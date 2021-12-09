@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Boostrap 5-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
+  <title>Editar Cliente</title>
+</head>
+<body>
+    <% if(user) { %>
+        <div class="card">
+            <div class="card-body">
+                <div class="card-title text-center">
+                    <div class="container-fluid">
+                        <div class="row justify-content-md-center">
+                    <div class="col-md-auto">
+                        <a href="/edit/<%= user.id%>" class="btn btn-secondary ">Más información</a>
+
+                    </div>  
+                        <div class="col-md-auto">
+                            <h3 ><%= user.Nombre%> </h3>
+
+                        </div>
+                        </div>
+                    
+                    </div>
+                </div>
+                <form action="/update/<%= user.id%>" method="POST">
+                    <input type="hidden" name="id" id="id" value="<%= user.id%>">
+                    <div class="form-group">
+                        <div class="d-flex flex-row">
+                            <div class="row">
+                                <div class="col-auto mr-auto">
+                                    <div class="col-md-9 ml-auto">
+                                        <label for="Tarea Realizada">Nombre: </label>
+                                        <input type="text" name="TareaRealizada" id="TareaRealizada"
+                                            value="<%= user.Nombre%>" placeholder="<%= user.Nombre%>">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-auto mr-auto">
+                                    <div class="col-md-9 ml-auto">
+                                        <label for="Entidad">Entidad </label>
+                                        <input type="text" name="Entidad" id="Entidad"
+                                            value="<%= user.Entidad%>" placeholder="<%= user.Entidad%>">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-auto mr-auto">
+                                    <div class="col-md-9 ml-auto">
+                                        <label for="Puesto">Puesto: </label>
+                                        <input type="date" name="Puesto" id="Puesto"
+                                            value="<%=user.Puesto%>" placeholder="<%=user.Puesto%>">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-auto mr-auto">
+                                    <div class="col-md-9 ml-auto">
+                                        <label for="Puesto">Puesto: </label>
+                                        <input type="date" name="Puesto" id="Puesto"
+                                            value="<%=user.Puesto%>" placeholder="<%=user.Puesto%>">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-auto mr-auto">
+                                    <div class="col-md-9 ml-auto">
+                                        <label for="Telefono">Teléfono: </label>
+                                        <input type="text" name="Telefono" id="Telefono"
+                                            value="<%=user.Telefono%>" placeholder="<%=user.Telefono%>">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-auto mr-auto">
+                                    <div class="col-md-9 ml-auto">
+                                        <label for="Correo">Correo: </label>
+                                        <input type="text" name="Correo" id="Correo"
+                                            value="<%=user.Correo%>" placeholder="<%=user.Correo%>">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                        <div class="container">
+                            <div class="button-group" role="group">
+                                <button type="submit" class="btn btn-primary text-center">Actualizar</button>
+                                <a href="/Contactos" class="btn btn-secondary text-center">Cancelar</a>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                </form>
+                <% } %>
+</body>
+</html>
