@@ -73,7 +73,7 @@
             <h4>Fecha Limite</h4>
           </th>
           <th>
-            <h4></h4>
+            
           </th>
         </tr>
       </thead>
@@ -85,13 +85,21 @@
     src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
   <script type="text/javascript" language="javascript"
     src="//cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css"></script>
-
+<!-- Moment.js: -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.4/moment.min.js"></script>
+<!-- Locales for moment.js-->
+<script src="//cdn.datatables.net/plug-ins/1.11.3/sorting/datetime-moment.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.4/locale/es.js"></script>
   <script>
+   
     $(document).ready(function () {
-      var url = 'http://localhost:3000/adminecogas/info';
-
+      var editar = function(tbody, table){
+ 
+}
+      $.fn.dataTable.moment('DD/MM/YYYY');
+      var url = '/adminecogas/info';
       $('#comunicacionDiaria').DataTable({
-
+"language": {url:"//cdn.datatables.net/plug-ins/1.11.3/i18n/es_es.json"},
         "ajax": {
           "url": url,
           "dataSrc": ""
@@ -101,11 +109,19 @@
           { "data": "NCarpeta" },
           { "data": "TareaRealizada" },
           { "data": "ProximaTarea" },
-          { "data": "FechaLimite" },
-        ]
+          { "data": "FechaLimite"},
+              {"data": "id",
+              render: function(data,type, row){
+                return '<a href="/editarTareas/'+data+'" class="btn btn-outline-info">editar</a>'
+              }
+
+              },
+            ],
       });
     });
+  
   </script>
+  
 </body>
 
 </html>

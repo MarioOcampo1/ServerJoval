@@ -150,7 +150,7 @@ router.get('/editarTareas/:id', (req, res) => {
             res.render('paginas/editarTareas', { user: results[0] });
         }
         else {
-            res.render('/adminecogas');
+            res.redirect('/adminecogas');
 
         }
     })
