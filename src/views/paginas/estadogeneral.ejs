@@ -104,7 +104,7 @@
                             <th>
                                 <%= moment(clientes.Fechafirmacontrato).format('DD-MM-YYYY')%>
                             </th>
-                            <th><a href="/edit" class="btn btn-outline-info">editar</a>
+                            <th><a href="/editarContacto/:<%=clientes.id%>" class="btn btn-outline-info">editar</a>
                             </tr></th>
                         <% })%>
                 </tbody>
