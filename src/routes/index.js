@@ -76,6 +76,7 @@ router.get('/estadogeneral', (req, res) => {
 router.get('/nuevocliente', (req, res) => {
     res.render('paginas/nuevocliente.ejs');
 })
+
 router.get('/contactos', (req, res) => {
     res.locals.moment = moment;
     const sql = 'SELECT * FROM contactos';
@@ -97,6 +98,7 @@ router.get('/contactos', (req, res) => {
 router.get('/editarContacto/:id', (req, res) => {
     res.locals.moment = moment;
     const id = req.params.id;
+    console.log("id es:" + id);
     const sql = 'SELECT * FROM contactos where id =?';
     connection.query(sql, [id], (error, results) => {
         if (error) throw error;
@@ -162,10 +164,15 @@ router.get('/edit/:id', (req, res) => {
     const sql = 'Select * from clientes where id=?';
     connection.query(sql, [id], (error, results) => {
         if (error) throw error;
+        console.log("results tiene " +results.length+ "valores");
         if (results.length > 0) {
+            console.log("entro en el if");
+
             res.render('paginas/edit', { user: results[0] });
         }
         else {
+            console.log("entro en el else");
+
             res.render('/adminecogas');
 
         }
