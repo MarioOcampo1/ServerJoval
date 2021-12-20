@@ -21,18 +21,21 @@
                     <div class="container-fluid">
                         <div class="row justify-content-md-center">
                             <div class="col-md-auto">
-                                <a href="/historialcarpeta/<%= user.Nombre%>" class="btn btn-secondary ">Ver Historial</a>
-                                    </div>  
-                    <div class="col-md-auto">
-                        <a href="/edit/<%= user.id%>" class="btn btn-secondary ">Más información</a>
+                                <a href="/historialcarpeta/<%= user.Nombre%>" class="btn btn-secondary ">Ver
+                                    Historial</a>
+                            </div>
+                            <div class="col-md-auto">
+                                <a href="/edit/<%= user.id%>" class="btn btn-secondary ">Más información</a>
 
-                    </div>  
-                        <div class="col-md-auto">
-                            <h3 ><%= user.Nombre%> </h3>
+                            </div>
+                            <div class="col-md-auto">
+                                <h3>
+                                    <%= user.Nombre%>
+                                </h3>
 
+                            </div>
                         </div>
-                        </div>
-                    
+
                     </div>
                 </div>
                 <form action="/updatetareas/<%= user.id%>" method="POST">
@@ -47,7 +50,7 @@
                                         <input type="text" name="TareaRealizada" id="TareaRealizada"
                                             value="<%= user.Tarea_Realizada%>" placeholder="<%= user.Tarea_Realizada%>">
                                     </div>
-                                
+
                                 </div>
                             </div>
                             <div class="row">
@@ -65,27 +68,37 @@
                                         <label for="FechaLimite">FechaLimite: </label>
                                         <input type="date" name="Fecha_limite" id="Fecha_limite"
                                             value="<%=user.Fecha_limite%>" placeholder="<%=user.Fecha_limite%>">
-
-
-
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
-                </div>
-                        <div class="container">
-                            <div class="button-group" role="group">
-                                <button type="submit" class="btn btn-primary text-center">Actualizar</button>
-                                <a href="/adminecogas" class="btn btn-secondary text-center">Cancelar</a>
+                    <div class="form-group">
+                        <div class="d-flex flex-row">
+                            <div class="row">
+                                <div class="col-auto mr-auto">
+                                    <div class="col-md-9 ml-auto">
+                                        <label for="Tarea Realizada">Estado de la carpeta: </label>
+                                        <input type="text" name="Estado" id="Estado"
+                                            value="<%= user.Estado%>" placeholder="<%= user.Estado%>">
+                                    </div>
+                                </div>
                             </div>
-                            
                         </div>
                     </div>
 
-                </form>
-                <% } %>
+            </div>
+            <div class="container">
+                <div class="button-group" role="group">
+                    <button type="submit" class="btn btn-primary text-center">Actualizar</button>
+                    <a href="/adminecogas" class="btn btn-secondary text-center">Cancelar</a>
+                </div>
+
+            </div>
+        </div>
+
+        </form>
+        <% } %>
 </body>
 
 </html>
