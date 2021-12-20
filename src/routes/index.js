@@ -229,7 +229,7 @@ router.post('/update/:id', (req, res) => {
         //console.log(Tarea_Realizada: TareaRealizada, ProximaTarea: ProximaTarea);
         const sql = 'Update clientes Set ? where id =?';
         connection.query(sql, [{
-            Nombre: NombreCarpeta, NCarpeta: NCarpeta, Comitente: Comitente, Ubicación: Departamento, DNV: DNV, DPV: DPV, Irrigacion: IRRIGACION,
+            Nombre: NombreCarpeta, NCarpeta: NCarpeta, Comitente: Comitente, Ubicacion: Departamento, DNV: DNV, DPV: DPV, Irrigacion: IRRIGACION,
             Hidraulica: HIDRAULICA, Ferrocarriles: FERROCARRIL, TipoDeRed: TipoDeRed, Fecha_limite: Fecha_limite
         }, id]
             , (error, results) => {
@@ -253,7 +253,7 @@ router.post('/update/:id', (req, res) => {
 
             const sql = 'Update clientes Set ? where id =?';
             connection.query(sql, [{
-                Nombre: NombreCarpeta, NCarpeta: NCarpeta, Comitente: Comitente, Ubicación: Departamento, DNV: DNV, DPV: DPV, Irrigacion: IRRIGACION,
+                Nombre: NombreCarpeta, NCarpeta: NCarpeta, Comitente: Comitente, Ubicacion: Departamento, DNV: DNV, DPV: DPV, Irrigacion: IRRIGACION,
                 Hidraulica: HIDRAULICA, Ferrocarriles: FERROCARRIL, TipoDeRed: TipoDeRed
             }, id]
                 , (error, results) => {
@@ -375,4 +375,17 @@ router.get('/historialcarpeta/:Nombre', (req, res) => {
     })
 
 })
-
+router.post('/edit/delete/:id',(req,res)=>{
+    const id= req.params.id;
+    const sql = 'Delete FROM clientes WHERE id =?';
+    res.locals.moment = moment;
+    connection.query(sql,[id], (error, results) => {
+        if (error) throw error;
+        if (results.length > 0) {
+            res.render('adminecogas.ejs'); 
+        }
+        else {
+            res.render('adminecogas.ejs');
+        }
+    })
+})
