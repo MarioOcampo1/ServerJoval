@@ -15,15 +15,15 @@
 </head>
 
 <body>
-  <p class="text-left ">Version de prueba (alpha 0.1)</p>
   <div class="container">
     <div class="row">
       <h1 class="text-center">Administración de obras de Gas</h1>
     </div>
-    <div class="alert alert-danger" role="alert">
-      ¡¡¡Cuidado, este es el servidor de pruebas, no poner nada importante acá!!!
-    </div>
+   
   </div>
+  
+  
+  <%- include('../partials/menusuperior.ejs')%>
   <div class="btn-group border-bottom">
     <a href="/">
       <button class="btn btn-danger">Volver</button>
@@ -31,28 +31,8 @@
     <a href="/nuevocliente">
       <button class="btn btn-success">Nuevo Cliente</button>
     </a>
+    <br>
   </div>
-  <br>
-  <nav class="navbar navbar-expand-lg navbar-light bg-primary ">
-    <a class="navbar-brand" href="#"></a>
-    <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link text-white border-bottomc " href="/estadogeneral">Estado General</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white border-bottom " href="/contactos">Contactos</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
-  <br>
-
   <div class="table-responsive">
     <table id="comunicacionDiaria" class="table table-striped table-bordered table-sm table-hover " style="width: 100%">
       <thead>
@@ -97,14 +77,16 @@
 
     $(document).ready(function () {
       var editar = function (tbody, table) {
-
       }
+      $.fn.dataTable.moment('D/M/YYYY');
+//       moment.locale('es');
+// $.fn.dataTable.moment( 'L', 'es');
+
       $('#comunicacionDiaria thead tr')
         .clone(true)
         .addClass('filters')
         .appendTo('#comunicacionDiaria thead');
 
-      $.fn.dataTable.moment('DD/MM/YYYY');
       var url = '/adminecogas/info';
       $('#comunicacionDiaria').DataTable({
         orderCellsTop: true,
@@ -161,14 +143,16 @@
           "url": url,
           "dataSrc": ""
         },
-
+"columnDefs":[{
+  target: 0,
+}],
         "columns": [
-          { "data": "Nombre" },
-          { "data": "NCarpeta" },
-          { "data": "TareaRealizada" },
-          { "data": "ProximaTarea" },
-          { "data": "FechaLimite" },
-          { "data": "Estado" },
+          { "width":"10%","data": "Nombre" },
+          { "width":"10%","data": "NCarpeta" },
+          { "width":"10%","data": "TareaRealizada" },
+          { "width":"10%","data": "ProximaTarea" },
+          { "type": 'datetime-moment',"width":"10%","data": "FechaLimite" },
+          { "width":"10%","data": "Estado" },
           {
             "data": "id",
             render: function (data, type, row) {

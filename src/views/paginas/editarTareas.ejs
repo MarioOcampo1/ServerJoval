@@ -78,9 +78,16 @@
                             <div class="row">
                                 <div class="col-auto mr-auto">
                                     <div class="col-md-9 ml-auto">
-                                        <label for="Tarea Realizada">Estado de la carpeta: </label>
-                                        <input type="text" name="Estado" id="Estado"
-                                            value="<%= user.Estado%>" placeholder="<%= user.Estado%>">
+                                                <label for="Estado-Carpeta">Estado de la carpeta:</label>
+                                                <select class="form-control" id="Estado-Carpeta" name="Estado-Carpeta" value="<%= user.Estado%>" placeholder="<%= user.Estado%>">
+                                                    <option value="<%=user.Estado%>"><%=user.Estado%></option>
+                                                    <option value="Sin presentar">Sin presentar</option>
+                                                    <option value="1ra parte">1ra parte</option>
+                                                  <option value="2da parte">2da parte</option>
+                                                  <option value="Caos">Caos</option>
+                                                  <option value="Finalizada">Finalizada</option>
+                                                </select>
+                                              </div>
                                     </div>
                                 </div>
                             </div>

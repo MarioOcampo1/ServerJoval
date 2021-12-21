@@ -22,6 +22,9 @@ connection.connect(error => {
 router.get('/', (req, res) => {
     res.render('index.ejs');
 })
+router.get('/interferencias', (req, res) => {
+    res.render('paginas/interferencias.ejs');
+})
 
 router.get('/adminecogas', (req, res) => {
     const sql = 'SELECT c.id, c.Nombre, c.NCarpeta, t.TareaRealizada, t.ProximaTarea, t.FechaLimite FROM clientes c, adgastareas t where c.Nombre = t.Nombre  ';
@@ -30,7 +33,7 @@ router.get('/adminecogas', (req, res) => {
         if (error) throw error;
 
         if (results.length > 0) {
-            res.render('adminecogas.ejs', { results: results }); //en {results:results} lo que hago es guardar los resultados que envia la bd, en la variable results
+            res.render('paginas/adminecogas.ejs', { results: results }); //en {results:results} lo que hago es guardar los resultados que envia la bd, en la variable results
 
         }
         else {
@@ -40,7 +43,7 @@ router.get('/adminecogas', (req, res) => {
 
 })
 router.get('/adminecogas/info', (req, res) => {
-    const sql = 'SELECT c.id, c.Nombre, c.NCarpeta, t.TareaRealizada, t.ProximaTarea, t.FechaLimite FROM clientes c, adgastareas t where c.Nombre = t.Nombre  ';
+    const sql = 'SELECT c.id, c.Nombre, c.NCarpeta, t.TareaRealizada, t.ProximaTarea, t.FechaLimite, c.Estado FROM clientes c, adgastareas t where c.Nombre = t.Nombre  ';
     res.locals.moment = moment;
     connection.query(sql, (error, results) => {
         if (error) throw error;
@@ -377,7 +380,8 @@ router.get('/historialcarpeta/:Nombre', (req, res) => {
 })
 router.post('/edit/delete/:id',(req,res)=>{
     const id= req.params.id;
-    const sql = 'Delete FROM clientes WHERE id =?';
+    var sql = 'Delete FROM clientes WHERE id =?';
+    sql = 'Delete FROM clientes WHERE id =?'
     res.locals.moment = moment;
     connection.query(sql,[id], (error, results) => {
         if (error) throw error;
