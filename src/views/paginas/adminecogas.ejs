@@ -55,13 +55,11 @@
           <th>
             <h4>Estado</h4>
           </th>
-          <th>
-
-          </th>
         </tr>
       </thead>
       <tbody>
       </tbody>
+      
     </table>
   </div>
   <script type="text/javascript" language="javascript" charset="utf8"
@@ -73,9 +71,12 @@
   <!-- Locales for moment.js-->
   <script src="//cdn.datatables.net/plug-ins/1.11.3/sorting/datetime-moment.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.4/locale/es.js"></script>
+  
   <script>
 
     $(document).ready(function () {
+      
+      
       var editar = function (tbody, table) {
       }
       $.fn.dataTable.moment('D/M/YYYY');
@@ -88,7 +89,8 @@
         .appendTo('#comunicacionDiaria thead');
 
       var url = '/adminecogas/info';
-      $('#comunicacionDiaria').DataTable({
+      
+     tabla= $('#comunicacionDiaria').DataTable({
         orderCellsTop: true,
         fixedHeader: true,
         initComplete: function () {
@@ -137,28 +139,22 @@
                 });
             });
         },
-
         "language": { url: "//cdn.datatables.net/plug-ins/1.11.3/i18n/es_es.json" },
         "ajax": {
           "url": url,
-          "dataSrc": ""
+          "dataSrc": "",
         },
-"columnDefs":[{
-  target: 0,
-}],
         "columns": [
-          { "width":"10%","data": "Nombre" },
-          { "width":"10%","data": "NCarpeta" },
+          { "data": "Nombre", render: function(data,type,row){
+            return '<a href="/editarTareas/' + row.id + '" class="btn btn-outline secondary btn-sm">'+row.Nombre+'</a>'
+          } },
+          { "data": "NCarpeta", render: function(data,type,row){
+            return '<a href="/editarTareas/' + row.id + '" class="btn btn-outline secondary btn-sm">'+row.NCarpeta+'</a>'
+          } },
           { "width":"10%","data": "TareaRealizada" },
           { "width":"10%","data": "ProximaTarea" },
           { "type": 'datetime-moment',"width":"10%","data": "FechaLimite" },
           { "width":"10%","data": "Estado" },
-          {
-            "data": "id",
-            render: function (data, type, row) {
-              return '<a href="/editarTareas/' + data + '" class="btn btn-outline-info">editar</a>'
-            }
-          },
 
         ],
       });

@@ -15,63 +15,192 @@
 
 <body>
     <h1 class="text-center">Estado General</h1>
-<%- include('../partials/menusuperior.ejs')%>
-    <div class="container-fluid">
-        <div class="table-responsive">
-            <table class="table table-striped table-bordered table-sm table-hover " style="width: 100%">
-                <thead>
-                    <tr>
-                        <th>
-                            <h4>Nombre</h4>
-                        </th>
-                        <th>
-                            <h4>N° de carpeta</h4>
-                        </th>
-                        <th>
-                            <h4>Ubicación</h4>
-                        </th>
-                        <th>
-                            <h4>Comitente</h4>
-                        </th>
-                        <th>
-                            <h4>Estado</h4>
-                        </th>
-                        <th>
-                            <h4>Fecha firma de contrato</h4>
-                        </th>
-                </thead>
-                <tbody>
-                    </tr>
-                    <% results.forEach((clientes)=>{ %>
-                         
+    <%- include('../partials/menusuperior.ejs')%>
+        <div class="container-fluid">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-sm table-hover " style="width: 100%">
+                    <thead>
                         <tr>
                             <th>
-                                <%= clientes.Nombre %>
+                                <h4>Nombre</h4>
                             </th>
                             <th>
-                                <%=clientes.NCarpeta%>
+                                <h4>N° de carpeta</h4>
                             </th>
                             <th>
-                                <%=clientes.Ubicación%>
+                                <h4>Ubicación</h4>
                             </th>
                             <th>
-                                <%=clientes.Comitente%>
+                                <h4>Comitente</h4>
                             </th>
                             <th>
-                                <%=clientes.Estado%>
+                                <h4>Estado</h4>
                             </th>
                             <th>
-                                <%= moment(clientes.Fechafirmacontrato).format('DD-MM-YYYY')%>
+                                <h4>Fecha firma de contrato</h4>
                             </th>
-                            <th><a href="/edit/<%=clientes.id%>" class="btn btn-outline-info">editar</a>
-                            </tr></th>
-                        <% })%>
-                </tbody>
-            </table>
+                            <th>
+                                Mensura
+                            </th>
+                            <th>
+                                Titulo de propiedad
+                            </th>
+                            <th>
+                                Documentación de la sociedad
+                            </th>
+                            <th>
+                                Acta en cargo vigente
+                            </th>
+                            <th>
+                                Cotización
+                            </th>
+                            <th>
+                                Comercial
+                            </th>
+                            <th>
+                                PC aprobado
+                            </th>
+                            <th>
+                                Carta oferta
+                            </th>
+                            <th>
+                                Mail de autorización
+                            </th>
+                            <th>
+                                Certificado de RT
+                            </th>
+                            <th>
+                                Interferencias
+                            </th>
+                            <th>
+                                Permisos
+                            </th>
+                            <th>
+                                Programa de seguridad
+                            </th>
+                            <th>
+                                Documentación de inspección
+                            </th>
+                            <th>
+                                Planos y Croquis
+                            </th>
+                            <th>
+                                Actas Finales
+                            </th>
+                            <th>
+                                Informes Finales
+                            </th>
+                            <th>
+                                Conforme de permisos
+                            </th>
+                            <th>
+                                Presentación Final
+                            </th>
+                            <th>
+                                Plano revisado
+                            </th>
+                            <th>
+                                EDITAR
+                            </th>
+
+
+                    </thead>
+                    <tbody>
+                        </tr>
+                        <% results.forEach((clientes)=>{ %>
+
+                            <tr>
+                                <th>
+                                    <a href="/edit/<%=clientes.id%>" class=""><%=clientes.Nombre%></a>
+                                </th>
+                                <th>
+                                    <a href="/edit/<%=clientes.id%>" class=""><%=clientes.NCarpeta%></a>
+                                </th>
+                                <th>
+                                    <%=clientes.Ubicación%>
+                                </th>
+                                <th>
+                                    <%=clientes.Comitente%>
+                                </th>
+                                <th>
+                                    <%=clientes.Estado%>
+                                </th>
+                                <th>
+                                    <%= moment(clientes.Fechafirmacontrato).format('DD-MM-YYYY')%>
+                                </th>
+                                <th>
+                                    <%=clientes.Mensura%>
+                                </th>
+                                <th>
+                                    <%=clientes.TituloDePropiedad%>
+                                </th>
+                                <th>
+                                    <%=clientes.DocumentaciónSociedad%>
+                                </th>
+                                <th>
+                                    <%=clientes.ActaCargoVigente%>
+                                </th>
+                                <th>
+                                    <%=clientes.Cotizacion%>
+                                </th>
+                                <th>
+                                    <%=clientes.Comercial%>
+                                </th>
+                                <th>
+                                    <%=clientes.PCaprobado%>
+                                </th>
+                                <th>
+                                    <%=clientes.CartaOferta%>
+                                </th>
+                                <th>
+                                    <%=clientes.MailAutorizacion%>
+                                </th>
+                                <th>
+                                    <%=clientes.CertificadoRT%>
+                                </th>
+                                <th>
+                                    <%=clientes.Interferencias%>
+                                </th>
+                                <th>
+                                    <%=clientes.Permisos%>
+                                </th>
+                                <th>
+                                    <%=clientes.Programadeseguridad%>
+                                </th>
+                                <th>
+                                    <%=clientes.DocInspeccion%>
+                                </th>
+                                <th>
+                                    <%=clientes.PlanosyCroquis%>
+                                </th>
+                                <th>
+                                    <%=clientes.ActasFinales%>
+                                </th>
+                                <th>
+                                    <%=clientes.InformesFinales%>
+                                </th>
+                                <th>
+                                    <%=clientes.ConformedePermisos%>
+                                </th>
+                                <th>
+                                    <%=clientes.PresentacionFinal%>
+                                </th>
+                                <th>
+                                    <%=clientes.PCrevisado%>
+                                </th>
+
+
+
+                                <th><a href="/edit/<%=clientes.id%>" class="btn btn-outline-info">editar</a>
+                            </tr>
+                            </th>
+                            <% })%>
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
-    </div>
-    </div>
+        </div>
+        </div>
 </body>
 <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script type="text/javascript" language="javascript"
