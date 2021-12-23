@@ -34,7 +34,7 @@
     <br>
   </div>
   <div class="table-responsive">
-    <table id="comunicacionDiaria" class="table table-striped table-bordered table-sm table-hover " style="width: 100%">
+    <table id="comunicacionDiaria" class="table table-striped table-bordered table-sm table-hover " style="width: 95%">
       <thead>
         <tr>
           <th>
@@ -146,10 +146,10 @@
         },
         "columns": [
           { "data": "Nombre", render: function(data,type,row){
-            return '<a href="/editarTareas/' + row.id + '" class="btn btn-outline secondary btn-sm">'+row.Nombre+'</a>'
+            return '<a href="/editarTareas/' + row.id + '" class="btn btn-outline-secondary btn-sm">'+row.Nombre+'</a>'
           } },
           { "data": "NCarpeta", render: function(data,type,row){
-            return '<a href="/editarTareas/' + row.id + '" class="btn btn-outline secondary btn-sm">'+row.NCarpeta+'</a>'
+            return '<a href="/editarTareas/' + row.id + '" class="btn btn-outline btn-sm">'+row.NCarpeta+'</a>'
           } },
           { "width":"10%","data": "TareaRealizada" },
           { "width":"10%","data": "ProximaTarea" },
