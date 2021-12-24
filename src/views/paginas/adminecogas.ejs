@@ -15,15 +15,13 @@
 </head>
 
 <body>
-  <div class="container">
+   <%- include('../partials/menusuperior.ejs')%>
+   <div class="container">
     <div class="row">
       <h1 class="text-center">Administración de obras de Gas</h1>
     </div>
    
   </div>
-  
-  
-  <%- include('../partials/menusuperior.ejs')%>
   <div class="btn-group border-bottom">
     <a href="/">
       <button class="btn btn-danger">Volver</button>
@@ -62,7 +60,7 @@
       
     </table>
   </div>
-  <script type="text/javascript" language="javascript" charset="utf8"
+ <script type="text/javascript" language="javascript" charset="utf8"
     src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
   <script type="text/javascript" language="javascript"
     src="//cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css"></script>
@@ -72,7 +70,7 @@
   <script src="//cdn.datatables.net/plug-ins/1.11.3/sorting/datetime-moment.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.4/locale/es.js"></script>
   
-  <script>
+  <script> 
 
     $(document).ready(function () {
       
