@@ -117,53 +117,123 @@
           <h5 class="text-center ">Jurisdicciones</h5>
           <br>
           <div class="form-check-inline">
-            <input class="form-check-input" type="checkbox" <%=user.HIDRAULICA=='pedir' ? "selected" : "" %>
-            value="pedir" id="HIDRAULICA" name="pedir">
+            <% if ((user.Hidraulica)=='pedir'){%>
+            <input class="form-check-input" type="checkbox"
+            value="pedir" id="Hidraulica" name="pedir" checked>
+            <%} else{%>
+               
+              <input class="form-check-input" type="checkbox"
+            value="pedir" id="Hidraulica" name="pedir">
+            
+              <%}%>
             <label class="form-check-label" for="defaultCheck1">
               Hidraúlica
             </label>
+            
           </div>
           <div class="form-check-inline">
-            <input class="form-check-input" type="checkbox" <%=user.FERROCARRIL=='pedir' ? "selected" : "" %>
-            value="pedir" id="FERROCARRIL" name="pedir">
-            <label class="form-check-label" for="defaultCheck2">
-              Ferrocarriles Argentinos
+            <% if ((user.Ferrocarriles)=='pedir'){%>
+            <input class="form-check-input" type="checkbox"
+            value="pedir" id="Ferrocarriles" name="pedir" checked>
+            <%} else{%>
+               
+              <input class="form-check-input" type="checkbox"
+            value="pedir" id="Ferrocarriles" name="pedir">
+            
+              <%}%>
+            <label class="form-check-label" for="defaultCheck1">
+              Ferrocarriles
             </label>
-          </div>
-          <div class="form-check-inline">
-            <input class="form-check-input" type="checkbox" <%=user.DNV=='pedir' ? "selected" : "" %> value="pedir"
-            id="DNV" name="pedir">
-            <label class="form-check-label" for="defaultCheck3">
-              Dirección Nacional de Vialidad
-            </label>
-          </div>
-          <div class="form-check-inline">
-            <input class="form-check-input" type="checkbox" <%=user.DPV=='pedir' ? "selected" : "" %> value="pedir"
-            id="DPV" name="pedir">
-            <label class="form-check-label" for="defaultCheck4">
-              Dirección Provincial de Vialidad
-            </label>
-          </div>
-          <div class="form-check-inline">
-            <input class="form-check-input" type="checkbox" <%=user.IRRIGACION=='pedir' ? "selected" : "" %>
-            value="pedir" id="IRRIGACION" name="pedir">
-            <label class="form-check-label" for="defaultCheck5">
-              Irrigación
-            </label>
-          </div>
-          <div class="form-check-inline">
-            <input class="form-check-input" type="checkbox" <%=user.PRIVADO=='pedir' ? "selected" : "" %> value="Es
-            privado" id="PRIVADO" name="Es privado">
-            <label class="form-check-label" for="defaultCheck5">
-              Privado
-            </label>
-          </div>
-          <div class="form-check-inline">
-            <input class="form-check-input" type="checkbox" value="" id="OTROSPERMISOS" name="pedir">
-            <label class="form-check-label" for="defaultCheck5">
-              Otros permisos
-            </label>
-          </div>
+            </div>
+            <div class="form-check-inline">
+              <% if ((user.DNV)=='pedir'){%>
+              <input class="form-check-input" type="checkbox"
+              value="pedir" id="DNV" name="pedir" checked>
+              <%} else{%>
+                 
+                <input class="form-check-input" type="checkbox"
+              value="pedir" id="DNV" name="pedir">
+              
+                <%}%>
+              <label class="form-check-label" for="defaultCheck1">
+                DNV
+              </label>
+              
+            </div>
+            <div class="form-check-inline">
+              <% if ((user.DPV)=='pedir'){%>
+              <input class="form-check-input" type="checkbox"
+              value="pedir" id="DPV" name="pedir" checked>
+              <%} else{%>
+                 
+                <input class="form-check-input" type="checkbox"
+              value="pedir" id="DPV" name="pedir">
+              
+                <%}%>
+              <label class="form-check-label" for="defaultCheck1">
+                DPV 
+              </label>
+              
+            </div>
+            <div class="form-check-inline">
+              <% if ((user.Irrigacion)=='pedir'){%>
+              <input class="form-check-input" type="checkbox"
+              value="pedir" id="Irrigacion" name="pedir" checked>
+              <%} else{%>
+                 
+                <input class="form-check-input" type="checkbox"
+              value="pedir" id="Irrigacion" name="pedir">
+              
+                <%}%>
+              <label class="form-check-label" for="defaultCheck1">
+                Irrigacion
+              </label>
+              </div>
+              
+            <div class="form-check-inline">
+              <% if ((user.Privado)=='pedir'){%>
+              <input class="form-check-input" type="checkbox"
+              value="pedir" id="Privado" name="pedir" checked>
+              <%} else{%>
+                 
+                <input class="form-check-input" type="checkbox"
+              value="pedir" id="Privado" name="pedir">
+              
+                <%}%>
+              <label class="form-check-label" for="defaultCheck1">
+                Privado
+              </label>
+              </div>
+              
+            <div class="form-check-inline">
+              <% if ((user.Irrigacion)=='pedir'){%>
+              <input class="form-check-input" type="checkbox"
+              value="pedir" id="Irrigacion" name="pedir" checked>
+              <%} else{%>
+                 
+                <input class="form-check-input" type="checkbox"
+              value="pedir" id="Irrigacion" name="pedir">
+              
+                <%}%>
+              <label class="form-check-label" for="defaultCheck1">
+                Irrigacion
+              </label>
+              </div>
+              
+            <div class="form-check-inline">
+              <% if ((user.Otrospermisos)=='pedir'){%>
+              <input class="form-check-input" type="checkbox"
+              value="pedir" id="Otrospermisos" name="pedir" checked>
+              <%} else{%>
+                 
+                <input class="form-check-input" type="checkbox"
+              value="pedir" id="Otrospermisos" name="pedir">
+              
+                <%}%>
+              <label class="form-check-label" for="defaultCheck1">
+                Otros Permisos
+              </label>
+              </div>
         </div>
       </div>
     </div>
