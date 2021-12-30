@@ -434,26 +434,45 @@ router.post('/guardar', (req, res) => {
 //Opciones de editar tareas POST
 router.post('/actualizarEtapas/:id',(req,res)=>{
     const id = req.body.id;
-    console.log("el id es: "+ req.body.id);
     const Mensura = req.body.Mensura;
     const TituloDePropiedad = req.body.TituloDePropiedad;
     const DocSociedad = req.body.DocumentaciónSociedad;
     const Comercial = req.body.Comercial;
-    const PcAprobado = req.body.PcAprobado;
+    const Pcaprobado = req.body.PCaprobado;
     const CartaOferta = req.body.CartaOferta;
     const MailAutorizacion = req.body.MailAutorizacion;
     const CertificadoRT = req.body.CertificadoRT;
-    const Interferencias = req.body.Interferencias;
+    var Interferencias = req.body.Interferencias;
     const Permisos = req.body.Permisos;
     const Programadeseguridad = req.body.Programadeseguridad;
-    const sql = 'Update clientes Set ? where id =?';
+    const intTelefonica = req.body.intTelefonica;
+    const intClaro = req.body.intClaro;
+    const intAgua = req.body.intAgua;
+    const intCloacas = req.body.intCloaca;
+    const intElectricidad = req.body.intElectricidad;
+    const intOtros = req.body.intOtros;
+    const intArnet = req.body.intArnet;
+    const sql = 'Update clientes Set ? where id=?';
+    console.log("int agua es: "+intAgua);
+    if(intTelefonica == "EnGestion" || intClaro== "EnGestion" || intAgua== "EnGestion" || intCloacas== "EnGestion" || intElectricidad== "EnGestion" || intOtros== "EnGestion" || intArnet== "EnGestion" ){
+        Interferencias="EnGestion";
+    }
+    if(intTelefonica == "ok" && intClaro== "ok" && intAgua== "ok" && intCloacas== "ok" && intElectricidad== "ok" && intOtros== "ok" && intArnet== "ok" ){
+Interferencias="ok";
+    }
+    console.log("interferencias es:" + Interferencias);
     connection.query(sql, [{
         Mensura: Mensura, TituloDePropiedad: TituloDePropiedad, DocumentaciónSociedad: DocSociedad, Comercial: Comercial, 
-        PcAprobado: PcAprobado, CartaOferta: CartaOferta, MailAutorizacion:MailAutorizacion, CertificadoRT: CertificadoRT, Interferencias: Interferencias, Permisos: Permisos, Programadeseguridad: Programadeseguridad }, id]
-        , (error, results) => {
+        PCaprobado: Pcaprobado, intTelefonica: intTelefonica, intClaro: intClaro, intAgua:intAgua,
+        intCloaca:intCloacas, intElectricidad:intElectricidad, intOtros:intOtros,intArnet:intArnet,
+         CartaOferta: CartaOferta, MailAutorizacion:MailAutorizacion, CertificadoRT: CertificadoRT,
+          Interferencias: Interferencias, Permisos: Permisos, Programadeseguridad: Programadeseguridad,}, id],
+           (error, results) => {
+               
             if (error) throw error;
-           
-                res.redirect('/editarTareas/:id');
+            
+            
+            res.redirect(req.get('referer'));
            
         })
 })

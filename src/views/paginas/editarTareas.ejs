@@ -43,219 +43,147 @@
                     <input type="hidden" name="Nombre" id="Nombre" value="<%= user.Nombre%>">
                     <div class="form-group">
                         <div class="d-flex flex-row">
-                            <div class="row">
-                                <div class="col-auto mr-auto">
-                                    <div class="col-md-9 ml-auto">
-                                        <label for="Tarea Realizada">Tarea Realizada: </label>
-                                        <input type="text" name="TareaRealizada" id="TareaRealizada"
-                                            value="<%= user.Tarea_Realizada%>" placeholder="<%= user.Tarea_Realizada%>">
-                                    </div>
+                            <div class="col-auto mr-auto">
+                                <div class="col-md-9 ml-auto">
+                                    <label for="Tarea Realizada">Tarea Realizada: </label>
+                                    <input type="text" name="TareaRealizada" id="TareaRealizada"
+                                        value="<%= user.Tarea_Realizada%>" placeholder="<%= user.Tarea_Realizada%>">
+                                </div>
 
+                            </div>
+                            <div class="col-auto mr-auto">
+                                <div class="col-md-9 ml-auto">
+                                    <label for="Proxima Tarea">Proxima Tarea: </label>
+                                    <input type="text" name="ProximaTarea" id="ProximaTarea"
+                                        value="<%= user.ProximaTarea%>" placeholder="<%= user.ProximaTarea%>">
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-auto mr-auto">
-                                    <div class="col-md-9 ml-auto">
-                                        <label for="Proxima Tarea">Proxima Tarea: </label>
-                                        <input type="text" name="ProximaTarea" id="ProximaTarea"
-                                            value="<%= user.ProximaTarea%>" placeholder="<%= user.ProximaTarea%>">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-auto mr-auto">
-                                    <div class="col-md-9 ml-auto">
-                                        <label for="FechaLimite">FechaLimite: </label>
-                                        <input type="date" name="Fecha_limite" id="Fecha_limite"
-                                            value="<%=user.Fecha_limite%>" placeholder="<%=user.Fecha_limite%>">
-                                    </div>
+                            <div class="col-auto mr-auto">
+                                <div class="col-md-9 ml-auto">
+                                    <label for="FechaLimite">FechaLimite: </label>
+                                    <input type="date" name="Fecha_limite" id="Fecha_limite"
+                                        value="<%=user.Fecha_limite%>" placeholder="<%=user.Fecha_limite%>">
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="d-flex flex-row">
-                            <div class="row">
-                                <div class="col-auto mr-auto">
-                                    <div class="col-md-9 ml-auto">
-                                        <label for="Estado-Carpeta">Estado de la carpeta:</label>
-                                        <select class="form-control" id="Estado" name="Estado" value="<%= user.Estado%>"
-                                            placeholder="<%= user.Estado%>">
-                                            <option value="<%=user.Estado%>" selected>
-                                                <%=user.Estado%>
-                                            </option>
-                                            <option value="Sin presentar">Sin presentar</option>
-                                            <option value="1ra parte">1ra parte</option>
-                                            <option value="2da parte">2da parte</option>
-                                            <option value="Caos">Caos</option>
-                                            <option value="Finalizada">Finalizada</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-            </div>
+                        <label for="Estado-Carpeta">Estado de la carpeta:</label>
+                        <select class="form-control" id="Estado" name="Estado" value="<%= user.Estado%>"
+                            placeholder="<%= user.Estado%>">
+                            <option value="<%=user.Estado%>" selected>
+                                <%=user.Estado%>
+                            </option>
+                            <option value="Sin presentar">Sin presentar</option>
+                            <option value="1ra parte">1ra parte</option>
+                            <option value="2da parte">2da parte</option>
+                            <option value="Caos">Caos</option>
+                            <option value="Finalizada">Finalizada</option>
+                        </select>
 
-        </div>
-        <div class="container">
-            <div class="button-group" role="group">
-                <button type="submit" class="btn btn-primary text-center">Actualizar</button>
-                <a href="/adminecogas" class="btn btn-secondary text-center">Cancelar</a>
+                    </div>
+                </div>
             </div>
-        </div>
-        </form>
-        <br>
-        <div class="container">
-            <div class="table-responsive">
-                <table class="table table-striped table-bordered table-sm table-hover " style="width: 100%">
+            <div class="container">
+                <div class="button-group text-center" role="group">
+                    <button type="submit" class="btn btn-primary text-center">Actualizar Tarea</button>
+                    <a href="/adminecogas" class="btn btn-secondary text-center">Cancelar</a>
+                </div>
+            </div>
+            </form>
+            <br>
+            <div class="container">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-sm table-hover " style="width: 100%">
                         <thead>
                             <form action="/actualizarEtapas/<%= user.id%>" id="actualizarEtapas" method="post">
                                 <input id="id" name="id" type="hidden" value="<%=user.id%>">
-                            <tr>
-                                <th>
-                                    <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-success" data-toggle="modal"
-                                        data-target="#ModalPreliminar">
-                                        Preliminar
-                                    </button>
+                                <h1 class="text-center">Etapas de la carpeta</h1>
+                                <tr class="table-active">
+                                    <!--Preliminar-->
+                                    <th>
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-success" data-toggle="modal"
+                                            data-target="#ModalPreliminar">
+                                            Preliminar
+                                        </button>
 
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="ModalPreliminar" tabindex="-1" role="dialog"
-                                        aria-labelledby="ModalPreliminar aria-hidden=" true">
-                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="ModalPreliminar">Preliminar</h5>
-                                                    <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <form action="/actualizarEtapas/<%= user.id%>" id="formPreliminar"
-                                                        method="post">
-                                                        <div class="container">
-                                                            <label for="Mensura">Mensura</label>
-                                                            <select class="form-control" id="Mensura" name="Mensura"
-                                                                value="<%= user.Mensura%>"
-                                                                placeholder="<%= user.Mensura%>">
-                                                                <option value="<%=user.Mensura%>" selected>
-                                                                    <%=user.Mensura%>
-                                                                </option>
-                                                                <option value="Sin presentar">Sin presentar</option>
-                                                                <option value="EnGestion">En gestion</option>
-                                                                <option value="ok">ok</option>
-
-                                                            </select>
-                                                            <label for="TituloDePropiedad">Titulo de propiedad</label>
-                                                            <select class="form-control" id="TituloDePropiedad"
-                                                                name="TituloDePropiedad"
-                                                                value="<%= user.TituloDePropiedad%>"
-                                                                placeholder="<%= user.TituloDePropiedad%>">
-                                                                <option value="<%=user.TituloDePropiedad%>" selected>
-                                                                    <%=user.TituloDePropiedad%>
-                                                                </option>
-                                                                <option value="Sin presentar">Sin presentar</option>
-                                                                <option value="EnGestion">En gestion</option>
-                                                                <option value="ok">ok</option>
-
-                                                            </select>
-                                                            <label for="DocumentaciónSociedad"> Documentación de la
-                                                                Sociedad</label>
-                                                            <select class="form-control" id="DocumentaciónSociedad"
-                                                                name="DocumentaciónSociedad"
-                                                                value="<%= user.DocumentaciónSociedad%>"
-                                                                placeholder="<%= user.DocumentaciónSociedad%>">
-                                                                <option value="<%=user.DocumentaciónSociedad%>"
-                                                                    selected>
-                                                                    <%=user.DocumentaciónSociedad%>
-                                                                </option>
-                                                                <option value="Sin presentar">Sin presentar</option>
-                                                                <option value="EnGestion">En gestion</option>
-                                                                <option value="ok">ok</option>
-
-                                                            </select>
-                                                            <label for="ActaCargoVigente"> Acta en cargo vigente</label>
-                                                            <select class="form-control" id="ActaCargoVigente"
-                                                                name="ActaCargoVigente"
-                                                                value="<%= user.ActaCargoVigente%>"
-                                                                placeholder="<%= user.ActaCargoVigente%>">
-                                                                <option value="<%=user.ActaCargoVigente%>" selected>
-                                                                    <%=user.ActaCargoVigente%>
-                                                                </option>
-                                                                <option value="Sin presentar">Sin presentar</option>
-                                                                <option value="EnGestion">En gestion</option>
-                                                                <option value="ok">ok</option>
-
-                                                            </select>
-                                                            <label for="Cotizacion"> Cotización</label>
-                                                            <select class="form-control" id="Cotizacion"
-                                                                name="Cotizacion" value="<%= user.Cotizacion%>"
-                                                                placeholder="<%= user.Cotizacion%>">
-                                                                <option value="<%=user.Cotizacion%>" selected>
-                                                                    <%=user.Cotizacion%>
-                                                                </option>
-                                                                <option value="Sin presentar">Sin presentar</option>
-                                                                <option value="EnGestion">En gestion</option>
-                                                                <option value="ok">ok</option>
-
-                                                            </select>
-                                                        </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-dismiss="modal">Cerrar</button>
-                                                    <button type="submit" form="actualizarEtapas" class="btn btn-primary">Guardar
-                                                        Cambios</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </th>
-                                <th>
-                                    <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-warning" data-toggle="modal"
-                                        data-target="#PrimeraParte">
-                                        1P Primera Parte
-                                    </button>
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="PrimeraParte" tabindex="-1" role="dialog"
-                                        aria-labelledby="PrimeraParte" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLongTitle">Primera Parte
-                                                    </h5>
-                                                    <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <div class="form-group">
-                                                        <div class="container">
-                                                            <label for="Comercial">Comercial</label>
-                                                            <select class="form-control" id="Comercial" name="Comercial"
-                                                                value="<%= user.Comercial%>"
-                                                                placeholder="<%= user.Comercial%>">
-                                                                <option value="<%=user.Comercial%>" selected>
-                                                                    <%=user.Comercial%>
-                                                                </option>
-                                                                <option value="Sin presentar">Sin presentar</option>
-                                                                <option value="EnGestion">En gestion</option>
-                                                                <option value="ok">ok</option>
-
-                                                            </select>
-                                                        </div>
-                                                        <div class="form-group">
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="ModalPreliminar" tabindex="-1" role="dialog"
+                                            aria-labelledby="ModalPreliminar aria-hidden=" true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="ModalPreliminar">Preliminar</h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form action="/actualizarEtapas/<%= user.id%>"
+                                                            id="formPreliminar" method="post">
                                                             <div class="container">
-                                                                <label for="PCAprobado">PC Aprobado</label>
-                                                                <select class="form-control" id="PCaprobado"
-                                                                    name="PCaprobado" value="<%= user.PCaprobado%>"
-                                                                    placeholder="<%= user.PCaprobado%>">
-                                                                    <option value="<%=user.PCaprobado%>" selected>
-                                                                        <%=user.PCaprobado%>
+                                                                <label for="Mensura">Mensura</label>
+                                                                <select class="form-control" id="Mensura" name="Mensura"
+                                                                    value="<%= user.Mensura%>"
+                                                                    placeholder="<%= user.Mensura%>">
+                                                                    <option value="<%=user.Mensura%>" selected>
+                                                                        <%=user.Mensura%>
+                                                                    </option>
+                                                                    <option value="Sin presentar">Sin presentar</option>
+                                                                    <option value="EnGestion">En gestion</option>
+                                                                    <option value="ok">ok</option>
+
+                                                                </select>
+                                                                <label for="TituloDePropiedad">Titulo de
+                                                                    propiedad</label>
+                                                                <select class="form-control" id="TituloDePropiedad"
+                                                                    name="TituloDePropiedad"
+                                                                    value="<%= user.TituloDePropiedad%>"
+                                                                    placeholder="<%= user.TituloDePropiedad%>">
+                                                                    <option value="<%=user.TituloDePropiedad%>"
+                                                                        selected>
+                                                                        <%=user.TituloDePropiedad%>
+                                                                    </option>
+                                                                    <option value="Sin presentar">Sin presentar</option>
+                                                                    <option value="EnGestion">En gestion</option>
+                                                                    <option value="ok">ok</option>
+
+                                                                </select>
+                                                                <label for="DocumentaciónSociedad"> Documentación de la
+                                                                    Sociedad</label>
+                                                                <select class="form-control" id="DocumentaciónSociedad"
+                                                                    name="DocumentaciónSociedad"
+                                                                    value="<%= user.DocumentaciónSociedad%>"
+                                                                    placeholder="<%= user.DocumentaciónSociedad%>">
+                                                                    <option value="<%=user.DocumentaciónSociedad%>"
+                                                                        selected>
+                                                                        <%=user.DocumentaciónSociedad%>
+                                                                    </option>
+                                                                    <option value="Sin presentar">Sin presentar</option>
+                                                                    <option value="EnGestion">En gestion</option>
+                                                                    <option value="ok">ok</option>
+
+                                                                </select>
+                                                                <label for="ActaCargoVigente"> Acta en cargo
+                                                                    vigente</label>
+                                                                <select class="form-control" id="ActaCargoVigente"
+                                                                    name="ActaCargoVigente"
+                                                                    value="<%= user.ActaCargoVigente%>"
+                                                                    placeholder="<%= user.ActaCargoVigente%>">
+                                                                    <option value="<%=user.ActaCargoVigente%>" selected>
+                                                                        <%=user.ActaCargoVigente%>
+                                                                    </option>
+                                                                    <option value="Sin presentar">Sin presentar</option>
+                                                                    <option value="EnGestion">En gestion</option>
+                                                                    <option value="ok">ok</option>
+
+                                                                </select>
+                                                                <label for="Cotizacion"> Cotización</label>
+                                                                <select class="form-control" id="Cotizacion"
+                                                                    name="Cotizacion" value="<%= user.Cotizacion%>"
+                                                                    placeholder="<%= user.Cotizacion%>">
+                                                                    <option value="<%=user.Cotizacion%>" selected>
+                                                                        <%=user.Cotizacion%>
                                                                     </option>
                                                                     <option value="Sin presentar">Sin presentar</option>
                                                                     <option value="EnGestion">En gestion</option>
@@ -263,15 +191,47 @@
 
                                                                 </select>
                                                             </div>
-                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">Cerrar</button>
+                                                        <button type="submit" form="actualizarEtapas"
+                                                            class="btn btn-primary">Guardar
+                                                            Cambios</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </th>
+                                    <!--Primera Parte-->
+                                    <th>
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-warning" data-toggle="modal"
+                                            data-target="#PrimeraParte">
+                                            1P Primera Parte
+                                        </button>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="PrimeraParte" tabindex="-1" role="dialog"
+                                            aria-labelledby="PrimeraParte" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLongTitle">Primera Parte
+                                                        </h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
                                                         <div class="form-group">
                                                             <div class="container">
-                                                                <label for="CartaOferta"> Carta Oferta</label>
-                                                                <select class="form-control" id="CartaOferta"
-                                                                    name="CartaOferta" value="<%= user.CartaOferta%>"
-                                                                    placeholder="<%= user.CartaOferta%>">
-                                                                    <option value="<%=user.CartaOferta%>" selected>
-                                                                        <%=user.CartaOferta%>
+                                                                <label for="Comercial">Comercial</label>
+                                                                <select class="form-control" id="Comercial"
+                                                                    name="Comercial" value="<%= user.Comercial%>"
+                                                                    placeholder="<%= user.Comercial%>">
+                                                                    <option value="<%=user.Comercial%>" selected>
+                                                                        <%=user.Comercial%>
                                                                     </option>
                                                                     <option value="Sin presentar">Sin presentar</option>
                                                                     <option value="EnGestion">En gestion</option>
@@ -279,323 +239,471 @@
 
                                                                 </select>
                                                             </div>
+                                                            <div class="form-group">
+                                                                <div class="container">
+                                                                    <label for="PCaprobado">PC Aprobado</label>
+                                                                    <select class="form-control" id="PCaprobado"
+                                                                        name="PCaprobado" value="<%= user.PCaprobado%>"
+                                                                        placeholder="<%= user.PCaprobado%>">
+                                                                        <option value="<%=user.PCaprobado%>" selected>
+                                                                            <%=user.PCaprobado%>
+                                                                        </option>
+                                                                        <option value="Sin presentar">Sin presentar
+                                                                        </option>
+                                                                        <option value="EnGestion">En gestion</option>
+                                                                        <option value="ok">ok</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="container">
+                                                                    <label for="CartaOferta"> Carta Oferta</label>
+                                                                    <select class="form-control" id="CartaOferta"
+                                                                        name="CartaOferta"
+                                                                        value="<%= user.CartaOferta%>"
+                                                                        placeholder="<%= user.CartaOferta%>">
+                                                                        <option value="<%=user.CartaOferta%>" selected>
+                                                                            <%=user.CartaOferta%>
+                                                                        </option>
+                                                                        <option value="Sin presentar">Sin presentar
+                                                                        </option>
+                                                                        <option value="EnGestion">En gestion</option>
+                                                                        <option value="ok">ok</option>
+
+                                                                    </select>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-dismiss="modal">Cerrar</button>
-                                                    <button type="submit" 
-                                                        class="btn btn-primary" form="actualizarEtapas">Guardar
-                                                        Cambios</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </th>
-                                <th>
-                                    <button type="button" class="btn btn-danger" data-toggle="modal"
-                                        data-target="#ModalSegundaParte">
-                                        2P Segunda Parte
-                                    </button>
-
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="ModalSegundaParte" tabindex="-1" role="dialog"
-                                        aria-labelledby="ModalSegundaParte aria-hidden=" true">
-                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="ModalSegundaParte">Segunda Parte</h5>
-                                                    <button type="submit" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <div class="container">
-                                                        <label for="MailAutorizacion">Mail de autorización</label>
-                                                        <select class="form-control" id="MailAutorizacion"
-                                                            name="MailAutorizacion" value="<%= user.MailAutorizacion%>"
-                                                            placeholder="<%= user.MailAutorizacion%>">
-                                                            <option value="<%=user.MailAutorizacion%>" selected>
-                                                                <%=user.MailAutorizacion%>
-                                                            </option>
-                                                            <option value="EnGestion">En gestion</option>
-                                                            <option value="ok">ok</option>
-
-                                                        </select>
-                                                        <label for="CertificadoRT">Certificado del RT</label>
-                                                        <select class="form-control" id="CertificadoRT"
-                                                            name="CertificadoRT" value="<%= user.CertificadoRT%>"
-                                                            placeholder="<%= user.CertificadoRT%>">
-                                                            <option value="<%=user.CertificadoRT%>" selected>
-                                                                <%=user.CertificadoRT%>
-                                                            </option>
-                                                            <option value="Sin presentar">Sin presentar</option>
-                                                            <option value="EnGestion">En gestion</option>
-                                                            <option value="ok">ok</option>
-
-                                                        </select>
-                                                        <label for="Interferencias"> Interferencias</label>
-                                                        <select class="form-control" id="Interferencias"
-                                                            name="Interferencias" value="<%= user.Interferencias%>"
-                                                            placeholder="<%= user.Interferencias%>">
-                                                            <option value="<%=user.Interferencias%>" selected>
-                                                                <%=user.Interferencias%>
-                                                            </option>
-                                                            <option value="Sin presentar">Sin presentar</option>
-                                                            <option value="EnGestion">En gestion</option>
-                                                            <option value="ok">ok</option>
-
-                                                        </select>
-                                                        <label for="Permisos"> Permisos</label>
-                                                        <select class="form-control" id="Permisos" name="Permisos"
-                                                            value="<%= user.Permisos%>"
-                                                            placeholder="<%= user.Permisos%>">
-                                                            <option value="<%=user.Permisos%>" selected>
-                                                                <%=user.Permisos%>
-                                                            </option>
-                                                            <option value="Sin presentar">Sin presentar</option>
-                                                            <option value="EnGestion">En gestion</option>
-                                                            <option value="ok">ok</option>
-
-                                                        </select>
-                                                        <label for="Programadeseguridad"> Programadeseguridad</label>
-                                                        <select class="form-control" id="Programadeseguridad"
-                                                            name="Programadeseguridad"
-                                                            value="<%= user.Programadeseguridad%>"
-                                                            placeholder="<%= user.Programadeseguridad%>">
-                                                            <option value="<%=user.Programadeseguridad%>" selected>
-                                                                <%=user.Programadeseguridad%>
-                                                            </option>
-                                                            <option value="Sin presentar">Sin presentar</option>
-                                                            <option value="EnGestion">En gestion</option>
-                                                            <option value="ok">ok</option>
-
-                                                        </select>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">Cerrar</button>
+                                                        <button type="submit" class="btn btn-primary"
+                                                            form="actualizarEtapas">Guardar
+                                                            Cambios</button>
                                                     </div>
                                                 </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-dismiss="modal">Cerrar</button>
-                                                    <button type="submit" class="btn btn-primary" form="actualizarEtapas">Guardar
-                                                        Cambios</button>
-                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </th>
-                                <th>
-                                    <button type="submit" class="btn btn-danger" data-toggle="modal"
-                                        data-target="#ModalCaos">
-                                        Caos
-                                    </button>
+                                    </th>
+                                    <!--Segunda Parte-->
+                                    <th>
+                                        <button type="button" class="btn btn-danger" data-toggle="modal"
+                                            data-target="#ModalSegundaParte">
+                                            2P Segunda Parte
+                                        </button>
 
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="ModalCaos" tabindex="-1" role="dialog"
-                                        aria-labelledby="Caos aria-hidden=" true">
-                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="Caos">CAOS (Conforme A ObraS )</h5>
-                                                    <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <div class="container">
-                                                        <label for="DocInspeccion">Documentos de inspección</label>
-                                                        <select class="form-control" id="MailAutorizacion"
-                                                            name="DocInspeccion" value="<%= user.DocInspeccion%>"
-                                                            placeholder="<%= user.DocInspeccion%>">
-                                                            <option value="<%=user.DocInspeccion%>" selected>
-                                                                <%=user.DocInspeccion%>
-                                                            </option>
-                                                            <option value="EnGestion">En gestion</option>
-                                                            <option value="ok">ok</option>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="ModalSegundaParte" tabindex="-1" role="dialog"
+                                            aria-labelledby="ModalSegundaParte aria-hidden=" true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="ModalSegundaParte">Segunda Parte
+                                                        </h5>
+                                                        <button type="submit" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="container">
+                                                            <label for="MailAutorizacion">Mail de autorización</label>
+                                                            <select class="form-control" id="MailAutorizacion"
+                                                                name="MailAutorizacion"
+                                                                value="<%= user.MailAutorizacion%>"
+                                                                placeholder="<%= user.MailAutorizacion%>">
+                                                                <option value="<%=user.MailAutorizacion%>" selected>
+                                                                    <%=user.MailAutorizacion%>
+                                                                </option>
+                                                                <option value="EnGestion">En gestion</option>
+                                                                <option value="ok">ok</option>
 
-                                                        </select>
-                                                        <label for="Planos y croquis">Planos y croquis</label>
-                                                        <select class="form-control" id="PlanosyCroquis"
-                                                            name="PlanosyCroquis" value="<%= user.PlanosyCroquis%>"
-                                                            placeholder="<%= user.PlanosyCroquis%>">
-                                                            <option value="<%=user.PlanosyCroquis%>" selected>
-                                                                <%=user.PlanosyCroquis%>
-                                                            </option>
-                                                            <option value="Sin presentar">Sin presentar</option>
-                                                            <option value="EnGestion">En gestion</option>
-                                                            <option value="ok">ok</option>
+                                                            </select>
+                                                            <label for="CertificadoRT">Certificado del RT</label>
+                                                            <select class="form-control" id="CertificadoRT"
+                                                                name="CertificadoRT" value="<%= user.CertificadoRT%>"
+                                                                placeholder="<%= user.CertificadoRT%>">
+                                                                <option value="<%=user.CertificadoRT%>" selected>
+                                                                    <%=user.CertificadoRT%>
+                                                                </option>
+                                                                <option value="Sin presentar">Sin presentar</option>
+                                                                <option value="EnGestion">En gestion</option>
+                                                                <option value="ok">ok</option>
 
-                                                        </select>
-                                                        <label for="Actas Finales"> Actas Finales</label>
-                                                        <select class="form-control" id="ActasFinales"
-                                                            name="ActasFinales" value="<%= user.ActasFinales%>"
-                                                            placeholder="<%= user.ActasFinales%>">
-                                                            <option value="<%=user.ActasFinales%>" selected>
-                                                                <%=user.ActasFinales%>
-                                                            </option>
-                                                            <option value="Sin presentar">Sin presentar</option>
-                                                            <option value="EnGestion">En gestion</option>
-                                                            <option value="ok">ok</option>
+                                                            </select>
+                                                            <label for="Permisos"> Permisos</label>
+                                                            <select class="form-control" id="Permisos" name="Permisos"
+                                                                value="<%= user.Permisos%>"
+                                                                placeholder="<%= user.Permisos%>">
+                                                                <option value="<%=user.Permisos%>" selected>
+                                                                    <%=user.Permisos%>
+                                                                </option>
+                                                                <option value="Sin presentar">Sin presentar</option>
+                                                                <option value="EnGestion">En gestion</option>
+                                                                <option value="ok">ok</option>
 
-                                                        </select>
-                                                        <label for="InformesFinales"> Informes Finales</label>
-                                                        <select class="form-control" id="InformesFinales"
-                                                            name="InformesFinales" value="<%= user.InformesFinales%>"
-                                                            placeholder="<%= user.InformesFinales%>">
-                                                            <option value="<%=user.InformesFinales%>" selected>
-                                                                <%=user.InformesFinales%>
-                                                            </option>
-                                                            <option value="Sin presentar">Sin presentar</option>
-                                                            <option value="EnGestion">En gestion</option>
-                                                            <option value="ok">ok</option>
+                                                            </select>
+                                                            <label for="Programadeseguridad">
+                                                                Programadeseguridad</label>
+                                                            <select class="form-control" id="Programadeseguridad"
+                                                                name="Programadeseguridad"
+                                                                value="<%= user.Programadeseguridad%>"
+                                                                placeholder="<%= user.Programadeseguridad%>">
+                                                                <option value="<%=user.Programadeseguridad%>" selected>
+                                                                    <%=user.Programadeseguridad%>
+                                                                </option>
+                                                                <option value="Sin presentar">Sin presentar</option>
+                                                                <option value="EnGestion">En gestion</option>
+                                                                <option value="ok">ok</option>
 
-                                                        </select>
-                                                        <label for="ConformedePermisos"> Conformes de Permisos</label>
-                                                        <select class="form-control" id="ConformedePermisos"
-                                                            name="ConformedePermisos"
-                                                            value="<%= user.ConformedePermisos%>"
-                                                            placeholder="<%= user.ConformedePermisos%>">
-                                                            <option value="<%=user.ConformedePermisos%>" selected>
-                                                                <%=user.ConformedePermisos%>
-                                                            </option>
-                                                            <option value="Sin presentar">Sin presentar</option>
-                                                            <option value="EnGestion">En gestion</option>
-                                                            <option value="ok">ok</option>
+                                                            </select>
+                                                            <label for="Interferencias"> Interferencias</label>
 
-                                                        </select>
+                                                            <!-- <a href="/interferencias">Ir a interferencias</a> -->
+                                                            <select class="form-control" id="Interferencias"
+                                                                value="<%=user.Interferencias%>">
+                                                                <option value="<%=user.Interferencias%>">
+                                                                    <%=user.Interferencias%>
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">Cerrar</button>
+                                                        <button type="submit" class="btn btn-primary"
+                                                            form="actualizarEtapas">Guardar
+                                                            Cambios</button>
                                                     </div>
                                                 </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-dismiss="modal">Cerrar</button>
-                                                    <button type="submit" class="btn btn-primary" form="actualizarEtapas">Guardar
-                                                        Cambios</button>
-                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </th>
-                                <th>
-                                    <button type="button" class="btn btn-danger" data-toggle="modal"
-                                        data-target="#ModalFinalizacion">
-                                        Finalización
-                                    </button>
+                                    </th>
+                                    <!--Caos-->
+                                    <th>
+                                        <button type="button" class="btn btn-success" data-toggle="modal"
+                                            data-target="#ModalCaos">
+                                            Caos
+                                        </button>
 
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="ModalFinalizacion" tabindex="-1" role="dialog"
-                                        aria-labelledby="Caos aria-hidden=" true">
-                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="ModalFinalizacion">Finalizacion</h5>
-                                                    <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <div class="container">
-                                                        <label for="PresentacionFinal">Presentacion Final</label>
-                                                        <select class="form-control" id="PresentacionFinal"
-                                                            name="PresentacionFinal"
-                                                            value="<%= user.PresentacionFinal%>"
-                                                            placeholder="<%= user.PresentacionFinal%>">
-                                                            <option value="<%=user.PresentacionFinal%>" selected>
-                                                                <%=user.PresentacionFinal%>
-                                                            </option>
-                                                            <option value="EnGestion">En gestion</option>
-                                                            <option value="ok">ok</option>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="ModalCaos" tabindex="-1" role="dialog"
+                                            aria-labelledby="Caos aria-hidden=" true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="Caos">CAOS (Conforme a obras)</h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="container">
+                                                            <label for="DocInspeccion">Documentos de inspección</label>
+                                                            <select class="form-control" id="MailAutorizacion"
+                                                                name="DocInspeccion" value="<%= user.DocInspeccion%>"
+                                                                placeholder="<%= user.DocInspeccion%>">
+                                                                <option value="<%=user.DocInspeccion%>" selected>
+                                                                    <%=user.DocInspeccion%>
+                                                                </option>
+                                                                <option value="EnGestion">En gestion</option>
+                                                                <option value="ok">ok</option>
 
-                                                        </select>
+                                                            </select>
+                                                            <label for="Planos y croquis">Planos y croquis</label>
+                                                            <select class="form-control" id="PlanosyCroquis"
+                                                                name="PlanosyCroquis" value="<%= user.PlanosyCroquis%>"
+                                                                placeholder="<%= user.PlanosyCroquis%>">
+                                                                <option value="<%=user.PlanosyCroquis%>" selected>
+                                                                    <%=user.PlanosyCroquis%>
+                                                                </option>
+                                                                <option value="Sin presentar">Sin presentar</option>
+                                                                <option value="EnGestion">En gestion</option>
+                                                                <option value="ok">ok</option>
 
+                                                            </select>
+                                                            <label for="Actas Finales"> Actas Finales</label>
+                                                            <select class="form-control" id="ActasFinales"
+                                                                name="ActasFinales" value="<%= user.ActasFinales%>"
+                                                                placeholder="<%= user.ActasFinales%>">
+                                                                <option value="<%=user.ActasFinales%>" selected>
+                                                                    <%=user.ActasFinales%>
+                                                                </option>
+                                                                <option value="Sin presentar">Sin presentar</option>
+                                                                <option value="EnGestion">En gestion</option>
+                                                                <option value="ok">ok</option>
+
+                                                            </select>
+                                                            <label for="InformesFinales"> Informes Finales</label>
+                                                            <select class="form-control" id="InformesFinales"
+                                                                name="InformesFinales"
+                                                                value="<%= user.InformesFinales%>"
+                                                                placeholder="<%= user.InformesFinales%>">
+                                                                <option value="<%=user.InformesFinales%>" selected>
+                                                                    <%=user.InformesFinales%>
+                                                                </option>
+                                                                <option value="Sin presentar">Sin presentar</option>
+                                                                <option value="EnGestion">En gestion</option>
+                                                                <option value="ok">ok</option>
+
+                                                            </select>
+                                                            <label for="ConformedePermisos"> Conformes de
+                                                                Permisos</label>
+                                                            <select class="form-control" id="ConformedePermisos"
+                                                                name="ConformedePermisos"
+                                                                value="<%= user.ConformedePermisos%>"
+                                                                placeholder="<%= user.ConformedePermisos%>">
+                                                                <option value="<%=user.ConformedePermisos%>" selected>
+                                                                    <%=user.ConformedePermisos%>
+                                                                </option>
+                                                                <option value="Sin presentar">Sin presentar</option>
+                                                                <option value="EnGestion">En gestion</option>
+                                                                <option value="ok">ok</option>
+
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">Cerrar</button>
+                                                        <button type="submit" class="btn btn-primary"
+                                                            form="actualizarEtapas">Guardar Cambios</button>
                                                     </div>
                                                 </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-dismiss="modal">Cerrar</button>
-                                                    <button type="submit" class="btn btn-primary" form="actualizarEtapas">Guardar
-                                                        Cambios</button>
+                                            </div>
+                                        </div>
+                                    </th>
+                                    <!--Finalizada-->
+                                    <th>
+                                        <button type="button" class="btn btn-danger" data-toggle="modal"
+                                            data-target="#ModalFinalizacion">
+                                            Finalización
+                                        </button>
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="ModalFinalizacion" tabindex="-1" role="dialog"
+                                            aria-labelledby="Caos aria-hidden=" true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="ModalFinalizacion">Finalizacion</h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="container">
+                                                            <label for="PresentacionFinal">Presentacion Final</label>
+                                                            <select class="form-control" id="PresentacionFinal"
+                                                                name="PresentacionFinal"
+                                                                value="<%= user.PresentacionFinal%>"
+                                                                placeholder="<%= user.PresentacionFinal%>">
+                                                                <option value="<%=user.PresentacionFinal%>" selected>
+                                                                    <%=user.PresentacionFinal%>
+                                                                </option>
+                                                                <option value="EnGestion">En gestion</option>
+                                                                <option value="ok">ok</option>
+
+                                                            </select>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">Cerrar</button>
+                                                        <button type="submit" class="btn btn-primary"
+                                                            form="actualizarEtapas">Guardar
+                                                            Cambios</button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </th>
-                            </form>
+                                    </th>
                         </thead>
-                    <tbody>
-
-                        <tr>
-                            <th>
-                                <!-- Gestion de la primera parte, muestra en "editarTareas" de cada carpeta, un resumen de como va cada area de la carpeta -->
-                                <% if(user.Mensura=="ok" && user.TituloDePropiedad=="ok" &&
-                                    (user.DocumentaciónSociedad=="ok" || user.DocumentaciónSociedad=="NC" )&&
-                                    (user.ActaCargoVigente=="ok" || user.ActaCargoVigente=="NC" ) &&
-                                    user.Cotizacion=="ok" ){%>
-                                    <p> Finalizada </p>
-                                    <%}else{%>
-                                        <%if(user.Mensura=="EnGestion"|| user.TituloDePropiedad=="EnGestion" ||
-                                            user.DocumentaciónSociedad=="EnGestion" ||
-                                            user.ActaCargoVigente=="EnGestion" || user.Cotizacion=="EnGestion" ){%>
-                                            En gestion
+                        <tbody>
+                            <tr>
+                                <th class="table-success">
+                                    <!-- Gestion de la primera parte, muestra en "editarTareas" de cada carpeta, un resumen de como va cada area de la carpeta -->
+                                    <% if(user.Mensura=="ok" && user.TituloDePropiedad=="ok" &&
+                                        (user.DocumentaciónSociedad=="ok" || user.DocumentaciónSociedad=="NC" )&&
+                                        (user.ActaCargoVigente=="ok" || user.ActaCargoVigente=="NC" ) &&
+                                        user.Cotizacion=="ok" ){%>
+                                        <p> Todo finalizado </p>
+                                        <%}%>
+                                            <%if(user.Mensura=="EnGestion"|| user.TituloDePropiedad=="EnGestion" ||
+                                                user.DocumentaciónSociedad=="EnGestion" ||
+                                                user.ActaCargoVigente=="EnGestion" || user.Cotizacion=="EnGestion" ){%>
+                                                Mensura: <%=user.Mensura%>
+                                                    <br>
+                                                    Titulo de Propiedad: <%= user.TituloDePropiedad%>
+                                                        <%}%>
+                                </th>
+                                <th class="table-success">
+                                    <!-- Configuracion de el cuadro de "Primera parte" -->
+                                    <%if(user.Comercial=="ok" && user.PCaprobado=="ok" && user.CartaOferta=="ok" ){%>
+                                        Finalizada
+                                        <%}else{ if(user.Comercial=="EnGestion" || user.PCaprobado=="EnGestion" ||
+                                            user.CartaOferta=="EnGestion" ){%>
+                                            En Gestion
                                             <%}}%>
-                            </th>
-                            <th>
-                                <!-- Configuracion de el cuadro de "Primera parte" -->
-                                <%if(user.Comercial=="ok" && user.PCaprobado=="ok" && user.CartaOferta=="ok" ){%>
-                                    OK
-                                    <%}else{ if(user.Comercial=="EnGestion" || user.PCaprobado=="EnGestion" ||
-                                        user.CartaOferta=="EnGestion" ){%>
-                                        En Gestion
-                                        <%}}%>
-                            </th>
-                            <th>
-                                <!-- Configuracion cuadro "Segunda Parte" -->
-                                <%if(user.MailAutorizacion=="ok" && user.CertificadoRT=="ok" &&
-                                    user.Interferencias=="ok" && user.Permisos=="ok" && user.Programadeseguridad=="ok"
-                                    ){%>
-                                    OK
-                                    <%}%>
-                                        <%if(user.MailAutorizacion=="EnGestion" || user.CertificadoRT=="EnGestion" ||
-                                            user.Interferencias=="EnGestion" || user.Permisos=="EnGestion" ||
-                                            user.Programadeseguridad=="EnGestion" ){%>
-                                            En Gestion
-                                            <%}%>
-                            </th>
-                            <th>
-                                <!-- Configuracion cuadro "Caos" -->
-                                <%if(user.DocInspeccion=="ok"&& user.PlanosyCroquis=="ok" && user.ActasFinales=="ok" &&
-                                    user.InformesFinales=="ok" && user.ConformedePermisos=="ok" &&
-                                    user.PresentacionFinal=="ok" ){%>
-                                    OK
-                                    <%}%>
-                                        <%if(user.DocInspeccion=="EnGestion"|| user.PlanosyCroquis=="EnGestion" ||
-                                            user.ActasFinales=="EnGestion" || user.InformesFinales=="EnGestion" ||
-                                            user.ConformedePermisos=="EnGestion" || user.PresentacionFinal=="EnGestion"
-                                            ){%>
-                                            En Gestion
-                                            <%}%>
-                            </th>
-                            <th>
-                                <%if(user.PresentacionFinal=="ok"){%>
-                                    OK
-                                    <%}%>
-                            </th>
+                                </th>
+                                <th class="table-success">
+                                    <!-- Configuracion cuadro "Segunda Parte" -->
+                                    <%if(user.MailAutorizacion=="ok" && user.CertificadoRT=="ok" && user.Interferencias=="ok" && user.Permisos=="ok" && user.Programadeseguridad=="ok" ){%>
+                                        Finalizada
+                                        <%}%>
+                                            <%if(user.MailAutorizacion=="EnGestion" || user.CertificadoRT=="EnGestion" || user.Interferencias=="EnGestion" || user.Permisos=="EnGestion" || user.Programadeseguridad=="EnGestion" ){%>
+                                                En Gestion
+                                                <%}%>
+                                </th>
+                                <th class="table-success">
+                                    <!-- Configuracion cuadro "Caos" -->
+                                    <%if(user.DocInspeccion=="ok"&& user.PlanosyCroquis=="ok" && user.ActasFinales=="ok"&& user.InformesFinales=="ok" && user.ConformedePermisos=="ok" &&user.PresentacionFinal=="ok" ){%>
+                                        Finalizada
+                                        <%}%>
+                                            <%if(user.DocInspeccion=="EnGestion"|| user.PlanosyCroquis=="EnGestion" ||user.ActasFinales=="EnGestion" || user.InformesFinales=="EnGestion" ||user.ConformedePermisos=="EnGestion" ||user.PresentacionFinal=="EnGestion" ){%>
+                                                En Gestion
+                                                <%}%>
+                                </th>
+                                <th class="table-success">
+                                    <%if(user.PresentacionFinal=="ok"){%>
+                                        Finalizada
+                                        <%}%>
+                                </th>
 
-                        </tr>
-                    </tbody>
-            </div>
-            <% } %>
-                <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-                    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-                    crossorigin="anonymous"></script>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-                    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-                    crossorigin="anonymous"></script>
-                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-                    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-                    crossorigin="anonymous"></script>
+                            </tr>
+                        </tbody>
+                        <table class="table table-bordered text-center">
+                            <h1 class="text-center">Interferencias</h1>
+                            <div class="container">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="text-light bg-dark">Telefonica</th>
+                                        <th scope="col" class="text-light bg-dark">Agua</th>
+                                        <th scope="col" class="text-light bg-dark">Cloacas</th>
+                                        <th scope="col" class="text-light bg-dark">Electricidad</th>
+                                        <th scope="col" class="text-light bg-dark">Claro</th>
+                                        <th scope="col" class="text-light bg-dark">Arnet</th>
+                                        <th scope="col" class="text-light bg-dark">Otros</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td  class="text-light bg-dark">
+                                            <select class="form-control" id="intTelefonica" name="intTelefonica"
+                                                value="<%=user.intTelefonica%>" placeholder="<%=user.intTelefonica%>">
+                                                <option value="<%=user.intTelefonica%>" selected>
+                                                    <%=user.intTelefonica%>
+                                                </option>
+                                                <option value="Sin presentar">Sin presentar</option>
+                                                <option value="EnGestion">En gestion</option>
+                                                <option value="ok">ok</option>
+
+                                            </select>
+                                        </td>
+                                        <td class="text-light bg-dark">
+                                            <select class="form-control" id="intAgua" name="intAgua"
+                                                value="<%=user.intAgua%>" placeholder="<%=user.intAgua%>">
+                                                <option value="<%=user.intAgua%>" selected>
+                                                    <%=user.intAgua%>
+                                                </option>
+                                                <option value="Sin presentar">Sin presentar</option>
+                                                <option value="EnGestion">En gestion</option>
+                                                <option value="ok">ok</option>
+
+                                            </select>
+                                        </td>
+                                        <td class="text-light bg-dark">
+                                            <select class="form-control" id="intCloaca" name="intCloaca"
+                                                value="<%=user.intCloaca%>" placeholder="<%=user.intCloaca%>">
+                                                <option value="<%=user.intCloaca%>%>" selected>
+                                                    <%=user.intCloaca%>
+                                                </option>
+                                                <option value="Sin presentar">Sin presentar</option>
+                                                <option value="EnGestion">En gestion</option>
+                                                <option value="ok">ok</option>
+
+                                            </select>
+
+                                        </td>
+                                        <td class="text-light bg-dark">
+                                            <select class="form-control" id="intElectricidad" name="intElectricidad"
+                                                value="<%=user.intElectricidad%>"
+                                                placeholder="<%=user.intElectricidad%>">
+                                                <option value="<%=user.intElectricidad%>%>" selected>
+                                                    <%=user.intElectricidad%>
+                                                </option>
+                                                <option value="Sin presentar">Sin presentar</option>
+                                                <option value="EnGestion">En gestion</option>
+                                                <option value="ok">ok</option>
+
+                                            </select>
+
+                                        </td>
+                                        <td class="text-light bg-dark">
+                                            <select class="form-control" id="intClaro" name="intClaro"
+                                                value="<%=user.intClaro%>" placeholder="<%=user.intClaro%>">
+                                                <option value="<%=user.intClaro%>%>" selected>
+                                                    <%=user.intClaro%>
+                                                </option>
+                                                <option value="Sin presentar">Sin presentar</option>
+                                                <option value="EnGestion">En gestion</option>
+                                                <option value="ok">ok</option>
+
+                                            </select>
+                                        </td>
+                                        <td class="text-light bg-dark">
+                                            <select class="form-control" id="intArnet" name="intArnet"
+                                                value="<%=user.intArnet%>" placeholder="<%=user.intArnet%>">
+                                                <option value="<%=user.intArnet%>%>" selected>
+                                                    <%=user.intArnet%>
+                                                </option>
+                                                <option value="Sin presentar">Sin presentar</option>
+                                                <option value="EnGestion">En gestion</option>
+                                                <option value="ok">ok</option>
+                                            </select>
+
+                                        </td>
+                                        <td class="text-light bg-dark">
+                                            <select class="form-control" id="intOtros" name="intOtros"
+                                                value="<%=user.intOtros%>" placeholder="<%=user.intOtros%>">
+                                                <option value="<%=user.intOtros%>%>" selected>
+                                                    <%=user.intOtros%>
+                                                </option>
+                                                <option value="Sin presentar">Sin presentar</option>
+                                                <option value="EnGestion">En gestion</option>
+                                                <option value="ok">ok</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                        </table>
+                        <div class="container">
+                            <div class="button-group text-center" role="group">
+                                <button type="submit" class="btn btn-primary text-center">Actualizar</button>
+                                <a href="/adminecogas" class="btn btn-secondary text-center">Cancelar</a>
+                            </div>
+                        </div>
+                        </form>
+                </div>
+
+
+                <% } %>
+
+                    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+                        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+                        crossorigin="anonymous"></script>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+                        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+                        crossorigin="anonymous"></script>
+                    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+                        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+                        crossorigin="anonymous"></script>
 </body>
 
 </html>
