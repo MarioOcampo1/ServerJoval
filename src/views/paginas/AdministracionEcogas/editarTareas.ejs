@@ -338,7 +338,16 @@
 
                                                         </select>
                                                         <label for="Permisos"> Permisos</label>
-                                                        <select class="form-control" id="Permisos" name="Permisos"
+                                                        <button type="button" id="botonMostrarPermisos"
+                                                            onclick="document.getElementById('tablaPermisos').style.visibility='visible';">Mostrar
+                                                            Permisos</button>
+                                                        <select class="form-control" id="Permisos"
+                                                            value="<%=user.Permisos%>">
+                                                            <option value="<%=user.Permisos%>">
+                                                                <%=user.Permisos%>
+                                                            </option>
+                                                        </select>
+                                                        <!-- <select class="form-control" id="Permisos" name="Permisos"
                                                             value="<%= user.Permisos%>"
                                                             placeholder="<%= user.Permisos%>">
                                                             <option value="<%=user.Permisos%>" selected>
@@ -349,6 +358,7 @@
                                                             <option value="ok">ok</option>
 
                                                         </select>
+                                                         -->
                                                         <label for="Programadeseguridad">
                                                             Programadeseguridad</label>
                                                         <select class="form-control" id="Programadeseguridad"
@@ -591,139 +601,215 @@
 
                         </tr>
                     </tbody>
-                    <table id="tablaInterferencias" title="Interferencias"class="tablaInterferencias table table-bordered text-center " style="visibility:hidden">
-                            <thead>
-                                <tr>
-                                    <th scope="col" class="text-light bg-dark">Telefonica</th>
-                                    <th scope="col" class="text-light bg-dark">Agua</th>
-                                    <th scope="col" class="text-light bg-dark">Cloacas</th>
-                                    <th scope="col" class="text-light bg-dark">Electricidad</th>
-                                    <th scope="col" class="text-light bg-dark">Claro</th>
-                                    <th scope="col" class="text-light bg-dark">Arnet</th>
-                                    <th scope="col" class="text-light bg-dark">Otros</th>
-
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="text-light bg-dark">
-                                        <select class="form-control" id="intTelefonica" name="intTelefonica"
-                                            value="<%=user.intTelefonica%>" placeholder="<%=user.intTelefonica%>">
-                                            <option value="<%=user.intTelefonica%>" selected>
-                                                <%=user.intTelefonica%>
-                                            </option>
-                                            <option value="Sin presentar">Sin presentar</option>
-                                            <option value="EnGestion">En gestion</option>
-                                            <option value="ok">ok</option>
-
-                                        </select>
-                                    </td>
-                                    <td class="text-light bg-dark">
-                                        <select class="form-control" id="intAgua" name="intAgua"
-                                            value="<%=user.intAgua%>" placeholder="<%=user.intAgua%>">
-                                            <option value="<%=user.intAgua%>" selected>
-                                                <%=user.intAgua%>
-                                            </option>
-                                            <option value="Sin presentar">Sin presentar</option>
-                                            <option value="EnGestion">En gestion</option>
-                                            <option value="ok">ok</option>
-
-                                        </select>
-                                    </td>
-                                    <td class="text-light bg-dark">
-                                        <select class="form-control" id="intCloaca" name="intCloaca"
-                                            value="<%=user.intCloaca%>" placeholder="<%=user.intCloaca%>">
-                                            <option value="<%=user.intCloaca%>%>" selected>
-                                                <%=user.intCloaca%>
-                                            </option>
-                                            <option value="Sin presentar">Sin presentar</option>
-                                            <option value="EnGestion">En gestion</option>
-                                            <option value="ok">ok</option>
-
-                                        </select>
-
-                                    </td>
-                                    <td class="text-light bg-dark">
-                                        <select class="form-control" id="intElectricidad" name="intElectricidad"
-                                            value="<%=user.intElectricidad%>" placeholder="<%=user.intElectricidad%>">
-                                            <option value="<%=user.intElectricidad%>%>" selected>
-                                                <%=user.intElectricidad%>
-                                            </option>
-                                            <option value="Sin presentar">Sin presentar</option>
-                                            <option value="EnGestion">En gestion</option>
-                                            <option value="ok">ok</option>
-
-                                        </select>
-
-                                    </td>
-                                    <td class="text-light bg-dark">
-                                        <select class="form-control" id="intClaro" name="intClaro"
-                                            value="<%=user.intClaro%>" placeholder="<%=user.intClaro%>">
-                                            <option value="<%=user.intClaro%>%>" selected>
-                                                <%=user.intClaro%>
-                                            </option>
-                                            <option value="Sin presentar">Sin presentar</option>
-                                            <option value="EnGestion">En gestion</option>
-                                            <option value="ok">ok</option>
-
-                                        </select>
-                                    </td>
-                                    <td class="text-light bg-dark">
-                                        <select class="form-control" id="intArnet" name="intArnet"
-                                            value="<%=user.intArnet%>" placeholder="<%=user.intArnet%>">
-                                            <option value="<%=user.intArnet%>%>" selected>
-                                                <%=user.intArnet%>
-                                            </option>
-                                            <option value="Sin presentar">Sin presentar</option>
-                                            <option value="EnGestion">En gestion</option>
-                                            <option value="ok">ok</option>
-                                        </select>
-
-                                    </td>
-                                    <td class="text-light bg-dark">
-                                        <select class="form-control" id="intOtros" name="intOtros"
-                                            value="<%=user.intOtros%>" placeholder="<%=user.intOtros%>">
-                                            <option value="<%=user.intOtros%>%>" selected>
-                                                <%=user.intOtros%>
-                                            </option>
-                                            <option value="Sin presentar">Sin presentar</option>
-                                            <option value="EnGestion">En gestion</option>
-                                            <option value="ok">ok</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                            </tbody>
-                    </table>
-                    <!-- <table title="Permisos"class="tablaPermisos  table table-bordered" >
+                    <table id="tablaInterferencias" title="Interferencias"
+                        class="tablaInterferencias table table-bordered text-center " style="visibility:hidden">
                         <thead>
-                          <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">First</th>
-                            <th scope="col">Last</th>
-                            <th scope="col">Handle</th>
-                          </tr>
+                            <tr>
+                                <th scope="col" class="text-light bg-dark">Telefonica</th>
+                                <th scope="col" class="text-light bg-dark">Agua</th>
+                                <th scope="col" class="text-light bg-dark">Cloacas</th>
+                                <th scope="col" class="text-light bg-dark">Electricidad</th>
+                                <th scope="col" class="text-light bg-dark">Claro</th>
+                                <th scope="col" class="text-light bg-dark">Arnet</th>
+                                <th scope="col" class="text-light bg-dark">Otros</th>
+
+                            </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">3</th>
-                            <td>Larry</td>
-                            <td>the Bird</td>
-                            <td>@twitter</td>
-                          </tr>
+                            <tr>
+                                <td class="text-light bg-dark">
+                                    <select class="form-control" id="intTelefonica" name="intTelefonica"
+                                        value="<%=user.intTelefonica%>" placeholder="<%=user.intTelefonica%>">
+                                        <option value="<%=user.intTelefonica%>" selected>
+                                            <%=user.intTelefonica%>
+                                        </option>
+                                        <option value="Sin presentar">Sin presentar</option>
+                                        <option value="EnGestion">En gestion</option>
+                                        <option value="ok">ok</option>
+
+                                    </select>
+                                </td>
+                                <td class="text-light bg-dark">
+                                    <select class="form-control" id="intAgua" name="intAgua" value="<%=user.intAgua%>"
+                                        placeholder="<%=user.intAgua%>">
+                                        <option value="<%=user.intAgua%>" selected>
+                                            <%=user.intAgua%>
+                                        </option>
+                                        <option value="Sin presentar">Sin presentar</option>
+                                        <option value="EnGestion">En gestion</option>
+                                        <option value="ok">ok</option>
+
+                                    </select>
+                                </td>
+                                <td class="text-light bg-dark">
+                                    <select class="form-control" id="intCloaca" name="intCloaca"
+                                        value="<%=user.intCloaca%>" placeholder="<%=user.intCloaca%>">
+                                        <option value="<%=user.intCloaca%>%>" selected>
+                                            <%=user.intCloaca%>
+                                        </option>
+                                        <option value="Sin presentar">Sin presentar</option>
+                                        <option value="EnGestion">En gestion</option>
+                                        <option value="ok">ok</option>
+
+                                    </select>
+
+                                </td>
+                                <td class="text-light bg-dark">
+                                    <select class="form-control" id="intElectricidad" name="intElectricidad"
+                                        value="<%=user.intElectricidad%>" placeholder="<%=user.intElectricidad%>">
+                                        <option value="<%=user.intElectricidad%>%>" selected>
+                                            <%=user.intElectricidad%>
+                                        </option>
+                                        <option value="Sin presentar">Sin presentar</option>
+                                        <option value="EnGestion">En gestion</option>
+                                        <option value="ok">ok</option>
+
+                                    </select>
+
+                                </td>
+                                <td class="text-light bg-dark">
+                                    <select class="form-control" id="intClaro" name="intClaro"
+                                        value="<%=user.intClaro%>" placeholder="<%=user.intClaro%>">
+                                        <option value="<%=user.intClaro%>%>" selected>
+                                            <%=user.intClaro%>
+                                        </option>
+                                        <option value="Sin presentar">Sin presentar</option>
+                                        <option value="EnGestion">En gestion</option>
+                                        <option value="ok">ok</option>
+
+                                    </select>
+                                </td>
+                                <td class="text-light bg-dark">
+                                    <select class="form-control" id="intArnet" name="intArnet"
+                                        value="<%=user.intArnet%>" placeholder="<%=user.intArnet%>">
+                                        <option value="<%=user.intArnet%>%>" selected>
+                                            <%=user.intArnet%>
+                                        </option>
+                                        <option value="Sin presentar">Sin presentar</option>
+                                        <option value="EnGestion">En gestion</option>
+                                        <option value="ok">ok</option>
+                                    </select>
+
+                                </td>
+                                <td class="text-light bg-dark">
+                                    <select class="form-control" id="intOtros" name="intOtros"
+                                        value="<%=user.intOtros%>" placeholder="<%=user.intOtros%>">
+                                        <option value="<%=user.intOtros%>%>" selected>
+                                            <%=user.intOtros%>
+                                        </option>
+                                        <option value="Sin presentar">Sin presentar</option>
+                                        <option value="EnGestion">En gestion</option>
+                                        <option value="ok">ok</option>
+                                    </select>
+                                </td>
+                            </tr>
                         </tbody>
-                      </table> -->
+                    </table>
+                    <table id="tablaPermisos" title="Permisos" class="tablaPermisos table table-bordered text-center "
+                        style="visibility:hidden">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="text-light bg-dark">Hidraúlica</th>
+                                <th scope="col" class="text-light bg-dark">Ferrocarriles</th>
+                                <th scope="col" class="text-light bg-dark">DNV</th>
+                                <th scope="col" class="text-light bg-dark">DPV</th>
+                                <th scope="col" class="text-light bg-dark">Irrigación</th>
+                                <th scope="col" class="text-light bg-dark">Privado</th>
+                                <th scope="col" class="text-light bg-dark">Otros</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-light bg-dark">
+                                    <select class="form-control" id="HIDRAULICA" name="HIDRAULICA"
+                                        value="<%=user.Hidraulica%>" placeholder="<%=user.Hidraulica%>">
+                                        <option value="<%=user.Hidraulica%>" selected>
+                                            <%=user.Hidraulica%>
+                                        </option>
+                                        <option value="Sin presentar">Sin presentar</option>
+                                        <option value="EnGestion">En gestion</option>
+                                        <option value="ok">ok</option>
+
+                                    </select>
+                                </td>
+                                <td class="text-light bg-dark">
+                                    <select class="form-control" id="FERROCARRIL" name="FERROCARRIL"
+                                        value="<%=user.Ferrocarriles%>" placeholder="<%=user.Ferrocarriles%>">
+                                        <option value="<%=user.Ferrocarriles%>" selected>
+                                            <%=user.Ferrocarriles%>
+                                        </option>
+                                        <option value="Sin presentar">Sin presentar</option>
+                                        <option value="EnGestion">En gestion</option>
+                                        <option value="ok">ok</option>
+
+                                    </select>
+                                </td>
+                                <td class="text-light bg-dark">
+                                    <select class="form-control" id="DNV" name="DNV" value="<%=user.DNV%>"
+                                        placeholder="<%=user.DNV%>">
+                                        <option value="<%=user.DNV%>" selected>
+                                            <%=user.DNV%>
+                                        </option>
+                                        <option value="Sin presentar">Sin presentar</option>
+                                        <option value="EnGestion">En gestion</option>
+                                        <option value="ok">ok</option>
+
+                                    </select>
+
+                                </td>
+                                <td class="text-light bg-dark">
+                                    <select class="form-control" id="DPV" name="DPV" value="<%=user.DPV%>"
+                                        placeholder="<%=user.DPV%>">
+                                        <option value="<%=user.DPV%>" selected>
+                                            <%=user.DPV%>
+                                        </option>
+                                        <option value="Sin presentar">Sin presentar</option>
+                                        <option value="EnGestion">En gestion</option>
+                                        <option value="ok">ok</option>
+
+                                    </select>
+
+                                </td>
+                                <td class="text-light bg-dark">
+                                    <select class="form-control" id="IRRIGACION" name="IRRIGACION"
+                                        value="<%=user.Irrigacion%>" placeholder="<%=user.Irrigacion%>">
+                                        <option value="<%=user.Irrigacion%>" selected>
+                                            <%=user.Irrigacion%>
+                                        </option>
+                                        <option value="Sin presentar">Sin presentar</option>
+                                        <option value="EnGestion">En gestion</option>
+                                        <option value="ok">ok</option>
+
+                                    </select>
+                                </td>
+                                <td class="text-light bg-dark">
+                                    <select class="form-control" id="PRIVADO" name="PRIVADO" value="<%=user.Privado%>"
+                                        placeholder="<%=user.Privado%>">
+                                        <option value="<%=user.Privado%>" selected>
+                                            <%=user.Privado%>
+                                        </option>
+                                        <option value="Sin presentar">Sin presentar</option>
+                                        <option value="EnGestion">En gestion</option>
+                                        <option value="ok">ok</option>
+                                    </select>
+
+                                </td>
+                                <td class="text-light bg-dark">
+                                    <select class="form-control" id="OTROSPERMISOS" name="OTROSPERMISOS"
+                                        value="<%=user.Otrospermisos%>" placeholder="<%=user.Otrospermisos%>">
+                                        <option value="<%=user.Otrospermisos%>" selected>
+                                            <%=user.Otrospermisos%>
+                                        </option>
+                                        <option value="Sin presentar">Sin presentar</option>
+                                        <option value="EnGestion">En gestion</option>
+                                        <option value="ok">ok</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
                     <div class="container">
                         <div class="button-group text-center" role="group">
                             <button type="submit" class="btn btn-primary text-center">Actualizar</button>

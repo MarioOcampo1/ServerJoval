@@ -15,6 +15,7 @@
 </head>
 
 <body>
+  <%- include('./partials/menusuperior.ejs')%>
   <% if(user) { %>
     <div class="card">
       <div class="card-body">
@@ -39,31 +40,10 @@
               </form>
             </div>
             </div>
+           
+        </div>
         
         </div>
-        </div>
-        <nav class="navbar navbar-expand-lg navbar-light bg-primary ">
-          <a class="navbar-brand" href="#"></a>
-          <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-      
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item active">
-                <a class="btn btn-primary  " href="/estadogeneral">Estado General</a>
-              </li>
-              <li class="nav-item">
-                <a class="btn btn-primary  " href="/contactos">Contactos</a>
-              </li>
-              <li class="nav-item">
-                <a class="btn btn-primary   " href="/adminecogas.ejs">Administración obras de gas</a>
-              </li>
-              
-            </ul>
-          </div>
-      </nav>
       <form action="/update/<%= user.id%>" method="POST">
         <input type="hidden" name="id" id="id" value="<%= user.id%>">
         <div class="form-group">
@@ -117,13 +97,13 @@
           <h5 class="text-center ">Jurisdicciones</h5>
           <br>
           <div class="form-check-inline">
-            <% if ((user.Hidraulica)=='pedir'){%>
+            <% if ((user.Hidraulica)!=''&& (user.Hidraulica)!= null  ){%>
             <input class="form-check-input" type="checkbox"
-            value="pedir" id="Hidraulica" name="pedir" checked>
+            value="pedir" id="HIDRAULICA" name="HIDRAULICA" checked>
             <%} else{%>
                
               <input class="form-check-input" type="checkbox"
-            value="pedir" id="Hidraulica" name="pedir">
+            value="pedir" id="HIDRAULICA" name="HIDRAULICA">
             
               <%}%>
             <label class="form-check-label" for="defaultCheck1">
@@ -132,13 +112,13 @@
             
           </div>
           <div class="form-check-inline">
-            <% if ((user.Ferrocarriles)=='pedir'){%>
+            <% if ((user.Ferrocarriles)!=''&& (user.Ferrocarriles)!= null ){%>
             <input class="form-check-input" type="checkbox"
-            value="pedir" id="Ferrocarriles" name="pedir" checked>
+            value="pedir" id="FERROCARRIL" name="FERROCARRIL" checked>
             <%} else{%>
                
               <input class="form-check-input" type="checkbox"
-            value="pedir" id="Ferrocarriles" name="pedir">
+            value="pedir" id="FERROCARRIL" name="FERROCARRIL">
             
               <%}%>
             <label class="form-check-label" for="defaultCheck1">
@@ -146,13 +126,13 @@
             </label>
             </div>
             <div class="form-check-inline">
-              <% if ((user.DNV)=='pedir'){%>
+              <% if ((user.DNV)!=''&& (user.DNV)!= null ){%>
               <input class="form-check-input" type="checkbox"
-              value="pedir" id="DNV" name="pedir" checked>
+              value="pedir" id="DNV" name="DNV" checked>
               <%} else{%>
                  
                 <input class="form-check-input" type="checkbox"
-              value="pedir" id="DNV" name="pedir">
+              value="pedir" id="DNV" name="DNV">
               
                 <%}%>
               <label class="form-check-label" for="defaultCheck1">
@@ -161,13 +141,13 @@
               
             </div>
             <div class="form-check-inline">
-              <% if ((user.DPV)=='pedir'){%>
+              <% if ((user.DPV)!=''&& (user.DPV)!= null ){%>
               <input class="form-check-input" type="checkbox"
-              value="pedir" id="DPV" name="pedir" checked>
+              value="pedir" id="DPV" name="DPV" checked>
               <%} else{%>
                  
                 <input class="form-check-input" type="checkbox"
-              value="ok" id="DPV" name="pedir">
+              value="ok" id="DPV" name="DPV">
               
                 <%}%>
               <label class="form-check-label" for="defaultCheck1">
@@ -176,13 +156,13 @@
               
             </div>
             <div class="form-check-inline">
-              <% if ((user.Irrigacion)=='pedir'){%>
+              <% if ((user.Irrigacion)!=''&& (user.Irrigacion)!= null ){%>
               <input class="form-check-input" type="checkbox"
-              value="pedir" id="Irrigacion" name="pedir" checked>
+              value="pedir" id="IRRIGACION" name="IRRIGACION" checked>
               <%} else{%>
                  
                 <input class="form-check-input" type="checkbox"
-              value="ok" id="Irrigacion" name="pedir">
+              value="ok" id="IRRIGACION" name="IRRIGACION">
               
                 <%}%>
               <label class="form-check-label" for="defaultCheck1">
@@ -191,13 +171,13 @@
               </div>
               
             <div class="form-check-inline">
-              <% if ((user.Privado)=='pedir'){%>
+              <% if ((user.Privado)!=''&& (user.Privado)!= null ){%>
               <input class="form-check-input" type="checkbox"
-              value="pedir" id="Privado" name="pedir" checked>
+              value="pedir" id="PRIVADO" name="PRIVADO" checked>
               <%} else{%>
                  
                 <input class="form-check-input" type="checkbox"
-              value="ok" id="Privado" name="pedir">
+              value="ok" id="PRIVADO" name="PRIVADO">
               
                 <%}%>
               <label class="form-check-label" for="defaultCheck1">
@@ -205,29 +185,15 @@
               </label>
               </div>
               
+            
             <div class="form-check-inline">
-              <% if ((user.Irrigacion)=='pedir'){%>
+              <% if ((user.Otrospermisos)!=''&& (user.Otrospermisos)!= null ){%>
               <input class="form-check-input" type="checkbox"
-              value="pedir" id="Irrigacion" name="pedir" checked>
+              value="pedir" id="OTROSPERMISOS" name="OTROSPERMISOS" checked>
               <%} else{%>
                  
                 <input class="form-check-input" type="checkbox"
-              value="ok" id="Irrigacion" name="pedir">
-              
-                <%}%>
-              <label class="form-check-label" for="defaultCheck1">
-                Irrigacion
-              </label>
-              </div>
-              
-            <div class="form-check-inline">
-              <% if ((user.Otrospermisos)=='pedir'){%>
-              <input class="form-check-input" type="checkbox"
-              value="pedir" id="Otrospermisos" name="pedir" checked>
-              <%} else{%>
-                 
-                <input class="form-check-input" type="checkbox"
-              value="ok" id="Otrospermisos" name="pedir">
+              value="ok" id="OTROSPERMISOS" name="OTROSPERMISOS">
               
                 <%}%>
               <label class="form-check-label" for="defaultCheck1">

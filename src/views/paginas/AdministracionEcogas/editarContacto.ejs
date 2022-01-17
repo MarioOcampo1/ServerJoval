@@ -26,12 +26,20 @@
                     </div>  
                         <div class="col-md-auto">
                             <h3 ><%= user.Nombre%> </h3>
-
+                            
+                        </div>
+                        <div class="col-md-auto">
+                        <form action="delete/Contacto/<%=user.id%>" method="post">
+                            <button type="submit" class="btn btn-danger" onclick="return confirmarDelete()"> Eliminar Cliente</button>
+                          </form>
                         </div>
                         </div>
                     
                     </div>
                 </div>
+                <div class="col-md-auto">
+                    
+                  </div>
                 <form action="/update/<%= user.id%>" method="POST">
                     <input type="hidden" name="id" id="id" value="<%= user.id%>">
                     <div class="form-group">

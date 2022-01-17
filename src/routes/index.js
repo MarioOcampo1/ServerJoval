@@ -52,7 +52,7 @@ router.get('/interferencias/info',(req,res)=>{
     })
 })
 router.get('/adminecogas', (req, res) => {
-    const sql = 'SELECT c.id, c.Nombre, c.NCarpeta, t.TareaRealizada, t.ProximaTarea, t.FechaLimite FROM clientes c, adgastareas t where c.Nombre = t.Nombre  ';
+    const sql = 'SELECT c.id, c.Nombre, c.NCarpeta, c.TareaRealizada, c.ProximaTarea, c.FechaLimite FROM clientes c  ';
     res.locals.moment = moment;
     connection.query(sql, (error, results) => {
         if (error) throw error;
@@ -68,7 +68,7 @@ router.get('/adminecogas', (req, res) => {
 
 })
 router.get('/adminecogas/info', (req, res) => {
-    const sql = 'SELECT c.id, c.Nombre, c.NCarpeta, t.TareaRealizada, t.ProximaTarea, t.FechaLimite, c.Estado FROM clientes c, adgastareas t where c.Nombre = t.Nombre  ';
+    const sql = 'SELECT c.id, c.Nombre, c.NCarpeta, c.TareaRealizada, c.ProximaTarea, c.FechaLimite, c.Estado FROM clientes c';
     res.locals.moment = moment;
     connection.query(sql, (error, results) => {
         if (error) throw error;
@@ -232,7 +232,10 @@ router.post('/update/:id', (req, res) => {
     const HIDRAULICA = req.body.HIDRAULICA;
     const FERROCARRIL = req.body.FERROCARRIL;
     const OTROSPERMISOS = req.body.OTROSPERMISOS;
+    const Privado = req.body.PRIVADO;
     const TipoDeRed = req.body.TipoDeRed;
+    console.log("id es:" + id);
+    console.log("el valor de hidraulica es:" + req.body.HIDRAULICA);
     //const TareaRealizada =req.body.TareaRealizada;
     //const ProximaTarea = req.body.ProximaTarea;
     const Fecha_limite = req.body.Fecha_limite;
@@ -240,19 +243,19 @@ router.post('/update/:id', (req, res) => {
         console.log('fecha limite a actualizar es: ' + Fecha_limite);
         console.log('fecha limite a actualizar es: ' + req.body.Fecha_limite);
         //console.log(Tarea_Realizada: TareaRealizada, ProximaTarea: ProximaTarea);
-        const sql = 'Update clientes Set ? where id =?';
+        var sql = 'Update clientes Set ? where id =?';
         connection.query(sql, [{
             Nombre: NombreCarpeta, NCarpeta: NCarpeta, Comitente: Comitente, Ubicacion: Departamento, DNV: DNV, DPV: DPV, Irrigacion: IRRIGACION,
-            Hidraulica: HIDRAULICA, Ferrocarriles: FERROCARRIL, TipoDeRed: TipoDeRed, Fecha_limite: Fecha_limite
+            Hidraulica: HIDRAULICA,Privado: PRIVADO, Ferrocarriles: FERROCARRIL, TipoDeRed: TipoDeRed, Fecha_limite: Fecha_limite
         }, id]
             , (error, results) => {
                 if (error) throw error;
 
                 if (results.length > 0) {
-                    res.redirect('paginas/AdministracionEcogas/adminecogas');
+                    res.redirect(req.get('referer'));
                 }
                 else {
-                    res.redirect('paginas/AdministracionEcogas/adminecogas');
+                    res.redirect(req.get('referer'));
 
                 }
 
@@ -273,10 +276,10 @@ router.post('/update/:id', (req, res) => {
                     if (error) throw error;
 
                     if (results.length > 0) {
-                        res.redirect('paginas/AdministracionEcogas/adminecogas');
+                        res.redirect(req.get('referer'));
                     }
                     else {
-                        res.redirect('paginas/AdministracionEcogas//adminecogas');
+                        res.redirect(req.get('referer'));
 
                     }
 
@@ -293,10 +296,10 @@ router.post('/update/:id', (req, res) => {
                     if (error) throw error;
 
                     if (results.length > 0) {
-                        res.redirect('paginas/AdministracionEcogas//adminecogas');
+                        res.redirect(req.get('referer'));
                     }
                     else {
-                        res.redirect('paginas/AdministracionEcogas//adminecogas');
+                        res.redirect(req.get('referer'));;
 
                     }
 
@@ -320,7 +323,7 @@ router.post('/updatetareas/:id', (req, res) => {
     var sql = "";
     if (Fecha_limite) {
         sql = 'Update  clientes set ? where id=?';
-        connection.query(sql, [{ Estado: EstadoCarpeta }, id], (error, results) => {
+        connection.query(sql, [{ Estado: EstadoCarpeta, TareaRealizada: TareaRealizada, ProximaTarea: ProximaTarea, Fechalimite: Fecha_limite  }, id], (error, results) => {
             if (error) throw error;
             console.log("se cargo el estado en tabla clientes");
 
@@ -334,26 +337,11 @@ router.post('/updatetareas/:id', (req, res) => {
                 res.redirect('/adminecogas');
             }
         })
-
-        sql = 'Update adgastareas Set ? where Nombre =?';
-        connection.query(sql, [{
-            TareaRealizada: TareaRealizada, ProximaTarea: ProximaTarea, FechaLimite: Fecha_limite
-        }, Nombre], (error, results) => {
-            if (error) throw error;
-
-            if (results.length > 0) {
-                res.redirect('/adminecogas');
-            }
-            else {
-                res.redirect('/adminecogas');
-
-            }
-
-        })
+        res.redirect('/adminecogas');
     }
     else {
         sql = 'Update  clientes set ? where id =?';
-        connection.query(sql, [{ Estado: EstadoCarpeta }, id], (error, results) => {
+        connection.query(sql, [{ Estado: EstadoCarpeta, TareaRealizada: TareaRealizada, ProximaTarea: ProximaTarea}, id], (error, results) => {
             if (error) throw error;
             console.log("se cargo el estado en tabla clientes");
 
@@ -366,20 +354,7 @@ router.post('/updatetareas/:id', (req, res) => {
                 res.redirect('/adminecogas');
             }
         })
-        sql = 'Update adgastareas Set ? where Nombre =?';
-        connection.query(sql, [{ TareaRealizada: TareaRealizada, ProximaTarea: ProximaTarea }, Nombre], (error, results) => {
-            if (error) throw error;
-
-            if (results.length > 0) {
-                res.redirect('/adminecogas');
-            }
-            else {
-                res.redirect('/adminecogas');
-
-            }
-
-        })
-
+        res.redirect('/adminecogas');
     }
 }
 )
@@ -391,29 +366,53 @@ router.post('/edit/delete/:id', (req, res) => {
     connection.query(sql, [id], (error, results) => {
         if (error) throw error;
         if (results.length > 0) {
-            res.render('adminecogas.ejs');
+            res.redirect('/adminecogas');
         }
         else {
-            res.render('adminecogas.ejs');
+            res.redirect('/adminecogas');
         }
     })
 })
-router.post('/guardar', (req, res) => {
+router.post('/editarContacto/delete/Contacto/:id', (req, res) => {
+    const id = req.params.id;
+    var sql = 'Delete FROM contactos WHERE id =?';
+   connection.query(sql, [id], (error, results) => {
+        if (error) throw error;
+        if (results.length > 0) {
+            res.redirect('/contactos');
+        }
+        else {
+            res.redirect('/contactos');
+        }
+    })
+})
+router.post('/guardarNuevoCliente', (req, res) => {
     const Nombre = req.body.NombreCarpeta;
     const NCarpeta = req.body.NCarpeta;
     const Comitente = req.body.Comitente;
     const Departamento = req.body.Departamento;
-    const DNV = req.body.DNV;
-    const DPV = req.body.DPV;
-    const IRRIGACION = req.body.IRRIGACION;
-    const HIDRAULICA = req.body.HIDRAULICA;
-    const FERROCARRIL = req.body.FERROCARRIL;
-    const OTROSPERMISOS = req.body.OTROSPERMISOS;
-    const TipoDeRed = req.body.TipoDeRed
+    var DNV = req.body.DNV;
+    var DPV = req.body.DPV;
+    var IRRIGACION = req.body.IRRIGACION;
+    var HIDRAULICA = req.body.HIDRAULICA;
+    var FERROCARRIL = req.body.FERROCARRIL;
+    var OTROSPERMISOS = req.body.OTROSPERMISOS;
+    var TipoDeRed = req.body.TipoDeRed
     // const TipoRed =req.body.Tipos-de-red;
-    const sql = 'Insert into clientes set ?';
+    if (DNV == null) {DNV="";}
+    if (DPV == null) {DPV="";}
+    if (IRRIGACION == null) {IRRIGACION="";}
+    if (HIDRAULICA == null) {HIDRAULICA="";}
+    if (FERROCARRIL == null) {FERROCARRIL="";}
+    if (OTROSPERMISOS == null) {OTROSPERMISOS="";}
+    var sql ='Insert into adgastareas set ?';
+    connection.query(sql,{
+        Nombre:Nombre},(error,results)=>{
+            if(error) throw error;
+        })
+     sql = 'Insert into clientes set ?';
     connection.query(sql, {
-        Nombre: Nombre, NCarpeta: NCarpeta, Comitente: Comitente, Ubicación: Departamento, DNV: DNV, DPV: DPV, Irrigacion: IRRIGACION,
+        Nombre: Nombre, NCarpeta: NCarpeta, Comitente: Comitente, Ubicacion: Departamento, DNV: DNV, DPV: DPV, Irrigacion: IRRIGACION,
         Hidraulica: HIDRAULICA, Ferrocarriles: FERROCARRIL, OtrosPermisos: OTROSPERMISOS, TipoDeRed: TipoDeRed
     }, (error, results) => {
         if (error) throw error;
@@ -426,6 +425,22 @@ router.post('/guardar', (req, res) => {
 
         }
     })
+
+})
+router.post('/guardarNuevoContacto', (req, res) => {
+    const Nombre = req.body.Nombre;
+    const Entidad = req.body.Entidad;
+    const Area = req.body.Area;
+    const Puesto = req.body.Puesto;
+    const Telefono = req.body.Teléfono;
+    const Correo = req.body.Correo;
+    var sql ='Insert into contactos set ?';
+    connection.query(sql,{
+        Nombre:Nombre, Entidad: Entidad, Area: Area, Puesto: Puesto, Telefono: Telefono, Correo: Correo},(error,results)=>{
+            if(error) throw error;
+        })
+            res.redirect('/contactos');
+ 
 
 })
 //Opciones de editar tareas POST
@@ -449,6 +464,13 @@ router.post('/actualizarEtapas/:id',(req,res)=>{
     const intElectricidad = req.body.intElectricidad;
     const intOtros = req.body.intOtros;
     const intArnet = req.body.intArnet;
+    const DNV = req.body.DNV;
+    const DPV = req.body.DPV;
+    const IRRIGACION = req.body.IRRIGACION;
+    const HIDRAULICA = req.body.HIDRAULICA;
+    const FERROCARRIL = req.body.FERROCARRIL;
+    const PRIVADO = req.body.PRIVADO;
+    const OTROSPERMISOS = req.body.OTROSPERMISOS;
     const sql = 'Update clientes Set ? where id=?';
     console.log("int agua es: "+intAgua);
     if(intTelefonica == "EnGestion" || intClaro== "EnGestion" || intAgua== "EnGestion" || intCloacas== "EnGestion" || intElectricidad== "EnGestion" || intOtros== "EnGestion" || intArnet== "EnGestion" ){
@@ -462,8 +484,8 @@ Interferencias="ok";
         Mensura: Mensura, TituloDePropiedad: TituloDePropiedad, DocumentaciónSociedad: DocSociedad, Comercial: Comercial, 
         PCaprobado: Pcaprobado, intTelefonica: intTelefonica, intClaro: intClaro, intAgua:intAgua,
         intCloaca:intCloacas, intElectricidad:intElectricidad, intOtros:intOtros,intArnet:intArnet,
-         CartaOferta: CartaOferta, MailAutorizacion:MailAutorizacion, CertificadoRT: CertificadoRT,
-          Interferencias: Interferencias, Permisos: Permisos, Programadeseguridad: Programadeseguridad,}, id],
+         CartaOferta: CartaOferta, MailAutorizacion:MailAutorizacion, CertificadoRT: CertificadoRT, DNV: DNV, DPV: DPV, Irrigacion: IRRIGACION,
+         Hidraulica: HIDRAULICA,Privado:PRIVADO, Ferrocarriles: FERROCARRIL,Interferencias: Interferencias, Permisos: Permisos, Programadeseguridad: Programadeseguridad,}, id],
            (error, results) => {
                
             if (error) throw error;
