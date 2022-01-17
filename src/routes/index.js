@@ -28,7 +28,7 @@ router.get('/interferencias', (req, res) => {
     connection.query(sql, (error, results) => {
         if (error) throw error;
         if (results.length > 0) {
-    res.render('paginas/interferencias.ejs', { results: results });
+    res.render('paginas/AdministracionEcogas/interferencias.ejs', { results: results });
         }
         else {
             res.send('Ningun resultado encontrado');
@@ -58,7 +58,7 @@ router.get('/adminecogas', (req, res) => {
         if (error) throw error;
 
         if (results.length > 0) {
-            res.render('paginas/adminecogas.ejs', { results: results }); //en {results:results} lo que hago es guardar los resultados que envia la bd, en la variable results
+            res.render('paginas/AdministracionEcogas/adminecogas.ejs', { results: results }); //en {results:results} lo que hago es guardar los resultados que envia la bd, en la variable results
 
         }
         else {
@@ -90,7 +90,7 @@ router.get('/estadogeneral', (req, res) => {
         if (error) throw error;
 
         if (results.length > 0) {
-            res.render('paginas/estadogeneral.ejs', { results: results }); //en {results:results} lo que hago es guardar los resultados que envia la bd, en la variable results
+            res.render('paginas/AdministracionEcogas/estadogeneral.ejs', { results: results }); //en {results:results} lo que hago es guardar los resultados que envia la bd, en la variable results
             // res.send(results);
         }
         else {
@@ -102,7 +102,7 @@ router.get('/estadogeneral', (req, res) => {
 
 })
 router.get('/nuevocliente', (req, res) => {
-    res.render('paginas/nuevocliente.ejs');
+    res.render('paginas/AdministracionEcogas/nuevocliente.ejs');
 })
 
 router.get('/contactos', (req, res) => {
@@ -112,7 +112,7 @@ router.get('/contactos', (req, res) => {
         if (error) throw error;
 
         if (results.length > 0) {
-            res.render('paginas/contactos.ejs', { results: results }); //en {results:results} lo que hago es guardar los resultados que envia la bd, en la variable results
+            res.render('paginas/AdministracionEcogas/contactos.ejs', { results: results }); //en {results:results} lo que hago es guardar los resultados que envia la bd, en la variable results
             // res.send(results);
         }
         else {
@@ -131,7 +131,7 @@ router.get('/editarContacto/:id', (req, res) => {
     connection.query(sql, [id], (error, results) => {
         if (error) throw error;
         if (results.length > 0) {
-            res.render('paginas/editarContacto', { user: results[0] });
+            res.render('paginas/AdministracionEcogas/editarContacto', { user: results[0] });
         }
         else {
             res.render('/adminecogas');
@@ -148,7 +148,7 @@ router.get('/editarTareas/:id', (req, res) => {
     connection.query(sql, [id], (error, results) => {
         if (error) throw error;
         if (results.length > 0) {
-            res.render('paginas/editarTareas', { user: results[0] });
+            res.render('paginas/AdministracionEcogas/editarTareas', { user: results[0] });
         }
         else {
             res.redirect('/adminecogas');
@@ -162,14 +162,11 @@ router.get('/edit/:id', (req, res) => {
     const sql = 'Select * from clientes where id=?';
     connection.query(sql, [id], (error, results) => {
         if (error) throw error;
-        console.log("results tiene " + results.length + "valores");
         if (results.length > 0) {
-            console.log("entro en el if");
 
-            res.render('paginas/edit', { user: results[0] });
+            res.render('paginas/AdministracionEcogas/edit', { user: results[0] });
         }
         else {
-            console.log("entro en el else");
 
             res.render('/adminecogas');
 
@@ -183,17 +180,17 @@ router.get('/historialcarpeta/:Nombre', (req, res) => {
     connection.query(sql, [Nombre], (error, results) => {
         if (error) throw error;
         if (results.length > 0) {
-            res.render('paginas/historialcarpeta.ejs', { results: results }); //en {results:results} lo que hago es guardar los resultados que envia la bd, en la variable results
+            res.render('paginas/AdministracionEcogas/historialcarpeta.ejs', { results: results }); //en {results:results} lo que hago es guardar los resultados que envia la bd, en la variable results
 
         }
         else {
-            res.render('paginas/historialcarpeta.ejs', { results: results });
+            res.render('paginas/AdministracionEcogas/historialcarpeta.ejs', { results: results });
         }
     })
 
 })
 router.get('/nuevocontacto', (req, res) => {
-    res.render('nuevocontacto.ejs');
+    res.render('paginas/AdministracionEcogas/nuevocontacto.ejs');
 })
 //Rutas Post
 router.post('/actualizarcontacto/:id', (req, res) => {
@@ -212,10 +209,10 @@ router.post('/actualizarcontacto/:id', (req, res) => {
             if (error) throw error;
 
             if (results.length > 0) {
-                res.redirect('/contactos');
+                res.redirect('paginas/AdministracionEcogas/contactos');
             }
             else {
-                res.redirect('/adminecogas');
+                res.redirect('paginas/AdministracionEcogas/adminecogas');
 
             }
 
@@ -252,10 +249,10 @@ router.post('/update/:id', (req, res) => {
                 if (error) throw error;
 
                 if (results.length > 0) {
-                    res.redirect('/adminecogas');
+                    res.redirect('paginas/AdministracionEcogas/adminecogas');
                 }
                 else {
-                    res.redirect('/adminecogas');
+                    res.redirect('paginas/AdministracionEcogas/adminecogas');
 
                 }
 
@@ -276,10 +273,10 @@ router.post('/update/:id', (req, res) => {
                     if (error) throw error;
 
                     if (results.length > 0) {
-                        res.redirect('/adminecogas');
+                        res.redirect('paginas/AdministracionEcogas/adminecogas');
                     }
                     else {
-                        res.redirect('/adminecogas');
+                        res.redirect('paginas/AdministracionEcogas//adminecogas');
 
                     }
 
@@ -296,10 +293,10 @@ router.post('/update/:id', (req, res) => {
                     if (error) throw error;
 
                     if (results.length > 0) {
-                        res.redirect('/adminecogas');
+                        res.redirect('paginas/AdministracionEcogas//adminecogas');
                     }
                     else {
-                        res.redirect('/adminecogas');
+                        res.redirect('paginas/AdministracionEcogas//adminecogas');
 
                     }
 
