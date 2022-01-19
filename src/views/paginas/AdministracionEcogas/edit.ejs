@@ -16,219 +16,215 @@
 
 <body>
   <%- include('./partials/menusuperior.ejs')%>
-  <% if(user) { %>
-    <div class="card">
-      <div class="card-body">
-        <div class="card-title text-center">
-          <div class="container-fluid">
-            <div class="row justify-content-md-center">
-              <div class="col-md-auto">
-                <a href="/adminecogas" class="btn btn-secondary">Salir al escritorio</a>
-      
-              </div>  
-        <div class="col-md-auto">
-          <a href="/editarTareas/<%= user.id%>" class="btn btn-secondary">Volver atrás</a>
+    <% if(user) { %>
+      <div class="card">
+        <div class="card-body">
+          <div class="card-title text-center">
+            <div class="container-fluid">
+              <div class="row justify-content-md-center">
+                <div class="col-md-auto">
+                  <h3> Editar cliente </h3>
 
-        </div>  
-            <div class="col-md-auto">
-                <h3> Editar cliente </h3>
+                </div>
+                <div class="col-md-auto">
+                  <form action="delete/<%=user.id%>" method="post">
+                    <button type="submit" class="btn btn-danger" onclick="return confirmarDelete()"> Eliminar
+                      Cliente</button>
+                  </form>
+                </div>
+              </div>
 
             </div>
-            <div class="col-md-auto">
-              <form action="delete/<%=user.id%>" method="post">
-                <button type="submit" class="btn btn-danger" onclick="return confirmarDelete()"> Eliminar Cliente</button>
-              </form>
-            </div>
-            </div>
-           
-        </div>
-        
-        </div>
-      <form action="/update/<%= user.id%>" method="POST">
-        <input type="hidden" name="id" id="id" value="<%= user.id%>">
-        <div class="form-group">
-          
-          <label for="Nombre">Nombre de carpeta</label>
-          <input type="text" class="form-control" id="NombreCarpeta" name="NombreCarpeta" value="<%= user.Nombre%>"
-            placeholder="<%= user.Nombre%>">
-        </div>
-        <div class="form-group">
-          <label for="Numero de Carpeta">N° de carpeta</label>
-          <input type="text" class="form-control" id="NCarpeta" name="NCarpeta" value="<%= user.NCarpeta%>"
-            placeholder="<%= user.NCarpeta%>">
-        </div>
-        <div class="form-group">
-          <label for="Comitente">Comitente</label>
-          <input type="Comitente" class="form-control" id="Comitente" name="Comitente" value="<%= user.Comitente%>"
-            placeholder="%= user.Comitente%">
-        </div>
-        <div class="form-group">
-          <label for="Departamento">Departamento</label>
-          <select class="form-control" id="Ubicación" name="Ubicación">
-            <option <%=user.Ubicación=='Ciudad de Mendoza' ? "selected" : "" %> value="Ciudad de Mendoza">Ciudad de
-              Mendoza</option>
-            <option <%=user.Ubicación=='Gral Alvear' ? "selected" : "" %> value="GralAlvear">Gral Alvear</option>
-            <option <%=user.Ubicación=='Luján de Cuyo' ? "selected" : "" %> value="Luján de Cuyo">Luján de Cuyo
-            </option>
-            <option <%=user.Ubicación=='Las-Heras' ? "selected" : "" %> value="Las Heras">Las Heras</option>
-            <option <%=user.Ubicación=='Maipú' ? "selected" : "" %> value="Maipú">Maipú</option>
-            <option <%=user.Ubicación=='San-Martín' ? "selected" : "" %> value="San Martín">San Martín</option>
-            <option <%=user.Ubicación=='Malargüe' ? "selected" : "" %> value="Malargüe">Malargüe</option>
-            <option <%=user.Ubicación=='San-Carlos' ? "selected" : "" %> value="San Carlos">San Carlos</option>
 
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="Tipos de red">Tipo de red</label>
-          <select class="form-control" id="Tipos-de-red" name="Tipos-de-red">
-            <option <%=user.TipoDeRed=='Pead' ? "selected" : "" %> value="Pead">Pead</option>
-            <option <%=user.TipoDeRed=='Acero' ? "selected" : "" %> value="Acero">Acero</option>
-            <option <%=user.TipoDeRed=='Gasoducto' ? "selected" : "" %> value="Gasoducto">Gasoducto</option>
-            <option <%=user.TipoDeRed=='Red interna' ? "selected" : "" %> value="Red interna">Interna</option>
-
-          </select>
-        </div>
-
-    </div>
-    </div>
-    <div class="container ">
-      <div class="card ">
-        <div class="card-body border border-success ">
-          <h5 class="text-center ">Jurisdicciones</h5>
-          <br>
-          <div class="form-check-inline">
-            <% if ((user.Hidraulica)!=''&& (user.Hidraulica)!= null  ){%>
-            <input class="form-check-input" type="checkbox"
-            value="pedir" id="HIDRAULICA" name="HIDRAULICA" checked>
-            <%} else{%>
-               
-              <input class="form-check-input" type="checkbox"
-            value="pedir" id="HIDRAULICA" name="HIDRAULICA">
-            
-              <%}%>
-            <label class="form-check-label" for="defaultCheck1">
-              Hidraúlica
-            </label>
-            
           </div>
-          <div class="form-check-inline">
-            <% if ((user.Ferrocarriles)!=''&& (user.Ferrocarriles)!= null ){%>
-            <input class="form-check-input" type="checkbox"
-            value="pedir" id="FERROCARRIL" name="FERROCARRIL" checked>
-            <%} else{%>
-               
-              <input class="form-check-input" type="checkbox"
-            value="pedir" id="FERROCARRIL" name="FERROCARRIL">
-            
-              <%}%>
-            <label class="form-check-label" for="defaultCheck1">
-              Ferrocarriles
-            </label>
+          <form action="/update/<%= user.id%>" method="POST">
+            <input type="hidden" name="id" id="id" value="<%= user.id%>">
+            <div class="form-group">
+
+              <label for="Nombre">Nombre de carpeta</label>
+              <input type="text" class="form-control" id="NombreCarpeta" name="NombreCarpeta" value="<%= user.Nombre%>"
+                placeholder="<%= user.Nombre%>">
             </div>
-            <div class="form-check-inline">
-              <% if ((user.DNV)!=''&& (user.DNV)!= null ){%>
-              <input class="form-check-input" type="checkbox"
-              value="pedir" id="DNV" name="DNV" checked>
-              <%} else{%>
-                 
-                <input class="form-check-input" type="checkbox"
-              value="pedir" id="DNV" name="DNV">
-              
-                <%}%>
-              <label class="form-check-label" for="defaultCheck1">
-                DNV
-              </label>
-              
+            <div class="form-group">
+              <label for="Numero de Carpeta">N° de carpeta</label>
+              <input type="text" class="form-control" id="NCarpeta" name="NCarpeta" value="<%= user.NCarpeta%>"
+                placeholder="<%= user.NCarpeta%>">
             </div>
-            <div class="form-check-inline">
-              <% if ((user.DPV)!=''&& (user.DPV)!= null ){%>
-              <input class="form-check-input" type="checkbox"
-              value="pedir" id="DPV" name="DPV" checked>
-              <%} else{%>
-                 
-                <input class="form-check-input" type="checkbox"
-              value="ok" id="DPV" name="DPV">
-              
-                <%}%>
-              <label class="form-check-label" for="defaultCheck1">
-                DPV 
-              </label>
-              
+            <div class="form-group">
+              <label for="Comitente">Comitente</label>
+              <input type="Comitente" class="form-control" id="Comitente" name="Comitente" value="<%= user.Comitente%>"
+                placeholder="%= user.Comitente%">
             </div>
-            <div class="form-check-inline">
-              <% if ((user.Irrigacion)!=''&& (user.Irrigacion)!= null ){%>
-              <input class="form-check-input" type="checkbox"
-              value="pedir" id="IRRIGACION" name="IRRIGACION" checked>
-              <%} else{%>
-                 
-                <input class="form-check-input" type="checkbox"
-              value="ok" id="IRRIGACION" name="IRRIGACION">
-              
-                <%}%>
-              <label class="form-check-label" for="defaultCheck1">
-                Irrigacion
-              </label>
-              </div>
-              
-            <div class="form-check-inline">
-              <% if ((user.Privado)!=''&& (user.Privado)!= null ){%>
-              <input class="form-check-input" type="checkbox"
-              value="pedir" id="PRIVADO" name="PRIVADO" checked>
-              <%} else{%>
-                 
-                <input class="form-check-input" type="checkbox"
-              value="ok" id="PRIVADO" name="PRIVADO">
-              
-                <%}%>
-              <label class="form-check-label" for="defaultCheck1">
-                Privado
-              </label>
-              </div>
-              
-            
-            <div class="form-check-inline">
-              <% if ((user.Otrospermisos)!=''&& (user.Otrospermisos)!= null ){%>
-              <input class="form-check-input" type="checkbox"
-              value="pedir" id="OTROSPERMISOS" name="OTROSPERMISOS" checked>
-              <%} else{%>
-                 
-                <input class="form-check-input" type="checkbox"
-              value="ok" id="OTROSPERMISOS" name="OTROSPERMISOS">
-              
-                <%}%>
-              <label class="form-check-label" for="defaultCheck1">
-                Otros Permisos
-              </label>
-              </div>
+            <div class="form-group">
+              <label for="Departamento">Departamento</label>
+              <select class="form-control" id="Ubicacion" name="Ubicacion">
+                <option value="<%=user.Ubicacion%>" selected><%=user.Ubicacion%>></option>
+                <option value="Ciudad de Mendoza">Ciudad de
+                  Mendoza</option>
+                <option value="GralAlvear">Gral Alvear</option>
+                <option value="Luján de Cuyo">Luján de Cuyo
+                </option>
+                <option value="Las Heras">Las Heras</option>
+                <option value="Maipú">Maipú</option>
+                <option value="San Martín">San Martín</option>
+                <option value="Malargüe">Malargüe</option>
+                <option value="San Carlos">San Carlos</option>
+
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="Tipos de red">Tipo de red</label>
+              <select class="form-control" id="TipoDeRed" name="TipoDeRed">
+                <option value="<%=user.TipoDeRed%>" selected><%=user.TipoDeRed%></option>
+                <option value="Pead">Pead</option>
+                <option value="Acero">Acero</option>
+                <option value="Gasoducto">Gasoducto</option>
+                <option value="Red interna">Interna</option>
+
+              </select>
+            </div>
+
         </div>
       </div>
-    </div>
-    <br>
-    <div class="container-fluid">
-      <div class="row justify-content-md-center">
-        <div class="col-md-auto">
+      <!-- <div class="container ">
+        <div class="card ">
+          <div class="card-body border border-success ">
+            <h5 class="text-center ">Jurisdicciones</h5>
+            <br>
+            <div class="form-check-inline">
+              <% if ((user.Hidraulica)!='' && (user.Hidraulica)!=null ){%>
+                <input class="form-check-input" type="checkbox" value="pedir" id="HIDRAULICA" name="HIDRAULICA" checked>
+                <%} else{%>
 
-        <button type="submit" class="btn btn-primary text-center">Actualizar</button>
-      </div>
-      <div class="col-md-auto">
-  
-        <a href="/adminecogas" class="btn btn-secondary text-center">Cancelar</a>
-    </div>
-    </div>
-    
-    </form>
-    <% } %>
-    <script>
-      function confirmarDelete(){
-        var respuesta = confirm("¿Estas seguro que deseas eliminar el cliente?");
-        if (respuesta ==true){
-          return true
-        }
-        else {
-          return false
-        } 
-      }
-    </script>
+                  <input class="form-check-input" type="checkbox" value="pedir" id="HIDRAULICA" name="HIDRAULICA">
+
+                  <%}%>
+                    <label class="form-check-label" for="defaultCheck1">
+                      Hidraúlica
+                    </label>
+
+            </div>
+            <div class="form-check-inline">
+              <% if ((user.Ferrocarriles)!='' && (user.Ferrocarriles)!=null ){%>
+                <input class="form-check-input" type="checkbox" value="pedir" id="FERROCARRIL" name="FERROCARRIL"
+                  checked>
+                <%} else{%>
+
+                  <input class="form-check-input" type="checkbox" value="pedir" id="FERROCARRIL" name="FERROCARRIL">
+
+                  <%}%>
+                    <label class="form-check-label" for="defaultCheck1">
+                      Ferrocarriles
+                    </label>
+            </div>
+            <div class="form-check-inline">
+              <% if ((user.DNV)!='' && (user.DNV)!=null ){%>
+                <input class="form-check-input" type="checkbox" value="pedir" id="DNV" name="DNV" checked>
+                <%} else{%>
+
+                  <input class="form-check-input" type="checkbox" value="pedir" id="DNV" name="DNV">
+
+                  <%}%>
+                    <label class="form-check-label" for="defaultCheck1">
+                      DNV
+                    </label>
+
+            </div>
+            <div class="form-check-inline">
+              <% if ((user.DPV)!='' && (user.DPV)!=null ){%>
+                <input class="form-check-input" type="checkbox" value="pedir" id="DPV" name="DPV" checked>
+                <%} else{%>
+
+                  <input class="form-check-input" type="checkbox" value="ok" id="DPV" name="DPV">
+
+                  <%}%>
+                    <label class="form-check-label" for="defaultCheck1">
+                      DPV
+                    </label>
+
+            </div>
+            <div class="form-check-inline">
+              <% if ((user.Irrigacion)!='' && (user.Irrigacion)!=null ){%>
+                <input class="form-check-input" type="checkbox" value="pedir" id="IRRIGACION" name="IRRIGACION" checked>
+                <%} else{%>
+
+                  <input class="form-check-input" type="checkbox" value="ok" id="IRRIGACION" name="IRRIGACION">
+
+                  <%}%>
+                    <label class="form-check-label" for="defaultCheck1">
+                      Irrigacion
+                    </label>
+            </div>
+
+            <div class="form-check-inline">
+              <% if ((user.Privado)!='' && (user.Privado)!=null ){%>
+                <input class="form-check-input" type="checkbox" value="pedir" id="PRIVADO" name="PRIVADO" checked>
+                <%} else{%>
+
+                  <input class="form-check-input" type="checkbox" value="ok" id="PRIVADO" name="PRIVADO">
+
+                  <%}%>
+                    <label class="form-check-label" for="defaultCheck1">
+                      Privado
+                    </label>
+            </div>
+
+
+            <div class="form-check-inline">
+              <% if ((user.Otrospermisos)!='' && (user.Otrospermisos)!=null ){%>
+                <input class="form-check-input" type="checkbox" value="pedir" id="OTROSPERMISOS" name="OTROSPERMISOS"
+                  checked>
+                <%} else{%>
+
+                  <input class="form-check-input" type="checkbox" value="ok" id="OTROSPERMISOS" name="OTROSPERMISOS">
+
+                  <%}%>
+                    <label class="form-check-label" for="defaultCheck1">
+                      Otros Permisos
+                    </label>
+            </div>
+            <div class="form-check-inline">
+              <% if ((user.PerMunicipal)!='' && (user.PerMunicipal)!=null ){%>
+                <input class="form-check-input" type="checkbox" value="pedir" id="PerMunicipal" name="PerMunicipal"
+                  checked>
+                <%} else{%>
+
+                  <input class="form-check-input" type="checkbox" value="ok" id="PerMunicipal" name="PerMunicipal">
+
+                  <%}%>
+                    <label class="form-check-label" for="defaultCheck1">
+                      Permiso Municipal
+                    </label>
+            </div>
+          </div>
+        </div>
+      </div> -->
+      <br>
+      <div class="container-fluid">
+        <div class="row justify-content-md-center">
+          <div class="col-md-auto">
+
+            <button type="submit" class="btn btn-primary text-center">Actualizar</button>
+          </div>
+          <div class="col-md-auto">
+            <button onClick="history.go(-1);" class="btn btn-secondary text-center"">Cancelar</button>
+            <!-- <a href="/adminecogas" class="btn btn-secondary text-center">Cancelar</a> -->
+          </div>
+        </div>
+
+        </form>
+        <% } %>
+          <script>
+            function confirmarDelete() {
+              var respuesta = confirm("¿Estas seguro que deseas eliminar el cliente?");
+              if (respuesta == true) {
+                return true
+              }
+              else {
+                return false
+              }
+            }
+          </script>
 </body>
 
 </html>

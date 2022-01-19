@@ -174,17 +174,18 @@ router.get('/edit/:id', (req, res) => {
     })
 })
 router.get('/historialcarpeta/:Nombre', (req, res) => {
+    const id = req.params.id;
     const Nombre = req.params.Nombre;
     const sql = 'SELECT * FROM historialdecambios WHERE Nombre_sub =?';
     res.locals.moment = moment;
     connection.query(sql, [Nombre], (error, results) => {
         if (error) throw error;
         if (results.length > 0) {
-            res.render('paginas/AdministracionEcogas/historialcarpeta.ejs', { results: results }); //en {results:results} lo que hago es guardar los resultados que envia la bd, en la variable results
+            res.render('paginas/AdministracionEcogas/historialcarpeta.ejs', { results: results, id:id }); //en {results:results} lo que hago es guardar los resultados que envia la bd, en la variable results
 
         }
         else {
-            res.render('paginas/AdministracionEcogas/historialcarpeta.ejs', { results: results });
+            res.render('paginas/AdministracionEcogas/historialcarpeta.ejs', { results: results, id:id });
         }
     })
 
@@ -192,6 +193,9 @@ router.get('/historialcarpeta/:Nombre', (req, res) => {
 router.get('/nuevocontacto', (req, res) => {
     res.render('paginas/AdministracionEcogas/nuevocontacto.ejs');
 })
+
+
+
 //Rutas Post
 router.post('/actualizarcontacto/:id', (req, res) => {
     const id = req.body.id;
@@ -221,11 +225,10 @@ router.post('/actualizarcontacto/:id', (req, res) => {
 router.post('/update/:id', (req, res) => {
     res.locals.moment = moment;
     const id = req.body.id;
-    console.log("id es:" + id);
     const NombreCarpeta = req.body.NombreCarpeta;
     const NCarpeta = req.body.NCarpeta
     const Comitente = req.body.Comitente;
-    const Departamento = req.body.Departamento;
+    const Departamento = req.body.Ubicacion;
     const DNV = req.body.DNV;
     const DPV = req.body.DPV;
     const IRRIGACION = req.body.IRRIGACION;
@@ -235,6 +238,7 @@ router.post('/update/:id', (req, res) => {
     const Privado = req.body.PRIVADO;
     const TipoDeRed = req.body.TipoDeRed;
     console.log("id es:" + id);
+    console.log("nombre carpeta:" + NombreCarpeta)
     console.log("el valor de hidraulica es:" + req.body.HIDRAULICA);
     //const TareaRealizada =req.body.TareaRealizada;
     //const ProximaTarea = req.body.ProximaTarea;
@@ -263,10 +267,6 @@ router.post('/update/:id', (req, res) => {
     }
     else {
         if (NombreCarpeta != null) {
-
-            console.log('fecha limite a actualizar es: ' + Fecha_limite);
-            console.log('fecha limite a actualizar es: ' + req.body.Fecha_limite);
-
             const sql = 'Update clientes Set ? where id =?';
             connection.query(sql, [{
                 Nombre: NombreCarpeta, NCarpeta: NCarpeta, Comitente: Comitente, Ubicacion: Departamento, DNV: DNV, DPV: DPV, Irrigacion: IRRIGACION,
@@ -289,7 +289,7 @@ router.post('/update/:id', (req, res) => {
         else {
             const sql = 'Update clientes Set ? where id =?';
             connection.query(sql, [{
-                NCarpeta: NCarpeta, Comitente: Comitente, Ubicación: Departamento, DNV: DNV, DPV: DPV, Irrigacion: IRRIGACION,
+                NCarpeta: NCarpeta, Comitente: Comitente, Ubicacion: Departamento, DNV: DNV, DPV: DPV, Irrigacion: IRRIGACION,
                 Hidraulica: HIDRAULICA, Ferrocarriles: FERROCARRIL, TipoDeRed: TipoDeRed
             }, id]
                 , (error, results) => {
@@ -455,7 +455,7 @@ router.post('/actualizarEtapas/:id',(req,res)=>{
     const MailAutorizacion = req.body.MailAutorizacion;
     const CertificadoRT = req.body.CertificadoRT;
     var Interferencias = req.body.Interferencias;
-    const Permisos = req.body.Permisos;
+    var Permisos = req.body.Permisos;
     const Programadeseguridad = req.body.Programadeseguridad;
     const intTelefonica = req.body.intTelefonica;
     const intClaro = req.body.intClaro;
@@ -471,6 +471,11 @@ router.post('/actualizarEtapas/:id',(req,res)=>{
     const FERROCARRIL = req.body.FERROCARRIL;
     const PRIVADO = req.body.PRIVADO;
     const OTROSPERMISOS = req.body.OTROSPERMISOS;
+    const PermisoMunicipal = req.body.PerMunicipal;
+    if ((DNV == "ok" || DNV == "NC") && (PermisoMunicipal== "ok" || DNV == "NC")&&(DPV == "ok"|| DPV == "NC") && (IRRIGACION == "ok"|| IRRIGACION == "NC") && (HIDRAULICA == "ok"|| HIDRAULICA == "NC") && (FERROCARRIL == "ok" || FERROCARRIL == "NC")&& (PRIVADO == "ok"|| PRIVADO == "NC") && (OTROSPERMISOS == "ok" || OTROSPERMISOS == "NC")){
+        Permisos= "ok";
+    }else{ Permisos="EnGestion"};
+    
     const sql = 'Update clientes Set ? where id=?';
     console.log("int agua es: "+intAgua);
     if(intTelefonica == "EnGestion" || intClaro== "EnGestion" || intAgua== "EnGestion" || intCloacas== "EnGestion" || intElectricidad== "EnGestion" || intOtros== "EnGestion" || intArnet== "EnGestion" ){
@@ -479,13 +484,13 @@ router.post('/actualizarEtapas/:id',(req,res)=>{
     if(intTelefonica == "ok" && intClaro== "ok" && intAgua== "ok" && intCloacas== "ok" && intElectricidad== "ok" && intOtros== "ok" && intArnet== "ok" ){
 Interferencias="ok";
     }
-    console.log("interferencias es:" + Interferencias);
+    console.log("El estado de interferencias es:" + Interferencias);
     connection.query(sql, [{
         Mensura: Mensura, TituloDePropiedad: TituloDePropiedad, DocumentaciónSociedad: DocSociedad, Comercial: Comercial, 
         PCaprobado: Pcaprobado, intTelefonica: intTelefonica, intClaro: intClaro, intAgua:intAgua,
         intCloaca:intCloacas, intElectricidad:intElectricidad, intOtros:intOtros,intArnet:intArnet,
-         CartaOferta: CartaOferta, MailAutorizacion:MailAutorizacion, CertificadoRT: CertificadoRT, DNV: DNV, DPV: DPV, Irrigacion: IRRIGACION,
-         Hidraulica: HIDRAULICA,Privado:PRIVADO, Ferrocarriles: FERROCARRIL,Interferencias: Interferencias, Permisos: Permisos, Programadeseguridad: Programadeseguridad,}, id],
+         CartaOferta: CartaOferta,PerMunicipal:PermisoMunicipal, MailAutorizacion:MailAutorizacion, CertificadoRT: CertificadoRT, DNV: DNV, DPV: DPV, Irrigacion: IRRIGACION,
+         Hidraulica: HIDRAULICA,Privado:PRIVADO, Ferrocarriles: FERROCARRIL, Otrospermisos:OTROSPERMISOS,Interferencias: Interferencias, Permisos: Permisos, Programadeseguridad: Programadeseguridad,}, id],
            (error, results) => {
                
             if (error) throw error;

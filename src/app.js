@@ -20,16 +20,15 @@ app.set('view engine','ejs'); //Ejs es un lenguaje que nos permite ser utilizado
 app.use(morgan('dev'));
 app.use(express.urlencoded({extended: false }));
 app.use(express.json());
-
 //Routes
 app.use(require('./routes/index')); //Usa el enrutador
 
 //Static
-app.use (express.static(path.join(__dirname, 'public'))); //Esta linea de codigo le dice a express que la carpeta public esta adentro de src
-
+app.use (express.static(path.join(__dirname, 'public')));
+app.use (express.static(path.join(__dirname, 'views'))); //Esta linea de codigo le dice a express que la carpeta public esta adentro de src
 //404 Handler
 app.use((req,res,next)=>{
-res.status(404).send('404 NOT FOUND');
+res.status(404).render('404.ejs');
 
 });
 
