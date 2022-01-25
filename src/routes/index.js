@@ -15,7 +15,6 @@ const connection = mysql.createConnection({
 connection.connect(error => {
     if (error) throw error;
 })
-
 //Settings
 //Fin de seteo de server original
 //Rutas Get
@@ -454,6 +453,8 @@ router.post('/actualizarEtapas/:id',(req,res)=>{
     const CartaOferta = req.body.CartaOferta;
     const MailAutorizacion = req.body.MailAutorizacion;
     const CertificadoRT = req.body.CertificadoRT;
+    var ActaConstitutiva = req.body.ActaConstitutiva;
+    var DniComitente = req.body.DniComitente;
     var Interferencias = req.body.Interferencias;
     var Permisos = req.body.Permisos;
     const Programadeseguridad = req.body.Programadeseguridad;
@@ -486,10 +487,10 @@ Interferencias="ok";
     }
     console.log("El estado de interferencias es:" + Interferencias);
     connection.query(sql, [{
-        Mensura: Mensura, TituloDePropiedad: TituloDePropiedad, DocumentaciónSociedad: DocSociedad, Comercial: Comercial, 
+        Mensura: Mensura,DniComitente: DniComitente, TituloDePropiedad: TituloDePropiedad, DocumentaciónSociedad: DocSociedad, Comercial: Comercial, 
         PCaprobado: Pcaprobado, intTelefonica: intTelefonica, intClaro: intClaro, intAgua:intAgua,
         intCloaca:intCloacas, intElectricidad:intElectricidad, intOtros:intOtros,intArnet:intArnet,
-         CartaOferta: CartaOferta,PerMunicipal:PermisoMunicipal, MailAutorizacion:MailAutorizacion, CertificadoRT: CertificadoRT, DNV: DNV, DPV: DPV, Irrigacion: IRRIGACION,
+         CartaOferta: CartaOferta,ActaConstitutiva: ActaConstitutiva,PerMunicipal:PermisoMunicipal, MailAutorizacion:MailAutorizacion, CertificadoRT: CertificadoRT, DNV: DNV, DPV: DPV, Irrigacion: IRRIGACION,
          Hidraulica: HIDRAULICA,Privado:PRIVADO, Ferrocarriles: FERROCARRIL, Otrospermisos:OTROSPERMISOS,Interferencias: Interferencias, Permisos: Permisos, Programadeseguridad: Programadeseguridad,}, id],
            (error, results) => {
                
