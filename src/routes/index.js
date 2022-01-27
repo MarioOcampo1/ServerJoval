@@ -461,6 +461,7 @@ router.post('/actualizarEtapas/:id',(req,res)=>{
     const NotaDeExcepcion = req.body.NotaDeExcepcion;
     const PlanoTipo = req.body.PlanoTipo;
     const Sucedaneo = req.body.Sucedaneo;
+    const DDJJNAG153 = req.body.DDJJNAG153;
     const SolicitudInicioObras = req.body.SolicitudInicioObras;
     const FechaInicioTrabajos = req.body.FechaInicioTrabajos;
     const FechaActividadActual = req.body.FechaActividadActual;
@@ -490,7 +491,7 @@ router.post('/actualizarEtapas/:id',(req,res)=>{
     const CronogramaAmbiente = req.body.CronogramaAmbiente;
     const ActaDeInicio = req.body.ActaDeInicio;
     const PruebaHermeticidad = req.body.PruebaHermeticidad;
-
+const NotaCumplimentoNormativa= req.body.NotaCumplimentoNormativa;
 
     const TituloDePropiedad = req.body.TituloDePropiedad;
     const DocSociedad = req.body.DocumentaciónSociedad;
@@ -534,7 +535,7 @@ Interferencias="ok";
     console.log("El estado de interferencias es:" + Interferencias);
     connection.query(sql, [{
         Mensura: Mensura,FechaFirmaContrato:FechaFirmaContrato,Contrato:Contrato,NotaDeExcepcion:NotaDeExcepcion,PlanoTipo:PlanoTipo,Sucedaneo:Sucedaneo,
-        SolicitudInicioObras:SolicitudInicioObras,FechaInicioTrabajos:FechaInicioTrabajos,FechaActividadActual:FechaActividadActual,
+        DDJJNAG153:DDJJNAG153,SolicitudInicioObras:SolicitudInicioObras,FechaInicioTrabajos:FechaInicioTrabajos,FechaActividadActual:FechaActividadActual,
         DocumentacionSociedad:DocumentacionSociedad,ActaCargoVigente:ActaCargoVigente,Cotizacion:Cotizacion,LibroOrdenesServicio:LibroOrdenesServicio,LibroNotasPedido:LibroNotasPedido,AvisosDeObra:AvisosDeObra,OrdenServicio:OrdenServicio,CronogramaFirmadoComitente:CronogramaFirmadoComitente,CronogramaSyH:CronogramaSyH,AvisoInicioObraART:AvisoInicioObraART,AvisoInicioObraIERIC:AvisoInicioObraIERIC,SeguroRC:SeguroRC,SeguroAccidentesPersonales:SeguroAccidentesPersonales,PlanosyCroquis:PlanosyCroquis,ActasFinales:ActasFinales,ActaInicioEfectivo:ActaInicioEfectivo,InformesFinales:InformesFinales,ConformeDePermisos:ConformeDePermisos,PresentacionFinal:PresentacionFinal,PCrevisado:PCrevisado,intArsat:intArsat,PerMunicipal:PerMunicipal,Monotributos:Monotributos,CronogramaAmbiente:CronogramaAmbiente,ActaDeInicio:ActaDeInicio,PruebaHermeticidad:PruebaHermeticidad,DniComitente: DniComitente, TituloDePropiedad: TituloDePropiedad, DocumentaciónSociedad: DocSociedad, Comercial: Comercial, 
         PCaprobado: Pcaprobado, intTelefonica: intTelefonica, intClaro: intClaro, intAgua:intAgua,
         intCloaca:intCloacas, intElectricidad:intElectricidad, intOtros:intOtros,intArnet:intArnet,
