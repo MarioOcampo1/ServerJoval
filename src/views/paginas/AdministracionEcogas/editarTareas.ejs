@@ -87,14 +87,15 @@
 
                         </div>
                     </div>
-            </div>
-            <br>
-            <div class="button-group text-center" role="group">
-                <button type="submit" class="btn btn-primary text-center">Actualizar Tarea</button>
-                <button onClick="history.go(-1);" class="btn btn-secondary text-center"">Cancelar</button>
+                    <br>
+                    <div class="button-group text-center" role="group">
+                        <button type="submit" class="btn btn-primary text-center">Actualizar Tarea</button>
+                        <button onClick="history.go(-1);" class="btn btn-secondary text-center"">Cancelar</button>
                 <!-- <a href=" /adminecogas" class="btn btn-secondary text-center">Cancelar</a> -->
+                    </div>
+                </form>
             </div>
-            </form>
+
             <br>
             <div class="container">
                 <div class="table-responsive">
@@ -274,7 +275,7 @@
                                                                         <option value="EnGestion(Preliminar)">En gestion
                                                                         </option>
                                                                         <option value="Ok(Preliminar)">ok</option>
-                                                                        
+
                                                                     </select>
                                                                 </div>
 
@@ -326,16 +327,17 @@
                                                                         <select class="form-control" id="Contrato"
                                                                             name="Comercial" value="<%= user.Contrato%>"
                                                                             placeholder="<%= user.Contrato%>">
-                                                                            <option hidden value="<%=user.Contrato%>" selected>
+                                                                            <option hidden value="<%=user.Contrato%>"
+                                                                                selected>
                                                                                 <%=user.Comercial%>
                                                                             </option>
-                                                                            <option value="Sin presentar"> Hacer</option>
+                                                                            <option value="Sin presentar"> Hacer
+                                                                            </option>
                                                                             <option value="EnGestion">En gestion
                                                                             </option>
                                                                             <option value="SinFirmar">Realizado pero no
                                                                                 firmado</option>
                                                                             <option value="ok">Ok</option>
-                                                                            <option value="NC">No corresponde</option>
                                                                         </select>
                                                                     </div>
                                                                     <div class="card-title">Presupuesto detallado</div>
@@ -351,7 +353,8 @@
                                                                             <option value="Sin presentar">Hacer</option>
                                                                             <option value="EnGestion">En gestion
                                                                             </option>
-                                                                            <option value="Presentado">Presentado</option>
+                                                                            <option value="Presentado">Presentado
+                                                                            </option>
                                                                             <option value="Observado">Observado</option>
                                                                             <option value="ok">Ok</option>
                                                                             <option value="NC">No corresponde</option>
@@ -382,18 +385,18 @@
                                                                             id="NotaDeExcepcion" name="NotaDeExcepcion"
                                                                             value="<%= user.NotaDeExcepcion%>"
                                                                             placeholder="<%= user.NotaDeExcepcion%>">
-                                                                            <option hidden value="<%=user.NotaDeExcepcion%>"
+                                                                            <option hidden
+                                                                                value="<%=user.NotaDeExcepcion%>"
                                                                                 selected>
                                                                                 <%=user.NotaDeExcepcion%>
                                                                             </option>
                                                                             <option value="EnGestion">En gestion
                                                                             </option>
-                                                                            <option value="Firmado">Firmado</option>
                                                                             <option value="Presentado">Presentado
                                                                             </option>
                                                                             <option value="Observado">Observado</option>
                                                                             <option value="ok">Ok</option>
-                                                                            <option value="NC">Ok</option>
+                                                                            <option value="NC">No corresponde</option>
 
                                                                         </select>
                                                                     </div>
@@ -406,7 +409,7 @@
                                                                             name="PCaprobado"
                                                                             value="<%= user.PCaprobado%>"
                                                                             placeholder="<%= user.PCaprobado%>">
-                                                                            <option  hidden value="<%=user.PCaprobado%>"
+                                                                            <option hidden value="<%=user.PCaprobado%>"
                                                                                 selected>
                                                                                 <%=user.PCaprobado%>
                                                                             </option>
@@ -415,7 +418,6 @@
                                                                             <option value="EnGestion">En gestion
                                                                             </option>
                                                                             <option value="Observado">Observado</option>
-
                                                                             <option value="ok">ok</option>
                                                                         </select>
 
@@ -424,7 +426,7 @@
                                                                             name="PlanoTipo"
                                                                             value="<%= user.PlanoTipo%>"
                                                                             placeholder="<%= user.PlanoTipo%>">
-                                                                            <option value="<%=user.PlanoTipo%>"
+                                                                            <option hidden value="<%=user.PlanoTipo%>"
                                                                                 selected>
                                                                                 <%=user.PlanoTipo%>
                                                                             </option>
@@ -432,7 +434,8 @@
                                                                             </option>
                                                                             <option value="EnGestion">En gestion
                                                                             </option>
-                                                                            <option value="Presentado">Presentado</option>
+                                                                            <option value="Presentado">Presentado
+                                                                            </option>
                                                                             <option value="Observado">Observado</option>
                                                                             <option value="ok">Ok</option>
                                                                             <option value="NC">No corresponde</option>
@@ -449,7 +452,7 @@
                                                                             name="CartaOferta"
                                                                             value="<%= user.CartaOferta%>"
                                                                             placeholder="<%= user.CartaOferta%>">
-                                                                            <option value="<%=user.CartaOferta%>"
+                                                                            <option hidden value="<%=user.CartaOferta%>"
                                                                                 selected>
                                                                                 <%=user.CartaOferta%>
                                                                             </option>
@@ -457,9 +460,11 @@
                                                                             </option>
                                                                             <option value="EnGestion">En gestion
                                                                             </option>
-                                                                            <option value="Presentado">Presentado</option>
+                                                                            <option value="Presentado">Presentado
+                                                                            </option>
                                                                             <option value="Observado">Observado</option>
                                                                             <option value="ok">ok</option>
+                                                                            <option value="NC">No corresponde/option>
 
                                                                         </select>
 
@@ -479,6 +484,7 @@
                                                                             <option value="EnGestion">En gestion
                                                                             </option>
                                                                             <option value="ok">ok</option>
+                                                                            <option value="NC">No corresponde/option>
 
                                                                         </select>
 
@@ -1114,72 +1120,77 @@
                                                                 <div class="card-header">Planos y croquis</div>
                                                                 <div class="card-text">
                                                                     <select class="form-control" id="PlanosyCroquis"
-                                                                    name="PlanosyCroquis" value="<%= user.PlanosyCroquis%>"
-                                                                    placeholder="<%= user.PlanosyCroquis%>">
-                                                                    <option value="<%=user.PlanosyCroquis%>" selected>
-                                                                        <%=user.PlanosyCroquis%>
+                                                                        name="PlanosyCroquis"
+                                                                        value="<%= user.PlanosyCroquis%>"
+                                                                        placeholder="<%= user.PlanosyCroquis%>">
+                                                                        <option value="<%=user.PlanosyCroquis%>"
+                                                                            selected>
+                                                                            <%=user.PlanosyCroquis%>
+                                                                        </option>
+                                                                        <option value="Sin presentar">Sin presentar
+                                                                        </option>
+                                                                        <option value="EnGestion">En gestion</option>
+                                                                        <option value="ok">ok</option>
+
+
+                                                                    </select>
+                                                                </div>
+
+                                                                </select>
+                                                                <div class="card-title">Conformes de Permisos</div>
+                                                                <select class="form-control" id="ConformedePermisos"
+                                                                    name="ConformedePermisos"
+                                                                    value="<%= user.ConformedePermisos%>"
+                                                                    placeholder="<%= user.ConformedePermisos%>">
+                                                                    <option value="<%=user.ConformedePermisos%>"
+                                                                        selected>
+                                                                        <%=user.ConformedePermisos%>
                                                                     </option>
                                                                     <option value="Sin presentar">Sin presentar</option>
                                                                     <option value="EnGestion">En gestion</option>
                                                                     <option value="ok">ok</option>
-    
-                                                            
-                                                            </select>
+
+                                                                </select>
+                                                                <div class="card-title">Prueba de hermeticidad</div>
+                                                                <select class="form-control" id="PruebaHermeticidad"
+                                                                    name="PruebaHermeticidad"
+                                                                    value="<%= user.PruebaHermeticidad%>"
+                                                                    placeholder="<%= user.PruebaHermeticidad%>">
+                                                                    <option value="<%=user.PruebaHermeticidad%>"
+                                                                        selected>
+                                                                        <%=user.PruebaHermeticidad%>
+                                                                    </option>
+                                                                    <option value="Sin presentar">Sin presentar</option>
+                                                                    <option value="EnGestion">En gestion</option>
+                                                                    <option value="ok">ok</option>
+
+                                                                </select>
+                                                                <div class="card-title">Informes finales</div>
+                                                                <select class="form-control" id="InformesFinales"
+                                                                    name="InformesFinales"
+                                                                    value="<%= user.InformesFinales%>"
+                                                                    placeholder="<%= user.InformesFinales%>">
+                                                                    <option value="<%=user.InformesFinales%>" selected>
+                                                                        <%=user.InformesFinales%>
+                                                                    </option>
+                                                                    <option value="Sin presentar">Sin presentar</option>
+                                                                    <option value="EnGestion">En gestion</option>
+                                                                    <option value="ok">ok</option>
+
+                                                                </select>
+                                                            </div>
                                                         </div>
-                                                          
-                                                            </select>
-                                                            <div class="card-title">Conformes de Permisos</div>
-                                                            <select class="form-control" id="ConformedePermisos"
-                                                                name="ConformedePermisos"
-                                                                value="<%= user.ConformedePermisos%>"
-                                                                placeholder="<%= user.ConformedePermisos%>">
-                                                                <option value="<%=user.ConformedePermisos%>" selected>
-                                                                    <%=user.ConformedePermisos%>
-                                                                </option>
-                                                                <option value="Sin presentar">Sin presentar</option>
-                                                                <option value="EnGestion">En gestion</option>
-                                                                <option value="ok">ok</option>
-
-                                                            </select>
-                                                            <div class="card-title">Prueba de hermeticidad</div>
-                                                            <select class="form-control" id="PruebaHermeticidad"
-                                                                name="PruebaHermeticidad"
-                                                                value="<%= user.PruebaHermeticidad%>"
-                                                                placeholder="<%= user.PruebaHermeticidad%>">
-                                                                <option value="<%=user.PruebaHermeticidad%>" selected>
-                                                                    <%=user.PruebaHermeticidad%>
-                                                                </option>
-                                                                <option value="Sin presentar">Sin presentar</option>
-                                                                <option value="EnGestion">En gestion</option>
-                                                                <option value="ok">ok</option>
-
-                                                            </select>
-                                                            <div class="card-title">Informes finales</div>
-                                                            <select class="form-control" id="InformesFinales"
-                                                                name="InformesFinales"
-                                                                value="<%= user.InformesFinales%>"
-                                                                placeholder="<%= user.InformesFinales%>">
-                                                                <option value="<%=user.InformesFinales%>" selected>
-                                                                    <%=user.InformesFinales%>
-                                                                </option>
-                                                                <option value="Sin presentar">Sin presentar</option>
-                                                                <option value="EnGestion">En gestion</option>
-                                                                <option value="ok">ok</option>
-
-                                                            </select>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-dismiss="modal" onclick="CerrarModal()">
+                                                                Cerrar</button>
+                                                            <button type="submit" class="btn btn-primary"
+                                                                form="actualizarEtapas">Guardar
+                                                                Cambios</button>
                                                         </div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary"
-                                                            data-dismiss="modal" onclick="CerrarModal()">
-                                                            Cerrar</button>
-                                                        <button type="submit" class="btn btn-primary"
-                                                            form="actualizarEtapas">Guardar
-                                                            Cambios</button>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
                                     </th>
 
 
@@ -1209,31 +1220,35 @@
                                                     <div class="modal-body">
                                                         <div class="container">
                                                             <div class="card p-3 border-secondary">
-                                                                <label for="PresentacionFinal">Presentacion Final</label>
-                                                            <select class="form-control" id="PresentacionFinal"
-                                                                name="PresentacionFinal"
-                                                                value="<%= user.PresentacionFinal%>"
-                                                                placeholder="<%= user.PresentacionFinal%>">
-                                                                <option value="<%=user.PresentacionFinal%>" selected>
-                                                                    <%=user.PresentacionFinal%>
-                                                                </option>
-                                                                <option value="EnGestion">En gestion</option>
-                                                                <option value="ok">ok</option>
-                                                            </select>
-                                                            <label for="HabilitacionFinal">Habilitación de Obra</label>
-                                                            <select class="form-control" id="HabilitacionFinal"
-                                                                name="HabilitacionFinal"
-                                                                value="<%= user.HabilitacionFinal%>"
-                                                                placeholder="<%= user.HabilitacionFinal%>">
-                                                                <option value="<%=user.HabilitacionFinal%>" selected>
-                                                                    <%=user.HabilitacionFinal%>
-                                                                </option>
-                                                                <option value="No">No realizada</option>
-                                                                <option value="ok">Ok</option>
-                                                            </select>
+                                                                <label for="PresentacionFinal">Presentacion
+                                                                    Final</label>
+                                                                <select class="form-control" id="PresentacionFinal"
+                                                                    name="PresentacionFinal"
+                                                                    value="<%= user.PresentacionFinal%>"
+                                                                    placeholder="<%= user.PresentacionFinal%>">
+                                                                    <option value="<%=user.PresentacionFinal%>"
+                                                                        selected>
+                                                                        <%=user.PresentacionFinal%>
+                                                                    </option>
+                                                                    <option value="EnGestion">En gestion</option>
+                                                                    <option value="ok">ok</option>
+                                                                </select>
+                                                                <label for="HabilitacionFinal">Habilitación de
+                                                                    Obra</label>
+                                                                <select class="form-control" id="HabilitacionFinal"
+                                                                    name="HabilitacionFinal"
+                                                                    value="<%= user.HabilitacionFinal%>"
+                                                                    placeholder="<%= user.HabilitacionFinal%>">
+                                                                    <option value="<%=user.HabilitacionFinal%>"
+                                                                        selected>
+                                                                        <%=user.HabilitacionFinal%>
+                                                                    </option>
+                                                                    <option value="No">No realizada</option>
+                                                                    <option value="ok">Ok</option>
+                                                                </select>
 
                                                             </div>
-                                                            
+
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">

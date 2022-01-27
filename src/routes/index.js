@@ -318,7 +318,7 @@ router.post('/updatetareas/:id', (req, res) => {
     const EstadoCarpeta = req.body.Estado;
     let fecha = new Date();
     const Fecha_Tarea_sub = fecha;
-    const Fecha_Proxima_Tarea_sub = req.body.Fecha_limite;
+    
     var sql = "";
     if (Fecha_limite) {
         sql = 'Update  clientes set ? where id=?';
@@ -329,14 +329,14 @@ router.post('/updatetareas/:id', (req, res) => {
         })
 
         sql = 'Insert into historialdecambios set?';
-        connection.query(sql, [{ Nombre_sub: Nombre, Tarea_Realizada_sub: TareaRealizada, Proxima_Tarea_sub: ProximaTarea, Fecha_Proxima_Tarea_sub: Fecha_Proxima_Tarea_sub, Fecha_Tarea_sub: Fecha_Tarea_sub }], (error, results) => {
+        connection.query(sql, [{ Nombre_sub: Nombre, Tarea_Realizada_sub: TareaRealizada, Proxima_Tarea_sub: ProximaTarea, Fecha_Proxima_Tarea_sub: Fecha_limite, Fecha_Tarea_sub: Fecha_Tarea_sub }], (error, results) => {
             if (error) throw error;
 
             if (results.length > 0) {
                 res.redirect('/adminecogas');
             }
         })
-        res.redirect('/adminecogas');
+         res.redirect(req.get('referer'));
     }
     else {
         sql = 'Update  clientes set ? where id =?';
@@ -346,14 +346,24 @@ router.post('/updatetareas/:id', (req, res) => {
 
         })
         sql = 'Insert into historialdecambios set?';
-        connection.query(sql, [{ Nombre_sub: Nombre, Tarea_Realizada_sub: TareaRealizada, Proxima_Tarea_sub: ProximaTarea }], (error, results) => {
-            if (error) throw error;
+        connection.query(sql, [{ Nombre_sub: Nombre, Tarea_Realizada_sub: TareaRealizada, Proxima_Tarea_sub: ProximaTarea, Fecha_Tarea_sub: Fecha_Tarea_sub }], (error, results) => {
+            if (error) {
+                throw error;
+                setTimeout(function () {
+                    res.redirect('/historialcarpeta/'+Nombre);
+                  }, 3000);
+
+            }
 
             if (results.length > 0) {
-                res.redirect('/adminecogas');
+                setTimeout(function () {
+                    res.redirect('/historialcarpeta/'+Nombre);
+                  }, 3000);
             }
         })
-        res.redirect('/adminecogas');
+        setTimeout(function () {
+            res.redirect('/historialcarpeta/'+Nombre);
+          }, 3000);
     }
 }
 )
@@ -446,6 +456,42 @@ router.post('/guardarNuevoContacto', (req, res) => {
 router.post('/actualizarEtapas/:id',(req,res)=>{
     const id = req.body.id;
     const Mensura = req.body.Mensura;
+    const FechaFirmaContrato = req.body.FechaFirmaContrato;
+    const Contrato = req.body.Contrato;
+    const NotaDeExcepcion = req.body.NotaDeExcepcion;
+    const PlanoTipo = req.body.PlanoTipo;
+    const Sucedaneo = req.body.Sucedaneo;
+    const SolicitudInicioObras = req.body.SolicitudInicioObras;
+    const FechaInicioTrabajos = req.body.FechaInicioTrabajos;
+    const FechaActividadActual = req.body.FechaActividadActual;
+    const DocumentacionSociedad = req.body.DocumentacionSociedad;
+    const ActaCargoVigente = req.body.ActaCargoVigente;
+    const Cotizacion = req.body.Cotizacion;
+    const LibroOrdenesServicio = req.body.LibroOrdenesServicio;
+    const LibroNotasPedido = req.body.LibroNotasPedido;
+    const AvisosDeObra = req.body.AvisosDeObra;
+    const OrdenServicio = req.body.OrdenServicio;
+    const CronogramaFirmadoComitente = req.body.CronogramaFirmadoComitente;
+    const CronogramaSyH = req.body.CronogramaSyH;
+    const AvisoInicioObraART = req.body.AvisoInicioObraART;
+    const AvisoInicioObraIERIC = req.body.AvisoInicioObraIERIC;
+    const SeguroRC = req.body.SeguroRC;
+    const SeguroAccidentesPersonales = req.body.SeguroAccidentesPersonales;
+    const PlanosyCroquis = req.body.PlanosyCroquis;
+    const ActasFinales = req.body.ActasFinales;
+    const ActaInicioEfectivo = req.body.ActaInicioEfectivo;
+    const InformesFinales = req.body.InformesFinales;
+    const ConformeDePermisos = req.body.ConformeDePermisos;
+    const PresentacionFinal = req.body.PresentacionFinal;
+    const PCrevisado = req.body.PCrevisado;
+    const intArsat = req.body.intArsat;
+    const PerMunicipal = req.body.PerMunicipal;
+    const Monotributos = req.body.Monotributos;
+    const CronogramaAmbiente = req.body.CronogramaAmbiente;
+    const ActaDeInicio = req.body.ActaDeInicio;
+    const PruebaHermeticidad = req.body.PruebaHermeticidad;
+
+
     const TituloDePropiedad = req.body.TituloDePropiedad;
     const DocSociedad = req.body.DocumentaciónSociedad;
     const Comercial = req.body.Comercial;
@@ -487,7 +533,9 @@ Interferencias="ok";
     }
     console.log("El estado de interferencias es:" + Interferencias);
     connection.query(sql, [{
-        Mensura: Mensura,DniComitente: DniComitente, TituloDePropiedad: TituloDePropiedad, DocumentaciónSociedad: DocSociedad, Comercial: Comercial, 
+        Mensura: Mensura,FechaFirmaContrato:FechaFirmaContrato,Contrato:Contrato,NotaDeExcepcion:NotaDeExcepcion,PlanoTipo:PlanoTipo,Sucedaneo:Sucedaneo,
+        SolicitudInicioObras:SolicitudInicioObras,FechaInicioTrabajos:FechaInicioTrabajos,FechaActividadActual:FechaActividadActual,
+        DocumentacionSociedad:DocumentacionSociedad,ActaCargoVigente:ActaCargoVigente,Cotizacion:Cotizacion,LibroOrdenesServicio:LibroOrdenesServicio,LibroNotasPedido:LibroNotasPedido,AvisosDeObra:AvisosDeObra,OrdenServicio:OrdenServicio,CronogramaFirmadoComitente:CronogramaFirmadoComitente,CronogramaSyH:CronogramaSyH,AvisoInicioObraART:AvisoInicioObraART,AvisoInicioObraIERIC:AvisoInicioObraIERIC,SeguroRC:SeguroRC,SeguroAccidentesPersonales:SeguroAccidentesPersonales,PlanosyCroquis:PlanosyCroquis,ActasFinales:ActasFinales,ActaInicioEfectivo:ActaInicioEfectivo,InformesFinales:InformesFinales,ConformeDePermisos:ConformeDePermisos,PresentacionFinal:PresentacionFinal,PCrevisado:PCrevisado,intArsat:intArsat,PerMunicipal:PerMunicipal,Monotributos:Monotributos,CronogramaAmbiente:CronogramaAmbiente,ActaDeInicio:ActaDeInicio,PruebaHermeticidad:PruebaHermeticidad,DniComitente: DniComitente, TituloDePropiedad: TituloDePropiedad, DocumentaciónSociedad: DocSociedad, Comercial: Comercial, 
         PCaprobado: Pcaprobado, intTelefonica: intTelefonica, intClaro: intClaro, intAgua:intAgua,
         intCloaca:intCloacas, intElectricidad:intElectricidad, intOtros:intOtros,intArnet:intArnet,
          CartaOferta: CartaOferta,ActaConstitutiva: ActaConstitutiva,PerMunicipal:PermisoMunicipal, MailAutorizacion:MailAutorizacion, CertificadoRT: CertificadoRT, DNV: DNV, DPV: DPV, Irrigacion: IRRIGACION,
