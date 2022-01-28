@@ -501,7 +501,7 @@ router.post('/actualizarEtapas/:id',(req,res)=>{
     const CronogramaAmbiente = req.body.CronogramaAmbiente;
     const ActaDeInicio = req.body.ActaDeInicio;
     const PruebaHermeticidad = req.body.PruebaHermeticidad;
-const NotaCumplimentoNormativa= req.body.NotaCumplimentoNormativa;
+    const NotaCumplimentoNormativa= req.body.NotaCumplimentoNormativa;
 
     const TituloDePropiedad = req.body.TituloDePropiedad;
     const DocSociedad = req.body.DocumentaciónSociedad;
@@ -520,37 +520,82 @@ const NotaCumplimentoNormativa= req.body.NotaCumplimentoNormativa;
     const intAgua = req.body.intAgua;
     const intCloacas = req.body.intCloaca;
     const intElectricidad = req.body.intElectricidad;
-    const intOtros = req.body.intOtros;
+    const intTelecom = req.body.intTelecom;
     const intArnet = req.body.intArnet;
-    const DNV = req.body.DNV;
+    const PlanoAnexo = req.body.PlanoAnexo;
+    console.log("esta llegando desde el cliente, para la variable DNV lo siguiente:" + req.body.DNV);
+    console.log("esta llegando desde el cliente, para la variable DNV1 lo siguiente:" + req.body.DNV1);
+    if(req.body.DNV1 == req.body.DNV){
+       
+            var DNV = req.body.DNV;
+        }
+             
+    else{
+        if(req.body.DNV1==""){
+            var DNV = req.body.DNV;
+        }else{var DNV = req.body.DNV1;}   
+       }
+    if(req.body.IRRIGACION1 == req.body.IRRIGACION){
+        var IRRIGACION = req.body.IRRIGACION1;
+    }else{
+        if(req.body.IRRIGACION1==""){
+            var IRRIGACION = req.body.IRRIGACION;
+        }else{var IRRIGACION = req.body.IRRIGACION1;}   
+       }
+    
+    if(req.body.HIDRAULICA1 == req.body.HIDRAULICA){
+        var HIDRAULICA = req.body.HIDRAULICA1;
+    }else{
+        if(req.body.HIDRAULICA1==""){
+            var HIDRAULICA = req.body.HIDRAULICA;
+        }else{var HIDRAULICA = req.body.HIDRAULICA1;}   
+       }
+    
+    if(req.body.FERROCARRIL1 == req.body.FERROCARRIL){
+        var FERROCARRIL = req.body.FERROCARRIL1;
+    }else{
+        if(req.body.FERROCARRIL1==""){
+            var FERROCARRIL = req.body.FERROCARRIL;
+        }else{var FERROCARRIL = req.body.FERROCARRIL1;} 
+    }
     const DPV = req.body.DPV;
-    const IRRIGACION = req.body.IRRIGACION;
-    const HIDRAULICA = req.body.HIDRAULICA;
-    const FERROCARRIL = req.body.FERROCARRIL;
     const PRIVADO = req.body.PRIVADO;
     const OTROSPERMISOS = req.body.OTROSPERMISOS;
     const PermisoMunicipal = req.body.PerMunicipal;
-    if ((DNV == "ok" || DNV == "NC") && (PermisoMunicipal== "ok" || DNV == "NC")&&(DPV == "ok"|| DPV == "NC") && (IRRIGACION == "ok"|| IRRIGACION == "NC") && (HIDRAULICA == "ok"|| HIDRAULICA == "NC") && (FERROCARRIL == "ok" || FERROCARRIL == "NC")&& (PRIVADO == "ok"|| PRIVADO == "NC") && (OTROSPERMISOS == "ok" || OTROSPERMISOS == "NC")){
+    if ((DNV == "ok" || DNV == "NC") && (PermisoMunicipal== "ok" || PermisoMunicipal == "NC")&&(DPV == "ok"|| DPV == "NC") && (IRRIGACION == "ok"|| IRRIGACION == "NC") && (HIDRAULICA == "ok"|| HIDRAULICA == "NC") && (FERROCARRIL == "ok" || FERROCARRIL == "NC")&& (PRIVADO == "ok"|| PRIVADO == "NC") && (OTROSPERMISOS == "ok" || OTROSPERMISOS == "NC")){
         Permisos= "ok";
-    }else{ Permisos="EnGestion"};
+    }else{ Permisos="Ok"};
     
     const sql = 'Update clientes Set ? where id=?';
     console.log("int agua es: "+intAgua);
-    if(intTelefonica == "EnGestion" || intClaro== "EnGestion" || intAgua== "EnGestion" || intCloacas== "EnGestion" || intElectricidad== "EnGestion" || intOtros== "EnGestion" || intArnet== "EnGestion" ){
+    if(intTelefonica == "EnGestion" || intClaro== "EnGestion" || intAgua== "EnGestion" || intCloacas== "EnGestion" || intElectricidad== "EnGestion" || intTelecom== "EnGestion" || intArnet== "EnGestion" || intArsat== "EnGestion" ){
         Interferencias="EnGestion";
+        console.log("Actualizaretapas/// Ingreso al if de interferencias 'en gestion'");
     }
     if(intTelefonica == "ok" && intClaro== "ok" && intAgua== "ok" && intCloacas== "ok" && intElectricidad== "ok" && intOtros== "ok" && intArnet== "ok" ){
 Interferencias="ok";
+console.log("Actualizaretapas/// Ingreso al if de interferencias 'ok'");
     }
-    console.log("El estado de interferencias es:" + Interferencias);
     connection.query(sql, [{
-        Mensura: Mensura,FechaFirmaContrato:FechaFirmaContrato,Contrato:Contrato,NotaDeExcepcion:NotaDeExcepcion,PlanoTipo:PlanoTipo,Sucedaneo:Sucedaneo,
-        DDJJNAG153:DDJJNAG153,SolicitudInicioObras:SolicitudInicioObras,FechaInicioTrabajos:FechaInicioTrabajos,FechaActividadActual:FechaActividadActual,
-        DocumentacionSociedad:DocumentacionSociedad,ActaCargoVigente:ActaCargoVigente,Cotizacion:Cotizacion,LibroOrdenesServicio:LibroOrdenesServicio,LibroNotasPedido:LibroNotasPedido,AvisosDeObra:AvisosDeObra,OrdenServicio:OrdenServicio,CronogramaFirmadoComitente:CronogramaFirmadoComitente,CronogramaSyH:CronogramaSyH,AvisoInicioObraART:AvisoInicioObraART,AvisoInicioObraIERIC:AvisoInicioObraIERIC,SeguroRC:SeguroRC,SeguroAccidentesPersonales:SeguroAccidentesPersonales,PlanosyCroquis:PlanosyCroquis,ActasFinales:ActasFinales,ActaInicioEfectivo:ActaInicioEfectivo,InformesFinales:InformesFinales,ConformeDePermisos:ConformeDePermisos,PresentacionFinal:PresentacionFinal,PCrevisado:PCrevisado,intArsat:intArsat,PerMunicipal:PerMunicipal,Monotributos:Monotributos,CronogramaAmbiente:CronogramaAmbiente,ActaDeInicio:ActaDeInicio,PruebaHermeticidad:PruebaHermeticidad,DniComitente: DniComitente, TituloDePropiedad: TituloDePropiedad, DocumentaciónSociedad: DocSociedad, Comercial: Comercial, 
+        Mensura: Mensura,FechaFirmaContrato:FechaFirmaContrato,Contrato:Contrato,NotaDeExcepcion:NotaDeExcepcion,
+        PlanoTipo:PlanoTipo,Sucedaneo:Sucedaneo,DDJJNAG153:DDJJNAG153,SolicitudInicioObras:SolicitudInicioObras,
+        FechaInicioTrabajos:FechaInicioTrabajos,FechaActividadActual:FechaActividadActual,
+        DocumentacionSociedad:DocumentacionSociedad,ActaCargoVigente:ActaCargoVigente,Cotizacion:Cotizacion,
+        LibroOrdenesServicio:LibroOrdenesServicio,LibroNotasPedido:LibroNotasPedido,AvisosDeObra:AvisosDeObra,OrdenServicio:OrdenServicio,
+        CronogramaFirmadoComitente:CronogramaFirmadoComitente,CronogramaSyH:CronogramaSyH,AvisoInicioObraART:AvisoInicioObraART,
+        AvisoInicioObraIERIC:AvisoInicioObraIERIC,SeguroRC:SeguroRC,SeguroAccidentesPersonales:SeguroAccidentesPersonales,
+        PlanosyCroquis:PlanosyCroquis,PlanoAnexo:PlanoAnexo,ActasFinales:ActasFinales,ActaInicioEfectivo:ActaInicioEfectivo,InformesFinales:InformesFinales,
+        ConformeDePermisos:ConformeDePermisos,PresentacionFinal:PresentacionFinal,PCrevisado:PCrevisado,intArsat:intArsat,
+        PerMunicipal:PerMunicipal,Monotributos:Monotributos,CronogramaAmbiente:CronogramaAmbiente,ActaDeInicio:ActaDeInicio,
+        PruebaHermeticidad:PruebaHermeticidad,DniComitente: DniComitente,NotaCumplimentoNormativa:NotaCumplimentoNormativa,
+         TituloDePropiedad: TituloDePropiedad, 
+        DocumentacionSociedad: DocSociedad, Comercial: Comercial, 
         PCaprobado: Pcaprobado, intTelefonica: intTelefonica, intClaro: intClaro, intAgua:intAgua,
-        intCloaca:intCloacas, intElectricidad:intElectricidad, intOtros:intOtros,intArnet:intArnet,
-         CartaOferta: CartaOferta,ActaConstitutiva: ActaConstitutiva,PerMunicipal:PermisoMunicipal, MailAutorizacion:MailAutorizacion, CertificadoRT: CertificadoRT, DNV: DNV, DPV: DPV, Irrigacion: IRRIGACION,
-         Hidraulica: HIDRAULICA,Privado:PRIVADO, Ferrocarriles: FERROCARRIL, Otrospermisos:OTROSPERMISOS,Interferencias: Interferencias, Permisos: Permisos, Programadeseguridad: Programadeseguridad,}, id],
+        intCloaca:intCloacas, intElectricidad:intElectricidad, intTelecom:intTelecom,intArnet:intArnet, intArsat:intArsat,
+         CartaOferta: CartaOferta,ActaConstitutiva: ActaConstitutiva,PerMunicipal:PermisoMunicipal, MailAutorizacion:MailAutorizacion, 
+         CertificadoRT: CertificadoRT, DNV: DNV, DPV: DPV, Irrigacion: IRRIGACION,
+         Hidraulica: HIDRAULICA,Privado:PRIVADO, Ferrocarriles: FERROCARRIL, Otrospermisos:OTROSPERMISOS,
+         Interferencias: Interferencias, Permisos: Permisos, Programadeseguridad: Programadeseguridad,}, id],
            (error, results) => {
                
             if (error) throw error;
