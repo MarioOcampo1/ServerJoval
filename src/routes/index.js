@@ -307,11 +307,10 @@ router.post('/update/:id', (req, res) => {
     }
 }
 )
-router.post('/updatetareas/:id', (req, res) => {
+router.post('/ActualizarProximasTareas/:id', (req, res) => {
     res.locals.moment = moment;
     const Nombre = req.body.Nombre;
     const id = req.body.id;
-    console.log("id es: "+ id);
     const TareaRealizada = req.body.TareaRealizada;
     const ProximaTarea = req.body.ProximaTarea;
     const Fecha_limite = req.body.Fecha_limite;
@@ -320,6 +319,7 @@ router.post('/updatetareas/:id', (req, res) => {
     const Fecha_Tarea_sub = fecha;
     
     var sql = "";
+    
     if (Fecha_limite) {
         sql = 'Update  clientes set ? where id=?';
         connection.query(sql, [{ Estado: EstadoCarpeta, TareaRealizada: TareaRealizada, ProximaTarea: ProximaTarea, Fechalimite: Fecha_limite  }, id], (error, results) => {
@@ -339,34 +339,44 @@ router.post('/updatetareas/:id', (req, res) => {
          res.redirect(req.get('referer'));
     }
     else {
-        sql = 'Update  clientes set ? where id =?';
+        if(TareaRealizada){
+            sql = 'Update  clientes set ? where id =?';
+            connection.query(sql, [{ Estado: EstadoCarpeta, TareaRealizada: TareaRealizada, ProximaTarea: ProximaTarea}, id], (error, results) => {
+                if (error) throw error;
+                console.log("se cargo el estado en tabla clientes");
+    
+            })
+            sql = 'Insert into historialdecambios set?';
+            connection.query(sql, [{ Nombre_sub: Nombre, Tarea_Realizada_sub: TareaRealizada, Proxima_Tarea_sub: ProximaTarea, Fecha_Tarea_sub: Fecha_Tarea_sub }], (error, results) => {
+                if (error) {
+                    throw error;
+                    setTimeout(function () {
+                        res.redirect('/historialcarpeta/'+Nombre);
+                      }, 3000);
+    
+                }
+    
+                if (results.length > 0) {
+                    setTimeout(function () {
+                        res.redirect('/historialcarpeta/'+Nombre);
+                      }, 3000);
+                }
+            })
+        }
+        else{sql = 'Update  clientes set ? where id =?';
         connection.query(sql, [{ Estado: EstadoCarpeta, TareaRealizada: TareaRealizada, ProximaTarea: ProximaTarea}, id], (error, results) => {
             if (error) throw error;
-            console.log("se cargo el estado en tabla clientes");
-
-        })
-        sql = 'Insert into historialdecambios set?';
-        connection.query(sql, [{ Nombre_sub: Nombre, Tarea_Realizada_sub: TareaRealizada, Proxima_Tarea_sub: ProximaTarea, Fecha_Tarea_sub: Fecha_Tarea_sub }], (error, results) => {
-            if (error) {
-                throw error;
-                setTimeout(function () {
-                    res.redirect('/historialcarpeta/'+Nombre);
-                  }, 3000);
-
-            }
-
             if (results.length > 0) {
                 setTimeout(function () {
                     res.redirect('/historialcarpeta/'+Nombre);
                   }, 3000);
-            }
-        })
+        }
         setTimeout(function () {
             res.redirect('/historialcarpeta/'+Nombre);
           }, 3000);
     }
-}
-)
+
+)}}})
 router.post('/edit/delete/:id', (req, res) => {
     const id = req.params.id;
     var sql = 'Delete FROM clientes WHERE id =?';
