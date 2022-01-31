@@ -21,8 +21,8 @@ app.use(morgan('dev'));
 app.use(express.urlencoded({extended: false }));
 app.use(express.json());
 //Routes
-app.use(require('./routes/index')); //Usa el enrutador
-
+app.use(require('./routes/AdminEcogas')); //Usa el enrutador
+app.use(require('./routes/AdminGeneral'));
 //Static
 app.use (express.static(path.join(__dirname, 'public')));
 app.use (express.static(path.join(__dirname, 'views'))); //Esta linea de codigo le dice a express que la carpeta public esta adentro de src

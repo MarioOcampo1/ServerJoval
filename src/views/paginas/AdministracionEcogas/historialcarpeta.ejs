@@ -25,9 +25,7 @@
         <div class="btn-group border-bottom ">
 
           <input type="button" value="Atras" class="btn btn-danger" onClick="history.go(-1);">
-          <a href="/nuevocliente">
-            <button class="btn btn-success">Nuevo Cliente</button>
-          </a>
+      
         </div>
       </div>
       <br>
@@ -36,7 +34,7 @@
           <thead>
             <tr>
               <th>
-                <h4>Nombre</h4>
+                <h4>Tarea realizada</h4>
               </th>
 
               <th>
@@ -44,12 +42,10 @@
 
               </th>
               <th>
-                <h4>Tarea realizada</h4>
+                <h4>Etapa de la tarea</h4>
 
               </th>
-<th>
-  Acciones
-</th>
+
           </thead>
           <tbody>
             </tr>
@@ -57,7 +53,8 @@
 
               <tr>
                 <th>
-                  <%= clientes.Nombre_sub %>
+                  <%=clientes.Tarea_Realizada_sub%>
+
                 </th>
 
                 <th>
@@ -65,11 +62,9 @@
 
                 </th>
                 <th>
-
-                  <%=clientes.Tarea_Realizada_sub%>
+<%=clientes.EtapaTarea_sub%>
                 </th>
-<th>
-</th>
+
                 <% })%>
           </tbody>
 

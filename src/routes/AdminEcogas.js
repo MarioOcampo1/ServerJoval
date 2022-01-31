@@ -22,21 +22,21 @@ router.get('/', (req, res) => {
     res.render('index.ejs');
 })
 router.get('/interferencias', (req, res) => {
-    const sql = 'SELECT c.id, c.Nombre, c.NCarpeta, c.intTelefonica, c.intAgua, c.intCloaca, c.intClaro, c.intElectricidad, c.intArnet, c.intOtros FROM clientes c';
+    const sql = 'SELECT c.id, c.Nombre, c.NCarpeta, c.intTelefonica, c.intAgua, c.intCloaca, c.intClaro, c.intElectricidad, c.intClaro, c.intArnet, c.intArsat, c.intTelecom FROM clientes c';
     res.locals.moment = moment;
     connection.query(sql, (error, results) => {
         if (error) throw error;
         if (results.length > 0) {
-    res.render('paginas/AdministracionEcogas/interferencias.ejs', { results: results });
+            res.render('paginas/AdministracionEcogas/interferencias.ejs', { results: results });
         }
         else {
             res.send('Ningun resultado encontrado');
         }
     })
-    
+
 })
-router.get('/interferencias/info',(req,res)=>{
-    const sql = 'SELECT c.id, c.Nombre, c.NCarpeta, c.intTelefonica, c.intAgua, c.intCloaca, c.intClaro, c.intElectricidad, c.intArnet, c.intOtros FROM clientes c';
+router.get('/interferencias/info', (req, res) => {
+    const sql = 'SELECT c.id, c.Nombre, c.NCarpeta, c.intTelefonica, c.intAgua, c.intCloaca, c.intClaro, c.intElectricidad, c.intClaro, c.intArnet,c.intArsat, c.intTelecom FROM clientes c';
     res.locals.moment = moment;
     connection.query(sql, (error, results) => {
         if (error) throw error;
@@ -180,11 +180,11 @@ router.get('/historialcarpeta/:Nombre', (req, res) => {
     connection.query(sql, [Nombre], (error, results) => {
         if (error) throw error;
         if (results.length > 0) {
-            res.render('paginas/AdministracionEcogas/historialcarpeta.ejs', { results: results, id:id }); //en {results:results} lo que hago es guardar los resultados que envia la bd, en la variable results
+            res.render('paginas/AdministracionEcogas/historialcarpeta.ejs', { results: results, id: id }); //en {results:results} lo que hago es guardar los resultados que envia la bd, en la variable results
 
         }
         else {
-            res.render('paginas/AdministracionEcogas/historialcarpeta.ejs', { results: results, id:id });
+            res.render('paginas/AdministracionEcogas/historialcarpeta.ejs', { results: results, id: id });
         }
     })
 
@@ -249,7 +249,7 @@ router.post('/update/:id', (req, res) => {
         var sql = 'Update clientes Set ? where id =?';
         connection.query(sql, [{
             Nombre: NombreCarpeta, NCarpeta: NCarpeta, Comitente: Comitente, Ubicacion: Departamento, DNV: DNV, DPV: DPV, Irrigacion: IRRIGACION,
-            Hidraulica: HIDRAULICA,Privado: PRIVADO, Ferrocarriles: FERROCARRIL, TipoDeRed: TipoDeRed, Fecha_limite: Fecha_limite
+            Hidraulica: HIDRAULICA, Privado: PRIVADO, Ferrocarriles: FERROCARRIL, TipoDeRed: TipoDeRed, Fecha_limite: Fecha_limite
         }, id]
             , (error, results) => {
                 if (error) throw error;
@@ -309,74 +309,83 @@ router.post('/update/:id', (req, res) => {
 )
 router.post('/ActualizarProximasTareas/:id', (req, res) => {
     res.locals.moment = moment;
+    let fecha = new Date();
     const Nombre = req.body.Nombre;
     const id = req.body.id;
     const TareaRealizada = req.body.TareaRealizada;
     const ProximaTarea = req.body.ProximaTarea;
     const Fecha_limite = req.body.Fecha_limite;
     const EstadoCarpeta = req.body.Estado;
-    let fecha = new Date();
     const Fecha_Tarea_sub = fecha;
-    
+    var EtapaTarea = req.body.EtapaTarea;
     var sql = "";
-    
+   if (EtapaTarea==""){
+
+   }
+
+    console.log("Etapa tarea contiene:" + EtapaTarea);
+
     if (Fecha_limite) {
         sql = 'Update  clientes set ? where id=?';
-        connection.query(sql, [{ Estado: EstadoCarpeta, TareaRealizada: TareaRealizada, ProximaTarea: ProximaTarea, Fechalimite: Fecha_limite  }, id], (error, results) => {
+        connection.query(sql, [{ Estado: EstadoCarpeta, EtapaTarea: EtapaTarea, TareaRealizada: TareaRealizada, ProximaTarea: ProximaTarea, Fechalimite: Fecha_limite }, id], (error, results) => {
             if (error) throw error;
             console.log("se cargo el estado en tabla clientes");
 
         })
 
         sql = 'Insert into historialdecambios set?';
-        connection.query(sql, [{ Nombre_sub: Nombre, Tarea_Realizada_sub: TareaRealizada, Proxima_Tarea_sub: ProximaTarea, Fecha_Proxima_Tarea_sub: Fecha_limite, Fecha_Tarea_sub: Fecha_Tarea_sub }], (error, results) => {
+        connection.query(sql, [{ EtapaTarea_sub: EtapaTarea, Nombre_sub: Nombre, Tarea_Realizada_sub: TareaRealizada, Proxima_Tarea_sub: ProximaTarea, Fecha_Proxima_Tarea_sub: Fecha_limite, Fecha_Tarea_sub: Fecha_Tarea_sub }], (error, results) => {
             if (error) throw error;
 
             if (results.length > 0) {
                 res.redirect('/adminecogas');
             }
         })
-         res.redirect(req.get('referer'));
+        res.redirect('/historialcarpeta/' + Nombre);
     }
     else {
-        if(TareaRealizada){
+        if (TareaRealizada) {
             sql = 'Update  clientes set ? where id =?';
-            connection.query(sql, [{ Estado: EstadoCarpeta, TareaRealizada: TareaRealizada, ProximaTarea: ProximaTarea}, id], (error, results) => {
+            connection.query(sql, [{ Estado: EstadoCarpeta, TareaRealizada: TareaRealizada, ProximaTarea: ProximaTarea }, id], (error, results) => {
                 if (error) throw error;
                 console.log("se cargo el estado en tabla clientes");
-    
+
             })
             sql = 'Insert into historialdecambios set?';
             connection.query(sql, [{ Nombre_sub: Nombre, Tarea_Realizada_sub: TareaRealizada, Proxima_Tarea_sub: ProximaTarea, Fecha_Tarea_sub: Fecha_Tarea_sub }], (error, results) => {
                 if (error) {
                     throw error;
                     setTimeout(function () {
-                        res.redirect('/historialcarpeta/'+Nombre);
-                      }, 3000);
-    
+                        res.redirect('/historialcarpeta/' + Nombre);
+                    }, 3000);
+
                 }
-    
+
                 if (results.length > 0) {
                     setTimeout(function () {
-                        res.redirect('/historialcarpeta/'+Nombre);
-                      }, 3000);
+                        res.redirect('/historialcarpeta/' + Nombre);
+                    }, 3000);
                 }
             })
         }
-        else{sql = 'Update  clientes set ? where id =?';
-        connection.query(sql, [{ Estado: EstadoCarpeta, TareaRealizada: TareaRealizada, ProximaTarea: ProximaTarea}, id], (error, results) => {
-            if (error) throw error;
-            if (results.length > 0) {
+        else {
+            sql = 'Update  clientes set ? where id =?';
+            connection.query(sql, [{ Estado: EstadoCarpeta, TareaRealizada: TareaRealizada, ProximaTarea: ProximaTarea }, id], (error, results) => {
+                if (error) throw error;
+                if (results.length > 0) {
+                    setTimeout(function () {
+                        res.redirect('/historialcarpeta/' + Nombre);
+                    }, 3000);
+                }
                 setTimeout(function () {
-                    res.redirect('/historialcarpeta/'+Nombre);
-                  }, 3000);
-        }
-        setTimeout(function () {
-            res.redirect('/historialcarpeta/'+Nombre);
-          }, 3000);
-    }
+                    res.redirect('/historialcarpeta/' + Nombre);
+                }, 3000);
+            }
 
-)}}})
+            )
+        }
+    }
+})
 router.post('/edit/delete/:id', (req, res) => {
     const id = req.params.id;
     var sql = 'Delete FROM clientes WHERE id =?';
@@ -395,7 +404,7 @@ router.post('/edit/delete/:id', (req, res) => {
 router.post('/editarContacto/delete/Contacto/:id', (req, res) => {
     const id = req.params.id;
     var sql = 'Delete FROM contactos WHERE id =?';
-   connection.query(sql, [id], (error, results) => {
+    connection.query(sql, [id], (error, results) => {
         if (error) throw error;
         if (results.length > 0) {
             res.redirect('/contactos');
@@ -418,18 +427,19 @@ router.post('/guardarNuevoCliente', (req, res) => {
     var OTROSPERMISOS = req.body.OTROSPERMISOS;
     var TipoDeRed = req.body.TipoDeRed
     // const TipoRed =req.body.Tipos-de-red;
-    if (DNV == null) {DNV="";}
-    if (DPV == null) {DPV="";}
-    if (IRRIGACION == null) {IRRIGACION="";}
-    if (HIDRAULICA == null) {HIDRAULICA="";}
-    if (FERROCARRIL == null) {FERROCARRIL="";}
-    if (OTROSPERMISOS == null) {OTROSPERMISOS="";}
-    var sql ='Insert into adgastareas set ?';
-    connection.query(sql,{
-        Nombre:Nombre},(error,results)=>{
-            if(error) throw error;
-        })
-     sql = 'Insert into clientes set ?';
+    if (DNV == null) { DNV = ""; }
+    if (DPV == null) { DPV = ""; }
+    if (IRRIGACION == null) { IRRIGACION = ""; }
+    if (HIDRAULICA == null) { HIDRAULICA = ""; }
+    if (FERROCARRIL == null) { FERROCARRIL = ""; }
+    if (OTROSPERMISOS == null) { OTROSPERMISOS = ""; }
+    var sql = 'Insert into adgastareas set ?';
+    connection.query(sql, {
+        Nombre: Nombre
+    }, (error, results) => {
+        if (error) throw error;
+    })
+    sql = 'Insert into clientes set ?';
     connection.query(sql, {
         Nombre: Nombre, NCarpeta: NCarpeta, Comitente: Comitente, Ubicacion: Departamento, DNV: DNV, DPV: DPV, Irrigacion: IRRIGACION,
         Hidraulica: HIDRAULICA, Ferrocarriles: FERROCARRIL, OtrosPermisos: OTROSPERMISOS, TipoDeRed: TipoDeRed
@@ -453,21 +463,25 @@ router.post('/guardarNuevoContacto', (req, res) => {
     const Puesto = req.body.Puesto;
     const Telefono = req.body.Teléfono;
     const Correo = req.body.Correo;
-    var sql ='Insert into contactos set ?';
-    connection.query(sql,{
-        Nombre:Nombre, Entidad: Entidad, Area: Area, Puesto: Puesto, Telefono: Telefono, Correo: Correo},(error,results)=>{
-            if(error) throw error;
-        })
-            res.redirect('/contactos');
- 
+    var sql = 'Insert into contactos set ?';
+    connection.query(sql, {
+        Nombre: Nombre, Entidad: Entidad, Area: Area, Puesto: Puesto, Telefono: Telefono, Correo: Correo
+    }, (error, results) => {
+        if (error) throw error;
+    })
+    res.redirect('/contactos');
+
 
 })
 //Opciones de editar tareas POST
-router.post('/actualizarEtapas/:id',(req,res)=>{
+router.post('/actualizarEtapas/:id', (req, res) => {
     const id = req.body.id;
+    //    Premiliminar
     const Mensura = req.body.Mensura;
     const FechaFirmaContrato = req.body.FechaFirmaContrato;
+    // PrimeraParte
     const Contrato = req.body.Contrato;
+    const Presupuesto = req.body.Presupuesto;
     const NotaDeExcepcion = req.body.NotaDeExcepcion;
     const PlanoTipo = req.body.PlanoTipo;
     const Sucedaneo = req.body.Sucedaneo;
@@ -492,6 +506,7 @@ router.post('/actualizarEtapas/:id',(req,res)=>{
     const ActasFinales = req.body.ActasFinales;
     const ActaInicioEfectivo = req.body.ActaInicioEfectivo;
     const InformesFinales = req.body.InformesFinales;
+    // Caos
     const ConformeDePermisos = req.body.ConformeDePermisos;
     const PresentacionFinal = req.body.PresentacionFinal;
     const PCrevisado = req.body.PCrevisado;
@@ -501,7 +516,7 @@ router.post('/actualizarEtapas/:id',(req,res)=>{
     const CronogramaAmbiente = req.body.CronogramaAmbiente;
     const ActaDeInicio = req.body.ActaDeInicio;
     const PruebaHermeticidad = req.body.PruebaHermeticidad;
-    const NotaCumplimentoNormativa= req.body.NotaCumplimentoNormativa;
+    const NotaCumplimentoNormativa = req.body.NotaCumplimentoNormativa;
 
     const TituloDePropiedad = req.body.TituloDePropiedad;
     const DocSociedad = req.body.DocumentaciónSociedad;
@@ -523,85 +538,86 @@ router.post('/actualizarEtapas/:id',(req,res)=>{
     const intTelecom = req.body.intTelecom;
     const intArnet = req.body.intArnet;
     const PlanoAnexo = req.body.PlanoAnexo;
+    // Final
+    const HabilitacionFinal = req.body.HabilitacionFinal;
     console.log("esta llegando desde el cliente, para la variable DNV lo siguiente:" + req.body.DNV);
     console.log("esta llegando desde el cliente, para la variable DNV1 lo siguiente:" + req.body.DNV1);
-    if(req.body.DNV1 == req.body.DNV){
-       
+    if (req.body.DNV1 == req.body.DNV) {
+        var DNV = req.body.DNV;
+    }
+    else {
+        if (req.body.DNV1 == "") {
             var DNV = req.body.DNV;
-        }
-             
-    else{
-        if(req.body.DNV1==""){
-            var DNV = req.body.DNV;
-        }else{var DNV = req.body.DNV1;}   
-       }
-    if(req.body.IRRIGACION1 == req.body.IRRIGACION){
+        } else { var DNV = req.body.DNV1; }
+    }
+    if (req.body.IRRIGACION1 == req.body.IRRIGACION) {
         var IRRIGACION = req.body.IRRIGACION1;
-    }else{
-        if(req.body.IRRIGACION1==""){
+    } else {
+        if (req.body.IRRIGACION1 == "") {
             var IRRIGACION = req.body.IRRIGACION;
-        }else{var IRRIGACION = req.body.IRRIGACION1;}   
-       }
-    
-    if(req.body.HIDRAULICA1 == req.body.HIDRAULICA){
+        } else { var IRRIGACION = req.body.IRRIGACION1; }
+    }
+
+    if (req.body.HIDRAULICA1 == req.body.HIDRAULICA) {
         var HIDRAULICA = req.body.HIDRAULICA1;
-    }else{
-        if(req.body.HIDRAULICA1==""){
+    } else {
+        if (req.body.HIDRAULICA1 == "") {
             var HIDRAULICA = req.body.HIDRAULICA;
-        }else{var HIDRAULICA = req.body.HIDRAULICA1;}   
-       }
-    
-    if(req.body.FERROCARRIL1 == req.body.FERROCARRIL){
+        } else { var HIDRAULICA = req.body.HIDRAULICA1; }
+    }
+
+    if (req.body.FERROCARRIL1 == req.body.FERROCARRIL) {
         var FERROCARRIL = req.body.FERROCARRIL1;
-    }else{
-        if(req.body.FERROCARRIL1==""){
+    } else {
+        if (req.body.FERROCARRIL1 == "") {
             var FERROCARRIL = req.body.FERROCARRIL;
-        }else{var FERROCARRIL = req.body.FERROCARRIL1;} 
+        } else { var FERROCARRIL = req.body.FERROCARRIL1; }
     }
     const DPV = req.body.DPV;
     const PRIVADO = req.body.PRIVADO;
     const OTROSPERMISOS = req.body.OTROSPERMISOS;
     const PermisoMunicipal = req.body.PerMunicipal;
-    if ((DNV == "ok" || DNV == "NC") && (PermisoMunicipal== "ok" || PermisoMunicipal == "NC")&&(DPV == "ok"|| DPV == "NC") && (IRRIGACION == "ok"|| IRRIGACION == "NC") && (HIDRAULICA == "ok"|| HIDRAULICA == "NC") && (FERROCARRIL == "ok" || FERROCARRIL == "NC")&& (PRIVADO == "ok"|| PRIVADO == "NC") && (OTROSPERMISOS == "ok" || OTROSPERMISOS == "NC")){
-        Permisos= "ok";
-    }else{ Permisos="Ok"};
-    
+    if ((DNV == "ok" || DNV == "NC") && (PermisoMunicipal == "ok" || PermisoMunicipal == "NC") && (DPV == "ok" || DPV == "NC") && (IRRIGACION == "ok" || IRRIGACION == "NC") && (HIDRAULICA == "ok" || HIDRAULICA == "NC") && (FERROCARRIL == "ok" || FERROCARRIL == "NC") && (PRIVADO == "ok" || PRIVADO == "NC") && (OTROSPERMISOS == "ok" || OTROSPERMISOS == "NC")) {
+        Permisos = "ok";
+    } else { Permisos = "EnGestioncls" };
+
     const sql = 'Update clientes Set ? where id=?';
-    console.log("int agua es: "+intAgua);
-    if(intTelefonica == "EnGestion" || intClaro== "EnGestion" || intAgua== "EnGestion" || intCloacas== "EnGestion" || intElectricidad== "EnGestion" || intTelecom== "EnGestion" || intArnet== "EnGestion" || intArsat== "EnGestion" ){
-        Interferencias="EnGestion";
+    console.log("int agua es: " + intAgua);
+    if (intTelefonica == "EnGestion" || intClaro == "EnGestion" || intAgua == "EnGestion" || intCloacas == "EnGestion" || intElectricidad == "EnGestion" || intTelecom == "EnGestion" || intArnet == "EnGestion" || intArsat == "EnGestion") {
+        Interferencias = "EnGestion";
         console.log("Actualizaretapas/// Ingreso al if de interferencias 'en gestion'");
     }
-    if(intTelefonica == "ok" && intClaro== "ok" && intAgua== "ok" && intCloacas== "ok" && intElectricidad== "ok" && intOtros== "ok" && intArnet== "ok" ){
-Interferencias="ok";
-console.log("Actualizaretapas/// Ingreso al if de interferencias 'ok'");
+    if (intTelefonica == "ok" && intClaro == "ok" && intAgua == "ok" && intCloacas == "ok" && intElectricidad == "ok" && intArnet == "ok") {
+        Interferencias = "ok";
+        console.log("Actualizaretapas/// Ingreso al if de interferencias 'ok'");
     }
     connection.query(sql, [{
-        Mensura: Mensura,FechaFirmaContrato:FechaFirmaContrato,Contrato:Contrato,NotaDeExcepcion:NotaDeExcepcion,
-        PlanoTipo:PlanoTipo,Sucedaneo:Sucedaneo,DDJJNAG153:DDJJNAG153,SolicitudInicioObras:SolicitudInicioObras,
-        FechaInicioTrabajos:FechaInicioTrabajos,FechaActividadActual:FechaActividadActual,
-        DocumentacionSociedad:DocumentacionSociedad,ActaCargoVigente:ActaCargoVigente,Cotizacion:Cotizacion,
-        LibroOrdenesServicio:LibroOrdenesServicio,LibroNotasPedido:LibroNotasPedido,AvisosDeObra:AvisosDeObra,OrdenServicio:OrdenServicio,
-        CronogramaFirmadoComitente:CronogramaFirmadoComitente,CronogramaSyH:CronogramaSyH,AvisoInicioObraART:AvisoInicioObraART,
-        AvisoInicioObraIERIC:AvisoInicioObraIERIC,SeguroRC:SeguroRC,SeguroAccidentesPersonales:SeguroAccidentesPersonales,
-        PlanosyCroquis:PlanosyCroquis,PlanoAnexo:PlanoAnexo,ActasFinales:ActasFinales,ActaInicioEfectivo:ActaInicioEfectivo,InformesFinales:InformesFinales,
-        ConformeDePermisos:ConformeDePermisos,PresentacionFinal:PresentacionFinal,PCrevisado:PCrevisado,intArsat:intArsat,
-        PerMunicipal:PerMunicipal,Monotributos:Monotributos,CronogramaAmbiente:CronogramaAmbiente,ActaDeInicio:ActaDeInicio,
-        PruebaHermeticidad:PruebaHermeticidad,DniComitente: DniComitente,NotaCumplimentoNormativa:NotaCumplimentoNormativa,
-         TituloDePropiedad: TituloDePropiedad, 
-        DocumentacionSociedad: DocSociedad, Comercial: Comercial, 
-        PCaprobado: Pcaprobado, intTelefonica: intTelefonica, intClaro: intClaro, intAgua:intAgua,
-        intCloaca:intCloacas, intElectricidad:intElectricidad, intTelecom:intTelecom,intArnet:intArnet, intArsat:intArsat,
-         CartaOferta: CartaOferta,ActaConstitutiva: ActaConstitutiva,PerMunicipal:PermisoMunicipal, MailAutorizacion:MailAutorizacion, 
-         CertificadoRT: CertificadoRT, DNV: DNV, DPV: DPV, Irrigacion: IRRIGACION,
-         Hidraulica: HIDRAULICA,Privado:PRIVADO, Ferrocarriles: FERROCARRIL, Otrospermisos:OTROSPERMISOS,
-         Interferencias: Interferencias, Permisos: Permisos, Programadeseguridad: Programadeseguridad,}, id],
-           (error, results) => {
-               
+        Mensura: Mensura, FechaFirmaContrato: FechaFirmaContrato, Contrato: Contrato, Presupuesto: Presupuesto, NotaDeExcepcion: NotaDeExcepcion,
+        PlanoTipo: PlanoTipo, Sucedaneo: Sucedaneo, DDJJNAG153: DDJJNAG153, SolicitudInicioObras: SolicitudInicioObras,
+        FechaInicioTrabajos: FechaInicioTrabajos, FechaActividadActual: FechaActividadActual,
+        DocumentacionSociedad: DocumentacionSociedad, ActaCargoVigente: ActaCargoVigente, Cotizacion: Cotizacion,
+        LibroOrdenesServicio: LibroOrdenesServicio, LibroNotasPedido: LibroNotasPedido, AvisosDeObra: AvisosDeObra, OrdenServicio: OrdenServicio,
+        CronogramaFirmadoComitente: CronogramaFirmadoComitente, CronogramaSyH: CronogramaSyH, AvisoInicioObraART: AvisoInicioObraART,
+        AvisoInicioObraIERIC: AvisoInicioObraIERIC, SeguroRC: SeguroRC, SeguroAccidentesPersonales: SeguroAccidentesPersonales,
+        PlanosyCroquis: PlanosyCroquis, PlanoAnexo: PlanoAnexo, ActasFinales: ActasFinales, ActaInicioEfectivo: ActaInicioEfectivo, InformesFinales: InformesFinales,
+        ConformeDePermisos: ConformeDePermisos, PresentacionFinal: PresentacionFinal, PCrevisado: PCrevisado, intArsat: intArsat,
+        PerMunicipal: PerMunicipal, Monotributos: Monotributos, CronogramaAmbiente: CronogramaAmbiente, ActaDeInicio: ActaDeInicio,
+        PruebaHermeticidad: PruebaHermeticidad, DniComitente: DniComitente, NotaCumplimentoNormativa: NotaCumplimentoNormativa,
+        TituloDePropiedad: TituloDePropiedad,
+        DocumentacionSociedad: DocSociedad, Comercial: Comercial,
+        PCaprobado: Pcaprobado, intTelefonica: intTelefonica, intClaro: intClaro, intAgua: intAgua,
+        intCloaca: intCloacas, intElectricidad: intElectricidad, intTelecom: intTelecom, intArnet: intArnet, intArsat: intArsat,
+        CartaOferta: CartaOferta, ActaConstitutiva: ActaConstitutiva, PerMunicipal: PermisoMunicipal, MailAutorizacion: MailAutorizacion,
+        CertificadoRT: CertificadoRT, DNV: DNV, DPV: DPV, Irrigacion: IRRIGACION,
+        Hidraulica: HIDRAULICA, Privado: PRIVADO, Ferrocarriles: FERROCARRIL, Otrospermisos: OTROSPERMISOS,
+        Interferencias: Interferencias, Permisos: Permisos, Programadeseguridad: Programadeseguridad, HabilitacionFinal: HabilitacionFinal
+    }, id],
+        (error, results) => {
+
             if (error) throw error;
-            
-            
+
+
             res.redirect(req.get('referer'));
-           
+
         })
 })
