@@ -13,7 +13,7 @@ const connection = mysql.createConnection({
 });
 //check de conexion a la base de datos
 connection.connect(error => {
-    if (error) throw error;
+    if (error) console.log( error);
 })
 //Settings
 //Fin de seteo de server original
@@ -25,7 +25,7 @@ router.get('/interferencias', (req, res) => {
     const sql = 'SELECT c.id, c.Nombre, c.NCarpeta, c.intTelefonica, c.intAgua, c.intCloaca, c.intClaro, c.intElectricidad, c.intClaro, c.intArnet, c.intArsat, c.intTelecom FROM clientes c';
     res.locals.moment = moment;
     connection.query(sql, (error, results) => {
-        if (error) throw error;
+        if (error) console.log(error);
         if (results.length > 0) {
             res.render('paginas/AdministracionEcogas/interferencias.ejs', { results: results });
         }
@@ -39,7 +39,7 @@ router.get('/interferencias/info', (req, res) => {
     const sql = 'SELECT c.id, c.Nombre, c.NCarpeta, c.intTelefonica, c.intAgua, c.intCloaca, c.intClaro, c.intElectricidad, c.intClaro, c.intArnet,c.intArsat, c.intTelecom FROM clientes c';
     res.locals.moment = moment;
     connection.query(sql, (error, results) => {
-        if (error) throw error;
+        if (error) console.log( error);
 
         if (results.length > 0) {
             res.send(results); //en {results:results} lo que hago es guardar los resultados que envia la bd, en la variable results
@@ -54,7 +54,7 @@ router.get('/adminecogas', (req, res) => {
     const sql = 'SELECT c.id, c.Nombre, c.NCarpeta, c.TareaRealizada, c.ProximaTarea, c.FechaLimite FROM clientes c  ';
     res.locals.moment = moment;
     connection.query(sql, (error, results) => {
-        if (error) throw error;
+        if (error) console.log( error);
 
         if (results.length > 0) {
             res.render('paginas/AdministracionEcogas/adminecogas.ejs', { results: results }); //en {results:results} lo que hago es guardar los resultados que envia la bd, en la variable results
@@ -70,7 +70,7 @@ router.get('/adminecogas/info', (req, res) => {
     const sql = 'SELECT c.id, c.Nombre, c.NCarpeta, c.TareaRealizada, c.ProximaTarea, c.FechaLimite, c.Estado FROM clientes c';
     res.locals.moment = moment;
     connection.query(sql, (error, results) => {
-        if (error) throw error;
+        if (error) console.log( error);
 
         if (results.length > 0) {
             res.send(results); //en {results:results} lo que hago es guardar los resultados que envia la bd, en la variable results
@@ -86,7 +86,7 @@ router.get('/estadogeneral', (req, res) => {
     res.locals.moment = moment;
     const sql = 'SELECT * FROM clientes';
     connection.query(sql, (error, results) => {
-        if (error) throw error;
+        if (error) console.log( error);
 
         if (results.length > 0) {
             res.render('paginas/AdministracionEcogas/estadogeneral.ejs', { results: results }); //en {results:results} lo que hago es guardar los resultados que envia la bd, en la variable results
@@ -108,7 +108,7 @@ router.get('/contactos', (req, res) => {
     res.locals.moment = moment;
     const sql = 'SELECT * FROM contactos';
     connection.query(sql, (error, results) => {
-        if (error) throw error;
+        if (error) console.log( error);
 
         if (results.length > 0) {
             res.render('paginas/AdministracionEcogas/contactos.ejs', { results: results }); //en {results:results} lo que hago es guardar los resultados que envia la bd, en la variable results
@@ -128,7 +128,7 @@ router.get('/editarContacto/:id', (req, res) => {
     console.log("id es:" + id);
     const sql = 'SELECT * FROM contactos where id =?';
     connection.query(sql, [id], (error, results) => {
-        if (error) throw error;
+        if (error) console.log( error);
         if (results.length > 0) {
             res.render('paginas/AdministracionEcogas/editarContacto', { user: results[0] });
         }
@@ -145,7 +145,7 @@ router.get('/editarTareas/:id', (req, res) => {
     const id = req.params.id;
     const sql = 'Select * from clientes where id=?';
     connection.query(sql, [id], (error, results) => {
-        if (error) throw error;
+        if (error) console.log( error);
         if (results.length > 0) {
             res.render('paginas/AdministracionEcogas/editarTareas', { user: results[0] });
         }
@@ -160,7 +160,7 @@ router.get('/edit/:id', (req, res) => {
     const id = req.params.id;
     const sql = 'Select * from clientes where id=?';
     connection.query(sql, [id], (error, results) => {
-        if (error) throw error;
+        if (error) console.log( error);
         if (results.length > 0) {
 
             res.render('paginas/AdministracionEcogas/edit', { user: results[0] });
@@ -178,7 +178,7 @@ router.get('/historialcarpeta/:Nombre', (req, res) => {
     const sql = 'SELECT * FROM historialdecambios WHERE Nombre_sub =?';
     res.locals.moment = moment;
     connection.query(sql, [Nombre], (error, results) => {
-        if (error) throw error;
+        if (error) console.log( error);
         if (results.length > 0) {
             res.render('paginas/AdministracionEcogas/historialcarpeta.ejs', { results: results, id: id }); //en {results:results} lo que hago es guardar los resultados que envia la bd, en la variable results
 
@@ -209,7 +209,7 @@ router.post('/actualizarcontacto/:id', (req, res) => {
         Nombre: Nombre, Entidad: entidad, Area: area, Puesto: Puesto, Telefono: Telefono, Correo: Correo
     }, id]
         , (error, results) => {
-            if (error) throw error;
+            if (error) console.log( error);
 
             if (results.length > 0) {
                 res.redirect('paginas/AdministracionEcogas/contactos');
@@ -252,7 +252,7 @@ router.post('/update/:id', (req, res) => {
             Hidraulica: HIDRAULICA, Privado: PRIVADO, Ferrocarriles: FERROCARRIL, TipoDeRed: TipoDeRed, Fecha_limite: Fecha_limite
         }, id]
             , (error, results) => {
-                if (error) throw error;
+                if (error) console.log( error);
 
                 if (results.length > 0) {
                     res.redirect(req.get('referer'));
@@ -272,7 +272,7 @@ router.post('/update/:id', (req, res) => {
                 Hidraulica: HIDRAULICA, Ferrocarriles: FERROCARRIL, TipoDeRed: TipoDeRed
             }, id]
                 , (error, results) => {
-                    if (error) throw error;
+                    if (error) console.log( error);
 
                     if (results.length > 0) {
                         res.redirect(req.get('referer'));
@@ -292,7 +292,7 @@ router.post('/update/:id', (req, res) => {
                 Hidraulica: HIDRAULICA, Ferrocarriles: FERROCARRIL, TipoDeRed: TipoDeRed
             }, id]
                 , (error, results) => {
-                    if (error) throw error;
+                    if (error) console.log( error);
 
                     if (results.length > 0) {
                         res.redirect(req.get('referer'));
@@ -319,23 +319,23 @@ router.post('/ActualizarProximasTareas/:id', (req, res) => {
     const Fecha_Tarea_sub = fecha;
     var EtapaTarea = req.body.EtapaTarea;
     var sql = "";
-   if (EtapaTarea==""){
+    if (EtapaTarea == "") {
 
-   }
+    }
 
     console.log("Etapa tarea contiene:" + EtapaTarea);
 
     if (Fecha_limite) {
         sql = 'Update  clientes set ? where id=?';
         connection.query(sql, [{ Estado: EstadoCarpeta, EtapaTarea: EtapaTarea, TareaRealizada: TareaRealizada, ProximaTarea: ProximaTarea, Fechalimite: Fecha_limite }, id], (error, results) => {
-            if (error) throw error;
+            if (error) console.log( error);
             console.log("se cargo el estado en tabla clientes");
 
         })
 
         sql = 'Insert into historialdecambios set?';
         connection.query(sql, [{ EtapaTarea_sub: EtapaTarea, Nombre_sub: Nombre, Tarea_Realizada_sub: TareaRealizada, Proxima_Tarea_sub: ProximaTarea, Fecha_Proxima_Tarea_sub: Fecha_limite, Fecha_Tarea_sub: Fecha_Tarea_sub }], (error, results) => {
-            if (error) throw error;
+            if (error) console.log( error);
 
             if (results.length > 0) {
                 res.redirect('/adminecogas');
@@ -347,14 +347,14 @@ router.post('/ActualizarProximasTareas/:id', (req, res) => {
         if (TareaRealizada) {
             sql = 'Update  clientes set ? where id =?';
             connection.query(sql, [{ Estado: EstadoCarpeta, TareaRealizada: TareaRealizada, ProximaTarea: ProximaTarea }, id], (error, results) => {
-                if (error) throw error;
+                if (error) console.log( error);
                 console.log("se cargo el estado en tabla clientes");
 
             })
             sql = 'Insert into historialdecambios set?';
             connection.query(sql, [{ Nombre_sub: Nombre, Tarea_Realizada_sub: TareaRealizada, Proxima_Tarea_sub: ProximaTarea, Fecha_Tarea_sub: Fecha_Tarea_sub }], (error, results) => {
                 if (error) {
-                    throw error;
+                    console.log( error);
                     setTimeout(function () {
                         res.redirect('/historialcarpeta/' + Nombre);
                     }, 3000);
@@ -371,7 +371,7 @@ router.post('/ActualizarProximasTareas/:id', (req, res) => {
         else {
             sql = 'Update  clientes set ? where id =?';
             connection.query(sql, [{ Estado: EstadoCarpeta, TareaRealizada: TareaRealizada, ProximaTarea: ProximaTarea }, id], (error, results) => {
-                if (error) throw error;
+                if (error) console.log( error);
                 if (results.length > 0) {
                     setTimeout(function () {
                         res.redirect('/historialcarpeta/' + Nombre);
@@ -392,7 +392,7 @@ router.post('/edit/delete/:id', (req, res) => {
     sql = 'Delete FROM clientes WHERE id =?'
     res.locals.moment = moment;
     connection.query(sql, [id], (error, results) => {
-        if (error) throw error;
+        if (error) console.log( error);
         if (results.length > 0) {
             res.redirect('/adminecogas');
         }
@@ -405,7 +405,7 @@ router.post('/editarContacto/delete/Contacto/:id', (req, res) => {
     const id = req.params.id;
     var sql = 'Delete FROM contactos WHERE id =?';
     connection.query(sql, [id], (error, results) => {
-        if (error) throw error;
+        if (error) console.log( error);
         if (results.length > 0) {
             res.redirect('/contactos');
         }
@@ -437,14 +437,14 @@ router.post('/guardarNuevoCliente', (req, res) => {
     connection.query(sql, {
         Nombre: Nombre
     }, (error, results) => {
-        if (error) throw error;
+        if (error) console.log( error);
     })
     sql = 'Insert into clientes set ?';
     connection.query(sql, {
         Nombre: Nombre, NCarpeta: NCarpeta, Comitente: Comitente, Ubicacion: Departamento, DNV: DNV, DPV: DPV, Irrigacion: IRRIGACION,
         Hidraulica: HIDRAULICA, Ferrocarriles: FERROCARRIL, OtrosPermisos: OTROSPERMISOS, TipoDeRed: TipoDeRed
     }, (error, results) => {
-        if (error) throw error;
+        if (error) console.log( error);
 
         if (results.length > 0) {
             res.redirect('/adminecogas');
@@ -467,7 +467,7 @@ router.post('/guardarNuevoContacto', (req, res) => {
     connection.query(sql, {
         Nombre: Nombre, Entidad: Entidad, Area: Area, Puesto: Puesto, Telefono: Telefono, Correo: Correo
     }, (error, results) => {
-        if (error) throw error;
+        if (error) console.log( error);
     })
     res.redirect('/contactos');
 
@@ -506,6 +506,36 @@ router.post('/actualizarEtapas/:id', (req, res) => {
     const ActasFinales = req.body.ActasFinales;
     const ActaInicioEfectivo = req.body.ActaInicioEfectivo;
     const InformesFinales = req.body.InformesFinales;
+    //Segunda Parte
+
+    const MailAutorizacion = req.body.MailAutorizacion;
+    const CertificadoRT = req.body.CertificadoRT;
+    var ActaConstitutiva = req.body.ActaConstitutiva;
+    var DniComitente = req.body.DniComitente;
+    var Interferencias = req.body.Interferencias;
+    var Permisos = req.body.Permisos;
+    const Programadeseguridad = req.body.Programadeseguridad;
+    const intTelefonicaPedida = req.body.intTelefonicaPedida;
+    const intTelefonicaObtenida = req.body.intTelefonicaObtenida;
+    const intClaroPedida = req.body.intClaroPedida;
+    const intClaroObtenida = req.body.intClaroObtenida;
+    const intAguaPedida = req.body.intAguaPedida;
+    const intAguaObtenida = req.body.intAguaObtenida;
+    const intCloacasPedida = req.body.intCloacasPedida;
+    const intCloacasObtenida = req.body.intCloacasObtenida;
+    const intElectricidadPedida = req.body.intElectricidadPedida;
+    const intElectricidadObtenida = req.body.intElectricidadObtenida;
+    const intTelecomPedida = req.body.intTelecomPedida;
+    const intTelecomObtenida = req.body.intTelecomObtenida;
+
+    const intTelefonica = req.body.intTelefonica;
+    const intClaro = req.body.intClaro;
+    const intAgua = req.body.intAgua;
+    const intCloacas = req.body.intCloaca;
+    const intElectricidad = req.body.intElectricidad;
+    const intTelecom = req.body.intTelecom;
+    const intArnet = req.body.intArnet;
+    const PlanoAnexo = req.body.PlanoAnexo;
     // Caos
     const ConformeDePermisos = req.body.ConformeDePermisos;
     const PresentacionFinal = req.body.PresentacionFinal;
@@ -523,25 +553,9 @@ router.post('/actualizarEtapas/:id', (req, res) => {
     const Comercial = req.body.Comercial;
     const Pcaprobado = req.body.PCaprobado;
     const CartaOferta = req.body.CartaOferta;
-    const MailAutorizacion = req.body.MailAutorizacion;
-    const CertificadoRT = req.body.CertificadoRT;
-    var ActaConstitutiva = req.body.ActaConstitutiva;
-    var DniComitente = req.body.DniComitente;
-    var Interferencias = req.body.Interferencias;
-    var Permisos = req.body.Permisos;
-    const Programadeseguridad = req.body.Programadeseguridad;
-    const intTelefonica = req.body.intTelefonica;
-    const intClaro = req.body.intClaro;
-    const intAgua = req.body.intAgua;
-    const intCloacas = req.body.intCloaca;
-    const intElectricidad = req.body.intElectricidad;
-    const intTelecom = req.body.intTelecom;
-    const intArnet = req.body.intArnet;
-    const PlanoAnexo = req.body.PlanoAnexo;
+
     // Final
     const HabilitacionFinal = req.body.HabilitacionFinal;
-    console.log("esta llegando desde el cliente, para la variable DNV lo siguiente:" + req.body.DNV);
-    console.log("esta llegando desde el cliente, para la variable DNV1 lo siguiente:" + req.body.DNV1);
     if (req.body.DNV1 == req.body.DNV) {
         var DNV = req.body.DNV;
     }
@@ -592,29 +606,43 @@ router.post('/actualizarEtapas/:id', (req, res) => {
         console.log("Actualizaretapas/// Ingreso al if de interferencias 'ok'");
     }
     connection.query(sql, [{
-        Mensura: Mensura, FechaFirmaContrato: FechaFirmaContrato, Contrato: Contrato, Presupuesto: Presupuesto, NotaDeExcepcion: NotaDeExcepcion,
+        //Prelimnar
+        Mensura: Mensura, TituloDePropiedad: TituloDePropiedad, DocumentacionSociedad: DocumentacionSociedad, ActaConstitutiva: ActaConstitutiva, ActaCargoVigente: ActaCargoVigente, Cotizacion: Cotizacion,
+        //Primera Parte
+        FechaFirmaContrato: FechaFirmaContrato, Contrato: Contrato, Presupuesto: Presupuesto, NotaDeExcepcion: NotaDeExcepcion,
         PlanoTipo: PlanoTipo, Sucedaneo: Sucedaneo, DDJJNAG153: DDJJNAG153, SolicitudInicioObras: SolicitudInicioObras,
-        FechaInicioTrabajos: FechaInicioTrabajos, FechaActividadActual: FechaActividadActual,
-        DocumentacionSociedad: DocumentacionSociedad, ActaCargoVigente: ActaCargoVigente, Cotizacion: Cotizacion,
+        FechaInicioTrabajos: FechaInicioTrabajos, FechaActividadActual: FechaActividadActual, Comercial: Comercial,
+        PCaprobado: Pcaprobado,
+        CartaOferta: CartaOferta,
+        //Obras
         LibroOrdenesServicio: LibroOrdenesServicio, LibroNotasPedido: LibroNotasPedido, AvisosDeObra: AvisosDeObra, OrdenServicio: OrdenServicio,
         CronogramaFirmadoComitente: CronogramaFirmadoComitente, CronogramaSyH: CronogramaSyH, AvisoInicioObraART: AvisoInicioObraART,
-        AvisoInicioObraIERIC: AvisoInicioObraIERIC, SeguroRC: SeguroRC, SeguroAccidentesPersonales: SeguroAccidentesPersonales,
+        AvisoInicioObraIERIC: AvisoInicioObraIERIC,
+        //Segunda Parte
+        SeguroRC: SeguroRC, SeguroAccidentesPersonales: SeguroAccidentesPersonales,
         PlanosyCroquis: PlanosyCroquis, PlanoAnexo: PlanoAnexo, ActasFinales: ActasFinales, ActaInicioEfectivo: ActaInicioEfectivo, InformesFinales: InformesFinales,
-        ConformeDePermisos: ConformeDePermisos, PresentacionFinal: PresentacionFinal, PCrevisado: PCrevisado, intArsat: intArsat,
+        PCrevisado: PCrevisado,
         PerMunicipal: PerMunicipal, Monotributos: Monotributos, CronogramaAmbiente: CronogramaAmbiente, ActaDeInicio: ActaDeInicio,
-        PruebaHermeticidad: PruebaHermeticidad, DniComitente: DniComitente, NotaCumplimentoNormativa: NotaCumplimentoNormativa,
-        TituloDePropiedad: TituloDePropiedad,
-        DocumentacionSociedad: DocSociedad, Comercial: Comercial,
-        PCaprobado: Pcaprobado, intTelefonica: intTelefonica, intClaro: intClaro, intAgua: intAgua,
+        PruebaHermeticidad: PruebaHermeticidad, DniComitente: DniComitente, NotaCumplimentoNormativa: NotaCumplimentoNormativa, PerMunicipal: PermisoMunicipal, MailAutorizacion: MailAutorizacion,
+        CertificadoRT: CertificadoRT,
+        //Interferencias
+        intTelefonicaObtenida: intTelefonicaObtenida, intTelefonicaPedida: intTelefonicaPedida, intClaroPedida: intClaroPedida, intClaroObtenida: intClaroObtenida,
+        intAguaObtenida: intAguaObtenida, intAguaPedida: intAguaPedida, intCloacasObtenida: intCloacasObtenida, intCloacasPedida: intCloacasPedida, intElectricidadObtenida: intElectricidadObtenida,
+        intElectricidadPedida: intElectricidadPedida, intTelecomObtenida: intTelecomObtenida, intTelecomPedida: intTelecomPedida, intTelefonica: intTelefonica, intClaro: intClaro, intAgua: intAgua,
         intCloaca: intCloacas, intElectricidad: intElectricidad, intTelecom: intTelecom, intArnet: intArnet, intArsat: intArsat,
-        CartaOferta: CartaOferta, ActaConstitutiva: ActaConstitutiva, PerMunicipal: PermisoMunicipal, MailAutorizacion: MailAutorizacion,
-        CertificadoRT: CertificadoRT, DNV: DNV, DPV: DPV, Irrigacion: IRRIGACION,
+        //Permisos
+        DNV: DNV, DPV: DPV, Irrigacion: IRRIGACION,
         Hidraulica: HIDRAULICA, Privado: PRIVADO, Ferrocarriles: FERROCARRIL, Otrospermisos: OTROSPERMISOS,
-        Interferencias: Interferencias, Permisos: Permisos, Programadeseguridad: Programadeseguridad, HabilitacionFinal: HabilitacionFinal
+        Interferencias: Interferencias, Permisos: Permisos, Programadeseguridad: Programadeseguridad,
+        //Finalizacion
+        ConformeDePermisos: ConformeDePermisos, PresentacionFinal: PresentacionFinal, HabilitacionFinal: HabilitacionFinal,
+
     }, id],
         (error, results) => {
 
-            if (error) throw error;
+            if (error) {
+                console.log(error);
+               }
 
 
             res.redirect(req.get('referer'));
