@@ -447,6 +447,12 @@ router.post('/guardarNuevoCliente', (req, res) => {
     }, (error, results) => {
         if (error) console.log( error);
     })
+    sql = 'Insert into clientes_tareasgenerales set ?';
+    connection.query(sql,{
+        Nombre:Nombre
+    }, (error, results) => {
+        if (error) console.log( error);
+    })
     sql = 'Insert into clientes set ?';
     connection.query(sql, {
         Nombre: Nombre, NCarpeta: NCarpeta, Comitente: Comitente, Ubicacion: Departamento, DNV: DNV, DPV: DPV, Irrigacion: IRRIGACION,
@@ -483,99 +489,100 @@ router.post('/guardarNuevoContacto', (req, res) => {
 })
 //Opciones de editar tareas POST
 router.post('/actualizarEtapas/:id', (req, res) => {
-    const id = req.body.id;
+    var id = req.body.id;
+    console.log("id es: " + id);
     //    Premiliminar
-    const Mensura = req.body.Mensura;
-    const FechaFirmaContrato = req.body.FechaFirmaContrato;
+    var Mensura = req.body.Mensura;
+    var FechaFirmaContrato = req.body.FechaFirmaContrato;
     // PrimeraParte
-    const Contrato = req.body.Contrato;
-    const Presupuesto = req.body.Presupuesto;
-    const NotaDeExcepcion = req.body.NotaDeExcepcion;
-    const PlanoTipo = req.body.PlanoTipo;
-    const Sucedaneo = req.body.Sucedaneo;
-    const SolicitudInicioObras = req.body.SolicitudInicioObras;
-    const FechaInicioTrabajos = req.body.FechaInicioTrabajos;
-    const FechaActividadActual = req.body.FechaActividadActual;
-    const DocumentacionSociedad = req.body.DocumentacionSociedad;
-    const ActaCargoVigente = req.body.ActaCargoVigente;
-    const Cotizacion = req.body.Cotizacion;
-    const LibroOrdenesServicio = req.body.LibroOrdenesServicio;
-    const LibroNotasPedido = req.body.LibroNotasPedido;
-    const AvisosDeObra = req.body.AvisosDeObra;
-    const OrdenServicio = req.body.OrdenServicio;
-    const CronogramaFirmadoComitente = req.body.CronogramaFirmadoComitente;
-    const CronogramaSyH = req.body.CronogramaSyH;
-    const AvisoInicioObraART = req.body.AvisoInicioObraART;
-    const AvisoInicioObraIERIC = req.body.AvisoInicioObraIERIC;
-    const SeguroRC = req.body.SeguroRC;
-    const SeguroAccidentesPersonales = req.body.SeguroAccidentesPersonales;
-    const ActasFinales = req.body.ActasFinales;
-    const ActaInicioEfectivo = req.body.ActaInicioEfectivo;
+    var Contrato = req.body.Contrato;
+    var Presupuesto = req.body.Presupuesto;
+    var NotaDeExcepcion = req.body.NotaDeExcepcion;
+    var PlanoTipo = req.body.PlanoTipo;
+    var Sucedaneo = req.body.Sucedaneo;
+    var SolicitudInicioObras = req.body.SolicitudInicioObras;
+    var FechaInicioTrabajos = req.body.FechaInicioTrabajos;
+    var FechaActividadActual = req.body.FechaActividadActual;
+    var DocumentacionSociedad = req.body.DocumentacionSociedad;
+    var ActaCargoVigente = req.body.ActaCargoVigente;
+    var Cotizacion = req.body.Cotizacion;
+    var LibroOrdenesServicio = req.body.LibroOrdenesServicio;
+    var LibroNotasPedido = req.body.LibroNotasPedido;
+    var AvisosDeObra = req.body.AvisosDeObra;
+    var OrdenServicio = req.body.OrdenServicio;
+    var CronogramaFirmadoComitente = req.body.CronogramaFirmadoComitente;
+    var CronogramaSyH = req.body.CronogramaSyH;
+    var AvisoInicioObraART = req.body.AvisoInicioObraART;
+    var AvisoInicioObraIERIC = req.body.AvisoInicioObraIERIC;
+    var SeguroRC = req.body.SeguroRC;
+    var SeguroAccidentesPersonales = req.body.SeguroAccidentesPersonales;
+    var ActasFinales = req.body.ActasFinales;
+    var ActaInicioEfectivo = req.body.ActaInicioEfectivo;
     //Segunda Parte
 
-    const MailAutorizacion = req.body.MailAutorizacion;
-    const CertificadoRT = req.body.CertificadoRT;
+    var MailAutorizacion = req.body.MailAutorizacion;
+    var CertificadoRT = req.body.CertificadoRT;
     var ActaConstitutiva = req.body.ActaConstitutiva;
     var DniComitente = req.body.DniComitente;
    
-    const Programadeseguridad = req.body.Programadeseguridad;
-    const intTelefonicaPedida = req.body.intTelefonicaPedida;
-    const intTelefonicaObtenida = req.body.intTelefonicaObtenida;
-    const intClaroPedida = req.body.intClaroPedida;
-    const intClaroObtenida = req.body.intClaroObtenida;
-    const intAguaPedida = req.body.intAguaPedida;
-    const intAguaObtenida = req.body.intAguaObtenida;
-    const intCloacasPedida = req.body.intCloacasPedida;
-    const intCloacasObtenida = req.body.intCloacasObtenida;
-    const intElectricidadPedida = req.body.intElectricidadPedida;
-    const intElectricidadObtenida = req.body.intElectricidadObtenida;
-    const intTelecomPedida = req.body.intTelecomPedida;
-    const intTelecomObtenida = req.body.intTelecomObtenida;
+    var Programadeseguridad = req.body.Programadeseguridad;
+    var intTelefonicaPedida = req.body.intTelefonicaPedida;
+    var intTelefonicaObtenida = req.body.intTelefonicaObtenida;
+    var intClaroPedida = req.body.intClaroPedida;
+    var intClaroObtenida = req.body.intClaroObtenida;
+    var intAguaPedida = req.body.intAguaPedida;
+    var intAguaObtenida = req.body.intAguaObtenida;
+    var intCloacasPedida = req.body.intCloacasPedida;
+    var intCloacasObtenida = req.body.intCloacasObtenida;
+    var intElectricidadPedida = req.body.intElectricidadPedida;
+    var intElectricidadObtenida = req.body.intElectricidadObtenida;
+    var intTelecomPedida = req.body.intTelecomPedida;
+    var intTelecomObtenida = req.body.intTelecomObtenida;
 
-    const intTelefonica = req.body.intTelefonica;
-    const intClaro = req.body.intClaro;
-    const intAgua = req.body.intAgua;
-    const intCloacas = req.body.intCloaca;
-    const intElectricidad = req.body.intElectricidad;
-    const intTelecom = req.body.intTelecom;
-    const intArnet = req.body.intArnet;
-    const PlanoAnexo = req.body.PlanoAnexo;
+    var intTelefonica = req.body.intTelefonica;
+    var intClaro = req.body.intClaro;
+    var intAgua = req.body.intAgua;
+    var intCloacas = req.body.intCloaca;
+    var intElectricidad = req.body.intElectricidad;
+    var intTelecom = req.body.intTelecom;
+    var intArnet = req.body.intArnet;
+    var PlanoAnexo = req.body.PlanoAnexo;
 
-    const MatriculaFusionista = req.body.MatriculaFusionista;
-    const MatriculaSoldador = req.body.MatriculaSoldador;
-    const EstudioImpactoAmbiental= req.body.EstudioImpactoAmbiental;
+    var MatriculaFusionista = req.body.MatriculaFusionista;
+    var MatriculaSoldador = req.body.MatriculaSoldador;
+    var EstudioImpactoAmbiental= req.body.EstudioImpactoAmbiental;
     //Permisos
-    const DPV = req.body.DPV;
-    const PRIVADO = req.body.PRIVADO;
-    const OTROSPERMISOS = req.body.OTROSPERMISOS;
-    const PermisoMunicipal = req.body.PerMunicipal;
+    var DPV = req.body.DPV;
+    var PRIVADO = req.body.PRIVADO;
+    var OTROSPERMISOS = req.body.OTROSPERMISOS;
+    var PermisoMunicipal = req.body.PerMunicipal;
     // Caos
-    const ConformeDePermisos = req.body.ConformeDePermisos;
-    const PCrevisado = req.body.PCrevisado;
-    const intArsat = req.body.intArsat;
-    const PerMunicipal = req.body.PerMunicipal;
-    const Monotributos = req.body.Monotributos;
-    const CronogramaAmbiente = req.body.CronogramaAmbiente;
-    const ActaDeInicio = req.body.ActaDeInicio;
+    var ConformeDePermisos = req.body.ConformeDePermisos;
+    var PCrevisado = req.body.PCrevisado;
+    var intArsat = req.body.intArsat;
+    var PerMunicipal = req.body.PerMunicipal;
+    var Monotributos = req.body.Monotributos;
+    var CronogramaAmbiente = req.body.CronogramaAmbiente;
+    var ActaDeInicio = req.body.ActaDeInicio;
 
-    const TituloDePropiedad = req.body.TituloDePropiedad;
+    var TituloDePropiedad = req.body.TituloDePropiedad;
     
-    const Pcaprobado = req.body.PCaprobado;
-    const CartaOferta = req.body.CartaOferta;
+    var Pcaprobado = req.body.PCaprobado;
+    var CartaOferta = req.body.CartaOferta;
 
     //Generales
 var DocumentacionTerreno, DocumentacionContractual, Tecnica,PermisosEspeciales,DocumentacionObra,Seguridad,PlanDeTrabajo,Matriculas,Ambiente,Avisos,DocumentacionInspeccion,ComunicacionObras,ActasFinalesEcogas,ConformesEntidades;    
-    const DocSociedad = req.body.DocumentaciónSociedad;
-    const Comercial = req.body.Comercial;
+    var DocSociedad = req.body.DocumentaciónSociedad;
+    var Comercial = req.body.Comercial;
     var Interferencias = req.body.Interferencias;
     var Permisos = req.body.Permisos;
-    const NotaCumplimentoNormativa = req.body.NotaCumplimentoNormativa;
-    const DDJJNAG153 = req.body.DDJJNAG153;
-    const PlanosyCroquis = req.body.PlanosyCroquis;
-    const PruebaHermeticidad = req.body.PruebaHermeticidad;
-    const PresentacionFinal = req.body.PresentacionFinal;
-    const InformesFinales = req.body.InformesFinales;
-    const HabilitacionFinal = req.body.HabilitacionFinal;
+    var NotaCumplimentoNormativa = req.body.NotaCumplimentoNormativa;
+    var DDJJNAG153 = req.body.DDJJNAG153;
+    var PlanosyCroquis = req.body.PlanosyCroquis;
+    var PruebaHermeticidad = req.body.PruebaHermeticidad;
+    var PresentacionFinal = req.body.PresentacionFinal;
+    var InformesFinales = req.body.InformesFinales;
+    var HabilitacionFinal = req.body.HabilitacionFinal;
     //Documentacion Terreno
     if(Mensura == "ok" && TituloDePropiedad == "ok" ){
         DocumentacionTerreno = "ok";
@@ -647,7 +654,7 @@ var DocumentacionTerreno, DocumentacionContractual, Tecnica,PermisosEspeciales,D
             Permisos="EnGestion";
              }
     //Plan de trabajo
-PlanDeTrabajo=PlanDeTrabajo;
+//PlanDeTrabajo=PlanDeTrabajo;
 // Matriculas
 if((MatriculaFusionista=="ok" || MatriculaFusionista=="NC") && (MatriculaSoldador=="ok" || MatriculaSoldador=="NC")){
     Matriculas="ok";
