@@ -241,9 +241,8 @@ router.post('/update/:id', (req, res) => {
     var PerMunicipal = req.body.PerMunicipal;
 
     const TipoDeRed = req.body.TipoDeRed;
-    console.log("id es:" + id);
-    console.log("nombre carpeta:" + NombreCarpeta)
-    console.log("el valor de hidraulica es:" + req.body.HIDRAULICA);
+    console.log("Intentando actualizar el contacto:" + NombreCarpeta);
+    
     //const TareaRealizada =req.body.TareaRealizada;
     //const ProximaTarea = req.body.ProximaTarea;
     const Fecha_limite = req.body.Fecha_limite;
@@ -490,6 +489,7 @@ router.post('/guardarNuevoContacto', (req, res) => {
 //Opciones de editar tareas POST
 router.post('/actualizarEtapas/:id', (req, res) => {
     var id = req.body.id;
+    var sql="";
     console.log("id es: " + id);
     //    Premiliminar
     var Mensura = req.body.Mensura;
@@ -698,17 +698,7 @@ if(OrdenServicio=="EnGestion"){
 
 console.log("Documentacion terreno: " +DocumentacionTerreno);
 
-    sql= 'Update clientes_tareasgenerales Set ? where Nombre=?';
-    connection.query(sql,[{ DocumentacionTerreno:DocumentacionTerreno,DocumentacionSociedad:DocumentacionSociedad,DocumentacionContractual:DocumentacionContractual,Comercial:Comercial,Tecnica:Tecnica,PermisosEspeciales:PermisosEspeciales,DocumentacionObra:DocumentacionObra,Seguridad:Seguridad,Interferencias:Interferencias,Permisos:Permisos,PlanDeTrabajo:PlanDeTrabajo,Matriculas:Matriculas,Ambiente:Ambiente,NotaCumplimentoNormativas:NotaCumplimentoNormativa,DDJJNAG153:DDJJNAG153,Avisos:Avisos,
-        DocumentacionInspeccion:DocumentacionInspeccion,ComunicacionObras:ComunicacionObras
-    }, id],
-        (error, results) => {
-
-            if (error) {
-                console.log(error);
-               }
-
-            })
+   
 
     if (req.body.DNV1 == req.body.DNV) {
         var DNV = req.body.DNV;
@@ -734,6 +724,13 @@ console.log("Documentacion terreno: " +DocumentacionTerreno);
         } else { var HIDRAULICA = req.body.HIDRAULICA1; }
     }
 
+    if (req.body.PerMunicipal1 == req.body.PerMunicipal) {
+        var PermisoMunicipal = req.body.PermisoMunicipal1;
+    } else {
+        if (req.body.PermisoMunicipal1 == "") {
+            var PermisoMunicipal = req.body.PermisoMunicipal;
+        } else { var PermisoMunicipal = req.body.PermisoMunicipal1; }
+    }
     if (req.body.FERROCARRIL1 == req.body.FERROCARRIL) {
         var FERROCARRIL = req.body.FERROCARRIL1;
     } else {
@@ -754,7 +751,18 @@ console.log("Documentacion terreno: " +DocumentacionTerreno);
         Interferencias = "ok";
         console.log("Actualizaretapas/// Ingreso al if de interferencias 'ok'");
     }
-    var sql = 'Update clientes Set ? where id=?';
+    sql= 'Update clientes_tareasgenerales Set ? where Nombre=?';
+    connection.query(sql,[{ DocumentacionTerreno:DocumentacionTerreno,DocumentacionSociedad:DocumentacionSociedad,DocumentacionContractual:DocumentacionContractual,Comercial:Comercial,Tecnica:Tecnica,PermisosEspeciales:PermisosEspeciales,DocumentacionObra:DocumentacionObra,Seguridad:Seguridad,Interferencias:Interferencias,Permisos:Permisos,PlanDeTrabajo:PlanDeTrabajo,Matriculas:Matriculas,Ambiente:Ambiente,NotaCumplimentoNormativas:NotaCumplimentoNormativa,DDJJNAG153:DDJJNAG153,Avisos:Avisos,
+        DocumentacionInspeccion:DocumentacionInspeccion,ComunicacionObras:ComunicacionObras
+    }, id],
+        (error, results) => {
+
+            if (error) {
+                console.log(error);
+               }
+
+            })
+     sql = 'Update clientes Set ? where id=?';
     connection.query(sql, [{
         //Prelimnar
         Mensura: Mensura, TituloDePropiedad: TituloDePropiedad, ActaConstitutiva: ActaConstitutiva, ActaCargoVigente: ActaCargoVigente, Cotizacion: Cotizacion,
@@ -772,8 +780,8 @@ console.log("Documentacion terreno: " +DocumentacionTerreno);
         SeguroRC: SeguroRC, SeguroAccidentesPersonales: SeguroAccidentesPersonales,
         PlanosyCroquis: PlanosyCroquis, PlanoAnexo: PlanoAnexo, ActasFinales: ActasFinales, ActaInicioEfectivo: ActaInicioEfectivo, InformesFinales: InformesFinales,
         PCrevisado: PCrevisado, EstudioImpactoAmbiental:EstudioImpactoAmbiental,
-        PerMunicipal: PerMunicipal, Monotributos: Monotributos, CronogramaAmbiente: CronogramaAmbiente, ActaDeInicio: ActaDeInicio,
-        PruebaHermeticidad: PruebaHermeticidad, DniComitente: DniComitente, NotaCumplimentoNormativa: NotaCumplimentoNormativa, PerMunicipal: PermisoMunicipal, MailAutorizacion: MailAutorizacion,
+         Monotributos: Monotributos, CronogramaAmbiente: CronogramaAmbiente, ActaDeInicio: ActaDeInicio,
+        PruebaHermeticidad: PruebaHermeticidad, DniComitente: DniComitente, NotaCumplimentoNormativa: NotaCumplimentoNormativa, MailAutorizacion: MailAutorizacion,
         CertificadoRT: CertificadoRT, MatriculaSoldador:MatriculaSoldador, MatriculaFusionista:MatriculaFusionista,
         //Interferencias
         intTelefonicaObtenida: intTelefonicaObtenida, intTelefonicaPedida: intTelefonicaPedida, intClaroPedida: intClaroPedida, intClaroObtenida: intClaroObtenida,
@@ -783,7 +791,7 @@ console.log("Documentacion terreno: " +DocumentacionTerreno);
         //Permisos
         DNV: DNV, DPV: DPV, Irrigacion: IRRIGACION,
         Hidraulica: HIDRAULICA, Privado: PRIVADO, Ferrocarriles: FERROCARRIL, Otrospermisos: OTROSPERMISOS,
-        Interferencias: Interferencias, Permisos: Permisos, Programadeseguridad: Programadeseguridad,
+        Interferencias: Interferencias, Permisos: Permisos, Programadeseguridad: Programadeseguridad,PerMunicipal: PerMunicipal,
         //Finalizacion
         ConformeDePermisos: ConformeDePermisos, PresentacionFinal: PresentacionFinal, HabilitacionFinal: HabilitacionFinal,
 

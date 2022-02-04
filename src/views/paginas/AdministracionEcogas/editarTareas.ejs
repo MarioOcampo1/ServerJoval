@@ -143,13 +143,14 @@
         </div>
     </div>
             <br>
-            <div class=" container">
-                                <div class="table-responsive">
-                                    <table class="table table-striped table-bordered table-sm table-hover "
-                                        style="width: 100%">
-                                        <thead>
-                                            <form action="/actualizarEtapas/<%= user.id%>" id="actualizarEtapas"
-                                                method="post">
+            <form action=" /actualizarEtapas/<%=user.id%>" id="actualizarEtapas" method="post">
+                                <div class=" container">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-bordered table-sm table-hover "
+                                            style="width: 100%">
+                                            <thead>
+
+                                               
                                                 <input id="id" name="id" type="hidden" value="<%=user.id%>">
                                                 <h1 class="text-center">Etapas de la carpeta</h1>
                                                 <tr class="table-active">
@@ -727,6 +728,32 @@
                                                                                                 corresponde</option>
                                                                                         </select>
                                                                                     </div>
+                                                                                    <div class="card-title">
+                                                                                        Municipal </div>
+                                                                                    <div class="card-text">
+                                                                                        <select class="form-control"
+                                                                                            id="PerMunicipal1"
+                                                                                            name="PerMunicipal"
+                                                                                            value="<%=user.PerMunicipal%>"
+                                                                                            placeholder="<%=user.PerMunicipal%>">
+                                                                                            <option
+                                                                                                value="<%=user.PerMunicipal%>"
+                                                                                                selected>
+                                                                                                <%=user.PerMunicipal%>
+                                                                                            </option>
+                                                                                            <option
+                                                                                                value="Sin presentar">
+                                                                                                Sin presentar
+                                                                                            </option>
+                                                                                            <option value="EnGestion">En
+                                                                                                gestion
+                                                                                            </option>
+                                                                                            <option value="ok">ok
+                                                                                            </option>
+                                                                                            <option value="NC">No
+                                                                                                corresponde</option>
+                                                                                        </select>
+                                                                                    </div>
                                                                                     <div class="card-title">DNV
                                                                                     </div>
                                                                                     <div class="card-text">
@@ -1051,6 +1078,40 @@
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="card-body">
+                                                                                    <div class="card-title">
+                                                                                        Municipal </div>
+                                                                                    <div class="card-text">
+                                                                                        <form-check>
+
+
+                                                                                            <input hidden type="radio"
+                                                                                                name="PerMunicipal"
+                                                                                                id="PerMunicipal"
+                                                                                                value="<%=user.PerMunicipal%>"
+                                                                                                checked>
+                                                                                            <input type="radio"
+                                                                                                name="PerMunicipal"
+                                                                                                id="PerMunicipal"
+                                                                                                value="En gestion"> En
+                                                                                            gestión
+                                                                                            <input type="radio"
+                                                                                                name="PerMunicipal"
+                                                                                                id="PerMunicipal"
+                                                                                                value="Pedida"> Pedida
+                                                                                            <input type="radio"
+                                                                                                name="PerMunicipal"
+                                                                                                id="PerMunicipal"
+                                                                                                value="ok"> Ok
+                                                                                            <input type="radio"
+                                                                                                name="PerMunicipal"
+                                                                                                id="PerMunicipal"
+                                                                                                value="NC"> No
+                                                                                            corresponde
+                                                                                            </select>
+                                                                                        </form-check>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="card-body">
                                                                                     <div class="card-title">DNV</div>
                                                                                     <div class="card-text">
                                                                                         <form-check>
@@ -1173,60 +1234,82 @@
                                                                                     </div>
                                                                                     <div class="card-text">
                                                                                         <form-check>
-                                                                                           
-                                                                                                <%if (user.intTelefonica=="En gestion") {%>
-                                                                                            <input checked type="radio"
-                                                                                                name="intTelefonica"
-                                                                                                id="intTelefonica"
-                                                                                                value="En gestion"
-                                                                                                onclick="intPedida('intTelefonicaPedida', false);">
-                                                                                            En
-                                                                                            gestión
-                                                                                            <%}else{%>
-                                                                                                <input type="radio"
-                                                                                                name="intTelefonica"
-                                                                                                id="intTelefonica"
-                                                                                                value="En gestion"
-                                                                                                onclick="intPedida('intTelefonicaPedida', false);">
-                                                                                            En
-                                                                                            gestión
-                                                                                                <%}%>
-                                                                                                <%if (user.intTelefonica=="Pedida") {%>
-                                                                                            <input checked type="radio"
-                                                                                                name="intTelefonica"
-                                                                                                id="intTelefonica"
-                                                                                                value="Pedida"
-                                                                                                onclick="estadoInterferencia('intTelefonicaPedida', 'intTelefonicaObtenida',true,false); ">
-                                                                                            Pedida
-                                                                                            <%}else{%>
-                                                                                                 <input type="radio"
-                                                                                                name="intTelefonica"
-                                                                                                id="intTelefonica"
-                                                                                                value="Pedida"
-                                                                                                onclick="estadoInterferencia('intTelefonicaPedida', 'intTelefonicaObtenida',true,false); ">
-                                                                                            Pedida
-                                                                                                <%}%>
-                                                                                            <input type="radio"
-                                                                                                name="intTelefonica"
-                                                                                                id="intTelefonica"
-                                                                                                value="ok"
-                                                                                                onclick="estadoInterferencia('intTelefonicaPedida', 'intTelefonicaObtenida',false,true);">
-                                                                                            Ok
-                                                                                            <div id="intTelefonicaPedida"
-                                                                                                style="display: none;">
-                                                                                                Fecha en la que se pidió: 
-                                                                                                <input type="date"
-                                                                                                    name="intTelefonicaPedida" value="<%= user.intTelefonicaPedida%>"
-                                                                                                    id="intTelefonicaPedida" placeholder="<%= user.intTelefonicaPedida %>">
-                                                                                            </div>
-                                                                                            <div id="intTelefonicaObtenida"
-                                                                                                style="display: none;">
-                                                                                                Fecha en la que se vence: 
 
-                                                                                                <input type="date"
-                                                                                                    name="intTelefonicaObtenida"
-                                                                                                    id="intTelefonicaObtenida" value="<%= user.intTelefonicaObtenida%>">
-                                                                                            </div>
+                                                                                            <%if (user.intTelefonica=="En gestion"
+                                                                                                ) {%>
+                                                                                                <input checked
+                                                                                                    type="radio"
+                                                                                                    name="intTelefonica"
+                                                                                                    id="intTelefonica"
+                                                                                                    value="En gestion"
+                                                                                                    onclick="intPedida('intTelefonicaPedida', false);">
+                                                                                                En
+                                                                                                gestión
+                                                                                                <%}else{%>
+                                                                                                    <input type="radio"
+                                                                                                        name="intTelefonica"
+                                                                                                        id="intTelefonica"
+                                                                                                        value="En gestion"
+                                                                                                        onclick="intPedida('intTelefonicaPedida', false);">
+                                                                                                    En
+                                                                                                    gestión
+                                                                                                    <%}%>
+                                                                                                        <%if (user.intTelefonica=="Pedida"
+                                                                                                            ) {%>
+                                                                                                            <input
+                                                                                                                checked
+                                                                                                                type="radio"
+                                                                                                                name="intTelefonica"
+                                                                                                                id="intTelefonica"
+                                                                                                                value="Pedida"
+                                                                                                                onclick="estadoInterferencia('intTelefonicaPedida', 'intTelefonicaObtenida',true,false); ">
+                                                                                                            Pedida
+                                                                                                            <%}else{%>
+                                                                                                                <input
+                                                                                                                    type="radio"
+                                                                                                                    name="intTelefonica"
+                                                                                                                    id="intTelefonica"
+                                                                                                                    value="Pedida"
+                                                                                                                    onclick="estadoInterferencia('intTelefonicaPedida', 'intTelefonicaObtenida',true,false); ">
+                                                                                                                Pedida
+                                                                                                                <%}%>
+                                                                                                                    <input
+                                                                                                                        type="radio"
+                                                                                                                        name="intTelefonica"
+                                                                                                                        id="intTelefonica"
+                                                                                                                        value="ok"
+                                                                                                                        onclick="estadoInterferencia('intTelefonicaPedida', 'intTelefonicaObtenida',false,true);">
+                                                                                                                    Ok
+                                                                                                                    <div id="intTelefonicaPedida"
+                                                                                                                        style="display: none;">
+                                                                                                                        Fecha
+                                                                                                                        en
+                                                                                                                        la
+                                                                                                                        que
+                                                                                                                        se
+                                                                                                                        pidió:
+                                                                                                                        <input
+                                                                                                                            type="date"
+                                                                                                                            name="intTelefonicaPedida"
+                                                                                                                            value="<%= user.intTelefonicaPedida%>"
+                                                                                                                            id="intTelefonicaPedida"
+                                                                                                                            placeholder="<%= user.intTelefonicaPedida %>">
+                                                                                                                    </div>
+                                                                                                                    <div id="intTelefonicaObtenida"
+                                                                                                                        style="display: none;">
+                                                                                                                        Fecha
+                                                                                                                        en
+                                                                                                                        la
+                                                                                                                        que
+                                                                                                                        se
+                                                                                                                        vence:
+
+                                                                                                                        <input
+                                                                                                                            type="date"
+                                                                                                                            name="intTelefonicaObtenida"
+                                                                                                                            id="intTelefonicaObtenida"
+                                                                                                                            value="<%= user.intTelefonicaObtenida%>">
+                                                                                                                    </div>
                                                                                         </form-check>
                                                                                     </div>
                                                                                 </div>
@@ -1261,14 +1344,16 @@
                                                                                                 Fecha en la que se pidió
                                                                                                 <input type="date"
                                                                                                     name="intAguaPedida"
-                                                                                                    id="intAguaPedida" value="<%= user.intAguaPedida%>">
+                                                                                                    id="intAguaPedida"
+                                                                                                    value="<%= user.intAguaPedida%>">
                                                                                             </div>
                                                                                             <div id="intAguaObtenida"
                                                                                                 style="display: none;">
                                                                                                 Fecha en la que se vence
                                                                                                 <input type="date"
                                                                                                     name="intAguaObtenida"
-                                                                                                    id="intAguaObtenida" value="<%= user.intAguaObtenida%>">
+                                                                                                    id="intAguaObtenida"
+                                                                                                    value="<%= user.intAguaObtenida%>">
                                                                                             </div>
                                                                                         </form-check>
                                                                                     </div>
@@ -1307,14 +1392,16 @@
                                                                                                 Fecha en la que se pidió
                                                                                                 <input type="date"
                                                                                                     name="intCloacasPedida"
-                                                                                                    id="intCloacasPedida" value="<%= user.intCloacasPedida%>"> 
+                                                                                                    id="intCloacasPedida"
+                                                                                                    value="<%= user.intCloacasPedida%>">
                                                                                             </div>
                                                                                             <div id="intCloacasObtenida"
                                                                                                 style="display: none;">
                                                                                                 Fecha en la que se vence
                                                                                                 <input type="date"
                                                                                                     name="intCloacasObtenida"
-                                                                                                    id="intCloacasObtenida" value="<%= user.intCloacasObtenida%>">
+                                                                                                    id="intCloacasObtenida"
+                                                                                                    value="<%= user.intCloacasObtenida%>">
                                                                                             </div>
                                                                                         </form-check>
                                                                                     </div>
@@ -1353,14 +1440,16 @@
                                                                                                 Fecha en la que se pidió
                                                                                                 <input type="date"
                                                                                                     name="intElectricidadPedida"
-                                                                                                    id="intElectricidadPedida" value="<%= user.intElectricidadPedida%>">
+                                                                                                    id="intElectricidadPedida"
+                                                                                                    value="<%= user.intElectricidadPedida%>">
                                                                                             </div>
                                                                                             <div id="intElectricidadObtenida"
                                                                                                 style="display: none;">
                                                                                                 Fecha en la que se vence
                                                                                                 <input type="date"
                                                                                                     name="intElectricidadObtenida"
-                                                                                                    id="intElectricidadObtenida" value="<%= user.ElectricidadguaObtenida%>">
+                                                                                                    id="intElectricidadObtenida"
+                                                                                                    value="<%= user.ElectricidadguaObtenida%>">
                                                                                             </div>
                                                                                         </form-check>
                                                                                     </div>
@@ -1397,14 +1486,16 @@
                                                                                                 Fecha en la que se pidió
                                                                                                 <input type="date"
                                                                                                     name="intClaroPedida"
-                                                                                                    id="intClaroPedida" value="<%= user.intClaroPedida%>">
+                                                                                                    id="intClaroPedida"
+                                                                                                    value="<%= user.intClaroPedida%>">
                                                                                             </div>
                                                                                             <div id="intClaroObtenida"
                                                                                                 style="display: none;">
                                                                                                 Fecha en la que se vence
                                                                                                 <input type="date"
                                                                                                     name="intClaroObtenida"
-                                                                                                    id="intClaroObtenida" value="<%= user.intClaroObtenida%>">
+                                                                                                    id="intClaroObtenida"
+                                                                                                    value="<%= user.intClaroObtenida%>">
                                                                                             </div>
                                                                                         </form-check>
                                                                                     </div>
@@ -1441,14 +1532,16 @@
                                                                                                 Fecha en la que se pidió
                                                                                                 <input type="date"
                                                                                                     name="intArnetPedida"
-                                                                                                    id="intArnetPedida" value="<%= user.intArnetPedida%>">
+                                                                                                    id="intArnetPedida"
+                                                                                                    value="<%= user.intArnetPedida%>">
                                                                                             </div>
                                                                                             <div id="intArnetObtenida"
                                                                                                 style="display: none;">
                                                                                                 Fecha en la que se vence
                                                                                                 <input type="date"
                                                                                                     name="intArnetObtenida"
-                                                                                                    id="intArnetObtenida" value="<%= user.intArnetObtenida%>">
+                                                                                                    id="intArnetObtenida"
+                                                                                                    value="<%= user.intArnetObtenida%>">
                                                                                             </div>
                                                                                         </form-check>
                                                                                     </div>
@@ -1485,14 +1578,16 @@
                                                                                                 Fecha en la que se pidió
                                                                                                 <input type="date"
                                                                                                     name="intArsatPedida"
-                                                                                                    id="intArsatPedida"value="<%= user.intArsatPedida%>">
+                                                                                                    id="intArsatPedida"
+                                                                                                    value="<%= user.intArsatPedida%>">
                                                                                             </div>
                                                                                             <div id="intArsatObtenida"
                                                                                                 style="display: none;">
                                                                                                 Fecha en la que se vence
                                                                                                 <input type="date"
                                                                                                     name="intArsatObtenida"
-                                                                                                    id="intArsatObtenida"value="<%= user.intArsatObtenida%>">
+                                                                                                    id="intArsatObtenida"
+                                                                                                    value="<%= user.intArsatObtenida%>">
                                                                                             </div>
                                                                                         </form-check>
                                                                                     </div>
@@ -1530,14 +1625,16 @@
                                                                                                 Fecha en la que se pidió
                                                                                                 <input type="date"
                                                                                                     name="intTelecomPedida"
-                                                                                                    id="intTelecomPedida"value="<%= user.intTelecomPedida%>">
+                                                                                                    id="intTelecomPedida"
+                                                                                                    value="<%= user.intTelecomPedida%>">
                                                                                             </div>
                                                                                             <div id="intTelecomObtenida"
                                                                                                 style="display: none;">
                                                                                                 Fecha en la que se vence
                                                                                                 <input type="date"
                                                                                                     name="intTelecomObtenida"
-                                                                                                    id="intTelecomObtenida"value="<%= user.intTelecomObtenida%>">
+                                                                                                    id="intTelecomObtenida"
+                                                                                                    value="<%= user.intTelecomObtenida%>">
                                                                                             </div>
                                                                                         </form-check>
                                                                                     </div>
@@ -2249,171 +2346,172 @@
                                                             </div>
                                                         </div>
                                                     </th>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <!-- Ifs de las etapas de la carpeta, controlan la frase que se muestra al usuario debajo de cada etapa. -->
-                                                <th class="table-success">
-                                                    <!-- Gestion de la primera parte, muestra en "Etapas de la carpeta" de cada carpeta, un resumen de como va cada area de la carpeta -->
-                                                    <% if(user.Mensura=="ok" && user.TituloDePropiedad=="ok" &&
-                                                        (user.DocumentaciónSociedad=="ok" ||
-                                                        user.DocumentaciónSociedad=="NC" )&&
-                                                        (user.ActaCargoVigente=="ok" || user.ActaCargoVigente=="NC" ) &&
-                                                        user.Cotizacion=="ok" ){%>
-                                                        <p> Todo finalizado </p>
-                                                        <%}%>
-                                                            <%if(user.Mensura=="EnGestion"||
-                                                                user.TituloDePropiedad=="EnGestion" ||
-                                                                user.DocumentaciónSociedad=="EnGestion" ||
-                                                                user.ActaCargoVigente=="EnGestion" ||
-                                                                user.Cotizacion=="EnGestion" ){%>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <!-- Ifs de las etapas de la carpeta, controlan la frase que se muestra al usuario debajo de cada etapa. -->
+                                                    <th class="table-success">
+                                                        <!-- Gestion de la primera parte, muestra en "Etapas de la carpeta" de cada carpeta, un resumen de como va cada area de la carpeta -->
+                                                        <% if(user.Mensura=="ok" && user.TituloDePropiedad=="ok" &&
+                                                            (user.DocumentaciónSociedad=="ok" ||
+                                                            user.DocumentaciónSociedad=="NC" )&&
+                                                            (user.ActaCargoVigente=="ok" || user.ActaCargoVigente=="NC"
+                                                            ) && user.Cotizacion=="ok" ){%>
+                                                            <p> Todo finalizado </p>
+                                                            <%}%>
+                                                                <%if(user.Mensura=="EnGestion"||
+                                                                    user.TituloDePropiedad=="EnGestion" ||
+                                                                    user.DocumentaciónSociedad=="EnGestion" ||
+                                                                    user.ActaCargoVigente=="EnGestion" ||
+                                                                    user.Cotizacion=="EnGestion" ){%>
+                                                                    <p>Se encuentra en gestión </p>
+                                                                    <%}%>
+                                                    </th>
+                                                    <th class="table-success">
+                                                        <!-- Configuracion de el cuadro de "Primera parte" -->
+                                                        <%if(user.Comercial=="ok" && user.PCaprobado=="ok" &&
+                                                            user.CartaOferta=="ok" ){%>
+                                                            Finalizada
+                                                            <%} if(user.Comercial=="EnGestion" ||
+                                                                user.PCaprobado=="EnGestion" ||
+                                                                user.CartaOferta=="EnGestion" ){%>
                                                                 <p>Se encuentra en gestión </p>
                                                                 <%}%>
-                                                </th>
-                                                <th class="table-success">
-                                                    <!-- Configuracion de el cuadro de "Primera parte" -->
-                                                    <%if(user.Comercial=="ok" && user.PCaprobado=="ok" &&
-                                                        user.CartaOferta=="ok" ){%>
-                                                        Finalizada
-                                                        <%} if(user.Comercial=="EnGestion" ||
-                                                            user.PCaprobado=="EnGestion" ||
-                                                            user.CartaOferta=="EnGestion" ){%>
-                                                            <p>Se encuentra en gestión </p>
+                                                    </th>
+                                                    <th class="table-success">
+                                                        <!-- Configuracion cuadro "Segunda Parte" -->
+                                                        <%if(user.AvisoInicioObras=="ok" && user.CertificadoRT=="ok" &&
+                                                            user.Interferencias=="ok" && user.Permisos=="ok" &&
+                                                            user.Programadeseguridad=="ok" ){%>
+                                                            Finalizada
                                                             <%}%>
-                                                </th>
-                                                <th class="table-success">
-                                                    <!-- Configuracion cuadro "Segunda Parte" -->
-                                                    <%if(user.AvisoInicioObras=="ok" && user.CertificadoRT=="ok" &&
-                                                        user.Interferencias=="ok" && user.Permisos=="ok" &&
-                                                        user.Programadeseguridad=="ok" ){%>
-                                                        Finalizada
-                                                        <%}%>
-                                                            <%if(user.MailAutorizacion=="EnGestion" ||
-                                                                user.CertificadoRT=="EnGestion" ||
-                                                                user.Interferencias=="EnGestion" ||
-                                                                user.Permisos=="EnGestion" ||
-                                                                user.Programadeseguridad=="EnGestion" ){%>
-                                                                En Gestion
-                                                                <%}%>
-                                                </th>
-                                                <th class="table-success">
+                                                                <%if(user.MailAutorizacion=="EnGestion" ||
+                                                                    user.CertificadoRT=="EnGestion" ||
+                                                                    user.Interferencias=="EnGestion" ||
+                                                                    user.Permisos=="EnGestion" ||
+                                                                    user.Programadeseguridad=="EnGestion" ){%>
+                                                                    En Gestion
+                                                                    <%}%>
+                                                    </th>
+                                                    <th class="table-success">
 
-                                                </th>
-                                                <th class="table-success">
-                                                    <!-- Configuracion cuadro "Caos" -->
-                                                    <%if(user.DocInspeccion=="ok"&& user.PlanosyCroquis=="ok" &&
-                                                        user.ActasFinales=="ok" && user.InformesFinales=="ok" &&
-                                                        user.ConformedePermisos=="ok" &&user.PresentacionFinal=="ok"
-                                                        ){%>
-                                                        Finalizada
-                                                        <%}%>
-                                                            <%if(user.DocInspeccion=="EnGestion"||
-                                                                user.PlanosyCroquis=="EnGestion"
-                                                                ||user.ActasFinales=="EnGestion" ||
-                                                                user.InformesFinales=="EnGestion"
-                                                                ||user.ConformedePermisos=="EnGestion"
-                                                                ||user.PresentacionFinal=="EnGestion" ){%>
-                                                                En Gestion
-                                                                <%}%>
-                                                </th>
-                                                <th class="table-success">
-                                                    <%if(user.PresentacionFinal=="ok"){%>
-                                                        Finalizada
-                                                        <%}%>
-                                                </th>
+                                                    </th>
+                                                    <th class="table-success">
+                                                        <!-- Configuracion cuadro "Caos" -->
+                                                        <%if(user.DocInspeccion=="ok"&& user.PlanosyCroquis=="ok" &&
+                                                            user.ActasFinales=="ok" && user.InformesFinales=="ok" &&
+                                                            user.ConformedePermisos=="ok" &&user.PresentacionFinal=="ok"
+                                                            ){%>
+                                                            Finalizada
+                                                            <%}%>
+                                                                <%if(user.DocInspeccion=="EnGestion"||
+                                                                    user.PlanosyCroquis=="EnGestion"
+                                                                    ||user.ActasFinales=="EnGestion" ||
+                                                                    user.InformesFinales=="EnGestion"
+                                                                    ||user.ConformedePermisos=="EnGestion"
+                                                                    ||user.PresentacionFinal=="EnGestion" ){%>
+                                                                    En Gestion
+                                                                    <%}%>
+                                                    </th>
+                                                    <th class="table-success">
+                                                        <%if(user.PresentacionFinal=="ok"){%>
+                                                            Finalizada
+                                                            <%}%>
+                                                    </th>
 
-                                            </tr>
-                                        </tbody>
+                                                </tr>
+                                            </tbody>
 
 
-                                        <div class="container">
-                                            <div class="button-group text-center" role="group">
-                                                <button type="submit"
-                                                    class="btn btn-primary text-center">Actualizar</button>
-                                                <a href="/adminecogas"
-                                                    class="btn btn-secondary text-center">Cancelar</a>
+                                            <div class="container">
+                                                <div class="button-group text-center" role="group">
+                                                    <button type="submit"
+                                                        class="btn btn-primary text-center">Actualizar</button>
+                                                    <a href="/adminecogas"
+                                                        class="btn btn-secondary text-center">Cancelar</a>
+                                                </div>
                                             </div>
-                                        </div>
-                                        </form>
-                                </div>
+                                            </form>
+                                    </div>
 
-                                <% } %>
-                                    <script
-                                        src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-                                        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-                                        crossorigin="anonymous"></script>
-                                    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-                                        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-                                        crossorigin="anonymous"></script>
-                                    <script
-                                        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-                                        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-                                        crossorigin="anonymous"></script>
-                                    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-                                        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-                                        crossorigin="anonymous"></script>
-                                    <script>
-                                        function tablaInterferencias {
-                                            var boton = document.getElementById("botonMostrarInterferencias");
-                                            var tabla = document.getElementById("tablaInterferencias");
-                                        };
+                                    <% } %>
+                                        <script
+                                            src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+                                            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+                                            crossorigin="anonymous"></script>
+                                        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+                                            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+                                            crossorigin="anonymous"></script>
+                                        <script
+                                            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+                                            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+                                            crossorigin="anonymous"></script>
+                                        <script
+                                            src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+                                            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+                                            crossorigin="anonymous"></script>
+                                        <script>
+                                            function tablaInterferencias {
+                                                var boton = document.getElementById("botonMostrarInterferencias");
+                                                var tabla = document.getElementById("tablaInterferencias");
+                                            };
 
-                                    </script>
-                                    <script>
-                                        function estadoInterferencia(nombrePedida, nombreObtenida, boolPedida, boolRecibida) {
-                                            if (boolPedida) {
-                                                elemento = document.getElementById(nombrePedida);
-                                                elemento.style.display = "block";
-                                            }
-                                            else {
-                                                elemento = document.getElementById(nombrePedida);
-                                                elemento.style.display = "none";
-                                            }
-                                            if (boolRecibida) {
-                                                elemento = document.getElementById(nombreObtenida);
-                                                elemento.style.display = "block";
-                                            }
-                                            else {
-                                                elemento = document.getElementById(nombreObtenida);
-                                                elemento.style.display = "none";
-                                            }
-                                        }
-
-                                    </script>
-                                    <script>
-                                        $(document).ready(
-                                            function AbrirEstadoCarpeta() {
-                                                var user = '<%= user.Estado %>';
-                                                // window.alert("aa");
-                                                // $('#ModalPreliminar').modal('show');
-
-                                                if ((user) == "Sin presentar") {
-                                                    $('#ModalPreliminar').modal('show');
-                                                };
-                                                if ((user) == "1ra parte") {
-                                                    $('#PrimeraParte').modal('show');
-                                                };
-                                                if ((user) == "2da parte") {
-                                                    $('#ModalSegundaParte').modal('show');
-                                                };
-                                                if ((user) == "Caos") {
-                                                    $('#ModalCaos').modal('show');
-                                                };
-                                                if ((user) == "Obras") {
-                                                    $('#ModalObras').modal('show');
+                                        </script>
+                                        <script>
+                                            function estadoInterferencia(nombrePedida, nombreObtenida, boolPedida, boolRecibida) {
+                                                if (boolPedida) {
+                                                    elemento = document.getElementById(nombrePedida);
+                                                    elemento.style.display = "block";
                                                 }
+                                                else {
+                                                    elemento = document.getElementById(nombrePedida);
+                                                    elemento.style.display = "none";
+                                                }
+                                                if (boolRecibida) {
+                                                    elemento = document.getElementById(nombreObtenida);
+                                                    elemento.style.display = "block";
+                                                }
+                                                else {
+                                                    elemento = document.getElementById(nombreObtenida);
+                                                    elemento.style.display = "none";
+                                                }
+                                            }
 
-                                            });
-                                    </script>
-                                    <script>
-                                        function CerrarModal() {
-                                            $('#ModalPreliminar').modal('hide');
-                                            $('#PrimeraParte').modal('hide');
-                                            $('#ModalSegundaParte').modal('hide');
-                                            $('#ModalCaos').modal('hide');
+                                        </script>
+                                        <script>
+                                            $(document).ready(
+                                                function AbrirEstadoCarpeta() {
+                                                    var user = '<%= user.Estado %>';
+                                                    // window.alert("aa");
+                                                    // $('#ModalPreliminar').modal('show');
 
-                                        }
-                                    </script>
+                                                    if ((user) == "Sin presentar") {
+                                                        $('#ModalPreliminar').modal('show');
+                                                    };
+                                                    if ((user) == "1ra parte") {
+                                                        $('#PrimeraParte').modal('show');
+                                                    };
+                                                    if ((user) == "2da parte") {
+                                                        $('#ModalSegundaParte').modal('show');
+                                                    };
+                                                    if ((user) == "Caos") {
+                                                        $('#ModalCaos').modal('show');
+                                                    };
+                                                    if ((user) == "Obras") {
+                                                        $('#ModalObras').modal('show');
+                                                    }
+
+                                                });
+                                        </script>
+                                        <script>
+                                            function CerrarModal() {
+                                                $('#ModalPreliminar').modal('hide');
+                                                $('#PrimeraParte').modal('hide');
+                                                $('#ModalSegundaParte').modal('hide');
+                                                $('#ModalCaos').modal('hide');
+
+                                            }
+                                        </script>
 
 </body>
 
