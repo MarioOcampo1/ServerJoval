@@ -33,6 +33,8 @@
                                     <a href="/edit/<%= user.id%>" class="btn btn-success ">Mas información</a>
                                 </div>
                                 <form action="/ActualizarEstadoCarpeta/<%= user.id%>" method="POST">
+                        <input type="hidden" name="id" id="id" value="<%= user.id%>">
+
                                     <div class="col-md-auto">
                                         <br>
                                         Estado de la carpeta:
