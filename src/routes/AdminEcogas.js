@@ -795,9 +795,7 @@ console.log("Documentacion terreno: " +DocumentacionTerreno);
 })
 router.post('/ActualizarEstadoCarpeta/:id', (req, res) => {
     var id = req.body.id;
-    console.log("id es: "+ id );
     var Estado= req.body.Estado; 
-    console.log("Estado es " + Estado);
     var sql = 'Update clientes Set ? where id=?';
     connection.query(sql, [{
         Estado: Estado
