@@ -84,10 +84,11 @@ router.get('/adminecogas/info', (req, res) => {
 })
 router.get('/estadogeneral', (req, res) => {
     res.locals.moment = moment;
-    const sql = 'SELECT * FROM clientes';
+    // const sql = 'SELECT c.id, c.Nombre  ,c.NCarpeta,  c.Ubicacion ,c.Comitente ,c.Estado, c.Fechafirmacontrato  ,b.DocumentacionTerreno ,b.DocumentacionSociedad ,b.DocumentacionContractual  ,b.Comercial ,b.Tecnica ,b.PermisosEspeciales ,b.DocumentacionObra  ,b.Seguridad,b.Interferencias, b.Permisos, b.PlanDeTrabajo, b.Matriculas, b.Ambiente, b.NotaCumplimentoNormativas, b.DDJJNAG153, b.Avisos, b.DocumentacionInspeccion, b.ComunicacionObras, b.ActasFinalesEcogas, b.PlanosyCroquis, b.ConformeEntidades, b.PruebaHermeticidad, b.InformesFinales, b.PresentacionFinal, b.HabilitacionObra  from clientes_tareasgenerales b ,clientes c';
+    const sql = 'SELECT c.id, c.Nombre  ,c.NCarpeta,  c.Ubicacion ,c.Comitente ,c.Estado, c.Fechafirmacontrato ,b.DocumentacionTerreno, b.DocumentacionSociedad,b.DocumentacionContractual  ,b.Comercial ,b.Tecnica,b.PermisosEspeciales ,b.DocumentacionObra  ,b.Seguridad,b.Interferencias, b.Permisos, b.PlanDeTrabajo, b.Matriculas, b.Ambiente, b.NotaCumplimentoNormativas, b.DDJJNAG153, b.Avisos, b.DocumentacionInspeccion, b.ComunicacionObras, b.ActasFinalesEcogas, b.PlanosyCroquis, b.ConformeEntidades, b.PruebaHermeticidad, b.InformesFinales,b.PresentacionFinal, b.HabilitacionObra  from clientes c, clientes_tareasgenerales b ';
+    // const sql='Select * from clientes c';
     connection.query(sql, (error, results) => {
         if (error) console.log( error);
-
         if (results.length > 0) {
             res.render('paginas/AdministracionEcogas/estadogeneral.ejs', { results: results }); //en {results:results} lo que hago es guardar los resultados que envia la bd, en la variable results
             // res.send(results);
@@ -485,7 +486,6 @@ router.post('/actualizarEtapas/:id', (req, res) => {
     const NotaDeExcepcion = req.body.NotaDeExcepcion;
     const PlanoTipo = req.body.PlanoTipo;
     const Sucedaneo = req.body.Sucedaneo;
-    const DDJJNAG153 = req.body.DDJJNAG153;
     const SolicitudInicioObras = req.body.SolicitudInicioObras;
     const FechaInicioTrabajos = req.body.FechaInicioTrabajos;
     const FechaActividadActual = req.body.FechaActividadActual;
@@ -502,18 +502,15 @@ router.post('/actualizarEtapas/:id', (req, res) => {
     const AvisoInicioObraIERIC = req.body.AvisoInicioObraIERIC;
     const SeguroRC = req.body.SeguroRC;
     const SeguroAccidentesPersonales = req.body.SeguroAccidentesPersonales;
-    const PlanosyCroquis = req.body.PlanosyCroquis;
     const ActasFinales = req.body.ActasFinales;
     const ActaInicioEfectivo = req.body.ActaInicioEfectivo;
-    const InformesFinales = req.body.InformesFinales;
     //Segunda Parte
 
     const MailAutorizacion = req.body.MailAutorizacion;
     const CertificadoRT = req.body.CertificadoRT;
     var ActaConstitutiva = req.body.ActaConstitutiva;
     var DniComitente = req.body.DniComitente;
-    var Interferencias = req.body.Interferencias;
-    var Permisos = req.body.Permisos;
+   
     const Programadeseguridad = req.body.Programadeseguridad;
     const intTelefonicaPedida = req.body.intTelefonicaPedida;
     const intTelefonicaObtenida = req.body.intTelefonicaObtenida;
@@ -536,26 +533,169 @@ router.post('/actualizarEtapas/:id', (req, res) => {
     const intTelecom = req.body.intTelecom;
     const intArnet = req.body.intArnet;
     const PlanoAnexo = req.body.PlanoAnexo;
+
+    const MatriculaFusionista = req.body.MatriculaFusionista;
+    const MatriculaSoldador = req.body.MatriculaSoldador;
+    const EstudioImpactoAmbiental= req.body.EstudioImpactoAmbiental;
+    //Permisos
+    const DPV = req.body.DPV;
+    const PRIVADO = req.body.PRIVADO;
+    const OTROSPERMISOS = req.body.OTROSPERMISOS;
+    const PermisoMunicipal = req.body.PerMunicipal;
     // Caos
     const ConformeDePermisos = req.body.ConformeDePermisos;
-    const PresentacionFinal = req.body.PresentacionFinal;
     const PCrevisado = req.body.PCrevisado;
     const intArsat = req.body.intArsat;
     const PerMunicipal = req.body.PerMunicipal;
     const Monotributos = req.body.Monotributos;
     const CronogramaAmbiente = req.body.CronogramaAmbiente;
     const ActaDeInicio = req.body.ActaDeInicio;
-    const PruebaHermeticidad = req.body.PruebaHermeticidad;
-    const NotaCumplimentoNormativa = req.body.NotaCumplimentoNormativa;
 
     const TituloDePropiedad = req.body.TituloDePropiedad;
-    const DocSociedad = req.body.DocumentaciónSociedad;
-    const Comercial = req.body.Comercial;
+    
     const Pcaprobado = req.body.PCaprobado;
     const CartaOferta = req.body.CartaOferta;
 
-    // Final
+    //Generales
+var DocumentacionTerreno, DocumentacionContractual, Tecnica,PermisosEspeciales,DocumentacionObra,Seguridad,PlanDeTrabajo,Matriculas,Ambiente,Avisos,DocumentacionInspeccion,ComunicacionObras,ActasFinalesEcogas,ConformesEntidades;    
+    const DocSociedad = req.body.DocumentaciónSociedad;
+    const Comercial = req.body.Comercial;
+    var Interferencias = req.body.Interferencias;
+    var Permisos = req.body.Permisos;
+    const NotaCumplimentoNormativa = req.body.NotaCumplimentoNormativa;
+    const DDJJNAG153 = req.body.DDJJNAG153;
+    const PlanosyCroquis = req.body.PlanosyCroquis;
+    const PruebaHermeticidad = req.body.PruebaHermeticidad;
+    const PresentacionFinal = req.body.PresentacionFinal;
+    const InformesFinales = req.body.InformesFinales;
     const HabilitacionFinal = req.body.HabilitacionFinal;
+    //Documentacion Terreno
+    if(Mensura == "ok" && TituloDePropiedad == "ok" ){
+        DocumentacionTerreno = "ok";
+    }
+    if(Mensura =="EnGestion" || TituloDePropiedad == "EnGestion"){
+        DocumentacionTerreno = "En Gestion";
+    }
+    //Documentacion Sociedad
+    if(ActaConstitutiva == "ok" && ActaCargoVigente == "ok" ){
+        DocumentacionSociedad = "ok";
+    }
+    if(ActaConstitutiva == "EnGestion" && ActaCargoVigente == "EnGestion" ){
+        DocumentacionSociedad = "EnGestion";
+    }
+    //Documentacion Contractual
+    if(Cotizacion == "ok" ){
+        DocumentacionContractual = "ok";
+    }
+    if(Cotizacion == "EnGestion" ){
+        DocumentacionContractual = "EnGestion";
+    }
+    // Comercial
+    if(Contrato == "ok" && Presupuesto =="ok" && Sucedaneo =="ok" && (NotaDeExcepcion =="ok" || NotaDeExcepcion =="NC") ){
+        Comercial = "ok";
+    }
+    if(Contrato == "EnGestion" || Presupuesto =="EnGestion" || Sucedaneo =="EnGestion" || (NotaDeExcepcion =="EnGestion" || NotaDeExcepcion =="NC") ){
+        Comercial = "EnGestion";
+    }
+    //Tecnica
+    if(Pcaprobado == "ok" && (PlanoTipo=="ok" || PlanoTipo=="NC") ){
+        Tecnica = "ok";
+    }
+    if(Pcaprobado == "EnGestion" || (PlanoTipo=="EnGestion" || PlanoTipo=="NC") ){
+        Tecnica = "EnGestion";
+    }
+    //Permisos Especiales
+    if((CartaOferta == "ok" || CartaOferta == "NC") && (PlanoAnexo=="ok" || PlanoAnexo=="NC") && (DNV=="ok" || DNV=="NC") && (HIDRAULICA=="ok" || HIDRAULICA=="NC") && (FERROCARRIL=="ok" || FERROCARRIL=="NC")  ){
+        PermisosEspeciales = "ok";
+    }
+    if((CartaOferta == "EnGestion" || CartaOferta == "NC") ||( PlanoAnexo=="EnGestion" || PlanoAnexo=="NC") ||( DNV=="EnGestion" || DNV=="NC")||(HIDRAULICA=="EnGestion" || HIDRAULICA=="NC")|| (FERROCARRIL=="EnGestion" || FERROCARRIL=="NC")){
+        PermisosEspeciales = "EnGestion";
+    }
+    //Documentación de obra
+    if(SolicitudInicioObras == "ok" && (CertificadoRT=="ok") ){
+        DocumentacionObra = "ok";
+    }
+    if(SolicitudInicioObras == "EnGestion" || (CertificadoRT=="EnGestion") ){
+        DocumentacionObra = "EnGestion";
+    }
+    //Seguridad
+    if(Programadeseguridad=="ok"&&CronogramaSyH=="ok" && SeguroRC=="ok" && Monotributos =="ok" && SeguroAccidentesPersonales=="ok"){
+        Seguridad="ok"
+    }
+    if(Programadeseguridad=="EnGestion"||CronogramaSyH=="EnGestion" || SeguroRC=="EnGestion" || Monotributos =="EnGestion" || SeguroAccidentesPersonales=="EnGestion"){
+        Seguridad="EnGestion"
+    }
+    //Interferencias
+    if(intAgua=="ok"|| (intAgua=="NC") &&intCloacas=="ok"|| (intCloacas=="NC")  && intElectricidad=="ok"|| (intElectricidad=="NC")  && intArsat =="ok"|| (intArsat=="NC")  && intClaro=="ok"|| (intClaro=="NC") && intTelefonica=="ok"|| (intTelefonica=="NC") && intArnet=="ok"|| (intArnet=="NC") && intTelecom=="ok"|| (intTelecom=="NC") ){
+        Interferencias="ok";
+    }
+    if((intAgua=="EnGestion"|| intAgua=="NC") ||(intCloacas=="EnGestion"|| intCloacas=="NC")  || (intElectricidad=="EnGestion"|| intElectricidad=="NC")  || (intArsat =="EnGestion"|| intArsat=="NC")  || (intClaro=="EnGestion"|| intClaro=="NC") || (intTelefonica=="EnGestion"|| intTelefonica=="NC") || (intArnet=="EnGestion"|| intArnet=="NC") || (intTelecom=="EnGestion"|| intTelecom=="NC") ){
+        Interferencias="EnGestion";
+    }
+    //Permisos
+    if(PerMunicipal=="ok" && (IRRIGACION=="ok"|| IRRIGACION=="NC") && (DPV=="ok"|| DPV=="NC")){
+        Permisos="ok";
+         }
+         if(PerMunicipal=="EnGestion" || (IRRIGACION=="EnGestion"|| IRRIGACION=="NC") || (DPV=="EnGestion"|| DPV=="NC")){
+            Permisos="EnGestion";
+             }
+    //Plan de trabajo
+PlanDeTrabajo=PlanDeTrabajo;
+// Matriculas
+if((MatriculaFusionista=="ok" || MatriculaFusionista=="NC") && (MatriculaSoldador=="ok" || MatriculaSoldador=="NC")){
+    Matriculas="ok";
+}
+if((MatriculaFusionista=="EnGestion" || MatriculaFusionista=="NC") && (MatriculaSoldador=="EnGestion" || MatriculaSoldador=="NC")){
+    Matriculas="EnGestion";
+}
+//Ambiente
+if((EstudioImpactoAmbiental=="ok" || EstudioImpactoAmbiental=="NC")&&(CronogramaAmbiente=="ok"|| CronogramaAmbiente=="NC")){
+Ambiente="ok";
+}
+if((EstudioImpactoAmbiental=="EnGestion" || EstudioImpactoAmbiental=="NC")&&(CronogramaAmbiente=="EnGestion"|| CronogramaAmbiente=="NC")){
+    Ambiente="EnGestion";
+    }
+    //Nota Cumplimento Normativas Vigentes
+    // NotaCumplimentoNormativa=NotaCumplimentoNormativa;
+// DDJJNAG153
+// DDJJNAG153=DDJJNAG153;
+// Avisos
+if(AvisoInicioObraART=="ok"&&AvisoInicioObraIERIC=="ok"&&AvisosDeObra=="ok"){
+    Avisos="ok";
+}
+if(AvisoInicioObraART=="EnGestion"&&AvisoInicioObraIERIC=="EnGestion"&&AvisosDeObra=="EnGestion"){
+    Avisos="EnGestion";
+}
+//Obras
+// DocumentacionInspeccion
+if(ActaDeInicio=="ok"&&Permisos=="ok"&&Interferencias=="ok"&&LibroOrdenesServicio=="ok"&&LibroNotasPedido=="ok"&&Pcaprobado=="ok"&&Avisos=="ok"&&CronogramaFirmadoComitente=="ok"){
+    DocumentacionInspeccion="ok";
+}
+if(ActaDeInicio=="EnGestion"||Permisos=="EnGestion"||Interferencias=="EnGestion"||LibroOrdenesServicio=="EnGestion"||LibroNotasPedido=="EnGestion"||Pcaprobado=="EnGestion"||Avisos=="EnGestion"||CronogramaFirmadoComitente=="EnGestion"){
+    DocumentacionInspeccion="EnGestion";
+}
+// ComunicacionObras
+if(OrdenServicio=="ok" ){
+    ComunicacionObras="ok";
+}
+if(OrdenServicio=="EnGestion"){
+    ComunicacionObras="EnGestion";
+}
+
+console.log("Documentacion terreno: " +DocumentacionTerreno);
+
+    sql= 'Update clientes_tareasgenerales Set ? where Nombre=?';
+    connection.query(sql,[{ DocumentacionTerreno:DocumentacionTerreno,DocumentacionSociedad:DocumentacionSociedad,DocumentacionContractual:DocumentacionContractual,Comercial:Comercial,Tecnica:Tecnica,PermisosEspeciales:PermisosEspeciales,DocumentacionObra:DocumentacionObra,Seguridad:Seguridad,Interferencias:Interferencias,Permisos:Permisos,PlanDeTrabajo:PlanDeTrabajo,Matriculas:Matriculas,Ambiente:Ambiente,NotaCumplimentoNormativas:NotaCumplimentoNormativa,DDJJNAG153:DDJJNAG153,Avisos:Avisos,
+        DocumentacionInspeccion:DocumentacionInspeccion,ComunicacionObras:ComunicacionObras
+    }, id],
+        (error, results) => {
+
+            if (error) {
+                console.log(error);
+               }
+
+            })
+
     if (req.body.DNV1 == req.body.DNV) {
         var DNV = req.body.DNV;
     }
@@ -587,16 +727,11 @@ router.post('/actualizarEtapas/:id', (req, res) => {
             var FERROCARRIL = req.body.FERROCARRIL;
         } else { var FERROCARRIL = req.body.FERROCARRIL1; }
     }
-    const DPV = req.body.DPV;
-    const PRIVADO = req.body.PRIVADO;
-    const OTROSPERMISOS = req.body.OTROSPERMISOS;
-    const PermisoMunicipal = req.body.PerMunicipal;
+    
     if ((DNV == "ok" || DNV == "NC") && (PermisoMunicipal == "ok" || PermisoMunicipal == "NC") && (DPV == "ok" || DPV == "NC") && (IRRIGACION == "ok" || IRRIGACION == "NC") && (HIDRAULICA == "ok" || HIDRAULICA == "NC") && (FERROCARRIL == "ok" || FERROCARRIL == "NC") && (PRIVADO == "ok" || PRIVADO == "NC") && (OTROSPERMISOS == "ok" || OTROSPERMISOS == "NC")) {
         Permisos = "ok";
     } else { Permisos = "EnGestioncls" };
 
-    const sql = 'Update clientes Set ? where id=?';
-    console.log("int agua es: " + intAgua);
     if (intTelefonica == "EnGestion" || intClaro == "EnGestion" || intAgua == "EnGestion" || intCloacas == "EnGestion" || intElectricidad == "EnGestion" || intTelecom == "EnGestion" || intArnet == "EnGestion" || intArsat == "EnGestion") {
         Interferencias = "EnGestion";
         console.log("Actualizaretapas/// Ingreso al if de interferencias 'en gestion'");
@@ -605,9 +740,10 @@ router.post('/actualizarEtapas/:id', (req, res) => {
         Interferencias = "ok";
         console.log("Actualizaretapas/// Ingreso al if de interferencias 'ok'");
     }
+    var sql = 'Update clientes Set ? where id=?';
     connection.query(sql, [{
         //Prelimnar
-        Mensura: Mensura, TituloDePropiedad: TituloDePropiedad, DocumentacionSociedad: DocumentacionSociedad, ActaConstitutiva: ActaConstitutiva, ActaCargoVigente: ActaCargoVigente, Cotizacion: Cotizacion,
+        Mensura: Mensura, TituloDePropiedad: TituloDePropiedad, ActaConstitutiva: ActaConstitutiva, ActaCargoVigente: ActaCargoVigente, Cotizacion: Cotizacion,
         //Primera Parte
         FechaFirmaContrato: FechaFirmaContrato, Contrato: Contrato, Presupuesto: Presupuesto, NotaDeExcepcion: NotaDeExcepcion,
         PlanoTipo: PlanoTipo, Sucedaneo: Sucedaneo, DDJJNAG153: DDJJNAG153, SolicitudInicioObras: SolicitudInicioObras,
@@ -621,10 +757,10 @@ router.post('/actualizarEtapas/:id', (req, res) => {
         //Segunda Parte
         SeguroRC: SeguroRC, SeguroAccidentesPersonales: SeguroAccidentesPersonales,
         PlanosyCroquis: PlanosyCroquis, PlanoAnexo: PlanoAnexo, ActasFinales: ActasFinales, ActaInicioEfectivo: ActaInicioEfectivo, InformesFinales: InformesFinales,
-        PCrevisado: PCrevisado,
+        PCrevisado: PCrevisado, EstudioImpactoAmbiental:EstudioImpactoAmbiental,
         PerMunicipal: PerMunicipal, Monotributos: Monotributos, CronogramaAmbiente: CronogramaAmbiente, ActaDeInicio: ActaDeInicio,
         PruebaHermeticidad: PruebaHermeticidad, DniComitente: DniComitente, NotaCumplimentoNormativa: NotaCumplimentoNormativa, PerMunicipal: PermisoMunicipal, MailAutorizacion: MailAutorizacion,
-        CertificadoRT: CertificadoRT,
+        CertificadoRT: CertificadoRT, MatriculaSoldador:MatriculaSoldador, MatriculaFusionista:MatriculaFusionista,
         //Interferencias
         intTelefonicaObtenida: intTelefonicaObtenida, intTelefonicaPedida: intTelefonicaPedida, intClaroPedida: intClaroPedida, intClaroObtenida: intClaroObtenida,
         intAguaObtenida: intAguaObtenida, intAguaPedida: intAguaPedida, intCloacasObtenida: intCloacasObtenida, intCloacasPedida: intCloacasPedida, intElectricidadObtenida: intElectricidadObtenida,
@@ -644,8 +780,9 @@ router.post('/actualizarEtapas/:id', (req, res) => {
                 console.log(error);
                }
 
-
+            })
+           
             res.redirect(req.get('referer'));
 
-        })
+        
 })
