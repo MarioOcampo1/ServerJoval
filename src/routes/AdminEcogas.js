@@ -85,8 +85,10 @@ router.get('/adminecogas/info', (req, res) => {
 router.get('/estadogeneral', (req, res) => {
     res.locals.moment = moment;
     // const sql = 'SELECT c.id, c.Nombre  ,c.NCarpeta,  c.Ubicacion ,c.Comitente ,c.Estado, c.Fechafirmacontrato  ,b.DocumentacionTerreno ,b.DocumentacionSociedad ,b.DocumentacionContractual  ,b.Comercial ,b.Tecnica ,b.PermisosEspeciales ,b.DocumentacionObra  ,b.Seguridad,b.Interferencias, b.Permisos, b.PlanDeTrabajo, b.Matriculas, b.Ambiente, b.NotaCumplimentoNormativas, b.DDJJNAG153, b.Avisos, b.DocumentacionInspeccion, b.ComunicacionObras, b.ActasFinalesEcogas, b.PlanosyCroquis, b.ConformeEntidades, b.PruebaHermeticidad, b.InformesFinales, b.PresentacionFinal, b.HabilitacionObra  from clientes_tareasgenerales b ,clientes c';
-    const sql = 'SELECT c.id, c.Nombre  ,c.NCarpeta,  c.Ubicacion ,c.Comitente ,c.Estado, c.Fechafirmacontrato ,b.DocumentacionTerreno, b.DocumentacionSociedad,b.DocumentacionContractual  ,b.Comercial ,b.Tecnica,b.PermisosEspeciales ,b.DocumentacionObra  ,b.Seguridad,b.Interferencias, b.Permisos, b.PlanDeTrabajo, b.Matriculas, b.Ambiente, b.NotaCumplimentoNormativas, b.DDJJNAG153, b.Avisos, b.DocumentacionInspeccion, b.ComunicacionObras, b.ActasFinalesEcogas, b.PlanosyCroquis, b.ConformeEntidades, b.PruebaHermeticidad, b.InformesFinales,b.PresentacionFinal, b.HabilitacionObra  from clientes c, clientes_tareasgenerales b ';
+    // const sql = 'SELECT c.id, c.Nombre  ,c.NCarpeta,  c.Ubicacion ,c.Comitente ,c.Estado, c.Fechafirmacontrato ,b.DocumentacionTerreno, b.DocumentacionSociedad,b.DocumentacionContractual  ,b.Comercial ,b.Tecnica,b.PermisosEspeciales ,b.DocumentacionObra  ,b.Seguridad,b.Interferencias, b.Permisos, b.PlanDeTrabajo, b.Matriculas, b.Ambiente, b.NotaCumplimentoNormativas, b.DDJJNAG153, b.Avisos, b.DocumentacionInspeccion, b.ComunicacionObras, b.ActasFinalesEcogas, b.PlanosyCroquis, b.ConformeEntidades, b.PruebaHermeticidad, b.InformesFinales,b.PresentacionFinal, b.HabilitacionObra  from clientes c, clientes_tareasgenerales b  ';
     // const sql='Select * from clientes c';
+    const sql='Select * from clientes_tareasgenerales b';
+
     connection.query(sql, (error, results) => {
         if (error) console.log( error);
         if (results.length > 0) {
@@ -176,12 +178,12 @@ router.get('/edit/:id', (req, res) => {
 router.get('/historialcarpeta/:Nombre', (req, res) => {
     const id = req.params.id;
     const Nombre = req.params.Nombre;
-    const sql = 'SELECT * FROM historialdecambios WHERE Nombre_sub =?';
+    const sql = 'SELECT c.* FROM historialdecambios c WHERE Nombre_sub =?';
     res.locals.moment = moment;
     connection.query(sql, [Nombre], (error, results) => {
         if (error) console.log( error);
         if (results.length > 0) {
-            res.render('paginas/AdministracionEcogas/historialcarpeta.ejs', { results: results, id: id }); //en {results:results} lo que hago es guardar los resultados que envia la bd, en la variable results
+            res.render('paginas/AdministracionEcogas/historialcarpeta.ejs', { results: results, id:id }); //en {results:results} lo que hago es guardar los resultados que envia la bd, en la variable results
 
         }
         else {
@@ -236,6 +238,8 @@ router.post('/update/:id', (req, res) => {
     const FERROCARRIL = req.body.FERROCARRIL;
     const OTROSPERMISOS = req.body.OTROSPERMISOS;
     const Privado = req.body.PRIVADO;
+    var PerMunicipal = req.body.PerMunicipal;
+
     const TipoDeRed = req.body.TipoDeRed;
     console.log("id es:" + id);
     console.log("nombre carpeta:" + NombreCarpeta)
@@ -250,7 +254,7 @@ router.post('/update/:id', (req, res) => {
         var sql = 'Update clientes Set ? where id =?';
         connection.query(sql, [{
             Nombre: NombreCarpeta, NCarpeta: NCarpeta, Comitente: Comitente, Ubicacion: Departamento, DNV: DNV, DPV: DPV, Irrigacion: IRRIGACION,
-            Hidraulica: HIDRAULICA, Privado: PRIVADO, Ferrocarriles: FERROCARRIL, TipoDeRed: TipoDeRed, Fecha_limite: Fecha_limite
+            Hidraulica: HIDRAULICA, Privado: PRIVADO, Ferrocarriles: FERROCARRIL, TipoDeRed: TipoDeRed, Fecha_limite: Fecha_limite, PerMunicipal:PerMunicipal
         }, id]
             , (error, results) => {
                 if (error) console.log( error);
@@ -290,7 +294,7 @@ router.post('/update/:id', (req, res) => {
             const sql = 'Update clientes Set ? where id =?';
             connection.query(sql, [{
                 NCarpeta: NCarpeta, Comitente: Comitente, Ubicacion: Departamento, DNV: DNV, DPV: DPV, Irrigacion: IRRIGACION,
-                Hidraulica: HIDRAULICA, Ferrocarriles: FERROCARRIL, TipoDeRed: TipoDeRed
+                Hidraulica: HIDRAULICA, Ferrocarriles: FERROCARRIL, TipoDeRed: TipoDeRed,PerMunicipal:PerMunicipal
             }, id]
                 , (error, results) => {
                     if (error) console.log( error);
@@ -427,8 +431,11 @@ router.post('/guardarNuevoCliente', (req, res) => {
     var FERROCARRIL = req.body.FERROCARRIL;
     var OTROSPERMISOS = req.body.OTROSPERMISOS;
     var TipoDeRed = req.body.TipoDeRed
+    var PerMunicipal = req.body.PerMunicipal;
     // const TipoRed =req.body.Tipos-de-red;
     if (DNV == null) { DNV = ""; }
+    if (PerMunicipal == null) { PerMunicipal = ""; }
+
     if (DPV == null) { DPV = ""; }
     if (IRRIGACION == null) { IRRIGACION = ""; }
     if (HIDRAULICA == null) { HIDRAULICA = ""; }
@@ -443,7 +450,7 @@ router.post('/guardarNuevoCliente', (req, res) => {
     sql = 'Insert into clientes set ?';
     connection.query(sql, {
         Nombre: Nombre, NCarpeta: NCarpeta, Comitente: Comitente, Ubicacion: Departamento, DNV: DNV, DPV: DPV, Irrigacion: IRRIGACION,
-        Hidraulica: HIDRAULICA, Ferrocarriles: FERROCARRIL, OtrosPermisos: OTROSPERMISOS, TipoDeRed: TipoDeRed
+        Hidraulica: HIDRAULICA,PerMunicipal:PerMunicipal, Ferrocarriles: FERROCARRIL, OtrosPermisos: OTROSPERMISOS, TipoDeRed: TipoDeRed
     }, (error, results) => {
         if (error) console.log( error);
 
