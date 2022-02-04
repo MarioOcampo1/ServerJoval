@@ -793,3 +793,16 @@ console.log("Documentacion terreno: " +DocumentacionTerreno);
 
         
 })
+router.post('/ActualizarEstadoCarpeta', (req, res) => {
+    var id = req.body.id;
+    var Estado= req.body.Estado; 
+    var sql = 'Update clientes Set ? where id=?';
+    connection.query(sql, [{
+        Estado: Estado
+    }, id], (error, results) => {
+        if (error) console.log( error);
+    })
+    res.redirect(req.get('referer'));
+
+
+})

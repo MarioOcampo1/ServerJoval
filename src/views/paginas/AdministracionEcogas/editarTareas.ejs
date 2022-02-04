@@ -32,8 +32,7 @@
                                 <div class="col-md-auto">
                                     <a href="/edit/<%= user.id%>" class="btn btn-success ">Mas información</a>
                                 </div>
-                                <form action="/ActualizarProximasTareas/<%= user.id%>" method="POST">
-
+                                <form action="/ActualizarEstadoCarpeta/<%= user.id%>" method="POST">
                                     <div class="col-md-auto">
                                         <br>
                                         Estado de la carpeta:
@@ -49,9 +48,12 @@
                                             <option value="Caos">Caos</option>
                                             <option value="Finalizada">Finalizada</option>
                                         </select>
+                                        <button type="submit" class="btn btn-success text-center">Actualizar Estado</button>
 
                                     </div>
+                                </form>
                             </div>
+                            <form action="/ActualizarProximasTareas/<%= user.id%>" method="POST">
 
                         </div>
                     </div>
