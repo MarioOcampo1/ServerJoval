@@ -129,8 +129,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        
-                        
+                        <%clientes=results%>
+                        <% if(clientes){%>
                         <% results.forEach((clientes)=>{ %>
                             <tr>
                                 <th>
@@ -196,6 +196,7 @@
                                 <th class="text-light bg-primary">
                                     <%=clientes.Tecnica%>
                                 </th>
+                                 
                                 <th>
                                     <%=clientes.PermisosEspeciales%>
                                 </th>
@@ -225,6 +226,7 @@
                                 </th>
                                 <th>
                                     <%=clientes.DDJJNAG153%>
+                                   
                                 </th>
                                 <th>
                                     <%=clientes.Avisos%>
@@ -262,16 +264,17 @@
                                 </th>
                                  
                             </tr>
-                           
+                            <% });%>    
                            
                     </tbody>
-                    <% });%>  
+                 
                 </table>
                   
             </div>
         </div>
         </div>
         </div>
+        <%}%>
 </body>
 <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script type="text/javascript" language="javascript"
