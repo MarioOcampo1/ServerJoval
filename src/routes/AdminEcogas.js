@@ -84,10 +84,10 @@ router.get('/adminecogas/info', (req, res) => {
 })
 router.get('/estadogeneral', (req, res) => {
     res.locals.moment = moment;
-    // const sql = 'SELECT c.id, c.Nombre  ,c.NCarpeta,  c.Ubicacion ,c.Comitente ,c.Estado, c.Fechafirmacontrato  ,b.DocumentacionTerreno ,b.DocumentacionSociedad ,b.DocumentacionContractual  ,b.Comercial ,b.Tecnica ,b.PermisosEspeciales ,b.DocumentacionObra  ,b.Seguridad,b.Interferencias, b.Permisos, b.PlanDeTrabajo, b.Matriculas, b.Ambiente, b.NotaCumplimentoNormativas, b.DDJJNAG153, b.Avisos, b.DocumentacionInspeccion, b.ComunicacionObras, b.ActasFinalesEcogas, b.PlanosyCroquis, b.ConformeEntidades, b.PruebaHermeticidad, b.InformesFinales, b.PresentacionFinal, b.HabilitacionObra  from clientes_tareasgenerales b ,clientes c';
+    const sql = 'SELECT c.id, c.Nombre  ,c.NCarpeta,  c.Ubicacion ,c.Comitente ,c.Estado, c.Fechafirmacontrato  ,b.DocumentacionTerreno ,b.DocumentacionSociedad ,b.DocumentacionContractual  ,b.Comercial ,b.Tecnica ,b.PermisosEspeciales ,b.DocumentacionObra  ,b.Seguridad,b.Interferencias, b.Permisos, b.PlanDeTrabajo, b.Matriculas, b.Ambiente, b.NotaCumplimentoNormativas, b.DDJJNAG153, b.Avisos, b.DocumentacionInspeccion, b.ComunicacionObras, b.ActasFinalesEcogas, b.PlanosyCroquis, b.ConformeEntidades, b.PruebaHermeticidad, b.InformesFinales, b.PresentacionFinal, b.HabilitacionObra  from clientes_tareasgenerales b ,clientes c';
     // const sql = 'SELECT c.id, c.Nombre  ,c.NCarpeta,  c.Ubicacion ,c.Comitente ,c.Estado, c.Fechafirmacontrato ,b.DocumentacionTerreno, b.DocumentacionSociedad,b.DocumentacionContractual  ,b.Comercial ,b.Tecnica,b.PermisosEspeciales ,b.DocumentacionObra  ,b.Seguridad,b.Interferencias, b.Permisos, b.PlanDeTrabajo, b.Matriculas, b.Ambiente, b.NotaCumplimentoNormativas, b.DDJJNAG153, b.Avisos, b.DocumentacionInspeccion, b.ComunicacionObras, b.ActasFinalesEcogas, b.PlanosyCroquis, b.ConformeEntidades, b.PruebaHermeticidad, b.InformesFinales,b.PresentacionFinal, b.HabilitacionObra  from clientes c, clientes_tareasgenerales b  ';
     // const sql='Select * from clientes c';
-    const sql='Select * from clientes_tareasgenerales b';
+    // const sql='Select * from clientes_tareasgenerales b';
 
     connection.query(sql, (error, results) => {
         if (error) console.log( error);
@@ -489,6 +489,7 @@ router.post('/guardarNuevoContacto', (req, res) => {
 //Opciones de editar tareas POST
 router.post('/actualizarEtapas/:id', (req, res) => {
     var id = req.body.id;
+    var Nombre = req.body.Nombre;   
     var sql="";
     console.log("id es: " + id);
     //    Premiliminar
@@ -753,13 +754,12 @@ console.log("Documentacion terreno: " +DocumentacionTerreno);
     sql= 'Update clientes_tareasgenerales Set ? where Nombre=?';
     connection.query(sql,[{ DocumentacionTerreno:DocumentacionTerreno,DocumentacionSociedad:DocumentacionSociedad,DocumentacionContractual:DocumentacionContractual,Comercial:Comercial,Tecnica:Tecnica,PermisosEspeciales:PermisosEspeciales,DocumentacionObra:DocumentacionObra,Seguridad:Seguridad,Interferencias:Interferencias,Permisos:Permisos,PlanDeTrabajo:PlanDeTrabajo,Matriculas:Matriculas,Ambiente:Ambiente,NotaCumplimentoNormativas:NotaCumplimentoNormativa,DDJJNAG153:DDJJNAG153,Avisos:Avisos,
         DocumentacionInspeccion:DocumentacionInspeccion,ComunicacionObras:ComunicacionObras
-    }, id],
+    }, Nombre],
         (error, results) => {
 
             if (error) {
                 console.log(error);
                }
-
             })
      sql = 'Update clientes Set ? where id=?';
     connection.query(sql, [{
