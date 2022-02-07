@@ -555,12 +555,11 @@ router.post('/actualizarEtapas/:id', (req, res) => {
     var DPV = req.body.DPV;
     var PRIVADO = req.body.PRIVADO;
     var OTROSPERMISOS = req.body.OTROSPERMISOS;
-    var PermisoMunicipal = req.body.PerMunicipal;
+    var PerMunicipal = req.body.PerMunicipal;
     // Caos
     var ConformeDePermisos = req.body.ConformeDePermisos;
     var PCrevisado = req.body.PCrevisado;
     var intArsat = req.body.intArsat;
-    var PerMunicipal = req.body.PerMunicipal;
     var Monotributos = req.body.Monotributos;
     var CronogramaAmbiente = req.body.CronogramaAmbiente;
     var ActaDeInicio = req.body.ActaDeInicio;
@@ -727,9 +726,9 @@ console.log("Documentacion terreno: " +DocumentacionTerreno);
     if (req.body.PerMunicipal1 == req.body.PerMunicipal) {
         var PermisoMunicipal = req.body.PermisoMunicipal1;
     } else {
-        if (req.body.PermisoMunicipal1 == "") {
-            var PermisoMunicipal = req.body.PermisoMunicipal;
-        } else { var PermisoMunicipal = req.body.PermisoMunicipal1; }
+        if (req.body.PerMunicipal1 == "") {
+            var PerMunicipal = req.body.PerMunicipal;
+        } else { var PerMunicipal = req.body.PerMunicipal1; }
     }
     if (req.body.FERROCARRIL1 == req.body.FERROCARRIL) {
         var FERROCARRIL = req.body.FERROCARRIL1;
@@ -739,7 +738,7 @@ console.log("Documentacion terreno: " +DocumentacionTerreno);
         } else { var FERROCARRIL = req.body.FERROCARRIL1; }
     }
     
-    if ((DNV == "ok" || DNV == "NC") && (PermisoMunicipal == "ok" || PermisoMunicipal == "NC") && (DPV == "ok" || DPV == "NC") && (IRRIGACION == "ok" || IRRIGACION == "NC") && (HIDRAULICA == "ok" || HIDRAULICA == "NC") && (FERROCARRIL == "ok" || FERROCARRIL == "NC") && (PRIVADO == "ok" || PRIVADO == "NC") && (OTROSPERMISOS == "ok" || OTROSPERMISOS == "NC")) {
+    if ((DNV == "ok" || DNV == "NC") && (PerMunicipal == "ok" || PerMunicipal == "NC") && (DPV == "ok" || DPV == "NC") && (IRRIGACION == "ok" || IRRIGACION == "NC") && (HIDRAULICA == "ok" || HIDRAULICA == "NC") && (FERROCARRIL == "ok" || FERROCARRIL == "NC") && (PRIVADO == "ok" || PRIVADO == "NC") && (OTROSPERMISOS == "ok" || OTROSPERMISOS == "NC")) {
         Permisos = "ok";
     } else { Permisos = "EnGestioncls" };
 
