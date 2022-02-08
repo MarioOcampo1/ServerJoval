@@ -237,7 +237,7 @@ router.post('/update/:id', (req, res) => {
     const HIDRAULICA = req.body.HIDRAULICA;
     const FERROCARRIL = req.body.FERROCARRIL;
     const OTROSPERMISOS = req.body.Otrospermisos;
-    const Privado = req.body.PRIVADO;
+    const Privado = req.body.Privado;
     var PerMunicipal = req.body.PerMunicipal;
 
     const TipoDeRed = req.body.TipoDeRed;
@@ -260,10 +260,11 @@ router.post('/update/:id', (req, res) => {
                 if (error) console.log( error);
 
                 if (results.length > 0) {
-                    res.redirect(req.get('referer'));
+                    res.redirect('/editarTareas/'+id);
+
                 }
                 else {
-                    res.redirect(req.get('referer'));
+                    res.redirect('/editarTareas/'+id);
 
                 }
 
@@ -280,10 +281,12 @@ router.post('/update/:id', (req, res) => {
                     if (error) console.log( error);
 
                     if (results.length > 0) {
-                        res.redirect(req.get('referer'));
+                        res.redirect('/editarTareas/'+id);
+
                     }
                     else {
-                        res.redirect(req.get('referer'));
+                        res.redirect('/editarTareas/'+id);
+
 
                     }
 
@@ -300,10 +303,12 @@ router.post('/update/:id', (req, res) => {
                     if (error) console.log( error);
 
                     if (results.length > 0) {
-                        res.redirect(req.get('referer'));
+                        res.redirect('/editarTareas/'+id);
+
                     }
                     else {
-                        res.redirect(req.get('referer'));;
+                        res.redirect('/editarTareas/'+id);
+
 
                     }
 
