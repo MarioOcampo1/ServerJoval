@@ -45,6 +45,7 @@
           <th>
             <h4>Tarea realizada</h4>
           </th>
+          <th> <h4>Etapa de la tarea</h4></th>
           <th>
             <h4>Proxima tarea</h4>
           </th>
@@ -153,6 +154,7 @@ $.fn.dataTable.moment( 'L', 'es');
             return '<a href="/editarTareas/' + row.id + '" class="btn btn-outline btn-sm">'+row.NCarpeta+'</a>'
           } },
           { "width":"10%","data": "TareaRealizada" },
+          { "width":"10%","data": "EtapaTarea" },
           { "width":"10%","data": "ProximaTarea" },
           { "type": 'datetime-moment',"width":"10%","data": "FechaLimite" },
           { "width":"10%","data": "Estado" },
