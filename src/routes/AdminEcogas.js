@@ -233,7 +233,7 @@ router.post('/update/:id', (req, res) => {
     const Departamento = req.body.Ubicacion;
     const DNV = req.body.DNV;
     const DPV = req.body.DPV;
-    const Irrigacion = req.body.Irrigacion;
+    const Irrigacion = req.body.IRRIGACION;
     const HIDRAULICA = req.body.HIDRAULICA;
     const FERROCARRIL = req.body.FERROCARRIL;
     const OTROSPERMISOS = req.body.OTROSPERMISOS;
@@ -242,7 +242,7 @@ router.post('/update/:id', (req, res) => {
 
     const TipoDeRed = req.body.TipoDeRed;
     console.log("Intentando actualizar el contacto:" + NombreCarpeta);
-    
+    console.log("Otros permisos:" + OTROSPERMISOS);
     //const TareaRealizada =req.body.TareaRealizada;
     //const ProximaTarea = req.body.ProximaTarea;
     const Fecha_limite = req.body.Fecha_limite;
@@ -253,7 +253,8 @@ router.post('/update/:id', (req, res) => {
         var sql = 'Update clientes Set ? where id =?';
         connection.query(sql, [{
             Nombre: NombreCarpeta, NCarpeta: NCarpeta, Comitente: Comitente, Ubicacion: Departamento, DNV: DNV, DPV: DPV, Irrigacion: Irrigacion,
-            Hidraulica: HIDRAULICA, Privado: PRIVADO, Ferrocarriles: FERROCARRIL, TipoDeRed: TipoDeRed, Fecha_limite: Fecha_limite, PerMunicipal:PerMunicipal
+            Hidraulica: HIDRAULICA, Privado: PRIVADO, Ferrocarriles: FERROCARRIL, TipoDeRed: TipoDeRed, Fecha_limite: Fecha_limite, 
+            PerMunicipal:PerMunicipal, OtrosPermisos: OTROSPERMISOS
         }, id]
             , (error, results) => {
                 if (error) console.log( error);
@@ -273,7 +274,7 @@ router.post('/update/:id', (req, res) => {
             const sql = 'Update clientes Set ? where id =?';
             connection.query(sql, [{
                 Nombre: NombreCarpeta, NCarpeta: NCarpeta, Comitente: Comitente, Ubicacion: Departamento, DNV: DNV, DPV: DPV, Irrigacion: Irrigacion,
-                Hidraulica: HIDRAULICA, Ferrocarriles: FERROCARRIL, TipoDeRed: TipoDeRed
+                Hidraulica: HIDRAULICA, Ferrocarriles: FERROCARRIL, TipoDeRed: TipoDeRed,OtrosPermisos: OTROSPERMISOS
             }, id]
                 , (error, results) => {
                     if (error) console.log( error);

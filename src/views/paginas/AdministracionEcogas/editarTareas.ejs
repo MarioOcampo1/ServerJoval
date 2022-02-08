@@ -1023,6 +1023,8 @@
                                                                                 <div
                                                                                     class="card-header bg-primary text-white">
                                                                                     Permisos</div>
+                                                                                    <%if (user.Hidraulica==""){}else{%>
+
                                                                                 <div class="card-body">
                                                                                     <div class="card-title">Hidraúlica
                                                                                     
@@ -1079,11 +1081,16 @@
                                                                                         </form-check>
                                                                                     </div>
                                                                                 </div>
+                                                                                <%}%>
+
+                                                                                <%if (user.Ferrocarriles==""){}else{%>
+
                                                                                 <div class="card-body">
                                                                                     <div class="card-title">Ferrocarril
                                                                                     </div>
                                                                                     <div class="card-text">
                                                                                         <form-check>
+
                                                                                             <%if (user.Ferrocarriles=="EnGestion"){%>
                                                                                                 <input checked type="radio"
                                                                                                 name="FERROCARRIL"
@@ -1132,11 +1139,16 @@
                                                                                         </form-check>
                                                                                     </div>
                                                                                 </div>
+                                                                                <%}%>
+
+                                                                                <%if (user.PerMunicipal==""){}else{%>
+
                                                                                 <div class="card-body">
                                                                                     <div class="card-title">
                                                                                         Municipal </div>
                                                                                     <div class="card-text">
                                                                                         <form-check>
+
                                                                                             <%if (user.PerMunicipal=="EnGestion"){%>
                                                                                                 <input checked type="radio"
                                                                                                 name="PerMunicipal"
@@ -1186,11 +1198,14 @@
                                                                                           
                                                                                         </form-check>
                                                                                     </div>
-                                                                                </div>
+                                                                                    <%}%>
+                                                                                <%if (user.DNV==""){}else{%>
+
                                                                                 <div class="card-body">
                                                                                     <div class="card-title">DNV</div>
                                                                                     <div class="card-text">
                                                                                         <form-check>
+
                                                                                             <%if (user.DNV=="EnGestion"){%>
                                                                                                 <input checked type="radio"
                                                                                                 name="DNV"
@@ -1240,10 +1255,14 @@
                                                                                         </form-check>
                                                                                     </div>
                                                                                 </div>
+                                                                                <%}%>
+                                                                                <%if (user.DPV==""){}else{%>
+
                                                                                 <div class="card-body">
                                                                                     <div class="card-title">DPV</div>
                                                                                     <div class="card-text">
                                                                                         <form-check>
+
                                                                                             <%if (user.DPV=="EnGestion"){%>
                                                                                                 <input checked type="radio"
                                                                                                 name="DPV"
@@ -1292,11 +1311,16 @@
                                                                                         </form-check>
                                                                                     </div>
                                                                                 </div>
+                                                                                <%}%>
+
+                                                                                <%if (user.Irrigacion==""){}else{%>
+
                                                                                 <div class="card-body">
                                                                                     <div class="card-title">Irrigación
                                                                                     </div>
                                                                                     <div class="card-text">
                                                                                         <form-check>
+
                                                                                             <%if (user.Irrigacion=="EnGestion"){%>
                                                                                                 <input checked type="radio"
                                                                                                 name="Irrigacion"
@@ -1345,6 +1369,10 @@
                                                                                         </form-check>
                                                                                     </div>
                                                                                 </div>
+                                                                                <%}%>
+
+                                                                                <%if (user.Privado==""){}else{%>
+
                                                                                 <div class="card-body">
                                                                                     <div class="card-title">Privado
                                                                                     </div>
@@ -1402,11 +1430,16 @@
                                                                                         </form-check>
                                                                                     </div>
                                                                                 </div>
+                                                                                <%}%>
+
+                                                                                <%if (user.Otrospermisos==""){}else{%>
+
                                                                                 <div class="card-body">
                                                                                     <div class="card-title">Otros permisos
                                                                                     </div>
                                                                                     <div class="card-text">
                                                                                         <form-check>
+
                                                                                             <%if (user.Otrospermisos=="EnGestion"){%>
                                                                                                 <input checked type="radio"
                                                                                                 name="Otrospermisos"
@@ -1457,7 +1490,10 @@
                                                                                         
                                                                                         </form-check>
                                                                                     </div>
+                                                                                    <%}%>
                                                                                 </div>
+                                                                              
+
                                                                             </div>
                                                                             <br>
                                                                             <div class="card p-3 border-success  ">
