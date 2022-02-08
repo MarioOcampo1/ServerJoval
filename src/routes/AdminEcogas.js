@@ -233,16 +233,16 @@ router.post('/update/:id', (req, res) => {
     const Departamento = req.body.Ubicacion;
     const DNV = req.body.DNV;
     const DPV = req.body.DPV;
-    const Irrigacion = req.body.IRRIGACION;
+    const Irrigacion = req.body.Irrigacion;
     const HIDRAULICA = req.body.HIDRAULICA;
     const FERROCARRIL = req.body.FERROCARRIL;
-    const OTROSPERMISOS = req.body.OTROSPERMISOS;
+    const OTROSPERMISOS = req.body.Otrospermisos;
     const Privado = req.body.PRIVADO;
     var PerMunicipal = req.body.PerMunicipal;
 
     const TipoDeRed = req.body.TipoDeRed;
     console.log("Intentando actualizar el contacto:" + NombreCarpeta);
-    console.log("Otros permisos:" + OTROSPERMISOS);
+    console.log("PRIVADO:" + OTROSPERMISOS);
     //const TareaRealizada =req.body.TareaRealizada;
     //const ProximaTarea = req.body.ProximaTarea;
     const Fecha_limite = req.body.Fecha_limite;
@@ -253,7 +253,7 @@ router.post('/update/:id', (req, res) => {
         var sql = 'Update clientes Set ? where id =?';
         connection.query(sql, [{
             Nombre: NombreCarpeta, NCarpeta: NCarpeta, Comitente: Comitente, Ubicacion: Departamento, DNV: DNV, DPV: DPV, Irrigacion: Irrigacion,
-            Hidraulica: HIDRAULICA, Privado: PRIVADO, Ferrocarriles: FERROCARRIL, TipoDeRed: TipoDeRed, Fecha_limite: Fecha_limite, 
+            Hidraulica: HIDRAULICA, Privado: Privado, Ferrocarriles: FERROCARRIL, TipoDeRed: TipoDeRed, Fecha_limite: Fecha_limite, 
             PerMunicipal:PerMunicipal, OtrosPermisos: OTROSPERMISOS
         }, id]
             , (error, results) => {
@@ -274,7 +274,7 @@ router.post('/update/:id', (req, res) => {
             const sql = 'Update clientes Set ? where id =?';
             connection.query(sql, [{
                 Nombre: NombreCarpeta, NCarpeta: NCarpeta, Comitente: Comitente, Ubicacion: Departamento, DNV: DNV, DPV: DPV, Irrigacion: Irrigacion,
-                Hidraulica: HIDRAULICA, Ferrocarriles: FERROCARRIL, TipoDeRed: TipoDeRed,OtrosPermisos: OTROSPERMISOS
+                Hidraulica: HIDRAULICA, Ferrocarriles: FERROCARRIL, TipoDeRed: TipoDeRed,OtrosPermisos: OTROSPERMISOS,Privado: Privado,PerMunicipal:PerMunicipal
             }, id]
                 , (error, results) => {
                     if (error) console.log( error);
@@ -294,7 +294,7 @@ router.post('/update/:id', (req, res) => {
             const sql = 'Update clientes Set ? where id =?';
             connection.query(sql, [{
                 NCarpeta: NCarpeta, Comitente: Comitente, Ubicacion: Departamento, DNV: DNV, DPV: DPV, Irrigacion: IRRIGACION,
-                Hidraulica: HIDRAULICA, Ferrocarriles: FERROCARRIL, TipoDeRed: TipoDeRed,PerMunicipal:PerMunicipal
+                Hidraulica: HIDRAULICA, Ferrocarriles: FERROCARRIL, TipoDeRed: TipoDeRed,PerMunicipal:PerMunicipal,Privado: Privado 
             }, id]
                 , (error, results) => {
                     if (error) console.log( error);
@@ -391,7 +391,7 @@ router.post('/ActualizarProximasTareas/:id', (req, res) => {
         }
     }
 })
-router.post('/edit/delete/:id', (req, res) => {
+router.delete('/edit/delete/:id', (req, res) => {
     const id = req.params.id;
     var sql = 'Delete FROM clientes WHERE id =?';
     sql = 'Delete FROM clientes WHERE id =?'
