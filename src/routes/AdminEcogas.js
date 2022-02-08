@@ -233,7 +233,7 @@ router.post('/update/:id', (req, res) => {
     const Departamento = req.body.Ubicacion;
     const DNV = req.body.DNV;
     const DPV = req.body.DPV;
-    const IRRIGACION = req.body.IRRIGACION;
+    const Irrigacion = req.body.Irrigacion;
     const HIDRAULICA = req.body.HIDRAULICA;
     const FERROCARRIL = req.body.FERROCARRIL;
     const OTROSPERMISOS = req.body.OTROSPERMISOS;
@@ -252,7 +252,7 @@ router.post('/update/:id', (req, res) => {
         //console.log(Tarea_Realizada: TareaRealizada, ProximaTarea: ProximaTarea);
         var sql = 'Update clientes Set ? where id =?';
         connection.query(sql, [{
-            Nombre: NombreCarpeta, NCarpeta: NCarpeta, Comitente: Comitente, Ubicacion: Departamento, DNV: DNV, DPV: DPV, Irrigacion: IRRIGACION,
+            Nombre: NombreCarpeta, NCarpeta: NCarpeta, Comitente: Comitente, Ubicacion: Departamento, DNV: DNV, DPV: DPV, Irrigacion: Irrigacion,
             Hidraulica: HIDRAULICA, Privado: PRIVADO, Ferrocarriles: FERROCARRIL, TipoDeRed: TipoDeRed, Fecha_limite: Fecha_limite, PerMunicipal:PerMunicipal
         }, id]
             , (error, results) => {
@@ -272,7 +272,7 @@ router.post('/update/:id', (req, res) => {
         if (NombreCarpeta != null) {
             const sql = 'Update clientes Set ? where id =?';
             connection.query(sql, [{
-                Nombre: NombreCarpeta, NCarpeta: NCarpeta, Comitente: Comitente, Ubicacion: Departamento, DNV: DNV, DPV: DPV, Irrigacion: IRRIGACION,
+                Nombre: NombreCarpeta, NCarpeta: NCarpeta, Comitente: Comitente, Ubicacion: Departamento, DNV: DNV, DPV: DPV, Irrigacion: Irrigacion,
                 Hidraulica: HIDRAULICA, Ferrocarriles: FERROCARRIL, TipoDeRed: TipoDeRed
             }, id]
                 , (error, results) => {
@@ -323,7 +323,7 @@ router.post('/ActualizarProximasTareas/:id', (req, res) => {
     const Fecha_Tarea_sub = fecha;
     var EtapaTarea = req.body.EtapaTarea;
     var sql = "";
-    if (EtapaTarea == "") {
+    if (EtapaTarea != "" && EtapaTarea != null ) {
 
     }
 
@@ -491,7 +491,6 @@ router.post('/actualizarEtapas/:id', (req, res) => {
     var id = req.body.id;
     var Nombre = req.body.Nombre;   
     var sql="";
-    console.log("id es: " + id);
     //    Premiliminar
     var Mensura = req.body.Mensura;
     var FechaFirmaContrato = req.body.FechaFirmaContrato;
@@ -555,8 +554,10 @@ router.post('/actualizarEtapas/:id', (req, res) => {
     //Permisos
     var DPV = req.body.DPV;
     var PRIVADO = req.body.PRIVADO;
-    var OTROSPERMISOS = req.body.OTROSPERMISOS;
+    var OTROSPERMISOS = req.body.Otrospermisos;
     var PerMunicipal = req.body.PerMunicipal;
+    var Irrigacion = req.body.Irrigacion;
+    var HIDRAULICA = req.body.HIDRAULICA;
     // Caos
     var ConformeDePermisos = req.body.ConformeDePermisos;
     var PCrevisado = req.body.PCrevisado;
@@ -583,6 +584,10 @@ var DocumentacionTerreno, DocumentacionContractual, Tecnica,PermisosEspeciales,D
     var PresentacionFinal = req.body.PresentacionFinal;
     var InformesFinales = req.body.InformesFinales;
     var HabilitacionFinal = req.body.HabilitacionFinal;
+
+    //Arreglos Provisorios
+    
+
     //Documentacion Terreno
     if(Mensura == "ok" && TituloDePropiedad == "ok" ){
         DocumentacionTerreno = "ok";
@@ -647,10 +652,10 @@ var DocumentacionTerreno, DocumentacionContractual, Tecnica,PermisosEspeciales,D
         Interferencias="EnGestion";
     }
     //Permisos
-    if(PerMunicipal=="ok" && (IRRIGACION=="ok"|| IRRIGACION=="NC") && (DPV=="ok"|| DPV=="NC")){
+    if(PerMunicipal=="ok" && (Irrigacion=="ok"|| Irrigacion=="NC") && (DPV=="ok"|| DPV=="NC")){
         Permisos="ok";
          }
-         if(PerMunicipal=="EnGestion" || (IRRIGACION=="EnGestion"|| IRRIGACION=="NC") || (DPV=="EnGestion"|| DPV=="NC")){
+         if(PerMunicipal=="EnGestion" || (Irrigacion=="EnGestion"|| Irrigacion=="NC") || (DPV=="EnGestion"|| DPV=="NC")){
             Permisos="EnGestion";
              }
     //Plan de trabajo
@@ -704,44 +709,54 @@ console.log("Documentacion terreno: " +DocumentacionTerreno);
         var DNV = req.body.DNV;
     }
     else {
-        if (req.body.DNV1 == "") {
+        if (req.body.DNV1 != "" && req.body.DNV1 != null ) {
             var DNV = req.body.DNV;
         } else { var DNV = req.body.DNV1; }
     }
-    if (req.body.IRRIGACION1 == req.body.IRRIGACION) {
-        var IRRIGACION = req.body.IRRIGACION1;
-    } else {
-        if (req.body.IRRIGACION1 == "") {
-            var IRRIGACION = req.body.IRRIGACION;
-        } else { var IRRIGACION = req.body.IRRIGACION1; }
-    }
 
+    if (req.body.Irrigacion1 == Irrigacion) {
+
+         Irrigacion = req.body.Irrigacion1;
+    }  
+        if ((req.body.Irrigacion1 != null && req.body.Irrigacion1 != "" && req.body.Irrigacion1 != undefined)) {
+             Irrigacion = req.body.Irrigacion1;
+        }
+         else {  Irrigacion = req.body.Irrigacion; }
+console.log("hidraulica1: "+ req.body.HIDRAULICA1+ " hidraulica: "+ req.body.HIDRAULICA);
+if (req.body.HIDRAULICA1 == HIDRAULICA) {
+    if (req.body.HIDRAULICA1 != "" && req.body.HIDRAULICA1 != null  && req.body.HIDRAULICA1 != undefined) {
+        HIDRAULICA = req.body.HIDRAULICA1;
+   }
     if (req.body.HIDRAULICA1 == req.body.HIDRAULICA) {
-        var HIDRAULICA = req.body.HIDRAULICA1;
-    } else {
-        if (req.body.HIDRAULICA1 == "") {
-            var HIDRAULICA = req.body.HIDRAULICA;
-        } else { var HIDRAULICA = req.body.HIDRAULICA1; }
-    }
+        HIDRAULICA = req.body.HIDRAULICA1;
+   }else {  HIDRAULICA = req.body.HIDRAULICA; }
+}
+
+     
+console.log("Valor final de hidraulica: " + HIDRAULICA);
 
     if (req.body.PerMunicipal1 == req.body.PerMunicipal) {
-        var PermisoMunicipal = req.body.PermisoMunicipal1;
+         PerMunicipal = req.body.PerMunicipal1;
+         
     } else {
-        if (req.body.PerMunicipal1 == "") {
-            var PerMunicipal = req.body.PerMunicipal;
-        } else { var PerMunicipal = req.body.PerMunicipal1; }
+        
+        if (req.body.PerMunicipal1 != "" || req.body.PerMunicipal1 != null || req.body.PerMunicipal1 != undefined) {
+             PerMunicipal = req.body.PerMunicipal1;
+        } 
+        if (PerMunicipal == "")
+         {  PerMunicipal = req.body.PerMunicipal; }
     }
     if (req.body.FERROCARRIL1 == req.body.FERROCARRIL) {
         var FERROCARRIL = req.body.FERROCARRIL1;
     } else {
-        if (req.body.FERROCARRIL1 == "") {
-            var FERROCARRIL = req.body.FERROCARRIL;
-        } else { var FERROCARRIL = req.body.FERROCARRIL1; }
+        if (req.body.FERROCARRIL1 != "" && req.body.FERROCARRIL1 != null && req.body.FERROCARRIL1 != undefined ) {
+             FERROCARRIL = req.body.FERROCARRIL1;
+        } else {  FERROCARRIL = req.body.FERROCARRIL; }
     }
     
-    if ((DNV == "ok" || DNV == "NC") && (PerMunicipal == "ok" || PerMunicipal == "NC") && (DPV == "ok" || DPV == "NC") && (IRRIGACION == "ok" || IRRIGACION == "NC") && (HIDRAULICA == "ok" || HIDRAULICA == "NC") && (FERROCARRIL == "ok" || FERROCARRIL == "NC") && (PRIVADO == "ok" || PRIVADO == "NC") && (OTROSPERMISOS == "ok" || OTROSPERMISOS == "NC")) {
+    if ((DNV == "ok" || DNV == "NC") && (PerMunicipal == "ok" || PerMunicipal == "NC") && (DPV == "ok" || DPV == "NC") && (Irrigacion == "ok" || Irrigacion == "NC") && (HIDRAULICA == "ok" || HIDRAULICA == "NC") && (FERROCARRIL == "ok" || FERROCARRIL == "NC") && (PRIVADO == "ok" || PRIVADO == "NC") && (OTROSPERMISOS == "ok" || OTROSPERMISOS == "NC")) {
         Permisos = "ok";
-    } else { Permisos = "EnGestioncls" };
+    } else { Permisos = "EnGestion" };
 
     if (intTelefonica == "EnGestion" || intClaro == "EnGestion" || intAgua == "EnGestion" || intCloacas == "EnGestion" || intElectricidad == "EnGestion" || intTelecom == "EnGestion" || intArnet == "EnGestion" || intArsat == "EnGestion") {
         Interferencias = "EnGestion";
@@ -761,6 +776,8 @@ console.log("Documentacion terreno: " +DocumentacionTerreno);
                 console.log(error);
                }
             })
+console.log("PerMunicipal1: "+ req.body.PerMunicipal1 +  " PerMunicipal: "+ req.body.PerMunicipal+ " la variable contiene: "+PerMunicipal) ;
+
      sql = 'Update clientes Set ? where id=?';
     connection.query(sql, [{
         //Prelimnar
@@ -788,7 +805,7 @@ console.log("Documentacion terreno: " +DocumentacionTerreno);
         intElectricidadPedida: intElectricidadPedida, intTelecomObtenida: intTelecomObtenida, intTelecomPedida: intTelecomPedida, intTelefonica: intTelefonica, intClaro: intClaro, intAgua: intAgua,
         intCloaca: intCloacas, intElectricidad: intElectricidad, intTelecom: intTelecom, intArnet: intArnet, intArsat: intArsat,
         //Permisos
-        DNV: DNV, DPV: DPV, Irrigacion: IRRIGACION,
+        DNV: DNV, DPV: DPV, Irrigacion: Irrigacion,
         Hidraulica: HIDRAULICA, Privado: PRIVADO, Ferrocarriles: FERROCARRIL, Otrospermisos: OTROSPERMISOS,
         Interferencias: Interferencias, Permisos: Permisos, Programadeseguridad: Programadeseguridad,PerMunicipal: PerMunicipal,
         //Finalizacion

@@ -23,6 +23,10 @@
             <div class="container-fluid">
               <div class="row justify-content-md-center">
                 <div class="col-md-auto">
+                  <a href="/editarTareas/<%=user.id%>"><button class="btn btn-success" > Volver atras</button></a>
+
+                </div>
+                <div class="col-md-auto">
                   <h3> Editar cliente </h3>
 
                 </div>
@@ -30,6 +34,7 @@
                   <form action="delete/<%=user.id%>" method="post">
                     <button type="submit" class="btn btn-danger" onclick="return confirmarDelete()"> Eliminar
                       Cliente</button>
+                     
                   </form>
                 </div>
               </div>
@@ -37,6 +42,7 @@
             </div>
 
           </div>
+
           <form action="/update/<%= user.id%>" method="POST">
             <input type="hidden" name="id" id="id" value="<%= user.id%>">
             <div class="form-group">
@@ -59,7 +65,7 @@
               <label for="Departamento">Departamento</label>
               <select class="form-control" id="Ubicacion" name="Ubicacion">
                 <option hidden value="<%=user.Ubicacion%>" selected ><%=user.Ubicacion%>></option>
-                <option value="Ciudad de Mendoza">Ciudad de Mendoza</option>
+                <option value="Ciudad de Mendoza">Ciudad de Mendoza </option>
                 <option value="Godoy Cruz">Godoy Cruz</option>
                 <option value="Lujan de Cuyo">Luján de Cuyo </option>
                 <option value="Las Heras">Las Heras</option>
