@@ -154,7 +154,8 @@ $.fn.dataTable.moment( 'L', 'es');
             return '<a href="/editarTareas/' + row.id + '" class="btn btn-outline btn-sm">'+row.NCarpeta+'</a>'
           } },
           { "width":"10%","data": "TareaRealizada" },
-          { "width":"10%","data": "EtapaTarea" },
+          { "data": "EtapaTarea" , render: function(data,type,row){
+            return '<a href="/historialcarpeta/' + row.Nombre + '" class="btn btn-secondary btn-sm text-center">'+row.EtapaTarea+'</a>'} },
           { "width":"10%","data": "ProximaTarea" },
           { "type": 'datetime-moment',"width":"10%","data": "FechaLimite" },
           { "width":"10%","data": "Estado" },
