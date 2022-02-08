@@ -622,6 +622,7 @@
                                                                                 <div class="card p-3 border-secondary">
                                                                                     <div class="card-header">
                                                                                         Permisos especiales</div>
+                                                                                        <%if (user.Privado=="NC"){}else{%>
                                                                                     <div class="card-title">Carta
                                                                                         oferta</div>
                                                                                     <div class="card-text">
@@ -655,6 +656,9 @@
                                                                                         </select>
 
                                                                                     </div>
+                                                                                    <%}%>
+                                                                                    <%if (user.Privado=="NC"){}else{%>
+
                                                                                     <div class="card-title">Plano
                                                                                         anexo</div>
                                                                                     <div class="card-text">
@@ -683,6 +687,9 @@
                                                                                         </select>
 
                                                                                     </div>
+                                                                                    <%}%>
+                                                                                    <%if (user.Hidraulica=="NC"){}else{%>
+
                                                                                     <div class="card-title">
                                                                                         Hidraúlica</div>
                                                                                     <div class="card-text">
@@ -710,6 +717,9 @@
 
                                                                                         </select>
                                                                                     </div>
+                                                                                    <%}%>
+                                                                                    <%if (user.Ferrocarriles=="NC"){}else{%>
+
                                                                                     <div class="card-title">
                                                                                         Ferrocarriles</div>
                                                                                     <div class="card-text">
@@ -736,32 +746,9 @@
                                                                                                 corresponde</option>
                                                                                         </select>
                                                                                     </div>
-                                                                                    <div class="card-title">
-                                                                                        Municipal </div>
-                                                                                    <div class="card-text">
-                                                                                        <select class="form-control"
-                                                                                            id="PerMunicipal1"
-                                                                                            name="PerMunicipal1"
-                                                                                            value=""
-                                                                                            placeholder="<%=user.PerMunicipal1%>">
-                                                                                            <option
-                                                                                                value="<%=user.PerMunicipal1%>"
-                                                                                                selected>
-                                                                                                <%=user.PerMunicipal%>
-                                                                                            </option>
-                                                                                            <option
-                                                                                                value="Sin presentar">
-                                                                                                Sin presentar
-                                                                                            </option>
-                                                                                            <option value="EnGestion">En
-                                                                                                gestion
-                                                                                            </option>
-                                                                                            <option value="ok">ok
-                                                                                            </option>
-                                                                                            <option value="NC">No
-                                                                                                corresponde</option>
-                                                                                        </select>
-                                                                                    </div>
+                                                                                    <%}%>
+                                                                                    <%if (user.DNV=="NC"){}else{%>
+                                                                                   
                                                                                     <div class="card-title">DNV
                                                                                     </div>
                                                                                     <div class="card-text">
@@ -787,6 +774,8 @@
                                                                                                 corresponde</option>
                                                                                         </select>
                                                                                     </div>
+                                                                                    <%}%>
+
                                                                                 </div>
                                                                             </div>
 
@@ -1490,8 +1479,9 @@
                                                                                         
                                                                                         </form-check>
                                                                                     </div>
-                                                                                </div>
                                                                                 <%}%>
+
+                                                                                </div>
                                                                               
 
                                                                             </div>

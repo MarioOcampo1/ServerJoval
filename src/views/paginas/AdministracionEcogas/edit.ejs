@@ -19,7 +19,7 @@
     <% if(user) { %>
       <div class="card">
         <div class="card-body">
-          <div class="card-title text-center">
+          <div class="card-title  text-center">
             <div class="container-fluid">
               <div class="row justify-content-md-center">
                 <div class="col-md-auto">
@@ -97,19 +97,19 @@
             </div>
 
         </div>
-        <div class="container ">
+        <div class="container">
           <div class="card ">
             <div class="card p-3 border-primary ">
               <div
-                  class="card-header bg-primary text-white">
-                  Permisos</div>
+                  class="card-header bg-primary text-white text-center">
+                  Jurisdicciones</div>
                   <%if (user.Hidraulica==""){}else{%>
 
               <div class="card-body">
-                  <div class="card-title">Hidraúlica
+                  <div class="card-title text-center">Hidraúlica
                   
                   </div>
-                  <div class="card-text">
+                  <div class="card-text text-center">
                       <form-check>
                         <%if (user.Hidraulica=="pedir"){%>
                           <input checked type="radio"
@@ -122,39 +122,7 @@
                           id="HIDRAULICA"
                           value="pedir"> pedir
                       <%}%>
-                          <%if (user.Hidraulica=="EnGestion"){%>
-                              <input checked type="radio"
-                              name="HIDRAULICA"
-                              id="HIDRAULICA"
-                              value="EnGestion"> En gestion
-                           <%}else{%>
-                              <input type="radio"
-                              name="HIDRAULICA"
-                              id="HIDRAULICA"
-                              value="EnGestion"> En gestion
-                          <%}%>
-                          <%if (user.Hidraulica=="Pedido"){%>
-                              <input checked type="radio"
-                              name="HIDRAULICA"
-                              id="HIDRAULICA"
-                              value="Pedido"> Pedido
-                           <%}else{%>
-                              <input type="radio"
-                              name="HIDRAULICA"
-                              id="HIDRAULICA"
-                              value="Pedido"> Pedido
-                          <%}%>
-                          <%if (user.Hidraulica=="ok"){%>
-                              <input checked type="radio"
-                              name="HIDRAULICA"
-                              id="HIDRAULICA"
-                              value="ok"> Ok
-                           <%}else{%>
-                              <input type="radio"
-                              name="HIDRAULICA"
-                              id="HIDRAULICA"
-                              value="ok"> Ok
-                          <%}%>
+                         
                           <%if (user.Hidraulica=="NC"){%>
                               <input checked type="radio"
                               name="HIDRAULICA"
@@ -177,9 +145,9 @@
               <%if (user.Ferrocarriles==""){}else{%>
 
               <div class="card-body">
-                  <div class="card-title">Ferrocarril
+                  <div class="card-title text-center">Ferrocarril
                   </div>
-                  <div class="card-text">
+                  <div class="card-text text-center">
                       <form-check>
                         <%if (user.Ferrocarriles=="pedir"){%>
                           <input checked type="radio"
@@ -192,39 +160,7 @@
                           id="Ferrocarriles"
                           value="pedir"> pedir
                       <%}%>
-                          <%if (user.Ferrocarriles=="EnGestion"){%>
-                              <input checked type="radio"
-                              name="FERROCARRIL"
-                              id="FERROCARRIL"
-                              value="EnGestion"> En gestion
-                           <%}else{%>
-                              <input type="radio"
-                              name="FERROCARRIL"
-                              id="FERROCARRIL"
-                              value="EnGestion"> En gestion
-                          <%}%>
-                          <%if (user.Ferrocarriles=="Pedido"){%>
-                              <input checked type="radio"
-                              name="FERROCARRIL"
-                              id="FERROCARRIL"
-                              value="Pedido"> Pedido
-                           <%}else{%>
-                              <input type="radio"
-                              name="FERROCARRIL"
-                              id="FERROCARRIL"
-                              value="Pedido"> Pedido
-                          <%}%>
-                          <%if (user.Ferrocarriles=="ok"){%>
-                              <input checked type="radio"
-                              name="FERROCARRIL"
-                              id="FERROCARRIL"
-                              value="ok"> Ok
-                           <%}else{%>
-                              <input type="radio"
-                              name="FERROCARRIL"
-                              id="FERROCARRIL"
-                              value="ok"> Ok
-                          <%}%>
+                         
                           <%if (user.Ferrocarriles=="NC"){%>
                               <input checked type="radio"
                               name="FERROCARRIL"
@@ -245,9 +181,9 @@
               <%if (user.PerMunicipal==""){}else{%>
 
               <div class="card-body">
-                  <div class="card-title">
+                  <div class="card-title text-center">
                       Municipal </div>
-                  <div class="card-text">
+                  <div class="card-text text-center">
                       <form-check>
                         <%if (user.PerMunicipal=="pedir"){%>
                           <input checked type="radio"
@@ -260,39 +196,7 @@
                           id="PerMunicipal"
                           value="pedir"> pedir
                       <%}%>
-                          <%if (user.PerMunicipal=="EnGestion"){%>
-                              <input checked type="radio"
-                              name="PerMunicipal"
-                              id="PerMunicipal"
-                              value="EnGestion"> En gestion
-                           <%}else{%>
-                              <input type="radio"
-                              name="PerMunicipal"
-                              id="PerMunicipal"
-                              value="EnGestion"> En gestion
-                          <%}%>
-                          <%if (user.PerMunicipal=="Pedido"){%>
-                              <input checked type="radio"
-                              name="PerMunicipal"
-                              id="PerMunicipal"
-                              value="Pedido"> Pedido
-                           <%}else{%>
-                              <input type="radio"
-                              name="PerMunicipal"
-                              id="PerMunicipal"
-                              value="Pedido"> Pedido
-                          <%}%>
-                          <%if (user.PerMunicipal=="ok"){%>
-                              <input checked type="radio"
-                              name="PerMunicipal"
-                              id="PerMunicipal"
-                              value="ok"> Ok
-                           <%}else{%>
-                              <input type="radio"
-                              name="PerMunicipal"
-                              id="PerMunicipal"
-                              value="ok"> Ok
-                          <%}%>
+                         
                           <%if (user.PerMunicipal=="NC"){%>
                               <input checked type="radio"
                               name="PerMunicipal"
@@ -313,8 +217,8 @@
               <%if (user.DNV==""){}else{%>
 
               <div class="card-body">
-                  <div class="card-title">DNV</div>
-                  <div class="card-text">
+                  <div class="card-title text-center">DNV</div>
+                  <div class="card-text text-center">
                       <form-check>
                         <%if (user.DNV=="pedir"){%>
                           <input checked type="radio"
@@ -327,39 +231,7 @@
                           id="DNV"
                           value="pedir"> pedir
                       <%}%>
-                          <%if (user.DNV=="EnGestion"){%>
-                              <input checked type="radio"
-                              name="DNV"
-                              id="DNV"
-                              value="EnGestion"> En gestion
-                           <%}else{%>
-                              <input type="radio"
-                              name="DNV"
-                              id="DNV"
-                              value="EnGestion"> En gestion
-                          <%}%>
-                          <%if (user.DNV=="Pedido"){%>
-                              <input checked type="radio"
-                              name="DNV"
-                              id="DNV"
-                              value="Pedido"> Pedido
-                           <%}else{%>
-                              <input type="radio"
-                              name="DNV"
-                              id="DNV"
-                              value="Pedido"> Pedido
-                          <%}%>
-                          <%if (user.DNV=="ok"){%>
-                              <input checked type="radio"
-                              name="DNV"
-                              id="DNV"
-                              value="ok"> Ok
-                           <%}else{%>
-                              <input type="radio"
-                              name="DNV"
-                              id="DNV"
-                              value="ok"> Ok
-                          <%}%>
+                        
                           <%if (user.DNV=="NC"){%>
                               <input checked type="radio"
                               name="DNV"
@@ -380,8 +252,8 @@
               <%if (user.DPV==""){}else{%>
 
               <div class="card-body">
-                  <div class="card-title">DPV</div>
-                  <div class="card-text">
+                  <div class="card-title text-center">DPV</div>
+                  <div class="card-text text-center">
                       <form-check>
                         <%if (user.DPV=="pedir"){%>
                           <input checked type="radio"
@@ -394,39 +266,7 @@
                           id="DPV"
                           value="pedir"> pedir
                       <%}%>
-                          <%if (user.DPV=="EnGestion"){%>
-                              <input checked type="radio"
-                              name="DPV"
-                              id="DPV"
-                              value="EnGestion"> En gestion
-                           <%}else{%>
-                              <input type="radio"
-                              name="DPV"
-                              id="DPV"
-                              value="EnGestion"> En gestion
-                          <%}%>
-                          <%if (user.DPV=="Pedido"){%>
-                              <input checked type="radio"
-                              name="DPV"
-                              id="DPV"
-                              value="Pedido"> Pedido
-                           <%}else{%>
-                              <input type="radio"
-                              name="DPV"
-                              id="DPV"
-                              value="Pedido"> Pedido
-                          <%}%>
-                          <%if (user.DPV=="ok"){%>
-                              <input checked type="radio"
-                              name="DPV"
-                              id="DPV"
-                              value="ok"> Ok
-                           <%}else{%>
-                              <input type="radio"
-                              name="DPV"
-                              id="DPV"
-                              value="ok"> Ok
-                          <%}%>
+                         
                           <%if (user.DPV=="NC"){%>
                               <input checked type="radio"
                               name="DPV"
@@ -447,9 +287,9 @@
               <%if (user.Irrigacion==""){}else{%>
 
               <div class="card-body">
-                  <div class="card-title">Irrigación
+                  <div class="card-title text-center">Irrigación
                   </div>
-                  <div class="card-text">
+                  <div class="card-text text-center">
                       <form-check>
                         <%if (user.Irrigacion=="pedir"){%>
                           <input checked type="radio"
@@ -462,39 +302,7 @@
                           id="Irrigacion"
                           value="pedir"> pedir
                       <%}%>
-                          <%if (user.Irrigacion=="EnGestion"){%>
-                              <input checked type="radio"
-                              name="Irrigacion"
-                              id="Irrigacion"
-                              value="EnGestion"> En gestion
-                           <%}else{%>
-                              <input type="radio"
-                              name="Irrigacion"
-                              id="Irrigacion"
-                              value="EnGestion"> En gestion
-                          <%}%>
-                          <%if (user.Irrigacion=="Pedido"){%>
-                              <input checked type="radio"
-                              name="Irrigacion"
-                              id="Irrigacion"
-                              value="Pedido"> Pedido
-                           <%}else{%>
-                              <input type="radio"
-                              name="Irrigacion"
-                              id="Irrigacion"
-                              value="Pedido"> Pedido
-                          <%}%>
-                          <%if (user.Irrigacion=="ok"){%>
-                              <input checked type="radio"
-                              name="Irrigacion"
-                              id="Irrigacion"
-                              value="ok"> Ok
-                           <%}else{%>
-                              <input type="radio"
-                              name="Irrigacion"
-                              id="Irrigacion"
-                              value="ok"> Ok
-                          <%}%>
+                          
                           <%if (user.Irrigacion=="NC"){%>
                               <input checked type="radio"
                               name="Irrigacion"
@@ -515,9 +323,9 @@
               <%if (user.Privado==""){}else{%>
 
               <div class="card-body">
-                  <div class="card-title">Privado
+                  <div class="card-title text-center">Privado
                   </div>
-                  <div class="card-text">
+                  <div class="card-text text-center">
                       <form-check>
                          
                         <%if (user.Privado=="pedir"){%>
@@ -531,41 +339,7 @@
                           id="Privado"
                           value="pedir"> pedir
                       <%}%>
-                              <%if (user.Privado=="EnGestion"){%>
-                                  <input checked type="radio"
-                                  name="PRIVADO"
-                                  id="PRIVADO"
-                                  value="EnGestion"> En
-                              gestión
-                               <%}else{%>
-                                  <input type="radio"
-                                  name="PRIVADO"
-                                  id="PRIVADO"
-                                  value="EnGestion"> En
-                              gestión
-                              <%}%>
-                              <%if (user.Privado=="Pedida"){%>
-                                  <input checked type="radio"
-                                  name="PRIVADO"
-                                  id="PRIVADO"
-                                  value="Pedida"> Pedida
-                               <%}else{%>
-                                  <input type="radio"
-                                  name="PRIVADO"
-                                  id="PRIVADO"
-                                  value="Pedida"> Pedida
-                              <%}%>
-                              <%if (user.Privado=="ok"){%>
-                                  <input checked type="radio"
-                                  name="PRIVADO"
-                                  id="PRIVADO"
-                                  value="ok"> Ok
-                               <%}else{%>
-                                  <input type="radio"
-                                  name="PRIVADO"
-                                  id="PRIVADO"
-                                  value="ok"> Ok
-                              <%}%>
+                             
                               <%if (user.Privado=="NC"){%>
                                   <input checked type="radio"
                                   name="PRIVADO"
@@ -586,9 +360,9 @@
               <%if (user.Otrospermisos==""){}else{%>
 
               <div class="card-body">
-                  <div class="card-title">Otros permisos
+                  <div class="card-title text-center">Otros permisos
                   </div>
-                  <div class="card-text">
+                  <div class="card-text text-center">
                       <form-check>
     
                         <%if (user.Otrospermisos=="pedir"){%>
@@ -600,65 +374,21 @@
                           <input type="radio"
                           name="Otrospermisos"
                           id="Otrospermisos"
-                          value="pedir"> pedir
-                      <%}%>
-                          <%if (user.Otrospermisos=="EnGestion"){%>
-                              <input checked type="radio"
-                              name="Otrospermisos"
-                              id="Otrospermisos"
-                              value="EnGestion"> En
-                          gestión
-                           <%}else{%>
-                              <input type="radio"
-                              name="Otrospermisos"
-                              id="Otrospermisos"
-                              value="EnGestion"> En
-                          gestión
-                          <%}%>
-                          <%if (user.Otrospermisos=="Pedida"){%>
-                              <input checked type="radio"
-                              name="Otrospermisos"
-                              id="Otrospermisos"
-                              value="Pedida"> Pedida
-                           <%}else{%>
-                              <input type="radio"
-                              name="Otrospermisos"
-                              id="Otrospermisos"
-                              value="Pedida"> Pedida
-                          <%}%>
-                          <%if (user.Otrospermisos=="ok"){%>
-                              <input checked type="radio"
-                              name="Otrospermisos"
-                              id="Otrospermisos"
-                              value="ok"> Ok
-                           <%}else{%>
-                              <input type="radio"
-                              name="Otrospermisos"
-                              id="Otrospermisos"
-                              value="ok"> Ok
-                          <%}%>
-                          <%if (user.Otrospermisos=="NC"){%>
-                              <input checked type="radio"
-                              name="Otrospermisos"
-                              id="Otrospermisos"
-                              value="NC"> No corresponde
-                           <%}else{%>
-                              <input type="radio"
-                              name="Otrospermisos"
-                              id="Otrospermisos"
-                              value="NC"> No corresponde
-                          <%}%>
+                          value="NC"> No corresponde
+                      
                       
                       
                       </form-check>
                   </div>
               </div>
               <%}%>
+              <%}%>
             
 
           </div>
             
           </div>
+        </div>
         </div>
                                             <br>
                                             <div class="container-fluid">
