@@ -45,7 +45,13 @@
           <th>
             <h4>Tarea realizada</h4>
           </th>
-          <th> <h4>Etapa de la tarea</h4></th>
+          <th> <h4>Etapa de la tarea</h4>
+            <!-- <Button>Prel</Button>
+            <button>1p</button> 
+            <button>2</button> 
+            <button>Obras</button> 
+            <button>Caos</button>  -->
+          </th>
           <th>
             <h4>Proxima tarea</h4>
           </th>
@@ -108,7 +114,14 @@ $.fn.dataTable.moment( 'L', 'es');
                 $(api.column(colIdx).header()).index()
               );
               var title = $(cell).text();
-              $(cell).html('<input type="text" placeholder="' + title + '" />');
+              $(cell).html(
+                '<input type="text" placeholder="' + title + '" />',
+             '<Button>Prel</Button>',
+            '<button>1p</button>' ,
+            '<button>2</button> ',
+            '<button>Obras</button> ',
+            '<button>Caos</button>',  
+            );
 
               // On every keypress in this input
               $(
