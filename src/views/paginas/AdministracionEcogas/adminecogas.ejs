@@ -71,13 +71,14 @@
   <!-- Moment.js: -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.4/moment.min.js"></script>
   <!-- Locales for moment.js-->
-  <script src="//cdn.datatables.net/plug-ins/1.11.3/sorting/datetime-moment.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.4/locale/es.js"></script>
+  <script type="text/javascript" src="//cdn.datatables.net/plug-ins/1.11.3/sorting/datetime-moment.js"></script>
+  <script  type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.4/locale/es.js"></script>
   <!-- Datatable -->
+  <script  type="text/javascript" src="https://cdn.datatables.net/datetime/1.1.1/css/dataTables.dateTime.min.css"></script>
+  <script  type="text/javascript" src="https://cdn.datatables.net/datetime/1.1.1/js/dataTables.dateTime.min.js"></script>
   <script> 
 
     $(document).ready(function () {
-      
       
       var editar = function (tbody, table) {
       }
@@ -157,7 +158,15 @@ $.fn.dataTable.moment( 'L', 'es');
           { "data": "EtapaTarea" , render: function(data,type,row){
             return '<a href="/historialcarpeta/' + row.Nombre + '" class="btn btn-secondary btn-sm text-center">'+row.EtapaTarea+'</a>'} },
           { "width":"10%","data": "ProximaTarea" },
-          { "type": 'datetime-moment',"width":"10%","data": "FechaLimite" },
+          { "width":"10%","data":  "FechaLimite", render:function(data,type,row){
+            var oldDate = data;
+            console.log("oldaDate contiene"+ oldDate);
+    momentObj = moment(oldDate).format("d-MMMM-YYYY"),
+    newDate = momentObj;
+    return newDate;
+           }},
+
+           
           { "width":"10%","data": "Estado" },
 
         ],
@@ -165,6 +174,7 @@ $.fn.dataTable.moment( 'L', 'es');
     });
 
   </script>
+          <!-- // { "data": "FechaLimite",type: 'date-dd-mmm-yyyy', targets: 0 }, -->
 
 </body>
 
