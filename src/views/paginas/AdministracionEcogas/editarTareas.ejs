@@ -818,6 +818,30 @@
                                                                     </div>
                                                                     <div class="modal-body">
                                                                         <div class="container">
+                                                                            <div class="card p-3 border-secondary ">
+                                                                                <div class="card-title">Mail de
+                                                                                    autorización</div>
+                                                                                <div class="card-text">
+                                                                                    <select class="form-control"
+                                                                                        id="MailAutorizacion"
+                                                                                        name="MailAutorizacion"
+                                                                                        value="<%= user.MailAutorizacion%>"
+                                                                                        placeholder="<%= user.MailAutorizacion%>">
+                                                                                        <option hidden
+                                                                                            value="<%=user.MailAutorizacion%>"
+                                                                                            selected>
+                                                                                            <%=user.MailAutorizacion%>
+                                                                                        </option>
+                                                                                        <option value="Sin presentar">
+                                                                                            Sin presentar</option>
+                                                                                        <option value="EnGestion">En
+                                                                                            gestion</option>
+                                                                                        <option value="ok">ok</option>
+    
+                                                                                    </select>
+                                                                                </div>
+                                                                                </div>
+                                                                                <br>
                                                                             <div class="card p-3 border-secondary">
                                                                                 <div class="card-header">
                                                                                     Documentación de obra</div>
@@ -961,6 +985,7 @@
 
                                                                                     </select>
                                                                                 </div>
+                                                                                
                                                                                 <div class="card-title">Seguro
                                                                                     accidentes personales
                                                                                 </div>
@@ -986,32 +1011,12 @@
                                                                                     </select>
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="card-title">Mail de
-                                                                                autorización</div>
-                                                                            <div class="card-text">
-                                                                                <select class="form-control"
-                                                                                    id="MailAutorizacion"
-                                                                                    name="MailAutorizacion"
-                                                                                    value="<%= user.MailAutorizacion%>"
-                                                                                    placeholder="<%= user.MailAutorizacion%>">
-                                                                                    <option hidden
-                                                                                        value="<%=user.MailAutorizacion%>"
-                                                                                        selected>
-                                                                                        <%=user.MailAutorizacion%>
-                                                                                    </option>
-                                                                                    <option value="Sin presentar">
-                                                                                        Sin presentar</option>
-                                                                                    <option value="EnGestion">En
-                                                                                        gestion</option>
-                                                                                    <option value="ok">ok</option>
-
-                                                                                </select>
-                                                                            </div>
+                                                                          
                                                                             <br>
                                                                             <div class="card p-3 border-primary ">
-                                                                                <div
-                                                                                    class="card-header bg-primary text-white">
-                                                                                    Permisos</div>
+                                                                                <div class="card-header bg-primary text-white">
+                                                                                    Permisos
+                                                                                </div>
                                                                                     <%if (user.Hidraulica=="NC"){}else{%>
 
                                                                                 <div class="card-body">
@@ -1478,14 +1483,14 @@
                                                                                         
                                                                                         
                                                                                         </form-check>
-                                                                                <%}%>
+                                                                                    </div>
+                                                                                
 
                                                                                     </div>
-
+                                                                                    <%}%>
                                                                                 </div>
                                                                               
 
-                                                                            </div>
                                                                             <br>
                                                                             <div class="card p-3 border-success  ">
                                                                                 <div
@@ -1975,8 +1980,9 @@
                                                                                         <option value="ok">ok
                                                                                         </option>
                                                                                         <option value="NC">No
-                                                                                            corresponde/option>
+                                                                                            corresponde </option>
                                                                                     </select>
+                                                                                    
                                                                                 </div>
                                                                                 <div class="card-title">Cronograma
                                                                                     de visitas ambiente
