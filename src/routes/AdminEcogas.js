@@ -51,7 +51,7 @@ router.get('/interferencias/info', (req, res) => {
     })
 })
 router.get('/adminecogas', (req, res) => {
-    const sql = 'SELECT c.id, c.Nombre, c.NCarpeta, c.TareaRealizada, c.ProximaTarea, c.FechaLimite FROM clientes c  ';
+    const sql = 'SELECT c.id, c.Nombre, c.NCarpeta, c.TareaRealizada, c.ProximaTarea, c.EtapaTarea, c.FechaLimite FROM clientes c  ';
     res.locals.moment = moment;
     connection.query(sql, (error, results) => {
         if (error) console.log( error);
@@ -67,7 +67,7 @@ router.get('/adminecogas', (req, res) => {
 
 })
 router.get('/adminecogas/info', (req, res) => {
-    const sql = 'SELECT c.id, c.Nombre, c.NCarpeta, c.TareaRealizada, c.ProximaTarea, c.FechaLimite, c.Estado FROM clientes c';
+    const sql = 'SELECT c.id, c.Nombre, c.NCarpeta, c.TareaRealizada, c.ProximaTarea,c.EtapaTarea, c.FechaLimite, c.Estado FROM clientes c';
     res.locals.moment = moment;
     connection.query(sql, (error, results) => {
         if (error) console.log( error);
