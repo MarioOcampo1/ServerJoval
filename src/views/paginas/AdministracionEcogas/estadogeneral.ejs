@@ -129,8 +129,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <%clientes=results%>
-                        <% if(clientes){%>
+                        <% if(results){%>
                         <% results.forEach((clientes)=>{ %>
                             <tr>
                                 <th>
@@ -149,6 +148,7 @@
                                 <th>
                                     <%=clientes.Comitente%>
                                 </th>
+                               
                                 <th>
                                     <%=clientes.Estado%>
                                         <%if(clientes.Estado=="Sin presentar"){%>
@@ -209,6 +209,7 @@
                                 <th>
                                     <%=clientes.Interferencias%>
                                 </th>
+                              
                                 <th>
                                     <%=clientes.Permisos%>
                                 </th>
@@ -259,12 +260,13 @@
                                 <th>
                                     <%=clientes.HabilitacionObra%>
                                 </th>
-                               
+                            
                                 <th><a href="/edit/<%=clientes.id%>" class="btn btn-outline-info">editar</a>
                                 </th>
-                                 
+                               
                             </tr>
-                            <% });%>    
+                            <% });%>
+                                
                            
                     </tbody>
                  
