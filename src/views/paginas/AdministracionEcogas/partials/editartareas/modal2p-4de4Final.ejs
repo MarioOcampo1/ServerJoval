@@ -1,0 +1,240 @@
+<div class="card p-3 border-secondary">
+    <div class="card-header">Matriculas
+    </div>
+    <div class="card-title">Fusionista
+    </div>
+    <div class="card-text">
+        <select class="form-control"
+            id="MatriculaFusionista"
+            name="MatriculaFusionista"
+            value="<%= user.MatriculaFusionista%>"
+            placeholder="<%= user.MatriculaFusionista%>">
+            <option hidden
+                value="<%=user.MatriculaFusionista%>"
+                selected>
+                <%=user.MatriculaFusionista%>
+            </option>
+            <option value="EnGestion">En
+                gestion</option>
+            <option value="ok">Ok
+            </option>
+            <option value="NC">No
+                corresponde</option>
+        </select>
+    </div>
+    <br>
+    <div class="card-title">Soldador
+    </div>
+    <div class="card-text">
+
+        <select class="form-control"
+            id="MatriculaSoldador"
+            name="MatriculaSoldador"
+            value="<%= user.MatriculaSoldador%>"
+            placeholder="<%= user.MatriculaSoldador%>">
+            <option hidden
+                value="<%=user.MatriculaSoldador%>"
+                selected>
+                <%=user.MatriculaSoldador%>
+            </option>
+            <option value="EnGestion">En
+                gestion</option>
+            <option value="ok">Ok
+            </option>
+            <option value="NC">No
+                corresponde</option>
+        </select>
+    </div>
+</div>
+<br>
+<div class="card p-3 border-secondary">
+    <div class="card-header">Ambiente
+    </div>
+    <div class="card-title">Estudio de
+        impacto ambiental
+    </div>
+    <div class="card-text">
+        <select class="form-control"
+            id="EstudioImpactoAmbiental"
+            name="EstudioImpactoAmbiental"
+            value="<%= user.EstudioImpactoAmbiental%>"
+            placeholder="<%= user.EstudioImpactoAmbiental%>">
+            <option hidden
+                value="<%=user.EstudioImpactoAmbiental%>"
+                selected>
+                <%=user.EstudioImpactoAmbiental%>
+            </option>
+            <option value="pedir">Sin solicitar</option>
+            <option value="EnGestion">En
+                gestion</option>
+            <option value="ok">ok
+            </option>
+            <option value="NC">No
+                corresponde </option>
+        </select>
+        
+    </div>
+    <div class="card-title">Cronograma
+        de visitas ambiente
+    </div>
+    <div class="card-text">
+        <select class="form-control"
+            id="CronogramaAmbiente"
+            name="CronogramaAmbiente"
+            value="<%= user.CronogramaAmbiente%>"
+            placeholder="<%= user.CronogramaAmbiente%>">
+            <option hidden
+                value="<%=user.CronogramaAmbiente%>"
+                selected>
+                <%=user.CronogramaAmbiente%>
+            </option>
+            <option value="pedir">Sin Solicitar</option>
+            <option value="EnGestion">En
+                gestion</option>
+            <option value="ok">ok
+            </option>
+            <option value="NC">No
+                corresponde</option>
+        </select>
+    </div>
+</div>
+<br>
+<div class="card p-3 border-secondary">
+    <div class="card-header">Nota
+        cumplimento de normativas
+        vigentes</div>
+    <div class="card-text">
+        <select class="form-control"
+            id="NotaCumplimentoNormativa"
+            name="NotaCumplimentoNormativa"
+            value="<%= user.NotaCumplimentoNormativa%>"
+            placeholder="<%= user.NotaCumplimentoNormativa%>">
+            <option hidden
+                value="<%=user.NotaCumplimentoNormativa%>"
+                selected>
+                <%=user.NotaCumplimentoNormativa%>
+            </option>
+            <option value="pedir">Sin solicitar</option>
+            <option value="EnGestion">En
+                gestion</option>
+            <option value="ok">Ok</option>
+          
+        </select>
+    </div>
+</div>
+<br>
+<div class="card p-3 border-secondary">
+    <div class="card-header">DDJJ NAG
+        153</div>
+    <div class="card-text">
+        <select class="form-control"
+            id="DDJJNAG153"
+            name="DDJJNAG153"
+            value="<%= user.DDJJNAG153%>"
+            placeholder="<%= user.DDJJNAG153%>">
+            <option hidden
+                value="<%=user.DDJJNAG153%>"
+                selected>
+                <%=user.DDJJNAG153%>
+            </option>
+            <option value="pedir">Sin solicitar</option>
+            <option value="EnGestion">En
+                gestion</option>
+            <option value="ok">Ok</option>
+            <option value="NC">No
+                corresponde</option>
+        </select>
+    </div>
+</div>
+<br>
+<div class="card p-3 border-secondary">
+    <div class="card-header">Avisos
+    </div>
+    <div class="card-title">Aviso de
+        inicio de obras ART
+    </div>
+    <div class="card-text">
+        <select class="form-control"
+            id="AvisoInicioObraART"
+            name="AvisoInicioObraART"
+            value="<%= user.AvisoInicioObraART%>"
+            placeholder="<%= user.AvisoInicioObraART%>">
+            <option hidden
+                value="<%=user.AvisoInicioObraART%>"
+                selected>
+                <%=user.AvisoInicioObraART%>
+            </option>
+            <option value="Sin presentar">
+                Sin presentar
+            </option>
+            <option value="EnGestion">En
+                gestion</option>
+            <option value="ok">ok
+            </option>
+
+        </select>
+    </div>
+    <div class="card-title">Aviso de
+        inicio de obras IERIC
+    </div>
+    <div class="card-text">
+        <select class="form-control"
+            id="AvisoInicioObraIERIC"
+            name="AvisoInicioObraIERIC"
+            value="<%= user.AvisoInicioObraIERIC%>"
+            placeholder="<%= user.AvisoInicioObraIERIC%>">
+            <option hidden
+                value="<%=user.AvisoInicioObraIERIC%>"
+                selected>
+                <%=user.AvisoInicioObraIERIC%>
+            </option>
+            <option value="Sin presentar">
+                Sin presentar
+            </option>
+            <option value="EnGestion">En
+                gestion</option>
+            <option value="ok">ok
+            </option>
+
+        </select>
+    </div>
+    <div class="card-title">Acta de
+        inicio efectivo</div>
+    <div class="card-text">
+        <select class="form-control"
+            id="ActaInicioEfectivo"
+            name="ActaInicioEfectivo"
+            value="<%= user.ActaInicioEfectivo%>"
+            placeholder="<%= user.ActaInicioEfectivo%>">
+            <option hidden
+                value="<%=user.ActaInicioEfectivo%>"
+                selected>
+                <%=user.ActaInicioEfectivo%>
+            </option>
+            <option value="Sin presentar">
+                Sin presentar
+            </option>
+            <option value="EnGestion">En
+                gestion</option>
+            <option value="ok">ok
+            </option>
+
+        </select>
+    </div>
+</div>
+
+</div>
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btn-secondary"
+data-dismiss="modal"
+onclick="CerrarModal()">Cerrar</button>
+<button type="submit" class="btn btn-primary"
+form="actualizarEtapas">Guardar
+Cambios</button>
+</div>
+</div>
+</div>
+
+
+</th>

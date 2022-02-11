@@ -1,0 +1,220 @@
+ <!--Segunda Parte-->
+ <th>
+    <button type="button" class="btn btn btn-success"
+        data-toggle="modal" data-target="#ModalSegundaParte">
+        2P Segunda Parte
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="ModalSegundaParte" tabindex="-1"
+        role="dialog" aria-labelledby="ModalSegundaParte"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered"
+            role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalSegundaParte">
+                        Segunda Parte
+                    </h5>
+                    <button type="submit" class="close"
+                        data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="card p-3 border-secondary ">
+                            <div class="card-title">Mail de
+                                autorización</div>
+                            <div class="card-text">
+                                <select class="form-control"
+                                    id="MailAutorizacion"
+                                    name="MailAutorizacion"
+                                    value="<%= user.MailAutorizacion%>"
+                                    placeholder="<%= user.MailAutorizacion%>">
+                                    <option hidden
+                                        value="<%=user.MailAutorizacion%>"
+                                        selected>
+                                        <%=user.MailAutorizacion%>
+                                    </option>
+                                    <option value="No Recibido">
+                                        No Recibido</option>
+                                    <option value="Recibido">Recibido</option>
+
+                                </select>
+                            </div>
+                            </div>
+                            <br>
+                        <div class="card p-3 border-secondary">
+                            <div class="card-header">
+                                Documentación de obra</div>
+                            <div class="card-tit">Solicitud
+                                Inicio de obras</div>
+                            <div class="card-text">
+                                <select class="form-control"
+                                    id="SolicitudInicioObras"
+                                    name="SolicitudInicioObras"
+                                    value="<%= user.SolicitudInicioObras%>"
+                                    placeholder="<%= user.SolicitudInicioObras%>">
+                                    <option hidden
+                                        value="<%=user.SolicitudInicioObras%>"
+                                        selected>
+                                        <%=user.SolicitudInicioObras%>
+                                    </option>
+                                    <option value="EnGestion">En
+                                        gestion</option>
+                                        <option value="Realizado">Realizado
+                                    </option>
+
+                                            <option value="ok">ok
+                                    </option>
+
+                                </select>
+                            </div>
+                            <div class="card-title">Certificado
+                                del RT</div>
+                            <div class="card-text">
+                                <select class="form-control"
+                                    id="CertificadoRT"
+                                    name="CertificadoRT"
+                                    value="<%= user.CertificadoRT%>"
+                                    placeholder="<%= user.CertificadoRT%>">
+                                    <option hidden
+                                        value="<%=user.CertificadoRT%>"
+                                        selected>
+                                        <%=user.CertificadoRT%>
+                                    </option>
+                                    <option value="Sin presentar">
+                                        Sin presentar
+                                    </option>
+                                    <option value="EnGestion">En
+                                        gestion</option>
+                                    <option value="ok">ok
+                                    </option>
+
+                                </select>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="card p-3 border-secondary">
+                            <div class="card-header">Seguridad
+                            </div>
+                            <div class="card-title">Programa de
+                                seguridad</div>
+                            <div class="card-text">
+                                <select class="form-control"
+                                    id="Programadeseguridad"
+                                    name="Programadeseguridad"
+                                    value="<%= user.Programadeseguridad%>"
+                                    placeholder="<%= user.Programadeseguridad%>">
+                                    <option hidden
+                                        value="<%=user.Programadeseguridad%>"
+                                        selected>
+                                        <%=user.Programadeseguridad%>
+                                    </option>
+                                    <option value="Sin presentar">
+                                        Sin presentar
+                                    </option>
+                                    <option value="EnGestion">En
+                                        gestion</option>
+                                    <option value="ok">ok
+                                    </option>
+
+                                </select>
+                            </div>
+                            <div class="card-title">Cronograma
+                                de visitas SyH</div>
+                            <div class="card-text">
+                                <select class="form-control"
+                                    id="CronogramaSyH"
+                                    name="CronogramaSyH"
+                                    value="<%= user.CronogramaSyH%>"
+                                    placeholder="<%= user.CronogramaSyH%>">
+                                    <option
+                                        value="<%=user.CronogramaSyH%>"
+                                        selected>
+                                        <%=user.CronogramaSyH%>
+                                    </option>
+                                    <option value="Sin presentar">
+                                        Sin presentar
+                                    </option>
+                                    <option value="EnGestion">En
+                                        gestion</option>
+                                    <option value="ok">ok
+                                    </option>
+
+                                </select>
+                            </div>
+                            <div class="card-title">Seguro
+                                responsabilidad civil
+                            </div>
+                            <div class="card-text">
+                                <select class="form-control"
+                                    id="SeguroRC" name="SeguroRC"
+                                    value="<%= user.SeguroRC%>"
+                                    placeholder="<%= user.SeguroRC%>">
+                                    <option
+                                        value="<%=user.SeguroRC%>"
+                                        selected>
+                                        <%=user.SeguroRC%>
+                                    </option>
+                                    <option value="Sin presentar">
+                                        Sin presentar
+                                    </option>
+                                    <option value="EnGestion">En
+                                        gestion</option>
+                                    <option value="ok">ok
+                                    </option>
+
+                                </select>
+                            </div>
+                            <div class="card-title">Monotributos
+                            </div>
+                            <div class="card-text">
+                                <select class="form-control"
+                                    id="Monotributos"
+                                    name="Monotributos"
+                                    value="<%= user.Monotributos%>"
+                                    placeholder="<%= user.Monotributos%>">
+                                    <option
+                                        value="<%=user.Monotributos%>"
+                                        selected>
+                                        <%=user.Monotributos%>
+                                    </option>
+                                    <option value="Sin presentar">
+                                        Sin presentar
+                                    </option>
+                                    <option value="EnGestion">En
+                                        gestion</option>
+                                    <option value="ok">ok
+                                    </option>
+
+                                </select>
+                            </div>
+                            
+                            <div class="card-title">Seguro
+                                accidentes personales
+                            </div>
+                            <div class="card-text">
+                                <select class="form-control"
+                                    id="SeguroAccidentesPersonales"
+                                    name="SeguroAccidentesPersonales"
+                                    value="<%= user.SeguroAccidentesPersonales%>"
+                                    placeholder="<%= user.SeguroAccidentesPersonales%>">
+                                    <option
+                                        value="<%=user.SeguroAccidentesPersonales%>"
+                                        selected>
+                                        <%=user.SeguroAccidentesPersonales%>
+                                    </option>
+                                    <option value="Sin presentar">
+                                        Sin presentar
+                                    </option>
+                                    <option value="EnGestion">En
+                                        gestion</option>
+                                    <option value="ok">ok
+                                    </option>
+
+                                </select>
+                            </div>
+                        </div>
+                      
