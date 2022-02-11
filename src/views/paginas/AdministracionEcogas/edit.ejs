@@ -32,6 +32,9 @@
                 </div>
                 <div class="col-md-auto">
                   <form action="delete/<%=user.id%>" method="post">
+            <input type="hidden" name="id" id="id" value="<%= user.id%>">
+            <input type="hidden" name="Nombre" id="Nombre" value="<%= user.Nombre%>">
+
                     <button type="submit" class="btn btn-danger" onclick="return confirmarDelete()"> Eliminar
                       Cliente</button>
 

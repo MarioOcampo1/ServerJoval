@@ -396,19 +396,23 @@ router.post('/ActualizarProximasTareas/:id', (req, res) => {
         }
     }
 })
-router.delete('/edit/delete/:id', (req, res) => {
-    const id = req.params.id;
+router.post('/edit/delete/:id', (req, res) => {
+    const id = req.body.id;
+    const Nombre = req.body.Nombre;
     var sql = 'Delete FROM clientes WHERE id =?';
-    sql = 'Delete FROM clientes WHERE id =?'
     res.locals.moment = moment;
     connection.query(sql, [id], (error, results) => {
         if (error) console.log( error);
         if (results.length > 0) {
-            res.redirect('/adminecogas');
-        }
-        else {
-            res.redirect('/adminecogas');
-        }
+            
+        }})
+        sql = 'Delete FROM clientes_tareasgenerales WHERE Nombre =?';
+        connection.query(sql, [Nombre], (error, results) => {
+            if (error) console.log( error);
+            if (results.length > 0) {
+                res.redirect('/adminecogas');
+            }
+            else{ res.redirect('/adminecogas');}
     })
 })
 router.post('/editarContacto/delete/Contacto/:id', (req, res) => {

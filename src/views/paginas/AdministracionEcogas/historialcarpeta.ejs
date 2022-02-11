@@ -36,16 +36,16 @@
           <thead>
             <tr>
               <th>
-                <h4>Tarea realizada</h4>
-              </th>
+                <h4>Etapa de la tarea</h4>
 
+              </th>
               <th>
                 <h4>Fecha de tarea realizada</h4>
 
               </th>
               
               <th>
-                <h4>Etapa de la tarea</h4>
+                <h4>Tarea realizada</h4>
 
 
               </th>
@@ -60,16 +60,14 @@
 
               <tr>
                 <th>
-                  <%=clientes.Tarea_Realizada_sub%>
-
+                  <%=clientes.EtapaTarea_sub%>
                 </th>
-
                 <th>
                   <%=moment(clientes.Fecha_Tarea_sub).format('DD-MM-YYYY')%>
 
                 </th>
                 <th>
-<%=clientes.EtapaTarea_sub%>
+                  <%=clientes.Tarea_Realizada_sub%>
                 </th>
                 <th>
                   <%=clientes.Proxima_Tarea_sub%>
