@@ -206,7 +206,15 @@
                             <div class="card p-3 border-secondary">
                                 <div class="card-header">
                                     Permisos especiales</div>
-                                    <%if (user.Privado=="NC"){}else{%>
+                                    <%if (user.Privado=="NC"){%>
+                                        <form-check>
+                                            <input hidden checked type="radio"
+                                            name="CartaOferta"
+                                            id="CartaOferta"
+                                            value="<%=user.CartaOferta%>"> 
+                                            
+                                        </form-check>
+                                        <% }else{%>
                                 <div class="card-title">Carta
                                     oferta</div>
                                 <div class="card-text">
@@ -241,7 +249,14 @@
 
                                 </div>
                                 <%}%>
-                                <%if (user.Privado=="NC"){}else{%>
+                                <%if (user.Privado=="NC"){%>
+                                    <form-check>
+                                        <input hidden checked type="radio"
+                                        name="PlanoAnexo"
+                                        id="PlanoAnexo"
+                                        value="<%=user.PlanoAnexo%>"> 
+                                    </form-check>
+                                    <% }else{%>
 
                                 <div class="card-title">Plano
                                     anexo</div>
@@ -272,37 +287,55 @@
 
                                 </div>
                                 <%}%>
-                                <%if (user.Hidraulica=="NC"){}else{%>
+                                <div class="card-title">
+                                <%if (user.Hidraulica=="NC"){%>
+                                    <form-check>
+                                        <input hidden checked type="radio"
+                                        name="HIDRAULICA1"
+                                        id="HIDRAULICA1"
+                                        value="<%=user.Hidraulica%>"> 
+                                    </form-check>
+                                <%}else{%>
 
                                 <div class="card-title">
-                                    Hidraúlica</div>
+                                    Hidraúlica valor actual: <%=user.Hidraulica%></div>
                                 <div class="card-text">
                                     <select class="form-control"
                                         id="HIDRAULICA1"
                                         name="HIDRAULICA1"
                                         value="<%=user.Hidraulica%>"
                                         placeholder="<%=user.Hidraulica%>">
-                                        <option
-                                            value="<%=user.Hidraulica%>"
+                                        <option  id="HIDRAULICA1"
+                                        name="HIDRAULICA1"
+                                            value="NoModificada"
                                             selected>
                                             <%=user.Hidraulica%>
                                         </option>
-                                        <option
+                                        <option  id="HIDRAULICA1"
+                                        name="HIDRAULICA1"
                                             value="Sin presentar">
                                             Sin presentar
                                         </option>
-                                        <option value="EnGestion">En
+                                        <option  id="HIDRAULICA1"
+                                        name="HIDRAULICA1" value="EnGestion">En
                                             gestion
                                         </option>
-                                        <option value="ok">ok
+                                        <option  id="HIDRAULICA1"
+                                        name="HIDRAULICA1" value="ok">Ok
                                         </option>
-                                        <option value="NC">No
+                                        <option  id="HIDRAULICA1"
+                                        name="HIDRAULICA1" value="NC">No
                                             corresponde</option>
 
                                     </select>
                                 </div>
                                 <%}%>
-                                <%if (user.Ferrocarriles=="NC"){}else{%>
+                                <%if (user.Ferrocarriles=="NC"){%>
+                                    <input hidden checked type="radio"
+                                    name="FERROCARRIL1"
+                                    id="FERROCARRIL1"
+                                    value="<%=user.FERROCARRIL1%>"> 
+                                <%}else{%>
 
                                 <div class="card-title">
                                     Ferrocarriles</div>
@@ -331,7 +364,12 @@
                                     </select>
                                 </div>
                                 <%}%>
-                                <%if (user.DNV=="NC"){}else{%>
+                                <%if (user.DNV=="NC"){%>
+                                    <input hidden checked type="radio"
+                                    name="DNV1"
+                                    id="DNV1"
+                                    value="<%=user.DNV%>"> 
+                                <%}else{%>
                                
                                 <div class="card-title">DNV
                                 </div>
