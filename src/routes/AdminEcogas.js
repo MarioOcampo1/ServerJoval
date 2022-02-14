@@ -574,10 +574,10 @@ router.post('/actualizarEtapas/:id', (req, res) => {
     var intArsat = req.body.intArsat;
     var Monotributos = req.body.Monotributos;
     var CronogramaAmbiente = req.body.CronogramaAmbiente;
-    var ActaDeInicio = req.body.ActaDeInicio;
+    var ActaDeInicio = req.body.ActasDeInicio;
 
     var TituloDePropiedad = req.body.TituloDePropiedad;
-    
+    PCEntregadoInspeccion = req.body.PCEntregadoInspeccion;
     var Pcaprobado = req.body.PCaprobado;
     var CartaOferta = req.body.CartaOferta;
 
@@ -697,10 +697,10 @@ if(AvisoInicioObraART=="EnGestion"&&AvisoInicioObraIERIC=="EnGestion"&&AvisosDeO
 }
 //Obras
 // DocumentacionInspeccion
-if(ActaDeInicio=="ok"&&Permisos=="ok"&&Interferencias=="ok"&&LibroOrdenesServicio=="ok"&&LibroNotasPedido=="ok"&&Pcaprobado=="ok"&&Avisos=="ok"&&CronogramaFirmadoComitente=="ok"){
+if(ActaDeInicio=="Presentado"&&Permisos=="ok"&&Interferencias=="ok"&&LibroOrdenesServicio=="ok"&&LibroNotasPedido=="ok"&&Pcaprobado=="ok"&&Avisos=="ok"&&CronogramaFirmadoComitente=="ok"){
     DocumentacionInspeccion="ok";
 }
-if(ActaDeInicio=="EnGestion"||Permisos=="EnGestion"||Interferencias=="EnGestion"||LibroOrdenesServicio=="EnGestion"||LibroNotasPedido=="EnGestion"||Pcaprobado=="EnGestion"||Avisos=="EnGestion"||CronogramaFirmadoComitente=="EnGestion"){
+if(ActaDeInicio=="Sin presentar"||Permisos=="EnGestion"||Interferencias=="EnGestion"||LibroOrdenesServicio=="EnGestion"||LibroNotasPedido=="EnGestion"||Pcaprobado=="EnGestion"||Avisos=="EnGestion"||CronogramaFirmadoComitente=="EnGestion"){
     DocumentacionInspeccion="EnGestion";
 }
 // ComunicacionObras
@@ -747,7 +747,6 @@ if (req.body.HIDRAULICA1!="NoModificada"){
 
      
 console.log("Valor final de hidraulica: " + HIDRAULICA);
-
     // if (req.body.PerMunicipal1 == req.body.PerMunicipal) {
     //      PerMunicipal = req.body.PerMunicipal1;
          
@@ -772,6 +771,8 @@ console.log("Valor final de hidraulica: " + HIDRAULICA);
     } else { Permisos = "EnGestion" };
     console.log("Valor BODY de DNV: " + req.body.DNV + " Valor BODY de DNV1: " +req.body.DNV1 );
     console.log("Valor final de DNV: " + DNV);
+console.log("El valor de acta de inicio es:" + ActaDeInicio);
+
     if (intTelefonica == "EnGestion" || intClaro == "EnGestion" || intAgua == "EnGestion" || intCloacas == "EnGestion" || intElectricidad == "EnGestion" || intTelecom == "EnGestion" || intArnet == "EnGestion" || intArsat == "EnGestion") {
         Interferencias = "EnGestion";
         console.log("Actualizaretapas/// Ingreso al if de interferencias 'en gestion'");
@@ -794,7 +795,7 @@ console.log("PerMunicipal1: "+ req.body.PerMunicipal1 +  " PerMunicipal: "+ req.
 console.log("/////////////////");
      sql = 'Update clientes Set ? where id=?';
     connection.query(sql, [{
-        //Prelimnar
+        //Prelimnar 
         Mensura: Mensura, TituloDePropiedad: TituloDePropiedad, ActaConstitutiva: ActaConstitutiva, ActaCargoVigente: ActaCargoVigente, Cotizacion: Cotizacion,
         //Primera Parte
         FechaFirmaContrato: FechaFirmaContrato, Contrato: Contrato, Presupuesto: Presupuesto, NotaDeExcepcion: NotaDeExcepcion,
@@ -805,7 +806,7 @@ console.log("/////////////////");
         //Obras
         LibroOrdenesServicio: LibroOrdenesServicio, LibroNotasPedido: LibroNotasPedido, AvisosDeObra: AvisosDeObra, OrdenServicio: OrdenServicio,
         CronogramaFirmadoComitente: CronogramaFirmadoComitente, CronogramaSyH: CronogramaSyH, AvisoInicioObraART: AvisoInicioObraART,
-        AvisoInicioObraIERIC: AvisoInicioObraIERIC,
+        AvisoInicioObraIERIC: AvisoInicioObraIERIC, PCEntregadoInspeccion: PCEntregadoInspeccion,
         //Segunda Parte
         SeguroRC: SeguroRC, SeguroAccidentesPersonales: SeguroAccidentesPersonales,
         PlanosyCroquis: PlanosyCroquis, PlanoAnexo: PlanoAnexo, ActasFinales: ActasFinales, ActaInicioEfectivo: ActaInicioEfectivo, InformesFinales: InformesFinales,
