@@ -24,105 +24,107 @@
                     <thead>
                         <tr>
                             <th class="text-center text-light bg-dark  " colspan="6">Datos de carpeta</th>
-                            <th class="text-center text-light bg-dark " colspan="5">Preliminar</th>
-                            <th class="text-center text-light bg-dark " colspan="4">1era parte</th>
-                            <th class="text-center text-light bg-primary " colspan="5">2da parte</th>
-                            <th class="text-center text-light bg-dark " colspan="8">Caos</th>
+                            <th class="text-center text-light bg-dark " colspan="3">Preliminar</th>
+                            <th class="text-center text-light bg-dark " colspan="3">1era parte</th>
+                            <th class="text-center text-light bg-dark " colspan="9">2da parte</th>
+                            <th class="text-center text-light bg-dark " colspan="3">Obras</th>
+
+                            <th class="text-center text-light bg-dark " colspan="7">Caos</th>
                         </tr>
                         <tr>
-                            <th>
+                            <th class="text-center p-3">
                                 <h4>Nombre</h4>
                             </th>
-                            <th>
+                            <th class="text-center p-3">
                                 <h4>N° de carpeta</h4>
                             </th>
-                            <th>
+                            <th class="text-center p-3">
                                 <h4>Ubicación</h4>
                             </th>
-                            <th>
+                            <th class="text-center p-3">
                                 <h4>Comitente</h4>
                             </th>
-                            <th>
+                            <th class="text-center p-3">
                                 <h4>Estado</h4>
                             </th>
-                            <th>
+                            <th class="text-center p-3">
                                 <h4>Fecha firma de contrato</h4>
                             </th>
 
-                            <th class="text-light bg-primary">
+                            <th class="text-center p-3 p-3 ">
                                 Documentación del terreno
                             </th>
-                            <th class="text-light bg-primary">
+                            <th class="text-center p-3 ">
                                 Documentación de la Sociedad
                             </th>
-                            <th class="text-light bg-primary">
+                            <th class="text-center p-3 ">
                                 Documentación contractual
                             </th>
-                            <th class="text-light bg-primary">
+                            <th class="text-center p-3 ">
                                 Comercial
                             </th>
-                            <th class="text-light bg-primary">
+                            <th class="text-center p-3 ">
                                 Tecnica
                             </th>
 
-                            <th>
+                            <th class="text-center p-3">
                                 Permisos especiales
                             </th>
-                            <th>
+                            <th class="text-center p-3">
                                 Documentación de obra
                             </th>
-                            <th>
+                            <th class="text-center p-3">
                                 Seguridad
                             </th>
-                            <th>
+                            <th class="text-center p-3">
                                 Interferencias
                             </th>
-                            <th>
+                            <th class="text-center p-3">
                                 Permisos
                             </th>
-                            <th>
+                            <th class="text-center p-3">
                                 Plan de trabajos
                             </th>
-                            <th>
+                            <th class="text-center p-3">
                                 Matriculas
                             </th>
-                            <th>
+                            <th class="text-center p-3">
                                 Ambiente
                             </th>
-                            <th>
+                            <th class="text-center p-3">
                                 Nota cumplimento de normas vigentes
                             </th>
-                            <th>
+                            <th class="text-center p-3">
                                 DDJJ NAG 153
                             </th>
-                            <th>
+                            <th class="text-center p-3">
                                 Avisos
                             </th>
-                            <th>
+                            <th class="text-center p-3">
                                 Documentación de inspección
                             </th>
-                            <th>
+                            <th class="text-center p-3">
                                 Comunicación de obras
                             </th>
-                            <th>
+                            <th class="text-center p-3">
                                 Actas finales de Ecogas
                             </th>
-                            <th>
+                            <th class="text-center p-3">
                                 Plano y croquis
                             </th>
-                            <th>
+                            <th class="text-center p-3">
                                 Conforme de entidades
                             </th>
-                            <th>
+                            <th class="text-center p-3">
                                 Prueba de hermeticidad
                             </th>
-                            <th>
+                            <th class="text-center p-3">
                                 Informe finales
                             </th>
-                            <th>
+                            <th class="text-center p-3">
                                 Presentación final
                             </th>
-                            <th>
+                            <th class="text-center p-3">
                                 Habilitación de obra
                             </th>
                            
@@ -132,24 +134,24 @@
                         <% if(results){%>
                         <% results.forEach((clientes)=>{ %>
                             <tr>
-                                <th>
+                                <th class="text-center">
                                     <a href="/editarTareas/<%=clientes.id%>" class="">
                                         <%=clientes.Nombre%>
                                     </a>
                                 </th>
-                                <th>
+                                <th >
                                     <a href="/editarTareas/<%=clientes.id%>" class="">
                                         <%=clientes.NCarpeta%>
                                     </a>
                                 </th>
-                                <th>
+                                <th >
                                     <%=clientes.Ubicacion%>
                                 </th>
-                                <th>
+                                <th >
                                     <%=clientes.Comitente%>
                                 </th>
                                
-                                <th>
+                                <th >
                                     <%=clientes.Estado%>
                                         <%if(clientes.Estado=="Sin presentar"){%>
                                             <progress max="4" value="0"></progress>
@@ -177,91 +179,564 @@
                                                                                         class="text-center">
                                                                                     <%}%>
                                 </th>
-                                <th>
+                                <th >
                                     <%= moment(clientes.Fechafirmacontrato).format('DD-MM-YYYY')%>
                                 </th>
-                                <th class="text-light bg-primary">
-                                    <%=clientes.DocumentacionTerreno%>
-                                </th>
-                                <th class="text-light bg-primary">
-                                    <%=clientes.DocumentacionSociedad%>
 
-                                </th>
-                                <th class="text-light bg-primary">
+                                <!-- Documentacion Terreno -->
+                                <%if(clientes.DocumentacionTerreno=="ok"){%>
+                                    <th class="text-light bg-success">
+                                        <%=clientes.DocumentacionTerreno%>
+                                    </th>
+                                    <%}%>
+                                    <%if(clientes.DocumentacionTerreno=="EnGestion"){%>
+                                        <th class="text-light bg-warning">
+                                            <%=clientes.DocumentacionTerreno%>
+                                        </th>
+                                        <%}%>
+                                        <%if(clientes.DocumentacionTerreno=="Sin presentar"){%>
+                                            <th class="text-light bg-secondary">
+                                                <%=clientes.DocumentacionTerreno%>
+                                            </th>
+                                            <%}%>
+                                            <!-- <%if((clientes.DocumentacionTerreno!="Sin presentar")&&(clientes.DocumentacionTerreno=="EnGestion")&&(clientes.DocumentacionTerreno!="ok")){%>
+                                                <th class="text-light ">
+                                                    <%=clientes.DocumentacionTerreno%>
+                                                </th>
+                                                <%}%> -->
+                                         <!-- // -->
+<!-- Documentacion Sociedad -->
+<%if(clientes.DocumentacionSociedad=="ok"){%>
+    <th class="text-light bg-success">
+        <%=clientes.DocumentacionSociedad%>
+    </th>
+    <%}%>
+    <%if(clientes.DocumentacionSociedad=="EnGestion"){%>
+        <th class="text-light bg-warning">
+            <%=clientes.DocumentacionSociedad%>
+        </th>
+        <%}%>
+        <%if(clientes.DocumentacionSociedad=="Sin presentar"){%>
+            <th class="text-light bg-secondary">
+                <%=clientes.DocumentacionSociedad%>
+            </th>
+            <%}%>
+            <%if((clientes.DocumentacionSociedad!="Sin presentar")&&(clientes.DocumentacionSociedad=="EnGestion")&&(clientes.DocumentacionSociedad!="ok")){%>
+                <th class="text-light ">
+                    <%=clientes.DocumentacionSociedad%>
+                </th>
+                <%}%>
+                            <!-- // -->
+                            <!-- Documentacion Contractual -->
+                            <%if(clientes.DocumentacionContractual=="ok"){%>
+                                <th class="text-light bg-success">
                                     <%=clientes.DocumentacionContractual%>
                                 </th>
-                                <th class="text-light bg-primary">
+                                <%}%>
+                                <%if(clientes.DocumentacionContractual=="EnGestion"){%>
+                                    <th class="text-light bg-warning">
+                                        <%=clientes.DocumentacionContractual%>
+                                    </th>
+                                    <%}%>
+                                    <%if(clientes.DocumentacionContractual=="Sin presentar"){%>
+                                        <th class="text-light bg-secondary">
+                                            <%=clientes.DocumentacionContractual%>
+                                        </th>
+                                        <%}%>
+                                        <%if((clientes.DocumentacionContractual!="Sin presentar")&&(clientes.DocumentacionContractual=="EnGestion")&&(clientes.DocumentacionContractual!="ok")){%>
+                                            <th class="text-light ">
+                                                <%=clientes.DocumentacionContractual%>
+                                            </th>
+                                            <%}%>
+                              <!-- // -->
+                              <!-- Comercial  -->
+                              <%if(clientes.Comercial=="ok"){%>
+                                <th class="text-light bg-success">
                                     <%=clientes.Comercial%>
                                 </th>
-                                <th class="text-light bg-primary">
+                                <%}%>
+                                <%if(clientes.Comercial=="EnGestion"){%>
+                                    <th class="text-light bg-warning">
+                                        <%=clientes.Comercial%>
+                                    </th>
+                                    <%}%>
+                                    <%if(clientes.Comercial=="Sin presentar"){%>
+                                        <th class="text-light bg-secondary">
+                                            <%=clientes.Comercial%>
+                                        </th>
+                                        <%}%>
+                                        <%if((clientes.Comercial!="Sin presentar")&&(clientes.Comercial=="EnGestion")&&(clientes.Comercial!="ok")){%>
+                                            <th class="text-light ">
+                                                <%=clientes.Comercial%>
+                                            </th>
+                                            <%}%>
+                            <!-- // -->
+                            <!-- Tecnica  -->
+                            <%if(clientes.Tecnica=="ok"){%>
+                                <th class="text-light bg-success">
                                     <%=clientes.Tecnica%>
                                 </th>
-                                 
-                                <th>
-                                    <%=clientes.PermisosEspeciales%>
-                                </th>
-                                <th>
+                                <%}%>
+                                <%if(clientes.Tecnica=="EnGestion"){%>
+                                    <th class="text-light bg-warning">
+                                        <%=clientes.Tecnica%> 
+                                    </th>
+                                    <%}%>
+                                    <%if(clientes.Tecnica=="Sin presentar"){%>
+                                        <th class="text-light bg-secondary">
+                                            <%=clientes.Tecnica%>
+                                        </th>
+                                        <%}%>
+                                        <%if((clientes.Tecnica!="Sin presentar")&&(clientes.Tecnica=="EnGestion")&&(clientes.Tecnica!="ok")){%>
+                                            <th class="text-light ">
+                                                <%=clientes.Tecnica%>
+                                            </th>
+                                            <%}%>
+                              
+                                 <!-- //  -->
+                                 <!-- Permisos Especiales  -->
+                                 <%if(clientes.PermisosEspeciales=="ok"){%>
+                                    <th class="text-light bg-success">
+                                        <%=clientes.PermisosEspeciales%>
+                                    </th>
+                                    <%}%>
+                                    <%if(clientes.PermisosEspeciales=="EnGestion"){%>
+                                        <th class="text-light bg-warning">
+                                            <%=clientes.PermisosEspeciales%> 
+                                        </th>
+                                        <%}%>
+                                        <%if(clientes.PermisosEspeciales=="Sin presentar"){%>
+                                            <th class="text-light bg-secondary">
+                                                <%=clientes.PermisosEspeciales%>
+                                            </th>
+                                            <%}%>
+                                            <%if((clientes.PermisosEspeciales!="Sin presentar")&&(clientes.PermisosEspeciales=="EnGestion")&&(clientes.PermisosEspeciales!="ok")){%>
+                                                <th class="text-light ">
+                                                    <%=clientes.PermisosEspeciales%>
+                                                </th>
+                                                <%}%>
+                             <!-- // -->
+                             <!-- Documentacion de obra -->
+                             <%if(clientes.DocumentacionObra=="ok"){%>
+                                <th class="text-light bg-success">
                                     <%=clientes.DocumentacionObra%>
                                 </th>
-                                <th>
+                                <%}%>
+                                <%if(clientes.DocumentacionObra=="EnGestion"){%>
+                                    <th class="text-light bg-warning">
+                                        <%=clientes.DocumentacionObra%> 
+                                    </th>
+                                    <%}%>
+                                    <%if(clientes.DocumentacionObra=="Sin presentar"){%>
+                                        <th class="text-light bg-secondary">
+                                            <%=clientes.DocumentacionObra%>
+                                        </th>
+                                        <%}%>
+                                        <%if((clientes.DocumentacionObra!="Sin presentar")&&(clientes.DocumentacionObra=="EnGestion")&&(clientes.DocumentacionObra!="ok")){%>
+                                            <th class="text-light ">
+                                                <%=clientes.DocumentacionObra%>
+                                            </th>
+                                            <%}%>
+                            <!-- // -->
+                            <!-- Seguridad -->
+                            <%if(clientes.Seguridad=="ok"){%>
+                                <th class="text-light bg-success">
                                     <%=clientes.Seguridad%>
                                 </th>
-                                <th>
+                                <%}%>
+                                <%if(clientes.Seguridad=="EnGestion"){%>
+                                    <th class="text-light bg-warning">
+                                        <%=clientes.Seguridad%> 
+                                    </th>
+                                    <%}%>
+                                    <%if(clientes.Seguridad=="Sin presentar"){%>
+                                        <th class="text-light bg-secondary">
+                                            <%=clientes.Seguridad%>
+                                        </th>
+                                        <%}%>
+                                        <%if((clientes.Seguridad!="Sin presentar")&&(clientes.Seguridad=="EnGestion")&&(clientes.Seguridad!="ok")){%>
+                                            <th class="text-light ">
+                                                <%=clientes.Seguridad%>
+                                            </th>
+                                            <%}%>
+                            <!-- // -->
+                            <!-- Interferencias -->
+                            <%if(clientes.Interferencias=="ok"){%>
+                                <th class="text-light bg-success">
                                     <%=clientes.Interferencias%>
                                 </th>
-                              
-                                <th>
+                                <%}%>
+                                <%if(clientes.Interferencias=="EnGestion"){%>
+                                    <th class="text-light bg-warning">
+                                        <%=clientes.Interferencias%> 
+                                    </th>
+                                    <%}%>
+                                    <%if(clientes.Interferencias=="Sin presentar"){%>
+                                        <th class="text-light bg-secondary">
+                                            <%=clientes.Interferencias%>
+                                        </th>
+                                        <%}%>
+                                        <%if((clientes.Interferencias!="Sin presentar")&&(clientes.Interferencias=="EnGestion")&&(clientes.Interferencias!="ok")){%>
+                                            <th class="text-light ">
+                                                <%=clientes.Interferencias%>
+                                            </th>
+                                            <%}%>
+                            <!-- // -->
+                            <!-- Permisos -->
+                            <%if(clientes.Permisos=="ok"){%>
+                                <th class="text-light bg-success">
                                     <%=clientes.Permisos%>
                                 </th>
-                                <th>
+                                <%}%>
+                                <%if(clientes.Permisos=="EnGestion"){%>
+                                    <th class="text-light bg-warning">
+                                        <%=clientes.Permisos%> 
+                                    </th>
+                                    <%}%>
+                                    <%if(clientes.Permisos=="Sin presentar"){%>
+                                        <th class="text-light bg-secondary">
+                                            <%=clientes.Permisos%>
+                                        </th>
+                                        <%}%>
+                                        <%if((clientes.Permisos!="Sin presentar")&&(clientes.Permisos=="EnGestion")&&(clientes.Permisos!="ok")){%>
+                                            <th class="text-light ">
+                                                <%=clientes.Permisos%>
+                                            </th>
+                                            <%}%>
+                            <!-- // -->
+                            <!-- Plan de trabajo -->
+                            <%if(clientes.PlanDeTrabajo=="ok"){%>
+                                <th class="text-light bg-success">
                                     <%=clientes.PlanDeTrabajo%>
                                 </th>
-                                <th>
+                                <%}%>
+                                <%if(clientes.PlanDeTrabajo=="EnGestion"){%>
+                                    <th class="text-light bg-warning">
+                                        <%=clientes.PlanDeTrabajo%> 
+                                    </th>
+                                    <%}%>
+                                    <%if(clientes.PlanDeTrabajo=="Sin presentar"){%>
+                                        <th class="text-light bg-secondary">
+                                            <%=clientes.PlanDeTrabajo%>
+                                        </th>
+                                        <%}%>
+                                        <%if((clientes.PlanDeTrabajo!="Sin presentar")&&(clientes.PlanDeTrabajo=="EnGestion")&&(clientes.PlanDeTrabajo!="ok")){%>
+                                            <th class="text-light ">
+                                                <%=clientes.PlanDeTrabajo%>
+                                            </th>
+                                            <%}%>
+                            <!-- // -->
+                            <!-- Matriculas -->
+                            <%if(clientes.Matriculas=="ok"){%>
+                                <th class="text-light bg-success">
                                     <%=clientes.Matriculas%>
                                 </th>
-                                <th>
+                                <%}%>
+                                <%if(clientes.Matriculas=="EnGestion"){%>
+                                    <th class="text-light bg-warning">
+                                        <%=clientes.Matriculas%> 
+                                    </th>
+                                    <%}%>
+                                    <%if(clientes.Matriculas=="Sin presentar"){%>
+                                        <th class="text-light bg-secondary">
+                                            <%=clientes.Matriculas%>
+                                        </th>
+                                        <%}%>
+                                        <%if((clientes.Matriculas!="Sin presentar")&&(clientes.Matriculas=="EnGestion")&&(clientes.Matriculas!="ok")){%>
+                                            <th class="text-light ">
+                                                <%=clientes.Matriculas%>
+                                            </th>
+                                            <%}%>
+                            <!-- // -->
+                            <!-- Ambiente -->
+                            <%if(clientes.Ambiente=="ok"){%>
+                                <th class="text-light bg-success">
                                     <%=clientes.Ambiente%>
                                 </th>
-                                <th>
+                                <%}%>
+                                <%if(clientes.Ambiente=="EnGestion"){%>
+                                    <th class="text-light bg-warning">
+                                        <%=clientes.Ambiente%> 
+                                    </th>
+                                    <%}%>
+                                    <%if(clientes.Ambiente=="Sin presentar"){%>
+                                        <th class="text-light bg-secondary">
+                                            <%=clientes.Ambiente%>
+                                        </th>
+                                        <%}%>
+                                        <%if((clientes.Ambiente!="Sin presentar")&&(clientes.Ambiente=="EnGestion")&&(clientes.Ambiente!="ok")){%>
+                                            <th class="text-light ">
+                                                <%=clientes.Ambiente%>
+                                            </th>
+                                            <%}%>
+                            <!-- // -->
+                            <!-- Nota cumplimiento normativas -->
+                            <%if(clientes.NotaCumplimentoNormativas=="ok"){%>
+                                <th class="text-light bg-success">
                                     <%=clientes.NotaCumplimentoNormativas%>
                                 </th>
-                                <th>
-                                    <%=clientes.DDJJNAG153%>
-                                   
+                                <%}%>
+                                <%if(clientes.NotaCumplimentoNormativas=="EnGestion"){%>
+                                    <th class="text-light bg-warning">
+                                        <%=clientes.NotaCumplimentoNormativas%> 
+                                    </th>
+                                    <%}%>
+                                    <%if(clientes.NotaCumplimentoNormativas=="Sin presentar"){%>
+                                        <th class="text-light bg-secondary">
+                                            <%=clientes.NotaCumplimentoNormativas%>
+                                        </th>
+                                        <%}%>
+                                        <%if((clientes.NotaCumplimentoNormativas!="Sin presentar")&&(clientes.NotaCumplimentoNormativas=="EnGestion")&&(clientes.NotaCumplimentoNormativas!="ok")){%>
+                                            <th class="text-light ">
+                                                <%=clientes.NotaCumplimentoNormativas%>
+                                            </th>
+                                            <%}%>
+                            <!-- // -->
+                            <!-- DDJJ NAG 153 -->
+                            <%if(clientes.ddjjnag153=="ok"){%>
+                                <th class="text-light bg-success">
+                                    <%=clientes.ddjjnag153%>
                                 </th>
-                                <th>
+                                <%}%>
+                                <%if(clientes.ddjjnag153=="EnGestion"){%>
+                                    <th class="text-light bg-warning">
+                                        <%=clientes.ddjjnag153%> 
+                                    </th>
+                                    <%}%>
+                                    <%if(clientes.ddjjnag153=="Sin presentar"){%>
+                                        <th class="text-light bg-secondary">
+                                            <%=clientes.ddjjnag153%>
+                                        </th>
+                                        <%}%>
+                                        <%if((clientes.ddjjnag153!="Sin presentar")&&(clientes.ddjjnag153=="EnGestion")&&(clientes.ddjjnag153!="ok")){%>
+                                            <th class="text-light ">
+                                                <%=clientes.ddjjnag153%>
+                                            </th>
+                                            <%}%>
+                            <!-- // -->
+                            <!-- Avisos -->
+                            <%if(clientes.Avisos=="ok"){%>
+                                <th class="text-light bg-success">
                                     <%=clientes.Avisos%>
                                 </th>
-                                <th>
+                                <%}%>
+                                <%if(clientes.Avisos=="EnGestion"){%>
+                                    <th class="text-light bg-warning">
+                                        <%=clientes.Avisos%> 
+                                    </th>
+                                    <%}%>
+                                    <%if(clientes.Avisos=="Sin presentar"){%>
+                                        <th class="text-light bg-secondary">
+                                            <%=clientes.Avisos%>
+                                        </th>
+                                        <%}%>
+                                        <%if((clientes.Avisos!="Sin presentar")&&(clientes.Avisos=="EnGestion")&&(clientes.Avisos!="ok")){%>
+                                            <th class="text-light ">
+                                                <%=clientes.Avisos%>
+                                            </th>
+                                            <%}%>
+                            <!-- // -->
+                            <!-- Documentacion de inspeccion -->
+                            <%if(clientes.DocumentacionInspeccion=="ok"){%>
+                                <th class="text-light bg-success">
                                     <%=clientes.DocumentacionInspeccion%>
                                 </th>
-                                <th>
+                                <%}%>
+                                <%if(clientes.DocumentacionInspeccion=="EnGestion"){%>
+                                    <th class="text-light bg-warning">
+                                        <%=clientes.DocumentacionInspeccion%> 
+                                    </th>
+                                    <%}%>
+                                    <%if(clientes.DocumentacionInspeccion=="Sin presentar"){%>
+                                        <th class="text-light bg-secondary">
+                                            <%=clientes.DocumentacionInspeccion%>
+                                        </th>
+                                        <%}%>
+                                        <%if((clientes.DocumentacionInspeccion!="Sin presentar")&&(clientes.DocumentacionInspeccion=="EnGestion")&&(clientes.DocumentacionInspeccion!="ok")){%>
+                                            <th class="text-light ">
+                                                <%=clientes.DocumentacionInspeccion%>
+                                            </th>
+                                            <%}%>
+                            <!-- // -->
+                            <!-- Comunicacion de obras -->
+                            <%if(clientes.ComunicacionObras=="ok"){%>
+                                <th class="text-light bg-success">
                                     <%=clientes.ComunicacionObras%>
                                 </th>
-                                <th>
+                                <%}%>
+                                <%if(clientes.ComunicacionObras=="EnGestion"){%>
+                                    <th class="text-light bg-warning">
+                                        <%=clientes.ComunicacionObras%> 
+                                    </th>
+                                    <%}%>
+                                    <%if(clientes.ComunicacionObras=="Sin presentar"){%>
+                                        <th class="text-light bg-secondary">
+                                            <%=clientes.ComunicacionObras%>
+                                        </th>
+                                        <%}%>
+                                        <%if((clientes.ComunicacionObras!="Sin presentar")&&(clientes.ComunicacionObras=="EnGestion")&&(clientes.ComunicacionObras!="ok")){%>
+                                            <th class="text-light ">
+                                                <%=clientes.ComunicacionObras%>
+                                            </th>
+                                            <%}%>
+                            <!-- // -->
+                            <!-- Actas finales de ecogas -->
+                            <%if(clientes.ActasFinalesEcogas=="ok"){%>
+                                <th class="text-light bg-success">
                                     <%=clientes.ActasFinalesEcogas%>
                                 </th>
-                                <th>
+                                <%}%>
+                                <%if(clientes.ActasFinalesEcogas=="EnGestion"){%>
+                                    <th class="text-light bg-warning">
+                                        <%=clientes.ActasFinalesEcogas%> 
+                                    </th>
+                                    <%}%>
+                                    <%if(clientes.ActasFinalesEcogas=="Sin presentar"){%>
+                                        <th class="text-light bg-secondary">
+                                            <%=clientes.ActasFinalesEcogas%>
+                                        </th>
+                                        <%}%>
+                                        <%if((clientes.ActasFinalesEcogas!="Sin presentar")&&(clientes.ActasFinalesEcogas=="EnGestion")&&(clientes.ActasFinalesEcogas!="ok")){%>
+                                            <th class="text-light ">
+                                                <%=clientes.ActasFinalesEcogas%>
+                                            </th>
+                                            <%}%>
+                            <!-- // -->
+                            <!-- Planos y Croquis -->
+                            <%if(clientes.PlanosyCroquis=="ok"){%>
+                                <th class="text-light bg-success">
                                     <%=clientes.PlanosyCroquis%>
                                 </th>
-                                <th>
-                                    <%=clientes.ConformeEntidades %>
+                                <%}%>
+                                <%if(clientes.PlanosyCroquis=="EnGestion"){%>
+                                    <th class="text-light bg-warning">
+                                        <%=clientes.PlanosyCroquis%> 
+                                    </th>
+                                    <%}%>
+                                    <%if(clientes.PlanosyCroquis=="Sin presentar"){%>
+                                        <th class="text-light bg-secondary">
+                                            <%=clientes.PlanosyCroquis%>
+                                        </th>
+                                        <%}%>
+                                        <%if((clientes.PlanosyCroquis!="Sin presentar")&&(clientes.PlanosyCroquis=="EnGestion")&&(clientes.PlanosyCroquis!="ok")){%>
+                                            <th class="text-light ">
+                                                <%=clientes.PlanosyCroquis%>
+                                            </th>
+                                            <%}%>
+                            <!-- // -->
+                            <!-- ConformeEntidades -->
+                            <%if(clientes.ConformeEntidades=="ok"){%>
+                                <th class="text-light bg-success">
+                                    <%=clientes.ConformeEntidades%>
                                 </th>
-                                <th>
+                                <%}%>
+                                <%if(clientes.ConformeEntidades=="EnGestion"){%>
+                                    <th class="text-light bg-warning">
+                                        <%=clientes.ConformeEntidades%> 
+                                    </th>
+                                    <%}%>
+                                    <%if(clientes.ConformeEntidades=="Sin presentar"){%>
+                                        <th class="text-light bg-secondary">
+                                            <%=clientes.ConformeEntidades%>
+                                        </th>
+                                        <%}%>
+                                        <%if((clientes.ConformeEntidades!="Sin presentar")&&(clientes.ConformeEntidades=="EnGestion")&&(clientes.ConformeEntidades!="ok")){%>
+                                            <th class="text-light ">
+                                                <%=clientes.ConformeEntidades%>
+                                            </th>
+                                            <%}%>
+                            <!-- // -->
+                            <!-- PruebaHermeticidad -->
+                            <%if(clientes.PruebaHermeticidad=="ok"){%>
+                                <th class="text-light bg-success">
                                     <%=clientes.PruebaHermeticidad%>
                                 </th>
-                                <th>
+                                <%}%>
+                                <%if(clientes.PruebaHermeticidad=="EnGestion"){%>
+                                    <th class="text-light bg-warning">
+                                        <%=clientes.PruebaHermeticidad%> 
+                                    </th>
+                                    <%}%>
+                                    <%if(clientes.PruebaHermeticidad=="Sin presentar"){%>
+                                        <th class="text-light bg-secondary">
+                                            <%=clientes.PruebaHermeticidad%>
+                                        </th>
+                                        <%}%>
+                                        <%if((clientes.PruebaHermeticidad!="Sin presentar")&&(clientes.PruebaHermeticidad=="EnGestion")&&(clientes.PruebaHermeticidad!="ok")){%>
+                                            <th class="text-light ">
+                                                <%=clientes.PruebaHermeticidad%>
+                                            </th>
+                                            <%}%>
+                            <!-- // -->
+                            <!-- Informes finales -->
+                            <%if(clientes.InformesFinales=="ok"){%>
+                                <th class="text-light bg-success">
                                     <%=clientes.InformesFinales%>
                                 </th>
-                                <th>
+                                <%}%>
+                                <%if(clientes.InformesFinales=="EnGestion"){%>
+                                    <th class="text-light bg-warning">
+                                        <%=clientes.InformesFinales%> 
+                                    </th>
+                                    <%}%>
+                                    <%if(clientes.InformesFinales=="Sin presentar"){%>
+                                        <th class="text-light bg-secondary">
+                                            <%=clientes.InformesFinales%>
+                                        </th>
+                                        <%}%>
+                                        <%if((clientes.InformesFinales!="Sin presentar")&&(clientes.InformesFinales=="EnGestion")&&(clientes.InformesFinales!="ok")){%>
+                                            <th class="text-light ">
+                                                <%=clientes.InformesFinales%>
+                                            </th>
+                                            <%}%>
+                            <!-- // -->
+                            <!-- Presentacion final -->
+                            <%if(clientes.PresentacionFinal=="ok"){%>
+                                <th class="text-light bg-success">
                                     <%=clientes.PresentacionFinal%>
                                 </th>
-                                
-                                <th>
+                                <%}%>
+                                <%if(clientes.PresentacionFinal=="EnGestion"){%>
+                                    <th class="text-light bg-warning">
+                                        <%=clientes.PresentacionFinal%> 
+                                    </th>
+                                    <%}%>
+                                    <%if(clientes.PresentacionFinal=="Sin presentar"){%>
+                                        <th class="text-light bg-secondary">
+                                            <%=clientes.PresentacionFinal%>
+                                        </th>
+                                        <%}%>
+                                        <%if((clientes.PresentacionFinal!="Sin presentar")&&(clientes.PresentacionFinal=="EnGestion")&&(clientes.PresentacionFinal!="ok")){%>
+                                            <th class="text-light ">
+                                                <%=clientes.PresentacionFinal%>
+                                            </th>
+                                            <%}%>
+                            <!-- // -->
+                            <!-- HabilitacionObra -->
+                            <%if(clientes.HabilitacionObra=="ok"){%>
+                                <th class="text-light bg-success">
                                     <%=clientes.HabilitacionObra%>
                                 </th>
+                                <%}%>
+                                <%if(clientes.HabilitacionObra=="EnGestion"){%>
+                                    <th class="text-light bg-warning">
+                                        <%=clientes.HabilitacionObra%> 
+                                    </th>
+                                    <%}%>
+                                    <%if(clientes.HabilitacionObra=="Sin presentar"){%>
+                                        <th class="text-light bg-secondary">
+                                            <%=clientes.HabilitacionObra%>
+                                        </th>
+                                        <%}%>
+                                        <%if((clientes.HabilitacionObra!="Sin presentar")&&(clientes.HabilitacionObra=="EnGestion")&&(clientes.HabilitacionObra!="ok")){%>
+                                            <th class="text-light ">
+                                                <%=clientes.HabilitacionObra%>
+                                            </th>
+                                            <%}%>
+                            <!-- // -->
+                          
                             
-                                <th><a href="/edit/<%=clientes.id%>" class="btn btn-outline-info">editar</a>
+                                <th ><a href="/edit/<%=clientes.id%>" class="btn btn-outline-info">editar</a>
                                 </th>
                                
                             </tr>
