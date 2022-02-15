@@ -32,16 +32,16 @@
       </div>
       <br>
       <div class="table-responsive">
-        <table class="table table-striped table-bordered table-sm table-hover " id="TablaHistorial" style="width: 100%">
+        <table class="table  table-bordered table-sm table-hover " id="TablaHistorial" style="width: 100%">
           <thead>
             <tr>
               <th>
                 <h4>Etapa de la tarea</h4>
-                <Button>Pl</Button>
+                <!-- <Button>Pl</Button>
                 <button>1p</button> 
                 <button>2p</button> 
                 <button>O</button> 
-                <button>C</button> 
+                <button>C</button>  -->
               </th>
               <th>
                 <h4>Fecha de tarea realizada</h4>
@@ -63,9 +63,41 @@
             <% results.forEach((clientes)=>{ %>
 
               <tr>
-                <th>
-                  <%=clientes.EtapaTarea_sub%>
-                </th>
+                <%if (clientes.EtapaTarea_sub=="1ra parte"){%>
+                  <th class="bg-primary text-light">
+                    <%=clientes.EtapaTarea_sub%>
+                  </th>
+                  <%}%>
+                  <%if (clientes.EtapaTarea_sub=="Sin Presentar"){%>
+                    <th class="bg-success text-light">
+                      <%=clientes.EtapaTarea_sub%>
+                    </th>
+                    <%}%>
+                    <%if (clientes.EtapaTarea_sub=="2da parte"){%>
+                      <th class="bg-info">
+                        <%=clientes.EtapaTarea_sub%>
+                      </th>
+                      <%}%>
+                      <%if (clientes.EtapaTarea_sub==null){%>
+                        <th class="bg-warning">
+                          <%=clientes.EtapaTarea_sub%>
+                        </th>
+                        <%}%>
+                        <%if (clientes.EtapaTarea_sub=="Caos"){%>
+                          <th class="bg-info">
+                            <%=clientes.EtapaTarea_sub%>
+                          </th>
+                          <%}%>
+                          <%if (clientes.EtapaTarea_sub=="Obras"){%>
+                            <th class="bg-info">
+                              <%=clientes.EtapaTarea_sub%>
+                            </th>
+                            <%}%>
+                            <%if (clientes.EtapaTarea_sub=="Finalizada"){%>
+                              <th class="bg-info">
+                                <%=clientes.EtapaTarea_sub%>
+                              </th>
+                              <%}%>
                 <th>
                   <%=moment(clientes.Fecha_Tarea_sub).format('DD-MM-YYYY')%>
 
