@@ -46,11 +46,11 @@
             <h4>Tarea realizada</h4>
           </th>
           <th> <h4>Etapa de la tarea</h4>
-            <!-- <Button>Prel</Button>
+            <Button onclick="$('.filters th').eq($(api.column(colIdx).header()).index())">Prel</Button>
             <button>1p</button> 
             <button>2</button> 
             <button>Obras</button> 
-            <button>Caos</button>  -->
+            <button>Caos</button> 
           </th>
           <th>
             <h4>Proxima tarea</h4>
@@ -83,8 +83,7 @@
   <script  type="text/javascript" src="https://cdn.datatables.net/datetime/1.1.1/css/dataTables.dateTime.min.css"></script>
   <script  type="text/javascript" src="https://cdn.datatables.net/datetime/1.1.1/js/dataTables.dateTime.min.js"></script>
   <script> 
-
-    $(document).ready(function () {
+    $(document).ready(function  () {
       
       var editar = function (tbody, table) {
       }
@@ -123,6 +122,7 @@ $.fn.dataTable.moment( 'L', 'es');
                 'input',
                 $('.filters th').eq($(api.column(colIdx).header()).index())
               )
+            
                 .off('keyup change')
                 .on('keyup change', function (e) {
                   e.stopPropagation();
@@ -181,7 +181,6 @@ $.fn.dataTable.moment( 'L', 'es');
     });
 
   </script>
-          <!-- // { "data": "FechaLimite",type: 'date-dd-mmm-yyyy', targets: 0 }, -->
 
 </body>
 
