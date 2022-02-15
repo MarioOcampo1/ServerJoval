@@ -12,6 +12,7 @@
 
 <body>
   <%- include('./partials/menusuperior.ejs')%>
+  <%if (results){%>
     <h1 class="text-center">Interferencias</h1>
     <div class="table-responsive-sm">
       <table id="Interferencias" class="table table-hover table-sm table-bordered " style="width: 95%">
@@ -24,7 +25,7 @@
               N° de carpeta
             </th>
             <th>
-              Telefonica
+              Telefonica 
             </th>
             <th>
 
@@ -143,19 +144,29 @@
                 return '<a href="/editarTareas/' + row.id + '" class="btn btn-outline btn-sm">' + row.NCarpeta + '</a>'
               }
             },
-            { "data": "intTelefonica", },
-            { "data": "intAgua" },
-            { "data": "intCloaca" },
-            { "data": "intElectricidad" },
-            { "data": "intClaro" },
-            { "data": "intArnet" },
-            { "data": "intArsat" },
-            { "data": "intTelecom" },
+            { "data": "intTelefonica", render: function(data,type,row){
+              return 'Estado: '+row.intTelefonica + '. Vencimiento: '+moment(row.intTelefonicaObtenida).format("d-MM-YY")+''
+            } },
+            { "data": "intAgua", render: function(data,type,row){
+              return 'Estado: '+row.intAgua + '. Vencimiento: '+moment(row.intAguaObtenida).format("d-MM-YY")+'' }},
+            { "data": "intCloaca", render: function(data,type,row){
+              return 'Estado: '+row.intCloaca + '. Vencimiento: '+moment(row.intCloacasObtenida).format("d-MM-YY")+'' } },
+            { "data": "intElectricidad", render: function(data,type,row){
+              return 'Estado: '+row.intElectricidad + '. Vencimiento: '+moment(row.intElectricidadObtenida).format("d-MM-YY")+'' } },
+            { "data": "intClaro", render: function(data,type,row){
+              return 'Estado: '+row.intClaro + '. Vencimiento: '+moment(row.intClaroObtenida).format("d-MM-YY")+'' } },
+            { "data": "intArnet", render: function(data,type,row){
+              return 'Estado: '+row.intArnet + '. Vencimiento: '+moment(row.intArnetObtenida).format("d-MM-YY")+'' } },
+            { "data": "intArsat" , render: function(data,type,row){
+              return 'Estado: '+row.intArsat + '. Vencimiento: '+moment(row.intArsatObtenida).format("d-MM-YY")+'' }},
+            { "data": "intTelecom", render: function(data,type,row){
+              return 'Estado: '+row.intTelecom + '. Vencimiento: '+moment(row.intAguaObtenida).format("d-MM-YY")+'' } },
           ],
         });
       });
 
     </script>
+    <%}%>
 </body>
 
 </html>

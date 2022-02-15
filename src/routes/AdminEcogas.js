@@ -22,7 +22,7 @@ router.get('/', (req, res) => {
     res.render('index.ejs');
 })
 router.get('/interferencias', (req, res) => {
-    const sql = 'SELECT c.id, c.Nombre, c.NCarpeta, c.intTelefonica, c.intAgua, c.intCloaca, c.intClaro, c.intElectricidad, c.intClaro, c.intArnet, c.intArsat, c.intTelecom FROM clientes c';
+    const sql = 'SELECT c.id, c.Nombre, c.NCarpeta, c.intTelefonica, c.intTelefonicaPedida, c.intTelefonicaObtenida, c.intAgua, c.intAguaPedida, c.intAguaObtenida, c.intCloaca,c.intCloacasPedida, c.intCloacasObtenida, c.intClaro, c.intClaroPedida, c.intClaroObtenida, c.intElectricidad, c.intElectricidadPedida, c.intElectricidadObtenida, c.intArnet ,  c.intArnetPedida, c.intArnetObtenida,c.intArsat, c.intArsatPedida, c.intArsatObtenida, c.intTelecomPedida, c.intTelecomObtenida, c.intTelecom FROM clientes c';
     res.locals.moment = moment;
     connection.query(sql, (error, results) => {
         if (error) console.log(error);
@@ -36,7 +36,7 @@ router.get('/interferencias', (req, res) => {
 
 })
 router.get('/interferencias/info', (req, res) => {
-    const sql = 'SELECT c.id, c.Nombre, c.NCarpeta, c.intTelefonica, c.intAgua, c.intCloaca, c.intClaro, c.intElectricidad, c.intClaro, c.intArnet,c.intArsat, c.intTelecom FROM clientes c';
+    const sql = 'SELECT c.id, c.Nombre, c.NCarpeta, c.intTelefonica, c.intTelefonicaPedida, c.intTelefonicaObtenida, c.intAgua, c.intAguaPedida, c.intAguaObtenida, c.intCloaca,c.intCloacasPedida, c.intCloacasObtenida, c.intClaro, c.intClaroPedida, c.intClaroObtenida, c.intElectricidad, c.intElectricidadPedida, c.intElectricidadObtenida, c.intArnet ,  c.intArnetPedida, c.intArnetObtenida,c.intArsat, c.intArsatPedida, c.intArsatObtenida, c.intTelecomPedida, c.intTelecomObtenida, c.intTelecom FROM clientes c';
     res.locals.moment = moment;
     connection.query(sql, (error, results) => {
         if (error) console.log( error);

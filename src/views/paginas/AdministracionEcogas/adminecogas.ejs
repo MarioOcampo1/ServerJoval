@@ -168,7 +168,6 @@ $.fn.dataTable.moment( 'L', 'es');
           { "width":"10%","data": "ProximaTarea" },
           { "width":"10%","data":  "FechaLimite", render:function(data,type,row){
             var oldDate = data;
-            console.log("oldaDate contiene"+ oldDate);
     momentObj = moment(oldDate).format("d-MMMM-YYYY"),
     newDate = momentObj;
     return newDate;
