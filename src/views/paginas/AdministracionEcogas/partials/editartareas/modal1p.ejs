@@ -293,23 +293,22 @@
                                         <input hidden checked type="radio"
                                         name="HIDRAULICA1"
                                         id="HIDRAULICA1"
-                                        value="<%=user.Hidraulica%>"> 
+                                        value="No corresponde"> 
                                     </form-check>
                                 <%}else{%>
 
                                 <div class="card-title">
-                                    Hidraúlica valor actual: <%=user.Hidraulica%></div>
+                                    Hidraúlica </div>
                                 <div class="card-text">
                                     <select class="form-control"
                                         id="HIDRAULICA1"
                                         name="HIDRAULICA1"
-                                        value="<%=user.Hidraulica%>"
-                                        placeholder="<%=user.Hidraulica%>">
+                                       placeholder="<%=user.HidraulicaVisacion%>">
                                         <option  id="HIDRAULICA1"
                                         name="HIDRAULICA1"
-                                            value="NoModificada"
-                                            selected>
-                                            <%=user.Hidraulica%>
+                                            value= "<%=user.HidraulicaVisacion%>"
+                                            selected hidden>
+                                            <%=user.HidraulicaVisacion%>
                                         </option>
                                         <option  id="HIDRAULICA1"
                                         name="HIDRAULICA1"
@@ -323,18 +322,16 @@
                                         <option  id="HIDRAULICA1"
                                         name="HIDRAULICA1" value="ok">Ok
                                         </option>
-                                        <option  id="HIDRAULICA1"
-                                        name="HIDRAULICA1" value="NC">No
-                                            corresponde</option>
+                                      
 
                                     </select>
                                 </div>
                                 <%}%>
-                                <%if (user.Ferrocarriles=="NC"){%>
+                                <%if (user.FerrocarrilesVisacion=="NC"){%>
                                     <input hidden checked type="radio"
                                     name="FERROCARRIL1"
                                     id="FERROCARRIL1"
-                                    value="<%=user.FERROCARRIL1%>"> 
+                                    value="<%=user.FerrocarrilesVisacion%>"> 
                                 <%}else{%>
 
                                 <div class="card-title">
@@ -343,12 +340,12 @@
                                     <select class="form-control"
                                         id="FERROCARRIL1"
                                         name="FERROCARRIL1"
-                                        value="<%=user.Ferrocarriles%>"
-                                        placeholder="<%=user.Ferrocarriles%>">
-                                        <option
-                                            value="<%=user.Ferrocarriles%>"
+                                        value="<%=user.FerrocarrilesVisacion%>"
+                                        placeholder="<%=user.FerrocarrilesVisacion%>">
+                                        <option hidden
+                                            value="<%=user.FerrocarrilesVisacion%>"
                                             selected>
-                                            <%=user.Ferrocarriles%>
+                                            <%=user.FerrocarrilesVisacion%>
                                         </option>
                                         <option
                                             value="Sin presentar">
@@ -359,8 +356,7 @@
                                         </option>
                                         <option value="ok">ok
                                         </option>
-                                        <option value="NC">No
-                                            corresponde</option>
+                                       
                                     </select>
                                 </div>
                                 <%}%>
@@ -368,7 +364,7 @@
                                     <input hidden checked type="radio"
                                     name="DNV1"
                                     id="DNV1"
-                                    value="<%=user.DNV%>"> 
+                                    value="No corresponde"> 
                                 <%}else{%>
                                
                                 <div class="card-title">DNV
@@ -376,12 +372,12 @@
                                 <div class="card-text">
                                     <select class="form-control"
                                         id="DNV1" name="DNV1"
-                                        value="<%=user.DNV%>"
-                                        placeholder="<%=user.DNV%>">
-                                        <option
-                                            value="<%=user.DNV%>"
+                                        value="<%=user.DNVVisacion%>"
+                                        placeholder="<%=user.DNVVisacion%>">
+                                        <option hidden
+                                            value="<%=user.DNVVisacion%>"
                                             selected>
-                                            <%=user.DNV%>
+                                            <%=user.DNVVisacion%>
                                         </option>
                                         <option
                                             value="Sin presentar">
@@ -392,8 +388,7 @@
                                         </option>
                                         <option value="ok">ok
                                         </option>
-                                        <option value="NC">No
-                                            corresponde</option>
+                                        
                                     </select>
                                 </div>
                                 <%}%>

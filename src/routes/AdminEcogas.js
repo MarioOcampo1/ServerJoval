@@ -563,6 +563,11 @@ router.post('/actualizarEtapas/:id', (req, res) => {
     var EstudioImpactoAmbiental= req.body.EstudioImpactoAmbiental;
     //Permisos
     var DPV = req.body.DPV;
+    var DNV = req.body.DNV;
+    var DNVVisacion = req.body.DNV1;
+    var HidraulicaVisacion = req.body.HIDRAULICA1;
+    var FerrocarrilesVisacion = req.body.FERROCARRIL1;
+
     var PRIVADO = req.body.PRIVADO;
     var OTROSPERMISOS = req.body.Otrospermisos;
     var PerMunicipal = req.body.PerMunicipal;
@@ -715,15 +720,7 @@ console.log("Documentacion terreno: " +DocumentacionTerreno);
 
    
 
-    if (req.body.DNV1 == req.body.DNV) {
-        var DNV = req.body.DNV;
-    }
-    else {
-        if (req.body.DNV1 != "" && req.body.DNV1 != null ) {
-            var DNV = req.body.DNV;
-        } else { var DNV = req.body.DNV1; }
-    }
-
+   
     if (req.body.Irrigacion1 == Irrigacion) {
 
          Irrigacion = req.body.Irrigacion1;
@@ -769,7 +766,6 @@ console.log("Valor final de hidraulica: " + HIDRAULICA);
     if ((DNV == "ok" || DNV == "NC") && (PerMunicipal == "ok" || PerMunicipal == "NC") && (DPV == "ok" || DPV == "NC") && (Irrigacion == "ok" || Irrigacion == "NC") && (HIDRAULICA == "ok" || HIDRAULICA == "NC") && (FERROCARRIL == "ok" || FERROCARRIL == "NC") && (PRIVADO == "ok" || PRIVADO == "NC") && (OTROSPERMISOS == "ok" || OTROSPERMISOS == "NC")) {
         Permisos = "ok";
     } else { Permisos = "EnGestion" };
-    console.log("Valor BODY de DNV: " + req.body.DNV + " Valor BODY de DNV1: " +req.body.DNV1 );
     console.log("Valor final de DNV: " + DNV);
 console.log("El valor de acta de inicio es:" + ActaDeInicio);
 
@@ -820,7 +816,7 @@ console.log("/////////////////");
         intElectricidadPedida: intElectricidadPedida, intTelecomObtenida: intTelecomObtenida, intTelecomPedida: intTelecomPedida, intTelefonica: intTelefonica, intClaro: intClaro, intAgua: intAgua,
         intCloaca: intCloacas, intElectricidad: intElectricidad, intTelecom: intTelecom, intArnet: intArnet, intArsat: intArsat,
         //Permisos
-        DNV: DNV, DPV: DPV, Irrigacion: Irrigacion,
+        DNV: DNV, DPV: DPV, Irrigacion: Irrigacion, DNVVisacion:DNVVisacion, HidraulicaVisacion: HidraulicaVisacion, FerrocarrilesVisacion: FerrocarrilesVisacion,
         Hidraulica: HIDRAULICA, Privado: PRIVADO, Ferrocarriles: FERROCARRIL, Otrospermisos: OTROSPERMISOS,
         Interferencias: Interferencias, Permisos: Permisos, Programadeseguridad: Programadeseguridad,PerMunicipal: PerMunicipal,
         //Finalizacion
