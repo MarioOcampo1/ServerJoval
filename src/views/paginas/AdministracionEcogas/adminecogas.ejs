@@ -46,11 +46,11 @@
             <h4>Tarea realizada</h4>
           </th>
           <th> <h4>Etapa de la tarea</h4>
-            <Button onclick="$('.filters th').eq($(api.column(colIdx).header()).index())">Prel</Button>
-            <button>1p</button> 
+            <!-- <Button onclick="$('.filters th').eq($(api.column(colIdx).header()).index())">Prel</Button> -->
+            <!-- <button>1p</button> 
             <button>2</button> 
             <button>Obras</button> 
-            <button>Caos</button> 
+            <button>Caos</button>  -->
           </th>
           <th>
             <h4>Proxima tarea</h4>
@@ -85,13 +85,7 @@
   <script> 
     $(document).ready(function  () {
       
-      var editar = function (tbody, table) {
-      }
-      $.fn.dataTable.moment('D/M/YYYY');
-      moment.locale('es');
-$.fn.dataTable.moment( 'L', 'es');
-
-      $('#comunicacionDiaria thead tr')
+        $('#comunicacionDiaria thead tr')
         .clone(true)
         .addClass('filters')
         .appendTo('#comunicacionDiaria thead');
@@ -114,7 +108,8 @@ $.fn.dataTable.moment( 'L', 'es');
               );
               var title = $(cell).text();
               $(cell).html(
-                '<input type="text" placeholder="' + title + '" />',
+                '<input type="text" placeholder="'+title+ '" />',
+              
              );
 
               // On every keypress in this input
@@ -137,7 +132,7 @@ $.fn.dataTable.moment( 'L', 'es');
                     .column(colIdx)
                     .search(
                       this.value != ''
-                        ? regexr.replace('{search}', '(((' + this.value + ')))')
+                        ? regexr.replace('{search}', '(((' + 'this.value' + ')))')
                         : '',
                       this.value != '',
                       this.value == ''
@@ -148,6 +143,7 @@ $.fn.dataTable.moment( 'L', 'es');
                     .focus()[0]
                     .setSelectionRange(cursorPosition, cursorPosition);
                 });
+
             });
         },
         "language": { url: "//cdn.datatables.net/plug-ins/1.11.3/i18n/es_es.json" },
