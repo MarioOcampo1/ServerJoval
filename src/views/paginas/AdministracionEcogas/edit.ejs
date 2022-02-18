@@ -68,7 +68,7 @@
               <label for="Departamento">Departamento</label>
               <select class="form-control" id="Ubicacion" name="Ubicacion">
                 <option hidden value="<%=user.Ubicacion%>" selected>
-                  <%=user.Ubicacion%>>
+                  <%=user.Ubicacion%>
                 </option>
                 <option value="Ciudad de Mendoza">Ciudad de Mendoza </option>
                 <option value="Godoy Cruz">Godoy Cruz</option>
@@ -78,7 +78,7 @@
                 <option value="San Martín">San Martín</option>
                 <option value="Malargüe">Malargüe</option>
                 <option value="San Carlos">San Carlos</option>
-                <option value="GralAlvear">Gral Alvear</option>
+                <option value="Gral Alvear">Gral Alvear</option>
                 <option value="Tunuyan">Tunuyán</option>
                 <option value="Tupungato">Tupungato</option>
                 <option value="San Rafael">San Rafael</option>
@@ -146,7 +146,7 @@
 
                   <%if (user.Ferrocarriles=="NC" ){%>
                     <input checked type="radio" name="FERROCARRIL" id="FERROCARRIL" value="NC"> No
-                    corresponde
+                    
                     <%}else{%>
                       <input type="radio" name="FERROCARRIL" id="FERROCARRIL" value="NC"> No
                       <%}%>
@@ -249,7 +249,7 @@
                     <input checked type="radio" name="Irrigacion" id="Irrigacion" value="NC"> No
                     <%}else{%>
                       <input type="radio" name="Irrigacion" id="Irrigacion" value="NC">
-                      No corresponde
+                      No 
                       <%}%>
 
           </form-check>
@@ -274,7 +274,7 @@
                   <%if (user.Privado=="NC" ){%>
                     <input checked type="radio" name="Privado" id="Privado" value="NC"> No
                     <%}else{%>
-                      <input type="radio" name="Privado" id="Privado" value="NC">No corresponde
+                      <input type="radio" name="Privado" id="Privado" value="NC">No 
                       <%}%>
           </form-check>
         </div>

@@ -618,14 +618,14 @@ var DocumentacionTerreno, DocumentacionContractual, Tecnica,PermisosEspeciales,D
         DocumentacionSociedad = "EnGestion";
     }
     //Documentacion Contractual
-    if(Cotizacion == "ok" ){
+    if(Cotizacion == "ok" && (Contrato=="Ok(Preliminar)" || Contrato=="ok") ){
         DocumentacionContractual = "ok";
     }
-    if(Cotizacion == "EnGestion" ){
+    if(Cotizacion == "EnGestion" || Contrato == "EnGestion" ){
         DocumentacionContractual = "EnGestion";
     }
     // Comercial
-    if(Contrato == "ok" && Presupuesto =="ok" && Sucedaneo =="ok" && (NotaDeExcepcion =="ok" || NotaDeExcepcion =="NC") ){
+    if((Contrato == "ok" ||Contrato == "Ok(Preliminar)")  && Presupuesto =="ok" && Sucedaneo =="ok" && (NotaDeExcepcion =="ok" || NotaDeExcepcion =="NC") ){
         Comercial = "ok";
     }
     if(Contrato == "EnGestion" || Presupuesto =="EnGestion" || Sucedaneo =="EnGestion" || (NotaDeExcepcion =="EnGestion" || NotaDeExcepcion =="NC") ){
