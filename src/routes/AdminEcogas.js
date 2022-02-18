@@ -843,6 +843,7 @@ router.post('/ActualizarEstadoCarpeta/:id', (req, res) => {
         Estado: Estado
     }, id], (error, results) => {
         if (error) console.log( error);
+        
     })
 
 
