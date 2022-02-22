@@ -334,7 +334,6 @@ router.post('/ActualizarProximasTareas/:id', (req, res) => {
     const TareaRealizada = req.body.TareaRealizada;
     const ProximaTarea = req.body.ProximaTarea;
     const Fecha_limite = req.body.Fecha_limite;
-    const EstadoCarpeta = req.body.Estado;
     const Fecha_Tarea_sub = fecha;
     var EtapaTarea = req.body.EtapaTarea;
     var sql = "";
@@ -346,7 +345,7 @@ router.post('/ActualizarProximasTareas/:id', (req, res) => {
 
     if (Fecha_limite) {
         sql = 'Update  clientes set ? where id=?';
-        connection.query(sql, [{ Estado: EstadoCarpeta, EtapaTarea: EtapaTarea, TareaRealizada: TareaRealizada, ProximaTarea: ProximaTarea, Fechalimite: Fecha_limite }, id], (error, results) => {
+        connection.query(sql, [{ EtapaTarea: EtapaTarea, TareaRealizada: TareaRealizada, ProximaTarea: ProximaTarea, Fechalimite: Fecha_limite }, id], (error, results) => {
             if (error) console.log( error);
             console.log("se cargo el estado en tabla clientes");
 
@@ -450,6 +449,7 @@ router.post('/guardarNuevoCliente', (req, res) => {
     var OTROSPERMISOS = req.body.OTROSPERMISOS;
     var TipoDeRed = req.body.TipoDeRed
     var PerMunicipal = req.body.PerMunicipal;
+    var Privado = req.body.Privado;
     // const TipoRed =req.body.Tipos-de-red;
     if (DNV == null) { DNV = ""; }
     if (PerMunicipal == null) { PerMunicipal = ""; }
@@ -474,7 +474,7 @@ router.post('/guardarNuevoCliente', (req, res) => {
     sql = 'Insert into clientes set ?';
     connection.query(sql, {
         Nombre: Nombre, NCarpeta: NCarpeta, Comitente: Comitente, Ubicacion: Departamento, DNV: DNV, DPV: DPV, Irrigacion: IRRIGACION,
-        Hidraulica: HIDRAULICA,PerMunicipal:PerMunicipal, Ferrocarriles: FERROCARRIL, OtrosPermisos: OTROSPERMISOS, TipoDeRed: TipoDeRed
+        Hidraulica: HIDRAULICA,PerMunicipal:PerMunicipal, Ferrocarriles: FERROCARRIL,Privado:Privado, OtrosPermisos: OTROSPERMISOS, TipoDeRed: TipoDeRed
     }, (error, results) => {
         if (error) console.log( error);
 

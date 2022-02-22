@@ -62,12 +62,12 @@
 
               <tr>
                 <%if (clientes.EtapaTarea_sub=="1ra parte"){%>
-                  <th class="bg-primary text-light">
+                  <th class="bg-secondary text-light">
                     <%=clientes.EtapaTarea_sub%>
                   </th>
                   <%}%>
                   <%if (clientes.EtapaTarea_sub=="Sin Presentar"){%>
-                    <th class="bg-success text-light">
+                    <th class="bg-light text-black">
                       <%=clientes.EtapaTarea_sub%>
                     </th>
                     <%}%>
@@ -77,22 +77,22 @@
                       </th>
                       <%}%>
                       <%if (clientes.EtapaTarea_sub==null){%>
-                        <th class="bg-warning">
+                        <th class="bg-dark">
                           <%=clientes.EtapaTarea_sub%>
                         </th>
                         <%}%>
                         <%if (clientes.EtapaTarea_sub=="Caos"){%>
-                          <th class="bg-info">
+                          <th class="bg-warning">
                             <%=clientes.EtapaTarea_sub%>
                           </th>
                           <%}%>
                           <%if (clientes.EtapaTarea_sub=="Obras"){%>
-                            <th class="bg-info">
+                            <th class="bg-success text-light">
                               <%=clientes.EtapaTarea_sub%>
                             </th>
                             <%}%>
                             <%if (clientes.EtapaTarea_sub=="Finalizada"){%>
-                              <th class="bg-info">
+                              <th class="bg-danger text-light">
                                 <%=clientes.EtapaTarea_sub%>
                               </th>
                               <%}%>
