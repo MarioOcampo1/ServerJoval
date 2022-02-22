@@ -149,8 +149,10 @@
         </div>
     </div>
             <br>
-            <form action=" /actualizarEtapas/<%=user.id%>" id="actualizarEtapas" method="post">
+            <form action=" /actPrelCarpEcogas/<%=user.id%>" id="actPrelCarpEcogas" method="post">
                 <input type="hidden" name="Nombre" id="Nombre" value="<%= user.Nombre%>">
+                <input type="hidden" name="id" id="id" value="<%= user.id%>">
+            
                 <div class=" container">
                     
                                     <div class="table-responsive">
@@ -164,14 +166,28 @@
                                                 <tr class="table-active">
                                                    
                                                     <%- include('./partials/editartareas/modalpreliminar.ejs')%>
-                                                    <%- include('./partials/editartareas/modal1p.ejs')%>
-                                                    <%- include('./partials/editartareas/modal2p-1de4Inicio.ejs')%>
+            </form>
+            <form action=" /act1pCarpEcogas/<%=user.id%>" id="act1pCarpEcogas" method="post">
+                <input type="hidden" name="Nombre" id="Nombre" value="<%= user.Nombre%>">
+                <input type="hidden" name="id" id="id" value="<%= user.id%>">
+        
+                <%- include('./partials/editartareas/modal1p.ejs')%>
+            </form>
+            <form action=" /act2pCarpEcogas/<%=user.id%>" id="act2pCarpEcogas" method="post">
+                <input type="hidden" name="Nombre" id="Nombre" value="<%= user.Nombre%>">
+                <input type="hidden" name="id" id="id" value="<%= user.id%>">
+                <%- include('./partials/editartareas/modal2p-1de4Inicio.ejs')%>
                                                     <%- include('./partials/editartareas/modal2p-2de4Permisos.ejs')%>
                                                     <%- include('./partials/editartareas/modal2p-3de4Interferencias.ejs')%>
+            
                                                     <%- include('./partials/editartareas/modal2p-4de4Final.ejs')%>
-
-
-                                                                    
+                                                </form>
+                                                <form action=" /actObrasCarpEcogas/<%=user.id%>" id="actObrasCarpEcogas" method="post">
+                        <input type="hidden" name="id" id="id" value="<%= user.id%>">
+                        <input type="hidden" name="Nombre" id="Nombre" value="<%= user.Nombre%>">
+                                                    <input type="hidden" name="PCaprobado" id="PCaprobado" value="<%= user.PCaprobado%>">
+                                                    <input type="hidden" name="Avisos" id="Avisos" value="<%= user.Avisos%>">
+                
                                                     <!-- Obras -->
                                                     <th>
                                                         <button type="button" class="btn btn-success"
@@ -205,11 +221,11 @@
                                                                                         id="ActasDeInicio"
                                                                                         name="ActasDeInicio"
                                                                                         value="<%= user.ActasDeInicio%>"
-                                                                                        placeholder="<%= user.ActaDeInicio%>">
+                                                                                        placeholder="<%= user.ActasDeInicio%>">
                                                                                         <option hidden
                                                                                             value="<%=user.ActaDeInicio%>"
                                                                                             selected>
-                                                                                            <%=user.ActasDeInicio%>
+                                                                                            <%=user.ActaDeInicio%>
                                                                                         </option>
                                                                                         <option value="Sin presentar">
                                                                                             Sin presentar
@@ -306,8 +322,8 @@
 
                                                                                     </select>
                                                                                 </div>
-                                                                                <div class="card-title">Plano
-                                                                                    aprobado</div>
+                                                                                <div class="card-title">PC entregado a inspección
+                                                                                    </div>
                                                                                 <div class="card-text">
                                                                                     <select class="form-control"
                                                                                         id="PCEntregadoInspeccion"
@@ -409,13 +425,19 @@
                                                                                 Cerrar</button>
                                                                             <button type="submit"
                                                                                 class="btn btn-primary"
-                                                                                form="actualizarEtapas">Guardar
+                                                                                form="actObrasCarpEcogas">Guardar
                                                                                 Cambios</button>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                     </th>
+                                                </form>
+                                                <form action=" /actCaosCarpEcogas/<%=user.id%>" id="actCaosCarpEcogas" method="post">
+                                                    <input type="hidden" name="id" id="id" value="<%= user.id%>">
+                                                    <input type="hidden" name="Nombre" id="Nombre" value="<%= user.Nombre%>">
+                                                  <input type="hidden" name="PCaprobado" id="PCaprobado" value="<%= user.PCaprobado%>">
+                                                  <input type="hidden" name="Avisos" id="Avisos" value="<%= user.Avisos%>">
                                                     <!--Caos-->
                                                     <th>
                                                         <button type="button" class="btn btn-success"
@@ -552,7 +574,7 @@
                                                                                 Cerrar</button>
                                                                             <button type="submit"
                                                                                 class="btn btn-primary"
-                                                                                form="actualizarEtapas">Guardar
+                                                                                form="actCaosCarpEcogas">Guardar
                                                                                 Cambios</button>
                                                                         </div>
                                                                     </div>
@@ -560,9 +582,11 @@
                                                             </div>
                                                     </th>
 
+                                                </form>
 
-
-
+                                                <form action=" /actFinalCarpEcogas/<%=user.id%>" id="actFinalCarpEcogas" method="post">
+                                                    <input type="hidden" name="Nombre" id="Nombre" value="<%= user.Nombre%>">
+                                                    <input type="hidden" name="id" id="id" value="<%= user.id%>">
 
 
                                                     <!--Finalizada-->
@@ -597,7 +621,7 @@
                                                                                     name="PresentacionFinal"
                                                                                     value="<%= user.PresentacionFinal%>"
                                                                                     placeholder="<%= user.PresentacionFinal%>">
-                                                                                    <option
+                                                                                    <option hidden
                                                                                         value="<%=user.PresentacionFinal%>"
                                                                                         selected>
                                                                                         <%=user.PresentacionFinal%>
@@ -634,13 +658,16 @@
                                                                             data-dismiss="modal"
                                                                             onclick="CerrarModal()">Cerrar</button>
                                                                         <button type="submit" class="btn btn-primary"
-                                                                            form="actualizarEtapas">Guardar
+                                                                            form="actFinalCarpEcogas">Guardar
                                                                             Cambios</button>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </th>
+                                                </form>
+                                                <form action=" /actualizarEtapas/<%=user.id%>" id="actPrelCarpEcogas" method="post">
+
                                             </thead>
                                             <tbody>
                                                 <tr>

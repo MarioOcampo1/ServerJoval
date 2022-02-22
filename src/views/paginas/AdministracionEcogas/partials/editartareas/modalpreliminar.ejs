@@ -93,7 +93,7 @@
                             <div class="card p-3 border-secondary">
                                 <div class="card-title">
                                     <label
-                                        for="DocumentaciónSociedad"
+                                        for="DocumentacionComitente"
                                         class="mx-auto">
                                         Documentación del
                                         comitente</label>
@@ -170,7 +170,7 @@
                                             name="DniComitente"
                                             id="DniComitente"
                                             maxlength="10"
-                                            placeholder="XX.XXX.XXX">
+                                            placeholder="<%= user.DniComitente%>">
 
                                         </select>
                                     </div>
@@ -208,7 +208,7 @@
                                 <label for="Contrato"> Contrato
                                     preliminar</label>
                                 <select class="form-control"
-                                    id="Contrato" name="Contrato"
+                                    id="ContratoPreliminar" name="ContratoPreliminar"
                                     value="<%= user.Contrato%>"
                                     placeholder="<%= user.Contrato%>">
                                     <option
@@ -237,7 +237,7 @@
                                 data-dismiss="modal"
                                 onclick="CerrarModal()">Cerrar</button>
                             <button type="submit"
-                                form="actualizarEtapas"
+                                form="actPrelCarpEcogas"
                                 class="btn btn-primary">Guardar
                                 Cambios</button>
                         </div>
