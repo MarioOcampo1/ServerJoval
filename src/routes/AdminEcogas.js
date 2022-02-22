@@ -529,9 +529,15 @@ var DocumentacionTerreno;
     if(Mensura == "ok" && TituloDePropiedad == "ok" ){
         DocumentacionTerreno = "ok";
     }
+    if(Mensura == "EnGestion" || TituloDePropiedad == "EnGestion" ){
+        DocumentacionTerreno = "En gestion";
+    }
      //Documentacion Sociedad
     if(ActaConstitutiva == "ok" && ActaCargoVigente == "ok" ){
         DocumentacionSociedad = "ok";
+    }
+    if(ActaConstitutiva == "EnGestion" || ActaCargoVigente == "EnGestion" ){
+        DocumentacionSociedad = "EnGestion";
     }
      //Documentacion Contractual
     if(Cotizacion == "ok" && (Contrato=="Ok(Preliminar)" || Contrato=="ok") ){
