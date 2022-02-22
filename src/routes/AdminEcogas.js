@@ -176,9 +176,18 @@ router.get('/edit/:id', (req, res) => {
     })
 })
 router.get('/historialcarpeta/:Nombre', (req, res) => {
-    const id = req.params.id;
+   var id;
     const Nombre = req.params.Nombre;
-    const sql = 'SELECT c.* FROM historialdecambios c WHERE Nombre_sub =?';
+    var sql = 'SELECT id FROM clientes WHERE Nombre =?';
+    connection.query(sql, [Nombre], (error, results) => {
+        if (error) console.log( error);
+        if (results.length > 0) {
+          
+        id= Object.values(results[0]);
+        }
+    })
+
+    sql = 'SELECT c.* FROM historialdecambios c WHERE Nombre_sub =?';
     res.locals.moment = moment;
     connection.query(sql, [Nombre], (error, results) => {
         if (error) console.log( error);
