@@ -449,16 +449,16 @@ router.post('/guardarNuevoCliente', (req, res) => {
     var OTROSPERMISOS = req.body.OTROSPERMISOS;
     var TipoDeRed = req.body.TipoDeRed
     var PerMunicipal = req.body.PerMunicipal;
-    var Privado = req.body.Privado;
+    var Privado = req.body.PRIVADO;
     // const TipoRed =req.body.Tipos-de-red;
-    if (DNV == null) { DNV = ""; }
-    if (PerMunicipal == null) { PerMunicipal = ""; }
+    if (DNV == null) { DNV = "NC"; }
+    if (PerMunicipal == null) { PerMunicipal = "NC"; }
 
-    if (DPV == null) { DPV = ""; }
-    if (IRRIGACION == null) { IRRIGACION = ""; }
-    if (HIDRAULICA == null) { HIDRAULICA = ""; }
-    if (FERROCARRIL == null) { FERROCARRIL = ""; }
-    if (OTROSPERMISOS == null) { OTROSPERMISOS = ""; }
+    if (DPV == null) { DPV = "NC"; }
+    if (IRRIGACION == null) { IRRIGACION = "NC"; }
+    if (HIDRAULICA == null) { HIDRAULICA = "NC"; }
+    if (FERROCARRIL == null) { FERROCARRIL = "NC"; }
+    if (OTROSPERMISOS == null) { OTROSPERMISOS = "NC"; }
     var sql = 'Insert into adgastareas set ?';
     connection.query(sql, {
         Nombre: Nombre
