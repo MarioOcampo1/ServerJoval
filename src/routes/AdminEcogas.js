@@ -337,12 +337,7 @@ router.post('/ActualizarProximasTareas/:id', (req, res) => {
     const Fecha_Tarea_sub = fecha;
     var EtapaTarea = req.body.EtapaTarea;
     var sql = "";
-    if (EtapaTarea != "" && EtapaTarea != null ) {
-
-    }
-
-    console.log("Etapa tarea contiene:" + EtapaTarea);
-
+   
     if (Fecha_limite) {
         sql = 'Update  clientes set ? where id=?';
         connection.query(sql, [{ EtapaTarea: EtapaTarea, TareaRealizada: TareaRealizada, ProximaTarea: ProximaTarea, Fechalimite: Fecha_limite }, id], (error, results) => {
@@ -362,46 +357,7 @@ router.post('/ActualizarProximasTareas/:id', (req, res) => {
         res.redirect('/historialcarpeta/' + Nombre);
     }
     else {
-        if (TareaRealizada) {
-            sql = 'Update  clientes set ? where id =?';
-            connection.query(sql, [{ Estado: EstadoCarpeta, TareaRealizada: TareaRealizada, ProximaTarea: ProximaTarea }, id], (error, results) => {
-                if (error) console.log( error);
-                console.log("se cargo el estado en tabla clientes");
-
-            })
-            sql = 'Insert into historialdecambios set?';
-            connection.query(sql, [{ Nombre_sub: Nombre, Tarea_Realizada_sub: TareaRealizada, Proxima_Tarea_sub: ProximaTarea, Fecha_Tarea_sub: Fecha_Tarea_sub }], (error, results) => {
-                if (error) {
-                    console.log( error);
-                    setTimeout(function () {
-                        res.redirect('/historialcarpeta/' + Nombre);
-                    }, 3000);
-
-                }
-
-                if (results.length > 0) {
-                    setTimeout(function () {
-                        res.redirect('/historialcarpeta/' + Nombre);
-                    }, 3000);
-                }
-            })
-        }
-        else {
-            sql = 'Update  clientes set ? where id =?';
-            connection.query(sql, [{ Estado: EstadoCarpeta, TareaRealizada: TareaRealizada, ProximaTarea: ProximaTarea }, id], (error, results) => {
-                if (error) console.log( error);
-                if (results.length > 0) {
-                    setTimeout(function () {
-                        res.redirect('/historialcarpeta/' + Nombre);
-                    }, 3000);
-                }
-                setTimeout(function () {
-                    res.redirect('/historialcarpeta/' + Nombre);
-                }, 3000);
-            }
-
-            )
-        }
+        res.redirect(req.get('referer'));
     }
 })
 router.post('/edit/delete/:id', (req, res) => {
@@ -905,155 +861,6 @@ connection.query(sql,[{ PresentacionFinal:PresentacionFinal,HabilitacionObra:Hab
                 res.redirect(req.get('referer'));
 })
 //Opciones de editar tareas POST
-router.post('/actualizarEtapas/:id', (req, res) => {
-    var id = req.body.id;
-    var Nombre = req.body.Nombre;   
-    var sql="";
-    {
-    // //    Premiliminar
-    // var Mensura = req.body.Mensura;
-    // var FechaFirmaContrato = req.body.FechaFirmaContrato;
-    // var TituloDePropiedad = req.body.TituloDePropiedad;
-    // var DocumentacionSociedad = req.body.DocumentacionSociedad;
-    // var ActaCargoVigente = req.body.ActaCargoVigente;
-    // var ActaConstitutiva = req.body.ActaConstitutiva;
-    // var DniComitente = req.body.DniComitente;
-    // var Cotizacion = req.body.Cotizacion;
-    // var Contrato = req.body.Contrato;
-    
-    // PrimeraParte
-    // var Comercial = req.body.Comercial;
-    // var Presupuesto = req.body.Presupuesto;
-    // var Sucedaneo = req.body.Sucedaneo;
-    // var NotaDeExcepcion = req.body.NotaDeExcepcion;
-    // var Pcaprobado = req.body.PCaprobado;
-    // var PlanoTipo = req.body.PlanoTipo;
-    // var CartaOferta = req.body.CartaOferta;
-    // var PlanoAnexo = req.body.PlanoAnexo;
-    // var HidraulicaVisacion = req.body.HIDRAULICA1;
-    // var DNVVisacion = req.body.DNV1;
-    // var FerrocarrilesVisacion = req.body.FERROCARRIL1;
-   
-    // //Segunda Parte
-
-    // var MailAutorizacion = req.body.MailAutorizacion;
-    // var SolicitudInicioObras = req.body.SolicitudInicioObras;
-    // var CertificadoRT = req.body.CertificadoRT;
-    // var Programadeseguridad = req.body.Programadeseguridad;
-    // var CronogramaSyH = req.body.CronogramaSyH;
-    // var SeguroRC = req.body.SeguroRC;
-    // var Monotributos = req.body.Monotributos;
-    // var SeguroAccidentesPersonales = req.body.SeguroAccidentesPersonales;
-   
-    //  //Permisos
-    //  var HIDRAULICA = req.body.HIDRAULICA;
-    //  var FERROCARRIL = req.body.FERROCARRIL;
-    //  var PerMunicipal = req.body.PerMunicipal;
-    //  var DNV = req.body.DNV;
-    //  var DPV = req.body.DPV;
-    //  var Irrigacion = req.body.Irrigacion;
-    //  var PRIVADO = req.body.PRIVADO;
-    //  var OTROSPERMISOS = req.body.Otrospermisos;
-
-
-    // var intTelefonicaPedida = req.body.intTelefonicaPedida;
-    // var intTelefonicaObtenida = req.body.intTelefonicaObtenida;
-    // var intTelefonica = req.body.intTelefonica;
-  
-    // var intClaroPedida = req.body.intClaroPedida;
-    // var intClaroObtenida = req.body.intClaroObtenida;
-    // var intClaro = req.body.intClaro;
-   
-    // var intAguaPedida = req.body.intAguaPedida;
-    // var intAguaObtenida = req.body.intAguaObtenida;
-    // var intAgua = req.body.intAgua;
-   
-    // var intCloacasPedida = req.body.intCloacasPedida;
-    // var intCloacasObtenida = req.body.intCloacasObtenida;
-    // var intCloacas = req.body.intCloaca;
-  
-    // var intElectricidadPedida = req.body.intElectricidadPedida;
-    // var intElectricidadObtenida = req.body.intElectricidadObtenida;
-    // var intElectricidad = req.body.intElectricidad;
-  
-    // var intTelecomPedida = req.body.intTelecomPedida;
-    // var intTelecomObtenida = req.body.intTelecomObtenida;
-    // var intTelecom = req.body.intTelecom;
-
-    // var intArnet = req.body.intArnet;
-    // var intArsat = req.body.intArsat;
-//Seccion Final
-
-// var MatriculaFusionista = req.body.MatriculaFusionista;
-// var MatriculaSoldador = req.body.MatriculaSoldador;
-// var EstudioImpactoAmbiental= req.body.EstudioImpactoAmbiental;
-// var CronogramaAmbiente = req.body.CronogramaAmbiente;
-// var NotaCumplimentoNormativa = req.body.NotaCumplimentoNormativa;
-// var DDJJNAG153 = req.body.DDJJNAG153;
-// var AvisoInicioObraART = req.body.AvisoInicioObraART;
-// var AvisoInicioObraIERIC = req.body.AvisoInicioObraIERIC;
-// var ActaInicioEfectivo = req.body.ActaInicioEfectivo;
-//Obras
-
-// var ActaDeInicio = req.body.ActasDeInicio;
-//     var Permisos = req.body.Permisos;
-//     var Interferencias = req.body.Interferencias;
-//     var LibroOrdenesServicio = req.body.LibroOrdenesServicio;
-//     var LibroNotasPedido = req.body.LibroNotasPedido;
-//     var PCEntregadoInspeccion = req.body.PCEntregadoInspeccion;
-//     var AvisosDeObra = req.body.AvisosDeObra;
-//     var CronogramaFirmadoComitente = req.body.CronogramaFirmadoComitente;
-//     var OrdenServicio = req.body.OrdenServicio;
-
-
-
-   
-    // Caos
-    // var ActasFinales = req.body.ActasFinales;
-    // var PlanosyCroquis = req.body.PlanosyCroquis;
-    // var ConformeDePermisos = req.body.ConformeDePermisos;
-    // var PruebaHermeticidad = req.body.PruebaHermeticidad;
-    // var InformesFinales = req.body.InformesFinales;
-
-// // Final
-// var PresentacionFinal = req.body.PresentacionFinal;
-// var HabilitacionFinal = req.body.HabilitacionFinal;
- }
-//Sin uso
-    // var DocSociedad = req.body.DocumentaciónSociedad;
-    // var PCrevisado = req.body.PCrevisado;
-    // var FechaInicioTrabajos = req.body.FechaInicioTrabajos;
-    // var FechaActividadActual = req.body.FechaActividadActual;
-
-    sql= 'Update clientes_tareasgenerales Set ? where Nombre=?';
-    connection.query(sql,[{ DocumentacionTerreno:DocumentacionTerreno,DocumentacionSociedad:DocumentacionSociedad,DocumentacionContractual:DocumentacionContractual,Comercial:Comercial,Tecnica:Tecnica,PermisosEspeciales:PermisosEspeciales,DocumentacionObra:DocumentacionObra,Seguridad:Seguridad,Interferencias:Interferencias,Permisos:Permisos,PlanDeTrabajo:PlanDeTrabajo,Matriculas:Matriculas,Ambiente:Ambiente,NotaCumplimentoNormativas:NotaCumplimentoNormativa,DDJJNAG153:DDJJNAG153,Avisos:Avisos,
-        DocumentacionInspeccion:DocumentacionInspeccion,ComunicacionObras:ComunicacionObras
-    }, Nombre],
-        (error, results) => {
-
-            if (error) {
-                console.log(error);
-               }
-            })
-     sql = 'Update clientes Set ? where id=?';
-    connection.query(sql, [{
-        ActaInicioEfectivo: ActaInicioEfectivo, ActaDeInicio: ActaInicioEfectivo,
-        LibroOrdenesServicio: LibroOrdenesServicio, LibroNotasPedido: LibroNotasPedido, PCEntregadoInspeccion: PCEntregadoInspeccion,CronogramaFirmadoComitente: CronogramaFirmadoComitente, OrdenServicio: OrdenServicio,
-        ActasFinales: ActasFinales,PlanosyCroquis: PlanosyCroquis,ConformeDePermisos: ConformeDePermisos, PruebaHermeticidad: PruebaHermeticidad,InformesFinales: InformesFinales,
-        
-    }, id],
-        (error, results) => {
-
-            if (error) {
-                console.log(error);
-               }
-
-            })
-           
-            res.redirect(req.get('referer'));
-
-        
-})
 router.post('/ActualizarEstadoCarpeta/:id', (req, res) => {
     var id = req.body.id;
     var Estado= req.body.Estado; 
