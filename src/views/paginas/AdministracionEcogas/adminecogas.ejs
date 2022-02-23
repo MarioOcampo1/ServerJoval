@@ -91,24 +91,24 @@
      tabla= $('#comunicacionDiaria').DataTable({
         orderCellsTop: true,
         fixedHeader: true,
-      
+      paging: false,
         "language": { url: "//cdn.datatables.net/plug-ins/1.11.3/i18n/es_es.json" },
         "ajax": {
           "url": url,
           "dataSrc": "",
         },
         "columns": [
-          { "data": "Nombre", render: function(data,type,row){
+          { "width":"5%","data": "Nombre", render: function(data,type,row){
             return '<a href="/editarTareas/' + row.id + '" class="btn btn-outline-secondary btn-sm">'+row.Nombre+'</a>'
           } },
-          { "data": "NCarpeta", render: function(data,type,row){
-            return '<a href="/editarTareas/' + row.id + '" class="btn btn-outline btn-sm">'+row.NCarpeta+'</a>'
+          { "width":"5%","data": "NCarpeta", render: function(data,type,row){
+            return '<a href="/editarTareas/' + row.id + '" class="btn btn-outline text-center btn-sm">'+row.NCarpeta+'</a>'
           } },
-          { "width":"10%","data": "TareaRealizada" },
+          { "width":"70%","data": "TareaRealizada" },
           { "data": "EtapaTarea" , render: function(data,type,row){
             return '<a href="/historialcarpeta/' + row.Nombre + '" class="btn btn-secondary btn-sm text-center">'+row.EtapaTarea+'</a>'} },
-          { "width":"10%","data": "ProximaTarea" },
-          { "width":"10%","data":  "FechaLimite", render:function(data,type,row){
+          { "width":"15%","data": "ProximaTarea" },
+          { "width":"5%","data":  "FechaLimite", render:function(data,type,row){
             var oldDate = data;
     momentObj = moment(oldDate).format("d-MMMM-YYYY"),
     newDate = momentObj;
