@@ -77,31 +77,31 @@
                         <div class="form-group">
                             <table>
                                 <tr>
-                                    <td class="text-center">
+                                    <td class="text-center p-1">
                                         <label for="Tarea Realizada">Tarea Realizada: </label>
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-center p-1">
                                         <label for="Proxima Tarea">Proxima Tarea: </label>
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-center p-1">
                                         <label for="FechaLimite">Fecha Limite: </label>
                                     </td>
-                                    <td class="text-center" colspan="6">
+                                    <td class="text-center p-1" colspan="6">
                                         <label for="EstadoEtapa"> Etapa de la tarea:</label>
 
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <input type="text" name="TareaRealizada" id="TareaRealizada"
+                                        <input class="p-1" type="text" name="TareaRealizada" id="TareaRealizada"
                                             placeholder="Ingrese ultima tarea realizada">
                                     </td>
                                     <td>
-                                        <input type="text" name="ProximaTarea" id="ProximaTarea"
+                                        <input class="p-1" type="text" name="ProximaTarea" id="ProximaTarea"
                                             placeholder="Ingrese la proxima tarea" </div>
                                     </td>
                                     <td>
-                                        <input type="date" required name="Fecha_limite" id="Fecha_limite"
+                                        <input class="p-1" type="date" required name="Fecha_limite" id="Fecha_limite"
                                             value="<%=user.Fecha_limite%>">
                                     </td>
                                     <td>
@@ -137,20 +137,12 @@
 
                                 </tr>
                                 <tr>
-                                    <Label class="text-center" for="Tarea Anterior">Tarea Anterior: <%= user.ProximaTarea%> </Label>
+                                    <label class="text-center" for="Tarea Anterior">Tarea Anterior: <%= user.ProximaTarea%> </label>
 
                                 </tr>
                             </table>
 
-                            <div class="col-auto mr-auto">
-                                <div class="col-md-9 ml-auto ">
-
-                                </div>
-                            </div>
-                            <div class="col-auto mr-auto">
-
-
-                            </div>
+                         
                         </div>
 
                     </div>
