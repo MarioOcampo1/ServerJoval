@@ -50,6 +50,8 @@ router.get('/interferencias/info', (req, res) => {
         }
     })
 })
+
+//Administracion Ecogas
 router.get('/adminecogas', (req, res) => {
     const sql = 'SELECT c.id, c.Nombre, c.NCarpeta, c.TareaRealizada, c.ProximaTarea, c.EtapaTarea, c.FechaLimite FROM clientes c  ';
     res.locals.moment = moment;
@@ -66,8 +68,9 @@ router.get('/adminecogas', (req, res) => {
     })
 
 })
-router.get('/adminecogas/info', (req, res) => {
-    const sql = 'SELECT c.id, c.Nombre, c.NCarpeta, c.TareaRealizada, c.ProximaTarea,c.EtapaTarea, c.FechaLimite, c.Estado FROM clientes c';
+router.get('/adminecogas/TablaGeneral', (req, res) => {
+    // const sql = 'SELECT c.id, c.Nombre, c.NCarpeta,a.ResponsableDeTarea, c.TareaRealizada, c.ProximaTarea,c.EtapaTarea, c.FechaLimite, c.Estado FROM clientes c, historialdecambios a where c.Nombre = a.Nombre_sub'; //SQL ORIGINAL
+    var sql = 'Select c.Nombre_sub, a.NCarpeta, a.Estado, a.id, c.ResponsableDeTarea,c.Tarea_Realizada_sub, c.Proxima_Tarea_sub, c.Fecha_Proxima_Tarea_sub, c.EtapaTarea_sub from historialdecambios c , clientes a where a.Nombre = c.Nombre_sub';
     res.locals.moment = moment;
     connection.query(sql, (error, results) => {
         if (error) console.log( error);
@@ -82,6 +85,7 @@ router.get('/adminecogas/info', (req, res) => {
     })
 
 })
+
 router.get('/estadogeneral', (req, res) => {
     res.locals.moment = moment;
     const sql = 'SELECT c.id, c.Nombre  ,c.NCarpeta,  c.Ubicacion ,c.Comitente ,c.Estado, c.Fechafirmacontrato  ,b.DocumentacionTerreno ,b.DocumentacionSociedad ,b.DocumentacionContractual  ,b.Comercial ,b.Tecnica ,b.PermisosEspeciales ,b.DocumentacionObra  ,b.Seguridad,b.Interferencias, b.Permisos, b.PlanDeTrabajo, b.Matriculas, b.Ambiente, b.NotaCumplimentoNormativas, b.DDJJNAG153, b.Avisos, b.DocumentacionInspeccion, b.ComunicacionObras, b.ActasFinalesEcogas, b.PlanosyCroquis, b.ConformeEntidades, b.PruebaHermeticidad, b.InformesFinales, b.PresentacionFinal, b.HabilitacionObra  from clientes_tareasgenerales b , clientes c where b.Nombre = c.Nombre';
@@ -335,6 +339,7 @@ router.post('/ActualizarProximasTareas/:id', (req, res) => {
     const ProximaTarea = req.body.ProximaTarea;
     const Fecha_limite = req.body.Fecha_limite;
     const Fecha_Tarea_sub = fecha;
+    const ResponsableDeTarea = req.body.ResponsableDeTarea;
     var EtapaTarea = req.body.EtapaTarea;
     var sql = "";
    
@@ -342,12 +347,10 @@ router.post('/ActualizarProximasTareas/:id', (req, res) => {
         sql = 'Update  clientes set ? where id=?';
         connection.query(sql, [{ EtapaTarea: EtapaTarea, TareaRealizada: TareaRealizada, ProximaTarea: ProximaTarea, Fechalimite: Fecha_limite }, id], (error, results) => {
             if (error) console.log( error);
-            console.log("se cargo el estado en tabla clientes");
-
         })
 
         sql = 'Insert into historialdecambios set?';
-        connection.query(sql, [{ EtapaTarea_sub: EtapaTarea, Nombre_sub: Nombre, Tarea_Realizada_sub: TareaRealizada, Proxima_Tarea_sub: ProximaTarea, Fecha_Proxima_Tarea_sub: Fecha_limite, Fecha_Tarea_sub: Fecha_Tarea_sub }], (error, results) => {
+        connection.query(sql, [{ EtapaTarea_sub: EtapaTarea, ResponsableDeTarea:ResponsableDeTarea, Nombre_sub: Nombre, Tarea_Realizada_sub: TareaRealizada, Proxima_Tarea_sub: ProximaTarea, Fecha_Proxima_Tarea_sub: Fecha_limite, Fecha_Tarea_sub: Fecha_Tarea_sub }], (error, results) => {
             if (error) console.log( error);
 
             if (results.length > 0) {

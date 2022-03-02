@@ -76,6 +76,7 @@
                         <input type="hidden" name="Nombre" id="Nombre" value="<%= user.Nombre%>">
                         <div class="form-group">
                             <table>
+                                <thead>
                                 <tr>
                                     <td class="text-center p-1">
                                         <label for="Tarea Realizada">Tarea Realizada: </label>
@@ -90,8 +91,11 @@
                                         <label for="EstadoEtapa"> Etapa de la tarea:</label>
 
                                     </td>
+
                                 </tr>
+                            </thead>
                                 <tr>
+                                    <tbody>
                                     <td>
                                         <input class="p-1" type="text" name="TareaRealizada" id="TareaRealizada"
                                             placeholder="Ingrese ultima tarea realizada">
@@ -134,20 +138,31 @@
                                     </td>
                                     </td>
 
+                                </tbody>
 
                                 </tr>
+
+                               
                                 <tr>
-                                    <label class="text-center" for="Tarea Anterior">Tarea Anterior: <%= user.ProximaTarea%> </label>
+                                <label class="text-center border border-secondary p-1" for="Tarea Anterior">Tarea Anterior: <%= user.ProximaTarea%> </label>
+                            </tr>
+                            <br>
+                           
 
-                                </tr>
                             </table>
-
-                         
+                            
                         </div>
 
                     </div>
                 <br>
-
+                <label for="ResponsableDeTarea"> Responsable de la Tarea:</label>
+                <br>
+                <div required>
+                    <input type="radio" name="ResponsableDeTarea" id="ResponsableDeTarea" required value="Mauricio"> Mauricio
+                    <input type="radio" name="ResponsableDeTarea" id="ResponsableDeTarea" value="Gustavo"> Gustavo
+                    <input type="radio" name="ResponsableDeTarea" id="ResponsableDeTarea" value="Mario"> Mario
+                </div>
+                
                 <div class="button-group text-center" role="group">
                     <button type="submit" class="btn btn-success text-center">Actualizar Tarea</button>
                     <button onClick="history.go(-1);" class="btn btn-secondary text-center"">Cancelar</button>
