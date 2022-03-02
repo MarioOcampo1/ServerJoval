@@ -126,20 +126,23 @@
           
           { "width":"15%", "searchable":false,"data": "Proxima_Tarea_sub" },
           
-          { "width":"5%","data":  "Fecha_Proxima_Tarea_sub", render:function(data,type,row){
-            var oldDate = data;
+          { "width":"5%","data": "Fecha_Proxima_Tarea_sub", render:function(data,type,row){
+            var FechaSinTransformar = data;
+    console.log("la fecha que venia originalmente era " + FechaSinTransformar);
             var fechaActual = new Date();
-
+            moment.locale('es');
             fechaActual = fechaActual.toISOString();
-       
-    momentObj = moment(oldDate).format("d-MMMM-YYYY"),
-    newDate = momentObj;
-    if (fechaActual>oldDate){
-         return '<div class="bg-danger text-dark">'+ newDate+' </div>'
+    fechaActual=moment(fechaActual).format("d-MM-YYYY");
+    newDate = moment(FechaSinTransformar).format("d-MM-YYYY");
+    console.log("la fecha que se muestra es " + newDate);
+    console.log("");    
+      if (fechaActual>FechaSinTransformar){
+         return '<div class="bg-danger text-dark">'+ newDate+' </div>';
     }
-    else{
-        return newDate;
+    if (fechaActual<FechaSinTransformar){
+      return '<div class="bg-dark text-light">'+ newDate+' </div>';
     }
+    else{ return newDate;}
            }},      
           { "width":"10%","data": "Estado" },
 
