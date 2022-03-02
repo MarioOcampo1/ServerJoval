@@ -139,7 +139,7 @@
     fechaActual=moment(fechaActual).format("d-MM-YYYY");
     console.log("fecha sin transformar="+FechaSinTransformar);
     newDate= FechaSinTransformar;
-    // newDate = moment(FechaSinTransformar).format("d-MM-YYYY");
+    newDate = moment(FechaSinTransformar).locale('es').format("DD-MM-YYYY");
 // newDate = convertFromStringToDate(FechaSinTransformar);
 console.log("valor que queda luego de la funcion:" + newDate);
     // newDate = moment(newDate).format("d-MM-YYYY");
@@ -148,7 +148,7 @@ console.log("valor que queda luego de la funcion:" + newDate);
     console.log("");    
 
       if (fechaActual>FechaSinTransformar){
-         return '<div class="bg-danger text-dark">'+ newDate+' </div>';
+         return '<div class="bg-danger text-light">'+ newDate+' </div>';
     }
     if (fechaActual<FechaSinTransformar){
       return '<div class="bg-dark text-light">'+ newDate+' </div>';
