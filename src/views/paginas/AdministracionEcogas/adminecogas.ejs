@@ -131,20 +131,28 @@
           
           { "width":"15%", "searchable":false,"data": "Proxima_Tarea_sub" },
           
-          { "width":"5%","data":  "Fecha_Proxima_Tarea_sub", render:function(data,type,row){
-            var oldDate = data;
+          { "width":"5%","data": "Fecha_Proxima_Tarea_sub", render:function(data,type,row){
+            var FechaSinTransformar = data;
             var fechaActual = new Date();
-
+            moment.locale('es');
             fechaActual = fechaActual.toISOString();
-       
-    momentObj = moment(oldDate).format("d-MMMM-YYYY"),
-    newDate = momentObj;
-    if (fechaActual>oldDate){
-         return '<div class="bg-danger text-dark">'+ newDate+' </div>'
+    fechaActual=moment(fechaActual).format("d-MM-YYYY");
+    console.log("fecha sin transformar="+FechaSinTransformar);
+    newDate = moment(FechaSinTransformar).format("d-MM-YYYY");
+// newDate = convertFromStringToDate(FechaSinTransformar);
+console.log("valor que queda luego de la funcion:" + newDate);
+    // newDate = moment(newDate).format("d-MM-YYYY");
+
+    console.log("la fecha que se muestra es " + newDate);
+    console.log("");    
+
+      if (fechaActual>FechaSinTransformar){
+         return '<div class="bg-danger text-dark">'+ newDate+' </div>';
     }
-    else{
-        return newDate;
+    if (fechaActual<FechaSinTransformar){
+      return '<div class="bg-dark text-light">'+ newDate+' </div>';
     }
+    else{ return newDate;}
            }},      
           { "width":"10%","data": "Estado" },
 
@@ -199,6 +207,19 @@ $('#Caos').on('click', function() {
     .draw();
 });
   })
+  function convertFromStringToDate(responseDate) {
+console.log("response date tiene:" + responseDate);              
+    let dateComponents = responseDate.split('T');
+    let datePieces = dateComponents[0].split("-");
+    let timePieces = dateComponents[1].split(":");
+    var NuevaFecha = new Date(datePieces[2], (datePieces[1] - 1), datePieces[0],
+                         timePieces[0], timePieces[1], timePieces[2]);
+
+console.log("la nueva fecha es:" + NuevaFecha);
+    return(new Date(datePieces[2], (datePieces[1] - 1), datePieces[0],
+                         timePieces[0], timePieces[1], timePieces[2]))
+}
+
      </script>
 <%}%>
 </body>
