@@ -164,15 +164,20 @@ console.log("valor que queda luego de la funcion:" + newDate);
 //Buscadores con botones.
    $('#Mauricio').on('click', function() {
     tabla
+    .columns()
+    .search('')
     .column(2)
     .search('Mauricio')
     .draw();
   });
     $('#Gustavo').on('click', function() {
     tabla
+    .columns()
+    .search('')
     .column(2)
     .search('Gustavo')
     .draw();
+    
 });
 $('#TablaGral').on('click', function() {
     tabla
@@ -182,27 +187,37 @@ $('#TablaGral').on('click', function() {
 });
 $('#Prel').on('click', function() {
     tabla
+    .columns()
+    .search('')
     .column(4)
     .search('Prel')
     .draw();
 });  $('#1ra').on('click', function() {
     tabla
+    .columns()
+    .search('')
     .column(4)
     .search('1ra')
     .draw();
 });  $('#2da').on('click', function() {
     tabla
+    .columns()
+    .search('')
     .column(4)
     .search('2da')
     .draw();
 });  $('#Obras').on('click', function() {
     tabla
+    .columns()
+    .search('')
     .column(4)
     .search('Obras')
     .draw();
 });
 $('#Caos').on('click', function() {
     tabla
+    .columns()
+    .search('')
     .column(4)
     .search('Caos')
     .draw();
