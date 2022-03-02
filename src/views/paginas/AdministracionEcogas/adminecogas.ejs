@@ -133,7 +133,8 @@
             fechaActual = fechaActual.toISOString();
     fechaActual=moment(fechaActual).format("d-MM-YYYY");
     console.log("fecha sin transformar="+FechaSinTransformar);
-    newDate = moment(FechaSinTransformar).format("d-MM-YYYY");
+    newDate= FechaSinTransformar;
+    // newDate = moment(FechaSinTransformar).format("d-MM-YYYY");
 // newDate = convertFromStringToDate(FechaSinTransformar);
 console.log("valor que queda luego de la funcion:" + newDate);
     // newDate = moment(newDate).format("d-MM-YYYY");
