@@ -128,14 +128,19 @@
           
           { "width":"5%","data": "Fecha_Proxima_Tarea_sub", render:function(data,type,row){
             var FechaSinTransformar = data;
-    console.log("la fecha que venia originalmente era " + FechaSinTransformar);
             var fechaActual = new Date();
             moment.locale('es');
             fechaActual = fechaActual.toISOString();
     fechaActual=moment(fechaActual).format("d-MM-YYYY");
+    console.log("fecha sin transformar="+FechaSinTransformar);
     newDate = moment(FechaSinTransformar).format("d-MM-YYYY");
+// newDate = convertFromStringToDate(FechaSinTransformar);
+console.log("valor que queda luego de la funcion:" + newDate);
+    // newDate = moment(newDate).format("d-MM-YYYY");
+
     console.log("la fecha que se muestra es " + newDate);
     console.log("");    
+
       if (fechaActual>FechaSinTransformar){
          return '<div class="bg-danger text-dark">'+ newDate+' </div>';
     }
@@ -170,6 +175,19 @@ $('#TablaGral').on('click', function() {
     .draw();
 });
   })
+  function convertFromStringToDate(responseDate) {
+console.log("response date tiene:" + responseDate);              
+    let dateComponents = responseDate.split('T');
+    let datePieces = dateComponents[0].split("-");
+    let timePieces = dateComponents[1].split(":");
+    var NuevaFecha = new Date(datePieces[2], (datePieces[1] - 1), datePieces[0],
+                         timePieces[0], timePieces[1], timePieces[2]);
+
+console.log("la nueva fecha es:" + NuevaFecha);
+    return(new Date(datePieces[2], (datePieces[1] - 1), datePieces[0],
+                         timePieces[0], timePieces[1], timePieces[2]))
+}
+
      </script>
 <%}%>
 </body>
