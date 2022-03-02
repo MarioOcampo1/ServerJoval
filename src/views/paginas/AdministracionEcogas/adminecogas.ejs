@@ -36,7 +36,7 @@
     <br>
 
   <div class="table">
-    <table id="comunicacionDiaria" class="table table-striped table-bordered table-sm table-hover " style="width: 95%">
+    <table id="comunicacionDiaria" class="table table-responsive table-striped table-bordered table-sm table-hover " style="width: 100%">
      
       <thead>
 
@@ -58,8 +58,13 @@
         
           </th>
           <th> <h4>Etapa de la tarea</h4>
-
+<div class="btn-group"></div>
            <button id="Prel"> Prel</button>
+           <button id="1P"> 1P</button>
+           <button id="2P"> 2P</button>
+           <button id="Obras"> Obras</button>
+           <button id="Caos"> CAOS</button>
+
 
           </th>
           <th>
@@ -122,7 +127,7 @@
           { "width":"5%","data": "ResponsableDeTarea"},
           { "width":"70%","searchable":false,"data": "Tarea_Realizada_sub" }, 
 
-          { "data": "EtapaTarea_sub", render: function(data,type,row){return '<a href="/historialcarpeta/' + row.Nombre_sub + '" class="btn btn-secondary btn-sm text-center">'+row.EtapaTarea_sub+'</a>'} }, //Esta es lo correcto que deberia de ir en esta linea
+          { "width":"15%", "data": "EtapaTarea_sub", render: function(data,type,row){return '<a href="/historialcarpeta/' + row.Nombre_sub + '" class="btn btn-secondary btn-sm text-center">'+row.EtapaTarea_sub+'</a>'} }, //Esta es lo correcto que deberia de ir en esta linea
           
           { "width":"15%", "searchable":false,"data": "Proxima_Tarea_sub" },
           
@@ -173,6 +178,33 @@ $('#TablaGral').on('click', function() {
     tabla
     .columns()
     .search('')
+    .draw();
+});
+$('#Prel').on('click', function() {
+    tabla
+    .column(4)
+    .search('Prel')
+    .draw();
+});  $('#1ra').on('click', function() {
+    tabla
+    .column(4)
+    .search('1ra')
+    .draw();
+});  $('#2da').on('click', function() {
+    tabla
+    .column(4)
+    .search('2da')
+    .draw();
+});  $('#Obras').on('click', function() {
+    tabla
+    .column(4)
+    .search('Obras')
+    .draw();
+});
+$('#Caos').on('click', function() {
+    tabla
+    .column(4)
+    .search('Caos')
     .draw();
 });
   })
