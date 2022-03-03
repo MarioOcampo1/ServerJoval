@@ -350,7 +350,7 @@ router.post('/ActualizarProximasTareas/:id', (req, res) => {
         })
 
         sql = 'Insert into historialdecambios set?';
-        connection.query(sql, [{ EtapaTarea_sub: EtapaTarea, ResponsableDeTarea:ResponsableDeTarea, Nombre_sub: Nombre, Tarea_Realizada_sub: TareaRealizada, Proxima_Tarea_sub: ProximaTarea, Fecha_Proxima_Tarea_sub: Fecha_limite, Fecha_Tarea_sub: Fecha_Tarea_sub }], (error, results) => {
+        connection.query(sql, [{ EtapaTarea_sub: EtapaTarea, ResponsableDeTarea:ResponsableDeTarea,Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: TareaRealizada, Proxima_Tarea_sub: ProximaTarea, Fecha_Proxima_Tarea_sub: Fecha_limite, Fecha_Tarea_sub: Fecha_Tarea_sub }], (error, results) => {
             if (error) console.log( error);
 
             if (results.length > 0) {
