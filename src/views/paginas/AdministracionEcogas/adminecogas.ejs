@@ -136,24 +136,18 @@
             var fechaActual = new Date();
             moment.locale('es');
             fechaActual = fechaActual.toISOString();
-    fechaActual=moment(fechaActual).format("d-MM-YYYY");
-    console.log("fecha sin transformar="+FechaSinTransformar);
+    fechaActual=moment(fechaActual).format("DD-MM-YYYY");
     newDate= FechaSinTransformar;
     newDate = moment(FechaSinTransformar).locale('es').format("DD-MM-YYYY");
-// newDate = convertFromStringToDate(FechaSinTransformar);
-console.log("valor que queda luego de la funcion:" + newDate);
-    // newDate = moment(newDate).format("d-MM-YYYY");
-
-    console.log("la fecha que se muestra es " + newDate);
-    console.log("");    
-
-      if (fechaActual>FechaSinTransformar){
+      if (fechaActual>newDate){
          return '<div class="bg-danger text-light">'+ newDate+' </div>';
     }
-    if (fechaActual<FechaSinTransformar){
-      return '<div class="bg-dark text-light">'+ newDate+' </div>';
+    if (fechaActual<newDate){
+      return '<div class="bg-success text-light">'+ newDate+' </div>';
     }
-    else{ return newDate;}
+    if (fechaActual==newDate){
+      return '<div class="bg-primary text-dark">'+ newDate+' </div>';
+    }
            }},      
           { "width":"10%","data": "Estado" },
 
