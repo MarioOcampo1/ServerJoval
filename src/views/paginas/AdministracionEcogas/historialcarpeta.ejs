@@ -59,6 +59,7 @@
               <th>
                 <h4>Responsable</h4>
               </th>
+              <th>Tarea realizada</th>
           </thead>
           <tbody>
             </tr>
@@ -114,39 +115,35 @@
                                             <th>
                                               <%if(clientes.Si_NO_TareaRealizada=='S'){%>
                                                 <form action=" /TareaOk/<%=clientes.Nombre_sub%>" method="post">
-                                                    Si<input checked type="radio" name="TareaOK" id="TareaOK"
+                                                    Si<input class="btn btn-primary" checked type="radio" name="TareaOK" id="TareaOK"
                                                       value="S">
-                                                    <input hidden type="text" name="id" id="id"
+                                                    <input class="btn btn-primary" hidden type="text" name="id" id="id"
                                                       value="<%=clientes.id%>">
-                                                    <input hidden type="text" name="Nombre" id="Nombre"
+                                                    <input class="btn btn-primary" hidden type="text" name="Nombre" id="Nombre"
                                                       value="<%=clientes.Nombre_sub%>">
                                                 </form>
                                                 <form action=" /TareaOk/<%=clientes.Nombre_sub%>" method="post">
-                                                    No<input type="radio" onchange="this.form.submit()" name="TareaOK" id="TareaOK" value="N">
-                                                  <input hidden type="text" name="id" id="id" value="<%=clientes.id%>">
-                                                  <input hidden type="text" name="Nombre" id="Nombre"
+                                                    No<input class="btn btn-primary" type="radio" onchange="this.form.submit()" name="TareaOK" id="TareaOK" value="N">
+                                                  <input class="btn btn-primary" hidden type="text" name="id" id="id" value="<%=clientes.id%>">
+                                                  <input class="btn btn-primary" hidden type="text" name="Nombre" id="Nombre"
                                                     value="<%=clientes.Nombre_sub%>">
                                                 </form>
                                                 <%}else{%>
                                                   <form action=" /TareaOk/<%=clientes.Nombre_sub%>" method="post">
-                                                    <button type="submit">
-                                                    Si  <input type="radio" onchange="this.form.submit()" name="TareaOK" id="TareaOK" value="S">
-                                                      <input hidden type="text" name="id" id="id"
+                                                    Si  <input class="btn btn-primary" type="radio" onchange="this.form.submit()" name="TareaOK" id="TareaOK" value="S">
+                                                      <input class="btn btn-primary" hidden type="text" name="id" id="id"
                                                         value="<%=clientes.id%>">
-                                                      <input hidden type="text" name="Nombre" id="Nombre"
+                                                      <input class="btn btn-primary" hidden type="text" name="Nombre" id="Nombre"
                                                         value="<%=clientes.Nombre_sub%>">
 
-                                                    </button>
                                                   </form>
                                                   <form action=" /TareaOk/<%=clientes.Nombre_sub%>" method="post">
 
-                                                    <button type="submit">
-                                                      No<input checked type="radio" name="TareaOK" id="TareaOK"
+                                                      No<input class="btn btn-primary" checked type="radio" name="TareaOK" id="TareaOK"
                                                         value="N">
-                                                    </button>
-                                                    <input hidden type="text" name="id" id="id"
+                                                    <input class="btn btn-primary" hidden type="text" name="id" id="id"
                                                       value="<%=clientes.id%>">
-                                                    <input hidden type="text" name="Nombre" id="Nombre"
+                                                    <input class="btn btn-primary" hidden type="text" name="Nombre" id="Nombre"
                                                       value="<%=clientes.Nombre_sub%>">
 
 
