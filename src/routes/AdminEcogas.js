@@ -237,6 +237,31 @@ router.post('/actualizarcontacto/:id', (req, res) => {
 
         })
 })
+router.post('/TareaOk/:Nombre', (req, res) => {
+    const Nombre= req.params.Nombre;
+    const TareaOk = req.body.TareaOK;
+   const id=req.body.id;
+
+    const sql = 'Update historialdecambios Set ? where Nombre_sub =? and id =?';
+    connection.query(sql, [{
+        Si_NO_TareaRealizada: TareaOk , 
+    }, Nombre, id]
+        , (error, results) => {
+            if (error) console.log( error);
+
+            if (results.length > 0) {
+                console.log("Intentando actualizar el estado de la tarea");
+                console.log("La tarea realizada tendra el estado: "+ TareaOk);
+                console.log("El id de la tarea es: "+ id);
+                res.redirect(req.get('referer'));
+            }
+            else {
+                console.log("Intentando actualizar el estado de la tarea");
+                console.log("La tarea realizada tendra el estado: "+ TareaOk);
+                console.log("El id de la tarea es: "+ id);
+}res.redirect(req.get('referer'));
+        })
+})
 router.post('/update/:id', (req, res) => {
     res.locals.moment = moment;
     const id = req.body.id;
