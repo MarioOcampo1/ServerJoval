@@ -63,6 +63,8 @@
           <tbody>
             </tr>
             <% results.forEach((clientes)=>{ %>
+              <%if(clientes.Si_NO_TareaRealizada=='S'){%>
+
               <tr>
                 <%if (clientes.EtapaTarea_sub=="1ra parte" ){%>
                   <th class="bg-secondary text-light">
@@ -111,6 +113,57 @@
                                             <th>
                                               <%=clientes.ResponsableDeTarea%>
                                             </th>
+                                            <%}else{%>
+                                              
+              <tr>
+                <%if (clientes.EtapaTarea_sub=="1ra parte" ){%>
+                  <th class="bg-secondary text-light">
+                    <%=clientes.EtapaTarea_sub%>
+                  </th>
+                  <%}%>
+                    <%if (clientes.EtapaTarea_sub=="Sin Presentar" ){%>
+                      <th class="bg-light text-black">
+                        <%=clientes.EtapaTarea_sub%>
+                      </th>
+                      <%}%>
+                        <%if (clientes.EtapaTarea_sub=="2da parte" ){%>
+                          <th class="bg-info">
+                            <%=clientes.EtapaTarea_sub%>
+                          </th>
+                          <%}%>
+                            <%if (clientes.EtapaTarea_sub==null){%>
+                              <th class="bg-dark">
+                                <%=clientes.EtapaTarea_sub%>
+                              </th>
+                              <%}%>
+                                <%if (clientes.EtapaTarea_sub=="Caos" ){%>
+                                  <th class="bg-warning">
+                                    <%=clientes.EtapaTarea_sub%>
+                                  </th>
+                                  <%}%>
+                                    <%if (clientes.EtapaTarea_sub=="Obras" ){%>
+                                      <th class="bg-success text-light">
+                                        <%=clientes.EtapaTarea_sub%>
+                                      </th>
+                                      <%}%>
+                                        <%if (clientes.EtapaTarea_sub=="Finalizada" ){%>
+                                          <th class="bg-danger text-light">
+                                            <%=clientes.EtapaTarea_sub%>
+                                          </th>
+                                          <%}%>
+                                            <th class="bg-warning">
+                                              <%=moment(clientes.Fecha_Tarea_sub).format('DD-MM-YYYY')%>
+                                            </th>
+                                            <th class="bg-warning">
+                                              <%=clientes.Tarea_Realizada_sub%>
+                                            </th>
+                                            <th class="bg-warning">
+                                              <%=clientes.Proxima_Tarea_sub%>
+                                            </th>
+                                            <th class="bg-warning">
+                                              <%=clientes.ResponsableDeTarea%>
+                                            </th>
+                                              <%}%>
                                             <th>
                                               <%if(clientes.Si_NO_TareaRealizada=='S'){%>
                                                 <form action=" /TareaOk/<%=clientes.Nombre_sub%>" method="post">
