@@ -148,19 +148,47 @@
               return 'Estado: '+row.intTelefonica + '. Vencimiento: '+moment(row.intTelefonicaObtenida).format("d-MM-YY")+''
             } },
             { "data": "intAgua", render: function(data,type,row){
-              return 'Estado: '+row.intAgua + '. Vencimiento: '+moment(row.intAguaObtenida).format("d-MM-YY")+'' }},
+if(row.intAguaObtenida==null || row.intAguaObtenida=='' ){
+  return 'Estado: '+row.intAgua }
+else{
+  return 'Estado: '+row.intAgua + '. Vencimiento: '+moment(row.intAguaObtenida).format("d-MM-YY")+'' };
+}},
             { "data": "intCloaca", render: function(data,type,row){
-              return 'Estado: '+row.intCloaca + '. Vencimiento: '+moment(row.intCloacasObtenida).format("d-MM-YY")+'' } },
+              if(row.intCloacaObtenida==null || row.intCloacaObtenida=='' ){
+  return 'Estado: '+row.intCloaca }
+else{
+  return 'Estado: '+row.intCloaca + '. Vencimiento: '+moment(row.intCloacaObtenida).format("d-MM-YY")+'' };
+}},
             { "data": "intElectricidad", render: function(data,type,row){
-              return 'Estado: '+row.intElectricidad + '. Vencimiento: '+moment(row.intElectricidadObtenida).format("d-MM-YY")+'' } },
+              if(row.intElectricidadObtenida==null || row.intElectricidadObtenida=='' ){
+  return 'Estado: '+row.intElectricidad }
+else{
+  return 'Estado: '+row.intElectricidad + '. Vencimiento: '+moment(row.intElectricidadObtenida).format("d-MM-YY")+'' };
+}},
             { "data": "intClaro", render: function(data,type,row){
-              return 'Estado: '+row.intClaro + '. Vencimiento: '+moment(row.intClaroObtenida).format("d-MM-YY")+'' } },
+              if(row.intClaroObtenida==null || row.intClaroObtenida=='' ){
+  return 'Estado: '+row.intClaro }
+else{
+  return 'Estado: '+row.intClaro + '. Vencimiento: '+moment(row.intClaroObtenida).format("d-MM-YY")+'' };
+}},
             { "data": "intArnet", render: function(data,type,row){
-              return 'Estado: '+row.intArnet + '. Vencimiento: '+moment(row.intArnetObtenida).format("d-MM-YY")+'' } },
+              if(row.intArnetObtenida==null || row.intArnetObtenida=='' ){
+  return 'Estado: '+row.intArnet }
+else{
+  return 'Estado: '+row.intArnet + '. Vencimiento: '+moment(row.intArnetObtenida).format("d-MM-YY")+'' };
+}},
             { "data": "intArsat" , render: function(data,type,row){
-              return 'Estado: '+row.intArsat + '. Vencimiento: '+moment(row.intArsatObtenida).format("d-MM-YY")+'' }},
+              if(row.intArsatObtenida==null || row.intArsatObtenida=='' ){
+  return 'Estado: '+row.intArsat }
+else{
+  return 'Estado: '+row.intArsat + '. Vencimiento: '+moment(row.intArsatObtenida).format("d-MM-YY")+'' };
+}},
             { "data": "intTelecom", render: function(data,type,row){
-              return 'Estado: '+row.intTelecom + '. Vencimiento: '+moment(row.intAguaObtenida).format("d-MM-YY")+'' } },
+              if(row.intTelecomObtenida==null || row.intTelecomObtenida=='' ){
+  return 'Estado: '+row.intTelecom }
+else{
+  return 'Estado: '+row.intTelecom + '. Vencimiento: '+moment(row.intTelecomObtenida).format("d-MM-YY")+'' };
+}},
           ],
         });
       });
