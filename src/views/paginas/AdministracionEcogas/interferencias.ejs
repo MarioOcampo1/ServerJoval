@@ -161,8 +161,8 @@ else{
   return 'Estado: '+row.intAgua + '. Vencimiento: '+moment(row.intAguaObtenida).format("d-MM-YY")+'' };
 }
 }
-              }
-},
+              },
+
             { "data": "intCloaca", render: function(data,type,row){
               if(row.intCloacaObtenida==null || row.intCloacaObtenida=='' ){
   return 'Estado: '+row.intCloaca }
