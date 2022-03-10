@@ -421,6 +421,7 @@ router.post('/editarContacto/delete/Contacto/:id', (req, res) => {
     })
 })
 router.post('/guardarNuevoCliente', (req, res) => {
+    const fechaActual= new Date();
     const Nombre = req.body.NombreCarpeta;
     const NCarpeta = req.body.NCarpeta;
     const Comitente = req.body.Comitente;
@@ -446,6 +447,12 @@ router.post('/guardarNuevoCliente', (req, res) => {
     var sql = 'Insert into adgastareas set ?';
     connection.query(sql, {
         Nombre: Nombre
+    }, (error, results) => {
+        if (error) console.log( error);
+    })
+    sql='Insert into historialdecambios set ?';
+    connection.query(sql, {
+        Nombre_sub: Nombre, Tarea_Realizada_sub: "Se crea nuevo cliente", Proxima_Tarea_sub: "Actualizar estado de carpeta", Si_NO_TareaRealizada:"N", Fecha_Tarea_sub: fechaActual
     }, (error, results) => {
         if (error) console.log( error);
     })
