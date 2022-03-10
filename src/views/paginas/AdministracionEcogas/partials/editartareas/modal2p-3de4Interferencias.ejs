@@ -1,417 +1,754 @@
+<div class="card p-3 border-success text-center ">
+    <div class="card-header bg-black text-white">
+        Interferencias
+    </div>
+    <div class="card-body">
+        <div class="card-title">Telefónica
+        </div>
+        <div class="card-text">
+            <form-check>
+                <%if (user.intTelefonica!="En gestion" && user.intTelefonica!="Pedida" && user.intTelefonica!="ok" ) {%>
+                    <input type="radio" name="intTelefonica" id="intTelefonica" value="En gestion">
+                    En
+                    gestión
+                    <input type="radio" name="intTelefonica" id="intTelefonica" value="Pedida"
+                        onclick="estadoInterferencia('intTelefonicaPedida', 'intTelefonicaObtenida',true,false); ">
+                    Pedida
+                    <input type="radio" name="intTelefonica" id="intTelefonica" value="ok"
+                        onclick="estadoInterferencia('intTelefonicaPedida', 'intTelefonicaObtenida',false,true);">
+                    Ok
+                    <div id="intTelefonicaPedida" style="display: none;">
+                        Fecha en la que se pidió:
+                        <input type="date" name="intTelefonicaPedida" value="<%= user.intTelefonicaPedida%>"
+                            id="intTelefonicaPedida" placeholder="<%= user.intTelefonicaPedida %>">
+                    </div>
+                    <div id="intTelefonicaObtenida" style="display: none;">
+                        Fecha en la que se vence:
 
-                                                                            <div class="card p-3 border-success text-center ">
-                                                                                <div
-                                                                                    class="card-header bg-black text-white">
-                                                                                    Interferencias
-                                                                                </div>
-                                                                                <div class="card-body">
-                                                                                    <div class="card-title">Telefónica
-                                                                                    </div>
-                                                                                    <div class="card-text">
-                                                                                        <form-check>
+                        <input type="date" name="intTelefonicaObtenida" id="intTelefonicaObtenida"
+                            value="<%= user.intTelefonicaObtenida%>">
+                    </div>
+                    <%}%>
+                        <%if (user.intTelefonica=="En gestion" ) {%>
+                            <input checked type="radio" name="intTelefonica" id="intTelefonica" value="En gestion">
+                            En
+                            gestión
+                            <input type="radio" name="intTelefonica" id="intTelefonica" value="Pedida"
+                                onclick="estadoInterferencia('intTelefonicaPedida', 'intTelefonicaObtenida',true,false); ">
+                            Pedida
+                            <input type="radio" name="intTelefonica" id="intTelefonica" value="ok"
+                                onclick="estadoInterferencia('intTelefonicaPedida', 'intTelefonicaObtenida',false,true);">
+                            Ok
+                            <div id="intTelefonicaPedida" style="display: none;">
+                                Fecha en la que se pidió:
+                                <input type="date" name="intTelefonicaPedida" value="<%= user.intTelefonicaPedida%>"
+                                    id="intTelefonicaPedida" placeholder="<%= user.intTelefonicaPedida %>">
+                            </div>
+                            <div id="intTelefonicaObtenida" style="display: none;">
+                                Fecha en la que se vence:
+        
+                                <input type="date" name="intTelefonicaObtenida" id="intTelefonicaObtenida"
+                                    value="<%= user.intTelefonicaObtenida%>">
+                            </div>
+                            <%}%>
+                                <%if (user.intTelefonica=="Pedida" ) {%>
+                                    <input  type="radio" name="intTelefonica" id="intTelefonica" value="En gestion">
+                                    En
+                                    gestión
+                                    <input checked type="radio" name="intTelefonica" id="intTelefonica" value="Pedida"
+                                        onclick="estadoInterferencia('intTelefonicaPedida', 'intTelefonicaObtenida',true,false); ">
+                                    Pedida
+                                    <input type="radio" name="intTelefonica" id="intTelefonica" value="ok"
+                                        onclick="estadoInterferencia('intTelefonicaPedida', 'intTelefonicaObtenida',false,true);">
+                                    Ok
+                                    <div id="intTelefonicaPedida" style="display: block;">
+                                        Fecha en la que se pidió:
+                                        <input type="date" name="intTelefonicaPedida" value="<%= user.intTelefonicaPedida%>"
+                                            id="intTelefonicaPedida" placeholder="<%= user.intTelefonicaPedida %>">
+                                    </div>
+                                    <div id="intTelefonicaObtenida" style="display: none;">
+                                        Fecha en la que se vence:
+                
+                                        <input type="date" name="intTelefonicaObtenida" id="intTelefonicaObtenida"
+                                            value="<%= user.intTelefonicaObtenida%>">
+                                    </div>
+                                    <%}%>
+                                        <%if (user.intTelefonica=="ok" ) { %>
+                                            <input  type="radio" name="intTelefonica" id="intTelefonica" value="En gestion">
+                                            En
+                                            gestión
+                                            <input  type="radio" name="intTelefonica" id="intTelefonica" value="Pedida"
+                                                onclick="estadoInterferencia('intTelefonicaPedida', 'intTelefonicaObtenida',true,false); ">
+                                            Pedida
+                                            <input checked type="radio" name="intTelefonica" id="intTelefonica" value="ok"
+                                                onclick="estadoInterferencia('intTelefonicaPedida', 'intTelefonicaObtenida',false,true);">
+                                            Ok
+                                            <div id="intTelefonicaPedida" style="display: none;">
+                                                Fecha en la que se pidió:
+                                                <input type="date" name="intTelefonicaPedida" value="<%= user.intTelefonicaPedida%>"
+                                                    id="intTelefonicaPedida" placeholder="<%= user.intTelefonicaPedida %>">
+                                            </div>
+                                            <div id="intTelefonicaObtenida" style="display: block;">
+                                                Fecha en la que se vence:
+                        
+                                                <input type="date" name="intTelefonicaObtenida" id="intTelefonicaObtenida"
+                                                    value="<%= user.intTelefonicaObtenida%>">
+                                            </div>
+                                            <%}%>
 
-                                                                                        <%if (user.intTelefonica=="En gestion"
-                                                                                                ) {%>
-                                                                                                <input checked
-                                                                                                    type="radio"
-                                                                                                    name="intTelefonica"
-                                                                                                    id="intTelefonica"
-                                                                                                    value="En gestion"
-                                                                                                    onclick="intPedida('intTelefonicaPedida', false);">
-                                                                                                En
-                                                                                                gestión
-                                                                                                <%}else{%>
-                                                                                                    <input type="radio"
-                                                                                                        name="intTelefonica"
-                                                                                                        id="intTelefonica"
-                                                                                                        value="En gestion"
-                                                                                                        onclick="intPedida('intTelefonicaPedida', false);">
-                                                                                                    En
-                                                                                                    gestión
-                                                                                                    <%}%>
-                                                                                                        <%if (user.intTelefonica=="Pedida"       ) {%>
-                                                                                                            <input
-                                                                                                                checked
-                                                                                                                type="radio"
-                                                                                                                name="intTelefonica"
-                                                                                                                id="intTelefonica"
-                                                                                                                value="Pedida"
-                                                                                                                onclick="estadoInterferencia('intTelefonicaPedida', 'intTelefonicaObtenida',true,false); ">
-                                                                                                            Pedida
-                                                                                                            <%}else{%>
-                                                                                                                <input
-                                                                                                                    type="radio"
-                                                                                                                    name="intTelefonica"
-                                                                                                                    id="intTelefonica"
-                                                                                                                    value="Pedida"
-                                                                                                                    onclick="estadoInterferencia('intTelefonicaPedida', 'intTelefonicaObtenida',true,false); ">
-                                                                                                                Pedida
-                                                                                                                <%}%>
-                                                                                                                    <input
-                                                                                                                        type="radio"
-                                                                                                                        name="intTelefonica"
-                                                                                                                        id="intTelefonica"
-                                                                                                                        value="ok"
-                                                                                                                        onclick="estadoInterferencia('intTelefonicaPedida', 'intTelefonicaObtenida',false,true);">
-                                                                                                                    Ok
-                                                                                                                    <div id="intTelefonicaPedida"
-                                                                                                                        style="display: none;">
-                                                                                                                        Fecha
-                                                                                                                        en
-                                                                                                                        la
-                                                                                                                        que
-                                                                                                                        se
-                                                                                                                        pidió:
-                                                                                                                        <input
-                                                                                                                            type="date"
-                                                                                                                            name="intTelefonicaPedida"
-                                                                                                                            value="<%= user.intTelefonicaPedida%>"
-                                                                                                                            id="intTelefonicaPedida"
-                                                                                                                            placeholder="<%= user.intTelefonicaPedida %>">
-                                                                                                                    </div>
-                                                                                                                    <div id="intTelefonicaObtenida"
-                                                                                                                        style="display: none;">
-                                                                                                                        Fecha
-                                                                                                                        en
-                                                                                                                        la
-                                                                                                                        que
-                                                                                                                        se
-                                                                                                                        vence:
+            </form-check>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="card-title">Agua</div>
+        <div class="card-text">
+            <form-check>
+                <input hidden type="radio" name="intAgua" id="intAgua" value="<%=user.intAgua%>" checked>
+                <%if (user.intAgua!="En gestion" && user.intAgua!="Pedida" && user.intAgua!="ok" ) {%>
+                    <input type="radio" name="intAgua" id="intAgua" value="En gestion">
+                    En gestión
+                    <input type="radio" name="intAgua" id="intAgua" value="Pedida"
+                        onclick="estadoInterferencia('intAguaPedida', 'intAguaObtenida',true,false);">
+                    Pedida
+                    <input type="radio" name="intAgua" id="intAgua" value="ok"
+                        onclick="estadoInterferencia('intAguaPedida', 'intAguaObtenida',false,true);">Ok
+                    <div id="intAguaPedida" style="display: none;">
+                        Fecha en la que se pidió
+                        <input type="date" name="intAguaPedida" id="intAguaPedida" value="<%= user.intAguaPedida%>">
+                    </div>
+                    <div id="intAguaObtenida" style="display: none;">
+                        Fecha en la que se vence
+                        <input type="date" name="intAguaObtenida" id="intAguaObtenida"
+                            value="<%= user.intAguaObtenida%>">
+                    </div>
+                    <%}%>
+                        <%if(user.intAgua=="En gestion"){%>
+                            <input checked type="radio" name="intAgua" id="intAgua" value="En gestion">
+                            En gestión
+                            <input type="radio" name="intAgua" id="intAgua" value="Pedida"
+                                onclick="estadoInterferencia('intAguaPedida', 'intAguaObtenida',true,false);">
+                            Pedida
+                            <input type="radio" name="intAgua" id="intAgua" value="ok"
+                                onclick="estadoInterferencia('intAguaPedida', 'intAguaObtenida',false,true);">Ok
+                            <div id="intAguaPedida" style="display: none;">
+                                Fecha en la que se pidió
+                                <input type="date" name="intAguaPedida" id="intAguaPedida"
+                                    value="<%= user.intAguaPedida%>">
+                            </div>
+                            <div id="intAguaObtenida" style="display: none;">
+                                Fecha en la que se vence
+                                <input type="date" name="intAguaObtenida" id="intAguaObtenida"
+                                    value="<%= user.intAguaObtenida%>">
+                            </div>
+                            <%}%>
+                                <%if (user.intAgua=="Pedida" ){%>
+                                    <input type="radio" name="intAgua" id="intAgua" value="En gestion"> En gestión
+                                    <input checked type="radio" name="intAgua" id="intAgua" value="Pedida"
+                                        onclick="estadoInterferencia('intAguaPedida', 'intAguaObtenida',true,false);">
 
-                                                                                                                        <input
-                                                                                                                            type="date"
-                                                                                                                            name="intTelefonicaObtenida"
-                                                                                                                            id="intTelefonicaObtenida"
-                                                                                                                            value="<%= user.intTelefonicaObtenida%>">
-                                                                                                                    </div>
-                                                                                        </form-check>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="card-body">
-                                                                                    <div class="card-title">Agua</div>
-                                                                                    <div class="card-text">
-                                                                                        <form-check>
-                                                                                            <input hidden type="radio"
-                                                                                                name="intAgua"
-                                                                                                id="intAgua"
-                                                                                                value="<%=user.intAgua%>"
-                                                                                                checked>
-                                                                                            <input type="radio"
-                                                                                                name="intAgua"
-                                                                                                id="intAgua"
-                                                                                                value="En gestion">
+                                    Pedida
+                                    <input type="radio" name="intAgua" id="intAgua" value="ok"
+                                        onclick="estadoInterferencia('intAguaPedida', 'intAguaObtenida',false,true);">Ok
+                                    <div id="intAguaPedida" style="display: block;">
+                                        Fecha en la que se pidió
+                                        <input type="date" name="intAguaPedida" id="intAguaPedida"
+                                            value="<%= user.intAguaPedida%>">
+                                    </div>
+                                    <div id="intAguaObtenida" style="display: none;">
+                                        Fecha en la que se vence
+                                        <input type="date" name="intAguaObtenida" id="intAguaObtenida"
+                                            value="<%= user.intAguaObtenida%>">
+                                    </div>
+                                    <%}%>
+                                        <%if (user.intAgua=="ok" ){%>
+                                            <input type="radio" name="intAgua" id="intAgua" value="En gestion"> En
+                                            gestión
+                                            <input type="radio" name="intAgua" id="intAgua" value="Pedida"
+                                                onclick="estadoInterferencia('intAguaPedida', 'intAguaObtenida',true,false);">
 
-                                                                                            En gestión
-                                                                                            <input type="radio"
-                                                                                                name="intAgua"
-                                                                                                id="intAgua"
-                                                                                                value="Pedida"
-                                                                                                onclick="estadoInterferencia('intAguaPedida', 'intAguaObtenida',true,false);">
+                                            Pedida
+                                            <input checked type="radio" name="intAgua" id="intAgua" value="ok"
+                                                onclick="estadoInterferencia('intAguaPedida', 'intAguaObtenida',false,true);">Ok
+                                            <div id="intAguaPedida" style="display: none;">
+                                                Fecha en la que se pidió
+                                                <input type="date" name="intAguaPedida" id="intAguaPedida"
+                                                    value="<%= user.intAguaPedida%>">
+                                            </div>
+                                            <div id="intAguaObtenida" style="display: block;">
+                                                Fecha en la que se vence
+                                                <input type="date" name="intAguaObtenida" id="intAguaObtenida"
+                                                    value="<%= user.intAguaObtenida%>">
+                                            </div>
+                                            <%}%>
 
-                                                                                            Pedida
-                                                                                            <input type="radio"
-                                                                                                name="intAgua"
-                                                                                                id="intAgua" value="ok"
-                                                                                                onclick="estadoInterferencia('intAguaPedida', 'intAguaObtenida',false,true);">Ok
-                                                                                            <div id="intAguaPedida"
-                                                                                                style="display: none;">
-                                                                                                Fecha en la que se pidió
-                                                                                                <input type="date"
-                                                                                                    name="intAguaPedida"
-                                                                                                    id="intAguaPedida"
-                                                                                                    value="<%= user.intAguaPedida%>">
-                                                                                            </div>
-                                                                                            <div id="intAguaObtenida"
-                                                                                                style="display: none;">
-                                                                                                Fecha en la que se vence
-                                                                                                <input type="date"
-                                                                                                    name="intAguaObtenida"
-                                                                                                    id="intAguaObtenida"
-                                                                                                    value="<%= user.intAguaObtenida%>">
-                                                                                            </div>
-                                                                                        </form-check>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="card-body">
-                                                                                    <div class="card-title">Cloacas
-                                                                                    </div>
-                                                                                    <div class="card-text">
-                                                                                        <form-check>
+                                                <!-- <div id="intAguaPedida" style="display: none;">
+                    Fecha en la que se pidió
+                    <input type="date" name="intAguaPedida" id="intAguaPedida" value="<%= user.intAguaPedida%>">
+                </div>
+                <div id="intAguaObtenida" style="display: none;">
+                    Fecha en la que se vence
+                    <input type="date" name="intAguaObtenida" id="intAguaObtenida" value="<%= user.intAguaObtenida%>">
+                </div> -->
+            </form-check>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="card-title">Cloacas
+        </div>
+        <div class="card-text">
+            <form-check>
+                <input hidden type="radio" name="intCloacas" id="intCloacas" value="<%=user.intCloacas%>" checked>
+                <%if (user.intCloaca!="En gestion" && user.intCloaca!="Pedida" && user.intCloaca!="ok" ) {%>
+                    <input type="radio" name="intCloacas" id="intCloacas" value="En gestion"> En
+                    gestión
+                    <input type="radio" name="intCloacas" id="intCloacas" value="Pedida"
+                        onclick="estadoInterferencia('intCloacasPedida', 'intCloacasObtenida',true,false);">
+                    Pedida
+                    <input type="radio" name="intCloacas" id="intCloacas" value="ok"
+                        onclick="estadoInterferencia('intCloacasPedida', 'intCloacasObtenida',false,true);">
+                    Ok
+                    <div id="intCloacasPedida" style="display: none;">
+                        Fecha en la que se pidió
+                        <input type="date" name="intCloacasPedida" id="intCloacasPedida"
+                            value="<%= user.intCloacasPedida%>">
+                    </div>
+                    <div id="intCloacasObtenida" style="display: none;">
+                        Fecha en la que se vence
+                        <input type="date" name="intCloacasObtenida" id="intCloacasObtenida"
+                            value="<%= user.intCloacasObtenida%>">
+                    </div>
+                    <%}%>
+                        <%if(user.intCloaca=="En gestion"){%>
+                            <input checked type="radio" name="intCloacas" id="intCloacas" value="En gestion"> En
+                            gestión
+                            <input type="radio" name="intCloacas" id="intCloacas" value="Pedida"
+                                onclick="estadoInterferencia('intCloacasPedida', 'intCloacasObtenida',true,false);">
+                            Pedida
+                            <input type="radio" name="intCloacas" id="intCloacas" value="ok"
+                                onclick="estadoInterferencia('intCloacasPedida', 'intCloacasObtenida',false,true);">
+                            Ok
+                            <div id="intCloacasPedida" style="display: none;">
+                                Fecha en la que se pidió
+                                <input type="date" name="intCloacasPedida" id="intCloacasPedida"
+                                    value="<%= user.intCloacasPedida%>">
+                            </div>
+                            <div id="intCloacasObtenida" style="display: none;">
+                                Fecha en la que se vence
+                                <input type="date" name="intCloacasObtenida" id="intCloacasObtenida"
+                                    value="<%= user.intCloacasObtenida%>">
+                            </div>
+                            <%}%>
+                                <%if( user.intCloaca=="Pedida" ){%>
+                                    <input type="radio" name="intCloacas" id="intCloacas" value="En gestion"> En
+                                    gestión
+                                    <input checked type="radio" name="intCloacas" id="intCloacas" value="Pedida"
+                                        onclick="estadoInterferencia('intCloacasPedida', 'intCloacasObtenida',true,false);">
+                                    Pedida
+                                    <input type="radio" name="intCloacas" id="intCloacas" value="ok"
+                                        onclick="estadoInterferencia('intCloacasPedida', 'intCloacasObtenida',false,true);">
+                                    Ok
+                                    <div id="intCloacasPedida" style="display: block;">
+                                        Fecha en la que se pidió
+                                        <input type="date" name="intCloacasPedida" id="intCloacasPedida"
+                                            value="<%= user.intCloacasPedida%>">
+                                    </div>
+                                    <div id="intCloacasObtenida" style="display: none;">
+                                        Fecha en la que se vence
+                                        <input type="date" name="intCloacasObtenida" id="intCloacasObtenida"
+                                            value="<%= user.intCloacasObtenida%>">
+                                    </div>
+                                    <%}%>
+                                        <%if( user.intCloaca=="ok" ){%>
+                                            <input type="radio" name="intCloacas" id="intCloacas" value="En gestion"> En
+                                            gestión
+                                            <input type="radio" name="intCloacas" id="intCloacas" value="Pedida"
+                                                onclick="estadoInterferencia('intCloacasPedida', 'intCloacasObtenida',true,false);">
+                                            Pedida
+                                            <input checked type="radio" name="intCloacas" id="intCloacas" value="ok"
+                                                onclick="estadoInterferencia('intCloacasPedida', 'intCloacasObtenida',false,true);">
+                                            Ok
+                                            <div id="intCloacasPedida" style="display: none;">
+                                                Fecha en la que se pidió
+                                                <input type="date" name="intCloacasPedida" id="intCloacasPedida"
+                                                    value="<%= user.intCloacasPedida%>">
+                                            </div>
+                                            <div id="intCloacasObtenida" style="display: block;">
+                                                Fecha en la que se vence
+                                                <input type="date" name="intCloacasObtenida" id="intCloacasObtenida"
+                                                    value="<%= user.intCloacasObtenida%>">
+                                            </div>
+                                            <%}%>
 
-                                                                                            <input hidden type="radio"
-                                                                                                name="intCloacas"
-                                                                                                id="intCloacas"
-                                                                                                value="<%=user.intCloacas%>"
-                                                                                                checked>
-                                                                                            <input type="radio"
-                                                                                                name="intCloacas"
-                                                                                                id="intCloacas"
-                                                                                                value="En gestion"> En
-                                                                                            gestión
-                                                                                            <input type="radio"
-                                                                                                name="intCloacas"
-                                                                                                id="intCloacas"
-                                                                                                value="Pedida"
-                                                                                                value="ok"
-                                                                                                onclick="estadoInterferencia('intCloacasPedida', 'intCloacasObtenida',true,false);">
-                                                                                            Pedida
-                                                                                            <input type="radio"
-                                                                                                name="intCloacas"
-                                                                                                id="intCloacas"
-                                                                                                value="ok"
-                                                                                                onclick="estadoInterferencia('intCloacasPedida', 'intCloacasObtenida',false,true);">
-                                                                                            Ok
-                                                                                            <div id="intCloacasPedida"
-                                                                                                style="display: none;">
-                                                                                                Fecha en la que se pidió
-                                                                                                <input type="date"
-                                                                                                    name="intCloacasPedida"
-                                                                                                    id="intCloacasPedida"
-                                                                                                    value="<%= user.intCloacasPedida%>">
-                                                                                            </div>
-                                                                                            <div id="intCloacasObtenida"
-                                                                                                style="display: none;">
-                                                                                                Fecha en la que se vence
-                                                                                                <input type="date"
-                                                                                                    name="intCloacasObtenida"
-                                                                                                    id="intCloacasObtenida"
-                                                                                                    value="<%= user.intCloacasObtenida%>">
-                                                                                            </div>
-                                                                                        </form-check>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="card-body">
-                                                                                    <div class="card-title">Electricidad
-                                                                                    </div>
-                                                                                    <div class="card-text">
-                                                                                        <form-check>
 
-                                                                                            <input hidden type="radio"
-                                                                                                name="intElectricidad"
-                                                                                                id="intElectricidad"
-                                                                                                value="<%=user.intElectricidad%>"
-                                                                                                checked>
-                                                                                            <input type="radio"
-                                                                                                name="intElectricidad"
-                                                                                                id="intElectricidad"
-                                                                                                value="En gestion"> En
-                                                                                            gestión
-                                                                                            <input type="radio"
-                                                                                                name="intElectricidad"
-                                                                                                id="intElectricidad"
-                                                                                                value="Pedida"
-                                                                                                value="ok"
-                                                                                                onclick="estadoInterferencia('intElectricidadPedida', 'intElectricidadObtenida',true,false);">
-                                                                                            Pedida
-                                                                                            <input type="radio"
-                                                                                                name="intElectricidad"
-                                                                                                id="intElectricidad"
-                                                                                                value="ok" value="ok"
-                                                                                                onclick="estadoInterferencia('intElectricidadPedida', 'intElectricidadObtenida',false,true);">
-                                                                                            Ok
-                                                                                            <div id="intElectricidadPedida"
-                                                                                                style="display: none;">
-                                                                                                Fecha en la que se pidió
-                                                                                                <input type="date"
-                                                                                                    name="intElectricidadPedida"
-                                                                                                    id="intElectricidadPedida"
-                                                                                                    value="<%= user.intElectricidadPedida%>">
-                                                                                            </div>
-                                                                                            <div id="intElectricidadObtenida"
-                                                                                                style="display: none;">
-                                                                                                Fecha en la que se vence
-                                                                                                <input type="date"
-                                                                                                    name="intElectricidadObtenida"
-                                                                                                    id="intElectricidadObtenida"
-                                                                                                    value="<%= user.ElectricidadguaObtenida%>">
-                                                                                            </div>
-                                                                                        </form-check>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="card-body">
+            </form-check>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="card-title">Electricidad
+        </div>
+        <div class="card-text">
+            <form-check>
+                <input hidden type="radio" name="intElectricidad" id="intElectricidad" value="<%=user.intElectricidad%>"
+                    checked>
+                <%if (user.intElectricidad!="En gestion" && user.intElectricidad!="Pedida" && user.intElectricidad!="ok"
+                    ) {%>
 
-                                                                                    <div class="card-title">Claro
-                                                                                    </div>
-                                                                                    <div class="card-text">
-                                                                                        <form-check>
+                    <input type="radio" name="intElectricidad" id="intElectricidad" value="En gestion"> En
+                    gestión
+                    <input type="radio" name="intElectricidad" id="intElectricidad" value="Pedida" value="ok"
+                        onclick="estadoInterferencia('intElectricidadPedida', 'intElectricidadObtenida',true,false);">
+                    Pedida
+                    <input type="radio" name="intElectricidad" id="intElectricidad" value="ok" value="ok"
+                        onclick="estadoInterferencia('intElectricidadPedida', 'intElectricidadObtenida',false,true);">
+                    Ok
+                    <div id="intElectricidadPedida" style="display: none;">
+                        Fecha en la que se pidió
+                        <input type="date" name="intElectricidadPedida" id="intElectricidadPedida"
+                            value="<%= user.intElectricidadPedida%>">
+                    </div>
+                    <div id="intElectricidadObtenida" style="display: none;">
+                        Fecha en la que se vence
+                        <input type="date" name="intElectricidadObtenida" id="intElectricidadObtenida"
+                            value="<%= user.intElectricidadObtenida%>">
+                    </div>
+                    <%}%>
+                        <%if(user.intElectricidad=="En gestion"){%>
+                            <input checked type="radio" name="intElectricidad" id="intElectricidad" value="En gestion">
+                            En
+                            gestión
+                            <input type="radio" name="intElectricidad" id="intElectricidad" value="Pedida" value="ok"
+                                onclick="estadoInterferencia('intElectricidadPedida', 'intElectricidadObtenida',true,false);">
+                            Pedida
+                            <input type="radio" name="intElectricidad" id="intElectricidad" value="ok" value="ok"
+                                onclick="estadoInterferencia('intElectricidadPedida', 'intElectricidadObtenida',false,true);">
+                            Ok
+                            <div id="intElectricidadPedida" style="display: none;">
+                                Fecha en la que se pidió
+                                <input type="date" name="intElectricidadPedida" id="intElectricidadPedida"
+                                    value="<%= user.intElectricidadPedida%>">
+                            </div>
+                            <div id="intElectricidadObtenida" style="display: none;">
+                                Fecha en la que se vence
+                                <input type="date" name="intElectricidadObtenida" id="intElectricidadObtenida"
+                                    value="<%= user.intElectricidadObtenida%>">
+                            </div>
 
-                                                                                            <input hidden type="radio"
-                                                                                                name="intClaro id="
-                                                                                                intClaro
-                                                                                                value="<%=user.intClaro%>"
-                                                                                                checked>
-                                                                                            <input type="radio"
-                                                                                                name="intClaro id="
-                                                                                                intClaro
-                                                                                                value="En gestion"> En
-                                                                                            gestión
-                                                                                            <input type="radio"
-                                                                                                name="intClaro id="
-                                                                                                intClaro value="Pedida"
-                                                                                                onclick="estadoInterferencia('intClaroPedida', 'intClaroObtenida',true,false);">
-                                                                                            Pedida
-                                                                                            <input type="radio"
-                                                                                                name="intClaro id="
-                                                                                                intClaro value="ok"
-                                                                                                onclick="estadoInterferencia('intClaroPedida', 'intClaroObtenida',false,true);">
-                                                                                            Ok
-                                                                                            <div id="intClaroPedida"
-                                                                                                style="display: none;">
-                                                                                                Fecha en la que se pidió
-                                                                                                <input type="date"
-                                                                                                    name="intClaroPedida"
-                                                                                                    id="intClaroPedida"
-                                                                                                    value="<%= user.intClaroPedida%>">
-                                                                                            </div>
-                                                                                            <div id="intClaroObtenida"
-                                                                                                style="display: none;">
-                                                                                                Fecha en la que se vence
-                                                                                                <input type="date"
-                                                                                                    name="intClaroObtenida"
-                                                                                                    id="intClaroObtenida"
-                                                                                                    value="<%= user.intClaroObtenida%>">
-                                                                                            </div>
-                                                                                        </form-check>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="card-body">
+                            <%}%>
+                                <%if(user.intElectricidad=="Pedida"){%>
+                                    <input type="radio" name="intElectricidad" id="intElectricidad" value="En gestion">
+                                    En
+                                    gestión
+                                    <input checked type="radio" name="intElectricidad" id="intElectricidad"
+                                        value="Pedida" value="ok"
+                                        onclick="estadoInterferencia('intElectricidadPedida', 'intElectricidadObtenida',true,false);">
+                                    Pedida
+                                    <input type="radio" name="intElectricidad" id="intElectricidad" value="ok"
+                                        value="ok"
+                                        onclick="estadoInterferencia('intElectricidadPedida', 'intElectricidadObtenida',false,true);">
+                                    Ok
+                                    <div id="intElectricidadPedida" style="display: block;">
+                                        Fecha en la que se pidió
+                                        <input type="date" name="intElectricidadPedida" id="intElectricidadPedida"
+                                            value="<%= user.intElectricidadPedida%>">
+                                    </div>
+                                    <div id="intElectricidadObtenida" style="display: none;">
+                                        Fecha en la que se vence
+                                        <input type="date" name="intElectricidadObtenida" id="intElectricidadObtenida"
+                                            value="<%= user.intElectricidadObtenida%>">
+                                    </div>
 
-                                                                                    <div class="card-title">Arnet
-                                                                                    </div>
-                                                                                    <div class="card-text">
-                                                                                        <form-check>
+                                    <%}%>
+                                        <%if(user.intElectricidad=="ok"){%>
+                                            <input type="radio" name="intElectricidad" id="intElectricidad"
+                                                value="En gestion"> En
+                                            gestión
+                                            <input type="radio" name="intElectricidad" id="intElectricidad"
+                                                value="Pedida" value="ok"
+                                                onclick="estadoInterferencia('intElectricidadPedida', 'intElectricidadObtenida',true,false);">
+                                            Pedida
+                                            <input checked type="radio" name="intElectricidad" id="intElectricidad"
+                                                value="ok" value="ok"
+                                                onclick="estadoInterferencia('intElectricidadPedida', 'intElectricidadObtenida',false,true);">
+                                            Ok
+                                            <div id="intElectricidadPedida" style="display: none;">
+                                                Fecha en la que se pidió
+                                                <input type="date" name="intElectricidadPedida"
+                                                    id="intElectricidadPedida" value="<%= user.intElectricidadPedida%>">
+                                            </div>
+                                            <div id="intElectricidadObtenida" style="display: block;">
+                                                Fecha en la que se vence
+                                                <input type="date" name="intElectricidadObtenida"
+                                                    id="intElectricidadObtenida"
+                                                    value="<%= user.intElectricidadObtenida%>">
+                                            </div>
 
-                                                                                            <input hidden type="radio"
-                                                                                                name="intArnet id="
-                                                                                                intArnet
-                                                                                                value="<%=user.intArnet%>"
-                                                                                                checked>
-                                                                                            <input type="radio"
-                                                                                                name="intArnet id="
-                                                                                                intArnet
-                                                                                                value="En gestion"> En
-                                                                                            gestión
-                                                                                            <input type="radio"
-                                                                                                name="intArnet id="
-                                                                                                intArnet value="Pedida"
-                                                                                                onclick="estadoInterferencia('intArnetPedida', 'intArnetObtenida',true,false);">
-                                                                                            Pedida
-                                                                                            <input type="radio"
-                                                                                                name="intArnet id="
-                                                                                                intArnet value="ok"
-                                                                                                onclick="estadoInterferencia('intArnetPedida', 'intArnetObtenida',false,true);">
-                                                                                            Ok
-                                                                                            <div id="intArnetPedida"
-                                                                                                style="display: none;">
-                                                                                                Fecha en la que se pidió
-                                                                                                <input type="date"
-                                                                                                    name="intArnetPedida"
-                                                                                                    id="intArnetPedida"
-                                                                                                    value="<%= user.intArnetPedida%>">
-                                                                                            </div>
-                                                                                            <div id="intArnetObtenida"
-                                                                                                style="display: none;">
-                                                                                                Fecha en la que se vence
-                                                                                                <input type="date"
-                                                                                                    name="intArnetObtenida"
-                                                                                                    id="intArnetObtenida"
-                                                                                                    value="<%= user.intArnetObtenida%>">
-                                                                                            </div>
-                                                                                        </form-check>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="card-body">
+                                            <%}%>
+            </form-check>
+        </div>
+    </div>
+    <div class="card-body">
 
-                                                                                    <div class="card-title">Arsat
-                                                                                    </div>
-                                                                                    <div class="card-text">
-                                                                                        <form-check>
+        <div class="card-title">Claro
+        </div>
+        <div class="card-text">
+            <form-check>
+                <%if (user.intClaro!="En gestion" && user.intClaro!="Pedida" && user.intClaro!="ok" ) {%>
+                    <input hidden type="radio" name="intClaro" id="intClaro" value="<%=user.intClaro%>" checked>
 
-                                                                                            <input hidden type="radio"
-                                                                                                name="intArsat id="
-                                                                                                intArsat
-                                                                                                value="<%=user.intArsat%>"
-                                                                                                checked>
-                                                                                            <input type="radio"
-                                                                                                name="intArsat id="
-                                                                                                intArsat
-                                                                                                value="En gestion"> En
-                                                                                            gestión
-                                                                                            <input type="radio"
-                                                                                                name="intArsat id="
-                                                                                                intArsat value="Pedida"
-                                                                                                onclick="estadoInterferencia('intArsatPedida', 'intArsatObtenida',true,false);">
-                                                                                            Pedida
-                                                                                            <input type="radio"
-                                                                                                name="intArsat id="
-                                                                                                intArsat value="ok"
-                                                                                                onclick="estadoInterferencia('intArsatPedida', 'intArsatObtenida',false,true);">
-                                                                                            Ok
-                                                                                            <div id="intArsatPedida"
-                                                                                                style="display: none;">
-                                                                                                Fecha en la que se pidió
-                                                                                                <input type="date"
-                                                                                                    name="intArsatPedida"
-                                                                                                    id="intArsatPedida"
-                                                                                                    value="<%= user.intArsatPedida%>">
-                                                                                            </div>
-                                                                                            <div id="intArsatObtenida"
-                                                                                                style="display: none;">
-                                                                                                Fecha en la que se vence
-                                                                                                <input type="date"
-                                                                                                    name="intArsatObtenida"
-                                                                                                    id="intArsatObtenida"
-                                                                                                    value="<%= user.intArsatObtenida%>">
-                                                                                            </div>
-                                                                                        </form-check>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="card-body">
+                    <input type="radio" name="intClaro" id="intClaro" value="En gestion"> En
+                    gestión
+                    <input type="radio" name="intClaro" id="intClaro" value="Pedida"
+                        onclick="estadoInterferencia('intClaroPedida', 'intClaroObtenida',true,false);">
+                    Pedida
+                    <input type="radio" name="intClaro" id="intClaro" value="ok"
+                        onclick="estadoInterferencia('intClaroPedida', 'intClaroObtenida',false,true);">
+                    Ok
+                    <div id="intClaroPedida" style="display: none;">
+                        Fecha en la que se pidió
+                        <input type="date" name="intClaroPedida" id="intClaroPedida" value="<%= user.intClaroPedida%>">
+                    </div>
+                    <div id="intClaroObtenida" style="display: none;">
+                        Fecha en la que se vence
+                        <input type="date" name="intClaroObtenida" id="intClaroObtenida"
+                            value="<%= user.intClaroObtenida%>">
+                    </div>
+                    <%}%>
+                        <%if (user.intClaro=="En gestion" ){%>
 
-                                                                                    <div class="card-title">Telecom
-                                                                                    </div>
-                                                                                    <div class="card-text">
-                                                                                        <form-check>
+                            <input checked type="radio" name="intClaro" id="intClaro" value="En gestion"> En
+                            gestión
+                            <input type="radio" name="intClaro" id="intClaro" value="Pedida"
+                                onclick="estadoInterferencia('intClaroPedida', 'intClaroObtenida',true,false);">
+                            Pedida
+                            <input type="radio" name="intClaro" id="intClaro" value="ok"
+                                onclick="estadoInterferencia('intClaroPedida', 'intClaroObtenida',false,true);">
+                            Ok
+                            <div id="intClaroPedida" style="display: none;">
+                                Fecha en la que se pidió
+                                <input type="date" name="intClaroPedida" id="intClaroPedida"
+                                    value="<%= user.intClaroPedida%>">
+                            </div>
+                            <div id="intClaroObtenida" style="display: none;">
+                                Fecha en la que se vence
+                                <input type="date" name="intClaroObtenida" id="intClaroObtenida"
+                                    value="<%= user.intClaroObtenida%>">
+                            </div>
+                            <%}%>
+                                <%if (user.intClaro=="Pedida" ){%>
 
-                                                                                            <input hidden type="radio"
-                                                                                                name="intTelecom id="
-                                                                                                intTelecom
-                                                                                                value="<%=user.intTelecom%>"
-                                                                                                checked>
-                                                                                            <input type="radio"
-                                                                                                name="intTelecom id="
-                                                                                                intTelecom
-                                                                                                value="En gestion"> En
-                                                                                            gestión
-                                                                                            <input type="radio"
-                                                                                                name="intTelecom id="
-                                                                                                intTelecom
-                                                                                                value="Pedida"
-                                                                                                onclick="estadoInterferencia('intTelecomPedida', 'intTelecomObtenida',true,false);">
-                                                                                            Pedida
-                                                                                            <input type="radio"
-                                                                                                name="intTelecom id="
-                                                                                                intTelecom value="ok"
-                                                                                                onclick="estadoInterferencia('intTelecomPedida', 'intTelecomObtenida',false,true);">
-                                                                                            Ok
-                                                                                            <div id="intTelecomPedida"
-                                                                                                style="display: none;">
-                                                                                                Fecha en la que se pidió
-                                                                                                <input type="date"
-                                                                                                    name="intTelecomPedida"
-                                                                                                    id="intTelecomPedida"
-                                                                                                    value="<%= user.intTelecomPedida%>">
-                                                                                            </div>
-                                                                                            <div id="intTelecomObtenida"
-                                                                                                style="display: none;">
-                                                                                                Fecha en la que se vence
-                                                                                                <input type="date"
-                                                                                                    name="intTelecomObtenida"
-                                                                                                    id="intTelecomObtenida"
-                                                                                                    value="<%= user.intTelecomObtenida%>">
-                                                                                            </div>
-                                                                                        </form-check>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <br>
+                                    <input type="radio" name="intClaro" id="intClaro" value="En gestion"> En
+                                    gestión
+                                    <input checked type="radio" name="intClaro" id="intClaro" value="Pedida"
+                                        onclick="estadoInterferencia('intClaroPedida', 'intClaroObtenida',true,false);">
+                                    Pedida
+                                    <input type="radio" name="intClaro" id="intClaro" value="ok"
+                                        onclick="estadoInterferencia('intClaroPedida', 'intClaroObtenida',false,true);">
+                                    Ok
+                                    <div id="intClaroPedida" style="display: block;">
+                                        Fecha en la que se pidió
+                                        <input type="date" name="intClaroPedida" id="intClaroPedida"
+                                            value="<%= user.intClaroPedida%>">
+                                    </div>
+                                    <div id="intClaroObtenida" style="display: none;">
+                                        Fecha en la que se vence
+                                        <input type="date" name="intClaroObtenida" id="intClaroObtenida"
+                                            value="<%= user.intClaroObtenida%>">
+                                    </div>
+                                    <%}%>
+                                        <%if (user.intClaro=="ok" ){%>
+
+                                            <input type="radio" name="intClaro" id="intClaro" value="En gestion"> En
+                                            gestión
+                                            <input type="radio" name="intClaro" id="intClaro" value="Pedida"
+                                                onclick="estadoInterferencia('intClaroPedida', 'intClaroObtenida',true,false);">
+                                            Pedida
+                                            <input checked type="radio" name="intClaro" id="intClaro" value="ok"
+                                                onclick="estadoInterferencia('intClaroPedida', 'intClaroObtenida',false,true);">
+                                            Ok
+                                            <div id="intClaroPedida" style="display: none;">
+                                                Fecha en la que se pidió
+                                                <input type="date" name="intClaroPedida" id="intClaroPedida"
+                                                    value="<%= user.intClaroPedida%>">
+                                            </div>
+                                            <div id="intClaroObtenida" style="display: block;">
+                                                Fecha en la que se vence
+                                                <input type="date" name="intClaroObtenida" id="intClaroObtenida"
+                                                    value="<%= user.intClaroObtenida%>">
+                                            </div>
+                                            <%}%>
+            </form-check>
+        </div>
+    </div>
+    <div class="card-body">
+
+        <div class="card-title">Arnet
+        </div>
+        <div class="card-text">
+            <form-check>
+                <%if (user.intArnet!="En gestion" && user.intArnet!="Pedida" && user.intArnet!="ok" ) {%>
+                    <input hidden type="radio" name="intArnet" id="intArnet" value="<%=user.intArnet%>" checked>
+                    <input type="radio" name="intArnet" id="intArnet" value="En gestion"> En
+                    gestión
+                    <input type="radio" name="intArnet" id="intArnet" value="Pedida"
+                        onclick="estadoInterferencia('intArnetPedida', 'intArnetObtenida',true,false);">
+                    Pedida
+                    <input type="radio" name="intArnet" id="intArnet" value="ok"
+                        onclick="estadoInterferencia('intArnetPedida', 'intArnetObtenida',false,true);">
+                    Ok
+                    <div id="intArnetPedida" style="display: none;">
+                        Fecha en la que se pidió
+                        <input type="date" name="intArnetPedida" id="intArnetPedida" value="<%= user.intArnetPedida%>">
+                    </div>
+                    <div id="intArnetObtenida" style="display: none;">
+                        Fecha en la que se vence
+                        <input type="date" name="intArnetObtenida" id="intArnetObtenida"
+                            value="<%= user.intArnetObtenida%>">
+                    </div>
+                    <%}%>
+                        <%if (user.intArnet=="EnGestion" ){%>
+                            <input checked type="radio" name="intArnet" id="intArnet" value="En gestion"> En
+                            gestión
+                            <input type="radio" name="intArnet" id="intArnet" value="Pedida"
+                                onclick="estadoInterferencia('intArnetPedida', 'intArnetObtenida',true,false);">
+                            Pedida
+                            <input type="radio" name="intArnet" id="intArnet" value="ok"
+                                onclick="estadoInterferencia('intArnetPedida', 'intArnetObtenida',false,true);">
+                            Ok
+                            <div id="intArnetPedida" style="display: none;">
+                                Fecha en la que se pidió
+                                <input type="date" name="intArnetPedida" id="intArnetPedida"
+                                    value="<%= user.intArnetPedida%>">
+                            </div>
+                            <div id="intArnetObtenida" style="display: none;">
+                                Fecha en la que se vence
+                                <input type="date" name="intArnetObtenida" id="intArnetObtenida"
+                                    value="<%= user.intArnetObtenida%>">
+                            </div>
+                            <%}%>
+                                <%if (user.intArnet=="Pedida" ){%>
+                                    <input type="radio" name="intArnet" id="intArnet" value="En gestion"> En
+                                    gestión
+                                    <input checked type="radio" name="intArnet" id="intArnet" value="Pedida"
+                                        onclick="estadoInterferencia('intArnetPedida', 'intArnetObtenida',true,false);">
+                                    Pedida
+                                    <input type="radio" name="intArnet" id="intArnet" value="ok"
+                                        onclick="estadoInterferencia('intArnetPedida', 'intArnetObtenida',false,true);">
+                                    Ok
+                                    <div id="intArnetPedida" style="display: block;">
+                                        Fecha en la que se pidió
+                                        <input type="date" name="intArnetPedida" id="intArnetPedida"
+                                            value="<%= user.intArnetPedida%>">
+                                    </div>
+                                    <div id="intArnetObtenida" style="display: none;">
+                                        Fecha en la que se vence
+                                        <input type="date" name="intArnetObtenida" id="intArnetObtenida"
+                                            value="<%= user.intArnetObtenida%>">
+                                    </div>
+                                    <%}%>
+
+                                        <%if (user.intArnet=="ok" ){%>
+                                            <input type="radio" name="intArnet" id="intArnet" value="En gestion"> En
+                                            gestión
+                                            <input type="radio" name="intArnet" id="intArnet" value="Pedida"
+                                                onclick="estadoInterferencia('intArnetPedida', 'intArnetObtenida',true,false);">
+                                            Pedida
+                                            <input checked type="radio" name="intArnet" id="intArnet" value="ok"
+                                                onclick="estadoInterferencia('intArnetPedida', 'intArnetObtenida',false,true);">
+                                            Ok
+                                            <div id="intArnetPedida" style="display: none;">
+                                                Fecha en la que se pidió
+                                                <input type="date" name="intArnetPedida" id="intArnetPedida"
+                                                    value="<%= user.intArnetPedida%>">
+                                            </div>
+                                            <div id="intArnetObtenida" style="display: block;">
+                                                Fecha en la que se vence
+                                                <input type="date" name="intArnetObtenida" id="intArnetObtenida"
+                                                    value="<%= user.intArnetObtenida%>">
+                                            </div>
+                                            <%}%>
+            </form-check>
+        </div>
+    </div>
+    <div class="card-body">
+
+        <div class="card-title">Arsat
+        </div>
+        <div class="card-text">
+            <form-check>
+                <%if (user.intArsat!="En gestion" && user.intArsat!="Pedida" && user.intArsat!="ok" ) {%>
+                    <input hidden type="radio" name="intArsat" id="intArsat" value="<%=user.intArsat%>" checked>
+                    <input type="radio" name="intArsat" id="intArsat" value="En gestion"> En
+                    gestión
+                    <input type="radio" name="intArsat" id="intArsat" value="Pedida"
+                        onclick="estadoInterferencia('intArsatPedida', 'intArsatObtenida',true,false);">
+                    Pedida
+                    <input type="radio" name="intArsat" id="intArsat" value="ok"
+                        onclick="estadoInterferencia('intArsatPedida', 'intArsatObtenida',false,true);">
+                    Ok
+                    <div id="intArsatPedida" style="display: none;">
+                        Fecha en la que se pidió
+                        <input type="date" name="intArsatPedida" id="intArsatPedida" value="<%= user.intArsatPedida%>">
+                    </div>
+                    <div id="intArsatObtenida" style="display: none;">
+                        Fecha en la que se vence
+                        <input type="date" name="intArsatObtenida" id="intArsatObtenida"
+                            value="<%= user.intArsatObtenida%>">
+                    </div>
+                    <%}%>
+                        <%if(user.intArsat=="En gestion"){%>
+                            <input checked type="radio" name="intArsat" id="intArsat" value="En gestion"> En
+                            gestión
+                            <input type="radio" name="intArsat" id="intArsat" value="Pedida"
+                                onclick="estadoInterferencia('intArsatPedida', 'intArsatObtenida',true,false);">
+                            Pedida
+                            <input type="radio" name="intArsat" id="intArsat value="ok"
+                                onclick="estadoInterferencia('intArsatPedida', 'intArsatObtenida',false,true);">
+                            Ok
+                            <div id="intArsatPedida" style="display: none;">
+                                Fecha en la que se pidió
+                                <input type="date" name="intArsatPedida" id="intArsatPedida"
+                                    value="<%= user.intArsatPedida%>">
+                            </div>
+                            <div id="intArsatObtenida" style="display: none;">
+                                Fecha en la que se vence
+                                <input type="date" name="intArsatObtenida" id="intArsatObtenida"
+                                    value="<%= user.intArsatObtenida%>">
+                            </div>
+                            <%}%>
+                                <%if(user.intArsat=="Pedida"){%>
+                                    <input type="radio" name="intArsat" id="intArsat" value="En gestion"> En
+                                    gestión
+                                    <input checked type="radio" name="intArsat" id="intArsat" value="Pedida"
+                                        onclick="estadoInterferencia('intArsatPedida', 'intArsatObtenida',true,false);">
+                                    Pedida
+                                    <input type="radio" name="intArsat" id="intArsat" value="ok"
+                                        onclick="estadoInterferencia('intArsatPedida', 'intArsatObtenida',false,true);">
+                                    Ok
+                                    <div id="intArsatPedida" style="display: block;">
+                                        Fecha en la que se pidió
+                                        <input type="date" name="intArsatPedida" id="intArsatPedida"
+                                            value="<%= user.intArsatPedida%>">
+                                    </div>
+                                    <div id="intArsatObtenida" style="display: none;">
+                                        Fecha en la que se vence
+                                        <input type="date" name="intArsatObtenida" id="intArsatObtenida"
+                                            value="<%= user.intArsatObtenida%>">
+                                    </div>
+                                    <%}%>
+                                        <%if(user.intArsat=="ok"){%>
+                                            <input type="radio" name="intArsat" id="intArsat" value="En gestion"> En
+                                            gestión
+                                            <input type="radio" name="intArsat" id="intArsat" value="Pedida"
+                                                onclick="estadoInterferencia('intArsatPedida', 'intArsatObtenida',true,false);">
+                                            Pedida
+                                            <input checked type="radio" name="intArsat" id="intArsat" value=" ok"
+                                                onclick="estadoInterferencia('intArsatPedida', 'intArsatObtenida',false,true);">
+                                            Ok
+                                            <div id="intArsatPedida" style="display: none;">
+                                                Fecha en la que se pidió
+                                                <input type="date" name="intArsatPedida" id="intArsatPedida"
+                                                    value="<%= user.intArsatPedida%>">
+                                            </div>
+                                            <div id="intArsatObtenida" style="display: block;">
+                                                Fecha en la que se vence
+                                                <input type="date" name="intArsatObtenida" id="intArsatObtenida"
+                                                    value="<%= user.intArsatObtenida%>">
+                                            </div>
+                                            <%}%>
+            </form-check>
+        </div>
+    </div>
+    <div class="card-body">
+
+        <div class="card-title">Telecom
+        </div>
+        <div class="card-text">
+            <form-check>
+                <%if (user.intTelecom!="En gestion" && user.intTelecom!="Pedida" && user.intTelecom!="ok" ) {%>
+                    <input hidden type="radio" name="intTelecom" id="intTelecom" value="<%=user.intTelecom%>" checked>
+                    <input type="radio" name="intTelecom" id="intTelecom" value="En gestion"> En
+                    gestión
+                    <input type="radio" name="intTelecom" id="intTelecom" value="Pedida"
+                        onclick="estadoInterferencia('intTelecomPedida', 'intTelecomObtenida',true,false);">
+                    Pedida
+                    <input type="radio" name="intTelecom" id="intTelecom " value="ok"
+                        onclick="estadoInterferencia('intTelecomPedida', 'intTelecomObtenida',false,true);">
+                    Ok
+                    <div id="intTelecomPedida" style="display: none;">
+                        Fecha en la que se pidió
+                        <input type="date" name="intTelecomPedida" id="intTelecomPedida"
+                            value="<%= user.intTelecomPedida%>">
+                    </div>
+                    <div id="intTelecomObtenida" style="display: none;">
+                        Fecha en la que se vence
+                        <input type="date" name="intTelecomObtenida" id="intTelecomObtenida"
+                            value="<%= user.intTelecomObtenida%>">
+                    </div>
+                    <%}%>
+                        <%if(user.intTelecom=="En gestion"){%>
+                            <input checked type="radio" name="intTelecom" id="intTelecom" value="En gestion"> En
+                            gestión
+                            <input type="radio" name="intTelecom" id="intTelecom" value="Pedida"
+                                onclick="estadoInterferencia('intTelecomPedida', 'intTelecomObtenida',true,false);">
+                            Pedida
+                            <input type="radio" name="intTelecom" id="intTelecom" value="ok"
+                                onclick="estadoInterferencia('intTelecomPedida', 'intTelecomObtenida',false,true);">
+                            Ok
+                            <div id="intTelecomPedida" style="display: none;">
+                                Fecha en la que se pidió
+                                <input type="date" name="intTelecomPedida" id="intTelecomPedida"
+                                    value="<%= user.intTelecomPedida%>">
+                            </div>
+                            <div id="intTelecomObtenida" style="display:none;">
+                                Fecha en la que se vence
+                                <input type="date" name="intTelecomObtenida" id="intTelecomObtenida"
+                                    value="<%= user.intTelecomObtenida%>">
+                            </div>
+                            <%}%>
+
+                                <%if(user.intTelecom=="Pedida"){%>
+                                    <input type="radio" name="intTelecom" id="intTelecom" value="En gestion"> En
+                                    gestión
+                                    <input checked type="radio" name="intTelecom" id="intTelecom" value="Pedida"
+                                        onclick="estadoInterferencia('intTelecomPedida', 'intTelecomObtenida',true,false);">
+                                    Pedida
+                                    <input type="radio" name="intTelecom" id="intTelecom" value="ok"
+                                        onclick="estadoInterferencia('intTelecomPedida', 'intTelecomObtenida',false,true);">
+                                    Ok
+                                    <div id="intTelecomPedida" style="display:block;">
+                                        Fecha en la que se pidió
+                                        <input type="date" name="intTelecomPedida" id="intTelecomPedida"
+                                            value="<%= user.intTelecomPedida%>">
+                                    </div>
+                                    <div id="intTelecomObtenida" style="display:none;">
+                                        Fecha en la que se vence
+                                        <input type="date" name="intTelecomObtenida" id="intTelecomObtenida"
+                                            value="<%= user.intTelecomObtenida%>">
+                                    </div>
+                                    <%}%>
+                                        <%if(user.intTelecom=="ok"){%>
+                                            <input type="radio" name="intTelecom" id="intTelecom" value="En gestion">
+                                            En
+                                            gestión
+                                            <input  type="radio" name="intTelecom" id="intTelecom"
+                                                value="Pedida"
+                                                onclick="estadoInterferencia('intTelecomPedida', 'intTelecomObtenida',true,false);">
+                                            Pedida
+                                            <input checked type="radio" name="intTelecom" id="intTelecom" value="ok"
+                                                onclick="estadoInterferencia('intTelecomPedida', 'intTelecomObtenida',false,true);">
+                                            Ok
+                                            <div id="intTelecomPedida" style="display:none;">
+                                                Fecha en la que se pidió
+                                                <input type="date" name="intTelecomPedida" id="intTelecomPedida"
+                                                    value="<%= user.intTelecomPedida%>">
+                                            </div>
+                                            <div id="intTelecomObtenida" style="display: block;">
+                                                Fecha en la que se vence
+                                                <input type="date" name="intTelecomObtenida" id="intTelecomObtenida"
+                                                    value="<%= user.intTelecomObtenida%>">
+                                                <%}%>
+            </form-check>
+        </div>
+    </div>
+</div>
+<br>
