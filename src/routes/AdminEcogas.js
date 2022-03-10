@@ -654,7 +654,7 @@ router.post('/act2pCarpEcogas/:id', (req,res)=>{
    
     var intCloacasPedida = req.body.intCloacasPedida;
     var intCloacasObtenida = req.body.intCloacasObtenida;
-    var intCloacas = req.body.intCloaca;
+    var intCloacas = req.body.intCloacas;
   
     var intElectricidadPedida = req.body.intElectricidadPedida;
     var intElectricidadObtenida = req.body.intElectricidadObtenida;
@@ -686,7 +686,7 @@ router.post('/act2pCarpEcogas/:id', (req,res)=>{
     var AvisoInicioObraART = req.body.AvisoInicioObraART;
     var AvisoInicioObraIERIC = req.body.AvisoInicioObraIERIC;
     var ActaInicioEfectivo = req.body.ActaInicioEfectivo;
-
+console.log("Mostrando opciones seleccionadas de las interferencias: Cloacas " + req.body.intCloacas +". Telefonica:" + req.body.intTelefonica + ".Claro: " + req.body.intClaro + ". Arnet:" + req.body.intArnet + ". Arsat:" + req.body.intArsat + ". Telecom: " + req.body.intTelecom);
     //Variables generales
     var DocumentacionObra,Seguridad,Interferencias,Permisos,Matriculas,Ambiente,Avisos;
     
@@ -758,8 +758,12 @@ connection.query(sql,[{ DocumentacionObra:DocumentacionObra,Seguridad:Seguridad,
             Hidraulica: HIDRAULICA,Ferrocarriles: FERROCARRIL, PerMunicipal: PerMunicipal,DNV: DNV, DPV: DPV, Irrigacion: Irrigacion, Privado: PRIVADO,  Otrospermisos: OTROSPERMISOS,
             intTelefonicaObtenida: intTelefonicaObtenida, intTelefonicaPedida: intTelefonicaPedida, intClaroPedida: intClaroPedida, intClaroObtenida: intClaroObtenida,
         intAguaObtenida: intAguaObtenida, intAguaPedida: intAguaPedida, intCloacasObtenida: intCloacasObtenida, intCloacasPedida: intCloacasPedida, intElectricidadObtenida: intElectricidadObtenida,
-        intElectricidadPedida: intElectricidadPedida, intTelecomObtenida: intTelecomObtenida, intTelecomPedida: intTelecomPedida, intTelefonica: intTelefonica, intClaro: intClaro, intAgua: intAgua,
+        intElectricidadPedida: intElectricidadPedida, intArsatPedida:intArsatPedida, intArsatObtenida:intArsatObtenida, intArnetObtenida:intArnetObtenida,  intArnetPedida: intArnetPedida,
+         intTelecomObtenida: intTelecomObtenida, intTelecomPedida: intTelecomPedida,
+         //Estado de las interferencias
+         intTelefonica: intTelefonica, intClaro: intClaro, intAgua: intAgua,
         intCloaca: intCloacas, intElectricidad: intElectricidad, intTelecom: intTelecom, intArnet: intArnet, intArsat: intArsat,
+        
         MatriculaFusionista:MatriculaFusionista,MatriculaSoldador:MatriculaSoldador, EstudioImpactoAmbiental:EstudioImpactoAmbiental, CronogramaAmbiente: CronogramaAmbiente, NotaCumplimentoNormativa: NotaCumplimentoNormativa,  DDJJNAG153: DDJJNAG153,
         AvisoInicioObraIERIC: AvisoInicioObraIERIC,  AvisoInicioObraART: AvisoInicioObraART, ActaDeInicio: ActaInicioEfectivo,
     }, id],

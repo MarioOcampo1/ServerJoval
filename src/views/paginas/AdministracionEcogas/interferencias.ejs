@@ -148,11 +148,21 @@
               return 'Estado: '+row.intTelefonica + '. Vencimiento: '+moment(row.intTelefonicaObtenida).format("d-MM-YY")+''
             } },
             { "data": "intAgua", render: function(data,type,row){
-if(row.intAguaObtenida==null || row.intAguaObtenida=='' ){
+              const fechaHoy = new Date();
+              if(row.intAguaObtenida < fechaHoy){
+                if(row.intAguaObtenida==null || row.intAguaObtenida=='' ){
   return 'Estado: '+row.intAgua }
 else{
   return 'Estado: '+row.intAgua + '. Vencimiento: '+moment(row.intAguaObtenida).format("d-MM-YY")+'' };
-}},
+}else{
+  if(row.intAguaObtenida==null || row.intAguaObtenida=='' ){
+  return 'Estado: '+row.intAgua }
+else{
+  return 'Estado: '+row.intAgua + '. Vencimiento: '+moment(row.intAguaObtenida).format("d-MM-YY")+'' };
+}
+}
+              }
+},
             { "data": "intCloaca", render: function(data,type,row){
               if(row.intCloacaObtenida==null || row.intCloacaObtenida=='' ){
   return 'Estado: '+row.intCloaca }
