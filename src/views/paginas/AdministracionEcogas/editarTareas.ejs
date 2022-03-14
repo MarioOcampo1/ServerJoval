@@ -335,7 +335,7 @@
                                                                                 </div>
 
                                                                                 <div class="card-title">Libro de
-                                                                                    ordenes de notas de
+                                                                                    de notas de
                                                                                     pedido
                                                                                 </div>
                                                                                 <div class="card-text">
@@ -449,10 +449,6 @@
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-
-
-
-
                                                                         <div class="modal-footer">
                                                                             <button type="button"
                                                                                 class="btn btn-secondary"
@@ -514,13 +510,12 @@
                                                                                         selected>
                                                                                         <%=user.ActasFinales%>
                                                                                     </option>
-                                                                                    <option value="Sin presentar">
-                                                                                        Sin presentar</option>
-                                                                                    <option value="EnGestion">En
-                                                                                        gestion</option>
+                                                                                    <option value="Sin recibir">
+                                                                                        Sin recibir</option>
+                                                                                    <option value="Recibidas"> Recibidas                                                                                 gestion</option>
+                                                                                    <option value="Firmadas">Firmadas</option>
                                                                                     <option value="ok">ok</option>
                                                                                 </select>
-
                                                                                 <div class="card-header">Planos y
                                                                                     croquis</div>
                                                                                 <div class="card-text">
@@ -534,12 +529,11 @@
                                                                                             selected>
                                                                                             <%=user.PlanosyCroquis%>
                                                                                         </option>
-                                                                                        <option value="Sin presentar">
-                                                                                            Sin presentar
-                                                                                        </option>
                                                                                         <option value="EnGestion">En
                                                                                             gestion</option>
-                                                                                        <option value="ok">ok
+                                                                                            <option value="Presentado">Presentado
+                                                                                                <option value="Aprobado/Impreso">Aprobado/Impreso
+                                                                                                    <option value="ok">ok
                                                                                         </option>
 
 
@@ -561,8 +555,8 @@
                                                                                     </option>
                                                                                     <option value="Sin presentar">
                                                                                         Sin presentar</option>
-                                                                                    <option value="EnGestion">En
-                                                                                        gestion</option>
+                                                                                    <option value="Solicitado">Solicitado</option>
+                                                                                    <option value="Entregado">Entregado</option>
                                                                                     <option value="ok">ok</option>
 
                                                                                 </select>
@@ -578,10 +572,9 @@
                                                                                         selected>
                                                                                         <%=user.PruebaHermeticidad%>
                                                                                     </option>
-                                                                                    <option value="Sin presentar">
-                                                                                        Sin presentar</option>
-                                                                                    <option value="EnGestion">En
-                                                                                        gestion</option>
+                                                                                    <option value="Sin realizar">
+                                                                                        Sin realizar</option>
+                                                                                    <option value="Realizada">Realizada</option>
                                                                                     <option value="ok">ok</option>
 
                                                                                 </select>
@@ -597,10 +590,9 @@
                                                                                         selected>
                                                                                         <%=user.InformesFinales%>
                                                                                     </option>
-                                                                                    <option value="Sin presentar">
-                                                                                        Sin presentar</option>
                                                                                     <option value="EnGestion">En
                                                                                         gestion</option>
+                                                                                    <option value="Firmados">Firmados</option>
                                                                                     <option value="ok">ok</option>
 
                                                                                 </select>
@@ -668,8 +660,7 @@
                                                                                         selected>
                                                                                         <%=user.PresentacionFinal%>
                                                                                     </option>
-                                                                                    <option value="EnGestion">En
-                                                                                        gestion</option>
+                                                                                    <option value="Sin presentar">Sin presentar</option>
                                                                                     <option value="ok">ok</option>
                                                                                 </select>
                                                                                 <label
@@ -829,7 +820,11 @@
                                             elemento.style.display = "none";
                                         }
                                     }
+// function FechaVencimientoPermiso(NombrePermiso,NombreCasilleroMostrar){
+//     elemento= document.getElementById(NombrePermiso);
 
+
+// }
                                 </script>
                                 <script>
                                     $(document).ready(

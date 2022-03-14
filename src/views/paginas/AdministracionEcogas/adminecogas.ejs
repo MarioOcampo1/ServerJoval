@@ -134,20 +134,23 @@
           { "width":"5%","data": "Fecha_Proxima_Tarea_sub", render:function(data,type,row){
             var FechaSinTransformar = data;
             var fechaActual = new Date();
+            var fechaActualTransformada;
             moment.locale('es');
             fechaActual = fechaActual.toISOString();
-    fechaActual=moment(fechaActual).format("DD-MM-YYYY");
-    newDate= FechaSinTransformar;
-    newDate = moment(FechaSinTransformar).locale('es').format("DD-MM-YYYY");
-      if (fechaActual>newDate){
-         return '<div class="bg-danger text-light">'+ newDate+' </div>';
+    fechaActualTransformada=moment(fechaActual).format("DD-MM-YYYY");
+    FechaDeTarea= FechaSinTransformar;
+    FechaDeTarea = moment(FechaSinTransformar).locale('es').format("DD-MM-YYYY");
+    console.log("Fecha actual:" + fechaActualTransformada + " Fecha de Tarea: " +FechaDeTarea);
+    if (fechaActualTransformada==FechaDeTarea){
+      return '<div class="bg-primary text-dark">'+ FechaDeTarea+' </div>';
     }
-    if (fechaActual<newDate){
-      return '<div class="bg-success text-light">'+ newDate+' </div>';
+      if (fechaActual>FechaSinTransformar){
+         return '<div class="bg-danger text-light">'+ FechaDeTarea+' </div>';
     }
-    if (fechaActual==newDate){
-      return '<div class="bg-primary text-dark">'+ newDate+' </div>';
+    if (fechaActual<FechaSinTransformar){
+      return '<div class="bg-success text-light">'+ FechaDeTarea+' </div>';
     }
+   
            }},      
           { "width":"10%","data": "Estado" },
 

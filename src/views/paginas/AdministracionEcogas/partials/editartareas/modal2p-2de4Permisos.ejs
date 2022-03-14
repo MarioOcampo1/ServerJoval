@@ -36,22 +36,9 @@
                                     <%if (user.Hidraulica=="ok" ){%>
                                         <input checked type="radio" name="HIDRAULICA" id="HIDRAULICA" value="ok"> Ok
                                         <%}else{%>
-                                            <input type="radio" name="HIDRAULICA" id="HIDRAULICA" value="ok"> Ok
+                                            <input type="radio" name="HIDRAULICA" id="HIDRAULICA" value="ok" onclick="FechaVencimientoPermiso('HIDRAULICA')"> Ok
                                             <%}%>
-                                                <!-- <%if (user.Hidraulica=="NC"){%>
-                                                                                                <input checked type="radio"
-                                                                                                name="HIDRAULICA"
-                                                                                                id="HIDRAULICA"
-                                                                                                value="NC"> No corresponde
-                                                                                             <%}else{%>
-                                                                                                <input type="radio"
-                                                                                                name="HIDRAULICA"
-                                                                                                id="HIDRAULICA"
-                                                                                                value="NC"> No corresponde
-                                                                                            <%}%> -->
-
-
-
+                                            <!-- <INPUt:datetime-local id="VencimientoHidraulica">Fecha de vencimiento del permiso</INPUt:datetime-local> -->
                     </form-check>
                 </div>
             </div>
