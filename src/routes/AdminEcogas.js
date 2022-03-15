@@ -5,6 +5,7 @@ const moment = require('moment');
 module.exports = router;
 //Seteo server original
 const mysql = require('mysql');
+const { NULL } = require('mysql/lib/protocol/constants/types');
 const connection = mysql.createConnection({
     host: '127.0.0.1',
     user: 'root',
@@ -522,6 +523,9 @@ var DocumentacionTerreno;
     if(Mensura == "EnGestion" || TituloDePropiedad == "EnGestion" ){
         DocumentacionTerreno = "EnGestion";
     }
+    if(Mensura == "Sin presentar" || TituloDePropiedad == "Sin presentar" ){
+        DocumentacionTerreno = "Sin presentar";
+    }
      //Documentacion Sociedad
     if(ActaConstitutiva == "ok" && ActaCargoVigente == "ok" ){
         DocumentacionSociedad = "ok";
@@ -529,12 +533,18 @@ var DocumentacionTerreno;
     if(ActaConstitutiva == "EnGestion" || ActaCargoVigente == "EnGestion" ){
         DocumentacionSociedad = "EnGestion";
     }
+    if(ActaConstitutiva == "Sin presentar" || ActaCargoVigente == "Sin presentar" ){
+        DocumentacionSociedad = "Sin presentar";
+    }
      //Documentacion Contractual
     if(Cotizacion == "ok" && (Contrato=="Ok(Preliminar)" || Contrato=="ok") ){
         DocumentacionContractual = "ok";
     }
-    if(Cotizacion == "EnGestion" || Contrato == "EnGestion" ){
+    if(Cotizacion == "EnGestion" || (Contrato == "EnGestion"|| Contrato == "EnGestion(Preliminar)") ){
         DocumentacionContractual = "EnGestion";
+    }
+    if(Cotizacion == "Sin presentar" || (Contrato == "Sin presentar" ||  Contrato == "Sin presentar(Preliminar)") ){
+        DocumentacionContractual = "Sin presentar";
     }
     console.log("documentacion terreno:" + DocumentacionTerreno);
     sql= 'Update clientes_tareasgenerales Set ? where Nombre=?';
@@ -586,8 +596,11 @@ router.post('/act1pCarpEcogas/:id', (req,res)=>{
     if((Contrato == "ok" ||Contrato == "Ok(Preliminar)")  && Presupuesto =="ok" && Sucedaneo =="ok" && (NotaDeExcepcion =="ok" || NotaDeExcepcion =="NC") ){
         Comercial = "ok";
     }
-    if(Contrato == "EnGestion" || Presupuesto =="EnGestion" || Sucedaneo =="EnGestion" || (NotaDeExcepcion =="EnGestion" || NotaDeExcepcion =="NC") ){
+    if(Contrato == "EnGestion" || Presupuesto =="EnGestion" || Sucedaneo =="EnGestion" || NotaDeExcepcion =="EnGestion" ){
         Comercial = "EnGestion";
+    }
+    if(Contrato == "Observado" || Presupuesto =="Observado" || Sucedaneo =="Observado" || NotaDeExcepcion =="Observado" ){
+        Comercial = "Sin presentar";
     }
     //Tecnica
     if(Pcaprobado == "ok" && (PlanoTipo=="ok" || PlanoTipo=="NC") ){
@@ -602,6 +615,9 @@ router.post('/act1pCarpEcogas/:id', (req,res)=>{
     }
     if(CartaOferta == "EnGestion" || PlanoAnexo=="EnGestion" || DNVVisacion=="EnGestion" ||HidraulicaVisacion=="EnGestion" || FerrocarrilesVisacion=="EnGestion" ){
         PermisosEspeciales = "EnGestion";
+    }
+    if(CartaOferta == "Observado" || PlanoAnexo=="Observado" || DNVVisacion=="Observado" ||HidraulicaVisacion=="Observado" || FerrocarrilesVisacion=="Observado" ){
+        PermisosEspeciales = "Observado";
     }
     console.log("id:"+ id + ","+Contrato, "", Comercial, "",Presupuesto, "",Sucedaneo, "",)
     sql= 'Update clientes_tareasgenerales Set ? where Nombre=?';
@@ -697,11 +713,14 @@ console.log("Mostrando opciones seleccionadas de las interferencias: Cloacas " +
     var DocumentacionObra,Seguridad,Interferencias,Permisos,Matriculas,Ambiente,Avisos;
     
  //Documentación de obra
- if(SolicitudInicioObras == "ok" && (CertificadoRT=="ok") ){
+ if(SolicitudInicioObras == "ok" && CertificadoRT=="ok" ){
     DocumentacionObra = "ok";
 }
 if(SolicitudInicioObras == "EnGestion" ||CertificadoRT=="EnGestion" ){
     DocumentacionObra = "EnGestion";
+}
+if(SolicitudInicioObras == "Sin presentar" ||CertificadoRT=="Sin presentar" ){
+    DocumentacionObra = "Sin presentar";
 }
  //Seguridad
  if(Programadeseguridad=="ok"&&CronogramaSyH=="ok" && SeguroRC=="ok" && Monotributos =="ok" && SeguroAccidentesPersonales=="ok"){
@@ -710,12 +729,17 @@ if(SolicitudInicioObras == "EnGestion" ||CertificadoRT=="EnGestion" ){
 if(Programadeseguridad=="EnGestion"||CronogramaSyH=="EnGestion" || SeguroRC=="EnGestion" || Monotributos =="EnGestion" || SeguroAccidentesPersonales=="EnGestion"){
     Seguridad="EnGestion";
 }
+if(Programadeseguridad=="Sin presentar"||CronogramaSyH=="Sin presentar" || SeguroRC=="Sin presentar" || Monotributos =="Sin presentar" || SeguroAccidentesPersonales=="Sin presentar"){
+    Seguridad="Sin presentar";
+}
 
     //Interferencias
     if(intAgua=="ok"|| (intAgua=="NC") &&intCloacas=="ok"|| (intCloacas=="NC")  && intElectricidad=="ok"|| (intElectricidad=="NC")  && intArsat =="ok"|| (intArsat=="NC")  && intClaro=="ok"|| (intClaro=="NC") && intTelefonica=="ok"|| (intTelefonica=="NC") && intArnet=="ok"|| (intArnet=="NC") && intTelecom=="ok"|| (intTelecom=="NC") ){
         Interferencias="ok";
     }
-    if((intAgua=="EnGestion"|| intAgua=="NC") ||(intCloacas=="EnGestion"|| intCloacas=="NC")  || (intElectricidad=="EnGestion"|| intElectricidad=="NC")  || (intArsat =="EnGestion"|| intArsat=="NC")  || (intClaro=="EnGestion"|| intClaro=="NC") || (intTelefonica=="EnGestion"|| intTelefonica=="NC") || (intArnet=="EnGestion"|| intArnet=="NC") || (intTelecom=="EnGestion"|| intTelecom=="NC") ){
+    if(intAgua=="EnGestion"|| intCloacas=="EnGestion" || intElectricidad=="EnGestion"|| intArsat =="EnGestion" || intClaro=="EnGestion" || intTelefonica=="EnGestion" || intArnet=="EnGestion"|| intTelecom=="EnGestion"
+   || intAgua=="Pedida"|| intCloacas=="Pedida" || intElectricidad=="Pedida"|| intArsat =="Pedida" || intClaro=="Pedida" || intTelefonica=="Pedida" || intArnet=="Pedida"|| intTelecom=="Pedida"
+    ){
         Interferencias="EnGestion";
     }
        //Permisos
@@ -732,6 +756,12 @@ if((MatriculaFusionista=="ok" || MatriculaFusionista=="NC") && (MatriculaSoldado
 if(MatriculaFusionista=="EnGestion" || MatriculaSoldador=="EnGestion" ){
     Matriculas="EnGestion";
 }
+if(MatriculaFusionista=="EnGestion" || MatriculaSoldador=="EnGestion" ){
+    Matriculas="EnGestion";
+}
+if(MatriculaFusionista==NULL || MatriculaSoldador==NULL || MatriculaFusionista=="" || MatriculaSoldador=="" ){
+    Matriculas="Sin presentar";
+}
 //Ambiente
 if((EstudioImpactoAmbiental=="ok" || EstudioImpactoAmbiental=="NC")&&(CronogramaAmbiente=="ok"|| CronogramaAmbiente=="NC")){
     Ambiente="ok";
@@ -739,13 +769,18 @@ if((EstudioImpactoAmbiental=="ok" || EstudioImpactoAmbiental=="NC")&&(Cronograma
     if(EstudioImpactoAmbiental=="EnGestion" ||CronogramaAmbiente=="EnGestion"){
         Ambiente="EnGestion";
         }
-        
+        if(EstudioImpactoAmbiental=="pedir" ||CronogramaAmbiente=="pedir"){
+            Ambiente="Sin presentar";
+            }      
         // Avisos
 if(AvisoInicioObraART=="ok"&&AvisoInicioObraIERIC=="ok"){
     Avisos="ok";
 }
 if(AvisoInicioObraART=="EnGestion"||AvisoInicioObraIERIC=="EnGestion"){
     Avisos="EnGestion";
+}
+if(AvisoInicioObraART=="Sin presentar"||AvisoInicioObraIERIC=="Sin presentar"){
+    Avisos="Sin presentar";
 }
 
 sql= 'Update clientes_tareasgenerales Set ? where Nombre=?';
