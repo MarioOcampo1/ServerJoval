@@ -122,9 +122,7 @@ router.get('/contactos', (req, res) => {
             // res.send(results);
         }
         else {
-            res.send('Ningun resultado encontrado');
-
-
+            res.render('paginas/AdministracionEcogas/nuevocontacto.ejs');
         }
     })
 
@@ -221,7 +219,7 @@ router.post('/actualizarcontacto/:id', (req, res) => {
     const Telefono = req.body.Telefono;
     const Correo = req.body.Correo;
     const sql = 'Update contactos Set ? where id =?';
-    console.log("intentando actualizar contacto...");
+    console.log("intentando actualizar contacto " +Nombre);
     connection.query(sql, [{
         Nombre: Nombre, Entidad: entidad, Area: area, Puesto: Puesto, Telefono: Telefono, Correo: Correo
     }, id]
@@ -229,10 +227,10 @@ router.post('/actualizarcontacto/:id', (req, res) => {
             if (error) console.log( error);
 
             if (results.length > 0) {
-                res.redirect('paginas/AdministracionEcogas/contactos');
+                res.redirect('/contactos');
             }
             else {
-                res.redirect('paginas/AdministracionEcogas/adminecogas');
+                res.redirect('/contactos');
 
             }
 
