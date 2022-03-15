@@ -514,14 +514,14 @@ var DocumentacionTerreno;
     var Contrato = req.body.ContratoPreliminar;
 
     // Variables generales
-    var DocumentacionSociedad = req.body.DocumentacionSociedad;
+    var DocumentacionSociedad;
     var DocumentacionContractual;
 
     if(Mensura == "ok" && TituloDePropiedad == "ok" ){
         DocumentacionTerreno = "ok";
     }
     if(Mensura == "EnGestion" || TituloDePropiedad == "EnGestion" ){
-        DocumentacionTerreno = "En gestion";
+        DocumentacionTerreno = "EnGestion";
     }
      //Documentacion Sociedad
     if(ActaConstitutiva == "ok" && ActaCargoVigente == "ok" ){
@@ -534,10 +534,10 @@ var DocumentacionTerreno;
     if(Cotizacion == "ok" && (Contrato=="Ok(Preliminar)" || Contrato=="ok") ){
         DocumentacionContractual = "ok";
     }
-     //Documentacion Contractual
     if(Cotizacion == "EnGestion" || Contrato == "EnGestion" ){
         DocumentacionContractual = "EnGestion";
     }
+    console.log("documentacion terreno:" + DocumentacionTerreno);
     sql= 'Update clientes_tareasgenerales Set ? where Nombre=?';
     connection.query(sql,[{ DocumentacionTerreno:DocumentacionTerreno,DocumentacionSociedad:DocumentacionSociedad,
         DocumentacionContractual:DocumentacionContractual }, Nombre],
@@ -570,7 +570,6 @@ router.post('/act1pCarpEcogas/:id', (req,res)=>{
     var sql="";
 
     var Contrato = req.body.Contrato;
-    var Comercial = req.body.Comercial;
     var Presupuesto = req.body.Presupuesto;
     var Sucedaneo = req.body.Sucedaneo;
     var NotaDeExcepcion = req.body.NotaDeExcepcion;
@@ -582,6 +581,7 @@ router.post('/act1pCarpEcogas/:id', (req,res)=>{
     var DNVVisacion = req.body.DNV1;
     var FerrocarrilesVisacion = req.body.FERROCARRIL1;
     // Variables Generales
+    var Comercial;
     var Tecnica, PermisosEspeciales;
     // Comercial
     if((Contrato == "ok" ||Contrato == "Ok(Preliminar)")  && Presupuesto =="ok" && Sucedaneo =="ok" && (NotaDeExcepcion =="ok" || NotaDeExcepcion =="NC") ){
@@ -601,7 +601,7 @@ router.post('/act1pCarpEcogas/:id', (req,res)=>{
      if((CartaOferta == "ok" || CartaOferta == "NC") && (PlanoAnexo=="ok" || PlanoAnexo=="NC") && (DNVVisacion=="Visado" || DNVVisacion=="NC") && (HidraulicaVisacion=="Visado" || HidraulicaVisacion=="NC") && (FerrocarrilesVisacion=="Visado" || FerrocarrilesVisacion=="NC")  ){
         PermisosEspeciales = "ok";
     }
-    if((CartaOferta == "EnGestion" || CartaOferta == "NC") ||( PlanoAnexo=="EnGestion" || PlanoAnexo=="NC") ||( DNVVisacion=="EnGestion" || DNVVisacion=="NC")||(HidraulicaVisacion=="EnGestion" || HidraulicaVisacion=="NC")|| (FerrocarrilesVisacion=="EnGestion" || FerrocarrilesVisacion=="NC")){
+    if(CartaOferta == "EnGestion" || PlanoAnexo=="EnGestion" || DNVVisacion=="EnGestion" ||HidraulicaVisacion=="EnGestion" || FerrocarrilesVisacion=="EnGestion" ){
         PermisosEspeciales = "EnGestion";
     }
     console.log("id:"+ id + ","+Contrato, "", Comercial, "",Presupuesto, "",Sucedaneo, "",)
@@ -701,7 +701,7 @@ console.log("Mostrando opciones seleccionadas de las interferencias: Cloacas " +
  if(SolicitudInicioObras == "ok" && (CertificadoRT=="ok") ){
     DocumentacionObra = "ok";
 }
-if(SolicitudInicioObras == "EnGestion" || (CertificadoRT=="EnGestion") ){
+if(SolicitudInicioObras == "EnGestion" ||CertificadoRT=="EnGestion" ){
     DocumentacionObra = "EnGestion";
 }
  //Seguridad
@@ -772,7 +772,7 @@ connection.query(sql,[{ DocumentacionObra:DocumentacionObra,Seguridad:Seguridad,
         intCloaca: intCloacas, intElectricidad: intElectricidad, intTelecom: intTelecom, intArnet: intArnet, intArsat: intArsat,
         
         MatriculaFusionista:MatriculaFusionista,MatriculaSoldador:MatriculaSoldador, EstudioImpactoAmbiental:EstudioImpactoAmbiental, CronogramaAmbiente: CronogramaAmbiente, NotaCumplimentoNormativa: NotaCumplimentoNormativa,  DDJJNAG153: DDJJNAG153,
-        AvisoInicioObraIERIC: AvisoInicioObraIERIC,  AvisoInicioObraART: AvisoInicioObraART, ActaDeInicio: ActaInicioEfectivo,
+        AvisoInicioObraIERIC: AvisoInicioObraIERIC,  AvisoInicioObraART: AvisoInicioObraART, ActaInicioEfectivo: ActaInicioEfectivo,
     }, id],
             (error, results) => {
     
