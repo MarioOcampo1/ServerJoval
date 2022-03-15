@@ -221,6 +221,7 @@ router.post('/actualizarcontacto/:id', (req, res) => {
     const Telefono = req.body.Telefono;
     const Correo = req.body.Correo;
     const sql = 'Update contactos Set ? where id =?';
+    console.log("intentando actualizar contacto...");
     connection.query(sql, [{
         Nombre: Nombre, Entidad: entidad, Area: area, Puesto: Puesto, Telefono: Telefono, Correo: Correo
     }, id]
@@ -484,7 +485,7 @@ router.post('/guardarNuevoContacto', (req, res) => {
     const Entidad = req.body.Entidad;
     const Area = req.body.Area;
     const Puesto = req.body.Puesto;
-    const Telefono = req.body.Teléfono;
+    const Telefono = req.body.Telefono;
     const Correo = req.body.Correo;
     var sql = 'Insert into contactos set ?';
     connection.query(sql, {
