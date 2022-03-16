@@ -610,7 +610,7 @@ router.post('/act1pCarpEcogas/:id', (req,res)=>{
         Tecnica = "EnGestion";
     }
      //Permisos Especiales
-     if((CartaOferta == "ok" || CartaOferta == "NC") && (PlanoAnexo=="ok" || PlanoAnexo=="NC") && (DNVVisacion=="Visado" || DNVVisacion=="NC") && (HidraulicaVisacion=="Visado" || HidraulicaVisacion=="NC") && (FerrocarrilesVisacion=="Visado" || FerrocarrilesVisacion=="NC")  ){
+     if((CartaOferta == "ok" || CartaOferta == "NC" || CartaOferta == "") && (PlanoAnexo=="ok" || PlanoAnexo=="NC" || PlanoAnexo=="") && (DNVVisacion=="Visado" || DNVVisacion=="NC") && (HidraulicaVisacion=="Visado" || HidraulicaVisacion=="NC") && (FerrocarrilesVisacion=="Visado" || FerrocarrilesVisacion=="NC")  ){
        console.log("Permisos especiales sera cambiado a ok...");
         PermisosEspeciales = "ok";
     }
