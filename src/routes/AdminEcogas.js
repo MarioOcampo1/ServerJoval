@@ -278,6 +278,10 @@ router.post('/update/:id', (req, res) => {
     const Privado = req.body.Privado;
     var PerMunicipal = req.body.PerMunicipal;
 
+    const DNVVisacion = req.body.DNV;
+    const HIDRAULICAVisacion = req.body.HIDRAULICA;
+    const FERROCARRILVisacion = req.body.FERROCARRIL;
+
     const TipoDeRed = req.body.TipoDeRed;
     console.log("Intentando actualizar el contacto:" + NombreCarpeta);
     console.log("PRIVADO:" + OTROSPERMISOS);
@@ -290,7 +294,7 @@ router.post('/update/:id', (req, res) => {
         //console.log(Tarea_Realizada: TareaRealizada, ProximaTarea: ProximaTarea);
         var sql = 'Update clientes Set ? where id =?';
         connection.query(sql, [{
-            Nombre: NombreCarpeta, NCarpeta: NCarpeta, Comitente: Comitente, Ubicacion: Departamento, DNV: DNV, DPV: DPV, Irrigacion: Irrigacion,
+            Nombre: NombreCarpeta, NCarpeta: NCarpeta, DNVVisacion:DNVVisacion, HIDRAULICAVisacion:HIDRAULICAVisacion, FERROCARRILVisacion:FERROCARRILVisacion,Comitente: Comitente, Ubicacion: Departamento, DNV: DNV, DPV: DPV, Irrigacion: Irrigacion,
             Hidraulica: HIDRAULICA, Privado: Privado, Ferrocarriles: FERROCARRIL, TipoDeRed: TipoDeRed, Fecha_limite: Fecha_limite, 
             PerMunicipal:PerMunicipal, OtrosPermisos: OTROSPERMISOS
         }, id]
