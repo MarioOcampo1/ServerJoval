@@ -753,6 +753,9 @@ if(Programadeseguridad=="Sin presentar"||CronogramaSyH=="Sin presentar" || Segur
             if (DPV=="ok"&&DNV=="ok"&&FERROCARRIL=="ok"&&HIDRAULICA=="ok") {
                 PermisosEspeciales="ok";
             }
+            if (DPV=="Visado"&&DNV=="Visado"&&FERROCARRIL=="Visado"&&HIDRAULICA=="Visado") {
+                PermisosEspeciales="ok";
+            }
             if (DPV=="EnGestion"||DNV=="EnGestion"||FERROCARRIL=="EnGestion"||HIDRAULICA=="EnGestion") {
                 PermisosEspeciales="EnGestion";
             }
