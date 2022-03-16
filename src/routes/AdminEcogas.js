@@ -285,6 +285,9 @@ router.post('/update/:id', (req, res) => {
     const TipoDeRed = req.body.TipoDeRed;
     console.log("Intentando actualizar el contacto:" + NombreCarpeta);
     console.log("PRIVADO:" + OTROSPERMISOS);
+    console.log("El valor de DNVVisacion es: "+ DNVVisacion);
+    console.log("El valor de Hidraulica Visacion es: "+ HIDRAULICAVisacion);
+
     //const TareaRealizada =req.body.TareaRealizada;
     //const ProximaTarea = req.body.ProximaTarea;
     const Fecha_limite = req.body.Fecha_limite;
@@ -294,7 +297,7 @@ router.post('/update/:id', (req, res) => {
         //console.log(Tarea_Realizada: TareaRealizada, ProximaTarea: ProximaTarea);
         var sql = 'Update clientes Set ? where id =?';
         connection.query(sql, [{
-            Nombre: NombreCarpeta, NCarpeta: NCarpeta, DNVVisacion:DNVVisacion, HIDRAULICAVisacion:HIDRAULICAVisacion, FERROCARRILVisacion:FERROCARRILVisacion,Comitente: Comitente, Ubicacion: Departamento, DNV: DNV, DPV: DPV, Irrigacion: Irrigacion,
+            Nombre: NombreCarpeta, NCarpeta: NCarpeta, DNVVisacion:DNVVisacion, HIDRAULICAVisacion:HIDRAULICAVisacion, FerrocarrilesVisacion:FERROCARRILVisacion,Comitente: Comitente, Ubicacion: Departamento, DNV: DNV, DPV: DPV, Irrigacion: Irrigacion,
             Hidraulica: HIDRAULICA, Privado: Privado, Ferrocarriles: FERROCARRIL, TipoDeRed: TipoDeRed, Fecha_limite: Fecha_limite, 
             PerMunicipal:PerMunicipal, OtrosPermisos: OTROSPERMISOS
         }, id]
@@ -316,7 +319,7 @@ router.post('/update/:id', (req, res) => {
         if (NombreCarpeta != null) {
             const sql = 'Update clientes Set ? where id =?';
             connection.query(sql, [{
-                Nombre: NombreCarpeta, NCarpeta: NCarpeta, Comitente: Comitente, Ubicacion: Departamento, DNV: DNV, DPV: DPV, Irrigacion: Irrigacion,
+                Nombre: NombreCarpeta, NCarpeta: NCarpeta, DNVVisacion:DNVVisacion, HIDRAULICAVisacion:HIDRAULICAVisacion, FerrocarrilesVisacion:FERROCARRILVisacion, Comitente: Comitente, Ubicacion: Departamento, DNV: DNV, DPV: DPV, Irrigacion: Irrigacion,
                 Hidraulica: HIDRAULICA, Ferrocarriles: FERROCARRIL, TipoDeRed: TipoDeRed,OtrosPermisos: OTROSPERMISOS,Privado: Privado,PerMunicipal:PerMunicipal
             }, id]
                 , (error, results) => {
@@ -618,7 +621,7 @@ router.post('/act1pCarpEcogas/:id', (req,res)=>{
        console.log("Permisos especiales sera cambiado a ok...");
         PermisosEspeciales = "ok";
     }
-    if(CartaOferta == "EnGestion" || PlanoAnexo=="EnGestion" || DNVVisacion=="EnGestion" ||HidraulicaVisacion=="EnGestion" || FerrocarrilesVisacion=="EnGestion" ){
+    if(CartaOferta == "EnGestion" || CartaOferta == "Presentado" ||  PlanoAnexo=="EnGestion" || PlanoAnexo=="Presentado"  || DNVVisacion=="EnGestion" || DNVVisacion=="Presentado" ||HidraulicaVisacion=="EnGestion" ||HidraulicaVisacion=="Presentado" || FerrocarrilesVisacion=="EnGestion" || FerrocarrilesVisacion=="Presentado" ){
        console.log("Permisos especiales sera cambiado a EnGestion...");
        PermisosEspeciales = "EnGestion";
     }
