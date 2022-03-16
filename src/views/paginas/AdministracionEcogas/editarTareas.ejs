@@ -505,14 +505,16 @@
                                                                                     name="ActasFinales"
                                                                                     value="<%= user.ActasFinales%>"
                                                                                     placeholder="<%= user.ActasFinales%>">
-                                                                                    <option
+                                                                                    <option hidden
                                                                                         value="<%=user.ActasFinales%>"
                                                                                         selected>
                                                                                         <%=user.ActasFinales%>
                                                                                     </option>
                                                                                     <option value="Sin recibir">
                                                                                         Sin recibir</option>
-                                                                                    <option value="Recibidas"> Recibidas                                                                                 gestion</option>
+                                                                                    <option value="Recibidas"> 
+                                                                                        Recibidas 
+                                                                                    </option>
                                                                                     <option value="Firmadas">Firmadas</option>
                                                                                     <option value="ok">ok</option>
                                                                                 </select>
@@ -524,7 +526,7 @@
                                                                                         name="PlanosyCroquis"
                                                                                         value="<%= user.PlanosyCroquis%>"
                                                                                         placeholder="<%= user.PlanosyCroquis%>">
-                                                                                        <option
+                                                                                        <option hidden
                                                                                             value="<%=user.PlanosyCroquis%>"
                                                                                             selected>
                                                                                             <%=user.PlanosyCroquis%>

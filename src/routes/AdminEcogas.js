@@ -642,13 +642,14 @@ router.post('/act1pCarpEcogas/:id', (req,res)=>{
                     })
                    
                     res.redirect(req.get('referer'));
-})
+})  
 router.post('/act2pCarpEcogas/:id', (req,res)=>{
     var id = req.body.id;
     var Nombre = req.body.Nombre;   
     var sql="";
     // Primera seccion 
     var MailAutorizacion = req.body.MailAutorizacion;
+    var PlanDeTrabajo = req.body.PlanDeTrabajo
     var SolicitudInicioObras = req.body.SolicitudInicioObras;
     var CertificadoRT = req.body.CertificadoRT;
     var Programadeseguridad = req.body.Programadeseguridad;
@@ -710,7 +711,7 @@ router.post('/act2pCarpEcogas/:id', (req,res)=>{
     var ActaInicioEfectivo = req.body.ActaInicioEfectivo;
 console.log("Mostrando opciones seleccionadas de las interferencias: Cloacas " + req.body.intCloacas +". Telefonica:" + req.body.intTelefonica + ".Claro: " + req.body.intClaro + ". Arnet:" + req.body.intArnet + ". Arsat:" + req.body.intArsat + ". Telecom: " + req.body.intTelecom);
     //Variables generales
-    var DocumentacionObra,Seguridad,Interferencias,Permisos,Matriculas,Ambiente,Avisos;
+    var DocumentacionObra,Seguridad,Interferencias,Permisos,Matriculas,Ambiente,Avisos, PermisosEspeciales;
     
  //Documentación de obra
  if(SolicitudInicioObras == "ok" && CertificadoRT=="ok" ){
@@ -749,6 +750,21 @@ if(Programadeseguridad=="Sin presentar"||CronogramaSyH=="Sin presentar" || Segur
          if(PerMunicipal=="EnGestion" || Irrigacion=="EnGestion" || DPV=="EnGestion" || DNV=="EnGestion" || FERROCARRIL=="EnGestion" || HIDRAULICA=="EnGestion"){
             Permisos="EnGestion";
              }
+            if (DPV=="ok"&&DNV=="ok"&&FERROCARRIL=="ok"&&HIDRAULICA=="ok") {
+                PermisosEspeciales="ok";
+            }
+            if (DPV=="EnGestion"||DNV=="EnGestion"||FERROCARRIL=="EnGestion"||HIDRAULICA=="EnGestion") {
+                PermisosEspeciales="EnGestion";
+            }
+            if (DPV=="Observado"||DNV=="Observado"||FERROCARRIL=="Observado"||HIDRAULICA=="Observado") {
+                PermisosEspeciales="Observado";
+            }
+            if (DPV=="EnGestion"||DNV=="EnGestion"||FERROCARRIL=="EnGestion"||HIDRAULICA=="EnGestion") {
+                PermisosEspeciales="EnGestion";
+            }
+            if (DPV=="Pedir"||DNV=="Pedir"||FERROCARRIL=="Pedir"||HIDRAULICA=="Pedir") {
+                PermisosEspeciales="Pedir";
+            }
 // Matriculas
 if((MatriculaFusionista=="ok" || MatriculaFusionista=="NC") && (MatriculaSoldador=="ok" || MatriculaSoldador=="NC")){
     Matriculas="ok";
@@ -773,18 +789,18 @@ if((EstudioImpactoAmbiental=="ok" || EstudioImpactoAmbiental=="NC")&&(Cronograma
             Ambiente="Sin presentar";
             }      
         // Avisos
-if(AvisoInicioObraART=="ok"&&AvisoInicioObraIERIC=="ok"){
+if(AvisoInicioObraART=="ok"&&AvisoInicioObraIERIC=="ok" && ActaInicioEfectivo=="ok"){
     Avisos="ok";
 }
-if(AvisoInicioObraART=="EnGestion"||AvisoInicioObraIERIC=="EnGestion"){
+if(AvisoInicioObraART=="EnGestion"||AvisoInicioObraIERIC=="EnGestion" || ActaInicioEfectivo=="EnGestion"){
     Avisos="EnGestion";
 }
-if(AvisoInicioObraART=="Sin presentar"||AvisoInicioObraIERIC=="Sin presentar"){
+if(AvisoInicioObraART=="Sin presentar"||AvisoInicioObraIERIC=="Sin presentar"|| ActaInicioEfectivo=="Sin presentar"){
     Avisos="Sin presentar";
 }
 
 sql= 'Update clientes_tareasgenerales Set ? where Nombre=?';
-connection.query(sql,[{ DocumentacionObra:DocumentacionObra,Seguridad:Seguridad,Interferencias:Interferencias,Permisos:Permisos,Matriculas:Matriculas,Ambiente:Ambiente,Avisos:Avisos,NotaCumplimentoNormativas:NotaCumplimentoNormativa,DDJJNAG153:DDJJNAG153}, Nombre],
+connection.query(sql,[{ PlanDeTrabajo:PlanDeTrabajo,DocumentacionObra:DocumentacionObra,Seguridad:Seguridad,Interferencias:Interferencias,Permisos:Permisos,Matriculas:Matriculas,Ambiente:Ambiente,Avisos:Avisos,NotaCumplimentoNormativas:NotaCumplimentoNormativa,DDJJNAG153:DDJJNAG153, Avisos: Avisos, PermisosEspeciales: PermisosEspeciales}, Nombre],
     (error, results) => {
 
         if (error) {
@@ -794,7 +810,7 @@ connection.query(sql,[{ DocumentacionObra:DocumentacionObra,Seguridad:Seguridad,
         sql = 'Update clientes Set ? where id=?';
         connection.query(sql, [{
             //Segunda Parte
-            MailAutorizacion: MailAutorizacion, SolicitudInicioObras:SolicitudInicioObras,CertificadoRT:CertificadoRT,Programadeseguridad:Programadeseguridad,
+            MailAutorizacion: MailAutorizacion, PlanDeTrabajo:PlanDeTrabajo,SolicitudInicioObras:SolicitudInicioObras,CertificadoRT:CertificadoRT,Programadeseguridad:Programadeseguridad,
             CronogramaSyH:CronogramaSyH,SeguroRC:SeguroRC, Monotributos: Monotributos, SeguroAccidentesPersonales: SeguroAccidentesPersonales,
             Hidraulica: HIDRAULICA,Ferrocarriles: FERROCARRIL, PerMunicipal: PerMunicipal,DNV: DNV, DPV: DPV, Irrigacion: Irrigacion, Privado: PRIVADO,  Otrospermisos: OTROSPERMISOS,
             intTelefonicaObtenida: intTelefonicaObtenida, intTelefonicaPedida: intTelefonicaPedida, intClaroPedida: intClaroPedida, intClaroObtenida: intClaroObtenida,
@@ -845,18 +861,18 @@ var Interferencias = req.body.Interferencias;
 
 var DocumentacionInspeccion, ComunicacionObras;
 // DocumentacionInspeccion
-if(ActaDeInicio=="Presentado"&&Permisos=="ok"&&Interferencias=="ok"&&LibroOrdenesServicio=="ok"&&LibroNotasPedido=="ok"&&PCEntregadoInspeccion=="ok"&&AvisosDeObra=="ok"&&CronogramaFirmadoComitente=="ok"){
+if(ActaDeInicio=="Presentado"&&Permisos=="Presentados"&&Interferencias=="Presentado"&&LibroOrdenesServicio=="Presentado"&&LibroNotasPedido=="Presentado"&&PCEntregadoInspeccion=="Presentado"&&AvisosDeObra=="Presentado"&&CronogramaFirmadoComitente=="Presentado"){
     DocumentacionInspeccion="ok";
 }
-if(ActaDeInicio=="Sin presentar"||Permisos=="EnGestion"||Interferencias=="EnGestion"||LibroOrdenesServicio=="EnGestion"||LibroNotasPedido=="EnGestion"||PCEntregadoInspeccion=="EnGestion"||AvisosDeObra=="EnGestion"||CronogramaFirmadoComitente=="EnGestion"){
-    DocumentacionInspeccion="EnGestion";
+if(ActaDeInicio=="Sin presentar"||Permisos=="Sin presentar"||Interferencias=="Sin presentar"||LibroOrdenesServicio=="Sin presentar"||LibroNotasPedido=="Sin presentar"||PCEntregadoInspeccion=="Sin presentar"||AvisosDeObra=="Sin presentar"||CronogramaFirmadoComitente=="Sin presentar"){
+    DocumentacionInspeccion="Sin presentar";
 }
 // ComunicacionObras
-if(OrdenServicio=="ok" ){
+if(OrdenServicio=="No" ){
     ComunicacionObras="ok";
 }
-if(OrdenServicio=="EnGestion"){
-    ComunicacionObras="EnGestion";
+if(OrdenServicio=="Si"){
+    ComunicacionObras="Leer historial de carpeta";
 }
 sql= 'Update clientes_tareasgenerales Set ? where Nombre=?';
 connection.query(sql,[{ DocumentacionInspeccion:DocumentacionInspeccion,ComunicacionObras:ComunicacionObras}, Nombre],
@@ -892,6 +908,13 @@ router.post('/actCaosCarpEcogas/:id',(req,res)=>{
     var ConformeDePermisos = req.body.ConformeDePermisos;
     var PruebaHermeticidad = req.body.PruebaHermeticidad;
     var InformesFinales = req.body.InformesFinales;
+    sql= 'Update clientes_tareasgenerales Set ? where Nombre=?';
+connection.query(sql,[{ ActasFinalesEcogas: ActasFinales, PlanosyCroquis: PlanosyCroquis, ConformeEntidades: ConformeDePermisos, PruebaHermeticidad: PruebaHermeticidad, InformesFinales: InformesFinales}, Nombre],
+    (error, results) => {
+        if (error) {
+            console.log(error);
+           }
+        })
     sql = 'Update clientes Set ? where id=?';
         connection.query(sql, [{
             //Segunda Parte

@@ -45,6 +45,31 @@
                             </div>
                             </div>
                             <br>
+                            <div class="card p-3 border-secondary">
+                                <div class="card-header">
+                                    Plan de trabajo</div>
+                                                               <div class="card-text">
+                                    <select class="form-control"
+                                        id="PlanDeTrabajo"
+                                        name="PlanDeTrabajo"
+                                        value="<%= user.PlanDeTrabajo%>"
+                                        placeholder="<%= user.PlanDeTrabajo%>">
+                                        <option hidden
+                                            value="<%=user.PlanDeTrabajo%>"
+                                            selected>
+                                            <%=user.PlanDeTrabajo%>
+                                        </option>
+                                        <option value="Sin presentar">Sin presentar
+    
+                                        <option value="EnGestion">En
+                                            gestion</option>
+                                                <option value="ok">ok
+                                        </option>
+    
+                                    </select>
+                                </div>
+                            </div>
+                                <br>
                         <div class="card p-3 border-secondary">
                             <div class="card-header">
                                 Documentación de obra</div>
