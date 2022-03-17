@@ -207,6 +207,24 @@ router.get('/historialcarpeta/:Nombre', (req, res) => {
 router.get('/nuevocontacto', (req, res) => {
     res.render('paginas/AdministracionEcogas/nuevocontacto.ejs');
 })
+router.get('/ComunicacionAlSistema', (req, res) => {
+    res.locals.moment = moment;
+    res.locals.moment = moment;
+    const sql = 'Select * from comunicacionsistema';
+    
+    connection.query(sql, (error, results) => {
+        if (error) console.log( error);
+        if (results.length > 0) {
+            res.render('paginas/AdministracionEcogas/ComunicacionAlSistema.ejs', {results: results});
+
+        }else {
+            res.render('paginas/AdministracionEcogas/ComunicacionAlSistema.ejs',{results: ""});
+
+
+        }
+    })
+
+})
 
 
 
@@ -863,7 +881,8 @@ var PlanosyCroquis = req.body.PlanosyCroquis;
 var ConformeDePermisos = req.body.ConformeDePermisos;
 var PruebaHermeticidad = req.body.PruebaHermeticidad;
 var InformesFinales = req.body.InformesFinales;
-
+var FechaInicioTrabajos= req.body.FechaInicioTrabajos;
+var FechaFindeobra= req.body.FechaFindeobra;
 // Variables externas a Caos
 var PCEntregadoInspeccion= req.body.PCEntregadoInspeccion;
 var AvisosDeObra= req.body.AvisosDeObra;
@@ -899,7 +918,7 @@ connection.query(sql,[{ DocumentacionInspeccion:DocumentacionInspeccion,Comunica
         connection.query(sql, [{
            
            ActaDeInicio: ActaDeInicio , Permisos: Permisos, Interferencias: Interferencias, LibroOrdenesServicio: LibroOrdenesServicio, LibroNotasPedido: LibroNotasPedido, PCEntregadoInspeccion: PCEntregadoInspeccion, AvisosDeObra:AvisosDeObra, CronogramaFirmadoComitente:CronogramaFirmadoComitente,
-           OrdenServicio:OrdenServicio
+           OrdenServicio:OrdenServicio, FechaInicioTrabajos:FechaInicioTrabajos,FechaFindeobra:FechaFindeobra
         }, id],
             (error, results) => {
     
@@ -969,6 +988,7 @@ connection.query(sql,[{ PresentacionFinal:PresentacionFinal,HabilitacionObra:Hab
                 })
                 res.redirect(req.get('referer'));
 })
+
 //Opciones de editar tareas POST
 router.post('/ActualizarEstadoCarpeta/:id', (req, res) => {
     var id = req.body.id;
@@ -977,6 +997,21 @@ router.post('/ActualizarEstadoCarpeta/:id', (req, res) => {
     connection.query(sql, [{
         Estado: Estado
     }, id], (error, results) => {
+        if (error) console.log( error);
+        
+    })
+    res.redirect(req.get('referer'));
+
+
+})
+router.post('/NuevaComunicacionSistema', (req, res) => {
+    var Descripcion= req.body.Descripcion;
+    var Responsable= req.body.Responsable;
+    var Terminada = "N";
+    var sql = 'Insert into comunicacionsistema Set ?';
+    connection.query(sql, [{
+        Descripcion: Descripcion,Responsable:Responsable,Terminada:Terminada
+    }], (error, results) => {
         if (error) console.log( error);
         
     })
