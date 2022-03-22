@@ -12,199 +12,330 @@
 
 <body>
   <%- include('./partials/menusuperior.ejs')%>
-  <%if (results){%>
-    <h1 class="text-center">Interferencias</h1>
-    <div class="table-responsive-sm">
-      <table id="Interferencias" class="table table-hover table-sm table-bordered " style="width: 95%">
-        <thead>
-          <tr>
-            <th class="text-center" scope="col">
-              Nombre
-            </th>
-            <th class="text-center" scope="col">
-              N° de carpeta
-            </th>
-            <th class="text-center">
-              Telefonica 
-            </th>
-            <th class="text-center">
+    <%if (results){%>
+      <h1 class="text-center">Interferencias</h1>
+      <div class="table-responsive-sm">
+        <table id="Interferencias" class="table table-hover table-sm table-bordered " style="width: 95%">
+          <thead>
+            <tr>
+              <th class="text-center" scope="col">
+                Nombre
+              </th>
+              <th class="text-center" scope="col">
+                N° de carpeta
+              </th>
+              <th class="text-center">
+                Telefonica
+              </th>
+              <th class="text-center">
 
-              Agua
-            </th>
-            <th class="text-center">
+                Agua
+              </th>
+              <th class="text-center">
 
-              Cloacas
-            </th>
-            <th class="text-center">
-              Electricidad
-            </th>
-            <th class="text-center">
-              Claro
-            </th>
-            <th class="text-center">
+                Cloacas
+              </th>
+              <th class="text-center">
+                Electricidad
+              </th>
+              <th class="text-center">
+                Claro
+              </th>
+              <th class="text-center">
 
-              Arnet
-            </th>
-            <th class="text-center">
-              Arsat
-            </th>
-            <th class="text-center">
-              Telecom
-            </th>
+                Arnet
+              </th>
+              <th class="text-center">
+                Arsat
+              </th>
+              <th class="text-center">
+                Telecom
+              </th>
 
-          </tr>
-        </thead>
-        <tbody>
-        </tbody>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
 
-      </table>
-    </div>
-    <script type="text/javascript" language="javascript"
-      src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script type="text/javascript" language="javascript" charset="utf8"
-      src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
-    <script type="text/javascript" language="javascript"
-      src="//cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css"></script>
-    <!-- Moment.js: -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.4/moment.min.js"></script>
-    <!-- Locales for moment.js-->
-    <script src="//cdn.datatables.net/plug-ins/1.11.3/sorting/datetime-moment.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.4/locale/es.js"></script>
+        </table>
+      </div>
+      <script type="text/javascript" language="javascript"
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script type="text/javascript" language="javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+      <script type="text/javascript" language="javascript"
+        src="//cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css"></script>
+      <!-- Moment.js: -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.4/moment.min.js"></script>
+      <!-- Locales for moment.js-->
+      <script src="//cdn.datatables.net/plug-ins/1.11.3/sorting/datetime-moment.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.4/locale/es.js"></script>
 
-    <script>
-      $(document).ready(function () {
-        $('#Interferencias thead tr')
-          .clone(true)
-          .addClass('filters')
-          .appendTo('#Interferencias thead');
-        var url = '/interferencias/info';
-        tabla = $('#Interferencias').DataTable({
-          orderCellsTop: true,
-          fixedHeader: true,
-          initComplete: function () {
-            var api = this.api();
-            // For each column
-            api
-              .columns()
-              .eq(0)
-              .each(function (colIdx) {
-                // Set the header cell to contain the input element
-                var cell = $('.filters th').eq(
-                  $(api.column(colIdx).header()).index()
-                );
-                var title = $(cell).text();
-                // $(cell).html('<input type="text" size="2" placeholder="'+ title + '" />');
-                $(cell).html('<input type="text" size="2" placeholder="Buscar" />');
+      <script>
+        $(document).ready(function () {
+          $('#Interferencias thead tr')
+            .clone(true)
+            .addClass('filters')
+            .appendTo('#Interferencias thead');
+          var url = '/interferencias/info';
+          tabla = $('#Interferencias').DataTable({
+            orderCellsTop: true,
+            fixedHeader: true,
+            initComplete: function () {
+              var api = this.api();
+              // For each column
+              api
+                .columns()
+                .eq(0)
+                .each(function (colIdx) {
+                  // Set the header cell to contain the input element
+                  var cell = $('.filters th').eq(
+                    $(api.column(colIdx).header()).index()
+                  );
+                  var title = $(cell).text();
+                  // $(cell).html('<input type="text" size="2" placeholder="'+ title + '" />');
+                  $(cell).html('<input type="text" size="2" placeholder="Buscar" />');
 
-                // On every keypress in this input
-                $(
-                  'input',
-                  $('.filters th').eq($(api.column(colIdx).header()).index())
-                )
-                  .off('keyup change')
-                  .on('keyup change', function (e) {
-                    e.stopPropagation();
+                  // On every keypress in this input
+                  $(
+                    'input',
+                    $('.filters th').eq($(api.column(colIdx).header()).index())
+                  )
+                    .off('keyup change')
+                    .on('keyup change', function (e) {
+                      e.stopPropagation();
 
-                    // Get the search value
-                    $(this).attr('title', $(this).val());
-                    var regexr = '({search})'; //$(this).parents('th').find('select').val();
+                      // Get the search value
+                      $(this).attr('title', $(this).val());
+                      var regexr = '({search})'; //$(this).parents('th').find('select').val();
 
-                    var cursorPosition = this.selectionStart;
-                    // Search the column for that value
-                    api
-                      .column(colIdx)
-                      .search(
-                        this.value != ''
-                          ? regexr.replace('{search}', '(((' + this.value + ')))')
-                          : '',
-                        this.value != '',
-                        this.value == ''
-                      )
-                      .draw();
+                      var cursorPosition = this.selectionStart;
+                      // Search the column for that value
+                      api
+                        .column(colIdx)
+                        .search(
+                          this.value != ''
+                            ? regexr.replace('{search}', '(((' + this.value + ')))')
+                            : '',
+                          this.value != '',
+                          this.value == ''
+                        )
+                        .draw();
 
-                    $(this)
-                      .focus()[0]
-                      .setSelectionRange(cursorPosition, cursorPosition);
-                  });
-              });
-          },
-          "language": { url: "//cdn.datatables.net/plug-ins/1.11.3/i18n/es_es.json" },
-          "ajax": {
-            "url": url,
-            "dataSrc": "",
-          },
-          "columns": [
-            {
-              "data": "Nombre", render: function (data, type, row) {
-                return '<a href="/editarTareas/' + row.id + '" class="btn  btn-outline-secondary btn-sm">' + row.Nombre + '</a>'
-              }
+                      $(this)
+                        .focus()[0]
+                        .setSelectionRange(cursorPosition, cursorPosition);
+                    });
+                });
             },
-            {
-              "data": "NCarpeta", render: function (data, type, row) {
-                return '<a href="/editarTareas/' + row.id + '" class="btn btn-outline btn-sm">' + row.NCarpeta + '</a>'
-              }
+            "language": { url: "//cdn.datatables.net/plug-ins/1.11.3/i18n/es_es.json" },
+            "ajax": {
+              "url": url,
+              "dataSrc": "",
             },
-            { "data": "intTelefonica", render: function(data,type,row){
-              return 'Estado: '+row.intTelefonica + '. Vencimiento: '+moment(row.intTelefonicaObtenida).format("d-MM-YY")+''
-            } },
-            { "data": "intAgua", render: function(data,type,row){
-              const fechaHoy = new Date();
-              if(row.intAguaObtenida < fechaHoy){
-                if(row.intAguaObtenida==null || row.intAguaObtenida=='' ){
-  return 'Estado: '+row.intAgua }
-else{
-  return 'Estado: '+row.intAgua + '. Vencimiento: '+moment(row.intAguaObtenida).format("d-MM-YY")+'' };
-}else{
-  if(row.intAguaObtenida==null || row.intAguaObtenida=='' ){
-  return 'Estado: '+row.intAgua }
-else{
-  return 'Estado: '+row.intAgua + '. Vencimiento: '+moment(row.intAguaObtenida).format("d-MM-YY")+'' };
+            "columns": [
+              {
+                "data": "Nombre", render: function (data, type, row) {
+                  return '<a href="/editarTareas/' + row.id + '" class="btn  btn-outline-secondary btn-sm">' + row.Nombre + '</a>'
+                }
+              },
+              {
+                "data": "NCarpeta", render: function (data, type, row) {
+                  return '<a href="/editarTareas/' + row.id + '" class="btn btn-outline btn-sm">' + row.NCarpeta + '</a>'
+                }
+              },
+              {
+                "data": "intTelefonica", render: function (data, type, row) {
+                  if (row.intTelefonica == "pedir") {
+
+                    return '<div class="bg-danger"> Estado: ' + row.intTelefonica + ' </div> '
+                  }
+                  if (row.intTelefonica == "Pedida" || row.intTelefonica == "En gestion") {
+
+                    return '<div class="bg-warning"> Estado: ' + row.intTelefonica + '. Vencimiento: ' + moment(row.intTelefonicaObtenida).format("d-MM-YY") + ' </div> '
+                  }
+                  if (row.intTelefonica == "ok") {
+
+                    return '<div class="bg-success text-light"> Estado: ' + row.intTelefonica + '. Vencimiento: ' + moment(row.intTelefonicaObtenida).format("d-MM-YY") + ' </div> '
+                  }
+
+                }
+              },
+              {
+                "data": "intAgua", render: function (data, type, row) {
+                  const fechaHoy = new Date();
+                  if (row.intAguaObtenida < fechaHoy) {
+                    if (row.intAguaObtenida == null || row.intAguaObtenida == '') {
+                      return 'Estado: ' + row.intAgua
+                    }
+                    else {
+                      if(row.intAgua == "pedir"){
+
+return '<div class="bg-danger"> Estado: '+row.intAgua + ' </div> '
 }
+              if(row.intAgua == "Pedida" || row.intAgua == "En gestion"){
+
+              return '<div class="bg-warning"> Estado: '+row.intAgua + '. Vencimiento: '+moment(row.intAguaObtenida).format("d-MM-YY")+' </div> '
+              }
+              if(row.intAgua == "ok"){
+
+return '<div class="bg-success text-light"> Estado: '+row.intAgua + '. Vencimiento: '+moment(row.intAguaObtenida).format("d-MM-YY")+' </div> '
 }
+                    };
+                  } else {
+                    if (row.intAguaObtenida == null || row.intAguaObtenida == '') {
+                      return 'Estado: ' + row.intAgua
+                    }
+                    else {
+                      if(row.intAgua == "pedir"){
+
+return '<div class="bg-danger"> Estado: '+row.intAgua + ' </div> '
+}
+              if(row.intAgua == "Pedida" || row.intAgua == "En gestion"){
+
+              return '<div class="bg-warning"> Estado: '+row.intAgua + '. Vencimiento: '+moment(row.intAguaObtenida).format("d-MM-YY")+' </div> '
+              }
+              if(row.intAgua == "ok"){
+
+return '<div class="bg-success text-light"> Estado: '+row.intAgua + '. Vencimiento: '+moment(row.intAguaObtenida).format("d-MM-YY")+' </div> '
+}
+                    };
+                  }
+                }
               },
 
-            { "data": "intCloaca", render: function(data,type,row){
-              if(row.intCloacaObtenida==null || row.intCloacaObtenida=='' ){
-  return 'Estado: '+row.intCloaca }
-else{
-  return 'Estado: '+row.intCloaca + '. Vencimiento: '+moment(row.intCloacaObtenida).format("d-MM-YY")+'' };
-}},
-            { "data": "intElectricidad", render: function(data,type,row){
-              if(row.intElectricidadObtenida==null || row.intElectricidadObtenida=='' ){
-  return 'Estado: '+row.intElectricidad }
-else{
-  return 'Estado: '+row.intElectricidad + '. Vencimiento: '+moment(row.intElectricidadObtenida).format("d-MM-YY")+'' };
-}},
-            { "data": "intClaro", render: function(data,type,row){
-              if(row.intClaroObtenida==null || row.intClaroObtenida=='' ){
-  return 'Estado: '+row.intClaro }
-else{
-  return 'Estado: '+row.intClaro + '. Vencimiento: '+moment(row.intClaroObtenida).format("d-MM-YY")+'' };
-}},
-            { "data": "intArnet", render: function(data,type,row){
-              if(row.intArnetObtenida==null || row.intArnetObtenida=='' ){
-  return 'Estado: '+row.intArnet }
-else{
-  return 'Estado: '+row.intArnet + '. Vencimiento: '+moment(row.intArnetObtenida).format("d-MM-YY")+'' };
-}},
-            { "data": "intArsat" , render: function(data,type,row){
-              if(row.intArsatObtenida==null || row.intArsatObtenida=='' ){
-  return 'Estado: '+row.intArsat }
-else{
-  return 'Estado: '+row.intArsat + '. Vencimiento: '+moment(row.intArsatObtenida).format("d-MM-YY")+'' };
-}},
-            { "data": "intTelecom", render: function(data,type,row){
-              if(row.intTelecomObtenida==null || row.intTelecomObtenida=='' ){
-  return 'Estado: '+row.intTelecom }
-else{
-  return 'Estado: '+row.intTelecom + '. Vencimiento: '+moment(row.intTelecomObtenida).format("d-MM-YY")+'' };
-}},
-          ],
-        });
-      });
+              {
+                "data": "intCloaca", render: function (data, type, row) {
+                  if (row.intCloacaObtenida == null || row.intCloacaObtenida == '') {
+                    return 'Estado: ' + row.intCloaca
+                  }
+                  else {
+                    if(row.intCloaca == "pedir"){
 
-    </script>
-    <%}%>
+return '<div class="bg-danger"> Estado: '+row.intCloaca + ' </div> '
+}
+              if(row.intCloaca == "Pedida" || row.intCloaca == "En gestion"){
+
+              return '<div class="bg-warning"> Estado: '+row.intCloaca + '. Vencimiento: '+moment(row.intCloacaObtenida).format("d-MM-YY")+' </div> '
+              }
+              if(row.intCloaca == "ok"){
+
+return '<div class="bg-success text-light"> Estado: '+row.intCloaca + '. Vencimiento: '+moment(row.intCloacaObtenida).format("d-MM-YY")+' </div> '
+}
+                  };
+                }
+              },
+              {
+                "data": "intElectricidad", render: function (data, type, row) {
+                  if (row.intElectricidadObtenida == null || row.intElectricidadObtenida == '') {
+                    return 'Estado: ' + row.intElectricidad
+                  }
+                  else {
+                    if(row.intElectricidad == "pedir"){
+
+return '<div class="bg-danger"> Estado: '+row.intElectricidad + ' </div> '
+}
+              if(row.intElectricidad == "Pedida" || row.intElectricidad == "En gestion"){
+
+              return '<div class="bg-warning"> Estado: '+row.intElectricidad + '. Vencimiento: '+moment(row.intElectricidadObtenida).format("d-MM-YY")+' </div> '
+              }
+              if(row.intElectricidad == "ok"){
+
+return '<div class="bg-success text-light"> Estado: '+row.intElectricidad + '. Vencimiento: '+moment(row.intElectricidadObtenida).format("d-MM-YY")+' </div> '
+}
+                  };
+                }
+              },
+              {
+                "data": "intClaro", render: function (data, type, row) {
+                  if (row.intClaroObtenida == null || row.intClaroObtenida == '') {
+                    return 'Estado: ' + row.intClaro
+                  }
+                  else {
+                    if(row.intClaro == "pedir"){
+
+return '<div class="bg-danger"> Estado: '+row.intClaro + ' </div> '
+}
+              if(row.intClaro == "Pedida" || row.intClaro == "En gestion"){
+
+              return '<div class="bg-warning"> Estado: '+row.intClaro + '. Vencimiento: '+moment(row.intClaroObtenida).format("d-MM-YY")+' </div> '
+              }
+              if(row.intClaro == "ok"){
+
+return '<div class="bg-success text-light"> Estado: '+row.intClaro + '. Vencimiento: '+moment(row.intClaroObtenida).format("d-MM-YY")+' </div> '
+}
+                  };
+                }
+              },
+              {
+                "data": "intArnet", render: function (data, type, row) {
+                  if (row.intArnetObtenida == null || row.intArnetObtenida == '') {
+                    return 'Estado: ' + row.intArnet
+                  }
+                  else {
+                    if(row.intArnet == "pedir"){
+
+return '<div class="bg-danger"> Estado: '+row.intArnet + ' </div> '
+}
+              if(row.intArnet == "Pedida" || row.intArnet == "En gestion"){
+
+              return '<div class="bg-warning"> Estado: '+row.intArnet + '. Vencimiento: '+moment(row.intArnetObtenida).format("d-MM-YY")+' </div> '
+              }
+              if(row.intArnet == "ok"){
+
+return '<div class="bg-success text-light"> Estado: '+row.intArnet + '. Vencimiento: '+moment(row.intArnetObtenida).format("d-MM-YY")+' </div> '
+}
+                  };
+                }
+              },
+              {
+                "data": "intArsat", render: function (data, type, row) {
+                  if (row.intArsatObtenida == null || row.intArsatObtenida == '') {
+                    return 'Estado: ' + row.intArsat
+                  }
+                  else {
+                    if(row.intArsat == "pedir"){
+
+return '<div class="bg-danger"> Estado: '+row.intArsat + ' </div> '
+}
+              if(row.intArsat == "Pedida" || row.intArsat == "En gestion"){
+
+              return '<div class="bg-warning"> Estado: '+row.intArsat + '. Vencimiento: '+moment(row.intArsatObtenida).format("d-MM-YY")+' </div> '
+              }
+              if(row.intArsat == "ok"){
+
+return '<div class="bg-success text-light"> Estado: '+row.intArsat + '. Vencimiento: '+moment(row.intArsatObtenida).format("d-MM-YY")+' </div> '
+}
+                  };
+                }
+              },
+              {
+                "data": "intTelecom", render: function (data, type, row) {
+                  if (row.intTelecomObtenida == null || row.intTelecomObtenida == '') {
+                    return 'Estado: ' + row.intTelecom
+                  }
+                  else {
+                    if(row.intTelecom == "pedir"){
+
+return '<div class="bg-danger"> Estado: '+row.intTelecom + ' </div> '
+}
+              if(row.intTelecom == "Pedida" || row.intTelecom == "En gestion"){
+
+              return '<div class="bg-warning"> Estado: '+row.intTelecom + '. Vencimiento: '+moment(row.intTelecomObtenida).format("d-MM-YY")+' </div> '
+              }
+              if(row.intTelecom == "ok"){
+
+return '<div class="bg-success text-light"> Estado: '+row.intTelecom + '. Vencimiento: '+moment(row.intTelecomObtenida).format("d-MM-YY")+' </div> '
+}
+                  };
+                }
+              },
+            ],
+          });
+        });
+
+      </script>
+      <%}%>
 </body>
 
 </html>

@@ -1,7 +1,10 @@
-body{
-    background-color: red;
-    }   
-#prueba .prueba{
-    background-color: red;
-    color: blue;
+.Tarea {
+      background-color: #0D6EFD;
+  }  
+.body .editarTareas{
+    background-color: aqua;
+}
+.Titulo {
+    background-color: #0D6EFD;
+    color: white;
 }

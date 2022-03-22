@@ -153,7 +153,7 @@ router.get('/editarTareas/:id', (req, res) => {
     connection.query(sql, [id], (error, results) => {
         if (error) console.log( error);
         if (results.length > 0) {
-            res.render('paginas/AdministracionEcogas/editarTareas', { user: results[0] });
+            res.render('paginas/AdministracionEcogas/editarTareas', { user: results[0]});
         }
         else {
             res.redirect('/adminecogas');
@@ -542,7 +542,7 @@ var DocumentacionTerreno;
     var DocumentacionSociedad;
     var DocumentacionContractual;
 
-    if(Mensura == "ok" && TituloDePropiedad == "ok" ){
+    if((Mensura == "ok" && TituloDePropiedad == "ok") || (Mensura == "NC" && TituloDePropiedad == "NC")){
         DocumentacionTerreno = "ok";
     }
     if(Mensura == "EnGestion" || TituloDePropiedad == "EnGestion" ){
@@ -552,7 +552,7 @@ var DocumentacionTerreno;
         DocumentacionTerreno = "Sin presentar";
     }
      //Documentacion Sociedad
-    if(ActaConstitutiva == "ok" && ActaCargoVigente == "ok" ){
+    if((ActaConstitutiva == "ok" && ActaCargoVigente == "ok") || (ActaConstitutiva == "NC" && ActaCargoVigente == "NC") ){
         DocumentacionSociedad = "ok";
     }
     if(ActaConstitutiva == "EnGestion" || ActaCargoVigente == "EnGestion" ){
@@ -562,7 +562,7 @@ var DocumentacionTerreno;
         DocumentacionSociedad = "Sin presentar";
     }
      //Documentacion Contractual
-    if(Cotizacion == "ok" && (Contrato=="Ok(Preliminar)" || Contrato=="ok") ){
+    if(Cotizacion == "ok" && (Contrato=="Ok(Preliminar)" || Contrato=="ok") ||(Cotizacion == "NC" && (Contrato=="NC(Preliminar)" || Contrato=="NC"))){
         DocumentacionContractual = "ok";
     }
     if(Cotizacion == "EnGestion" || (Contrato == "EnGestion"|| Contrato == "EnGestion(Preliminar)") ){
@@ -602,7 +602,6 @@ router.post('/act1pCarpEcogas/:id', (req,res)=>{
     var id = req.body.id;
     var Nombre = req.body.Nombre;   
     var sql="";
-
     var Contrato = req.body.Contrato;
     var Presupuesto = req.body.Presupuesto;
     var Sucedaneo = req.body.Sucedaneo;
@@ -614,6 +613,7 @@ router.post('/act1pCarpEcogas/:id', (req,res)=>{
     var HidraulicaVisacion = req.body.HIDRAULICA1;
     var DNVVisacion = req.body.DNV1;
     var FerrocarrilesVisacion = req.body.FERROCARRIL1;
+    var FechaFirmaContrato= req.body.FechaFirmaContrato;
     // Variables Generales
     var Comercial;
     var Tecnica, PermisosEspeciales;
@@ -657,9 +657,9 @@ router.post('/act1pCarpEcogas/:id', (req,res)=>{
                }
             })
             sql = 'Update clientes Set ? where id=?';
-            connection.query(sql, [{
+            if(FechaFirmaContrato==null || FechaFirmaContrato==null ){  connection.query(sql, [{
                 //Primera Parte
-                Contrato: Contrato, Presupuesto: Presupuesto, Sucedaneo: Sucedaneo, NotaDeExcepcion: NotaDeExcepcion,PCaprobado: Pcaprobado,
+                Contrato: Contrato,Presupuesto: Presupuesto, Sucedaneo: Sucedaneo, NotaDeExcepcion: NotaDeExcepcion,PCaprobado: Pcaprobado,
                 PlanoTipo: PlanoTipo, CartaOferta: CartaOferta, PlanoAnexo: PlanoAnexo, HidraulicaVisacion:HidraulicaVisacion, DNVVisacion: DNVVisacion, FerrocarrilesVisacion: FerrocarrilesVisacion}, id],
                 (error, results) => {
         
@@ -669,7 +669,21 @@ router.post('/act1pCarpEcogas/:id', (req,res)=>{
         
                     })
                    
-                    res.redirect(req.get('referer'));
+                    res.redirect(req.get('referer'));}
+            else{  connection.query(sql, [{
+                //Primera Parte
+                Contrato: Contrato, Fechafirmacontrato:FechaFirmaContrato,Presupuesto: Presupuesto, Sucedaneo: Sucedaneo, NotaDeExcepcion: NotaDeExcepcion,PCaprobado: Pcaprobado,
+                PlanoTipo: PlanoTipo, CartaOferta: CartaOferta, PlanoAnexo: PlanoAnexo, HidraulicaVisacion:HidraulicaVisacion, DNVVisacion: DNVVisacion, FerrocarrilesVisacion: FerrocarrilesVisacion}, id],
+                (error, results) => {
+        
+                    if (error) {
+                        console.log(error);
+                       }
+        
+                    })
+                   
+                    res.redirect(req.get('referer'));}
+          
 })  
 router.post('/act2pCarpEcogas/:id', (req,res)=>{
     var id = req.body.id;

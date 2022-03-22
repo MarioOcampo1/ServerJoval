@@ -56,6 +56,20 @@
                                         </option>
                                     </select>
                                 </div>
+                                <div class="card-title">Fecha de firma del contrato
+                                                                    </div>
+                                <div class="card-text">
+                                  <input type="date" name="FechaFirmaContrato" id="FechaFirmaContrato"placeholder="<%= user.Fechafirmacontrato%>">
+<script>
+var fecha = "<%=user.Fechafirmacontrato%>";
+console.log("la fecha es : "+ fecha);
+                                        var FechaModificada= moment(Fecha, "MM/DD/YYYY");
+                                        console.log("La fecha modificada es: "+ FechaModificada);
+                                        document.write(FechaModificada);
+                                     
+</script>
+    
+                                </div>
                                 <div class="card-title">
                                     Presupuesto detallado</div>
                                 <div class="card-text">
@@ -215,7 +229,7 @@
                                             <input hidden checked type="radio"
                                             name="CartaOferta"
                                             id="CartaOferta"
-                                            value="<%=user.CartaOferta%>"> 
+                                            value="NC"> 
                                             
                                         </form-check>
                                         <% }else{%>
@@ -257,7 +271,7 @@
                                         <input hidden checked type="radio"
                                         name="PlanoAnexo"
                                         id="PlanoAnexo"
-                                        value="<%=user.PlanoAnexo%>"> 
+                                        value="NC"> 
                                     </form-check>
                                     <% }else{%>
 
@@ -300,7 +314,7 @@
                                         <input hidden checked type="radio"
                                         name="HIDRAULICA1"
                                         id="HIDRAULICA1"
-                                        value="No corresponde"> 
+                                        value="NC"> 
                                     </form-check>
                                 <%}else{%>
 
@@ -343,7 +357,7 @@
                                     <input hidden checked type="radio"
                                     name="FERROCARRIL1"
                                     id="FERROCARRIL1"
-                                    value="<%=user.FerrocarrilesVisacion%>"> 
+                                    value="NC"> 
                                 <%}else{%>
 
                                 <div class="card-title">
@@ -378,7 +392,7 @@
                                     <input hidden checked type="radio"
                                     name="DNV1"
                                     id="DNV1"
-                                    value="No corresponde"> 
+                                    value="NC"> 
                                 <%}else{%>
                                
                                 <div class="card-title">DNV
