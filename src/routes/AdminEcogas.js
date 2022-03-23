@@ -654,6 +654,7 @@ router.post('/act1pCarpEcogas/:id', (req,res)=>{
 
     }
     console.log("id:"+ id + ","+Contrato, "", Comercial, "",Presupuesto, "",Sucedaneo, "",)
+    console.log("El valor que contiene la fecha del contrato es: "+ FechaFirmaContrato);
     sql= 'Update clientes_tareasgenerales Set ? where Nombre=?';
     connection.query(sql,[{ Comercial:Comercial,Tecnica:Tecnica,PermisosEspeciales:PermisosEspeciales}, Nombre],
         (error, results) => {
@@ -663,7 +664,10 @@ router.post('/act1pCarpEcogas/:id', (req,res)=>{
                }
             })
             sql = 'Update clientes Set ? where id=?';
-            if(FechaFirmaContrato==null || FechaFirmaContrato=="" ){  connection.query(sql, [{
+            if(FechaFirmaContrato==null || FechaFirmaContrato=="" ){ 
+                console.log("Fecha firma de contrato contiene: " + FechaFirmaContrato + ". Por lo tanto, entro al primer if, donde no deberia de tener nada.");
+                
+                connection.query(sql, [{
                 //Primera Parte
                 Contrato: Contrato,Presupuesto: Presupuesto, Sucedaneo: Sucedaneo, NotaDeExcepcion: NotaDeExcepcion,PCaprobado: Pcaprobado,
                 PlanoTipo: PlanoTipo, CartaOferta: CartaOferta, PlanoAnexo: PlanoAnexo, HidraulicaVisacion:HidraulicaVisacion, DNVVisacion: DNVVisacion, FerrocarrilesVisacion: FerrocarrilesVisacion}, id],
