@@ -631,7 +631,7 @@ router.post('/act1pCarpEcogas/:id', (req,res)=>{
     if(Pcaprobado == "ok" && (PlanoTipo=="ok" || PlanoTipo=="NC") ){
         Tecnica = "ok";
     }
-    if(Pcaprobado == "EnGestion" || (PlanoTipo=="EnGestion") ){
+    if(Pcaprobado == "EnGestion" || PlanoTipo=="EnGestion" ){
         Tecnica = "EnGestion";
     }
      //Permisos Especiales
