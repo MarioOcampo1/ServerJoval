@@ -630,6 +630,7 @@ router.post('/act1pCarpEcogas/:id', (req,res)=>{
     //Tecnica
     if(Pcaprobado == "ok" && (PlanoTipo=="ok" || PlanoTipo=="NC") ){
         Tecnica = "ok";
+        console.log("La variable Tecnica va tener el valor: " +Tecnica );
     }
     if(Pcaprobado == "EnGestion" || PlanoTipo=="EnGestion" ){
         Tecnica = "EnGestion";
