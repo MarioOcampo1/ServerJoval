@@ -657,7 +657,7 @@ router.post('/act1pCarpEcogas/:id', (req,res)=>{
                }
             })
             sql = 'Update clientes Set ? where id=?';
-            if(FechaFirmaContrato==null || FechaFirmaContrato==null ){  connection.query(sql, [{
+            if(FechaFirmaContrato==null || FechaFirmaContrato=="" ){  connection.query(sql, [{
                 //Primera Parte
                 Contrato: Contrato,Presupuesto: Presupuesto, Sucedaneo: Sucedaneo, NotaDeExcepcion: NotaDeExcepcion,PCaprobado: Pcaprobado,
                 PlanoTipo: PlanoTipo, CartaOferta: CartaOferta, PlanoAnexo: PlanoAnexo, HidraulicaVisacion:HidraulicaVisacion, DNVVisacion: DNVVisacion, FerrocarrilesVisacion: FerrocarrilesVisacion}, id],
