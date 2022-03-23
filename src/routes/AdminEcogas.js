@@ -638,14 +638,19 @@ router.post('/act1pCarpEcogas/:id', (req,res)=>{
      if((CartaOferta == "ok" || CartaOferta == "NC" || CartaOferta == "") && (PlanoAnexo=="ok" || PlanoAnexo=="NC" || PlanoAnexo=="") && (DNVVisacion=="Visado" || DNVVisacion=="NC" || DNVVisacion=="") && (HidraulicaVisacion=="Visado" || HidraulicaVisacion=="NC" || HidraulicaVisacion=="") && (FerrocarrilesVisacion=="Visado" || FerrocarrilesVisacion=="NC" || FerrocarrilesVisacion=="")  ){
        console.log("Permisos especiales sera cambiado a ok...");
         PermisosEspeciales = "ok";
+        console.log("El valor que contiene permisos especiales es: " +PermisosEspeciales);
     }
     if(CartaOferta == "EnGestion" || CartaOferta == "Presentado" ||  PlanoAnexo=="EnGestion" || PlanoAnexo=="Presentado"  || DNVVisacion=="EnGestion" || DNVVisacion=="Presentado" ||HidraulicaVisacion=="EnGestion" ||HidraulicaVisacion=="Presentado" || FerrocarrilesVisacion=="EnGestion" || FerrocarrilesVisacion=="Presentado" ){
        console.log("Permisos especiales sera cambiado a EnGestion...");
        PermisosEspeciales = "EnGestion";
+       console.log("El valor que contiene permisos especiales es: " +PermisosEspeciales);
+
     }
     if(CartaOferta == "Observado" || PlanoAnexo=="Observado" || DNVVisacion=="Observado" ||HidraulicaVisacion=="Observado" || FerrocarrilesVisacion=="Observado" ){
        console.log("Permisos especiales sera cambiado a Observado...");
        PermisosEspeciales = "Observado";
+       console.log("El valor que contiene permisos especiales es: " +PermisosEspeciales);
+
     }
     console.log("id:"+ id + ","+Contrato, "", Comercial, "",Presupuesto, "",Sucedaneo, "",)
     sql= 'Update clientes_tareasgenerales Set ? where Nombre=?';
