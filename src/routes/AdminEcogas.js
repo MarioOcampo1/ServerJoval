@@ -542,7 +542,7 @@ var DocumentacionTerreno;
     var DocumentacionSociedad;
     var DocumentacionContractual;
 
-    if((Mensura == "ok" && TituloDePropiedad == "ok") || (Mensura == "NC" && TituloDePropiedad == "NC")){
+    if((Mensura == "ok" ||Mensura == "NC")&&( TituloDePropiedad == "ok" || TituloDePropiedad == "NC")){
         DocumentacionTerreno = "ok";
     }
     if(Mensura == "EnGestion" || TituloDePropiedad == "EnGestion" ){
@@ -552,7 +552,7 @@ var DocumentacionTerreno;
         DocumentacionTerreno = "Sin presentar";
     }
      //Documentacion Sociedad
-    if((ActaConstitutiva == "ok" && ActaCargoVigente == "ok") || (ActaConstitutiva == "NC" && ActaCargoVigente == "NC") ){
+    if((ActaConstitutiva == "ok" || ActaConstitutiva == "NC" ) && (ActaCargoVigente == "ok" || ActaCargoVigente == "NC") ){
         DocumentacionSociedad = "ok";
     }
     if(ActaConstitutiva == "EnGestion" || ActaCargoVigente == "EnGestion" ){
@@ -562,7 +562,7 @@ var DocumentacionTerreno;
         DocumentacionSociedad = "Sin presentar";
     }
      //Documentacion Contractual
-    if(Cotizacion == "ok" && (Contrato=="Ok(Preliminar)" || Contrato=="ok") ||(Cotizacion == "NC" && (Contrato=="NC(Preliminar)" || Contrato=="NC"))){
+    if((Cotizacion == "ok" || Cotizacion == "NC") && (Contrato=="Ok(Preliminar)" || Contrato=="ok" || Contrato=="NC(Preliminar)" || Contrato=="NC")){
         DocumentacionContractual = "ok";
     }
     if(Cotizacion == "EnGestion" || (Contrato == "EnGestion"|| Contrato == "EnGestion(Preliminar)") ){
