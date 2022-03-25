@@ -718,12 +718,12 @@
                                         <tr>
                                             <!-- Ifs de las etapas de la carpeta, controlan la frase que se muestra al usuario debajo de cada etapa. -->
                                             <th class="table-success">
-                                                <!-- Gestion de la primera parte, muestra en "Etapas de la carpeta" de cada carpeta, un resumen de como va cada area de la carpeta -->
+                                                <!-- Gestion de la primera parte, muestra en "Etapas de la carpeta", un resumen de como va cada area de la carpeta -->
                                                 <% if(user.Mensura=="ok" && user.TituloDePropiedad=="ok" &&
                                                     (user.DocumentaciónSociedad=="ok" ||
                                                     user.DocumentaciónSociedad=="NC" )&& (user.ActaCargoVigente=="ok" ||
-                                                    user.ActaCargoVigente=="NC" ) && user.Cotizacion=="ok" ){%>
-                                                    <p> Todo finalizado </p>
+                                                    user.ActaCargoVigente=="NC" ) && user.Cotizacion=="ok" && (user.Contrato=="ok" || user.Contrato=="Ok(Preliminar")){%>
+                                                    <p>Finalizada</p>
                                                     <%}%>
                                                         <%if(user.Mensura=="EnGestion"||
                                                             user.TituloDePropiedad=="EnGestion" ||
@@ -735,11 +735,11 @@
                                             </th>
                                             <th class="table-success">
                                                 <!-- Configuracion de el cuadro de "Primera parte" -->
-                                                <%if(user.Comercial=="ok" && user.PCaprobado=="ok" &&
-                                                    user.CartaOferta=="ok" ){%>
+                                                <%if(user.Contrato=="ok" && user.PCaprobado=="ok" &&
+                                                    user.MailAutorizacion=="ok"){%>
                                                     Finalizada
-                                                    <%} if(user.Comercial=="EnGestion" || user.PCaprobado=="EnGestion"
-                                                        || user.CartaOferta=="EnGestion" ){%>
+                                                    <%} if(user.Contrato=="EnGestion" || user.PCaprobado=="EnGestion"
+                                                        ){%>
                                                         <p>Se encuentra en gestión </p>
                                                         <%}%>
                                             </th>
