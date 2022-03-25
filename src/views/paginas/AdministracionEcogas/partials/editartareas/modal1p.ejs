@@ -59,6 +59,9 @@
                                 <div class="card-title">Fecha de firma del contrato
                                                                     </div>
                                 <div class="card-text">
+                                    <%if(user.Fechafirmacontrato){%>
+                                        
+                                        <%}%>
                                   <input type="date" name="FechaFirmaContrato" id="FechaFirmaContrato"placeholder="<%= user.Fechafirmacontrato%>">
 <script>
 var fecha = "<%=user.Fechafirmacontrato%>";
@@ -216,7 +219,6 @@ console.log("la fecha es : "+ fecha);
                                         <option value="NC">
                                             No corresponde
                                         </option>
-
                                     </select>
                                 </div>
                             </div>
@@ -302,8 +304,6 @@ console.log("la fecha es : "+ fecha);
                                             Observado</option>
                                         <option value="ok">ok
                                         </option>
-                                      
-
                                     </select>
 
                                 </div>

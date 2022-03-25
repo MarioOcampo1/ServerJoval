@@ -19,7 +19,9 @@
 
         <div class="container-fluid">
             <div class="table-responsive-sm ">
-                <table class="table table-striped table-bordered border-secondary  text-center table-sm "
+                	
+<label for="buscador">Buscar:</label> <input type="text" id="buscador" value=""/>
+                <table id="EstadoGeneral" class="table table-striped table-bordered border-secondary  text-center table-sm "
                     style="width: 100%">
                     <thead>
                         <tr>
@@ -135,22 +137,22 @@
                         <% if(results){%>
                         <% results.forEach((clientes)=>{ %>
                             <tr>
-                                <th class="text-center">
+                                <td class="text-center">
                                     <a href="/editarTareas/<%=clientes.id%>" class="">
                                         <%=clientes.Nombre%>
                                     </a>
-                                </th>
-                                <th >
+                                </td>
+                                <td >
                                         <%=clientes.NCarpeta%>
-                                </th>
-                                <th >
+                                </td>
+                                <td >
                                     <%=clientes.Ubicacion%>
-                                </th>
-                                <th >
+                                </td>
+                                <td >
                                     <%=clientes.Comitente%>
-                                </th>
+                                </td>
                                
-                                <th >
+                                <td >
                                     <a href="/historialcarpeta/<%=clientes.Nombre%>">
                                     <%=clientes.Estado%>
 
@@ -176,706 +178,706 @@
                                                                                 <%if(clientes.Estado=="en obras"){%>
                                                                                     <br>
                                                                                     <img src="https://media.istockphoto.com/vectors/men-working-road-sign-vector-id856987802?s=612x612"
-                                                                                        alt="" width="45px"
+                                                                                        alt="" widtd="45px"
                                                                                         height="45px"
                                                                                         class="text-center">
                                                                                     <%}%>
-                                </th>
-                                <th >
+                                </td>
+                                <td >
                                     <%= moment(clientes.Fechafirmacontrato).format('DD-MM-YYYY')%>
-                                </th>
+                                </td>
 
                                 <!-- Documentacion Terreno -->
                                 <%if(clientes.DocumentacionTerreno=="ok"){%>
-                                    <th class="text-light bg-success">
+                                    <td class="text-light bg-success">
                                         <%=clientes.DocumentacionTerreno%>
-                                    </th>
+                                    </td>
                                     <%}%>
                                     <%if(clientes.DocumentacionTerreno=="EnGestion"){%>
-                                        <th class="text-dark bg-warning">
+                                        <td class="text-dark bg-warning">
                                             <%=clientes.DocumentacionTerreno%>
-                                        </th>
+                                        </td>
                                         <%}%>
                                         <%if(clientes.DocumentacionTerreno=="Sin presentar"){%>
-                                            <th class="text-light bg-danger">
+                                            <td class="text-light bg-danger">
                                                 <%=clientes.DocumentacionTerreno%>
-                                            </th>
+                                            </td>
                                             <%}%>
                                          <%if(clientes.DocumentacionTerreno!="ok"&& clientes.DocumentacionTerreno!="EnGestion"&& clientes.DocumentacionTerreno!="Sin presentar"){%>
                                             <%if(clientes.DocumentacionTerreno==null){ %>
-                                                <th class="text-dark bg-danger">
+                                                <td class="text-dark bg-danger">
                                                   ERROR
-                                                </th>
+                                                </td>
                                                 <%}else{%>
-                                            <th class="text-dark">
+                                            <td class="text-dark">
                                                 <%=clientes.DocumentacionTerreno%>
-                                            </th>
+                                            </td>
                                             
                                             <%}}%>
                                             
                                          <!-- // -->
                                         <!-- Documentacion Sociedad -->
                                         <%if(clientes.DocumentacionSociedad=="ok"){%>
-                                            <th class="text-light bg-success">
+                                            <td class="text-light bg-success">
                                                 <%=clientes.DocumentacionSociedad%>
-                                            </th>
+                                            </td>
                                             <%}%>
                                             <%if(clientes.DocumentacionSociedad=="EnGestion"){%>
-                                                <th class="text-dark bg-warning">
+                                                <td class="text-dark bg-warning">
                                                     <%=clientes.DocumentacionSociedad%>
-                                                </th>
+                                                </td>
                                                 <%}%>
 
                                                 <%if(clientes.DocumentacionSociedad=="Sin presentar"){%>
-                                                    <th class="text-light bg-danger">
+                                                    <td class="text-light bg-danger">
                                                         <%=clientes.DocumentacionSociedad%>
-                                                    </th>
+                                                    </td>
                                                     <%}%>
                                                     <%if(clientes.DocumentacionSociedad!="ok"&& clientes.DocumentacionSociedad!="EnGestion"&& clientes.DocumentacionSociedad!="Sin presentar"){%>
                                                         <%if(clientes.DocumentacionSociedad==null){ %>
-                                                            <th class="text-dark bg-danger">
+                                                            <td class="text-dark bg-danger">
                                                               ERROR
-                                                            </th>
-                                                            <%}else{%>   <th class="text-dark">
+                                                            </td>
+                                                            <%}else{%>   <td class="text-dark">
                                                             <%=clientes.DocumentacionSociedad%>
-                                                        </th>
+                                                        </td>
                                                         <%}}%>
                                                        
                             <!-- // -->
                             <!-- Documentacion Contractual -->
                             <%if(clientes.DocumentacionContractual=="ok"){%>
-                                <th class="text-light bg-success">
+                                <td class="text-light bg-success">
                                     <%=clientes.DocumentacionContractual%>
-                                </th>
+                                </td>
                                 <%}%>
                                 <%if(clientes.DocumentacionContractual=="EnGestion"){%>
-                                    <th class="text-dark bg-warning">
+                                    <td class="text-dark bg-warning">
                                         <%=clientes.DocumentacionContractual%>
-                                    </th>
+                                    </td>
                                     <%}%>
                                     <%if(clientes.DocumentacionContractual=="Sin presentar"){%>
-                                        <th class="text-light bg-danger">
+                                        <td class="text-light bg-danger">
                                             <%=clientes.DocumentacionContractual%>
-                                        </th>
+                                        </td>
                                         <%}%>
                                         <%if(clientes.DocumentacionContractual!="ok"&& clientes.DocumentacionContractual!="EnGestion"&& clientes.DocumentacionContractual!="Sin presentar"){%>
                                             <%if(clientes.DocumentacionContractual==null){ %>
-                                                <th class="text-dark bg-danger">
+                                                <td class="text-dark bg-danger">
                                                   ERROR
-                                                </th>
+                                                </td>
                                                 <%}else{%>
-                                            <th class="text-dark">
+                                            <td class="text-dark">
                                                 <%=clientes.DocumentacionContractual%>
-                                            </th>
+                                            </td>
                                             <%}}%>
                                            
                               <!-- // -->
                               <!-- Comercial  -->
                               <%if(clientes.Comercial=="ok"){%>
-                                <th class="text-light bg-success">
+                                <td class="text-light bg-success">
                                     <%=clientes.Comercial%>
-                                </th>
+                                </td>
                                 <%}%>
                                 <%if(clientes.Comercial=="EnGestion"){%>
-                                    <th class="text-dark bg-warning">
+                                    <td class="text-dark bg-warning">
                                         <%=clientes.Comercial%>
-                                    </th>
+                                    </td>
                                     <%}%>
                                     <%if(clientes.Comercial=="Sin presentar"){%>
-                                        <th class="text-light bg-secondary">
+                                        <td class="text-light bg-secondary">
                                             <%=clientes.Comercial%>
-                                        </th>
+                                        </td>
                                         <%}%>
                                         <%if(clientes.Comercial!="ok"&& clientes.Comercial!="EnGestion"&& clientes.Comercial!="Sin presentar"){%>
                                             <%if(clientes.Comercial==null){ %>
-                                                <th class="text-dark bg-danger">
+                                                <td class="text-dark bg-danger">
                                                   ERROR
-                                                </th>
+                                                </td>
                                                 <%}else{%>
-                                            <th class="text-dark">
+                                            <td class="text-dark">
                                                 <%=clientes.Comercial%>
-                                            </th>
+                                            </td>
                                             <%}}%>
                                            
                             <!-- // -->
                             <!-- Tecnica  -->
                             <%if(clientes.Tecnica=="ok"){%>
-                                <th class="text-light bg-success">
+                                <td class="text-light bg-success">
                                     <%=clientes.Tecnica%>
-                                </th>
+                                </td>
                                 <%}%>
                                 <%if(clientes.Tecnica=="EnGestion"){%>
-                                    <th class="text-dark bg-warning">
+                                    <td class="text-dark bg-warning">
                                         <%=clientes.Tecnica%> 
-                                    </th>
+                                    </td>
                                     <%}%>
                                     <%if(clientes.Tecnica=="Sin presentar"){%>
-                                        <th class="text-light bg-secondary">
+                                        <td class="text-light bg-secondary">
                                             <%=clientes.Tecnica%>
-                                        </th>
+                                        </td>
                                         <%}%>
                                         <%if(clientes.Tecnica!="ok"&& clientes.Tecnica!="EnGestion"&& clientes.Tecnica!="Sin presentar"){%>
                                             <%if(clientes.Tecnica==null){ %>
-                                                <th class="text-dark bg-danger">
+                                                <td class="text-dark bg-danger">
                                                   ERROR
-                                                </th>
+                                                </td>
                                                 <%}else{%>
-                                            <th class="text-dark">
+                                            <td class="text-dark">
                                                 <%=clientes.Tecnica%>
-                                            </th>
+                                            </td>
                                             <%}}%>
                                            
                                  <!-- //  -->
                                  <!-- Permisos Especiales  -->
                                  <%if(clientes.PermisosEspeciales=="ok"){%>
-                                    <th class="text-light bg-success">
+                                    <td class="text-light bg-success">
                                         <%=clientes.PermisosEspeciales%>
-                                    </th>
+                                    </td>
                                     <%}%>
                                     <%if(clientes.PermisosEspeciales=="EnGestion"){%>
-                                        <th class="text-dark bg-warning">
+                                        <td class="text-dark bg-warning">
                                             <%=clientes.PermisosEspeciales%> 
-                                        </th>
+                                        </td>
                                         <%}%>
                                         <%if(clientes.PermisosEspeciales=="Sin presentar"){%>
-                                            <th class="text-light bg-danger">
+                                            <td class="text-light bg-danger">
                                                 <%=clientes.PermisosEspeciales%>
-                                            </th>
+                                            </td>
                                             <%}%>
                                             <%if(clientes.PermisosEspeciales=="Observado" || clientes.PermisosEspeciales=="Pedir"){%>
-                                                <th class="text-light bg-danger">
+                                                <td class="text-light bg-danger">
                                                     <%=clientes.PermisosEspeciales%>
-                                                </th>
+                                                </td>
                                                 <%}%>
                                                 <%if(clientes.PermisosEspeciales!="ok"&& clientes.PermisosEspeciales!="EnGestion"&& clientes.PermisosEspeciales!="Sin presentar"&& clientes.PermisosEspeciales!="Observado"){%>
                                                     <%if(clientes.PermisosEspeciales==null){ %>
-                                                        <th class="text-dark bg-danger">
+                                                        <td class="text-dark bg-danger">
                                                           ERROR
-                                                        </th>
+                                                        </td>
                                                         <%}else{%>
-                                                    <th class="text-dark">
+                                                    <td class="text-dark">
                                                         <%=clientes.PermisosEspeciales%>
-                                                    </th>
+                                                    </td>
                                                     <%}}%>
                                                 
                              <!-- // -->
                              <!-- Documentacion de obra -->
                              <%if(clientes.DocumentacionObra=="ok"){%>
-                                <th class="text-light bg-success">
+                                <td class="text-light bg-success">
                                     <%=clientes.DocumentacionObra%>
-                                </th>
+                                </td>
                                 <%}%>
                                 <%if(clientes.DocumentacionObra=="EnGestion"){%>
-                                    <th class="text-dark bg-warning">
+                                    <td class="text-dark bg-warning">
                                         <%=clientes.DocumentacionObra%> 
-                                    </th>
+                                    </td>
                                     <%}%>
                                     <%if(clientes.DocumentacionObra=="Sin presentar"){%>
-                                        <th class="text-light bg-danger">
+                                        <td class="text-light bg-danger">
                                             <%=clientes.DocumentacionObra%>
-                                        </th>
+                                        </td>
                                         <%}%>
                                         <%if((clientes.DocumentacionObra!="Sin presentar")&&(clientes.DocumentacionObra!="EnGestion")&&(clientes.DocumentacionObra!="ok")){%>
                                             <%if(clientes.DocumentacionObra==null){ %>
-                                                <th class="text-dark bg-danger">
+                                                <td class="text-dark bg-danger">
                                                   ERROR
-                                                </th>
-                                                <%}else{%> <th class="text-dark ">
+                                                </td>
+                                                <%}else{%> <td class="text-dark ">
                                                 <%=clientes.DocumentacionObra%>
-                                            </th>
+                                            </td>
                                             <%}}%>
                                             
                             <!-- // -->
                             <!-- Seguridad -->
                             <%if(clientes.Seguridad=="ok"){%>
-                                <th class="text-light bg-success">
+                                <td class="text-light bg-success">
                                     <%=clientes.Seguridad%>
-                                </th>
+                                </td>
                                 <%}%>
                                 <%if(clientes.Seguridad=="EnGestion"){%>
-                                    <th class="text-dark bg-warning">
+                                    <td class="text-dark bg-warning">
                                         <%=clientes.Seguridad%> 
-                                    </th>
+                                    </td>
                                     <%}%>
                                     <%if(clientes.Seguridad=="Sin presentar"){%>
-                                        <th class="text-light bg-secondary">
+                                        <td class="text-light bg-secondary">
                                             <%=clientes.Seguridad%>
-                                        </th>
+                                        </td>
                                         <%}%>
                                         <%if((clientes.Seguridad!="Sin presentar")&&(clientes.Seguridad!="EnGestion")&&(clientes.Seguridad!="ok")){%>
                                             <%if(clientes.Seguridad==null){ %>
-                                                <th class="text-dark bg-danger">
+                                                <td class="text-dark bg-danger">
                                                   ERROR
-                                                </th>
-                                                <%}else{%>  <th class="text-dark ">
+                                                </td>
+                                                <%}else{%>  <td class="text-dark ">
                                                 <%=clientes.Seguridad%>
-                                            </th>
+                                            </td>
                                             <%}}%>
                                           
                             <!-- // -->
                             <!-- Interferencias -->
                             <%if(clientes.Interferencias=="ok"){%>
-                                <th class="text-light bg-success">
+                                <td class="text-light bg-success">
                                     <%=clientes.Interferencias%>
-                                </th>
+                                </td>
                                 <%}%>
                                 <%if(clientes.Interferencias=="EnGestion" || clientes.Interferencias=="Pedida"){%>
-                                    <th class="text-dark bg-warning">
+                                    <td class="text-dark bg-warning">
                                         <%=clientes.Interferencias%> 
-                                    </th>
+                                    </td>
                                     <%}%>
                                     <%if(clientes.Interferencias=="Sin presentar"){%>
-                                        <th class="text-light bg-danger">
+                                        <td class="text-light bg-danger">
                                             <%=clientes.Interferencias%>
-                                        </th>
+                                        </td>
                                         <%}%>
                                         <%if((clientes.Interferencias!="Sin presentar")&&(clientes.Interferencias!="EnGestion")&&(clientes.Interferencias!="ok")){%>
                                             <%if(clientes.Interferencias==null){ %>
-                                                <th class="text-dark bg-danger">
+                                                <td class="text-dark bg-danger">
                                                   ERROR
-                                                </th>
-                                                <%}else{%>  <th class="text-dark">
+                                                </td>
+                                                <%}else{%>  <td class="text-dark">
                                                 <%=clientes.Interferencias%>
-                                            </th>
+                                            </td>
                                             <%}}%>
                                            
                             <!-- // -->
                             <!-- Permisos -->
                             <%if(clientes.Permisos=="ok"){%>
-                                <th class="text-light bg-success">
+                                <td class="text-light bg-success">
                                     <%=clientes.Permisos%>
-                                </th>
+                                </td>
                                 <%}%>
                                 <%if(clientes.Permisos=="EnGestion"){%>
-                                    <th class="text-dark bg-warning">
+                                    <td class="text-dark bg-warning">
                                         <%=clientes.Permisos%> 
-                                    </th>
+                                    </td>
                                     <%}%>
                                     <%if(clientes.Permisos=="Sin presentar"){%>
-                                        <th class="text-light bg-danger">
+                                        <td class="text-light bg-danger">
                                             <%=clientes.Permisos%>
-                                        </th>
+                                        </td>
                                         <%}%>
                                         <%if((clientes.Permisos!="Sin presentar")&&(clientes.Permisos!="EnGestion")&&(clientes.Permisos!="ok")){%>
                                             <%if(clientes.Permisos==null){ %>
-                                                <th class="text-dark bg-danger">
+                                                <td class="text-dark bg-danger">
                                                   ERROR
-                                                </th>
-                                                <%}else{%>  <th class="text-dark">
+                                                </td>
+                                                <%}else{%>  <td class="text-dark">
                                                 <%=clientes.Permisos%>
-                                            </th>
+                                            </td>
                                             <%}}%>
                                            
                             <!-- // -->
                             <!-- Plan de trabajo -->
                             <%if(clientes.PlanDeTrabajo=="ok"){%>
-                                <th class="text-light bg-success">
+                                <td class="text-light bg-success">
                                     <%=clientes.PlanDeTrabajo%>
-                                </th>
+                                </td>
                                 <%}%>
                                 <%if(clientes.PlanDeTrabajo=="EnGestion"){%>
-                                    <th class="text-dark bg-warning">
+                                    <td class="text-dark bg-warning">
                                         <%=clientes.PlanDeTrabajo%> 
-                                    </th>
+                                    </td>
                                     <%}%>
                                     <%if(clientes.PlanDeTrabajo=="Sin presentar"){%>
-                                        <th class="text-light bg-danger">
+                                        <td class="text-light bg-danger">
                                             <%=clientes.PlanDeTrabajo%>
-                                        </th>
+                                        </td>
                                         <%}%>
                                         <%if((clientes.PlanDeTrabajo!="Sin presentar")&&(clientes.PlanDeTrabajo!="EnGestion")&&(clientes.PlanDeTrabajo!="ok")){%>
                                             <%if(clientes.PlanDeTrabajo==null){ %>
-                                                <th class="text-dark bg-danger">
+                                                <td class="text-dark bg-danger">
                                                   ERROR
-                                                </th>
-                                                <%}else{%>  <th class="text-dark ">
+                                                </td>
+                                                <%}else{%>  <td class="text-dark ">
                                                 <%=clientes.PlanDeTrabajo%>
-                                            </th>
+                                            </td>
                                             <%}}%>
                                          
                             <!-- // -->
                             <!-- Matriculas -->
                             <%if(clientes.Matriculas=="ok"){%>
-                                <th class="text-light bg-success">
+                                <td class="text-light bg-success">
                                     <%=clientes.Matriculas%>
-                                </th>
+                                </td>
                                 <%}%>
                                 <%if(clientes.Matriculas=="EnGestion"){%>
-                                    <th class="text-dark bg-warning">
+                                    <td class="text-dark bg-warning">
                                         <%=clientes.Matriculas%> 
-                                    </th>
+                                    </td>
                                     <%}%>
                                     <%if(clientes.Matriculas=="Sin presentar"){%>
-                                        <th class="text-light bg-secondary">
+                                        <td class="text-light bg-secondary">
                                             <%=clientes.Matriculas%>
-                                        </th>
+                                        </td>
                                         <%}%>
                                         <%if((clientes.Matriculas!="Sin presentar")&&(clientes.Matriculas!="EnGestion")&&(clientes.Matriculas!="ok")){%>
                                             <%if(clientes.Matriculas==null){ %>
-                                                <th class="text-dark bg-danger">
+                                                <td class="text-dark bg-danger">
                                                   ERROR
-                                                </th>
-                                                <%}else{%> <th class="text-dark">
+                                                </td>
+                                                <%}else{%> <td class="text-dark">
                                                 <%=clientes.Matriculas%>
-                                            </th>
+                                            </td>
                                             <%}}%>
                                          
                             <!-- // -->
                             <!-- Ambiente -->
                             <%if(clientes.Ambiente=="ok"){%>
-                                <th class="text-light bg-success">
+                                <td class="text-light bg-success">
                                     <%=clientes.Ambiente%>
-                                </th>
+                                </td>
                                 <%}%>
                                 <%if(clientes.Ambiente=="EnGestion"){%>
-                                    <th class="text-dark bg-warning">
+                                    <td class="text-dark bg-warning">
                                         <%=clientes.Ambiente%> 
-                                    </th>
+                                    </td>
                                     <%}%>
                                     <%if(clientes.Ambiente=="Sin presentar"){%>
-                                        <th class="text-light bg-secondary">
+                                        <td class="text-light bg-secondary">
                                             <%=clientes.Ambiente%>
-                                        </th>
+                                        </td>
                                         <%}%>
                                         <%if((clientes.Ambiente!="Sin presentar")&&(clientes.Ambiente!="EnGestion")&&(clientes.Ambiente!="ok")){%>
                                             <%if(clientes.Ambiente==null){ %>
-                                                <th class="text-dark bg-danger">
+                                                <td class="text-dark bg-danger">
                                                   ERROR
-                                                </th>
-                                                <%}else{%>  <th class="text-dark">
+                                                </td>
+                                                <%}else{%>  <td class="text-dark">
                                                 <%=clientes.Ambiente%>
-                                            </th>
+                                            </td>
                                             <%}}%>
                                           
                             <!-- // -->
                             <!-- Nota cumplimiento normativas -->
                             <%if(clientes.NotaCumplimentoNormativas=="ok"){%>
-                                <th class="text-light bg-success">
+                                <td class="text-light bg-success">
                                     <%=clientes.NotaCumplimentoNormativas%>
-                                </th>
+                                </td>
                                 <%}%>
                                 <%if(clientes.NotaCumplimentoNormativas=="EnGestion"){%>
-                                    <th class="text-dark bg-warning">
+                                    <td class="text-dark bg-warning">
                                         <%=clientes.NotaCumplimentoNormativas%> 
-                                    </th>
+                                    </td>
                                     <%}%>
                                     <%if(clientes.NotaCumplimentoNormativas=="Sin presentar"){%>
-                                        <th class="text-light bg-secondary">
+                                        <td class="text-light bg-secondary">
                                             <%=clientes.NotaCumplimentoNormativas%>
-                                        </th>
+                                        </td>
                                         <%}%>
                                         <%if((clientes.NotaCumplimentoNormativas!="Sin presentar")&&(clientes.NotaCumplimentoNormativas!="EnGestion")&&(clientes.NotaCumplimentoNormativas!="ok")){%>
                                             <%if(clientes.NotaCumplimentoNormativas==null){ %>
-                                                <th class="text-dark bg-danger">
+                                                <td class="text-dark bg-danger">
                                                   ERROR
-                                                </th>
-                                                <%}else{%>   <th class="text-dark">
+                                                </td>
+                                                <%}else{%>   <td class="text-dark">
                                                 <%=clientes.NotaCumplimentoNormativas%>
-                                            </th>
+                                            </td>
                                             <%}}%>
                                          
                             <!-- // -->
                             <!-- DDJJ NAG 153 -->
                             <%if(clientes.DDJJNAG153=="ok"){%>
-                                <th class="text-light bg-success">
+                                <td class="text-light bg-success">
                                     <%=clientes.DDJJNAG153%>
-                                </th>
+                                </td>
                                 <%}%>
                                 <%if(clientes.DDJJNAG153=="EnGestion"){%>
-                                    <th class="text-dark bg-warning">
+                                    <td class="text-dark bg-warning">
                                         <%=clientes.DDJJNAG153%> 
-                                    </th>
+                                    </td>
                                     <%}%>
                                     <%if(clientes.DDJJNAG153=="Sin presentar"){%>
-                                        <th class="text-light bg-secondary">
+                                        <td class="text-light bg-secondary">
                                             <%=clientes.DDJJNAG153%>
-                                        </th>
+                                        </td>
                                         <%}%>
                                         <%if((clientes.DDJJNAG153!="Sin presentar")&&(clientes.DDJJNAG153!="EnGestion")&&(clientes.DDJJNAG153!="ok")){%>
                                             <%if(clientes.DDJJNAG153==null){ %>
-                                                <th class="text-dark bg-danger">
+                                                <td class="text-dark bg-danger">
                                                   ERROR
-                                                </th>
-                                                <%}else{%>   <th class="text-dark ">
+                                                </td>
+                                                <%}else{%>   <td class="text-dark ">
                                                 <%=clientes.DDJJNAG153%>
-                                            </th>
+                                            </td>
                                             <%}}%>
                                            
                             <!-- // -->
                             <!-- Avisos -->
                             <%if(clientes.Avisos=="ok"){%>
-                                <th class="text-light bg-success">
+                                <td class="text-light bg-success">
                                     <%=clientes.Avisos%>
-                                </th>
+                                </td>
                                 <%}%>
                                 <%if(clientes.Avisos=="EnGestion"){%>
-                                    <th class="text-dark bg-warning">
+                                    <td class="text-dark bg-warning">
                                         <%=clientes.Avisos%> 
-                                    </th>
+                                    </td>
                                     <%}%>
                                     <%if(clientes.Avisos=="Sin presentar"){%>
-                                        <th class="text-light bg-secondary">
+                                        <td class="text-light bg-secondary">
                                             <%=clientes.Avisos%>
-                                        </th>
+                                        </td>
                                         <%}%>
                                         <%if((clientes.Avisos!="Sin presentar")&&(clientes.Avisos!="EnGestion")&&(clientes.Avisos!="ok")){%>
                                             <%if(clientes.Avisos==null){ %>
-                                                <th class="text-dark bg-danger">
+                                                <td class="text-dark bg-danger">
                                                   ERROR
-                                                </th>
-                                                <%}else{%>   <th class="text-dark ">
+                                                </td>
+                                                <%}else{%>   <td class="text-dark ">
                                                 <%=clientes.Avisos%>
-                                            </th>
+                                            </td>
                                             <%}}%>
                                           
                             <!-- // -->
                             <!-- Documentacion de inspeccion -->
                             <%if(clientes.DocumentacionInspeccion=="ok"){%>
-                                <th class="text-light bg-success">
+                                <td class="text-light bg-success">
                                     <%=clientes.DocumentacionInspeccion%>
-                                </th>
+                                </td>
                                 <%}%>
                                 <%if(clientes.DocumentacionInspeccion=="EnGestion"){%>
-                                    <th class="text-dark bg-warning">
+                                    <td class="text-dark bg-warning">
                                         <%=clientes.DocumentacionInspeccion%> 
-                                    </th>
+                                    </td>
                                     <%}%>
                                     <%if(clientes.DocumentacionInspeccion=="Sin presentar"){%>
-                                        <th class="text-light bg-danger">
+                                        <td class="text-light bg-danger">
                                             <%=clientes.DocumentacionInspeccion%>
-                                        </th>
+                                        </td>
                                         <%}%>
                                         <%if((clientes.DocumentacionInspeccion!="Sin presentar")&&(clientes.DocumentacionInspeccion!="EnGestion")&&(clientes.DocumentacionInspeccion!="ok")){%>
                                             <%if(clientes.DocumentacionInspeccion==null){ %>
-                                                <th class="text-dark bg-danger">
+                                                <td class="text-dark bg-danger">
                                                   ERROR
-                                                </th>
-                                                <%}else{%> <th class="text-dark ">
+                                                </td>
+                                                <%}else{%> <td class="text-dark ">
                                                 <%=clientes.DocumentacionInspeccion%>
-                                            </th>
+                                            </td>
                                             <%}}%>
                                            
                             <!-- // -->
                             <!-- Comunicacion de obras -->
                             <%if(clientes.ComunicacionObras=="ok"){%>
-                                <th class="text-light bg-success">
+                                <td class="text-light bg-success">
                                     <%=clientes.ComunicacionObras%>
-                                </th>
+                                </td>
                                 <%}%>
                                 <%if(clientes.ComunicacionObras=="EnGestion"){%>
-                                    <th class="text-dark bg-warning">
+                                    <td class="text-dark bg-warning">
                                         <%=clientes.ComunicacionObras%> 
-                                    </th>
+                                    </td>
                                     <%}%>
                                     <%if(clientes.ComunicacionObras=="Leer historial de carpeta"){%>
-                                        <th class="text-light bg-danger">
+                                        <td class="text-light bg-danger">
                                             <%=clientes.ComunicacionObras%>
-                                        </th>
+                                        </td>
                                         <%}%>
                                         <%if((clientes.ComunicacionObras!="Leer historial de carpeta")&&(clientes.ComunicacionObras!="EnGestion")&&(clientes.ComunicacionObras!="ok")){%>
                                             <%if(clientes.ComunicacionObras==null){ %>
-                                                <th class="text-dark bg-danger">
+                                                <td class="text-dark bg-danger">
                                                   ERROR
-                                                </th>
-                                                <%}else{%>  <th class="text-dark ">
+                                                </td>
+                                                <%}else{%>  <td class="text-dark ">
                                                 <%=clientes.ComunicacionObras%>
-                                            </th>
+                                            </td>
                                             <%}}%>
                                       
                             <!-- // -->
                             <!-- Actas finales de ecogas -->
                             <%if(clientes.ActasFinalesEcogas=="ok"){%>
-                                <th class="text-light bg-success">
+                                <td class="text-light bg-success">
                                     <%=clientes.ActasFinalesEcogas%>
-                                </th>
+                                </td>
                                 <%}%>
                                 <%if(clientes.ActasFinalesEcogas=="Recibidas"|| clientes.ActasFinalesEcogas=="Firmadas"){%>
-                                    <th class="text-dark bg-warning">
+                                    <td class="text-dark bg-warning">
                                         <%=clientes.ActasFinalesEcogas%> 
-                                    </th>
+                                    </td>
                                     <%}%>
                                     <%if(clientes.ActasFinalesEcogas=="Sin recibir"){%>
-                                        <th class="text-light bg-danger">
+                                        <td class="text-light bg-danger">
                                             <%=clientes.ActasFinalesEcogas%>
-                                        </th>
+                                        </td>
                                         <%}%>
                                         <%if((clientes.ActasFinalesEcogas!="Sin recibir")&&(clientes.ActasFinalesEcogas!="Recibidas")&&(clientes.ActasFinalesEcogas!="Firmadas")&&(clientes.ActasFinalesEcogas!="ok")){%>
                                             <%if(clientes.ActasFinalesEcogas==null){ %>
-                                                <th class="text-dark bg-danger">
+                                                <td class="text-dark bg-danger">
                                                   ERROR
-                                                </th>
-                                                <%}else{%>   <th class="text-dark ">
+                                                </td>
+                                                <%}else{%>   <td class="text-dark ">
                                                 <%=clientes.ActasFinalesEcogas%>
-                                            </th>
+                                            </td>
                                             <%}}%>
                                          
                             <!-- // -->
                             <!-- Planos y Croquis -->
                             <%if(clientes.PlanosyCroquis=="ok"){%>
-                                <th class="text-light bg-success">
+                                <td class="text-light bg-success">
                                     <%=clientes.PlanosyCroquis%>
-                                </th>
+                                </td>
                                 <%}%>
                                 <%if(clientes.PlanosyCroquis=="EnGestion" || clientes.PlanosyCroquis=="Aprobado/Impreso" ||  clientes.PlanosyCroquis=="Presentado" ){%>
-                                    <th class="text-dark bg-warning">
+                                    <td class="text-dark bg-warning">
                                         <%=clientes.PlanosyCroquis%> 
-                                    </th>
+                                    </td>
                                     <%}%>
                                     <%if(clientes.PlanosyCroquis=="Sin presentar"){%>
-                                        <th class="text-light bg-secondary">
+                                        <td class="text-light bg-secondary">
                                             <%=clientes.PlanosyCroquis%>
-                                        </th>
+                                        </td>
                                         <%}%>
                                         <%if((clientes.PlanosyCroquis!="Sin presentar")&&(clientes.PlanosyCroquis!="EnGestion")&&(clientes.PlanosyCroquis!="Aprobado/Impreso")&&(clientes.PlanosyCroquis!="ok")&&(clientes.PlanosyCroquis!="Presentado")){%>
                                             <%if(clientes.PlanosyCroquis==null){ %>
-                                                <th class="text-dark bg-danger">
+                                                <td class="text-dark bg-danger">
                                                   ERROR
-                                                </th>
-                                                <%}else{%><th class="text-dark ">
+                                                </td>
+                                                <%}else{%><td class="text-dark ">
                                                 <%=clientes.PlanosyCroquis%>
-                                            </th>
+                                            </td>
                                             <%}}%>
                                          
                             <!-- // -->
                             <!-- ConformeEntidades -->
                             <%if(clientes.ConformeEntidades=="ok"){%>
-                                <th class="text-light bg-success">
+                                <td class="text-light bg-success">
                                     <%=clientes.ConformeEntidades%>
-                                </th>
+                                </td>
                                 <%}%>
                                 <%if(clientes.ConformeEntidades=="EnGestion"|| clientes.ConformeEntidades=="Solicitado"){%>
-                                    <th class="text-dark bg-warning">
+                                    <td class="text-dark bg-warning">
                                         <%=clientes.ConformeEntidades%> 
-                                    </th>
+                                    </td>
                                     <%}%>
                                     <%if(clientes.ConformeEntidades=="Sin presentar"){%>
-                                        <th class="text-light bg-secondary">
+                                        <td class="text-light bg-secondary">
                                             <%=clientes.ConformeEntidades%>
-                                        </th>
+                                        </td>
                                         <%}%>
                                         <%if((clientes.ConformeEntidades!="Sin presentar")&&(clientes.ConformeEntidades!="EnGestion")&&(clientes.ConformeEntidades!="ok")){%>
                                             <%if(clientes.ConformeEntidades==null){ %>
-                                                <th class="text-dark bg-danger">
+                                                <td class="text-dark bg-danger">
                                                   ERROR
-                                                </th>
-                                                <%}else{%> <th class="text-dark ">
+                                                </td>
+                                                <%}else{%> <td class="text-dark ">
                                                 <%=clientes.ConformeEntidades%>
-                                            </th>
+                                            </td>
                                             <%}}%>
                                           
                             <!-- // -->
                             <!-- PruebaHermeticidad -->
                             <%if(clientes.PruebaHermeticidad=="ok"){%>
-                                <th class="text-light bg-success">
+                                <td class="text-light bg-success">
                                     <%=clientes.PruebaHermeticidad%>
-                                </th>
+                                </td>
                                 <%}%>
                                 <%if(clientes.PruebaHermeticidad=="EnGestion"){%>
-                                    <th class="text-dark bg-warning">
+                                    <td class="text-dark bg-warning">
                                         <%=clientes.PruebaHermeticidad%> 
-                                    </th>
+                                    </td>
                                     <%}%>
                                     <%if(clientes.PruebaHermeticidad=="Sin realizar"){%>
-                                        <th class="text-light bg-danger">
+                                        <td class="text-light bg-danger">
                                             <%=clientes.PruebaHermeticidad%>
-                                        </th>
+                                        </td>
                                         <%}%>
                                         <%if((clientes.PruebaHermeticidad!="Sin realizar")&&(clientes.PruebaHermeticidad!="EnGestion")&&(clientes.PruebaHermeticidad!="ok")){%>
                                             <%if(clientes.PruebaHermeticidad==null){ %>
-                                                <th class="text-dark bg-danger">
+                                                <td class="text-dark bg-danger">
                                                   ERROR
-                                                </th>
-                                                <%}else{%>     <th class="text-dark ">
+                                                </td>
+                                                <%}else{%>     <td class="text-dark ">
                                                 <%=clientes.PruebaHermeticidad%>
-                                            </th>
+                                            </td>
                                             <%}}%>
                                           
                             <!-- // -->
                             <!-- Informes finales -->
                             <%if(clientes.InformesFinales=="ok"){%>
-                                <th class="text-light bg-success">
+                                <td class="text-light bg-success">
                                     <%=clientes.InformesFinales%>
-                                </th>
+                                </td>
                                 <%}%>
                                 <%if(clientes.InformesFinales=="EnGestion"){%>
-                                    <th class="text-dark bg-warning">
+                                    <td class="text-dark bg-warning">
                                         <%=clientes.InformesFinales%> 
-                                    </th>
+                                    </td>
                                     <%}%>
                                     <%if(clientes.InformesFinales=="Sin presentar"){%>
-                                        <th class="text-light bg-secondary">
+                                        <td class="text-light bg-secondary">
                                             <%=clientes.InformesFinales%>
-                                        </th>
+                                        </td>
                                         <%}%>
                                         <%if((clientes.InformesFinales!="Sin presentar")&&(clientes.InformesFinales!="EnGestion")&&(clientes.InformesFinales!="ok")){%>
                                             <%if(clientes.InformesFinales==null){ %>
-                                                <th class="text-dark bg-danger">
+                                                <td class="text-dark bg-danger">
                                                   ERROR
-                                                </th>
-                                                <%}else{%>      <th class="text-dark ">
+                                                </td>
+                                                <%}else{%>      <td class="text-dark ">
                                                 <%=clientes.InformesFinales%>
-                                            </th>
+                                            </td>
                                             <%}}%>
                                          
                             <!-- // -->
                             <!-- Presentacion final -->
                             <%if(clientes.PresentacionFinal=="ok"){%>
-                                <th class="text-light bg-success">
+                                <td class="text-light bg-success">
                                     <%=clientes.PresentacionFinal%>
-                                </th>
+                                </td>
                                 <%}%>
                                 <%if(clientes.PresentacionFinal=="EnGestion"){%>
-                                    <th class="text-dark bg-warning">
+                                    <td class="text-dark bg-warning">
                                         <%=clientes.PresentacionFinal%> 
-                                    </th>
+                                    </td>
                                     <%}%>
                                     <%if(clientes.PresentacionFinal=="Sin presentar"){%>
-                                        <th class="text-light bg-secondary">
+                                        <td class="text-light bg-secondary">
                                             <%=clientes.PresentacionFinal%>
-                                        </th>
+                                        </td>
                                         <%}%>
                                         <%if((clientes.PresentacionFinal!="Sin presentar")&&(clientes.PresentacionFinal!="EnGestion")&&(clientes.PresentacionFinal!="ok")){%>
                                             <%if(clientes.PresentacionFinal==null){ %>
-                                                <th class="text-dark bg-danger">
+                                                <td class="text-dark bg-danger">
                                                   ERROR
-                                                </th>
-                                                <%}else{%>       <th class="text-dark ">
+                                                </td>
+                                                <%}else{%>       <td class="text-dark ">
                                                 <%=clientes.PresentacionFinal%>
-                                            </th>
+                                            </td>
                                             <%}}%>
                                           
                             <!-- // -->
                             <!-- HabilitacionObra -->
                             <%if(clientes.HabilitacionObra=="ok"){%>
-                                <th class="text-light bg-success">
+                                <td class="text-light bg-success">
                                     <%=clientes.HabilitacionObra%>
-                                </th>
+                                </td>
                                 <%}%>
                                 <%if(clientes.HabilitacionObra=="EnGestion"){%>
-                                    <th class="text-dark bg-warning">
+                                    <td class="text-dark bg-warning">
                                         <%=clientes.HabilitacionObra%> 
-                                    </th>
+                                    </td>
                                     <%}%>
                                     <%if(clientes.HabilitacionObra=="Sin presentar"){%>
-                                        <th class="text-light bg-secondary">
+                                        <td class="text-light bg-secondary">
                                             <%=clientes.HabilitacionObra%>
-                                        </th>
+                                        </td>
                                         <%}%>
                                         <%if((clientes.HabilitacionObra!="Sin presentar")&&(clientes.HabilitacionObra!="EnGestion")&&(clientes.HabilitacionObra!="ok")){%>
                                             <%if(clientes.HabilitacionObra==null){ %>
-                                                <th class="text-dark bg-danger">
+                                                <td class="text-dark bg-danger">
                                                   ERROR
-                                                </th>
-                                                <%}else{%>     <th class="text-dark ">
+                                                </td>
+                                                <%}else{%>     <td class="text-dark ">
                                                 <%=clientes.HabilitacionObra%>
-                                            </th>
+                                            </td>
                                             <%}}%>    
                                           
                             <!-- // -->
                           
                             
-                                <th ><a href="/edit/<%=clientes.id%>" class="btn btn-outline-info">editar</a>
-                                </th>
+                                <td ><a href="/edit/<%=clientes.id%>" class="btn btn-outline-info">editar</a>
+                                </td>
                                
                             </tr>
                             <% });%>
@@ -898,5 +900,23 @@
     src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap5.min.js"></script>
 <!-- dataTable js -->
 <!-- <script type="text/javascript" src="/main.js"></script> -->
+<script>
+    jQuery("#buscador").keyup(function(){
+    if( jQuery(this).val() != ""){
+        jQuery("#EstadoGeneral tbody>tr").hide();
+        jQuery("#EstadoGeneral td:contiene-palabra('" + jQuery(this).val() + "')").parent("tr").show();
+    }
+    else{
+        jQuery("#EstadoGeneral tbody>tr").show();
+    }
+});
+ 
+jQuery.extend(jQuery.expr[":"], 
+{
+    "contiene-palabra": function(elem, i, match, array) {
+        return (elem.textContent || elem.innerText || jQuery(elem).text() || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
+    }
+});
+</script>
 
 </html>
