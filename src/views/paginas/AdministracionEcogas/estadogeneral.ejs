@@ -137,7 +137,7 @@
                         <% if(results){%>
                         <% results.forEach((clientes)=>{ %>
                             <tr>
-                                <td class="text-center">
+                                <td class="text-center position-sticky start-0 end-50">
                                     <a href="/editarTareas/<%=clientes.id%>" class="">
                                         <%=clientes.Nombre%>
                                     </a>
@@ -312,7 +312,7 @@
                                     </td>
                                     <%}%>
                                     <%if(clientes.Tecnica=="Sin presentar"){%>
-                                        <td class="text-light bg-secondary">
+                                        <td class="text-light bg-danger">
                                             <%=clientes.Tecnica%>
                                         </td>
                                         <%}%>
@@ -400,7 +400,7 @@
                                     </td>
                                     <%}%>
                                     <%if(clientes.Seguridad=="Sin presentar"){%>
-                                        <td class="text-light bg-secondary">
+                                        <td class="text-light bg-danger">
                                             <%=clientes.Seguridad%>
                                         </td>
                                         <%}%>
@@ -508,7 +508,7 @@
                                     </td>
                                     <%}%>
                                     <%if(clientes.Matriculas=="Sin presentar"){%>
-                                        <td class="text-light bg-secondary">
+                                        <td class="text-light bg-danger">
                                             <%=clientes.Matriculas%>
                                         </td>
                                         <%}%>
@@ -535,7 +535,7 @@
                                     </td>
                                     <%}%>
                                     <%if(clientes.Ambiente=="Sin presentar"){%>
-                                        <td class="text-light bg-secondary">
+                                        <td class="text-light bg-danger">
                                             <%=clientes.Ambiente%>
                                         </td>
                                         <%}%>
@@ -562,7 +562,7 @@
                                     </td>
                                     <%}%>
                                     <%if(clientes.NotaCumplimentoNormativas=="Sin presentar"){%>
-                                        <td class="text-light bg-secondary">
+                                        <td class="text-light bg-danger">
                                             <%=clientes.NotaCumplimentoNormativas%>
                                         </td>
                                         <%}%>
@@ -589,7 +589,7 @@
                                     </td>
                                     <%}%>
                                     <%if(clientes.DDJJNAG153=="Sin presentar"){%>
-                                        <td class="text-light bg-secondary">
+                                        <td class="text-light bg-danger">
                                             <%=clientes.DDJJNAG153%>
                                         </td>
                                         <%}%>
@@ -616,7 +616,7 @@
                                     </td>
                                     <%}%>
                                     <%if(clientes.Avisos=="Sin presentar"){%>
-                                        <td class="text-light bg-secondary">
+                                        <td class="text-light bg-danger">
                                             <%=clientes.Avisos%>
                                         </td>
                                         <%}%>
@@ -724,7 +724,7 @@
                                     </td>
                                     <%}%>
                                     <%if(clientes.PlanosyCroquis=="Sin presentar"){%>
-                                        <td class="text-light bg-secondary">
+                                        <td class="text-light bg-danger">
                                             <%=clientes.PlanosyCroquis%>
                                         </td>
                                         <%}%>
@@ -751,7 +751,7 @@
                                     </td>
                                     <%}%>
                                     <%if(clientes.ConformeEntidades=="Sin presentar"){%>
-                                        <td class="text-light bg-secondary">
+                                        <td class="text-light bg-danger">
                                             <%=clientes.ConformeEntidades%>
                                         </td>
                                         <%}%>
@@ -805,7 +805,7 @@
                                     </td>
                                     <%}%>
                                     <%if(clientes.InformesFinales=="Sin presentar"){%>
-                                        <td class="text-light bg-secondary">
+                                        <td class="text-light bg-danger">
                                             <%=clientes.InformesFinales%>
                                         </td>
                                         <%}%>
@@ -832,7 +832,7 @@
                                     </td>
                                     <%}%>
                                     <%if(clientes.PresentacionFinal=="Sin presentar"){%>
-                                        <td class="text-light bg-secondary">
+                                        <td class="text-light bg-danger">
                                             <%=clientes.PresentacionFinal%>
                                         </td>
                                         <%}%>
@@ -859,7 +859,7 @@
                                     </td>
                                     <%}%>
                                     <%if(clientes.HabilitacionObra=="Sin presentar"){%>
-                                        <td class="text-light bg-secondary">
+                                        <td class="text-light bg-danger">
                                             <%=clientes.HabilitacionObra%>
                                         </td>
                                         <%}%>
