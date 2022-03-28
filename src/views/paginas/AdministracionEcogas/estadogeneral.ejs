@@ -30,8 +30,8 @@
                             <th class="text-center text-light bg-dark " colspan="3">1ra parte</th>
                             <th class="text-center text-light bg-dark " colspan="10">2da parte</th>
                             <th class="text-center text-light bg-dark " colspan="2">Obras</th>
-                            <th class="text-center text-light bg-dark " colspan="6">Caos</th>
-                            <th class="text-center text-light bg-dark " colspan="1">Fin de obra</th>
+                            <th class="text-center text-light bg-dark " colspan="5">Caos</th>
+                            <th class="text-center text-light bg-dark " colspan="2">Fin de obra</th>
 
                         </tr>
                         <tr>
@@ -193,7 +193,7 @@
                                         <%=clientes.DocumentacionTerreno%>
                                     </td>
                                     <%}%>
-                                    <%if(clientes.DocumentacionTerreno=="EnGestion"){%>
+                                    <%if(clientes.DocumentacionTerreno=="EnGestion" || clientes.DocumentacionTerreno=="Presentado"){%>
                                         <td class="text-dark bg-warning">
                                             <%=clientes.DocumentacionTerreno%>
                                         </td>
@@ -203,7 +203,7 @@
                                                 <%=clientes.DocumentacionTerreno%>
                                             </td>
                                             <%}%>
-                                         <%if(clientes.DocumentacionTerreno!="ok"&& clientes.DocumentacionTerreno!="EnGestion"&& clientes.DocumentacionTerreno!="Sin presentar"){%>
+                                         <%if(clientes.DocumentacionTerreno!="ok"&& clientes.DocumentacionTerreno!="Presentado"&& clientes.DocumentacionTerreno!="EnGestion"&& clientes.DocumentacionTerreno!="Presentado"&& clientes.DocumentacionTerreno!="Sin presentar"){%>
                                             <%if(clientes.DocumentacionTerreno==null){ %>
                                                 <td class="text-dark bg-danger">
                                                   ERROR
@@ -222,7 +222,7 @@
                                                 <%=clientes.DocumentacionSociedad%>
                                             </td>
                                             <%}%>
-                                            <%if(clientes.DocumentacionSociedad=="EnGestion"){%>
+                                            <%if(clientes.DocumentacionSociedad=="EnGestion" || clientes.DocumentacionSociedad=="Presentado"){%>
                                                 <td class="text-dark bg-warning">
                                                     <%=clientes.DocumentacionSociedad%>
                                                 </td>
@@ -233,7 +233,7 @@
                                                         <%=clientes.DocumentacionSociedad%>
                                                     </td>
                                                     <%}%>
-                                                    <%if(clientes.DocumentacionSociedad!="ok"&& clientes.DocumentacionSociedad!="EnGestion"&& clientes.DocumentacionSociedad!="Sin presentar"){%>
+                                                    <%if(clientes.DocumentacionSociedad!="ok"&& clientes.DocumentacionSociedad!="EnGestion"&& clientes.DocumentacionSociedad!="Presentado"&& clientes.DocumentacionSociedad!="Presentado" && clientes.DocumentacionSociedad!="Sin presentar"){%>
                                                         <%if(clientes.DocumentacionSociedad==null){ %>
                                                             <td class="text-dark bg-danger">
                                                               ERROR
@@ -250,7 +250,7 @@
                                     <%=clientes.DocumentacionContractual%>
                                 </td>
                                 <%}%>
-                                <%if(clientes.DocumentacionContractual=="EnGestion"){%>
+                                <%if(clientes.DocumentacionContractual=="EnGestion" || clientes.DocumentacionContractual=="Presentado"){%>
                                     <td class="text-dark bg-warning">
                                         <%=clientes.DocumentacionContractual%>
                                     </td>
@@ -260,7 +260,7 @@
                                             <%=clientes.DocumentacionContractual%>
                                         </td>
                                         <%}%>
-                                        <%if(clientes.DocumentacionContractual!="ok"&& clientes.DocumentacionContractual!="EnGestion"&& clientes.DocumentacionContractual!="Sin presentar"){%>
+                                        <%if(clientes.DocumentacionContractual!="ok"&& clientes.DocumentacionContractual!="EnGestion" && clientes.DocumentacionContractual!="Presentado"&& clientes.DocumentacionContractual!="Sin presentar"){%>
                                             <%if(clientes.DocumentacionContractual==null){ %>
                                                 <td class="text-dark bg-danger">
                                                   ERROR
@@ -288,7 +288,7 @@
                                             <%=clientes.Comercial%>
                                         </td>
                                         <%}%>
-                                        <%if(clientes.Comercial!="ok"&& clientes.Comercial!="EnGestion"&& clientes.Comercial!="Sin presentar"){%>
+                                        <%if(clientes.Comercial!="ok"&& clientes.Comercial!="EnGestion" && clientes.Comercial!="Presentado"&& clientes.Comercial!="Sin presentar"){%>
                                             <%if(clientes.Comercial==null){ %>
                                                 <td class="text-dark bg-danger">
                                                   ERROR
@@ -316,7 +316,7 @@
                                             <%=clientes.Tecnica%>
                                         </td>
                                         <%}%>
-                                        <%if(clientes.Tecnica!="ok"&& clientes.Tecnica!="EnGestion"&& clientes.Tecnica!="Sin presentar"){%>
+                                        <%if(clientes.Tecnica!="ok"&& clientes.Tecnica!="EnGestion" && clientes.Tecnica!="Presentado"&& clientes.Tecnica!="Sin presentar"){%>
                                             <%if(clientes.Tecnica==null){ %>
                                                 <td class="text-dark bg-danger">
                                                   ERROR
@@ -349,7 +349,7 @@
                                                     <%=clientes.PermisosEspeciales%>
                                                 </td>
                                                 <%}%>
-                                                <%if(clientes.PermisosEspeciales!="ok"&& clientes.PermisosEspeciales!="EnGestion"&& clientes.PermisosEspeciales!="Sin presentar"&& clientes.PermisosEspeciales!="Observado"){%>
+                                                <%if(clientes.PermisosEspeciales!="ok"&& clientes.PermisosEspeciales!="EnGestion"&& clientes.PermisosEspeciales!="Presentado"&& clientes.PermisosEspeciales!="Sin presentar"&& clientes.PermisosEspeciales!="Observado"){%>
                                                     <%if(clientes.PermisosEspeciales==null){ %>
                                                         <td class="text-dark bg-danger">
                                                           ERROR
