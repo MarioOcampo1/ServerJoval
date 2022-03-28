@@ -2,14 +2,14 @@
 <html lang="es">
 
 <head>
-    <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Joval S.A.</title>
-    <link rel="stylesheet" type="text/css"
-        href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap5.min.css">
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="../css/estadogeneral.css">
     <title>Estado General</title>
 </head>
 
@@ -137,7 +137,7 @@
                         <% if(results){%>
                         <% results.forEach((clientes)=>{ %>
                             <tr>
-                                <td class="text-center position-sticky start-0 end-50">
+                                <td class="text-center Nombre">
                                     <a href="/editarTareas/<%=clientes.id%>" class="">
                                         <%=clientes.Nombre%>
                                     </a>
@@ -157,7 +157,7 @@
                                     <%=clientes.Estado%>
 
                                     </a>
-                                        <%if(clientes.Estado=="Sin presentar"){%>
+                                        <%if(clientes.Estado=="Sin presentar"|| clientes.Estado=="Preliminar"){%>
                                             <progress max="4" value="0"></progress>
                                             <%}%>
                                                 <%if(clientes.Estado=="1ra parte"){%>
