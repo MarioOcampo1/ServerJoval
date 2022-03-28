@@ -449,11 +449,11 @@
                                                                                 </div>
                                                                                 <div class="card-title">Fecha de comienzo de obras</div>
                                                                                 <div class="card-text">
-                                                                                    <input type="date" name="FechaInicioTrabajos" id="FechaInicioTrabajos" >
+                                                                                    <input type="date" name="FechaInicioTrabajos" id="FechaInicioTrabajos" value="<%=user.FechaInicioTrabajos%>">
                                                                                    <%=user.FechaInicioTrabajos%>                                                                                 </div>
                                                                                 <div class="card-title">Fecha fin de obras</div>
                                                                                 <div class="card-text">
-                                                                                    <input type="date" name="FechaFindeobra" id="FechaFindeobra">
+                                                                                    <input type="date" name="FechaFindeobra" id="FechaFindeobra" value="<%=user.FechaFindeobra%>">
                                                                                     <%=user.FechaFindeobra%>
                                                                                 </div>
                                                                             </div>
@@ -831,11 +831,9 @@
                                             elemento.style.display = "none";
                                         }
                                     }
-// function FechaVencimientoPermiso(NombrePermiso,NombreCasilleroMostrar){
-//     elemento= document.getElementById(NombrePermiso);
-
-
-// }
+function FechaVencimientoPermiso(NombreCasilleroMostrar){
+   document.getElementById(NombreCasilleroMostrar).style.display = "block";
+}
                                 </script>
                                 <script>
                                     $(document).ready(
@@ -870,7 +868,11 @@
                                         $('#ModalCaos').modal('hide');
 
                                     }
-                                  
+                                  function MostrarFechaConMoment(Fecha){
+                                    moment.locale('es');
+                                    FechaModificada = moment(Fecha).locale('es').format("DD-MM-YYYY");
+                                    return FechaModificada;
+                                  }
                                 </script>
 
 

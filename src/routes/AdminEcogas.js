@@ -805,7 +805,7 @@ if(Programadeseguridad=="Sin presentar"||CronogramaSyH=="Sin presentar" || Segur
             if (DPV=="ok"&&DNV=="ok"&&FERROCARRIL=="ok"&&HIDRAULICA=="ok") {
                 PermisosEspeciales="ok";
             }
-            if (DPV=="Visado"&&DNV=="Visado"&&FERROCARRIL=="Visado"&&HIDRAULICA=="Visado") {
+            if ((DPV=="Visado"|| DPV=="NC")&&(DNV=="Visado"|| DNV=="NC")&&(FERROCARRIL=="Visado"|| FERROCARRIL=="NC")&&(HIDRAULICA=="Visado"|| FERROCARRIL=="NC")) {
                 PermisosEspeciales="ok";
             }
             if (DPV=="EnGestion"||DNV=="EnGestion"||FERROCARRIL=="EnGestion"||HIDRAULICA=="EnGestion") {
@@ -814,9 +814,7 @@ if(Programadeseguridad=="Sin presentar"||CronogramaSyH=="Sin presentar" || Segur
             if (DPV=="Observado"||DNV=="Observado"||FERROCARRIL=="Observado"||HIDRAULICA=="Observado") {
                 PermisosEspeciales="Observado";
             }
-            if (DPV=="EnGestion"||DNV=="EnGestion"||FERROCARRIL=="EnGestion"||HIDRAULICA=="EnGestion") {
-                PermisosEspeciales="EnGestion";
-            }
+            
             if (DPV=="Pedir"||DNV=="Pedir"||FERROCARRIL=="Pedir"||HIDRAULICA=="Pedir") {
                 PermisosEspeciales="Pedir";
             }
@@ -854,6 +852,16 @@ if(AvisoInicioObraART=="Sin presentar"||AvisoInicioObraIERIC=="Sin presentar"|| 
     Avisos="Sin presentar";
 }
 
+//Vencimientos de permisos, ART y Ieric
+var VencimientoFerrocarril,VencimientoHidraulica,VencimientoMunicipal,VencimientoDPV,VencimientoDNV,VencimientoIrrigacion,VencimientoPrivado,VencimientoOtrosPermisos;
+VencimientoFerrocarril=req.body.VencimientoFerrocarril;
+VencimientoHidraulica=req.body.VencimientoHidraulica
+VencimientoMunicipal=req.body.VencimientoMunicipal;
+VencimientoDPV=req.body.VencimientoDPV;
+VencimientoDNV=req.body.VencimientoDNV;
+VencimientoIrrigacion=req.body.VencimientoIrrigacion;
+VencimientoPrivado=req.body.VencimientoPrivado;
+VencimientoOtrosPermisos=req.body.VencimientoOtrosPermisos;
 sql= 'Update clientes_tareasgenerales Set ? where Nombre=?';
 connection.query(sql,[{ PlanDeTrabajo:PlanDeTrabajo,DocumentacionObra:DocumentacionObra,Seguridad:Seguridad,Interferencias:Interferencias,Permisos:Permisos,Matriculas:Matriculas,Ambiente:Ambiente,Avisos:Avisos,NotaCumplimentoNormativas:NotaCumplimentoNormativa,DDJJNAG153:DDJJNAG153, Avisos: Avisos, PermisosEspeciales: PermisosEspeciales}, Nombre],
     (error, results) => {
@@ -863,6 +871,17 @@ connection.query(sql,[{ PlanDeTrabajo:PlanDeTrabajo,DocumentacionObra:Documentac
            }
         })
         sql = 'Update clientes Set ? where id=?';
+        connection.query(sql,[{
+VencimientoDNV:VencimientoDNV, VencimientoDPV:VencimientoDPV,VencimientoFerrocarril:VencimientoFerrocarril,VencimientoHidraulica:VencimientoHidraulica,VencimientoIrrigacion:VencimientoIrrigacion,VencimientoMunicipal:VencimientoMunicipal,VencimientoOtrosPermisos:VencimientoOtrosPermisos,VencimientoPrivado:VencimientoPrivado
+        },id],
+        (error, results) => {
+
+            if (error) {
+                console.log(error);
+               }
+
+            })
+           
         connection.query(sql, [{
             //Segunda Parte
             MailAutorizacion: MailAutorizacion, PlanDeTrabajo:PlanDeTrabajo,SolicitudInicioObras:SolicitudInicioObras,CertificadoRT:CertificadoRT,Programadeseguridad:Programadeseguridad,
@@ -939,18 +958,50 @@ connection.query(sql,[{ DocumentacionInspeccion:DocumentacionInspeccion,Comunica
            }
         })
         sql = 'Update clientes Set ? where id=?';
-        connection.query(sql, [{
+        if(FechaInicioTrabajos){
+            if(FechaFindeobra){
+                connection.query(sql, [{
            
-           ActaDeInicio: ActaDeInicio , Permisos: Permisos, Interferencias: Interferencias, LibroOrdenesServicio: LibroOrdenesServicio, LibroNotasPedido: LibroNotasPedido, PCEntregadoInspeccion: PCEntregadoInspeccion, AvisosDeObra:AvisosDeObra, CronogramaFirmadoComitente:CronogramaFirmadoComitente,
-           OrdenServicio:OrdenServicio, FechaInicioTrabajos:FechaInicioTrabajos,FechaFindeobra:FechaFindeobra
-        }, id],
-            (error, results) => {
-    
-                if (error) {
-                    console.log(error);
-                   }
-    
-                })
+                    ActaDeInicio: ActaDeInicio , Permisos: Permisos, Interferencias: Interferencias, LibroOrdenesServicio: LibroOrdenesServicio, LibroNotasPedido: LibroNotasPedido, PCEntregadoInspeccion: PCEntregadoInspeccion, AvisosDeObra:AvisosDeObra, CronogramaFirmadoComitente:CronogramaFirmadoComitente,
+                    OrdenServicio:OrdenServicio, FechaInicioTrabajos:FechaInicioTrabajos,FechaFindeobra:FechaFindeobra
+                 }, id],
+                     (error, results) => {
+             
+                         if (error) {
+                             console.log(error);
+                            }
+             
+                         })
+            }
+            else{
+                connection.query(sql, [{
+           
+                    ActaDeInicio: ActaDeInicio , Permisos: Permisos, Interferencias: Interferencias, LibroOrdenesServicio: LibroOrdenesServicio, LibroNotasPedido: LibroNotasPedido, PCEntregadoInspeccion: PCEntregadoInspeccion, AvisosDeObra:AvisosDeObra, CronogramaFirmadoComitente:CronogramaFirmadoComitente,
+                    OrdenServicio:OrdenServicio, FechaInicioTrabajos:FechaInicioTrabajos}, id],
+                     (error, results) => {
+             
+                         if (error) {
+                             console.log(error);
+                            }
+             
+                         })
+            }
+           
+        }
+        else{
+            connection.query(sql, [{
+           
+                ActaDeInicio: ActaDeInicio , Permisos: Permisos, Interferencias: Interferencias, LibroOrdenesServicio: LibroOrdenesServicio, LibroNotasPedido: LibroNotasPedido, PCEntregadoInspeccion: PCEntregadoInspeccion, AvisosDeObra:AvisosDeObra, CronogramaFirmadoComitente:CronogramaFirmadoComitente,
+                OrdenServicio:OrdenServicio,}, id],
+                 (error, results) => {
+         
+                     if (error) {
+                         console.log(error);
+                        }
+         
+                     })
+        }
+      
                
                 res.redirect(req.get('referer'));
     

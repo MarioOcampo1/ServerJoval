@@ -34,11 +34,21 @@
                                 <%}%>
 
                                     <%if (user.Hidraulica=="ok" ){%>
-                                        <input checked type="radio" name="HIDRAULICA" id="HIDRAULICA" value="ok"> Ok
+                                        <input checked type="radio" name="HIDRAULICA" id="HIDRAULICA" value="ok"> Ok 
+                                        <div id="VencimientoHidraulica" style="display:block;">
+                                            Fecha en la que se pidió: 
+                                            <input type="date" name="VencimientoHidraulica" id="VencimientoHidraulica"
+                                                value="<%= user.VencimientoHidraulica%>" >
+                                        </div>
                                         <%}else{%>
-                                            <input type="radio" name="HIDRAULICA" id="HIDRAULICA" value="ok" onclick="FechaVencimientoPermiso('HIDRAULICA')"> Ok
+                                            <input type="radio" name="HIDRAULICA" id="HIDRAULICA" value="ok" onclick="FechaVencimientoPermiso('VencimientoHidraulica')"> Ok 
+                                            <div id="VencimientoHidraulica" style="display:none;">
+                                                Fecha en la que se pidió
+                                                <input type="date" name="VencimientoHidraulica" id="VencimientoHidraulica"
+                                                    value="<%= user.VencimientoHidraulica%>" placeholder="<%= user.VencimientoHidraulica%>">
+                                            </div>
                                             <%}%>
-                                            <!-- <INPUt:datetime-local id="VencimientoHidraulica">Fecha de vencimiento del permiso</INPUt:datetime-local> -->
+                                           
                     </form-check>
                 </div>
             </div>
