@@ -278,13 +278,13 @@
                                     <%=clientes.Comercial%>
                                 </td>
                                 <%}%>
-                                <%if(clientes.Comercial=="EnGestion"){%>
+                                <%if(clientes.Comercial=="EnGestion" || clientes.Comercial=="Presentado"){%>
                                     <td class="text-dark bg-warning">
                                         <%=clientes.Comercial%>
                                     </td>
                                     <%}%>
                                     <%if(clientes.Comercial=="Sin presentar"){%>
-                                        <td class="text-light bg-secondary">
+                                        <td class="text-light bg-danger">
                                             <%=clientes.Comercial%>
                                         </td>
                                         <%}%>
@@ -306,7 +306,7 @@
                                     <%=clientes.Tecnica%>
                                 </td>
                                 <%}%>
-                                <%if(clientes.Tecnica=="EnGestion"){%>
+                                <%if(clientes.Tecnica=="EnGestion" || clientes.Tecnica=="Presentado"){%>
                                     <td class="text-dark bg-warning">
                                         <%=clientes.Tecnica%> 
                                     </td>
@@ -334,7 +334,7 @@
                                         <%=clientes.PermisosEspeciales%>
                                     </td>
                                     <%}%>
-                                    <%if(clientes.PermisosEspeciales=="EnGestion"){%>
+                                    <%if(clientes.PermisosEspeciales=="EnGestion" || clientes.PermisosEspeciales=="Presentado"){%>
                                         <td class="text-dark bg-warning">
                                             <%=clientes.PermisosEspeciales%> 
                                         </td>
