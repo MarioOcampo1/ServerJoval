@@ -21,3 +21,10 @@ connection.connect(error => {
 router.get('/admingral', (req, res) => {
     res.render('paginas/AdministracionGeneral/admingral.ejs');
 })
+router.get('/seguros',(req,res)=>{
+    res.render('paginas/AdministracionGeneral/seguros.ejs');
+})
+router.get('/infoempresa',(req,res)=>{
+    res.render('paginas/AdministracionGeneral/infoempresa.ejs');
+})
+router.get()
