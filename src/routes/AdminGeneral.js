@@ -27,4 +27,3 @@ router.get('/seguros',(req,res)=>{
 router.get('/infoempresa',(req,res)=>{
     res.render('paginas/AdministracionGeneral/infoempresa.ejs');
 })
-router.get()
