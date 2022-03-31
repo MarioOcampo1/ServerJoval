@@ -195,7 +195,7 @@ router.get('/historialcarpeta/:Nombre', (req, res) => {
     connection.query(sql, [Nombre], (error, results) => {
         if (error) console.log( error);
         if (results.length > 0) {
-            res.render('paginas/AdministracionEcogas/historialcarpeta.ejs', { results: results, id:id }); //en {results:results} lo que hago es guardar los resultados que envia la bd, en la variable results
+            res.render('paginas/AdministracionEcogas/historialcarpeta.ejs', { results: results, id:id , Nombre: Nombre }); //en {results:results} lo que hago es guardar los resultados que envia la bd, en la variable results
 
         }
         else {
