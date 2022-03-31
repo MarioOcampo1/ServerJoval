@@ -27,3 +27,8 @@ router.get('/seguros',(req,res)=>{
 router.get('/infoempresa',(req,res)=>{
     res.render('paginas/AdministracionGeneral/infoempresa.ejs');
 })
+router.get('/download/logoJoval',(req,res)=>{
+    var filepath ='/LogoJoval.jpg';
+    var filename= 'Logo Joval.jpeg';
+   res.download(filepath, filename);
+})
