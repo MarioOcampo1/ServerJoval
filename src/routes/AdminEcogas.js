@@ -1,8 +1,48 @@
 const { render } = require('ejs');
 const { Router } = require('express');
+const cookieParser = require('cookie-parser')
+const session = require('express-session')
+const passport = require('passport');
+const PassportLocal = require('passport-local').Strategy;
 const router = Router();
 const moment = require('moment');
 module.exports = router;
+router.use(session({
+    secret: 'mi secreto',
+    resave:true,
+    saveUninitialized: true
+}))
+router.use(passport.initialize());
+router.use(passport.session());
+passport.use(new PassportLocal(function(username,password, done){
+ 
+    if(username=="Mario" && password == ""){
+return    done(null,{id: 1 , name: "Mario"});
+    }
+if(username=="gmaceira" && password == "January2072"){
+    return    done(null,{id: 2 , name: "Gustavo"});
+}
+if(username=="mpereyra" && password == "theboss"){
+    return    done(null,{id: 3 , name: "Mauricio"});
+}
+
+done(null, false);
+// Cuando el sistema, quiere guardar que el usuario 1 ingreso al sistema, a esa llamada se le llama Serialización.
+}))
+passport.serializeUser(function(user,done){
+    done(null,user.id);
+})
+passport.deserializeUser(function(id,done){
+    if( id==1){
+done(null,{id:1, name: "Mario"});
+    }
+    if( id==2){
+        done(null,{id:1, name: "Gustavo"});
+            }
+            if( id==3){
+                done(null,{id:1, name: "Mauricio"});
+                    }
+})
 //Seteo server original
 const mysql = require('mysql');
 const { NULL } = require('mysql/lib/protocol/constants/types');
@@ -20,6 +60,9 @@ connection.connect(error => {
 //Fin de seteo de server original
 //Rutas Get
 router.get('/', (req, res) => {
+    res.render('login.ejs');
+})
+router.get('/index', (req, res) => {
     res.render('index.ejs');
 })
 router.get('/interferencias', (req, res) => {
@@ -229,6 +272,11 @@ router.get('/ComunicacionAlSistema', (req, res) => {
 
 
 //Rutas Post
+router.post('/login', passport.authenticate('local',{
+    successRedirect: "/index",
+failureRedirect: "/", failureMessage: true
+})
+)
 router.post('/actualizarcontacto/:id', (req, res) => {
     const id = req.body.id;
     const Nombre = req.body.Nombre;
