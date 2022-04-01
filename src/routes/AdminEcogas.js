@@ -70,7 +70,7 @@ router.get('/index',(req,res,next)=>{
 }
 }else{
     (req, res) => {
-    res.render('login.ejs');
+        res.redirect('/');
 }}
 }) 
 router.get('/interferencias', (req, res) => {
@@ -90,7 +90,7 @@ router.get('/interferencias', (req, res) => {
 
 }}else{
     (req, res) => {
-        res.render('login.ejs');
+        res.redirect('/');
     }
 }
 })
@@ -112,6 +112,7 @@ router.get('/interferencias/info', (req, res) => {
 
 //Administracion Ecogas
 router.get('/adminecogas', (req, res) => {
+    if(req.isAuthenticated()){
     const sql = 'SELECT c.id, c.Nombre, c.NCarpeta, c.TareaRealizada, c.ProximaTarea, c.EtapaTarea, c.FechaLimite FROM clientes c  ';
     res.locals.moment = moment;
     connection.query(sql, (error, results) => {
@@ -126,7 +127,10 @@ router.get('/adminecogas', (req, res) => {
         }
     })
 
-})
+}
+else {
+    res.redirect('/');
+}})
 router.get('/adminecogas/TablaGeneral', (req, res) => {
     // const sql = 'SELECT c.id, c.Nombre, c.NCarpeta,a.ResponsableDeTarea, c.TareaRealizada, c.ProximaTarea,c.EtapaTarea, c.FechaLimite, c.Estado FROM clientes c, historialdecambios a where c.Nombre = a.Nombre_sub'; //SQL ORIGINAL
     var sql = 'Select c.Nombre_sub, a.NCarpeta, a.Estado, a.id, c.ResponsableDeTarea,c.Tarea_Realizada_sub, c.Proxima_Tarea_sub, c.Fecha_Proxima_Tarea_sub, c.EtapaTarea_sub from historialdecambios c , clientes a where a.Nombre = c.Nombre_sub AND c.Si_NO_TareaRealizada != "S"  '; //AND (DATE_SUB(CURDATE(), interval 7 day)) <= c.Fecha_Proxima_Tarea_sub  Permite mostrar las fechas proximas a vencerse. ';
@@ -146,6 +150,7 @@ router.get('/adminecogas/TablaGeneral', (req, res) => {
 })
 
 router.get('/estadogeneral', (req, res) => {
+    if(req.isAuthenticated()){
     res.locals.moment = moment;
     const sql = 'SELECT c.id, c.Nombre  ,c.NCarpeta,  c.Ubicacion ,c.Comitente ,c.Estado, c.Fechafirmacontrato  ,b.DocumentacionTerreno ,b.DocumentacionSociedad ,b.DocumentacionContractual  ,b.Comercial ,b.Tecnica ,b.PermisosEspeciales ,b.DocumentacionObra  ,b.Seguridad,b.Interferencias, b.Permisos, b.PlanDeTrabajo, b.Matriculas, b.Ambiente, b.NotaCumplimentoNormativas, b.DDJJNAG153, b.Avisos, b.DocumentacionInspeccion, b.ComunicacionObras, b.ActasFinalesEcogas, b.PlanosyCroquis, b.ConformeEntidades, b.PruebaHermeticidad, b.InformesFinales, b.PresentacionFinal, b.HabilitacionObra  from clientes_tareasgenerales b , clientes c where b.Nombre = c.Nombre';
     // const sql = 'SELECT c.id, c.Nombre  ,c.NCarpeta,  c.Ubicacion ,c.Comitente ,c.Estado, c.Fechafirmacontrato ,b.DocumentacionTerreno, b.DocumentacionSociedad,b.DocumentacionContractual  ,b.Comercial ,b.Tecnica,b.PermisosEspeciales ,b.DocumentacionObra  ,b.Seguridad,b.Interferencias, b.Permisos, b.PlanDeTrabajo, b.Matriculas, b.Ambiente, b.NotaCumplimentoNormativas, b.DDJJNAG153, b.Avisos, b.DocumentacionInspeccion, b.ComunicacionObras, b.ActasFinalesEcogas, b.PlanosyCroquis, b.ConformeEntidades, b.PruebaHermeticidad, b.InformesFinales,b.PresentacionFinal, b.HabilitacionObra  from clientes c , clientes_tareasgenerales b  ';
@@ -165,12 +170,21 @@ router.get('/estadogeneral', (req, res) => {
         }
     })
 
-})
+}
+else{
+    res.redirect('/');
+}})
 router.get('/nuevocliente', (req, res) => {
+    if(req.isAuthenticated()){
     res.render('paginas/AdministracionEcogas/nuevocliente.ejs');
+    }
+    else{
+        res.redirect('/');
+    }
 })
 
 router.get('/contactos', (req, res) => {
+    if(req.isAuthenticated()){
     res.locals.moment = moment;
     const sql = 'SELECT * FROM contactos';
     connection.query(sql, (error, results) => {
@@ -184,9 +198,10 @@ router.get('/contactos', (req, res) => {
             res.render('paginas/AdministracionEcogas/nuevocontacto.ejs');
         }
     })
-
+ } else{ res.redirect('/');}
 })
 router.get('/editarContacto/:id', (req, res) => {
+    if(req.isAuthenticated()){
     res.locals.moment = moment;
     const id = req.params.id;
     console.log("id es:" + id);
@@ -201,10 +216,12 @@ router.get('/editarContacto/:id', (req, res) => {
 
         }
     })
+} else{ res.redirect('/');}
 
 })
 
 router.get('/editarTareas/:id', (req, res) => {
+    if(req.isAuthenticated()){
     res.locals.moment = moment;
     const id = req.params.id;
     const sql = 'Select * from clientes where id=?';
@@ -218,8 +235,10 @@ router.get('/editarTareas/:id', (req, res) => {
 
         }
     })
+ } else{ res.redirect('/');}
 })
 router.get('/edit/:id', (req, res) => {
+    if(req.isAuthenticated()){
     res.locals.moment = moment;
     const id = req.params.id;
     const sql = 'Select * from clientes where id=?';
@@ -235,8 +254,10 @@ router.get('/edit/:id', (req, res) => {
 
         }
     })
+ } else{ res.redirect('/');}
 })
 router.get('/historialcarpeta/:Nombre', (req, res) => {
+    if(req.isAuthenticated()){
    var id;
     const Nombre = req.params.Nombre;
     var sql = 'SELECT id FROM clientes WHERE Nombre =?';
@@ -261,11 +282,15 @@ router.get('/historialcarpeta/:Nombre', (req, res) => {
         }
     })
 
+ } else{ res.redirect('/');}
 })
 router.get('/nuevocontacto', (req, res) => {
+    if(req.isAuthenticated()){
     res.render('paginas/AdministracionEcogas/nuevocontacto.ejs');
+ } else{ res.redirect('/');}
 })
 router.get('/ComunicacionAlSistema', (req, res) => {
+    if(req.isAuthenticated()){
     res.locals.moment = moment;
     res.locals.moment = moment;
     const sql = 'Select * from comunicacionsistema';
@@ -282,6 +307,7 @@ router.get('/ComunicacionAlSistema', (req, res) => {
         }
     })
 
+ } else{ res.redirect('/');}
 })
 
 
