@@ -12,11 +12,12 @@ router.use(session({
     resave:true,
     saveUninitialized: true
 }))
+router.use(cookieParser('Mi ultra secreto'));
 router.use(passport.initialize());
 router.use(passport.session());
 passport.use(new PassportLocal(function(username,password, done){
  
-    if(username=="Mario" && password == ""){
+    if(username=="Mario" && password == "asd"){
 return    done(null,{id: 1 , name: "Mario"});
     }
 if(username=="gmaceira" && password == "January2072"){
@@ -26,7 +27,7 @@ if(username=="mpereyra" && password == "theboss"){
     return    done(null,{id: 3 , name: "Mauricio"});
 }
 
-done(null, false);
+done(null, false); // Esta linea define a traves del null, que no hubo ningun error, pero el al mismo tiempo, a traves del false, indica que el usuario no se ha encontrado.
 // Cuando el sistema, quiere guardar que el usuario 1 ingreso al sistema, a esa llamada se le llama Serialización.
 }))
 passport.serializeUser(function(user,done){
@@ -62,10 +63,19 @@ connection.connect(error => {
 router.get('/', (req, res) => {
     res.render('login.ejs');
 })
-router.get('/index', (req, res) => {
+router.get('/index',(req,res,next)=>{
+    if(req.isAuthenticated()){
+      (req, res) => {
     res.render('index.ejs');
-})
+}
+}else{
+    (req, res) => {
+    res.render('login.ejs');
+}}
+}) 
 router.get('/interferencias', (req, res) => {
+    if(req.isAuthenticated()){
+        (req, res) => {
     const sql = 'SELECT c.id, c.Nombre, c.NCarpeta, c.intTelefonica, c.intTelefonicaPedida, c.intTelefonicaObtenida, c.intAgua, c.intAguaPedida, c.intAguaObtenida, c.intCloaca,c.intCloacasPedida, c.intCloacasObtenida, c.intClaro, c.intClaroPedida, c.intClaroObtenida, c.intElectricidad, c.intElectricidadPedida, c.intElectricidadObtenida, c.intArnet ,  c.intArnetPedida, c.intArnetObtenida,c.intArsat, c.intArsatPedida, c.intArsatObtenida, c.intTelecomPedida, c.intTelecomObtenida, c.intTelecom FROM clientes c';
     res.locals.moment = moment;
     connection.query(sql, (error, results) => {
@@ -78,6 +88,11 @@ router.get('/interferencias', (req, res) => {
         }
     })
 
+}}else{
+    (req, res) => {
+        res.render('login.ejs');
+    }
+}
 })
 router.get('/interferencias/info', (req, res) => {
     const sql = 'SELECT c.id, c.Nombre, c.NCarpeta, c.intTelefonica, c.intTelefonicaPedida, c.intTelefonicaObtenida, c.intAgua, c.intAguaPedida, c.intAguaObtenida, c.intCloaca,c.intCloacasPedida, c.intCloacasObtenida, c.intClaro, c.intClaroPedida, c.intClaroObtenida, c.intElectricidad, c.intElectricidadPedida, c.intElectricidadObtenida, c.intArnet ,  c.intArnetPedida, c.intArnetObtenida,c.intArsat, c.intArsatPedida, c.intArsatObtenida, c.intTelecomPedida, c.intTelecomObtenida, c.intTelecom FROM clientes c';
