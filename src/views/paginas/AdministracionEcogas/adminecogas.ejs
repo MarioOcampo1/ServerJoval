@@ -138,6 +138,8 @@
           
           { "width":"5%","data": "Fecha_Proxima_Tarea_sub", render:function(data,type,row){
             moment.locale('es');
+            data= new Date(data);
+            data= data.toISOString();
             var fecha = new Date(data);
             var fechaActual = new Date();
             fecha = fecha.toISOString();
@@ -148,15 +150,16 @@
     
     if (fechaActual==fecha){
       fecha = moment(fecha).locale('es').format("DD-MM-YYYY");
-        return '<div class="bg-primary text-dark">'+ fecha+' </div>';
-    }
+        return 
+        '<div style="display:none">'+ data+'</div> <br>  <div class="bg-primary text-dark">'+ fecha+' </div>';
+      }
       if (fechaActual>fecha){
         fecha = moment(fecha).locale('es').format("DD-MM-YYYY");
-           return '<div class="bg-danger text-light">'+ fecha+' </div>';
-    }
+           return '<div style="display:none">'+ data+'</div> <br>     <div class="bg-danger text-light">'+ fecha+' </div>';
+          }
     if (fechaActual<fecha){
       fecha = moment(fecha).locale('es').format("DD-MM-YYYY");
-       return '<div class="bg-success text-light">'+ fecha+' </div>';
+       return '<div style="display:none">'+ data+'</div> <br>  <div class="bg-success text-light">'+ fecha+' </div>';
     }
    
            }},      
