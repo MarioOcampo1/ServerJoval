@@ -114,7 +114,7 @@
         fixedHeader: true,
       paging: false,
       "ordering": true,
-      // "columnDefs": [ { type: 'date', 'targets': [6] } ],
+      // columnDefs: [ { type: 'date', targets: [6],  } ], //Al activar este filtro, no permite que se puedan ordenar las fechas.
       "order":[[6,'desc']],
         "language": { url: "//cdn.datatables.net/plug-ins/1.11.3/i18n/es_es.json" },
         "ajax": {
@@ -137,23 +137,26 @@
           { "width":"15%", "searchable":false,"data": "Proxima_Tarea_sub" },
           
           { "width":"5%","data": "Fecha_Proxima_Tarea_sub", render:function(data,type,row){
-            var FechaSinTransformar = data;
-            var fechaActual = new Date();
-            var fechaActualTransformada;
             moment.locale('es');
+            var fecha = new Date(data);
+            var fechaActual = new Date();
+            fecha = fecha.toISOString();
             fechaActual = fechaActual.toISOString();
-    fechaActualTransformada=moment(fechaActual).format("DD-MM-YYYY");
-    FechaDeTarea= FechaSinTransformar;
-    FechaDeTarea = moment(FechaSinTransformar).locale('es').format("DD-MM-YYYY");
-    console.log("Fecha actual:" + fechaActualTransformada + " Fecha de Tarea: " +FechaDeTarea);
-    if (fechaActualTransformada==FechaDeTarea){
-      return '<div class="bg-primary text-dark">'+ FechaDeTarea+' </div>';
+
+
+    // fechaActual=moment(fechaActual).format("DD-MM-YYYY");
+    
+    if (fechaActual==fecha){
+      fecha = moment(fecha).locale('es').format("DD-MM-YYYY");
+        return '<div class="bg-primary text-dark">'+ fecha+' </div>';
     }
-      if (fechaActual>FechaSinTransformar){
-         return '<div class="bg-danger text-light">'+ FechaDeTarea+' </div>';
+      if (fechaActual>fecha){
+        fecha = moment(fecha).locale('es').format("DD-MM-YYYY");
+           return '<div class="bg-danger text-light">'+ fecha+' </div>';
     }
-    if (fechaActual<FechaSinTransformar){
-      return '<div class="bg-success text-light">'+ FechaDeTarea+' </div>';
+    if (fechaActual<fecha){
+      fecha = moment(fecha).locale('es').format("DD-MM-YYYY");
+       return '<div class="bg-success text-light">'+ fecha+' </div>';
     }
    
            }},      
