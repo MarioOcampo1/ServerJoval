@@ -17,7 +17,7 @@ router.use(passport.initialize());
 router.use(passport.session());
 passport.use(new PassportLocal(function(username,password, done){
  
-    if(username=="Mario" && password == "asd"){
+    if(username=="mocampo" && password == "asd"){
 return    done(null,{id: 1 , name: "Mario"});
     }
 if(username=="gmaceira" && password == "January2072"){
@@ -65,10 +65,9 @@ router.get('/', (req, res) => {
 })
 router.get('/index',(req,res,next)=>{
     if(req.isAuthenticated()){
-      (req, res) => {
     res.render('index.ejs');
 }
-}else{
+else{
     (req, res) => {
         res.redirect('/');
 }}
