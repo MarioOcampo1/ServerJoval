@@ -716,11 +716,11 @@ router.post('/act1pCarpEcogas/:id', (req,res)=>{
         Comercial = "Sin presentar";
     }
     //Tecnica
-    if(Pcaprobado == "ok" && (PlanoTipo=="ok" || PlanoTipo=="NC") ){
+    if((Pcaprobado == "ok") && (PlanoTipo=="ok" || PlanoTipo=="NC") ){
         Tecnica = "ok";
         console.log("La variable Tecnica va tener el valor: " +Tecnica );
     }
-    if(Pcaprobado == "EnGestion" || Pcaprobado == "Presentado" || PlanoTipo=="EnGestion" || PlanoTipo=="Presentado" ){
+    if(Pcaprobado == "EnGestion"|| PlanoTipo=="EnGestion"){
         Tecnica = "EnGestion";
     }
     if(Pcaprobado == "Presentado" ||  PlanoTipo=="Presentado"){
@@ -728,6 +728,9 @@ router.post('/act1pCarpEcogas/:id', (req,res)=>{
     }
     if( Pcaprobado == "Observado" || PlanoTipo=="Observado"){
         Tecnica = "Observado";
+    }
+    if( Pcaprobado == "Sin presentar" || PlanoTipo=="Sin presentar"){
+        Tecnica = "Sin presentar";
     }
      //Permisos Especiales
      if((CartaOferta == "ok" || CartaOferta == "NC" || CartaOferta == "") && (PlanoAnexo=="ok" || PlanoAnexo=="NC" || PlanoAnexo=="") && (DNVVisacion=="Visado" || DNVVisacion=="NC" || DNVVisacion=="") && (HidraulicaVisacion=="Visado" || HidraulicaVisacion=="NC" || HidraulicaVisacion=="") && (FerrocarrilesVisacion=="Visado" || FerrocarrilesVisacion=="NC" || FerrocarrilesVisacion=="")  ){
