@@ -718,19 +718,23 @@ router.post('/act1pCarpEcogas/:id', (req,res)=>{
     //Tecnica
     if((Pcaprobado == "ok") && (PlanoTipo=="ok" || PlanoTipo=="NC") ){
         Tecnica = "ok";
-        console.log("La variable Tecnica va tener el valor: " +Tecnica );
+        console.log("1La variable Tecnica va tener el valor: " +Tecnica );
     }
     if(Pcaprobado == "EnGestion"|| PlanoTipo=="EnGestion"){
         Tecnica = "EnGestion";
+        console.log("2La variable Tecnica va tener el valor: " +Tecnica );
     }
     if(Pcaprobado == "Presentado" ||  PlanoTipo=="Presentado"){
         Tecnica = "Presentado";
+        console.log("3La variable Tecnica va tener el valor: " +Tecnica );
     }
     if( Pcaprobado == "Observado" || PlanoTipo=="Observado"){
         Tecnica = "Observado";
+        console.log("4La variable Tecnica va tener el valor: " +Tecnica );
     }
     if( Pcaprobado == "Sin presentar" || PlanoTipo=="Sin presentar"){
         Tecnica = "Sin presentar";
+        console.log("5La variable Tecnica va tener el valor: " +Tecnica );
     }
      //Permisos Especiales
      if((CartaOferta == "ok" || CartaOferta == "NC" || CartaOferta == "") && (PlanoAnexo=="ok" || PlanoAnexo=="NC" || PlanoAnexo=="") && (DNVVisacion=="Visado" || DNVVisacion=="NC" || DNVVisacion=="") && (HidraulicaVisacion=="Visado" || HidraulicaVisacion=="NC" || HidraulicaVisacion=="") && (FerrocarrilesVisacion=="Visado" || FerrocarrilesVisacion=="NC" || FerrocarrilesVisacion=="")  ){
