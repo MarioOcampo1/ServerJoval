@@ -742,11 +742,12 @@ router.post('/act1pCarpEcogas/:id', (req,res)=>{
 
     }
     if(CartaOferta == "Observado" || PlanoAnexo=="Observado" || DNVVisacion=="Observado" ||HidraulicaVisacion=="Observado" || FerrocarrilesVisacion=="Observado" ){
-       console.log("Permisos especiales sera cambiado a Observado...");
        PermisosEspeciales = "Observado";
-       console.log("El valor que contiene permisos especiales es: " +PermisosEspeciales);
-
     }
+    if(CartaOferta == "Sin presentar" || PlanoAnexo=="Sin presentar" || DNVVisacion=="Sin presentar" ||HidraulicaVisacion=="Sin presentar" || FerrocarrilesVisacion=="Sin presentar" || CartaOferta == "Pedir" || PlanoAnexo=="Pedir" || DNVVisacion=="Pedir" ||HidraulicaVisacion=="Pedir" || FerrocarrilesVisacion=="Pedir" ){
+        PermisosEspeciales = "Sin presentar";
+     }
+ 
     console.log("id:"+ id + ","+Contrato, "", Comercial, "",Presupuesto, "",Sucedaneo, "",)
     console.log("El valor que contiene la fecha del contrato es: "+ FechaFirmaContrato);
     sql= 'Update clientes_tareasgenerales Set ? where Nombre=?';

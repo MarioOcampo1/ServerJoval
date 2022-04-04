@@ -316,7 +316,7 @@
                                         <%=clientes.Tecnica%> 
                                     </td>
                                     <%}%>
-                                    <%if(clientes.Tecnica=="Sin presentar"){%>
+                                    <%if(clientes.Tecnica=="Sin presentar"|| clientes.Tecnica=="Observado"){%>
                                         <td class="text-light bg-danger">
                                             <%=clientes.Tecnica%>
                                         </td>
@@ -326,11 +326,9 @@
                                                 <td class="text-dark bg-danger">
                                                   ERROR
                                                 </td>
-                                                <%}else{%>
-                                            <td class="text-dark">
-                                                <%=clientes.Tecnica%>
-                                            </td>
-                                            <%}}%>
+                                                <%}%>
+                                           
+                                            <%}%>
                                            
                                  <!-- //  -->
                                  <!-- Permisos Especiales  -->
@@ -346,12 +344,12 @@
                                         <%}%>
                                         <%if(clientes.PermisosEspeciales=="Sin presentar"){%>
                                             <td class="text-light bg-danger">
-                                                <%=clientes.PermisosEspeciales%>
+                                                <%=clientes.PermisosEspeciales%> 
                                             </td>
                                             <%}%>
                                             <%if(clientes.PermisosEspeciales=="Observado" || clientes.PermisosEspeciales=="Pedir"){%>
                                                 <td class="text-light bg-danger">
-                                                    <%=clientes.PermisosEspeciales%>
+                                                    <%=clientes.PermisosEspeciales%> 
                                                 </td>
                                                 <%}%>
                                                 <%if(clientes.PermisosEspeciales!="ok"&& clientes.PermisosEspeciales!="EnGestion"&& clientes.PermisosEspeciales!="Presentado"&& clientes.PermisosEspeciales!="Sin presentar"&& clientes.PermisosEspeciales!="Observado"){%>
@@ -359,11 +357,8 @@
                                                         <td class="text-dark bg-danger">
                                                           ERROR
                                                         </td>
-                                                        <%}else{%>
-                                                    <td class="text-dark">
-                                                        <%=clientes.PermisosEspeciales%>
-                                                    </td>
-                                                    <%}}%>
+                                                        <%}%>
+                                                    <%}%>
                                                 
                              <!-- // -->
                              <!-- Documentacion de obra -->
@@ -387,10 +382,8 @@
                                                 <td class="text-dark bg-danger">
                                                   ERROR
                                                 </td>
-                                                <%}else{%> <td class="text-dark ">
-                                                <%=clientes.DocumentacionObra%>
-                                            </td>
-                                            <%}}%>
+                                                <%}%> 
+                                            <%}%>
                                             
                             <!-- // -->
                             <!-- Seguridad -->
@@ -414,10 +407,9 @@
                                                 <td class="text-dark bg-danger">
                                                   ERROR
                                                 </td>
-                                                <%}else{%>  <td class="text-dark ">
-                                                <%=clientes.Seguridad%>
+                                                <%}%>  
                                             </td>
-                                            <%}}%>
+                                            <%}%>
                                           
                             <!-- // -->
                             <!-- Interferencias -->
@@ -441,10 +433,8 @@
                                                 <td class="text-dark bg-danger">
                                                   ERROR
                                                 </td>
-                                                <%}else{%>  <td class="text-dark">
-                                                <%=clientes.Interferencias%>
-                                            </td>
-                                            <%}}%>
+                                                <%}%>
+                                            <%}%>
                                            
                             <!-- // -->
                             <!-- Permisos -->
@@ -468,10 +458,8 @@
                                                 <td class="text-dark bg-danger">
                                                   ERROR
                                                 </td>
-                                                <%}else{%>  <td class="text-dark">
-                                                <%=clientes.Permisos%>
-                                            </td>
-                                            <%}}%>
+                                                <%}%>
+                                            <%}%>
                                            
                             <!-- // -->
                             <!-- Plan de trabajo -->
@@ -495,10 +483,8 @@
                                                 <td class="text-dark bg-danger">
                                                   ERROR
                                                 </td>
-                                                <%}else{%>  <td class="text-dark ">
-                                                <%=clientes.PlanDeTrabajo%>
-                                            </td>
-                                            <%}}%>
+                                                <%}%>
+                                            <%}%>
                                          
                             <!-- // -->
                             <!-- Matriculas -->
@@ -522,10 +508,7 @@
                                                 <td class="text-dark bg-danger">
                                                   ERROR
                                                 </td>
-                                                <%}else{%> <td class="text-dark">
-                                                <%=clientes.Matriculas%>
-                                            </td>
-                                            <%}}%>
+                                                <%}}%>
                                          
                             <!-- // -->
                             <!-- Ambiente -->
@@ -549,10 +532,7 @@
                                                 <td class="text-dark bg-danger">
                                                   ERROR
                                                 </td>
-                                                <%}else{%>  <td class="text-dark">
-                                                <%=clientes.Ambiente%>
-                                            </td>
-                                            <%}}%>
+                                                <%}}%>
                                           
                             <!-- // -->
                             <!-- Nota cumplimiento normativas -->
@@ -576,10 +556,7 @@
                                                 <td class="text-dark bg-danger">
                                                   ERROR
                                                 </td>
-                                                <%}else{%>   <td class="text-dark">
-                                                <%=clientes.NotaCumplimentoNormativas%>
-                                            </td>
-                                            <%}}%>
+                                                <%}}%>
                                          
                             <!-- // -->
                             <!-- DDJJ NAG 153 -->
@@ -603,10 +580,7 @@
                                                 <td class="text-dark bg-danger">
                                                   ERROR
                                                 </td>
-                                                <%}else{%>   <td class="text-dark ">
-                                                <%=clientes.DDJJNAG153%>
-                                            </td>
-                                            <%}}%>
+                                                <%}}%>
                                            
                             <!-- // -->
                             <!-- Avisos -->
@@ -630,10 +604,7 @@
                                                 <td class="text-dark bg-danger">
                                                   ERROR
                                                 </td>
-                                                <%}else{%>   <td class="text-dark ">
-                                                <%=clientes.Avisos%>
-                                            </td>
-                                            <%}}%>
+                                                <%}}%>
                                           
                             <!-- // -->
                             <!-- Documentacion de inspeccion -->
@@ -657,10 +628,7 @@
                                                 <td class="text-dark bg-danger">
                                                   ERROR
                                                 </td>
-                                                <%}else{%> <td class="text-dark ">
-                                                <%=clientes.DocumentacionInspeccion%>
-                                            </td>
-                                            <%}}%>
+                                                <%}}%>
                                            
                             <!-- // -->
                             <!-- Comunicacion de obras -->
@@ -684,10 +652,7 @@
                                                 <td class="text-dark bg-danger">
                                                   ERROR
                                                 </td>
-                                                <%}else{%>  <td class="text-dark ">
-                                                <%=clientes.ComunicacionObras%>
-                                            </td>
-                                            <%}}%>
+                                                <%}}%>
                                       
                             <!-- // -->
                             <!-- Actas finales de ecogas -->
@@ -711,10 +676,7 @@
                                                 <td class="text-dark bg-danger">
                                                   ERROR
                                                 </td>
-                                                <%}else{%>   <td class="text-dark ">
-                                                <%=clientes.ActasFinalesEcogas%>
-                                            </td>
-                                            <%}}%>
+                                                <%}}%>
                                          
                             <!-- // -->
                             <!-- Planos y Croquis -->
@@ -738,10 +700,7 @@
                                                 <td class="text-dark bg-danger">
                                                   ERROR
                                                 </td>
-                                                <%}else{%><td class="text-dark ">
-                                                <%=clientes.PlanosyCroquis%>
-                                            </td>
-                                            <%}}%>
+                                                <%}}%>
                                          
                             <!-- // -->
                             <!-- ConformeEntidades -->
@@ -765,10 +724,7 @@
                                                 <td class="text-dark bg-danger">
                                                   ERROR
                                                 </td>
-                                                <%}else{%> <td class="text-dark ">
-                                                <%=clientes.ConformeEntidades%>
-                                            </td>
-                                            <%}}%>
+                                                <%}}%>
                                           
                             <!-- // -->
                             <!-- PruebaHermeticidad -->
@@ -792,10 +748,7 @@
                                                 <td class="text-dark bg-danger">
                                                   ERROR
                                                 </td>
-                                                <%}else{%>     <td class="text-dark ">
-                                                <%=clientes.PruebaHermeticidad%>
-                                            </td>
-                                            <%}}%>
+                                                <%}}%>
                                           
                             <!-- // -->
                             <!-- Informes finales -->
@@ -819,10 +772,7 @@
                                                 <td class="text-dark bg-danger">
                                                   ERROR
                                                 </td>
-                                                <%}else{%>      <td class="text-dark ">
-                                                <%=clientes.InformesFinales%>
-                                            </td>
-                                            <%}}%>
+                                                <%}}%>
                                          
                             <!-- // -->
                             <!-- Presentacion final -->
@@ -846,10 +796,7 @@
                                                 <td class="text-dark bg-danger">
                                                   ERROR
                                                 </td>
-                                                <%}else{%>       <td class="text-dark ">
-                                                <%=clientes.PresentacionFinal%>
-                                            </td>
-                                            <%}}%>
+                                                <%}}%>
                                           
                             <!-- // -->
                             <!-- HabilitacionObra -->
@@ -873,10 +820,7 @@
                                                 <td class="text-dark bg-danger">
                                                   ERROR
                                                 </td>
-                                                <%}else{%>     <td class="text-dark ">
-                                                <%=clientes.HabilitacionObra%>
-                                            </td>
-                                            <%}}%>    
+                                                <%}}%>
                                           
                             <!-- // -->
                           
