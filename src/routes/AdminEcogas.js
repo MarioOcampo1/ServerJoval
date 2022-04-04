@@ -18,7 +18,7 @@ router.use(passport.session());
 passport.use(new PassportLocal(function(username,password, done){
  
     if(username=="mocampo" && password == "asd"){
-return    done(null,{id: 1 , name: "Mario"});
+return done(null,{id: 1 , name: "Mario"});
     }
 if(username=="gmaceira" && password == "January2072"){
     return    done(null,{id: 2 , name: "Gustavo"});
