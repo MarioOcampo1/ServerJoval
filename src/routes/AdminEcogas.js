@@ -720,8 +720,14 @@ router.post('/act1pCarpEcogas/:id', (req,res)=>{
         Tecnica = "ok";
         console.log("La variable Tecnica va tener el valor: " +Tecnica );
     }
-    if(Pcaprobado == "EnGestion" || PlanoTipo=="EnGestion" ){
+    if(Pcaprobado == "EnGestion" || Pcaprobado == "Presentado" || PlanoTipo=="EnGestion" || PlanoTipo=="Presentado" ){
         Tecnica = "EnGestion";
+    }
+    if(Pcaprobado == "Presentado" ||  PlanoTipo=="Presentado"){
+        Tecnica = "Presentado";
+    }
+    if( Pcaprobado == "Observado" || PlanoTipo=="Observado"){
+        Tecnica = "Observado";
     }
      //Permisos Especiales
      if((CartaOferta == "ok" || CartaOferta == "NC" || CartaOferta == "") && (PlanoAnexo=="ok" || PlanoAnexo=="NC" || PlanoAnexo=="") && (DNVVisacion=="Visado" || DNVVisacion=="NC" || DNVVisacion=="") && (HidraulicaVisacion=="Visado" || HidraulicaVisacion=="NC" || HidraulicaVisacion=="") && (FerrocarrilesVisacion=="Visado" || FerrocarrilesVisacion=="NC" || FerrocarrilesVisacion=="")  ){
@@ -806,6 +812,16 @@ router.post('/act2pCarpEcogas/:id', (req,res)=>{
     var Irrigacion = req.body.Irrigacion;
     var PRIVADO = req.body.PRIVADO;
     var OTROSPERMISOS = req.body.Otrospermisos;
+//Vencimientos de permisos, ART y Ieric
+var VencimientoFerrocarril,VencimientoHidraulica,VencimientoMunicipal,VencimientoDPV,VencimientoDNV,VencimientoIrrigacion,VencimientoPrivado,VencimientoOtrosPermisos;
+VencimientoFerrocarril=req.body.VencimientoFerrocarril;
+VencimientoHidraulica=req.body.VencimientoHidraulica
+VencimientoMunicipal=req.body.VencimientoMunicipal;
+VencimientoDPV=req.body.VencimientoDPV;
+VencimientoDNV=req.body.VencimientoDNV;
+VencimientoIrrigacion=req.body.VencimientoIrrigacion;
+VencimientoPrivado=req.body.VencimientoPrivado;
+VencimientoOtrosPermisos=req.body.VencimientoOtrosPermisos;
    //Interferencias
    var intTelefonicaPedida = req.body.intTelefonicaPedida;
     var intTelefonicaObtenida = req.body.intTelefonicaObtenida; 
@@ -940,16 +956,7 @@ if(AvisoInicioObraART=="Sin presentar"||AvisoInicioObraIERIC=="Sin presentar"|| 
     Avisos="Sin presentar";
 }
 
-//Vencimientos de permisos, ART y Ieric
-var VencimientoFerrocarril,VencimientoHidraulica,VencimientoMunicipal,VencimientoDPV,VencimientoDNV,VencimientoIrrigacion,VencimientoPrivado,VencimientoOtrosPermisos;
-VencimientoFerrocarril=req.body.VencimientoFerrocarril;
-VencimientoHidraulica=req.body.VencimientoHidraulica
-VencimientoMunicipal=req.body.VencimientoMunicipal;
-VencimientoDPV=req.body.VencimientoDPV;
-VencimientoDNV=req.body.VencimientoDNV;
-VencimientoIrrigacion=req.body.VencimientoIrrigacion;
-VencimientoPrivado=req.body.VencimientoPrivado;
-VencimientoOtrosPermisos=req.body.VencimientoOtrosPermisos;
+
 sql= 'Update clientes_tareasgenerales Set ? where Nombre=?';
 connection.query(sql,[{ PlanDeTrabajo:PlanDeTrabajo,DocumentacionObra:DocumentacionObra,Seguridad:Seguridad,Interferencias:Interferencias,Permisos:Permisos,Matriculas:Matriculas,Ambiente:Ambiente,Avisos:Avisos,NotaCumplimentoNormativas:NotaCumplimentoNormativa,DDJJNAG153:DDJJNAG153, Avisos: Avisos, PermisosEspeciales: PermisosEspeciales}, Nombre],
     (error, results) => {
