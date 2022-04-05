@@ -34,21 +34,25 @@
                                 <%}%>
 
                                     <%if (user.Hidraulica=="ok" ){%>
-                                        <input checked type="radio" name="HIDRAULICA" id="HIDRAULICA" value="ok"> Ok 
+                                        <input checked type="radio" name="HIDRAULICA" id="HIDRAULICA" value="ok"> Ok
                                         <div id="VencimientoHidraulica" style="display:block;">
-                                            Fecha en la que se pidió: 
-                                            <input type="date" name="VencimientoHidraulica" id="VencimientoHidraulica"
-                                                value="<%= user.VencimientoHidraulica%>" >
+                                            Fecha en la que se pidió:
+                                            <input type="date" onfocus="(this.type='date')" onblur="(this.type='text')"
+                                                name="VencimientoHidraulica" id="VencimientoHidraulica"
+                                                value="<%= user.VencimientoHidraulica%>" placeholder="<%= user.VencimientoHidraulica%>">
                                         </div>
                                         <%}else{%>
-                                            <input type="radio" name="HIDRAULICA" id="HIDRAULICA" value="ok" onclick="FechaVencimientoPermiso('VencimientoHidraulica')"> Ok 
+                                            <input type="radio" name="HIDRAULICA" id="HIDRAULICA" value="ok"
+                                                onclick="FechaVencimientoPermiso('VencimientoHidraulica')"> Ok
                                             <div id="VencimientoHidraulica" style="display:none;">
                                                 Fecha en la que se pidió
-                                                <input type="date" name="VencimientoHidraulica" id="VencimientoHidraulica"
-                                                    value="<%= user.VencimientoHidraulica%>" placeholder="<%= user.VencimientoHidraulica%>">
+                                                <input type="date" onfocus="(this.type='date')"
+                                                    onblur="(this.type='text')" name="VencimientoHidraulica"
+                                                    id="VencimientoHidraulica" value="<%= user.VencimientoHidraulica%>"
+                                                    placeholder="<%= user.VencimientoHidraulica%>">
                                             </div>
                                             <%}%>
-                                           
+
                     </form-check>
                 </div>
             </div>
@@ -88,13 +92,28 @@
                                                 <%if (user.Ferrocarriles=="ok" ){%>
                                                     <input checked type="radio" name="FERROCARRIL" id="FERROCARRIL"
                                                         value="ok"> Ok
+                                                    <div id="VencimientoFerrocarril" style="display:block;">
+                                                        Fecha en la que se pidió
+                                                        <input type="date" onfocus="(this.type='date')"
+                                                            onblur="(this.type='text')" name="VencimientoFerrocarril"
+                                                            id="VencimientoFerrocarril"
+                                                            value="<%= user.VencimientoFerrocarril%>"
+                                                            placeholder="<%= user.VencimientoFerrocarril%>">
+                                                    </div>
                                                     <%}else{%>
-                                                            <input type="radio" name="FERROCARRIL" id="FERROCARRIL" value="ok" onclick="FechaVencimientoPermiso('VencimientoFerrocarril')"> Ok 
-                                                            <div id="VencimientoFerrocarril" style="display:none;">
-                                                                Fecha en la que se pidió
-                                                                <input type="date" name="VencimientoFerrocarril" id="VencimientoFerrocarril"
-                                                                    value="<%= user.VencimientoFerrocarril%>" placeholder="<%= user.VencimientoFerrocarril%>">
-                                                            </div>
+                                                        <input type="radio" name="FERROCARRIL" id="FERROCARRIL"
+                                                            value="ok"
+                                                            onclick="FechaVencimientoPermiso('VencimientoFerrocarril')">
+                                                        Ok
+                                                        <div id="VencimientoFerrocarril" style="display:none;">
+                                                            Fecha en la que se pidió
+                                                            <input type="date" onfocus="(this.type='date')"
+                                                                onblur="(this.type='text')"
+                                                                name="VencimientoFerrocarril"
+                                                                id="VencimientoFerrocarril"
+                                                                value="<%= user.VencimientoFerrocarril%>"
+                                                                placeholder="<%= user.VencimientoFerrocarril%>">
+                                                        </div>
                                                         <%}%>
                                                             <!-- <%if (user.Ferrocarriles=="NC"){%>
                                                                                                 <input checked type="radio"
@@ -149,12 +168,31 @@
                                                                 <%if (user.PerMunicipal=="ok" ){%>
                                                                     <input checked type="radio" name="PerMunicipal"
                                                                         id="PerMunicipal" value="ok"> Ok
+                                                                        <div id="VencimientoMunicipal" style="display:block;">
+                                                                        Fecha en la que se pidió
+                                                                        <input type="date"
+                                                                            onfocus="(this.type='date')"
+                                                                            onblur="(this.type='text')"
+                                                                            name="VencimientoMunicipal"
+                                                                            id="VencimientoMunicipal"
+                                                                            value="<%= user.VencimientoMunicipal%>"
+                                                                            placeholder="<%= user.VencimientoMunicipal%>">
+                                                                    </div>
                                                                     <%}else{%>
-                                                                        <input type="radio" name="PerMunicipal" id="PerMunicipal" value="ok" onclick="FechaVencimientoPermiso('VencimientoMunicipal')"> Ok 
-                                                                        <div id="VencimientoMunicipal" style="display:none;">
+                                                                        <input type="radio" name="PerMunicipal"
+                                                                            id="PerMunicipal" value="ok"
+                                                                            onclick="FechaVencimientoPermiso('VencimientoMunicipal')">
+                                                                        Ok
+                                                                        <div id="VencimientoMunicipal"
+                                                                            style="display:none;">
                                                                             Fecha en la que se pidió
-                                                                            <input type="date" name="VencimientoMunicipal" id="VencimientoMunicipal"
-                                                                                value="<%= user.VencimientoMunicipal%>" placeholder="<%= user.VencimientoMunicipal%>">
+                                                                            <input type="date"
+                                                                                onfocus="(this.type='date')"
+                                                                                onblur="(this.type='text')"
+                                                                                name="VencimientoMunicipal"
+                                                                                id="VencimientoMunicipal"
+                                                                                value="<%= user.VencimientoMunicipal%>"
+                                                                                placeholder="<%= user.VencimientoMunicipal%>">
                                                                         </div>
                                                                         <%}%>
                                                                             <!-- <%if (user.PerMunicipal=="NC"){%>
@@ -209,12 +247,32 @@
                                                                             <%if (user.DNV=="ok" ){%>
                                                                                 <input checked type="radio" name="DNV"
                                                                                     id="DNV" value="ok"> Ok
+                                                                                    <div id="VencimientoDNV"
+                                                                                    style="display:block;">
+                                                                                    Fecha en la que se pidió
+                                                                                    <input type="date"
+                                                                                        onfocus="(this.type='date')"
+                                                                                        onblur="(this.type='text')"
+                                                                                        name="VencimientoDNV"
+                                                                                        id="VencimientoDNV"
+                                                                                        value="<%= user.VencimientoDNV%>"
+                                                                                        placeholder="<%= user.VencimientoDNV%>">
+                                                                                </div>
                                                                                 <%}else{%>
-                                                                                    <input type="radio" name="DNV" id="DNV" value="ok" onclick="FechaVencimientoPermiso('VencimientoDNV')"> Ok 
-                                                                                    <div id="VencimientoDNV" style="display:none;">
+                                                                                    <input type="radio" name="DNV"
+                                                                                        id="DNV" value="ok"
+                                                                                        onclick="FechaVencimientoPermiso('VencimientoDNV')">
+                                                                                    Ok
+                                                                                    <div id="VencimientoDNV"
+                                                                                        style="display:none;">
                                                                                         Fecha en la que se pidió
-                                                                                        <input type="date" name="VencimientoDNV" id="VencimientoDNV"
-                                                                                            value="<%= user.VencimientoDNV%>" placeholder="<%= user.VencimientoDNV%>">
+                                                                                        <input type="date"
+                                                                                            onfocus="(this.type='date')"
+                                                                                            onblur="(this.type='text')"
+                                                                                            name="VencimientoDNV"
+                                                                                            id="VencimientoDNV"
+                                                                                            value="<%= user.VencimientoDNV%>"
+                                                                                            placeholder="<%= user.VencimientoDNV%>">
                                                                                     </div>
                                                                                     <%}%>
                                                                                         <!-- <%if (user.DNV=="NC"){%>
@@ -238,14 +296,14 @@
                                                         <%if (user.DPV=="NC" ){%>
 
                                                             <input hidden checked type="radio" name="DPV" id="DPV"
-                                                                value="<%=user.DPV%>"> 
+                                                                value="<%=user.DPV%>">
                                                             <%}else{%>
 
-                                                            <div class="card-body">
-                                                                <div class="card-title">DPV</div>
-                                                                <div class="card-text">
-                                                                    <form-check>
-                                                                        <!-- <%if (user.DPV=="Pedir"){%>
+                                                                <div class="card-body">
+                                                                    <div class="card-title">DPV</div>
+                                                                    <div class="card-text">
+                                                                        <form-check>
+                                                                            <!-- <%if (user.DPV=="Pedir"){%>
                                                                                                 <input checked type="radio"
                                                                                                 name="DPV"
                                                                                                 id="DPV"
@@ -256,27 +314,52 @@
                                                                                                 id="DPV"
                                                                                                 value="Pedir"> Pedir
                                                                                             <%}%> -->
-                                                                        <%if (user.DPV=="EnGestion" ){%>
-                                                                            <input checked type="radio" name="DPV"
-                                                                                id="DPV" value="EnGestion"> En gestion
-                                                                            <%}else{%>
-                                                                                <input type="radio" name="DPV" id="DPV"
-                                                                                    value="EnGestion"> En gestion
-                                                                                <%}%>
+                                                                            <%if (user.DPV=="EnGestion" ){%>
+                                                                                <input checked type="radio" name="DPV"
+                                                                                    id="DPV" value="EnGestion"> En
+                                                                                gestion
+                                                                                <%}else{%>
+                                                                                    <input type="radio" name="DPV"
+                                                                                        id="DPV" value="EnGestion"> En
+                                                                                    gestion
+                                                                                    <%}%>
 
-                                                                                    <%if (user.DPV=="ok" ){%>
-                                                                                        <input checked type="radio"
-                                                                                            name="DPV" id="DPV"
-                                                                                            value="ok"> Ok
-                                                                                        <%}else{%>
-                                                                                            <input type="radio" name="DPV" id="DPV" value="ok" onclick="FechaVencimientoPermiso('VencimientoDPV')"> Ok 
-                                                                                            <div id="VencimientoDPV" style="display:none;">
-                                                                                                Fecha en la que se pidió
-                                                                                                <input type="date" name="VencimientoDPV" id="VencimientoDPV"
-                                                                                                    value="<%= user.VencimientoDPV%>" placeholder="<%= user.VencimientoDPV%>">
+                                                                                        <%if (user.DPV=="ok" ){%>
+                                                                                            <input checked type="radio"
+                                                                                                name="DPV" id="DPV"
+                                                                                                value="ok"> Ok
+                                                                                                <div id="VencimientoDPV"
+                                                                                                style="display:block;">
+                                                                                                Fecha en la que se
+                                                                                                pidió
+                                                                                                <input type="date"
+                                                                                                    onfocus="(this.type='date')"
+                                                                                                    onblur="(this.type='text')"
+                                                                                                    name="VencimientoDPV"
+                                                                                                    id="VencimientoDPV"
+                                                                                                    value="<%= user.VencimientoDPV%>"
+                                                                                                    placeholder="<%= user.VencimientoDPV%>">
                                                                                             </div>
-                                                                                            <%}%>
-                                                                                                <!-- <%if (user.DPV=="NC"){%>
+                                                                                            <%}else{%>
+                                                                                                <input type="radio"
+                                                                                                    name="DPV" id="DPV"
+                                                                                                    value="ok"
+                                                                                                    onclick="FechaVencimientoPermiso('VencimientoDPV')">
+                                                                                                Ok
+                                                                                                <div id="VencimientoDPV"
+                                                                                                    style="display:none;">
+                                                                                                    Fecha en la que se
+                                                                                                    pidió
+                                                                                                    <input type="text"
+                                                                                                        onfocus="(this.type='date')"
+                                                                                                        onblur="(this.type='text')"
+                                                                                                        name="VencimientoDPV"
+                                                                                                        id="VencimientoDPV"
+                                                                                                        value="<%= user.VencimientoDPV%>"
+                                                                                                        placeholder="<%= user.VencimientoDPV%>">
+                                                                                                </div>
+                                                                                                <%}%>
+                                                                                                    <!-- <%if (user.DPV=="NC"){%>
                                                                                                 <input checked type="radio"
                                                                                                 name="DPV"
                                                                                                 id="DPV"
@@ -288,23 +371,24 @@
                                                                                                 value="NC"> No corresponde
                                                                                             <%}%> -->
 
-                                                                    </form-check>
+                                                                        </form-check>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
 
-                                                            <%}%>
+                                                                <%}%>
 
-                                                                <%if (user.Irrigacion=="NC" ){%>
-                                                                    <input hidden checked type="radio" name="Irrigacion"
-                                                                        id="Irrigacion" value="<%=user.Irrigacion%>">
-                                                                    <% }else{%>
+                                                                    <%if (user.Irrigacion=="NC" ){%>
+                                                                        <input hidden checked type="radio"
+                                                                            name="Irrigacion" id="Irrigacion"
+                                                                            value="<%=user.Irrigacion%>">
+                                                                        <% }else{%>
 
-                                                                        <div class="card-body">
-                                                                            <div class="card-title">Irrigación
-                                                                            </div>
-                                                                            <div class="card-text">
-                                                                                <form-check>
-                                                                                    <!-- <%if (user.Irrigacion=="Pedir"){%>
+                                                                            <div class="card-body">
+                                                                                <div class="card-title">Irrigación
+                                                                                </div>
+                                                                                <div class="card-text">
+                                                                                    <form-check>
+                                                                                        <!-- <%if (user.Irrigacion=="Pedir"){%>
                                                                                                 <input checked type="radio"
                                                                                                 name="Irrigacion"
                                                                                                 id="Irrigacion"
@@ -315,37 +399,68 @@
                                                                                                 id="Irrigacion"
                                                                                                 value="Pedir"> Pedir
                                                                                             <%}%> -->
-                                                                                    <%if (user.Irrigacion=="EnGestion"
-                                                                                        ){%>
-                                                                                        <input checked type="radio"
-                                                                                            name="Irrigacion"
-                                                                                            id="Irrigacion"
-                                                                                            value="EnGestion"> En
-                                                                                        gestion
-                                                                                        <%}else{%>
-                                                                                            <input type="radio"
+                                                                                        <%if (user.Irrigacion=="EnGestion"
+                                                                                            ){%>
+                                                                                            <input checked type="radio"
                                                                                                 name="Irrigacion"
                                                                                                 id="Irrigacion"
                                                                                                 value="EnGestion"> En
                                                                                             gestion
-                                                                                            <%}%>
+                                                                                            <%}else{%>
+                                                                                                <input type="radio"
+                                                                                                    name="Irrigacion"
+                                                                                                    id="Irrigacion"
+                                                                                                    value="EnGestion">
+                                                                                                En
+                                                                                                gestion
+                                                                                                <%}%>
 
-                                                                                                <%if (user.Irrigacion=="ok"
-                                                                                                    ){%>
-                                                                                                    <input checked
-                                                                                                        type="radio"
-                                                                                                        name="Irrigacion"
-                                                                                                        id="Irrigacion"
-                                                                                                        value="ok"> Ok
-                                                                                                    <%}else{%>
-                                                                                                        <input type="radio" name="Irrigacion" id="Irrigacion" value="ok" onclick="FechaVencimientoPermiso('VencimientoIrrigacion')"> Ok 
-                                                                                                        <div id="VencimientoIrrigacion" style="display:none;">
-                                                                                                            Fecha en la que se pidió
-                                                                                                            <input type="date" name="VencimientoIrrigacion" id="VencimientoIrrigacion"
-                                                                                                                value="<%= user.VencimientoIrrigacion%>" placeholder="<%= user.VencimientoIrrigacion%>">
-                                                                                                        </div>
-                                                                                                        <%}%>
-                                                                                                            <!-- <%if (user.Irrigacion=="NC"){%>
+                                                                                                    <%if (user.Irrigacion=="ok"
+                                                                                                        ){%>
+                                                                                                        <input checked
+                                                                                                            type="radio"
+                                                                                                            name="Irrigacion"
+                                                                                                            id="Irrigacion"
+                                                                                                            value="ok">
+                                                                                                        Ok
+                                                                                                        <div id="VencimientoIrrigacion"
+                                                                                                        style="display:block;">
+                                                                                                        Fecha en
+                                                                                                        la que
+                                                                                                        se pidió
+                                                                                                        <input
+                                                                                                            type="date"
+                                                                                                            onfocus="(this.type='date')"
+                                                                                                            onblur="(this.type='text')"
+                                                                                                            name="VencimientoIrrigacion"
+                                                                                                            id="VencimientoIrrigacion"
+                                                                                                            value="<%= user.VencimientoIrrigacion%>"
+                                                                                                            placeholder="<%= user.VencimientoIrrigacion%>">
+                                                                                                    </div>
+                                                                                                        <%}else{%>
+                                                                                                            <input
+                                                                                                                type="radio"
+                                                                                                                name="Irrigacion"
+                                                                                                                id="Irrigacion"
+                                                                                                                value="ok"
+                                                                                                                onclick="FechaVencimientoPermiso('VencimientoIrrigacion')">
+                                                                                                            Ok
+                                                                                                            <div id="VencimientoIrrigacion"
+                                                                                                                style="display:none;">
+                                                                                                                Fecha en
+                                                                                                                la que
+                                                                                                                se pidió
+                                                                                                                <input
+                                                                                                                    type="date"
+                                                                                                                    onfocus="(this.type='date')"
+                                                                                                                    onblur="(this.type='text')"
+                                                                                                                    name="VencimientoIrrigacion"
+                                                                                                                    id="VencimientoIrrigacion"
+                                                                                                                    value="<%= user.VencimientoIrrigacion%>"
+                                                                                                                    placeholder="<%= user.VencimientoIrrigacion%>">
+                                                                                                            </div>
+                                                                                                            <%}%>
+                                                                                                                <!-- <%if (user.Irrigacion=="NC"){%>
                                                                                                 <input checked type="radio"
                                                                                                 name="Irrigacion"
                                                                                                 id="Irrigacion"
@@ -357,23 +472,24 @@
                                                                                                 value="NC"> No corresponde
                                                                                             <%}%> -->
 
-                                                                                </form-check>
+                                                                                    </form-check>
+                                                                                </div>
                                                                             </div>
-                                                                        </div>
-                                                                        <%}%>
+                                                                            <%}%>
 
-                                                                            <%if (user.Privado=="NC" ){%>
-                                                                                <input hidden checked type="radio"
-                                                                                    name="PRIVADO" id="PRIVADO"
-                                                                                    value="<%=user.Privado%>">
-                                                                                <% }else{%>
+                                                                                <%if (user.Privado=="NC" ){%>
+                                                                                    <input hidden checked type="radio"
+                                                                                        name="PRIVADO" id="PRIVADO"
+                                                                                        value="<%=user.Privado%>">
+                                                                                    <% }else{%>
 
-                                                                                    <div class="card-body">
-                                                                                        <div class="card-title">Privado
-                                                                                        </div>
-                                                                                        <div class="card-text">
-                                                                                            <form-check>
-                                                                                                <!-- <%if (user.Privado=="pedir"){%>
+                                                                                        <div class="card-body">
+                                                                                            <div class="card-title">
+                                                                                                Privado
+                                                                                            </div>
+                                                                                            <div class="card-text">
+                                                                                                <form-check>
+                                                                                                    <!-- <%if (user.Privado=="pedir"){%>
                                                                                                 <input checked type="radio"
                                                                                                 name="PRIVADO"
                                                                                                 id="PRIVADO"
@@ -385,43 +501,78 @@
                                                                                                 value="pedir"> Pedir
                                                                                             <%}%>
                                                                                        -->
-                                                                                                <%if (user.Privado=="EnGestion"
-                                                                                                    ){%>
-                                                                                                    <input checked
-                                                                                                        type="radio"
-                                                                                                        name="PRIVADO"
-                                                                                                        id="PRIVADO"
-                                                                                                        value="EnGestion">
-                                                                                                    En
-                                                                                                    gestión
-                                                                                                    <%}else{%>
-                                                                                                        <input
+                                                                                                    <%if (user.Privado=="EnGestion"
+                                                                                                        ){%>
+                                                                                                        <input checked
                                                                                                             type="radio"
                                                                                                             name="PRIVADO"
                                                                                                             id="PRIVADO"
                                                                                                             value="EnGestion">
                                                                                                         En
                                                                                                         gestión
-                                                                                                        <%}%>
+                                                                                                        <%}else{%>
+                                                                                                            <input
+                                                                                                                type="radio"
+                                                                                                                name="PRIVADO"
+                                                                                                                id="PRIVADO"
+                                                                                                                value="EnGestion">
+                                                                                                            En
+                                                                                                            gestión
+                                                                                                            <%}%>
 
-                                                                                                            <%if (user.Privado=="ok"
-                                                                                                                ){%>
-                                                                                                                <input
-                                                                                                                    checked
-                                                                                                                    type="radio"
-                                                                                                                    name="PRIVADO"
-                                                                                                                    id="PRIVADO"
-                                                                                                                    value="ok">
-                                                                                                                Ok
-                                                                                                                <%}else{%>
-                                                                                                                    <input type="radio" name="PRIVADO" id="PRIVADO" value="ok" onclick="FechaVencimientoPermiso('VencimientoPrivado')"> Ok 
-                                                                                                                    <div id="VencimientoPrivado" style="display:none;">
-                                                                                                                        Fecha en la que se pidió
-                                                                                                                        <input type="date" name="VencimientoPrivado" id="VencimientoPrivado"
-                                                                                                                            value="<%= user.VencimientoPrivado%>" placeholder="<%= user.VencimientoPrivado%>">
-                                                                                                                    </div>
-                                                                                                                    <%}%>
-                                                                                                                        <!-- <%if (user.Privado=="NC"){%>
+                                                                                                                <%if (user.Privado=="ok"
+                                                                                                                    ){%>
+                                                                                                                    <input
+                                                                                                                        checked
+                                                                                                                        type="radio"
+                                                                                                                        name="PRIVADO"
+                                                                                                                        id="PRIVADO"
+                                                                                                                        value="ok">
+                                                                                                                    Ok
+                                                                                                                    <div id="VencimientoPrivado"
+                                                                                                                    style="display:block;">
+                                                                                                                    Fecha
+                                                                                                                    en
+                                                                                                                    la
+                                                                                                                    que
+                                                                                                                    se
+                                                                                                                    pidió
+                                                                                                                    <input
+                                                                                                                        type="date"
+                                                                                                                        onfocus="(this.type='date')"
+                                                                                                                        onblur="(this.type='text')"
+                                                                                                                        name="VencimientoPrivado"
+                                                                                                                        id="VencimientoPrivado"
+                                                                                                                        value="<%= user.VencimientoPrivado%>"
+                                                                                                                        placeholder="<%= user.VencimientoPrivado%>">
+                                                                                                                </div>
+                                                                                                                    <%}else{%>
+                                                                                                                        <input
+                                                                                                                            type="radio"
+                                                                                                                            name="PRIVADO"
+                                                                                                                            id="PRIVADO"
+                                                                                                                            value="ok"
+                                                                                                                            onclick="FechaVencimientoPermiso('VencimientoPrivado')">
+                                                                                                                        Ok
+                                                                                                                        <div id="VencimientoPrivado"
+                                                                                                                            style="display:none;">
+                                                                                                                            Fecha
+                                                                                                                            en
+                                                                                                                            la
+                                                                                                                            que
+                                                                                                                            se
+                                                                                                                            pidió
+                                                                                                                            <input
+                                                                                                                                type="date"
+                                                                                                                                onfocus="(this.type='date')"
+                                                                                                                                onblur="(this.type='text')"
+                                                                                                                                name="VencimientoPrivado"
+                                                                                                                                id="VencimientoPrivado"
+                                                                                                                                value="<%= user.VencimientoPrivado%>"
+                                                                                                                                placeholder="<%= user.VencimientoPrivado%>">
+                                                                                                                        </div>
+                                                                                                                        <%}%>
+                                                                                                                            <!-- <%if (user.Privado=="NC"){%>
                                                                                                     <input checked type="radio"
                                                                                                     name="PRIVADO"
                                                                                                     id="PRIVADO"
@@ -433,29 +584,31 @@
                                                                                                     value="NC"> No corresponde
                                                                                                 <%}%> -->
 
-                                                                                            </form-check>
+                                                                                                </form-check>
+                                                                                            </div>
                                                                                         </div>
-                                                                                    </div>
-                                                                                    <%}%>
+                                                                                        <%}%>
 
-                                                                                        <%if (user.Otrospermisos=="NC"
-                                                                                            ){%>
-                                                                                            <input hidden checked
-                                                                                                type="radio"
-                                                                                                name="Otrospermisos"
-                                                                                                id="Otrospermisos"
-                                                                                                value="<%=user.Otrospermisos%>">
-                                                                                            <%}else{%>
+                                                                                            <%if (user.Otrospermisos=="NC"
+                                                                                                ){%>
+                                                                                                <input hidden checked
+                                                                                                    type="radio"
+                                                                                                    name="Otrospermisos"
+                                                                                                    id="Otrospermisos"
+                                                                                                    value="<%=user.Otrospermisos%>">
+                                                                                                <%}else{%>
 
-                                                                                                <div class="card-body">
                                                                                                     <div
-                                                                                                        class="card-title">
-                                                                                                        Otros permisos
-                                                                                                    </div>
-                                                                                                    <div
-                                                                                                        class="card-text">
-                                                                                                        <form-check>
-                                                                                                            <!-- <%if (user.Otrospermisos=="pedir"){%>
+                                                                                                        class="card-body">
+                                                                                                        <div
+                                                                                                            class="card-title">
+                                                                                                            Otros
+                                                                                                            permisos
+                                                                                                        </div>
+                                                                                                        <div
+                                                                                                            class="card-text">
+                                                                                                            <form-check>
+                                                                                                                <!-- <%if (user.Otrospermisos=="pedir"){%>
                                                                                                 <input checked type="radio"
                                                                                                 name="Otrospermisos"
                                                                                                 id="Otrospermisos"
@@ -466,44 +619,79 @@
                                                                                                 id="Otrospermisos"
                                                                                                 value="pedir"> Pedir
                                                                                             <%}%> -->
-                                                                                                            <%if (user.Otrospermisos=="EnGestion"
-                                                                                                                ){%>
-                                                                                                                <input
-                                                                                                                    checked
-                                                                                                                    type="radio"
-                                                                                                                    name="Otrospermisos"
-                                                                                                                    id="Otrospermisos"
-                                                                                                                    value="EnGestion">
-                                                                                                                En
-                                                                                                                gestión
-                                                                                                                <%}else{%>
+                                                                                                                <%if (user.Otrospermisos=="EnGestion"
+                                                                                                                    ){%>
                                                                                                                     <input
+                                                                                                                        checked
                                                                                                                         type="radio"
                                                                                                                         name="Otrospermisos"
                                                                                                                         id="Otrospermisos"
                                                                                                                         value="EnGestion">
                                                                                                                     En
                                                                                                                     gestión
-                                                                                                                    <%}%>
+                                                                                                                    <%}else{%>
+                                                                                                                        <input
+                                                                                                                            type="radio"
+                                                                                                                            name="Otrospermisos"
+                                                                                                                            id="Otrospermisos"
+                                                                                                                            value="EnGestion">
+                                                                                                                        En
+                                                                                                                        gestión
+                                                                                                                        <%}%>
 
-                                                                                                                        <%if (user.Otrospermisos=="ok"
-                                                                                                                            ){%>
-                                                                                                                            <input
-                                                                                                                                checked
-                                                                                                                                type="radio"
-                                                                                                                                name="Otrospermisos"
-                                                                                                                                id="Otrospermisos"
-                                                                                                                                value="ok">
-                                                                                                                            Ok
-                                                                                                                            <%}else{%>
-                                                                                                                                <input type="radio" name="Otrospermisos" id="Otrospermisos" value="ok" onclick="FechaVencimientoPermiso('VencimientoOtrosPermisos')"> Ok 
-                                                                                                                                <div id="VencimientoOtrosPermisos" style="display:none;">
-                                                                                                                                    Fecha en la que se pidió
-                                                                                                                                    <input type="date" name="VencimientoOtrosPermisos" id="VencimientoOtrosPermisos"
-                                                                                                                                        value="<%= user.VencimientoOtrosPermisos%>" placeholder="<%= user.VencimientoOtrosPermisos%>">
-                                                                                                                                </div>
-                                                                                                                                <%}%>
-                                                                                                                                    <!-- <%if (user.Otrospermisos=="NC"){%>
+                                                                                                                            <%if (user.Otrospermisos=="ok"
+                                                                                                                                ){%>
+                                                                                                                                <input
+                                                                                                                                    checked
+                                                                                                                                    type="radio"
+                                                                                                                                    name="Otrospermisos"
+                                                                                                                                    id="Otrospermisos"
+                                                                                                                                    value="ok">
+                                                                                                                                Ok
+                                                                                                                                <div id="VencimientoOtrosPermisos"
+                                                                                                                                style="display:block;">
+                                                                                                                                Fecha
+                                                                                                                                en
+                                                                                                                                la
+                                                                                                                                que
+                                                                                                                                se
+                                                                                                                                pidió
+                                                                                                                                <input
+                                                                                                                                    type="date"
+                                                                                                                                    onfocus="(this.type='date')"
+                                                                                                                                    onblur="(this.type='text')"
+                                                                                                                                    name="VencimientoOtrosPermisos"
+                                                                                                                                    id="VencimientoOtrosPermisos"
+                                                                                                                                    value="<%= user.VencimientoOtrosPermisos%>"
+                                                                                                                                    placeholder="<%= user.VencimientoOtrosPermisos%>">
+                                                                                                                            </div>
+                                                                                                                                <%}else{%>
+                                                                                                                                    <input
+                                                                                                                                        type="radio"
+                                                                                                                                        name="Otrospermisos"
+                                                                                                                                        id="Otrospermisos"
+                                                                                                                                        value="ok"
+                                                                                                                                        onclick="FechaVencimientoPermiso('VencimientoOtrosPermisos')">
+                                                                                                                                    Ok
+                                                                                                                                    <div id="VencimientoOtrosPermisos"
+                                                                                                                                        style="display:none;">
+                                                                                                                                        Fecha
+                                                                                                                                        en
+                                                                                                                                        la
+                                                                                                                                        que
+                                                                                                                                        se
+                                                                                                                                        pidió
+                                                                                                                                        <input
+                                                                                                                                            type="date"
+                                                                                                                                            onfocus="(this.type='date')"
+                                                                                                                                            onblur="(this.type='text')"
+                                                                                                                                            name="VencimientoOtrosPermisos"
+                                                                                                                                            id="VencimientoOtrosPermisos"
+                                                                                                                                            value="<%= user.VencimientoOtrosPermisos%>"
+                                                                                                                                            placeholder="<%= user.VencimientoOtrosPermisos%>">
+                                                                                                                                    </div>
+                                                                                                                                    <%}%>
+                                                                                                                                        <!-- <%if (user.Otrospermisos=="NC"){%>
                                                                                                 <input checked type="radio"
                                                                                                 name="Otrospermisos"
                                                                                                 id="Otrospermisos"
@@ -516,12 +704,12 @@
                                                                                             <%}%>
                                                                                          -->
 
-                                                                                                        </form-check>
+                                                                                                            </form-check>
+                                                                                                        </div>
+
+
                                                                                                     </div>
-
-
-                                                                                                </div>
-                                                                                                <%}%>
+                                                                                                    <%}%>
 </div>
 
 <br>

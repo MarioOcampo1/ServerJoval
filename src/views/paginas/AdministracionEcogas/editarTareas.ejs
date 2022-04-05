@@ -74,30 +74,30 @@
                         <input type="hidden" name="id" id="id" value="<%= user.id%>">
                         <input type="hidden" name="Nombre" id="Nombre" value="<%= user.Nombre%>">
                         <div class="form-group">
+                            <label class="text-center container-fluid border border-secondary p-1" for="Tarea Anterior">Tarea Anterior: <%= user.ProximaTarea%> </label>
                             <table>
                                 <thead>
                                 <tr>
-                                    <td class="text-center p-1">
+                                    <th class="text-center p-1 " colspan="1" >
                                         <label for="Tarea Realizada">Tarea Realizada: </label>
-                                    </td>
-                                    <td class="text-center p-1">
+                                    </th>
+                                    <th class="text-center p-1 " colspan="1" >
                                         <label for="Proxima Tarea">Proxima Tarea: </label>
-                                    </td>
-                                    <td class="text-center p-1">
+                                    </th>
+                                    <th class="text-center p-1 " colspan="1" >
                                         <label for="FechaLimite">Fecha Limite: </label>
-                                    </td>
-                                    <td class="text-center p-1" colspan="6">
+                                    </th>
+                                    <th class="text-center p-1" colspan="6">
                                         <label for="EstadoEtapa"> Etapa de la tarea:</label>
 
-                                    </td>
-<td class="text-center p-1>
+                                    </th>
+<th class="text-center p-1" colspan="2">
     <label for="ResponsableDeTarea"> Responsable de la Tarea:</label>
-
-</td>
+</th>
                                 </tr>
                             </thead>
-                                <tr>
                                     <tbody>
+                                <tr>
                                     <td>
                                         <input class="p-1" type="text" name="TareaRealizada" id="TareaRealizada"
                                             placeholder="Ingrese ultima tarea realizada">
@@ -118,11 +118,11 @@
                                     <td>
                                         <input class="form-check-input" type="radio" name="EtapaTarea" id="EtapaTarea"
                                             value="1ra parte">
-                                        <label class="form-check-label" for="EtapaTarea">1ra parte</label>
+                                        <label class="form-check-label" for="EtapaTarea">1° parte</label>
                                     </td>
                                     <td> <input class="form-check-input" type="radio" name="EtapaTarea" id="EtapaTarea"
                                             value="2da parte">
-                                        <label class="form-check-label" for="EtapaTarea"> 2da parte</label>
+                                        <label class="form-check-label" for="EtapaTarea"> 2° parte</label>
                                     </td>
                                     <td> <input class="form-check-input" type="radio" name="EtapaTarea" id="EtapaTarea"
                                             value="Obras">
@@ -133,7 +133,6 @@
                                         <label class="form-check-label" for="EtapaTarea">Caos </label>
                                     </td>
                                     <td>
-
                                         <input class="form-check-input" type="radio" name="EtapaTarea" id="EtapaTarea"
                                             value="Finalizada">
                                         <label class="form-check-label" for="EtapaTarea">Finalizada </label>
@@ -141,28 +140,11 @@
 <td required class="table bordered">
         <input type="radio" name="ResponsableDeTarea" id="ResponsableDeTarea" required value="Mauricio"> Mauricio
         <input type="radio" name="ResponsableDeTarea" id="ResponsableDeTarea" value="Gustavo"> Gustavo
-        <input type="radio" name="ResponsableDeTarea" id="ResponsableDeTarea" value="Mario"> Mario
 </td>
-                                </tbody>
-
-                                </tr>
-
-                               
-                                <tr>
-                                <label class="text-center border border-secondary p-1" for="Tarea Anterior">Tarea Anterior: <%= user.ProximaTarea%> </label>
-                            </tr>
-                            <br>
-                           
-
+</tr>
+                        </tbody>
                             </table>
-                            
-                        </div>
-                        <br>
-                       
-                        
-                    </div>
-                <br>
-              
+                            <br>
                 <div class="button-group text-center" role="group">
                     <button type="submit" class="btn btn-success text-center">Actualizar Tarea</button>
                     <button onClick="history.go(-1);" class="btn btn-secondary text-center"">Cancelar</button>
@@ -805,13 +787,7 @@
                                 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
                                     integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
                                     crossorigin="anonymous"></script>
-                                <script>
-                                    function tablaInterferencias {
-                                        var boton = document.getElementById("botonMostrarInterferencias");
-                                        var tabla = document.getElementById("tablaInterferencias");
-                                    };
-
-                                </script>
+                               
                                 <script>
                                     function estadoInterferencia(nombrePedida, nombreObtenida, booleanIntPedida, boolRecibida) {
                                         if (booleanIntPedida) {
@@ -857,7 +833,9 @@ function FechaVencimientoPermiso(NombreCasilleroMostrar){
                                             if ((user) == "Obras") {
                                                 $('#ModalObras').modal('show');
                                             }
-                                            
+                                            function RevisarFechasVencidas(){
+                                                
+                                            }
                                         });
                                 </script>
                                 <script>
