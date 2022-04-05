@@ -821,7 +821,7 @@ router.post('/act2pCarpEcogas/:id', (req,res)=>{
     var PRIVADO = req.body.PRIVADO;
     var OTROSPERMISOS = req.body.Otrospermisos;
 //Vencimientos de permisos, ART y Ieric
-var VencimientoFerrocarril,VencimientoHidraulica,VencimientoMunicipal,VencimientoDPV,VencimientoDNV,VencimientoIrrigacion,VencimientoPrivado,VencimientoOtrosPermisos;
+var VencimientoFerrocarril,VencimientoHidraulica,VencimientoMunicipal,VencimientoDPV,VencimientoDNV,VencimientoIrrigacion,VencimientoPrivado,VencimientoOtrosPermisos,VencimientoAvisoObraIeric,VencimientoAvisoObraArt;
 VencimientoFerrocarril=req.body.VencimientoFerrocarril;
 VencimientoHidraulica=req.body.VencimientoHidraulica
 VencimientoMunicipal=req.body.VencimientoMunicipal;
@@ -830,6 +830,8 @@ VencimientoDNV=req.body.VencimientoDNV;
 VencimientoIrrigacion=req.body.VencimientoIrrigacion;
 VencimientoPrivado=req.body.VencimientoPrivado;
 VencimientoOtrosPermisos=req.body.VencimientoOtrosPermisos;
+VencimientoAvisoObraArt=req.body.VencimientoAvisoObraArt;
+VencimientoAvisoObraIeric= req.body.VencimientoAvisoObraIeric;
    //Interferencias
    var intTelefonicaPedida = req.body.intTelefonicaPedida;
     var intTelefonicaObtenida = req.body.intTelefonicaObtenida; 
@@ -975,7 +977,7 @@ connection.query(sql,[{ PlanDeTrabajo:PlanDeTrabajo,DocumentacionObra:Documentac
         })
         sql = 'Update clientes Set ? where id=?';
         connection.query(sql,[{
-VencimientoDNV:VencimientoDNV, VencimientoDPV:VencimientoDPV,VencimientoFerrocarril:VencimientoFerrocarril,VencimientoHidraulica:VencimientoHidraulica,VencimientoIrrigacion:VencimientoIrrigacion,VencimientoMunicipal:VencimientoMunicipal,VencimientoOtrosPermisos:VencimientoOtrosPermisos,VencimientoPrivado:VencimientoPrivado
+VencimientoDNV:VencimientoDNV, VencimientoDPV:VencimientoDPV,VencimientoFerrocarril:VencimientoFerrocarril,VencimientoHidraulica:VencimientoHidraulica,VencimientoIrrigacion:VencimientoIrrigacion,VencimientoMunicipal:VencimientoMunicipal,VencimientoOtrosPermisos:VencimientoOtrosPermisos,VencimientoPrivado:VencimientoPrivado,VencimientoAvisoObraArt:VencimientoAvisoObraArt,VencimientoAvisoObraIeric:VencimientoAvisoObraIeric
         },id],
         (error, results) => {
 
