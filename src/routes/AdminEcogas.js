@@ -74,7 +74,6 @@ else{
 }) 
 router.get('/interferencias', (req, res) => {
     if(req.isAuthenticated()){
-        (req, res) => {
     const sql = 'SELECT c.id, c.Nombre, c.NCarpeta, c.intTelefonica, c.intTelefonicaPedida, c.intTelefonicaObtenida, c.intAgua, c.intAguaPedida, c.intAguaObtenida, c.intCloaca,c.intCloacasPedida, c.intCloacasObtenida, c.intClaro, c.intClaroPedida, c.intClaroObtenida, c.intElectricidad, c.intElectricidadPedida, c.intElectricidadObtenida, c.intArnet ,  c.intArnetPedida, c.intArnetObtenida,c.intArsat, c.intArsatPedida, c.intArsatObtenida, c.intTelecomPedida, c.intTelecomObtenida, c.intTelecom FROM clientes c';
     res.locals.moment = moment;
     connection.query(sql, (error, results) => {
@@ -87,7 +86,8 @@ router.get('/interferencias', (req, res) => {
         }
     })
 
-}}else{
+}
+else{
     (req, res) => {
         res.redirect('/');
     }
