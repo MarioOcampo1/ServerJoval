@@ -7,7 +7,7 @@ const session = require('express-session')
 const app = express();
 const nodemon = require('nodemon');
 const { dirname } = require('path');
-const path = require('path'); //El modulo path nos permite concatenar directorios y hacerlos multiplataforma.
+const path = require('path'); //El modulo path nos permite concatenar directorios, para poder usar todos y hacerlos multiplataforma.
 const morgan = require('morgan');
 const { MACROMAN_BIN } = require('mysql/lib/protocol/constants/charsets');
 //Settings
@@ -41,13 +41,14 @@ passport.serializeUser(function(user,done){
 passport.deserializeUser(function(id,done){
 done(null,)
 })
+//Static
+app.use (express.static(path.join(__dirname, 'public')));//Esta linea de codigo le dice a express que la carpeta public esta adentro de src
+app.use(express.static('public'));
 //Routes
 app.use(require('./routes/AdminEcogas')); //Usa el enrutador
 app.use(require('./routes/AdminGeneral'));
-//Static
-app.use (express.static(path.join(__dirname, 'public')));
-app.use (express.static(path.join(__dirname, 'views'))); //Esta linea de codigo le dice a express que la carpeta public esta adentro de src
-app.use(express.static('public'));
+app.use(require('./routes/Compra-Venta'));
+
 //404 Handler
 app.use((req,res,next)=>{
 res.status(404).render('404.ejs');

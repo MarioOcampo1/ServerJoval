@@ -59,17 +59,37 @@ connection.connect(error => {
 })
 //Settings
 //Rutas Get
-router.get('/admingral', (req, res) => {
-    res.render('paginas/AdministracionGeneral/admingral.ejs');
+router.get('/compraventa', (req, res) => {
+//     if(req.isAuthenticated()){
+    res.render('paginas/Compra-Venta/Principal.ejs');
+//     }
+//     else{
+//         (req, res) => {
+//             res.redirect('/');
+//     }
+// }
 })
-router.get('/seguros',(req,res)=>{
-    res.render('paginas/AdministracionGeneral/seguros.ejs');
+router.get('/compra',(req,res)=>{
+    if(req.isAuthenticated()){
+        res.render('paginas/Compra-Venta/compra.ejs');
+
+    }else{
+        (req, res) => {
+            res.redirect('/');
+    }
+    }
 })
-router.get('/infoempresa',(req,res)=>{
-    res.render('paginas/AdministracionGeneral/infoempresa.ejs');
+router.get('/solicitudCotizacion',(req,res)=>{
+    if(req.isAuthenticated()){
+    var filename= './src/public/plantillas/SolicitudDeCotizacion(Plantilla).xlsx';
+    res.download(filename);
+  
+    }else{
+        (req, res) => {
+            res.redirect('/');
+    }
+    }
 })
-router.get('/download/logoJoval',(req,res)=>{
-    var filepath ='/LogoJoval.jpg';
-    var filename= 'Logo Joval.jpeg';
-   res.download(filepath, filename);
+router.post('/nuevasolicitudcotizacion',(req,res)=>{
+    
 })
