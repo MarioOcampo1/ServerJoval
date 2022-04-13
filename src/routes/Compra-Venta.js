@@ -81,7 +81,7 @@ router.get('/compra',(req,res)=>{
 })
 router.get('/solicitudCotizacion',(req,res)=>{
     if(req.isAuthenticated()){
-    var filename= './src/public/plantillas/SolicitudDeCotizacion(Plantilla).xlsx';
+    var filename= './public/plantillas/SolicitudDeCotizacion(Plantilla).xlsx';
     res.download(filename);
   
     }else{
