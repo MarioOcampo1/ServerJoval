@@ -1,21 +1,14 @@
 const express = require('express');
 const passport = require('passport');
 const PassportLocal = require('passport-local').Strategy;
-const cookieParser = require('cookie-parser')
-const session = require('express-session')
-
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
 const app = express();
 const nodemon = require('nodemon');
 const { dirname } = require('path');
 const path = require('path'); //El modulo path nos permite concatenar directorios, para poder usar todos y hacerlos multiplataforma.
 const morgan = require('morgan');
 const { MACROMAN_BIN } = require('mysql/lib/protocol/constants/charsets');
-//Settings
-app.set('port', 3000); //configura port, con el valor 3000, en app
-app.set('views', path.join(__dirname,'views' )); //path concatena dirname con la carpeta llamada views.
-app.set('view engine','ejs'); //Ejs es un lenguaje que nos permite ser utilizado dentro de un html, permitiendo tener condicionales, bucles, dentro del html. 
-//Ejs es usado por defecto por express. Asique no es necesario que lo requiera. directamente se usa.
-
 //Middlewares //Son funciones que se van ejecutando antes de que llegue a las rutas.
 app.use(morgan('dev'));
 app.use(express.urlencoded({extended: true }));
@@ -41,6 +34,12 @@ passport.serializeUser(function(user,done){
 passport.deserializeUser(function(id,done){
 done(null,)
 })
+//Settings
+app.set('port', 3000); //configura port, con el valor 3000, en app
+app.set('views', path.join(__dirname,'views' )); //path concatena dirname con la carpeta llamada views.
+app.set('public', path.join(__dirname,'public' ));
+app.set('view engine','ejs'); //Ejs es un lenguaje que nos permite ser utilizado dentro de un html, permitiendo tener condicionales, bucles, dentro del html. 
+//Ejs es usado por defecto por express. Asique no es necesario que lo requiera. directamente se usa.
 //Static
 app.use (express.static(path.join(__dirname, 'public')));//Esta linea de codigo le dice a express que la carpeta public esta adentro de src
 app.use(express.static('public'));
