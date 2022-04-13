@@ -12,6 +12,7 @@ router.use(session({
     resave:true,
     saveUninitialized: true
 }))
+
 router.use(cookieParser('Mi ultra secreto'));
 router.use(passport.initialize());
 router.use(passport.session());
