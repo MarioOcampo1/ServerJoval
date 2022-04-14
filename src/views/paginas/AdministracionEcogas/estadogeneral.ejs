@@ -37,7 +37,7 @@
                             <th class="text-center text-light bg-dark  " colspan="6">Datos de carpeta</th>
                             <th class="text-center text-light bg-dark " colspan="3">Preliminar</th>
                             <th class="text-center text-light bg-dark " colspan="3">1ra parte</th>
-                            <th class="text-center text-light bg-dark " colspan="10">2da parte</th>
+                            <th class="text-center text-light bg-dark " colspan="11">2da parte</th>
                             <th class="text-center text-light bg-dark " colspan="2">Obras</th>
                             <th class="text-center text-light bg-dark " colspan="5">Caos</th>
                             <th class="text-center text-light bg-dark " colspan="2">Fin de obra</th>
@@ -81,6 +81,9 @@
 
                             <th class="text-center p-3 MenuSuperior">
                                 Permisos especiales
+                            </th>
+                            <th class="text-center p-3 MenuSuperior">
+                                Mail de autorización
                             </th>
                             <th class="text-center p-3 MenuSuperior">
                                 Documentación de obra
@@ -218,9 +221,9 @@
                                             </td>
                                             <%}%>
                                          <%if(clientes.DocumentacionTerreno!="ok"&& clientes.DocumentacionTerreno!="Presentado"&& clientes.DocumentacionTerreno!="EnGestion"&& clientes.DocumentacionTerreno!="Presentado"&& clientes.DocumentacionTerreno!="Sin presentar"){%>
-                                            <%if(clientes.DocumentacionTerreno==null){ %>
-                                                <td class="text-dark bg-danger">
-                                                  ERROR
+                                            <%if(clientes.DocumentacionTerreno==null||clientes.DocumentacionTerreno==""){ %>
+                                                <td class="text-light bg-danger">
+                                                 !
                                                 </td>
                                                 <%}else{%>
                                             <td class="text-dark">
@@ -248,14 +251,13 @@
                                                     </td>
                                                     <%}%>
                                                     <%if(clientes.DocumentacionSociedad!="ok"&& clientes.DocumentacionSociedad!="EnGestion"&& clientes.DocumentacionSociedad!="Presentado"&& clientes.DocumentacionSociedad!="Presentado" && clientes.DocumentacionSociedad!="Sin presentar"){%>
-                                                        <%if(clientes.DocumentacionSociedad==null){ %>
-                                                            <td class="text-dark bg-danger">
-                                                              ERROR
+                                                        <%if(clientes.DocumentacionSociedad==null||clientes.DocumentacionSociedad==""){ %>
+                                                            <td class="text-light bg-danger">
+                                                             !
                                                             </td>
-                                                            <%}else{%>   <td class="text-dark">
-                                                            <%=clientes.DocumentacionSociedad%>
+                                                            <%}%>  
                                                         </td>
-                                                        <%}}%>
+                                                        <%}%>
                                                        
                             <!-- // -->
                             <!-- Documentacion Contractual -->
@@ -275,9 +277,9 @@
                                         </td>
                                         <%}%>
                                         <%if(clientes.DocumentacionContractual!="ok"&& clientes.DocumentacionContractual!="EnGestion" && clientes.DocumentacionContractual!="Presentado"&& clientes.DocumentacionContractual!="Sin presentar"){%>
-                                            <%if(clientes.DocumentacionContractual==null){ %>
-                                                <td class="text-dark bg-danger">
-                                                  ERROR
+                                            <%if(clientes.DocumentacionContractual==null||clientes.DocumentacionContractual==""){ %>
+                                                <td class="text-light bg-danger">
+                                                 !
                                                 </td>
                                                 <%}else{%>
                                             <td class="text-dark">
@@ -303,9 +305,9 @@
                                         </td>
                                         <%}%>
                                         <%if(clientes.Comercial!="ok"&& clientes.Comercial!="EnGestion" && clientes.Comercial!="Presentado"&& clientes.Comercial!="Sin presentar"){%>
-                                            <%if(clientes.Comercial==null){ %>
-                                                <td class="text-dark bg-danger">
-                                                  ERROR
+                                            <%if(clientes.Comercial==null||clientes.Comercial==""){ %>
+                                                <td class="text-light bg-danger">
+                                                 !
                                                 </td>
                                                 <%}else{%>
                                             <td class="text-dark">
@@ -331,9 +333,9 @@
                                         </td>
                                         <%}%>
                                         <%if(clientes.Tecnica!="ok"&& clientes.Tecnica!="EnGestion" && clientes.Tecnica!="Presentado"&& clientes.Tecnica!="Sin presentar"){%>
-                                            <%if(clientes.Tecnica==null){ %>
-                                                <td class="text-dark bg-danger">
-                                                  ERROR
+                                            <%if(clientes.Tecnica==null||clientes.Tecnica==""){ %>
+                                                <td class="text-light bg-danger">
+                                                 !
                                                 </td>
                                                 <%}%>
                                            
@@ -362,12 +364,31 @@
                                                 </td>
                                                 <%}%>
                                                 <%if(clientes.PermisosEspeciales!="ok"&& clientes.PermisosEspeciales!="EnGestion"&& clientes.PermisosEspeciales!="Presentado"&& clientes.PermisosEspeciales!="Sin presentar"&& clientes.PermisosEspeciales!="Observado"){%>
-                                                    <%if(clientes.PermisosEspeciales==null){ %>
+                                                    <%if(clientes.PermisosEspeciales==null||clientes.PermisosEspeciales==""){ %>
                                                         <td class="text-dark bg-danger">
-                                                          ERROR
+                                                         !
                                                         </td>
                                                         <%}%>
                                                     <%}%>
+                                             <!-- // -->
+                             <!-- Mail de autorización -->
+                             <%if(clientes.MailAutorizacion=="Recibido"){%>
+                                <td class="text-light bg-success">
+                                    <%=clientes.MailAutorizacion%>
+                                </td>
+                                <%}%>
+                                    <%if(clientes.MailAutorizacion=="Sin presentar"|| clientes.MailAutorizacion=="No Recibido"){%>
+                                        <td class="text-light bg-danger">
+                                            <%=clientes.MailAutorizacion%>
+                                        </td>
+                                        <%}%>
+                                        <%if((clientes.MailAutorizacion!="Sin presentar"|| clientes.MailAutorizacion!="No Recibido")&&(clientes.MailAutorizacion!="Recibido")&&(clientes.MailAutorizacion!="ok")){%>
+                                            <%if(clientes.MailAutorizacion==null||clientes.MailAutorizacion==""){ %>
+                                                <td class="text-dark bg-danger">
+                                                    Sin cargar
+                                                </td>
+                                                <%}%> 
+                                            <%}%>
                                                 
                              <!-- // -->
                              <!-- Documentacion de obra -->
@@ -387,9 +408,9 @@
                                         </td>
                                         <%}%>
                                         <%if((clientes.DocumentacionObra!="Sin presentar")&&(clientes.DocumentacionObra!="EnGestion")&&(clientes.DocumentacionObra!="ok")){%>
-                                            <%if(clientes.DocumentacionObra==null){ %>
-                                                <td class="text-dark bg-danger">
-                                                  ERROR
+                                            <%if(clientes.DocumentacionObra==null||clientes.DocumentacionObra==""){ %>
+                                                <td class="text-light bg-danger">
+                                                 !
                                                 </td>
                                                 <%}%> 
                                             <%}%>
@@ -412,9 +433,9 @@
                                         </td>
                                         <%}%>
                                         <%if((clientes.Seguridad!="Sin presentar")&&(clientes.Seguridad!="EnGestion")&&(clientes.Seguridad!="ok")){%>
-                                            <%if(clientes.Seguridad==null){ %>
-                                                <td class="text-dark bg-danger">
-                                                  ERROR
+                                            <%if(clientes.Seguridad==null||clientes.Seguridad==""){ %>
+                                                <td class="text-light bg-danger">
+                                                 !
                                                 </td>
                                                 <%}%>  
                                             </td>
@@ -438,9 +459,9 @@
                                         </td>
                                         <%}%>
                                         <%if((clientes.Interferencias!="Sin presentar")&&(clientes.Interferencias!="EnGestion")&&(clientes.Interferencias!="ok")){%>
-                                            <%if(clientes.Interferencias==null){ %>
-                                                <td class="text-dark bg-danger">
-                                                  ERROR
+                                            <%if(clientes.Interferencias==null||clientes.Interferencias==""){ %>
+                                                <td class="text-light bg-danger">
+                                                 !
                                                 </td>
                                                 <%}%>
                                             <%}%>
@@ -463,9 +484,9 @@
                                         </td>
                                         <%}%>
                                         <%if((clientes.Permisos!="Sin presentar")&&(clientes.Permisos!="EnGestion")&&(clientes.Permisos!="ok")){%>
-                                            <%if(clientes.Permisos==null){ %>
-                                                <td class="text-dark bg-danger">
-                                                  ERROR
+                                            <%if(clientes.Permisos==null||clientes.Permisos==""){ %>
+                                                <td class="text-light bg-danger">
+                                                 !
                                                 </td>
                                                 <%}%>
                                             <%}%>
@@ -488,9 +509,9 @@
                                         </td>
                                         <%}%>
                                         <%if((clientes.PlanDeTrabajo!="Sin presentar")&&(clientes.PlanDeTrabajo!="EnGestion")&&(clientes.PlanDeTrabajo!="ok")){%>
-                                            <%if(clientes.PlanDeTrabajo==null){ %>
-                                                <td class="text-dark bg-danger">
-                                                  ERROR
+                                            <%if(clientes.PlanDeTrabajo==null||clientes.PlanDeTrabajo==""){ %>
+                                                <td class="text-light bg-danger">
+                                                 !
                                                 </td>
                                                 <%}%>
                                             <%}%>
@@ -513,9 +534,9 @@
                                         </td>
                                         <%}%>
                                         <%if((clientes.Matriculas!="Sin presentar")&&(clientes.Matriculas!="EnGestion")&&(clientes.Matriculas!="ok")){%>
-                                            <%if(clientes.Matriculas==null){ %>
-                                                <td class="text-dark bg-danger">
-                                                  ERROR
+                                            <%if(clientes.Matriculas==null||clientes.Matriculas==""){ %>
+                                                <td class="text-light bg-danger">
+                                                 !
                                                 </td>
                                                 <%}}%>
                                          
@@ -537,9 +558,9 @@
                                         </td>
                                         <%}%>
                                         <%if((clientes.Ambiente!="Sin presentar")&&(clientes.Ambiente!="EnGestion")&&(clientes.Ambiente!="ok")){%>
-                                            <%if(clientes.Ambiente==null){ %>
-                                                <td class="text-dark bg-danger">
-                                                  ERROR
+                                            <%if(clientes.Ambiente==null||clientes.Ambiente==""){ %>
+                                                <td class="text-light bg-danger">
+                                                 !
                                                 </td>
                                                 <%}}%>
                                           
@@ -561,9 +582,9 @@
                                         </td>
                                         <%}%>
                                         <%if((clientes.NotaCumplimentoNormativas!="Sin presentar")&&(clientes.NotaCumplimentoNormativas!="EnGestion")&&(clientes.NotaCumplimentoNormativas!="ok")){%>
-                                            <%if(clientes.NotaCumplimentoNormativas==null){ %>
-                                                <td class="text-dark bg-danger">
-                                                  ERROR
+                                            <%if(clientes.NotaCumplimentoNormativas==null||clientes.NotaCumplimentoNormativas==""){ %>
+                                                <td class="text-light bg-danger">
+                                                 !
                                                 </td>
                                                 <%}}%>
                                          
@@ -585,9 +606,9 @@
                                         </td>
                                         <%}%>
                                         <%if((clientes.DDJJNAG153!="Sin presentar")&&(clientes.DDJJNAG153!="EnGestion")&&(clientes.DDJJNAG153!="ok")){%>
-                                            <%if(clientes.DDJJNAG153==null){ %>
-                                                <td class="text-dark bg-danger">
-                                                  ERROR
+                                            <%if(clientes.DDJJNAG153==null||clientes.DDJJNAG153==""){ %>
+                                                <td class="text-light bg-danger">
+                                                 !
                                                 </td>
                                                 <%}}%>
                                            
@@ -609,9 +630,9 @@
                                         </td>
                                         <%}%>
                                         <%if((clientes.Avisos!="Sin presentar")&&(clientes.Avisos!="EnGestion")&&(clientes.Avisos!="ok")){%>
-                                            <%if(clientes.Avisos==null){ %>
-                                                <td class="text-dark bg-danger">
-                                                  ERROR
+                                            <%if(clientes.Avisos==null||clientes.Avisos==""){ %>
+                                                <td class="text-light bg-danger">
+                                                 !
                                                 </td>
                                                 <%}}%>
                                           
@@ -633,9 +654,9 @@
                                         </td>
                                         <%}%>
                                         <%if((clientes.DocumentacionInspeccion!="Sin presentar")&&(clientes.DocumentacionInspeccion!="EnGestion")&&(clientes.DocumentacionInspeccion!="ok")){%>
-                                            <%if(clientes.DocumentacionInspeccion==null){ %>
-                                                <td class="text-dark bg-danger">
-                                                  ERROR
+                                            <%if(clientes.DocumentacionInspeccion==null||clientes.DocumentacionInspeccion==""){ %>
+                                                <td class="text-light bg-danger">
+                                                 !
                                                 </td>
                                                 <%}}%>
                                            
@@ -657,9 +678,9 @@
                                         </td>
                                         <%}%>
                                         <%if((clientes.ComunicacionObras!="Leer historial de carpeta")&&(clientes.ComunicacionObras!="EnGestion")&&(clientes.ComunicacionObras!="ok")){%>
-                                            <%if(clientes.ComunicacionObras==null){ %>
-                                                <td class="text-dark bg-danger">
-                                                  ERROR
+                                            <%if(clientes.ComunicacionObras==null||clientes.ComunicacionObras==""){ %>
+                                                <td class="text-light bg-danger">
+                                                 !
                                                 </td>
                                                 <%}}%>
                                       
@@ -681,9 +702,9 @@
                                         </td>
                                         <%}%>
                                         <%if((clientes.ActasFinalesEcogas!="Sin recibir")&&(clientes.ActasFinalesEcogas!="Recibidas")&&(clientes.ActasFinalesEcogas!="Firmadas")&&(clientes.ActasFinalesEcogas!="ok")){%>
-                                            <%if(clientes.ActasFinalesEcogas==null){ %>
-                                                <td class="text-dark bg-danger">
-                                                  ERROR
+                                            <%if(clientes.ActasFinalesEcogas==null||clientes.ActasFinalesEcogas==""){ %>
+                                                <td class="text-light bg-danger">
+                                                 !
                                                 </td>
                                                 <%}}%>
                                          
@@ -705,9 +726,9 @@
                                         </td>
                                         <%}%>
                                         <%if((clientes.PlanosyCroquis!="Sin presentar")&&(clientes.PlanosyCroquis!="EnGestion")&&(clientes.PlanosyCroquis!="Aprobado/Impreso")&&(clientes.PlanosyCroquis!="ok")&&(clientes.PlanosyCroquis!="Presentado")){%>
-                                            <%if(clientes.PlanosyCroquis==null){ %>
-                                                <td class="text-dark bg-danger">
-                                                  ERROR
+                                            <%if(clientes.PlanosyCroquis==null||clientes.PlanosyCroquis==""){ %>
+                                                <td class="text-light bg-danger">
+                                                 !
                                                 </td>
                                                 <%}}%>
                                          
@@ -729,9 +750,9 @@
                                         </td>
                                         <%}%>
                                         <%if((clientes.ConformeEntidades!="Sin presentar")&&(clientes.ConformeEntidades!="EnGestion")&&(clientes.ConformeEntidades!="ok")){%>
-                                            <%if(clientes.ConformeEntidades==null){ %>
-                                                <td class="text-dark bg-danger">
-                                                  ERROR
+                                            <%if(clientes.ConformeEntidades==null||clientes.ConformeEntidades==""){ %>
+                                                <td class="text-light bg-danger">
+                                                 !
                                                 </td>
                                                 <%}}%>
                                           
@@ -753,9 +774,9 @@
                                         </td>
                                         <%}%>
                                         <%if((clientes.PruebaHermeticidad!="Sin realizar")&&(clientes.PruebaHermeticidad!="EnGestion")&&(clientes.PruebaHermeticidad!="ok")){%>
-                                            <%if(clientes.PruebaHermeticidad==null){ %>
-                                                <td class="text-dark bg-danger">
-                                                  ERROR
+                                            <%if(clientes.PruebaHermeticidad==null||clientes.PruebaHermeticidad==""){ %>
+                                                <td class="text-light bg-danger">
+                                                 !
                                                 </td>
                                                 <%}}%>
                                           
@@ -777,9 +798,9 @@
                                         </td>
                                         <%}%>
                                         <%if((clientes.InformesFinales!="Sin presentar")&&(clientes.InformesFinales!="EnGestion")&&(clientes.InformesFinales!="ok")){%>
-                                            <%if(clientes.InformesFinales==null){ %>
-                                                <td class="text-dark bg-danger">
-                                                  ERROR
+                                            <%if(clientes.InformesFinales==null||clientes.InformesFinales==""){ %>
+                                                <td class="text-light bg-danger">
+                                                 !
                                                 </td>
                                                 <%}}%>
                                          
@@ -801,9 +822,9 @@
                                         </td>
                                         <%}%>
                                         <%if((clientes.PresentacionFinal!="Sin presentar")&&(clientes.PresentacionFinal!="EnGestion")&&(clientes.PresentacionFinal!="ok")){%>
-                                            <%if(clientes.PresentacionFinal==null){ %>
-                                                <td class="text-dark bg-danger">
-                                                  ERROR
+                                            <%if(clientes.PresentacionFinal==null||clientes.PresentacionFinal==""){ %>
+                                                <td class="text-light bg-danger">
+                                                 !
                                                 </td>
                                                 <%}}%>
                                           
@@ -825,9 +846,9 @@
                                         </td>
                                         <%}%>
                                         <%if((clientes.HabilitacionObra!="Sin presentar")&&(clientes.HabilitacionObra!="EnGestion")&&(clientes.HabilitacionObra!="ok")){%>
-                                            <%if(clientes.HabilitacionObra==null){ %>
-                                                <td class="text-dark bg-danger">
-                                                  ERROR
+                                            <%if(clientes.HabilitacionObra==null||clientes.HabilitacionObra==""){ %>
+                                                <td class="text-light bg-danger">
+                                                 !
                                                 </td>
                                                 <%}}%>
                                           
