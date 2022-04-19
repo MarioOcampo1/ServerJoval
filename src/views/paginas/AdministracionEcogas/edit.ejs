@@ -35,7 +35,7 @@
                     <input type="hidden" name="id" id="id" value="<%= user.id%>">
                     <input type="hidden" name="Nombre" id="Nombre" value="<%= user.Nombre%>">
 
-                    <button type="submit" class="btn btn-danger" onclick="return confirmarDelete()"> Eliminar
+                    <button type="submit" class="btn btn-danger" onclick=" confirmarDelete()"> Eliminar
                       Cliente</button>
 
                   </form>
@@ -48,6 +48,8 @@
 
           <form action="/update/<%= user.id%>" method="POST">
             <input type="hidden" name="id" id="id" value="<%= user.id%>">
+            <input type="hidden" name="Nombre" id="Nombre" value="<%= user.Nombre%>">
+
             <div class="form-group">
 
               <label for="Nombre">Nombre de carpeta</label>

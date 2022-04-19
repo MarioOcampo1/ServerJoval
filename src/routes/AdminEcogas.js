@@ -371,6 +371,7 @@ router.post('/TareaOk/:Nombre', (req, res) => {
 })
 router.post('/update/:id', (req, res) => {
     res.locals.moment = moment;
+    const NombreOriginal= req.body.Nombre;
     const id = req.body.id;
     const NombreCarpeta = req.body.NombreCarpeta;
     const NCarpeta = req.body.NCarpeta
@@ -402,7 +403,24 @@ router.post('/update/:id', (req, res) => {
         console.log('fecha limite a actualizar es: ' + Fecha_limite);
         console.log('fecha limite a actualizar es: ' + req.body.Fecha_limite);
         //console.log(Tarea_Realizada: TareaRealizada, ProximaTarea: ProximaTarea);
-        var sql = 'Update clientes Set ? where id =?';
+        var sql = 'Update clientes_tareasgenerales Set ? where Nombre =?';
+        connection.query(sql,[{
+            Nombre: NombreCarpeta
+        },NombreOriginal], (error, results)=>{
+            if (error) console.log( error);
+            console.log('Actualizando clientes_tareasgenerales');
+        }
+        )
+        sql= 'Update historialdecambios Set? where Nombre_sub=? ';
+        connection.query(sql,[{
+            Nombre_sub: NombreCarpeta
+        },NombreOriginal], (error, results)=>{
+            if (error) console.log( error);
+            console.log('Actualizando historialdecambios');
+
+        }
+        )
+        sql = 'Update clientes Set ? where id =?';
         connection.query(sql, [{
             Nombre: NombreCarpeta, NCarpeta: NCarpeta, DNVVisacion:DNVVisacion, HIDRAULICAVisacion:HIDRAULICAVisacion, FerrocarrilesVisacion:FERROCARRILVisacion,Comitente: Comitente, Ubicacion: Departamento, DNV: DNV, DPV: DPV, Irrigacion: Irrigacion,
             Hidraulica: HIDRAULICA, Privado: Privado, Ferrocarriles: FERROCARRIL, TipoDeRed: TipoDeRed, Fecha_limite: Fecha_limite, 
@@ -423,8 +441,27 @@ router.post('/update/:id', (req, res) => {
             })
     }
     else {
+        console.log('No se ha detectado fecha limite');
         if (NombreCarpeta != null) {
-            const sql = 'Update clientes Set ? where id =?';
+            var sql = 'Update clientes_tareasgenerales Set? where Nombre =?';
+        connection.query(sql,[{
+            Nombre: NombreCarpeta
+        },NombreOriginal], (error, results)=>{
+            if (error) console.log( error);
+            console.log('Actualizando clientes_tareasgenerales');
+
+        }
+        )
+        sql= 'Update historialdecambios Set? where Nombre_sub=? ';
+        connection.query(sql,[{
+            Nombre_sub: NombreCarpeta
+        },NombreOriginal], (error, results)=>{
+            if (error) console.log( error);
+            console.log('Actualizando historialdecambios');
+
+        }
+        )
+             sql = 'Update clientes Set ? where id =?';
             connection.query(sql, [{
                 Nombre: NombreCarpeta, NCarpeta: NCarpeta, DNVVisacion:DNVVisacion, HIDRAULICAVisacion:HIDRAULICAVisacion, FerrocarrilesVisacion:FERROCARRILVisacion, Comitente: Comitente, Ubicacion: Departamento, DNV: DNV, DPV: DPV, Irrigacion: Irrigacion,
                 Hidraulica: HIDRAULICA, Ferrocarriles: FERROCARRIL, TipoDeRed: TipoDeRed,OtrosPermisos: OTROSPERMISOS,Privado: Privado,PerMunicipal:PerMunicipal
