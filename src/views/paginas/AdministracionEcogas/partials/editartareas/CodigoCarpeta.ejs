@@ -20,11 +20,13 @@
                       N°
                   </th>
                   <th>Nombre de carpeta</th>
+                  
               </tr>
             </thead>
             <tbody>
                
                     <%results.forEach((Codigo)=>{%>
+                      <% if(Codigo.Codigoenuso=="N"){%>
                         <tr>
                     
                             <td>
@@ -35,7 +37,7 @@
 <%= Codigo.Nombre%>
 </td>
 </tr>
-<%})%>
+<%}})%>
                
               <!-- <tr>
                 <th scope="row">1</th>
@@ -57,6 +59,8 @@
               </tr> -->
             </tbody>
           </table>
-        <%}%>
+        <%}else{%>
+          "No hay codigos disponibles"
+          <%}%>
 </body>
 </html>

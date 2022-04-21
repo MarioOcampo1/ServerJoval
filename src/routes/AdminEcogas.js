@@ -312,7 +312,7 @@ router.get('/ComunicacionAlSistema', (req, res) => {
 router.get('/CodigoCarpeta', (req, res) => {
     if(req.isAuthenticated()){
     res.locals.moment = moment;
-    const sql = 'Select Codigo,Nombre, Codigoenuso from clientes';
+    const sql = 'Select Codigo,Nombre,Codigoenuso from clientes';
     connection.query(sql, (error, results) => {
         if (error) console.log( error);
         if (results.length > 0) {
