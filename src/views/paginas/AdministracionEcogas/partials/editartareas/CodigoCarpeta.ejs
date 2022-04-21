@@ -20,13 +20,9 @@
                 <tr>
                     <%var i =0;%>
                     <%results.forEach((Codigo)=>{%>
-<%i++;%>
-                        <td>
+                        <th>
                 <%= Codigo.Codigo%>
-            </td>
-            <%if (i=9){i=0;%>
-                <br>
-                <%}%>
+            </th>
                 <%})%>
                 </tr>
               <!-- <tr>
