@@ -15,14 +15,28 @@
               <tr>
                 Codigos en uso
               </tr>
+              <tr>
+                  <th>
+                      N°
+                  </th>
+                  <th>Nombre de carpeta</th>
+              </tr>
             </thead>
             <tbody>
-                <tr>
-                    <%var i =0;%>
+               
                     <%results.forEach((Codigo)=>{%>
+                        <tr>
+                    
+                            <td>
                 <%= Codigo.Codigo%>
-                 <%})%>
-                </tr>
+                
+                </td>
+<td>
+<%= Codigo.Nombre%>
+</td>
+</tr>
+<%})%>
+               
               <!-- <tr>
                 <th scope="row">1</th>
                 <td>Mark</td>
