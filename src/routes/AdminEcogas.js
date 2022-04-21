@@ -133,7 +133,7 @@ else {
 }})
 router.get('/adminecogas/TablaGeneral', (req, res) => {
     // const sql = 'SELECT c.id, c.Nombre, c.NCarpeta,a.ResponsableDeTarea, c.TareaRealizada, c.ProximaTarea,c.EtapaTarea, c.FechaLimite, c.Estado FROM clientes c, historialdecambios a where c.Nombre = a.Nombre_sub'; //SQL ORIGINAL
-    var sql = 'Select c.Nombre_sub, a.NCarpeta, a.Estado, a.id, c.ResponsableDeTarea,c.Tarea_Realizada_sub, c.Proxima_Tarea_sub, c.Fecha_Proxima_Tarea_sub, c.EtapaTarea_sub from historialdecambios c , clientes a where a.Nombre = c.Nombre_sub AND c.Si_NO_TareaRealizada != "S"  '; //AND (DATE_SUB(CURDATE(), interval 7 day)) <= c.Fecha_Proxima_Tarea_sub  Permite mostrar las fechas proximas a vencerse. ';
+    var sql = 'Select c.Nombre_sub, a.NCarpeta,a.Codigo,a.Codigoenuso, a.Estado, a.id, c.ResponsableDeTarea,c.Tarea_Realizada_sub, c.Proxima_Tarea_sub, c.Fecha_Proxima_Tarea_sub, c.EtapaTarea_sub from historialdecambios c , clientes a where a.Nombre = c.Nombre_sub AND c.Si_NO_TareaRealizada != "S"  '; //AND (DATE_SUB(CURDATE(), interval 7 day)) <= c.Fecha_Proxima_Tarea_sub  Permite mostrar las fechas proximas a vencerse. ';
     res.locals.moment = moment;
     connection.query(sql, (error, results) => {
         if (error) console.log( error);
