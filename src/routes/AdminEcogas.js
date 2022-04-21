@@ -309,6 +309,23 @@ router.get('/ComunicacionAlSistema', (req, res) => {
 
  } else{ res.redirect('/');}
 })
+router.get('/CodigoCarpeta', (req, res) => {
+    if(req.isAuthenticated()){
+    res.locals.moment = moment;
+    const sql = 'Select Codigo, Codigoenuso from clientes';
+    connection.query(sql, (error, results) => {
+        if (error) console.log( error);
+        if (results.length > 0) {
+            res.render('paginas/AdministracionEcogas/partials/editartareas/CodigoCarpeta.ejs' ,{results: results})
+        }else {
+            res.render("Ningun resultado encontrado");
+
+
+        }
+    })
+
+ } else{ res.redirect('/');}
+})
 
 
 
