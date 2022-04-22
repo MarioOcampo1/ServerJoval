@@ -121,7 +121,15 @@
         },
        
         "columns": [
-          {"width":"5%","data": "Codigo" },
+          {"width":"5%","data": "Codigo", render: function(data,type,row){
+            var Codigoenuso= row.Codigoenuso;
+            if(Codigoenuso=="N"){
+              return 'S/C';
+            }
+            else{
+              return row.Codigo;
+            }
+          }},
           { "width":"5%","data": "Nombre_sub", render: function(data,type,row){
             return '<a href="/editarTareas/' + row.id + '" class="btn btn-outline-secondary btn-sm">'+row.Nombre_sub+'</a>'
           } },
