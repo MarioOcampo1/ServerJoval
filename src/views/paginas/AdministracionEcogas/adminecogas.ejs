@@ -121,13 +121,13 @@
         },
        
         "columns": [
-          {"width":"5%","data": "Codigo", render: function(data,type,row){
-            var Codigoenuso= row.Codigoenuso;
-            if(Codigoenuso=="N"){
+          {"width":"5%","data": "CodigoVigentes", render: function(data,type,row){
+            var CodigoEnUsoVigentes= row.CodigoEnUsoVigentesVigentes;
+            if(CodigoEnUsoVigentes=="N"){
               return '';
             }
             else{
-              return row.Codigo;
+              return row.CodigoVigentes;
             }
           }},
           { "width":"5%","data": "Nombre_sub", render: function(data,type,row){

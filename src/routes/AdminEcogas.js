@@ -133,7 +133,7 @@ else {
 }})
 router.get('/adminecogas/TablaGeneral', (req, res) => {
     // const sql = 'SELECT c.id, c.Nombre, c.NCarpeta,a.ResponsableDeTarea, c.TareaRealizada, c.ProximaTarea,c.EtapaTarea, c.FechaLimite, c.Estado FROM clientes c, historialdecambios a where c.Nombre = a.Nombre_sub'; //SQL ORIGINAL
-    var sql = 'Select c.Nombre_sub, a.NCarpeta,a.Codigo,a.Codigoenuso, a.Estado, a.id, c.ResponsableDeTarea,c.Tarea_Realizada_sub, c.Proxima_Tarea_sub, c.Fecha_Proxima_Tarea_sub, c.EtapaTarea_sub from historialdecambios c , clientes a where a.Nombre = c.Nombre_sub AND c.Si_NO_TareaRealizada != "S"  '; //AND (DATE_SUB(CURDATE(), interval 7 day)) <= c.Fecha_Proxima_Tarea_sub  Permite mostrar las fechas proximas a vencerse. ';
+    var sql = 'Select b.CodigoVigentes,b.CodigoEnUsoVigentes, c.Nombre_sub, a.NCarpeta, a.Estado, a.id, c.ResponsableDeTarea,c.Tarea_Realizada_sub, c.Proxima_Tarea_sub, c.Fecha_Proxima_Tarea_sub, c.EtapaTarea_sub from  clientes a, codificacioncarpetas b, historialdecambios c  where a.Nombre = c.Nombre_sub AND c.Si_NO_TareaRealizada != "S"  '; //AND (DATE_SUB(CURDATE(), interval 7 day)) <= c.Fecha_Proxima_Tarea_sub  Permite mostrar las fechas proximas a vencerse. ';
     res.locals.moment = moment;
     connection.query(sql, (error, results) => {
         if (error) console.log( error);
@@ -312,7 +312,7 @@ router.get('/ComunicacionAlSistema', (req, res) => {
 router.get('/CodigoCarpeta', (req, res) => {
     if(req.isAuthenticated()){
     res.locals.moment = moment;
-    const sql = 'Select Codigo,Nombre,Codigoenuso from clientes';
+    const sql = 'Select * from codificacioncarpetas';
     connection.query(sql, (error, results) => {
         if (error) console.log( error);
         if (results.length > 0) {
@@ -442,9 +442,16 @@ router.post('/update/:id', (req, res) => {
 
         }
         )
+         sql= 'Update codificacioncarpetas Set? where Nombre=?';
+connection.query(sql, [{
+   CodigoVigentes:CodigoNuevo, CodigoEnUsoVigentes:"S"
+}, NombreCarpeta], (error, results) => {
+    if (error) console.log( error);
+    
+})
         sql = 'Update clientes Set ? where id =?';
         connection.query(sql, [{
-            Codigoenuso:"S" ,Nombre: NombreCarpeta, Codigo:CodigoNuevo, NCarpeta: NCarpeta, DNVVisacion:DNVVisacion, HIDRAULICAVisacion:HIDRAULICAVisacion, FerrocarrilesVisacion:FERROCARRILVisacion,Comitente: Comitente, Ubicacion: Departamento, DNV: DNV, DPV: DPV, Irrigacion: Irrigacion,
+           Nombre: NombreCarpeta, NCarpeta: NCarpeta, DNVVisacion:DNVVisacion, HIDRAULICAVisacion:HIDRAULICAVisacion, FerrocarrilesVisacion:FERROCARRILVisacion,Comitente: Comitente, Ubicacion: Departamento, DNV: DNV, DPV: DPV, Irrigacion: Irrigacion,
             Hidraulica: HIDRAULICA, Privado: Privado, Ferrocarriles: FERROCARRIL, TipoDeRed: TipoDeRed, Fecha_limite: Fecha_limite, 
             PerMunicipal:PerMunicipal, OtrosPermisos: OTROSPERMISOS
         }, id]
@@ -483,6 +490,13 @@ router.post('/update/:id', (req, res) => {
 
         }
         )
+        sql= 'Update codificacioncarpetas Set? where Nombre=?';
+        connection.query(sql, [{
+           CodigoVigentes:CodigoNuevo, CodigoEnUsoVigentes:"S"
+        }, NombreCarpeta], (error, results) => {
+            if (error) console.log( error);
+            
+        })
              sql = 'Update clientes Set ? where id =?';
             connection.query(sql, [{
                 Codigoenuso:"S" ,Nombre: NombreCarpeta, Codigo:CodigoNuevo,NCarpeta: NCarpeta, DNVVisacion:DNVVisacion, HIDRAULICAVisacion:HIDRAULICAVisacion, FerrocarrilesVisacion:FERROCARRILVisacion, Comitente: Comitente, Ubicacion: Departamento, DNV: DNV, DPV: DPV, Irrigacion: Irrigacion,
@@ -505,6 +519,13 @@ router.post('/update/:id', (req, res) => {
 
         }
         else {
+            sql= 'Update codificacioncarpetas Set? where Nombre=?';
+            connection.query(sql, [{
+               CodigoVigentes:CodigoNuevo, CodigoEnUsoVigentes:"S"
+            }, NombreCarpeta], (error, results) => {
+                if (error) console.log( error);
+                
+            })
             const sql = 'Update clientes Set ? where id =?';
             connection.query(sql, [{
                 Codigoenuso:"S" ,NCarpeta: NCarpeta, Codigo:CodigoNuevo, Comitente: Comitente, Ubicacion: Departamento, DNV: DNV, DPV: DPV, Irrigacion: IRRIGACION,
@@ -571,6 +592,12 @@ router.post('/edit/delete/:id', (req, res) => {
         if (results.length > 0) {
             
         }})
+        sql='Delete from codificacioncarpetas where Nombre=?';
+        connection.query(sql, [Nombre], (error, results) => {
+            if (error) console.log( error);
+            if (results.length > 0) {
+                
+            }})
         sql = 'Delete FROM clientes_tareasgenerales WHERE Nombre =?';
         connection.query(sql, [Nombre], (error, results) => {
             if (error) console.log( error);
@@ -636,9 +663,16 @@ router.post('/guardarNuevoCliente', (req, res) => {
     }, (error, results) => {
         if (error) console.log( error);
     })
+    sql= 'Insert into codificacioncarpetas Set?';
+    connection.query(sql, {
+       CodigoVigentes:Codigo, CodigoEnUsoVigentes:"S", Nombre: Nombre
+    }, (error, results) => {
+        if (error) console.log( error);
+        
+    })
     sql = 'Insert into clientes set ?';
     connection.query(sql, {
-        Nombre: Nombre,Codigo:Codigo, Codigoenuso:"S", NCarpeta: NCarpeta, Comitente: Comitente, Ubicacion: Departamento, DNV: DNV, DPV: DPV, Irrigacion: IRRIGACION,
+        Nombre: Nombre, NCarpeta: NCarpeta, Comitente: Comitente, Ubicacion: Departamento, DNV: DNV, DPV: DPV, Irrigacion: IRRIGACION,
         Hidraulica: HIDRAULICA,PerMunicipal:PerMunicipal, Ferrocarriles: FERROCARRIL,Privado:Privado, OtrosPermisos: OTROSPERMISOS, TipoDeRed: TipoDeRed
     }, (error, results) => {
         if (error) console.log( error);
@@ -1233,15 +1267,23 @@ connection.query(sql,[{ PresentacionFinal:PresentacionFinal,HabilitacionObra:Hab
 //Opciones de editar tareas POST
 router.post('/ActualizarEstadoCarpeta/:id', (req, res) => {
     var id = req.body.id;
+    var Nombre = req.body.Nombre;
     var Estado= req.body.Estado; 
 if(Estado="Finalizada"){
     var CodigoEnUso="N";
 } else{
     var CodigoEnUso="S";
 }
+var sql= 'Update codificacioncarpetas Set? where Nombre=?';
+connection.query(sql, [{
+   CodigoEnUsoVigentes:CodigoEnUso
+}, Nombre], (error, results) => {
+    if (error) console.log( error);
+    
+})
     var sql = 'Update clientes Set ? where id=?';
     connection.query(sql, [{
-        Estado: Estado, Codigoenuso:CodigoEnUso
+        Estado: Estado, 
     }, id], (error, results) => {
         if (error) console.log( error);
         
