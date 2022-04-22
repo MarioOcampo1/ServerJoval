@@ -388,6 +388,7 @@ router.post('/TareaOk/:Nombre', (req, res) => {
 })
 router.post('/update/:id', (req, res) => {
     res.locals.moment = moment;
+    const Codigo= req.body.Codigo;
     const NombreOriginal= req.body.Nombre;
     const id = req.body.id;
     const NombreCarpeta = req.body.NombreCarpeta;
@@ -439,7 +440,7 @@ router.post('/update/:id', (req, res) => {
         )
         sql = 'Update clientes Set ? where id =?';
         connection.query(sql, [{
-            Nombre: NombreCarpeta, NCarpeta: NCarpeta, DNVVisacion:DNVVisacion, HIDRAULICAVisacion:HIDRAULICAVisacion, FerrocarrilesVisacion:FERROCARRILVisacion,Comitente: Comitente, Ubicacion: Departamento, DNV: DNV, DPV: DPV, Irrigacion: Irrigacion,
+            Nombre: NombreCarpeta, Codigo:Codigo, NCarpeta: NCarpeta, DNVVisacion:DNVVisacion, HIDRAULICAVisacion:HIDRAULICAVisacion, FerrocarrilesVisacion:FERROCARRILVisacion,Comitente: Comitente, Ubicacion: Departamento, DNV: DNV, DPV: DPV, Irrigacion: Irrigacion,
             Hidraulica: HIDRAULICA, Privado: Privado, Ferrocarriles: FERROCARRIL, TipoDeRed: TipoDeRed, Fecha_limite: Fecha_limite, 
             PerMunicipal:PerMunicipal, OtrosPermisos: OTROSPERMISOS
         }, id]
@@ -480,7 +481,7 @@ router.post('/update/:id', (req, res) => {
         )
              sql = 'Update clientes Set ? where id =?';
             connection.query(sql, [{
-                Nombre: NombreCarpeta, NCarpeta: NCarpeta, DNVVisacion:DNVVisacion, HIDRAULICAVisacion:HIDRAULICAVisacion, FerrocarrilesVisacion:FERROCARRILVisacion, Comitente: Comitente, Ubicacion: Departamento, DNV: DNV, DPV: DPV, Irrigacion: Irrigacion,
+                Nombre: NombreCarpeta, Codigo:Codigo,NCarpeta: NCarpeta, DNVVisacion:DNVVisacion, HIDRAULICAVisacion:HIDRAULICAVisacion, FerrocarrilesVisacion:FERROCARRILVisacion, Comitente: Comitente, Ubicacion: Departamento, DNV: DNV, DPV: DPV, Irrigacion: Irrigacion,
                 Hidraulica: HIDRAULICA, Ferrocarriles: FERROCARRIL, TipoDeRed: TipoDeRed,OtrosPermisos: OTROSPERMISOS,Privado: Privado,PerMunicipal:PerMunicipal
             }, id]
                 , (error, results) => {
@@ -502,7 +503,7 @@ router.post('/update/:id', (req, res) => {
         else {
             const sql = 'Update clientes Set ? where id =?';
             connection.query(sql, [{
-                NCarpeta: NCarpeta, Comitente: Comitente, Ubicacion: Departamento, DNV: DNV, DPV: DPV, Irrigacion: IRRIGACION,
+                NCarpeta: NCarpeta, Codigo:Codigo, Comitente: Comitente, Ubicacion: Departamento, DNV: DNV, DPV: DPV, Irrigacion: IRRIGACION,
                 Hidraulica: HIDRAULICA, Ferrocarriles: FERROCARRIL, TipoDeRed: TipoDeRed,PerMunicipal:PerMunicipal,Privado: Privado 
             }, id]
                 , (error, results) => {
