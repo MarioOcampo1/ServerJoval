@@ -590,6 +590,7 @@ router.post('/editarContacto/delete/Contacto/:id', (req, res) => {
 })
 router.post('/guardarNuevoCliente', (req, res) => {
     const fechaActual= new Date();
+    const Codigo = req.body.Codigo;
     const Nombre = req.body.NombreCarpeta;
     const NCarpeta = req.body.NCarpeta;
     const Comitente = req.body.Comitente;
@@ -632,7 +633,7 @@ router.post('/guardarNuevoCliente', (req, res) => {
     })
     sql = 'Insert into clientes set ?';
     connection.query(sql, {
-        Nombre: Nombre, NCarpeta: NCarpeta, Comitente: Comitente, Ubicacion: Departamento, DNV: DNV, DPV: DPV, Irrigacion: IRRIGACION,
+        Nombre: Nombre,Codigo:Codigo, NCarpeta: NCarpeta, Comitente: Comitente, Ubicacion: Departamento, DNV: DNV, DPV: DPV, Irrigacion: IRRIGACION,
         Hidraulica: HIDRAULICA,PerMunicipal:PerMunicipal, Ferrocarriles: FERROCARRIL,Privado:Privado, OtrosPermisos: OTROSPERMISOS, TipoDeRed: TipoDeRed
     }, (error, results) => {
         if (error) console.log( error);
