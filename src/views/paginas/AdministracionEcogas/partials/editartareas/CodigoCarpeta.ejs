@@ -5,60 +5,33 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Codigo carpeta</title>
+    <script src=".\bootstrap\dist\js/bootstrap.bundle.min.js"></script>
+    <script
+    src="https://code.jquery.com/jquery-3.6.0.js"integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous">
+  </script>
+  <script>
+    $('#CodigoCarpeta').click(function(){
+                                            $.ajax({
+                                                url: '/CodigoCarpeta',
+                                                method:"GET",
+                                                success: function(data){
+         $('#tablaAjax').html(data);
+                                                },
+                                                error:function(error){
+                                                    console.log('ERROR:' + error);
+                                                },
+                                            });
+                                            $('#ModalCodigosCarpeta').modal('show');
+                                        })
+  </script>
 </head>
 <body>
-    <%if(results){%>
-  
-
-        <table class="table">
-            <thead>
-              <tr>
-                Codigos en uso
-              </tr>
-              <tr>
-                  <th>
-                      N°
-                  </th>
-                  <th>Nombre de carpeta</th>
-                  
-              </tr>
-            </thead>
-            <tbody>
-               
+    <%if(results){%>     
+                <label class="text-center" for=""> Codigos disponibles para ser usados </label>
                     <%results.forEach((Codigo)=>{%>
                       <% if(Codigo.Codigoenuso=="N"){%>
-                        <tr>
-                    
-                            <td>
-                <%= Codigo.Codigo%>
-                
-                </td>
-<td>
-<%= Codigo.Nombre%>
-</td>
-</tr>
-<%}})%>
-               
-              <!-- <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-              </tr> -->
-            </tbody>
-          </table>
+<button id="CodigoCarpeta<%=Codigo.Codigo%>">  <%= Codigo.Codigo%> </button> ;       
+<%}})%>                   
         <%}else{%>
           "No hay codigos disponibles"
           <%}%>

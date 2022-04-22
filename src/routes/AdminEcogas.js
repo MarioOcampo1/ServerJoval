@@ -633,7 +633,7 @@ router.post('/guardarNuevoCliente', (req, res) => {
     })
     sql = 'Insert into clientes set ?';
     connection.query(sql, {
-        Nombre: Nombre,Codigo:Codigo, NCarpeta: NCarpeta, Comitente: Comitente, Ubicacion: Departamento, DNV: DNV, DPV: DPV, Irrigacion: IRRIGACION,
+        Nombre: Nombre,Codigo:Codigo, Codigoenuso:"S", NCarpeta: NCarpeta, Comitente: Comitente, Ubicacion: Departamento, DNV: DNV, DPV: DPV, Irrigacion: IRRIGACION,
         Hidraulica: HIDRAULICA,PerMunicipal:PerMunicipal, Ferrocarriles: FERROCARRIL,Privado:Privado, OtrosPermisos: OTROSPERMISOS, TipoDeRed: TipoDeRed
     }, (error, results) => {
         if (error) console.log( error);
@@ -1229,9 +1229,14 @@ connection.query(sql,[{ PresentacionFinal:PresentacionFinal,HabilitacionObra:Hab
 router.post('/ActualizarEstadoCarpeta/:id', (req, res) => {
     var id = req.body.id;
     var Estado= req.body.Estado; 
+if(Estado="Finalizada"){
+    var CodigoEnUso="N";
+} else{
+    var CodigoEnUso="S";
+}
     var sql = 'Update clientes Set ? where id=?';
     connection.query(sql, [{
-        Estado: Estado
+        Estado: Estado, Codigoenuso:CodigoEnUso
     }, id], (error, results) => {
         if (error) console.log( error);
         
