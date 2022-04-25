@@ -39,10 +39,13 @@
                                 </div>
                                 <div class="col-md-auto">
                                     <button class="btn btn-primary" id="CodigoCarpeta">
-                                        <%if( user.Codigoenuso=="N"){%>
+                                        <%if( CodigoEnUsoVigentes=="S"){%>
+                                            Codigo de la carpeta: <%=CodigoVigentes%>
+                                            <%}%>
+                                        <%if( CodigoEnUsoVigentes=="N"){%>
                                             Codigo de la carpeta: <%"S/C"%>
-                                            <%}else{%>
-                                    Codigo de la carpeta: <%=user.Codigo%>
+                                            <%}if(CodigoEnUsoVigentes=="F"){%>
+                                    Codigo de la carpeta: FINALIZADA N°:<%=user.CodigoFinalizadas%>
                                     <%}%>
                                     </button>
                                 </div>
@@ -977,7 +980,8 @@
                                                     function RevisarFechasVencidas() {
 
                                                     }
-                                                });
+                                                }
+                                                                                               );
                                         </script>
                                         <script>
                                             function CerrarModal() {
