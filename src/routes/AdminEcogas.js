@@ -388,24 +388,24 @@ router.post('/TareaOk/:Nombre', (req, res) => {
 })
 router.post('/update/:id', (req, res) => {
     res.locals.moment = moment;
-    const CodigoViejo= req.body.CodigoViejo;
-    const CodigoNuevo= req.body.Codigo;
+    var CodigoViejo= req.body.CodigoViejo;
+    var CodigoNuevo= req.body.Codigo;
     if (CodigoNuevo==null|| CodigoNuevo==""){
     CodigoNuevo=CodigoViejo;
     }
-    const NombreOriginal= req.body.Nombre;
-    const id = req.body.id;
-    const NombreCarpeta = req.body.NombreCarpeta;
-    const NCarpeta = req.body.NCarpeta
-    const Comitente = req.body.Comitente;
-    const Departamento = req.body.Ubicacion;
-    const DNV = req.body.DNV;
-    const DPV = req.body.DPV;
-    const Irrigacion = req.body.Irrigacion;
-    const HIDRAULICA = req.body.HIDRAULICA;
-    const FERROCARRIL = req.body.FERROCARRIL;
-    const OTROSPERMISOS = req.body.Otrospermisos;
-    const Privado = req.body.Privado;
+    var NombreOriginal= req.body.Nombre;
+    var id = req.body.id;
+    var NombreCarpeta = req.body.NombreCarpeta;
+    var NCarpeta = req.body.NCarpeta
+    var Comitente = req.body.Comitente;
+    var Departamento = req.body.Ubicacion;
+    var DNV = req.body.DNV;
+    var DPV = req.body.DPV;
+    var Irrigacion = req.body.Irrigacion;
+    var HIDRAULICA = req.body.HIDRAULICA;
+    var FERROCARRIL = req.body.FERROCARRIL;
+    var OTROSPERMISOS = req.body.Otrospermisos;
+    var Privado = req.body.Privado;
     var PerMunicipal = req.body.PerMunicipal;
 
     const DNVVisacion = req.body.DNV;
@@ -1269,14 +1269,40 @@ router.post('/ActualizarEstadoCarpeta/:id', (req, res) => {
     var id = req.body.id;
     var Nombre = req.body.Nombre;
     var Estado= req.body.Estado; 
+    var sql;
+    var CodigoFinalizada;
 if(Estado="Finalizada"){
     var CodigoEnUso="N";
+    sql='Select max(CodigoFinalizadas) from codificacioncarpetas'
+    connection.query(sql,{ },(error,results )=>{
+        if (error) console.log( error);
+        var result;
+                   JSON.parse((JSON.stringify(results)),function(k,v){
+                       var contador=0;
+                       console.log("k:" + k);
+                       console.log("v:" + v);
+if(contador==0){
+    contador=contador+1;
+    result=v;
+    
+console.log("el valor de result adentro de la funcion es " + result);
+}
+        });
+        
+       console.log("Valor de result" +result);
+    //    console.log("el valor de result[22] es:");
+    //    console.log(result[22]);
+// CodigoFinalizada=result[22];
+// console.log('valor de result ' +CodigoFinalizada);
+// CodigoFinalizada++;
+// console.log("Codigo finalizada +1" + CodigoFinalizada);
+    })
 } else{
     var CodigoEnUso="S";
 }
-var sql= 'Update codificacioncarpetas Set? where Nombre=?';
+ sql= 'Update codificacioncarpetas Set? where Nombre=?';
 connection.query(sql, [{
-   CodigoEnUsoVigentes:CodigoEnUso
+   CodigoEnUsoVigentes:CodigoEnUso,CodigoFinalizadas:CodigoFinalizada
 }, Nombre], (error, results) => {
     if (error) console.log( error);
     
