@@ -26,9 +26,9 @@
   </script>
 </head>
 <body>
-    <%if(results){%>     
+    <%if(resultado){%>     
                 <label class="text-center" for=""> Codigos disponibles para ser usados </label>
-                    <%results.forEach((Codigo)=>{%>
+                    <%resultado.forEach((Codigo)=>{%>
                       <% if(Codigo.CodigoEnUsoVigentes=="N"){%>
 <button id="CodigoCarpeta<%=Codigo.CodigoVigentes%>">  <%= Codigo.CodigoVigentes%> </button> ;       
 <%}})%>                   

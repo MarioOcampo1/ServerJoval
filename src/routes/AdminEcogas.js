@@ -251,11 +251,7 @@ router.get('/editarTareas/:id', (req, res) => {
                    var CodigoFinalizadas=0;
 
                    JSON.parse((JSON.stringify(results)),function(k,v){
-                       console.log("k:" + k);
-                       console.log("v:" + v);
-                       console.log("valor de contador" + contador);
-                       console.log("////////////////////////////////////////////")
-                       if(contador==1){
+                                          if(contador==1){
                             CodigoVigentes=v;
                        }
                        if(contador==2){
@@ -266,9 +262,7 @@ router.get('/editarTareas/:id', (req, res) => {
                }
                contador=contador+1;
                });
-               console.log("CodigoVigentes" + CodigoVigentes);
-               console.log("CodigoEnUsoVigentes" + CodigoEnUsoVigentes);
-
+             
                sql = 'Select * from clientes where id=? ';
 
                connection.query(sql, [id], (error, results) => {
@@ -366,12 +360,12 @@ router.get('/CodigoCarpeta', (req, res) => {
     if (req.isAuthenticated()) {
         res.locals.moment = moment;
         const sql = 'Select * from codificacioncarpetas';
-        connection.query(sql, (error, results) => {
+        connection.query(sql, (error, resultado) => {
             if (error) console.log(error);
-            if (results.length > 0) {
-                res.render('paginas/AdministracionEcogas/partials/editartareas/CodigoCarpeta.ejs', { results: results })
+            if (resultado.length > 0) {
+                res.render('paginas/AdministracionEcogas/partials/editartareas/CodigoCarpeta.ejs', { resultado: resultado })
             } else {
-                res.render("Ningun resultado encontrado");
+                res.send("Ningun resultado encontrado");
 
 
             }
@@ -1331,6 +1325,8 @@ router.post('/actFinalCarpEcogas/:id', (req, res) => {
 
 //Opciones de editar tareas POST
 router.post('/ActualizarEstadoCarpeta/:id', (req, res) => {
+    console.log("Actualizando estado de carpeta");
+    
     var id = req.body.id;
     var Nombre = req.body.Nombre;
     var Estado = req.body.Estado;
@@ -1351,17 +1347,24 @@ router.post('/ActualizarEstadoCarpeta/:id', (req, res) => {
             });
             CodigoFinalizada = result;
             CodigoFinalizada = CodigoFinalizada + 1;
-        })
-    } else {
+            sql = 'Update codificacioncarpetas Set ? where Nombre= ?';
+            connection.query(sql, [{
+                CodigoEnUsoVigentes: CodigoEnUso, CodigoFinalizadas: CodigoFinalizada,
+            }, Nombre], (error, results) => {
+                if (error) console.log(error);
+            
+            })
+        }
+        )
+    } 
+    else {
         var CodigoEnUso = "S";
     }
     sql = 'Update codificacioncarpetas Set ? where Nombre= ?';
     connection.query(sql, [{
-        CodigoEnUsoVigentes: CodigoEnUso, CodigoFinalizadas: CodigoFinalizada,
+        CodigoEnUsoVigentes: CodigoEnUso
     }, Nombre], (error, results) => {
         if (error) console.log(error);
-        console.log("Actualizando codificacioncarpetas, Carpeta Nombre:" + Nombre);
-        console.log("CodigoFinalizada:" + CodigoFinalizada);
     })
     var sql = 'Update clientes Set ? where id=?';
     connection.query(sql, [{
