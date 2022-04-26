@@ -29,7 +29,7 @@
     <%if(resultado){%>     
                 <label class="text-center" for=""> Codigos disponibles para ser usados </label>
                     <%resultado.forEach((Codigo)=>{%>
-                      <% if(Codigo.CodigoEnUsoVigentes=="N"){%>
+                      <% if(Codigo.CodigoEnUsoVigentes=="N"|| Codigo.CodigoEnUsoVigentes=="F"){%>
 <button id="CodigoCarpeta<%=Codigo.CodigoVigentes%>">  <%= Codigo.CodigoVigentes%> </button> ;       
 <%}})%>                   
         <%}else{%>
