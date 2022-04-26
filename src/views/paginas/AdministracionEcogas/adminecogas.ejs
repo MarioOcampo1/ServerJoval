@@ -45,31 +45,30 @@
   </div>
   </div>
     <br>
-    <div class="table " style="width:100%">
+    <div class="table-responsive " style="width:100%">
     <table id="comunicacionDiaria" class="table table-striped table-bordered table-hover" style="width:100%">
       <thead>
         <tr>
-          <th>
-            <h2>C</h2>
+          <th class="text-center">
+            <h6 >C</h6>
           </th>
-          <th>
-            <h2>N</h2>
+          <th class="text-center">
+            <h6 >Nombre</h6>
           </th>
-          <th>
-            <h2>N°</h2>
+          <th class="text-center">
+            <h6 >N°</h6>
           </th>
-          <th>
-            <h2></h2>
+          <th class="text-center">
+            
             <button id="Mauricio"class=" btn btn-outline-dark btn-sm "> Mauricio</button>
-            <button id="Gustavo"class="   btn btn-outline-dark btn-sm"> Gustavo</button>
+            <button id="Gustavo"class="  btn btn-outline-dark btn-sm"> Gustavo</button>
           </th>
-          <th>
-            <h6 >Tarea realizada</h6>
-            <div class="btn-group btn-group" role="group">
+          <th class="text-center">
+            <h6 >Tarea realizada
               <button id="TablaGral"clicked class=" btn btn-outline-dark btn-sm">Quitar filtros</button>
-            </div>
+            </h6>
           </th>
-          <th> <h6>Etapa de la tarea</h6>
+          <th class="text-center">
 <div class="btn-group btn-group-sm" role="group">
            <button class="btn btn-outline-dark btn-sm" id="Prel"> Prel</button>
            <button class="btn btn-outline-dark btn-sm" id="1P"> 1P</button>
@@ -80,19 +79,19 @@
            <button class="btn btn-outline-dark btn-sm" id="Caos"> CAOS</button>
           </div>
 </th>
-          <th>
+          <th class="text-center">
             <h6>Proxima tarea</h6>
           </th>
-          <th>
+          <th class="text-center">
             <h6>Fecha Limite</h6>
             <!-- <button id="VerUrgentes"class="   btn btn-outline-dark btn-sm"> Ver urgentes</button> -->
 
           </th>
-          <th>
+          <th class="text-center">
             <h6>Estado</h6>
         </tr>
       </thead>
-      <tbody>
+      <tbody class="text-center">
       </tbody>
     </table>
   </div>
@@ -129,17 +128,12 @@
             }
           }},
           {"width": "1%","data": "Nombre_sub", render: function(data,type,row){
-            return '<a href="/editarTareas/' + row.id + '" class="btn btn-outline-secondary btn-sm">'+row.Nombre_sub+'</a>'
+            return '<a href="/editarTareas/' + row.id + '" class=" text-center btn btn-outline-secondary btn-sm">'+row.Nombre_sub+'</a>'
           } },
           {"width": "1%","data": "NCarpeta", render: function(data,type,row){
-            return '<a href="/editarTareas/' + row.id + '" class="btn btn-outline text-center btn-sm">'+row.NCarpeta+'</a>'
+            return '<a href="/editarTareas/' + row.id + '" class=" text-center btn btn-outline text-center btn-sm">'+row.NCarpeta+'</a>'
           } },
-          {"width": "1%","data": "ResponsableDeTarea", render: function(data,type,row){
-           if(data=="Mauricio"){return "M"};
-           if(data=="Gustavo"){return "G"};
-           if(data=="Mario"){return "MO"};
-           if(data==""||data==null){return "S/C"};
-          }},
+          {"width": "1%","data": "ResponsableDeTarea" },
           {"width": "50%","data": "Tarea_Realizada_sub", "searchable":false, }, 
           {"width": "1%","data": "EtapaTarea_sub", render: function(data,type,row){
   return '<a href="/historialcarpeta/' + row.Nombre_sub + '" class="text-center">'+row.EtapaTarea_sub+'</a>'} }, //Esta es lo correcto que deberia de ir en esta linea
