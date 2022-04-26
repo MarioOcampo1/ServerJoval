@@ -44,84 +44,82 @@
     </a>
   </div>
     <br>
-
-  <div class="table-responsive">
-    <table id="comunicacionDiaria" class="table  table-striped table-bordered table-sm table-hover  " style="width: 100%">
-     
+    <div class="table ">
+    <table id="comunicacionDiaria" class="table table-striped table-bordered table-hover  ">
       <thead>
-
         <tr>
           <th>
-            Codigo
+            <h2>C</h2>
           </th>
           <th>
-            <h4>Nombre</h4>
+            <h2>N</h2>
           </th>
           <th>
-            <h4>N° de carpeta</h4>
+            <h2>N°</h2>
           </th>
           <th>
-            <h4>Responsable</h4>
-            <div class="btn-group ">
+            <h2></h2>
             <button id="Mauricio"class=" btn btn-outline-dark btn-sm "> Mauricio</button>
             <button id="Gustavo"class="   btn btn-outline-dark btn-sm"> Gustavo</button>
-          </div>
           </th>
           <th>
-            <h4>Tarea realizada</h4>
-            <div class="btn-group ">
+            <h6 >Tarea realizada</h6>
+            <div class="btn-group btn-group" role="group">
               <button id="TablaGral"clicked class=" btn btn-outline-dark btn-sm">Quitar filtros</button>
             </div>
           </th>
-          <th> <h4>Etapa de la tarea</h4>
-<div class="btn-group ">
+          <th> <h6>Etapa de la tarea</h6>
+<div class="btn-group btn-group-sm" role="group">
            <button class="btn btn-outline-dark btn-sm" id="Prel"> Prel</button>
            <button class="btn btn-outline-dark btn-sm" id="1P"> 1P</button>
            <button class="btn btn-outline-dark btn-sm" id="2P"> 2P</button>
+          </div>
+           <div class="btn-group btn-group-sm" role="group">
            <button class="btn btn-outline-dark btn-sm" id="Obras"> Obras</button>
            <button class="btn btn-outline-dark btn-sm" id="Caos"> CAOS</button>
           </div>
 </th>
           <th>
-            <h4>Proxima tarea</h4>
+            <h6>Proxima tarea</h6>
           </th>
           <th>
-            <h4>Fecha Limite</h4>
+            <h6>Fecha Limite</h6>
             <!-- <button id="VerUrgentes"class="   btn btn-outline-dark btn-sm"> Ver urgentes</button> -->
 
           </th>
           <th>
-            <h4>Estado</h4>
+            <h6>Estado</h6>
           <!-- </th>
           <th>Opciones</th> -->
         </tr>
       </thead>
       <tbody>
       </tbody>
-      
     </table>
   </div>
- 
   <script>  
+    $("#comunicacionDiaria").css("width","100%")
+
   $(document).ready(function(){
    
       var url = '/adminecogas/TablaGeneral';
       
     var tabla= $('#comunicacionDiaria').DataTable({
-        orderCellsTop: true,
-        fixedHeader: true,
-      paging: false,
+        "orderCellsTop": true,
+        "fixedHeader": true,
+      "paging": false,
       "ordering": true,
+      "bAutoWidth": false,
       // columnDefs: [ { type: 'date', targets: [6],  } ], //Al activar este filtro, no permite que se puedan ordenar las fechas.
       "order":[[6,'desc']],
         "language": { url: "//cdn.datatables.net/plug-ins/1.11.3/i18n/es_es.json" },
         "ajax": {
           "url": url,
           "dataSrc": "",
-        },
-       
+        }, 
+               
         "columns": [
-          {"width":"5%","data": "CodigoVigentes", render: function(data,type,row){
+          {"width": "5%","data": "CodigoVigentes", render: function(data,type,row){
             var LetraCodigoEnUso= row.CodigoEnUsoVigentesVigentes;
             if(LetraCodigoEnUso=="N"){
               return '';
@@ -130,20 +128,17 @@
               return row.CodigoVigentes;
             }
           }},
-          { "width":"5%","data": "Nombre_sub", render: function(data,type,row){
+          {"width": "5%","data": "Nombre_sub", render: function(data,type,row){
             return '<a href="/editarTareas/' + row.id + '" class="btn btn-outline-secondary btn-sm">'+row.Nombre_sub+'</a>'
           } },
-          { "width":"5%","data": "NCarpeta", render: function(data,type,row){
+          {"width": "5%","data": "NCarpeta", render: function(data,type,row){
             return '<a href="/editarTareas/' + row.id + '" class="btn btn-outline text-center btn-sm">'+row.NCarpeta+'</a>'
           } },
-          { "width":"5%","data": "ResponsableDeTarea"},
-          { "width":"70%","searchable":false,"data": "Tarea_Realizada_sub" }, 
-
-          { "width":"15%", "data": "EtapaTarea_sub", render: function(data,type,row){return '<a href="/historialcarpeta/' + row.Nombre_sub + '" class="btn btn-secondary btn-sm text-center">'+row.EtapaTarea_sub+'</a>'} }, //Esta es lo correcto que deberia de ir en esta linea
-          
-          { "width":"15%", "searchable":false,"data": "Proxima_Tarea_sub" },
-          
-          { "width":"5%","data": "Fecha_Proxima_Tarea_sub", render:function(data,type,row){
+          {"width": "5%","data": "ResponsableDeTarea"},
+          {"width": "100%","data": "Tarea_Realizada_sub", "searchable":false, }, 
+          {"width": "5%","data": "EtapaTarea_sub", render: function(data,type,row){return '<a href="/historialcarpeta/' + row.Nombre_sub + '" class="text-center">'+row.EtapaTarea_sub+'</a>'} }, //Esta es lo correcto que deberia de ir en esta linea
+          {"width": "100%","data": "Proxima_Tarea_sub",   "searchable":false, },
+          {"width": "5%","data": "Fecha_Proxima_Tarea_sub", render:function(data,type,row){
             moment.locale('es');
             data= new Date(data);
             data= data.toISOString();
@@ -170,12 +165,17 @@
     }
    
            }},      
-          { "width":"10%","data": "Estado" },
+          {"width": "5%","data": "Estado" },
 
         ],
         destroy:true,
+        "autoWidth": true,
+    
+ 
         
       });
+
+Fuente: https://www.iteramos.com/pregunta/18592/jquery-datatables-controlar-el-ancho-de-la-tabla
 
 //Buscadores con botones.
    $('#Mauricio').on('click', function() {
