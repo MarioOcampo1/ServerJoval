@@ -1349,7 +1349,7 @@ router.post('/ActualizarEstadoCarpeta/:id', (req, res) => {
             CodigoFinalizada = CodigoFinalizada + 1;
             sql = 'Update codificacioncarpetas Set ? where Nombre= ?';
             connection.query(sql, [{
-                CodigoEnUsoVigentes: CodigoEnUso, CodigoFinalizadas: CodigoFinalizada,CodigoVigentes:""
+                CodigoEnUsoVigentes: CodigoEnUso, CodigoFinalizadas: CodigoFinalizada,
             }, Nombre], (error, results) => {
                 if (error) console.log(error);
             
