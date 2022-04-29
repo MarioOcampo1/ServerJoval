@@ -47,6 +47,7 @@
           </div>
 
           <form action="/update/<%= user.id%>" method="POST">
+            <input type="hidden" name="CodigoOriginal" value="<%=Codigo%>">
             <input type="hidden" name="id" id="id" value="<%= user.id%>">
             <input type="hidden" name="Nombre" id="Nombre" value="<%= user.Nombre%>">
             <div class="form-group">
@@ -76,9 +77,8 @@
               </div>
             </div>
             <div class="form-group">
-              <input type="hidden" name="CodigoViejo" value="<%= user.Codigo%>">
               <label for="Codigo">Codigo de carpeta</label>
-              <input type="number" name="Codigo" id="Codigo" placeholder="Elija un numero">
+              <input type="number" name="Codigo" id="Codigo" placeholder="Elija un numero" value="">
             </div>
             <div class="form-group">
 

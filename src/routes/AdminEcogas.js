@@ -263,7 +263,7 @@ router.get('/editarTareas/:id', (req, res) => {
                contador=contador+1;
                });
              
-               sql = 'Select * from clientes where id=? ';
+               sql = 'Select * from clientes where id=?';
 
                connection.query(sql, [id], (error, results) => {
                    if (error) console.log(error);
@@ -288,19 +288,47 @@ router.get('/edit/:id', (req, res) => {
     if (req.isAuthenticated()) {
         res.locals.moment = moment;
         const id = req.params.id;
-        const sql = 'Select * from clientes where id=?';
+        var Nombre;
+        var sql = 'Select Nombre from clientes where id=?'
         connection.query(sql, [id], (error, results) => {
             if (error) console.log(error);
             if (results.length > 0) {
+                var contador = 0;              
+                JSON.parse((JSON.stringify(results)), function (k, v) {
+                    if (contador == 0) {
+                        contador = contador + 1;
+                        Nombre = v;
+                    }
+                    return Nombre;});
+           }
+        sql='select CodigoVigentes from codificacioncarpetas where Nombre=?';
+        connection.query(sql, [Nombre], (error, Codigo) => {
+            if (error) console.log(error);
+            var contador = 1;     
+            var CodigoBDLimpio;         
+            JSON.parse((JSON.stringify(Codigo)), function (k, v) {
 
-                res.render('paginas/AdministracionEcogas/edit', { user: results[0] });
-            }
-            else {
-
-                res.render('/adminecogas');
-
-            }
+                if (contador == 1) {
+                    contador = contador + 1;
+                    CodigoBDLimpio = v;
+                }
+            })
+                sql = 'Select * from clientes where id=?';
+                connection.query(sql, [id], (error, results) => {
+                    if (error) console.log(error);
+                    if (results.length > 0) {
+                        res.render('paginas/AdministracionEcogas/edit', { user: results[0] , Codigo:CodigoBDLimpio });
+                    }
+                    else {
+        
+                        res.render('/adminecogas');
+        
+                    }
+                })
+           
         })
+    })
+          
     } else { res.redirect('/'); }
 })
 router.get('/historialcarpeta/:Nombre', (req, res) => {
@@ -435,10 +463,10 @@ router.post('/TareaOk/:Nombre', (req, res) => {
 })
 router.post('/update/:id', (req, res) => {
     res.locals.moment = moment;
-    var CodigoViejo = req.body.CodigoViejo;
     var CodigoNuevo = req.body.Codigo;
+    var Codigo =req.body.CodigoOriginal; //Dicho valor, es el codigo original que tiene la base de datos antes de querer actualizarlo, ver el get de edit, para poder identificar la variable usada acá.
     if (CodigoNuevo == null || CodigoNuevo == "") {
-        CodigoNuevo = CodigoViejo;
+        CodigoNuevo = Codigo;
     }
     var NombreOriginal = req.body.Nombre;
     var id = req.body.id;
@@ -461,17 +489,9 @@ router.post('/update/:id', (req, res) => {
 
     const TipoDeRed = req.body.TipoDeRed;
     console.log("Intentando actualizar el contacto:" + NombreCarpeta);
-    console.log("PRIVADO:" + OTROSPERMISOS);
-    console.log("El valor de DNVVisacion es: " + DNVVisacion);
-    console.log("El valor de Hidraulica Visacion es: " + HIDRAULICAVisacion);
-
-    //const TareaRealizada =req.body.TareaRealizada;
-    //const ProximaTarea = req.body.ProximaTarea;
     const Fecha_limite = req.body.Fecha_limite;
     if (Fecha_limite) {
-        console.log('fecha limite a actualizar es: ' + Fecha_limite);
-        console.log('fecha limite a actualizar es: ' + req.body.Fecha_limite);
-        //console.log(Tarea_Realizada: TareaRealizada, ProximaTarea: ProximaTarea);
+       console.log("camino 1");
         var sql = 'Update clientes_tareasgenerales Set ? where Nombre =?';
         connection.query(sql, [{
             Nombre: NombreCarpeta
@@ -491,8 +511,8 @@ router.post('/update/:id', (req, res) => {
         )
         sql = 'Update codificacioncarpetas Set? where Nombre=?';
         connection.query(sql, [{
-            CodigoVigentes: CodigoNuevo, CodigoEnUsoVigentes: "S"
-        }, NombreCarpeta], (error, results) => {
+            CodigoVigentes: CodigoNuevo, CodigoEnUsoVigentes: "S", Nombre: NombreCarpeta
+        }, NombreOriginal], (error, results) => {
             if (error) console.log(error);
 
         })
@@ -517,15 +537,16 @@ router.post('/update/:id', (req, res) => {
             })
     }
     else {
+       console.log("camino 2");
         console.log('No se ha detectado fecha limite');
         if (NombreCarpeta != null) {
+       console.log("camino 2.1");
+
             var sql = 'Update clientes_tareasgenerales Set? where Nombre =?';
             connection.query(sql, [{
-                Codigoenuso: "S", Nombre: NombreCarpeta
+                Nombre: NombreCarpeta
             }, NombreOriginal], (error, results) => {
                 if (error) console.log(error);
-                console.log('Actualizando clientes_tareasgenerales');
-
             }
             )
             sql = 'Update historialdecambios Set? where Nombre_sub=? ';
@@ -533,14 +554,13 @@ router.post('/update/:id', (req, res) => {
                 Nombre_sub: NombreCarpeta
             }, NombreOriginal], (error, results) => {
                 if (error) console.log(error);
-                console.log('Actualizando historialdecambios');
 
             }
             )
             sql = 'Update codificacioncarpetas Set? where Nombre=?';
             connection.query(sql, [{
-                CodigoVigentes: CodigoNuevo, CodigoEnUsoVigentes: "S"
-            }, NombreCarpeta], (error, results) => {
+                CodigoVigentes: CodigoNuevo, CodigoEnUsoVigentes: "S", Nombre:NombreCarpeta
+            }, NombreOriginal], (error, results) => {
                 if (error) console.log(error);
 
             })
@@ -566,10 +586,12 @@ router.post('/update/:id', (req, res) => {
 
         }
         else {
+       console.log("camino 2.2");
+
             sql = 'Update codificacioncarpetas Set? where Nombre=?';
             connection.query(sql, [{
                 CodigoVigentes: CodigoNuevo, CodigoEnUsoVigentes: "S"
-            }, NombreCarpeta], (error, results) => {
+            }, NombreOriginal], (error, results) => {
                 if (error) console.log(error);
 
             })
@@ -1326,7 +1348,7 @@ router.post('/actFinalCarpEcogas/:id', (req, res) => {
 //Opciones de editar tareas POST
 router.post('/ActualizarEstadoCarpeta/:id', (req, res) => {
     console.log("Actualizando estado de carpeta");
-    
+
     var id = req.body.id;
     var Nombre = req.body.Nombre;
     var Estado = req.body.Estado;
@@ -1349,14 +1371,14 @@ router.post('/ActualizarEstadoCarpeta/:id', (req, res) => {
             CodigoFinalizada = CodigoFinalizada + 1;
             sql = 'Update codificacioncarpetas Set ? where Nombre= ?';
             connection.query(sql, [{
-                CodigoEnUsoVigentes: CodigoEnUso, CodigoFinalizadas: CodigoFinalizada,CodigoVigentes:""
+                CodigoEnUsoVigentes: CodigoEnUso, CodigoFinalizadas: CodigoFinalizada, CodigoVigentes: ""
             }, Nombre], (error, results) => {
                 if (error) console.log(error);
-            
+
             })
         }
         )
-    } 
+    }
     else {
         var CodigoEnUso = "S";
     }
