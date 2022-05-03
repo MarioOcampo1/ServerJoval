@@ -29,13 +29,33 @@
                     style="width: 100%">
                     <thead>
                         <tr>
-                            <th class="text-center text-light bg-dark" id="Encabezado" value="0"  colspan="6">Datos de carpeta</th>
-                            <th class="text-center text-light bg-dark" id="Encabezado" value="1" colspan="3">Preliminar</th>
-                            <th class="text-center text-light bg-dark" id="Encabezado" value="2" colspan="3">1ra parte</th>
-                            <th class="text-center text-light bg-dark" id="Encabezado" value="3" colspan="11">2da parte</th>
-                            <th class="text-center text-light bg-dark" id="Encabezado" value="4" colspan="2">Obras</th>
-                            <th class="text-center text-light bg-dark" id="Encabezado" value="5" colspan="5">Caos</th>
-                            <th class="text-center text-light bg-dark" id="Encabezado" value="6" colspan="2">Fin de obra</th>
+                            <th class="text-center text-light bg-dark" id="Encabezado" value="0"  colspan="6">
+                                <button class="btn text-light">Datos de carpeta</button>
+                            </th>
+                            <th class="text-center text-light bg-dark" id="Encabezado" value="1" colspan="3">
+                                <button class="btn text-light">Preliminar</button>
+
+                            </th>
+                            <th class="text-center text-light bg-dark" id="Encabezado" value="2" colspan="3">
+                                <button class="btn text-light">1ra parte</button>
+
+                            </th>
+                            <th class="text-center text-light bg-dark" id="Encabezado" value="3" colspan="11">
+                                <button class="btn text-light">2da parte</button>
+
+                            </th>
+                            <th class="text-center text-light bg-dark" id="Encabezado" value="4" colspan="2">
+                                <button class="btn text-light">Obras</button>
+
+                            </th>
+                            <th class="text-center text-light bg-dark" id="Encabezado" value="5" colspan="5">
+                                <button class="btn text-light">Caos</button>
+
+                            </th>
+                            <th class="text-center text-light bg-dark" id="Encabezado" value="6" colspan="2">
+                                <button class="btn text-light">Fin de obra</button>
+
+                            </th>
 
                         </tr>
                         <tr>
@@ -871,7 +891,7 @@
 <!-- <script type="text/javascript" src="/main.js"></script> -->
 <script>
     jQuery("#buscador").keyup(function(){
-    if( jQuery(this).val() == "0"){
+    if( jQuery(this).val() != "0"){
         jQuery("#EstadoGeneral tbody>tr").hide();
         jQuery("#EstadoGeneral td:contiene-palabra('" + jQuery(this).val() + "')").parent("tr").show();
     }
@@ -879,15 +899,6 @@
         jQuery("#EstadoGeneral tbody>tr").show();
     }
 });
-jQuery("#Encabezado").click(function(){
-    if( jQuery(this).val() != ""){
-        jQuery("#EstadoGeneral tbody>tr").hide();
-        jQuery("#EstadoGeneral td:contiene-palabra('Datos de carpeta')").parent("tr").show();
-    }
-    else{
-        jQuery("#EstadoGeneral tbody>tr").show();
-    }
-}); 
 jQuery.extend(jQuery.expr[":"], 
 {
     "contiene-palabra": function(elem, i, match, array) {
