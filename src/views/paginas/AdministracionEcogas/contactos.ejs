@@ -10,6 +10,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
       crossorigin="anonymous"></script>
+      <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+      <script type="text/javascript" language="javascript"
+          src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+      <script type="text/javascript" language="javascript"
+          src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap5.min.js"></script>
     <title>Contactos</title>
 </head>
 <body>    
@@ -26,7 +31,9 @@
     </div>
   <br/>
   <div class="table-responsive">
-    <table class="table table-striped table-bordered table-sm table-hover " style="width: 100%">
+<label for="buscador">Buscar:</label> <input type="text" id="buscador" value=""/>
+
+    <table id="Contactos" class="table table-striped table-bordered table-sm table-hover " style="width: 100%">
         <thead>
             <tr>
                 <th>
@@ -47,34 +54,32 @@
                 <th>
                     <h4>Correo</h4>
                 </th>
-               
+              </tr>
         </thead>
         <tbody>
-            </tr>
             <% results.forEach((contactos)=>{ %>
-                 
                 <tr>
-                   <th>
+                   <td>
                         <%= contactos.Nombre %>
-                    </th>
-                    <th>
+                    </td>
+                    <td>
                         <%=contactos.Entidad%>
-                    </th>
-                    <th>
+                    </td>
+                    <td>
                         <%=contactos.Area%>
-                    </th>
+                    </td>
                     
-                    <th>
+                    <td>
                         <%=contactos.Puesto%>
-                    </th>
-                    <th>
+                    </td>
+                    <td>
                       <%=contactos.Telefono%>
-                    </th>
-                    <th>
+                    </td>
+                    <td>
                         <%=contactos.Correo%>
-                      </th>
-                    <th><a href="/editarContacto/<%= contactos.id%>" class="btn btn-outline-info">editar</a>
-                    </tr></th>
+                      </td>
+                    <td><a href="/editarContacto/<%= contactos.id%>" class="btn btn-outline-info">editar</a>
+                    </tr></td>
                 <% })%>
         </tbody>
   
@@ -83,4 +88,25 @@
     </table>
   </div>
   </body>
+  <script>
+    jQuery("#buscador").keyup(function(){
+    if( jQuery(this).val() != "0"){
+        jQuery("#Contactos tbody>tr").hide();
+        jQuery("#Contactos td:contiene-palabra('" + jQuery(this).val() + "')").parent("tr").show();
+    }
+    else{
+        jQuery("#Contactos tbody>tr").show();
+        jQuery("#Contactos tbody>td").show();
+
+    }
+});
+
+jQuery.extend(jQuery.expr[":"], 
+{
+    "contiene-palabra": function(elem, i, match, array) {
+        return (elem.textContent || elem.innerText || jQuery(elem).text() || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
+    }
+});
+</script>
+
 </html>

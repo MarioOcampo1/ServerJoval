@@ -50,13 +50,13 @@
       <thead>
         <tr>
           <th class="text-center">
-            <h6 >C</h6>
+            <h6 title="Codigo designado para ubicar en las carpetas fisicas de la oficina.">C</h6>
           </th>
           <th class="text-center">
-            <h6 >Nombre</h6>
+            <h6>Nombre</h6>
           </th>
           <th class="text-center">
-            <h6 >N°</h6>
+            <h6>N°</h6>
           </th>
           <th class="text-center">
             
@@ -64,7 +64,7 @@
             <button id="Gustavo"class="  btn btn-outline-dark btn-sm"> Gustavo</button>
           </th>
           <th class="text-center">
-            <h6 >Tarea realizada
+            <h6>Tarea realizada
               <button id="TablaGral"clicked class=" btn btn-outline-dark btn-sm">Quitar filtros</button>
             </h6>
           </th>
@@ -124,14 +124,14 @@
               return '';
             }
             else{
-              return row.CodigoVigentes;
+              return '<div title="Codigo designado para ubicar en las carpetas fisicas de la oficina.">'+row.CodigoVigentes+'</div>';
             }
           }},
           {"width": "1%","data": "Nombre_sub", render: function(data,type,row){
-            return '<a href="/editarTareas/' + row.id + '" class=" text-center btn btn-outline-secondary btn-sm">'+row.Nombre_sub+'</a>'
+            return '<a href="/editarTareas/' + row.id + '" class=" text-center btn btn-outline-secondary btn-sm" title="Nombre de la carpeta">'+row.Nombre_sub+'</a>'
           } },
           {"width": "1%","data": "NCarpeta", render: function(data,type,row){
-            return '<a href="/editarTareas/' + row.id + '" class=" text-center btn btn-outline text-center btn-sm">'+row.NCarpeta+'</a>'
+            return '<a href="/editarTareas/' + row.id + '" class=" text-center btn btn-outline text-center btn-sm" title="N° de la carpeta">'+row.NCarpeta+'</a>'
           } },
           {"width": "1%","data": "ResponsableDeTarea" },
           {"width": "50%","data": "Tarea_Realizada_sub", "searchable":false, }, 
