@@ -402,6 +402,13 @@ router.get('/CodigoCarpeta', (req, res) => {
     } else { res.redirect('/'); }
 })
 
+router.get('/GuiaParaElNuevo', (req, res) => {
+    if (req.isAuthenticated()) {
+        res.render('paginas/AdministracionEcogas/GuiaParaNuevo.ejs');
+
+    } else { res.redirect('/'); }
+})
+
 
 
 //Rutas Post
@@ -1354,7 +1361,7 @@ router.post('/ActualizarEstadoCarpeta/:id', (req, res) => {
     var Estado = req.body.Estado;
     var sql;
     var CodigoFinalizada = 0;
-    if (Estado = "Finalizada") {
+    if (Estado == "Finalizada") {
         var CodigoEnUso = "F";
         sql = 'Select max(CodigoFinalizadas) from codificacioncarpetas'
         connection.query(sql, (error, results) => {
