@@ -119,9 +119,9 @@
                
         "columns": [
           {"width": "5%","data": "CodigoVigentes", render: function(data,type,row){
-            var LetraCodigoEnUso= row.CodigoEnUsoVigentesVigentes;
-            if(LetraCodigoEnUso=="N"){
-              return '';
+           
+            if(row.CodigoVigentes==null){
+              return ('<div class="text-success bg-dark" title="Carpeta Finalizada. Codigo fisico.">'+row.CodigoFinalizadas+'</div>' );
             }
             else{
               return '<div title="Codigo designado para ubicar en las carpetas fisicas de la oficina.">'+row.CodigoVigentes+'</div>';

@@ -135,7 +135,7 @@ router.get('/adminecogas', (req, res) => {
 })
 router.get('/adminecogas/TablaGeneral', (req, res) => {
     // const sql = 'SELECT c.id, c.Nombre, c.NCarpeta,a.ResponsableDeTarea, c.TareaRealizada, c.ProximaTarea,c.EtapaTarea, c.FechaLimite, c.Estado FROM clientes c, historialdecambios a where c.Nombre = a.Nombre_sub'; //SQL ORIGINAL
-    var sql = 'Select b.CodigoVigentes,b.CodigoEnUsoVigentes, c.Nombre_sub, a.NCarpeta, a.Estado, a.id, c.ResponsableDeTarea,c.Tarea_Realizada_sub, c.Proxima_Tarea_sub, c.Fecha_Proxima_Tarea_sub, c.EtapaTarea_sub from  clientes a, codificacioncarpetas b, historialdecambios c  where a.Nombre = c.Nombre_sub AND a.Nombre = b.Nombre and c.Si_NO_TareaRealizada != "S"  '; //AND (DATE_SUB(CURDATE(), interval 7 day)) <= c.Fecha_Proxima_Tarea_sub  Permite mostrar las fechas proximas a vencerse. ';
+    var sql = 'Select b.CodigoVigentes,b.CodigoEnUsoVigentes,b.CodigoFinalizadas, c.Nombre_sub, a.NCarpeta, a.Estado, a.id, c.ResponsableDeTarea,c.Tarea_Realizada_sub, c.Proxima_Tarea_sub, c.Fecha_Proxima_Tarea_sub, c.EtapaTarea_sub from  clientes a, codificacioncarpetas b, historialdecambios c  where a.Nombre = c.Nombre_sub AND a.Nombre = b.Nombre and c.Si_NO_TareaRealizada != "S"  '; //AND (DATE_SUB(CURDATE(), interval 7 day)) <= c.Fecha_Proxima_Tarea_sub  Permite mostrar las fechas proximas a vencerse. ';
     res.locals.moment = moment;
     connection.query(sql, (error, results) => {
         if (error) console.log(error);
@@ -387,7 +387,7 @@ router.get('/ComunicacionAlSistema', (req, res) => {
 router.get('/CodigoCarpeta', (req, res) => {
     if (req.isAuthenticated()) {
         res.locals.moment = moment;
-        const sql = 'Select * from codificacioncarpetas';
+        const sql = 'Select * from codificacioncarpetas where CodigoVigentes is not null';
         connection.query(sql, (error, resultado) => {
             if (error) console.log(error);
             if (resultado.length > 0) {
@@ -489,112 +489,47 @@ router.post('/update/:id', (req, res) => {
     var OTROSPERMISOS = req.body.Otrospermisos;
     var Privado = req.body.Privado;
     var PerMunicipal = req.body.PerMunicipal;
-
+var sql='';
     const DNVVisacion = req.body.DNV;
     const HIDRAULICAVisacion = req.body.HIDRAULICA;
     const FERROCARRILVisacion = req.body.FERROCARRIL;
 
     const TipoDeRed = req.body.TipoDeRed;
     console.log("Intentando actualizar el contacto:" + NombreCarpeta);
-    const Fecha_limite = req.body.Fecha_limite;
-    if (Fecha_limite) {
-       console.log("camino 1");
-        var sql = 'Update clientes_tareasgenerales Set ? where Nombre =?';
-        connection.query(sql, [{
-            Nombre: NombreCarpeta
-        }, NombreOriginal], (error, results) => {
-            if (error) console.log(error);
-            console.log('Actualizando clientes_tareasgenerales');
-        }
-        )
-        sql = 'Update historialdecambios Set? where Nombre_sub=? ';
-        connection.query(sql, [{
-            Nombre_sub: NombreCarpeta
-        }, NombreOriginal], (error, results) => {
-            if (error) console.log(error);
-            console.log('Actualizando historialdecambios');
+    // Comparacion de codigos para poder eliminar el codigo de la carpeta finalizada, y agregarselo a la nueva
+// if (CodigoNuevo != Codigo){
+//     sql = 'Update codificacioncarpetas Set? where Nombre=?';
+//     connection.query(sql, [{
+//         CodigoVigentes: CodigoNuevo, CodigoEnUsoVigentes: "S",
+//     }, NombreOriginal], (error, results) => {
+//         if (error) console.log(error);
 
-        }
-        )
-        sql = 'Update codificacioncarpetas Set? where Nombre=?';
-        connection.query(sql, [{
-            CodigoVigentes: CodigoNuevo, CodigoEnUsoVigentes: "S", Nombre: NombreCarpeta
-        }, NombreOriginal], (error, results) => {
-            if (error) console.log(error);
+//     })
+//     sql = 'Delete from codificacioncareptas Set? where Codigo=? and CodigoEnUsoVigentes="F"';
+//     connection.query(sql, [{
+        
+//     }, Codigo], (error, results) => {
+//         if (error) console.log(error);
 
+//     })
+// }
+        sql = 'Select * from codificacioncarpetas where CodigoVigentes =?';
+        connection.query(sql,Codigo,(error,results)=>{
+            var NombreLocal, contador=0;
+            JSON.parse((JSON.stringify(results)), function (k, v) {
+                if (contador == 0) {
+                    contador = contador + 1;
+                    NombreLocal = v;
+                }
+            });
+            sql ='Update codificacioncarpetas Set? where Nombre=?';
+            connection.query(sql,[{
+                CodigoVigentes: null
+            }, NombreLocal], (error,results)=>{
+                if (error) console.log(error); 
+                console.log("El codigo de la carpeta finalizada:" + NombreLocal+", deberia de haber sido eliminado");
+            })
         })
-        sql = 'Update clientes Set ? where id =?';
-        connection.query(sql, [{
-            Nombre: NombreCarpeta, NCarpeta: NCarpeta, DNVVisacion: DNVVisacion, HIDRAULICAVisacion: HIDRAULICAVisacion, FerrocarrilesVisacion: FERROCARRILVisacion, Comitente: Comitente, Ubicacion: Departamento, DNV: DNV, DPV: DPV, Irrigacion: Irrigacion,
-            Hidraulica: HIDRAULICA, Privado: Privado, Ferrocarriles: FERROCARRIL, TipoDeRed: TipoDeRed, Fecha_limite: Fecha_limite,
-            PerMunicipal: PerMunicipal, OtrosPermisos: OTROSPERMISOS
-        }, id]
-            , (error, results) => {
-                if (error) console.log(error);
-
-                if (results.length > 0) {
-                    res.redirect('/editarTareas/' + id);
-
-                }
-                else {
-                    res.redirect('/editarTareas/' + id);
-
-                }
-
-            })
-    }
-    else {
-       console.log("camino 2");
-        console.log('No se ha detectado fecha limite');
-        if (NombreCarpeta != null) {
-       console.log("camino 2.1");
-
-            var sql = 'Update clientes_tareasgenerales Set? where Nombre =?';
-            connection.query(sql, [{
-                Nombre: NombreCarpeta
-            }, NombreOriginal], (error, results) => {
-                if (error) console.log(error);
-            }
-            )
-            sql = 'Update historialdecambios Set? where Nombre_sub=? ';
-            connection.query(sql, [{
-                Nombre_sub: NombreCarpeta
-            }, NombreOriginal], (error, results) => {
-                if (error) console.log(error);
-
-            }
-            )
-            sql = 'Update codificacioncarpetas Set? where Nombre=?';
-            connection.query(sql, [{
-                CodigoVigentes: CodigoNuevo, CodigoEnUsoVigentes: "S", Nombre:NombreCarpeta
-            }, NombreOriginal], (error, results) => {
-                if (error) console.log(error);
-
-            })
-            sql = 'Update clientes Set ? where id =?';
-            connection.query(sql, [{
-               Nombre: NombreCarpeta, NCarpeta: NCarpeta, DNVVisacion: DNVVisacion, HIDRAULICAVisacion: HIDRAULICAVisacion, FerrocarrilesVisacion: FERROCARRILVisacion, Comitente: Comitente, Ubicacion: Departamento, DNV: DNV, DPV: DPV, Irrigacion: Irrigacion,
-                Hidraulica: HIDRAULICA, Ferrocarriles: FERROCARRIL, TipoDeRed: TipoDeRed, OtrosPermisos: OTROSPERMISOS, Privado: Privado, PerMunicipal: PerMunicipal
-            }, id]
-                , (error, results) => {
-                    if (error) console.log(error);
-
-                    if (results.length > 0) {
-                        res.redirect('/editarTareas/' + id);
-
-                    }
-                    else {
-                        res.redirect('/editarTareas/' + id);
-
-
-                    }
-
-                })
-
-        }
-        else {
-       console.log("camino 2.2");
-
             sql = 'Update codificacioncarpetas Set? where Nombre=?';
             connection.query(sql, [{
                 CodigoVigentes: CodigoNuevo, CodigoEnUsoVigentes: "S"
@@ -602,9 +537,9 @@ router.post('/update/:id', (req, res) => {
                 if (error) console.log(error);
 
             })
-            const sql = 'Update clientes Set ? where id =?';
+             sql = 'Update clientes Set ? where id =?';
             connection.query(sql, [{
-                NCarpeta: NCarpeta, Comitente: Comitente, Ubicacion: Departamento, DNV: DNV, DPV: DPV, Irrigacion: IRRIGACION,
+                NCarpeta: NCarpeta, Comitente: Comitente, Ubicacion: Departamento, DNV: DNV, DPV: DPV, Irrigacion: Irrigacion,
                 Hidraulica: HIDRAULICA, Ferrocarriles: FERROCARRIL, TipoDeRed: TipoDeRed, PerMunicipal: PerMunicipal, Privado: Privado
             }, id]
                 , (error, results) => {
@@ -621,8 +556,8 @@ router.post('/update/:id', (req, res) => {
                     }
 
                 })
-        }
-    }
+        
+    
 }
 )
 router.post('/ActualizarProximasTareas/:id', (req, res) => {
@@ -1378,7 +1313,7 @@ router.post('/ActualizarEstadoCarpeta/:id', (req, res) => {
             CodigoFinalizada = CodigoFinalizada + 1;
             sql = 'Update codificacioncarpetas Set ? where Nombre= ?';
             connection.query(sql, [{
-                CodigoEnUsoVigentes: CodigoEnUso, CodigoFinalizadas: CodigoFinalizada, CodigoVigentes: ""
+                CodigoEnUsoVigentes: CodigoEnUso, CodigoFinalizadas: CodigoFinalizada
             }, Nombre], (error, results) => {
                 if (error) console.log(error);
 
