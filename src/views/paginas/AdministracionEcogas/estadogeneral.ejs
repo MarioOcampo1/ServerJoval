@@ -26,16 +26,16 @@
 <div class="modal" id="ObrasFinalizadas" tabindex="-1" style="display:none;">
     <div class="modal-dialog">
       <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Modal title</h5>
+        <div class="text-center modal-header ">
+          <h5 class="modal-title text-center">Carpetas Finalizadas</h5>
           <button type="button" class="btn-close" onclick="document.getElementById('ObrasFinalizadas').style.display = 'none' ; " aria-label="Close"></button>
         </div>
         <div class="modal-body">
             <% results.forEach((carpeta)=>{ %>
                 <% if(carpeta.Estado =="Finalizada"){%>
-                    <a href="/editarTareas/<%=carpeta.id%>" class="">
+                    <a href="/editarTareas/<%=carpeta.id%>" class="link-dark">
                     <%=carpeta.Nombre%>
-                    </a> ;
+                    </a> -
                    
                 <%}})%>
             
@@ -896,11 +896,8 @@
                                                 <%}}%>
                                           
                             <!-- // -->
-                          
-                            
                                 <td ><a href="/edit/<%=clientes.id%>" class="btn btn-outline-info">editar</a>
                                 </td>
-                               
                             </tr>
                             <% }});%>
                                 
