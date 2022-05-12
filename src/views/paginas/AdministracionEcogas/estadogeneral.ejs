@@ -20,7 +20,34 @@
 <body>
     <%- include('./partials/menusuperior.ejs')%>
         <h1 class="text-center">Estado General</h1>
-
+<div class="row">
+    <button onclick="document.getElementById('ObrasFinalizadas').style.display = 'block' ; ">Ver finalizadas</button>
+</div>
+<div class="modal" id="ObrasFinalizadas" tabindex="-1" style="display:none;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Modal title</h5>
+          <button type="button" class="btn-close" onclick="document.getElementById('ObrasFinalizadas').style.display = 'none' ; " aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <% results.forEach((carpeta)=>{ %>
+                <% if(carpeta.Estado =="Finalizada"){%>
+                    <a href="/editarTareas/<%=carpeta.id%>" class="">
+                    <%=carpeta.Nombre%>
+                    </a> ;
+                   
+                <%}})%>
+            
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="document.getElementById('ObrasFinalizadas').style.display = 'none' ; ">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
         <div class="container-fluid">
             <div class="table-responsive-sm ">
                 	
@@ -163,6 +190,7 @@
                     <tbody>
                         <% if(results){%>
                         <% results.forEach((clientes)=>{ %>
+                            <%if(clientes.Estado!="Finalizada"){%>
                             <tr>
                                 <td class="text-center Nombre">
                                     <a href="/editarTareas/<%=clientes.id%>" class="">
@@ -874,7 +902,7 @@
                                 </td>
                                
                             </tr>
-                            <% });%>
+                            <% }});%>
                                 
                            
                     </tbody>
@@ -906,6 +934,7 @@ jQuery.extend(jQuery.expr[":"],
         return (elem.textContent || elem.innerText || jQuery(elem).text() || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
     }
 });
+
 </script>
 
 </html>
