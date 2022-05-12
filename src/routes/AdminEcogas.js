@@ -387,15 +387,14 @@ router.get('/ComunicacionAlSistema', (req, res) => {
 router.get('/CodigoCarpeta', (req, res) => {
     if (req.isAuthenticated()) {
         res.locals.moment = moment;
-        const sql = 'Select * from codificacioncarpetas where CodigoVigentes is not null';
-        connection.query(sql, (error, resultado) => {
-            if (error) console.log(error);
+var sql="";
+         sql = 'Select * from codificacioncarpetas where CodigoVigentes is not null';
+        connection.query(sql, (error, resultado) => {    
+            
             if (resultado.length > 0) {
                 res.render('paginas/AdministracionEcogas/partials/editartareas/CodigoCarpeta.ejs', { resultado: resultado })
             } else {
                 res.send("Ningun resultado encontrado");
-
-
             }
         })
 

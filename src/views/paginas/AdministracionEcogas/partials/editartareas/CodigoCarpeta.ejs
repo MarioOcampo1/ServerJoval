@@ -1,41 +1,53 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Codigo carpeta</title>
-    <script src=".\bootstrap\dist\js/bootstrap.bundle.min.js"></script>
-    <script
-    src="https://code.jquery.com/jquery-3.6.0.js"integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous">
-  </script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Codigo carpeta</title>
+  <script src=".\bootstrap\dist\js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous">
+    </script>
   <script>
-    $('#CodigoCarpeta').click(function(){
-                                            $.ajax({
-                                                url: '/CodigoCarpeta',
-                                                method:"GET",
-                                                success: function(data){
-         $('#tablaAjax').html(data);
-                                                },
-                                                error:function(error){
-                                                    console.log('ERROR:' + error);
-                                                },
-                                            });
-                                            $('#ModalCodigosCarpeta').modal('show');
-                                        })
+    $('#CodigoCarpeta').click(function () {
+      $.ajax({
+        url: '/CodigoCarpeta',
+        method: "GET",
+        success: function (data) {
+          $('#tablaAjax').html(data);
+        },
+        error: function (error) {
+          console.log('ERROR:' + error);
+        },
+      });
+      $('#ModalCodigosCarpeta').modal('show');
+    })
   </script>
 </head>
+
 <body>
-    <%if(resultado){%>     
-                <label class="text-center" for=""> Codigos disponibles para ser usados </label>
-                
-                    <%resultado.forEach((Codigo)=>{%>
-                      
-                      <% if(Codigo.CodigoEnUsoVigentes=="N"|| Codigo.CodigoEnUsoVigentes=="F"){%>
-<button id="CodigoCarpeta<%=Codigo.CodigoVigentes%>">  <%= Codigo.CodigoVigentes%> </button> ;       
-<%}})%>                   
-        <%}else{%>
-          "No hay codigos disponibles"
-          <%}%>
+  <%if(resultado){%>
+    <% var contadorCodigos=0 , NCarpetaMasGrande=0 ;%>
+
+      <%resultado.forEach((Codigo)=>{%>
+
+        <% if((Codigo.CodigoVigentes!=null || Codigo.CodigoVigentes!="")&&(Codigo.CodigoEnUsoVigentes=="F")){%>
+          <button id="CodigoCarpeta<%=Codigo.CodigoVigentes%>">
+            <%= Codigo.CodigoVigentes%>
+          </button>;
+          <% contadorCodigos++;%>
+ <%}%>        
+ <%if(Codigo.CodigoVigentes!=null || Codigo.CodigoVigentes!=""){%>
+<%if(NCarpetaMasGrande<Codigo.CodigoVigentes){%>
+  <%NCarpetaMasGrande=Codigo.CodigoVigentes%>
+            <%}}%>
+            <%})%>
+              <%if(contadorCodigos==0){%>
+                <h2>No hay codigos disponibles</h2>
+                El codigo de "carpetas vigentes" con mayor denominación es: <%=NCarpetaMasGrande%>             
+                <%}}%>
 </body>
+
 </html>
