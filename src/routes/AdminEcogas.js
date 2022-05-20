@@ -74,14 +74,14 @@ router.get('/index', (req, res, next) => {
         }
     }
 })
-router.get('/interferencias', (req, res) => {
+router.get('/vencimientos', (req, res) => {
     // if(req.isAuthenticated()){
     const sql = 'SELECT c.id, c.Nombre, c.NCarpeta, c.intTelefonica, c.intTelefonicaPedida, c.intTelefonicaObtenida, c.intAgua, c.intAguaPedida, c.intAguaObtenida, c.intCloaca,c.intCloacasPedida, c.intCloacasObtenida, c.intClaro, c.intClaroPedida, c.intClaroObtenida, c.intElectricidad, c.intElectricidadPedida, c.intElectricidadObtenida, c.intArnet ,  c.intArnetPedida, c.intArnetObtenida,c.intArsat, c.intArsatPedida, c.intArsatObtenida, c.intTelecomPedida, c.intTelecomObtenida, c.intTelecom FROM clientes c';
     res.locals.moment = moment;
     connection.query(sql, (error, results) => {
         if (error) console.log(error);
         if (results.length > 0) {
-            res.render('paginas/AdministracionEcogas/interferencias.ejs', { results: results });
+            res.render('paginas/AdministracionEcogas/vencimientos.ejs', { results: results });
         }
         else {
             res.send('Ningun resultado encontrado');
@@ -523,7 +523,7 @@ var sql='';
             });
             sql ='Update codificacioncarpetas Set? where Nombre=?';
             connection.query(sql,[{
-                CodigoVigentes: null
+                CodigoVigentes: 0
             }, NombreLocal], (error,results)=>{
                 if (error) console.log(error); 
                 console.log("El codigo de la carpeta finalizada:" + NombreLocal+", deberia de haber sido eliminado");
@@ -595,14 +595,8 @@ router.post('/ActualizarProximasTareas/:id', (req, res) => {
 router.post('/edit/delete/:id', (req, res) => {
     const id = req.body.id;
     const Nombre = req.body.Nombre;
-    var sql = 'Delete FROM clientes WHERE id =?';
-    res.locals.moment = moment;
-    connection.query(sql, [id], (error, results) => {
-        if (error) console.log(error);
-        if (results.length > 0) {
-
-        }
-    })
+    var sql =''
+    
     sql = 'Delete from codificacioncarpetas where Nombre=?';
     connection.query(sql, [Nombre], (error, results) => {
         if (error) console.log(error);
@@ -617,6 +611,14 @@ router.post('/edit/delete/:id', (req, res) => {
             res.redirect('/adminecogas');
         }
         else { res.redirect('/adminecogas'); }
+    })
+    sql= 'Delete FROM clientes WHERE id =?';
+    res.locals.moment = moment;
+    connection.query(sql, [id], (error, results) => {
+        if (error) console.log(error);
+        if (results.length > 0) {
+
+        }
     })
 })
 router.post('/editarContacto/delete/Contacto/:id', (req, res) => {
@@ -657,6 +659,14 @@ router.post('/guardarNuevoCliente', (req, res) => {
     if (HIDRAULICA == null) { HIDRAULICA = "NC"; }
     if (FERROCARRIL == null) { FERROCARRIL = "NC"; }
     if (OTROSPERMISOS == null) { OTROSPERMISOS = "NC"; }
+    if( DNV =="NC" && DPV=="NC" && HIDRAULICA=="NC"&&FERROCARRIL=="NC"){
+        var PermisosEspeciales="NC"
+        if(PerMunicipal=="NC"){
+            var Permisos="NC";
+        }else{
+            var Permisos="Sin presentar";
+        }
+    }
     var sql = 'Insert into adgastareas set ?';
     connection.query(sql, {
         Nombre: Nombre
@@ -671,7 +681,7 @@ router.post('/guardarNuevoCliente', (req, res) => {
     })
     sql = 'Insert into clientes_tareasgenerales set ?';
     connection.query(sql, {
-        Nombre: Nombre
+        Nombre: Nombre,PermisosEspeciales: PermisosEspeciales, Permisos:Permisos
     }, (error, results) => {
         if (error) console.log(error);
     })
@@ -819,11 +829,11 @@ router.post('/act1pCarpEcogas/:id', (req, res) => {
     if ((Contrato == "ok" || Contrato == "Ok(Preliminar)") && Presupuesto == "ok" && Sucedaneo == "ok" && (NotaDeExcepcion == "ok" || NotaDeExcepcion == "NC")) {
         Comercial = "ok";
     }
-    if (Contrato == "EnGestion" || Presupuesto == "EnGestion" || Sucedaneo == "EnGestion" || NotaDeExcepcion == "EnGestion") {
+    if (Contrato == "EnGestion" || Presupuesto == "EnGestion" || (Sucedaneo == "EnGestion"|| Sucedaneo == "Presentado") || (NotaDeExcepcion == "EnGestion"|| NotaDeExcepcion == "Presentado")) {
         Comercial = "EnGestion";
     }
     if (Contrato == "Observado" || Presupuesto == "Observado" || Sucedaneo == "Observado" || NotaDeExcepcion == "Observado") {
-        Comercial = "Sin presentar";
+        Comercial = "Observado";
     }
     //Tecnica
     if ((Pcaprobado == "ok") && (PlanoTipo == "ok" || PlanoTipo == "NC")) {
