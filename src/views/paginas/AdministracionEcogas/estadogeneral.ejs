@@ -342,12 +342,12 @@
                                         <%=clientes.Comercial%>
                                     </td>
                                     <%}%>
-                                    <%if(clientes.Comercial=="Sin presentar"){%>
+                                    <%if(clientes.Comercial=="Sin presentar" || clientes.Comercial=="Observado"){%>
                                         <td class="text-light bg-danger">
                                             <%=clientes.Comercial%>
                                         </td>
                                         <%}%>
-                                        <%if(clientes.Comercial!="ok"&& clientes.Comercial!="EnGestion" && clientes.Comercial!="Presentado"&& clientes.Comercial!="Sin presentar"){%>
+                                        <%if(clientes.Comercial!="ok"&& clientes.Comercial!="EnGestion" && clientes.Comercial!="Presentado"&& clientes.Comercial!="Sin presentar"&& clientes.Comercial!="Observado"){%>
                                             <%if(clientes.Comercial==null||clientes.Comercial==""){ %>
                                                 <td class="text-light bg-danger">
                                                  !
@@ -386,7 +386,7 @@
                                            
                                  <!-- //  -->
                                  <!-- Permisos Especiales  -->
-                                 <%if(clientes.PermisosEspeciales=="ok"){%>
+                                 <%if(clientes.PermisosEspeciales=="ok" || clientes.PermisosEspeciales=="NC"){%>
                                     <td class="text-light bg-success">
                                         <%=clientes.PermisosEspeciales%>
                                     </td>
