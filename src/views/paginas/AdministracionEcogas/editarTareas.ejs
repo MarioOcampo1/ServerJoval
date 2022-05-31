@@ -83,7 +83,7 @@
                                             <option hidden value="<%=user.Estado%>" selected>
                                                 <%=user.Estado%>
                                             </option>
-                                            <option value="Sin presentar">Sin presentar</option>
+                                            <option value="Preliminar">Preliminar</option>
                                             <option value="1ra parte">1ra parte</option>
                                             <option value="2da parte">2da parte</option>
                                             <option value="Obras">Obras</option>
@@ -962,7 +962,7 @@
                                             $(document).ready(
                                                 function AbrirEstadoCarpeta() {
                                                     var user = '<%= user.Estado %>';
-                                            if ((user) == "Sin presentar") {
+                                            if ((user) == "Preliminar") {
                                                         $('#ModalPreliminar').modal('show');
                                                     };
                                                     if ((user) == "1ra parte") {

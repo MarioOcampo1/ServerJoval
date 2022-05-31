@@ -154,7 +154,7 @@ router.get('/adminecogas/TablaGeneral', (req, res) => {
 router.get('/estadogeneral', (req, res) => {
     if (req.isAuthenticated()) {
         res.locals.moment = moment;
-        const sql = 'SELECT c.id, c.Nombre  ,c.NCarpeta,  c.Ubicacion ,c.Comitente ,c.Estado, c.Fechafirmacontrato  ,b.DocumentacionTerreno ,b.DocumentacionSociedad ,b.DocumentacionContractual  ,b.Comercial ,b.Tecnica ,b.PermisosEspeciales ,b.DocumentacionObra  ,b.Seguridad,b.Interferencias, b.Permisos, b.PlanDeTrabajo, b.Matriculas, b.Ambiente, b.NotaCumplimentoNormativas, b.DDJJNAG153, b.Avisos, b.DocumentacionInspeccion, b.ComunicacionObras, b.ActasFinalesEcogas, b.PlanosyCroquis, b.ConformeEntidades, b.PruebaHermeticidad, b.InformesFinales, b.PresentacionFinal, c.MailAutorizacion, b.HabilitacionObra  from clientes_tareasgenerales b , clientes c where b.Nombre = c.Nombre';
+        const sql = 'SELECT e.CodigoVigentes, c.id, c.Nombre  ,c.NCarpeta,  c.Ubicacion ,c.Comitente ,c.Estado, c.Fechafirmacontrato  ,b.DocumentacionTerreno ,b.DocumentacionSociedad ,b.DocumentacionContractual  ,b.Comercial ,b.Tecnica ,b.PermisosEspeciales ,b.DocumentacionObra  ,b.Seguridad,b.Interferencias, b.Permisos, b.PlanDeTrabajo, b.Matriculas, b.Ambiente, b.NotaCumplimentoNormativas, b.DDJJNAG153, b.Avisos, b.DocumentacionInspeccion, b.ComunicacionObras, b.ActasFinalesEcogas, b.PlanosyCroquis, b.ConformeEntidades, b.PruebaHermeticidad, b.InformesFinales, b.PresentacionFinal, c.MailAutorizacion, b.HabilitacionObra  from clientes_tareasgenerales b , codificacioncarpetas e, clientes c where b.Nombre = c.Nombre AND b.Nombre = e.Nombre';
         // const sql = 'SELECT c.id, c.Nombre  ,c.NCarpeta,  c.Ubicacion ,c.Comitente ,c.Estado, c.Fechafirmacontrato ,b.DocumentacionTerreno, b.DocumentacionSociedad,b.DocumentacionContractual  ,b.Comercial ,b.Tecnica,b.PermisosEspeciales ,b.DocumentacionObra  ,b.Seguridad,b.Interferencias, b.Permisos, b.PlanDeTrabajo, b.Matriculas, b.Ambiente, b.NotaCumplimentoNormativas, b.DDJJNAG153, b.Avisos, b.DocumentacionInspeccion, b.ComunicacionObras, b.ActasFinalesEcogas, b.PlanosyCroquis, b.ConformeEntidades, b.PruebaHermeticidad, b.InformesFinales,b.PresentacionFinal, b.HabilitacionObra  from clientes c , clientes_tareasgenerales b  ';
         // const sql='Select * from clientes c';
         // const sql='Select * from clientes_tareasgenerales b';
@@ -227,59 +227,60 @@ router.get('/editarTareas/:id', (req, res) => {
     if (req.isAuthenticated()) {
         res.locals.moment = moment;
         const id = req.params.id;
-        var Nombre='';
+        var Nombre = '';
         var sql = 'Select Nombre from clientes where id=?';
-                   
-       connection.query(sql, [id], (error, results) => {
-         
+
+        connection.query(sql, [id], (error, results) => {
+
             if (error) console.log(error);
-          if (results.length > 0) {
-                var contador = 0;              
-                Nombre= JSON.parse((JSON.stringify(results)), function (k, v) {
+            if (results.length > 0) {
+                var contador = 0;
+                Nombre = JSON.parse((JSON.stringify(results)), function (k, v) {
                     if (contador == 0) {
                         contador = contador + 1;
                         Nombre = v;
                     }
-                    return Nombre;});
-           }
-           sql = 'Select * from codificacioncarpetas Where Nombre=?';
-           connection.query(sql,[Nombre], (error, results)=>{
-               if (error) console.log( error);
-                   var contador=0;
-                   var CodigoVigentes=0;
-                   var CodigoEnUsoVigentes="";
-                   var CodigoFinalizadas=0;
+                    return Nombre;
+                });
+            }
+            sql = 'Select * from codificacioncarpetas Where Nombre=?';
+            connection.query(sql, [Nombre], (error, results) => {
+                if (error) console.log(error);
+                var contador = 0;
+                var CodigoVigentes = 0;
+                var CodigoEnUsoVigentes = "";
+                var CodigoFinalizadas = 0;
 
-                   JSON.parse((JSON.stringify(results)),function(k,v){
-                                          if(contador==1){
-                            CodigoVigentes=v;
-                       }
-                       if(contador==2){
-                        CodigoEnUsoVigentes=v;
-                   }
-                   if(contador==3){
-                    CodigoFinalizadas=v;
-               }
-               contador=contador+1;
-               });
-             
-               sql = 'Select * from clientes where id=?';
+                JSON.parse((JSON.stringify(results)), function (k, v) {
+                    if (contador == 1) {
+                        CodigoVigentes = v;
+                    }
+                    if (contador == 2) {
+                        CodigoEnUsoVigentes = v;
+                    }
+                    if (contador == 3) {
+                        CodigoFinalizadas = v;
+                    }
+                    contador = contador + 1;
+                });
 
-               connection.query(sql, [id], (error, results) => {
-                   if (error) console.log(error);
-                   if (results.length > 0) {
-                       res.render('paginas/AdministracionEcogas/editarTareas', { user: results[0],CodigoVigentes:CodigoVigentes,CodigoEnUsoVigentes:CodigoEnUsoVigentes,CodigoFinalizadas:CodigoFinalizadas });
-                   }
-                   else {
-                       res.redirect('/adminecogas');
-                   }
-               })
-           })
+                sql = 'Select * from clientes where id=?';
 
-       }
+                connection.query(sql, [id], (error, results) => {
+                    if (error) console.log(error);
+                    if (results.length > 0) {
+                        res.render('paginas/AdministracionEcogas/editarTareas', { user: results[0], CodigoVigentes: CodigoVigentes, CodigoEnUsoVigentes: CodigoEnUsoVigentes, CodigoFinalizadas: CodigoFinalizadas });
+                    }
+                    else {
+                        res.redirect('/adminecogas');
+                    }
+                })
+            })
+
+        }
         )
-       
-        
+
+
     }
     else { res.redirect('/'); }
 })
@@ -293,42 +294,43 @@ router.get('/edit/:id', (req, res) => {
         connection.query(sql, [id], (error, results) => {
             if (error) console.log(error);
             if (results.length > 0) {
-                var contador = 0;              
+                var contador = 0;
                 JSON.parse((JSON.stringify(results)), function (k, v) {
                     if (contador == 0) {
                         contador = contador + 1;
                         Nombre = v;
                     }
-                    return Nombre;});
-           }
-        sql='select CodigoVigentes from codificacioncarpetas where Nombre=?';
-        connection.query(sql, [Nombre], (error, Codigo) => {
-            if (error) console.log(error);
-            var contador = 1;     
-            var CodigoBDLimpio;         
-            JSON.parse((JSON.stringify(Codigo)), function (k, v) {
+                    return Nombre;
+                });
+            }
+            sql = 'select CodigoVigentes from codificacioncarpetas where Nombre=?';
+            connection.query(sql, [Nombre], (error, Codigo) => {
+                if (error) console.log(error);
+                var contador = 1;
+                var CodigoBDLimpio;
+                JSON.parse((JSON.stringify(Codigo)), function (k, v) {
 
-                if (contador == 1) {
-                    contador = contador + 1;
-                    CodigoBDLimpio = v;
-                }
-            })
+                    if (contador == 1) {
+                        contador = contador + 1;
+                        CodigoBDLimpio = v;
+                    }
+                })
                 sql = 'Select * from clientes where id=?';
                 connection.query(sql, [id], (error, results) => {
                     if (error) console.log(error);
                     if (results.length > 0) {
-                        res.render('paginas/AdministracionEcogas/edit', { user: results[0] , Codigo:CodigoBDLimpio });
+                        res.render('paginas/AdministracionEcogas/edit', { user: results[0], Codigo: CodigoBDLimpio });
                     }
                     else {
-        
+
                         res.render('/adminecogas');
-        
+
                     }
                 })
-           
+
+            })
         })
-    })
-          
+
     } else { res.redirect('/'); }
 })
 router.get('/historialcarpeta/:Nombre', (req, res) => {
@@ -387,10 +389,11 @@ router.get('/ComunicacionAlSistema', (req, res) => {
 router.get('/CodigoCarpeta', (req, res) => {
     if (req.isAuthenticated()) {
         res.locals.moment = moment;
-var sql="";
-         sql = 'Select * from codificacioncarpetas where CodigoVigentes is not null';
-        connection.query(sql, (error, resultado) => {    
-            
+        var sql = "";
+      
+        sql = 'Select * from codificacioncarpetas where CodigoVigentes is not null';
+        connection.query(sql, (error, resultado) => {
+
             if (resultado.length > 0) {
                 res.render('paginas/AdministracionEcogas/partials/editartareas/CodigoCarpeta.ejs', { resultado: resultado })
             } else {
@@ -470,7 +473,7 @@ router.post('/TareaOk/:Nombre', (req, res) => {
 router.post('/update/:id', (req, res) => {
     res.locals.moment = moment;
     var CodigoNuevo = req.body.Codigo;
-    var Codigo =req.body.CodigoOriginal; //Dicho valor, es el codigo original que tiene la base de datos antes de querer actualizarlo, ver el get de edit, para poder identificar la variable usada acá.
+    var Codigo = req.body.CodigoOriginal; //Dicho valor, es el codigo original que tiene la base de datos antes de querer actualizarlo, ver el get de edit, para poder identificar la variable usada acá.
     if (CodigoNuevo == null || CodigoNuevo == "") {
         CodigoNuevo = Codigo;
     }
@@ -488,75 +491,52 @@ router.post('/update/:id', (req, res) => {
     var OTROSPERMISOS = req.body.Otrospermisos;
     var Privado = req.body.Privado;
     var PerMunicipal = req.body.PerMunicipal;
-var sql='';
+    var sql = '';
     const DNVVisacion = req.body.DNV;
     const HIDRAULICAVisacion = req.body.HIDRAULICA;
     const FERROCARRILVisacion = req.body.FERROCARRIL;
-
     const TipoDeRed = req.body.TipoDeRed;
     console.log("Intentando actualizar el contacto:" + NombreCarpeta);
-    // Comparacion de codigos para poder eliminar el codigo de la carpeta finalizada, y agregarselo a la nueva
-// if (CodigoNuevo != Codigo){
-//     sql = 'Update codificacioncarpetas Set? where Nombre=?';
-//     connection.query(sql, [{
-//         CodigoVigentes: CodigoNuevo, CodigoEnUsoVigentes: "S",
-//     }, NombreOriginal], (error, results) => {
-//         if (error) console.log(error);
+    //La siguiente parte del codigo, sirve para que la codificacion de la carpeta siempre se mantenga actualizada, y vigente.
+    //Tambien, cuando se cambie el nombre de la carpeta, lo va a cambiar en todas las areas de la BD, para que no desaparezcan las tareas ni tampoco el historial.
+    sql = 'Update codificacioncarpetas Set? where Nombre=?';
+    connection.query(sql, [{
+        CodigoVigentes: CodigoNuevo, CodigoEnUsoVigentes: "S", Nombre: NombreCarpeta
+    }, NombreOriginal], (error, results) => {
+        if (error) console.log(error);
 
-//     })
-//     sql = 'Delete from codificacioncareptas Set? where Codigo=? and CodigoEnUsoVigentes="F"';
-//     connection.query(sql, [{
-        
-//     }, Codigo], (error, results) => {
-//         if (error) console.log(error);
+    })
+    //Se procede a buscar en la codificacion de las carpetas, si el codigo nuevo es de una carpeta Eliminada, dichas carpetas tienen en "CodigoEnUsoVigentes" una letra "E"
+    //El objetivo es eliminar por completo la carpeta. 
+    sql= "Delete from codificacioncarpetas where CodigoEnUsoVigentes='E' and CodigoVigentes=?"
+    connection.query(sql,[CodigoNuevo],(error)=>{
+        if(error) console.log(error);
+    })
+    sql = 'Update clientes_tareasgenerales Set? where Nombre=?';
+    connection.query(sql, [{
+        Nombre: NombreCarpeta
+    }, NombreOriginal], (error, results) => {
+        if (error) console.log(error);
 
-//     })
-// }
-        sql = 'Select * from codificacioncarpetas where CodigoVigentes =?';
-        connection.query(sql,Codigo,(error,results)=>{
-            var NombreLocal, contador=0;
-            JSON.parse((JSON.stringify(results)), function (k, v) {
-                if (contador == 0) {
-                    contador = contador + 1;
-                    NombreLocal = v;
-                }
-            });
-            sql ='Update codificacioncarpetas Set? where Nombre=?';
-            connection.query(sql,[{
-                CodigoVigentes: 0
-            }, NombreLocal], (error,results)=>{
-                if (error) console.log(error); 
-                console.log("El codigo de la carpeta finalizada:" + NombreLocal+", deberia de haber sido eliminado");
-            })
+    })
+    sql = 'Update historialdecambios Set? where Nombre_sub=?';
+    connection.query(sql, [{
+        Nombre_sub: NombreCarpeta
+    }, NombreOriginal], (error, results) => {
+        if (error) console.log(error);
+
+    })
+    sql = 'Update clientes Set ? where id =?';
+    connection.query(sql, [{
+        Nombre: NombreCarpeta,NCarpeta: NCarpeta, Comitente: Comitente, Ubicacion: Departamento, DNV: DNV, DPV: DPV, Irrigacion: Irrigacion,
+        Hidraulica: HIDRAULICA, Ferrocarriles: FERROCARRIL, TipoDeRed: TipoDeRed, PerMunicipal: PerMunicipal, Privado: Privado
+    }, id]
+        , (error, results) => {
+            if (error) console.log(error);
+                            res.redirect('/editarTareas/' + id);
         })
-            sql = 'Update codificacioncarpetas Set? where Nombre=?';
-            connection.query(sql, [{
-                CodigoVigentes: CodigoNuevo, CodigoEnUsoVigentes: "S"
-            }, NombreOriginal], (error, results) => {
-                if (error) console.log(error);
-
-            })
-             sql = 'Update clientes Set ? where id =?';
-            connection.query(sql, [{
-                NCarpeta: NCarpeta, Comitente: Comitente, Ubicacion: Departamento, DNV: DNV, DPV: DPV, Irrigacion: Irrigacion,
-                Hidraulica: HIDRAULICA, Ferrocarriles: FERROCARRIL, TipoDeRed: TipoDeRed, PerMunicipal: PerMunicipal, Privado: Privado
-            }, id]
-                , (error, results) => {
-                    if (error) console.log(error);
-
-                    if (results.length > 0) {
-                        res.redirect('/editarTareas/' + id);
-
-                    }
-                    else {
-                        res.redirect('/editarTareas/' + id);
 
 
-                    }
-
-                })
-        
-    
 }
 )
 router.post('/ActualizarProximasTareas/:id', (req, res) => {
@@ -595,15 +575,20 @@ router.post('/ActualizarProximasTareas/:id', (req, res) => {
 router.post('/edit/delete/:id', (req, res) => {
     const id = req.body.id;
     const Nombre = req.body.Nombre;
-    var sql =''
-    
-    sql = 'Delete from codificacioncarpetas where Nombre=?';
-    connection.query(sql, [Nombre], (error, results) => {
-        if (error) console.log(error);
-        if (results.length > 0) {
+    var sql = ''
 
-        }
-    })
+    sql = 'Update codificacioncarpetas set? where Nombre=?';
+    connection.query(sql, [{
+CodigoEnUsoVigentes:"E"
+    }, Nombre],
+        (error, results) => {
+
+            if (error) {
+                console.log(error);
+            }
+
+        })
+   
     sql = 'Delete FROM clientes_tareasgenerales WHERE Nombre =?';
     connection.query(sql, [Nombre], (error, results) => {
         if (error) console.log(error);
@@ -612,7 +597,7 @@ router.post('/edit/delete/:id', (req, res) => {
         }
         else { res.redirect('/adminecogas'); }
     })
-    sql= 'Delete FROM clientes WHERE id =?';
+    sql = 'Delete FROM clientes WHERE id =?';
     res.locals.moment = moment;
     connection.query(sql, [id], (error, results) => {
         if (error) console.log(error);
@@ -659,12 +644,12 @@ router.post('/guardarNuevoCliente', (req, res) => {
     if (HIDRAULICA == null) { HIDRAULICA = "NC"; }
     if (FERROCARRIL == null) { FERROCARRIL = "NC"; }
     if (OTROSPERMISOS == null) { OTROSPERMISOS = "NC"; }
-    if( DNV =="NC" && DPV=="NC" && HIDRAULICA=="NC"&&FERROCARRIL=="NC"){
-        var PermisosEspeciales="NC"
-        if(PerMunicipal=="NC"){
-            var Permisos="NC";
-        }else{
-            var Permisos="Sin presentar";
+    if (DNV == "NC" && DPV == "NC" && HIDRAULICA == "NC" && FERROCARRIL == "NC") {
+        var PermisosEspeciales = "NC"
+        if (PerMunicipal == "NC") {
+            var Permisos = "NC";
+        } else {
+            var Permisos = "Sin presentar";
         }
     }
     var sql = 'Insert into adgastareas set ?';
@@ -681,7 +666,7 @@ router.post('/guardarNuevoCliente', (req, res) => {
     })
     sql = 'Insert into clientes_tareasgenerales set ?';
     connection.query(sql, {
-        Nombre: Nombre,PermisosEspeciales: PermisosEspeciales, Permisos:Permisos
+        Nombre: Nombre, PermisosEspeciales: PermisosEspeciales, Permisos: Permisos
     }, (error, results) => {
         if (error) console.log(error);
     })
@@ -691,6 +676,10 @@ router.post('/guardarNuevoCliente', (req, res) => {
     }, (error, results) => {
         if (error) console.log(error);
 
+    })
+    sql= "Delete from codificacioncarpetas where CodigoEnUsoVigentes= 'E' and CodigoVigentes=?"
+    connection.query(sql,[Codigo],(error)=>{
+        if(error) console.log(error);
     })
     sql = 'Insert into clientes set ?';
     connection.query(sql, {
@@ -829,7 +818,7 @@ router.post('/act1pCarpEcogas/:id', (req, res) => {
     if ((Contrato == "ok" || Contrato == "Ok(Preliminar)") && Presupuesto == "ok" && Sucedaneo == "ok" && (NotaDeExcepcion == "ok" || NotaDeExcepcion == "NC")) {
         Comercial = "ok";
     }
-    if (Contrato == "EnGestion" || Presupuesto == "EnGestion" || (Sucedaneo == "EnGestion"|| Sucedaneo == "Presentado") || (NotaDeExcepcion == "EnGestion"|| NotaDeExcepcion == "Presentado")) {
+    if (Contrato == "EnGestion" || Presupuesto == "EnGestion" || (Sucedaneo == "EnGestion" || Sucedaneo == "Presentado") || (NotaDeExcepcion == "EnGestion" || NotaDeExcepcion == "Presentado")) {
         Comercial = "EnGestion";
     }
     if (Contrato == "Observado" || Presupuesto == "Observado" || Sucedaneo == "Observado" || NotaDeExcepcion == "Observado") {
@@ -926,6 +915,8 @@ router.post('/act2pCarpEcogas/:id', (req, res) => {
     var id = req.body.id;
     var Nombre = req.body.Nombre;
     var sql = "";
+    var FechaDiaActual = new Date();
+    console.log("Fecha dia actual es:" + FechaDiaActual);
     // Primera seccion 
     var MailAutorizacion = req.body.MailAutorizacion;
     var PlanDeTrabajo = req.body.PlanDeTrabajo
@@ -1033,6 +1024,10 @@ router.post('/act2pCarpEcogas/:id', (req, res) => {
         || intAgua == "Pedida" || intCloacas == "Pedida" || intElectricidad == "Pedida" || intArsat == "Pedida" || intClaro == "Pedida" || intTelefonica == "Pedida" || intArnet == "Pedida" || intTelecom == "Pedida"
     ) {
         Interferencias = "EnGestion";
+    }
+    //Vencimientos de interferencias (Si se vencen, se pondran en modo "Pedir")
+    if (intAguaObtenida > FechaDiaActual || intAguaPedida > FechaDiaActual) {
+        intAgua = "Pedir";
     }
     //Permisos
     if ((PerMunicipal == "ok" || PerMunicipal == "NC") && (Irrigacion == "ok" || Irrigacion == "NC") && (DPV == "ok" || DPV == "NC") && (DNV == "ok" || DNV == "NC") && (FERROCARRIL == "ok" || FERROCARRIL == "NC") && (HIDRAULICA == "ok" || HIDRAULICA == "NC")) {

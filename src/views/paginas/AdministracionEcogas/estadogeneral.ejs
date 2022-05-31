@@ -56,7 +56,7 @@
                     style="width: 100%">
                     <thead>
                         <tr>
-                            <th class="text-center text-light bg-dark" value="0"  colspan="6">
+                            <th class="text-center text-light bg-dark" value="0"  colspan="7">
                                 <button class="btn text-light">Datos de carpeta</button>
                             </th>
                             <th class="text-center text-light bg-dark" id="Preliminar" value="1" colspan="3">
@@ -86,102 +86,105 @@
 
                         </tr>
                         <tr>
-                            <th class="text-center p-3 ">
+                            <th class="text-center">
+                                <h4>Código</h4>
+                            </th>
+                            <th class="text-center  ">
                                 <h4>Nombre</h4>
                             </th>
-                            <th class="text-center p-3 MenuSuperior">
+                            <th class="text-center  MenuSuperior">
                                 <h4>N° de carpeta</h4>
                             </th>
-                            <th class="text-center p-3 MenuSuperior">
+                            <th class="text-center  MenuSuperior">
                                 <h4>Ubicación</h4>
                             </th>
-                            <th class="text-center p-3 MenuSuperior">
+                            <th class="text-center  MenuSuperior">
                                 <h4>Comitente</h4>
                             </th>
-                            <th class="text-center p-3 MenuSuperior">
+                            <th class="text-center  MenuSuperior">
                                 <h4>Estado</h4>
                             </th>
-                            <th class="text-center p-3 MenuSuperior">
+                            <th class="text-center  MenuSuperior">
                                 <h4>Fecha firma de contrato</h4>
                             </th>
 
-                            <th class="text-center p-3 MenuSuperior ">
+                            <th class="text-center  MenuSuperior ">
                                 Documentación del terreno
                             </th>
-                            <th class="text-center p-3 MenuSuperior ">
+                            <th class="text-center  MenuSuperior ">
                                 Documentación de la Sociedad
                             </th>
-                            <th class="text-center p-3 MenuSuperior ">
+                            <th class="text-center  MenuSuperior ">
                                 Documentación contractual
                             </th>
-                            <th class="text-center p-3 MenuSuperior ">
+                            <th class="text-center  MenuSuperior ">
                                 Comercial
                             </th>
-                            <th class="text-center p-3 MenuSuperior ">
+                            <th class="text-center  MenuSuperior ">
                                 Tecnica
                             </th>
 
-                            <th class="text-center p-3 MenuSuperior">
+                            <th class="text-center  MenuSuperior">
                                 Permisos especiales
                             </th>
-                            <th class="text-center p-3 MenuSuperior">
+                            <th class="text-center  MenuSuperior">
                                 Mail de autorización
                             </th>
-                            <th class="text-center p-3 MenuSuperior">
+                            <th class="text-center  MenuSuperior">
                                 Documentación de obra
                             </th>
-                            <th class="text-center p-3 MenuSuperior">
+                            <th class="text-center  MenuSuperior">
                                 Seguridad
                             </th>
-                            <th class="text-center p-3 MenuSuperior">
+                            <th class="text-center  MenuSuperior">
                                 Interferencias
                             </th>
-                            <th class="text-center p-3 MenuSuperior">
+                            <th class="text-center  MenuSuperior">
                                 Permisos
                             </th>
-                            <th class="text-center p-3 MenuSuperior">
+                            <th class="text-center  MenuSuperior">
                                 Plan de trabajos
                             </th>
-                            <th class="text-center p-3 MenuSuperior">
+                            <th class="text-center  MenuSuperior">
                                 Matriculas
                             </th>
-                            <th class="text-center p-3 MenuSuperior">
+                            <th class="text-center  MenuSuperior">
                                 Ambiente
                             </th>
-                            <th class="text-center p-3 MenuSuperior">
+                            <th class="text-center  MenuSuperior">
                                 Nota cumplimento de normas vigentes
                             </th>
-                            <th class="text-center p-3 MenuSuperior">
+                            <th class="text-center  MenuSuperior">
                                 DDJJ NAG 153
                             </th>
-                            <th class="text-center p-3 MenuSuperior">
+                            <th class="text-center  MenuSuperior">
                                 Avisos
                             </th>
-                            <th class="text-center p-3 MenuSuperior">
+                            <th class="text-center  MenuSuperior">
                                 Documentación de inspección
                             </th>
-                            <th class="text-center p-3 MenuSuperior">
+                            <th class="text-center  MenuSuperior">
                                 Comunicación de obras
                             </th>
-                            <th class="text-center p-3 MenuSuperior">
+                            <th class="text-center  MenuSuperior">
                                 Actas finales de Ecogas
                             </th>
-                            <th class="text-center p-3 MenuSuperior">
+                            <th class="text-center  MenuSuperior">
                                 Plano y croquis
                             </th>
-                            <th class="text-center p-3 MenuSuperior">
+                            <th class="text-center  MenuSuperior">
                                 Conforme de entidades
                             </th>
-                            <th class="text-center p-3 MenuSuperior">
+                            <th class="text-center  MenuSuperior">
                                 Prueba de hermeticidad
                             </th>
-                            <th class="text-center p-3 MenuSuperior">
+                            <th class="text-center  MenuSuperior">
                                 Informe finales
                             </th>
-                            <th class="text-center p-3 MenuSuperior">
+                            <th class="text-center  MenuSuperior">
                                 Presentación final
                             </th>
-                            <th class="text-center p-3 MenuSuperior">
+                            <th class="text-center  MenuSuperior">
                                 Habilitación de obra
                             </th>
                            
@@ -192,6 +195,9 @@
                         <% results.forEach((clientes)=>{ %>
                             <%if(clientes.Estado!="Finalizada"){%>
                             <tr>
+                                <td class="text-center">
+                                    <%=clientes.CodigoVigentes%>
+                                </td>
                                 <td class="text-center Nombre">
                                     <a href="/editarTareas/<%=clientes.id%>" class="">
                                         <%=clientes.Nombre%>

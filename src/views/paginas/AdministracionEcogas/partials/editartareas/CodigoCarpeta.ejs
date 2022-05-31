@@ -33,7 +33,7 @@
 
       <%resultado.forEach((Codigo)=>{%>
 
-        <% if((Codigo.CodigoVigentes!=null || Codigo.CodigoVigentes!="")&&(Codigo.CodigoEnUsoVigentes=="F")){%>
+        <% if((Codigo.CodigoVigentes!=null || Codigo.CodigoVigentes!="")&&(Codigo.CodigoEnUsoVigentes=="F" || Codigo.CodigoEnUsoVigentes=="E" )){%>
           <button id="CodigoCarpeta<%=Codigo.CodigoVigentes%>">
             <%= Codigo.CodigoVigentes%>
           </button>;
