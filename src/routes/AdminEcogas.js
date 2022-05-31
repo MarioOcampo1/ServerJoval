@@ -512,6 +512,22 @@ router.post('/update/:id', (req, res) => {
     connection.query(sql,[CodigoNuevo],(error)=>{
         if(error) console.log(error);
     })
+    //En caso de que el codigo no provenga de la carpeta eliminada, sino de una finalizada, se procede
+    //a dejar la carpeta finalizada sin "CodigoVigentes". 
+    //Esto es con motivo de que deje de figurar como que el codigo esta disponible.
+    sql = "Update codificacioncarpetas SET? where CodigoEnUsoVigentes='F' and CodigoVigentes=?";
+    connection.query(sql,[{
+        CodigoVigentes:null
+    },CodigoNuevo],(error)=>{
+        if(error) console.log(error);
+    })
+    sql="Update codificacioncarpetas set? where Nombre=?";
+    connection.query(sql, [{
+        CodigoVigentes: CodigoNuevo, CodigoEnUsoVigentes: "S", Nombre: NombreCarpeta
+    }, NombreOriginal], (error, results) => {
+        if (error) console.log(error);
+
+    })
     sql = 'Update clientes_tareasgenerales Set? where Nombre=?';
     connection.query(sql, [{
         Nombre: NombreCarpeta
@@ -679,6 +695,15 @@ router.post('/guardarNuevoCliente', (req, res) => {
     })
     sql= "Delete from codificacioncarpetas where CodigoEnUsoVigentes= 'E' and CodigoVigentes=?"
     connection.query(sql,[Codigo],(error)=>{
+        if(error) console.log(error);
+    })
+    //En caso de que el codigo no provenga de la carpeta eliminada, sino de una finalizada, se procede
+    //a dejar la carpeta finalizada sin "CodigoVigentes". 
+    //Esto es con motivo de que deje de figurar como que el codigo esta disponible.
+    sql = 'Update codificacioncarpetas set? where CodigoEnUsoVigentes:"F" and CodigoVigentes=?';
+    connection.query(sql,[{
+        CodigoVigentes:null
+    },Codigo],(error)=>{
         if(error) console.log(error);
     })
     sql = 'Insert into clientes set ?';
