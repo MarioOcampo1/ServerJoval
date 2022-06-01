@@ -23,6 +23,18 @@
               <th class="text-center">
                 Interferencias
               </th>
+              <th class="text-center">
+                Permisos
+              </th >
+              <th class="text-center">
+Aviso ART
+              </th>
+              <th class="text-center">
+                Aviso IERIC
+                              </th>
+                              <th class="text-center">
+                             Programa de seguridad
+                                              </th>
               <!-- <th class="text-center">
                 Telefonica
               </th>
@@ -144,223 +156,35 @@
                 }
               },
               {render: function(data,type,row){
-                if((row.intTelefonica == "pedir") || (row.intAgua == "pedir")|| (row.intCloaca == "pedir")
-||(row.intElectricidad == "pedir")
-||(row.intClaro == "pedir")
-||(row.intArnet == "pedir")
-||(row.intArsat == "pedir")
-||(row.intTelecom == "pedir") ){
-                  return '<div class="bg-danger text-light text-center"> Pedir interferencias  </div> '
+                if(row.Interferencias=="Pedir")
+                {
+                  return '<div class="bg-danger text-light text-center"> Pedir interferencias  </div> ';
                 }
-if((row.intTelefonica == "Pedida" || row.intTelefonica == "En gestion")||(row.intAgua == "Pedida" || row.intAgua == "En gestion")
-||(row.intAgua == "Pedida" || row.intAgua == "En gestion")
-||(row.intCloaca == "Pedida" || row.intCloaca == "En gestion")
-||(row.intElectricidad == "Pedida" || row.intElectricidad == "En gestion")
-||(row.intClaro == "Pedida" || row.intClaro == "En gestion")
-||(row.intArnet == "Pedida" || row.intArnet == "En gestion")
-||(row.intArsat == "Pedida" || row.intArsat == "En gestion")
-||(row.intTelecom == "Pedida" || row.intTelecom == "En gestion")) {
-  return '<div class="bg-warning text-center">Interferencias pedidas y/o en gestion </div> '
+if(row.Interferencias=="EnGestion"){
+  return '<div class="bg-warning text-center">Interferencias pedidas y/o en gestion </div> ';
 }
-if((row.intTelefonica == "ok")&& 
-(row.intAgua == "ok")
-&& (row.intAgua == "ok")
-&& (row.intCloaca == "ok")
-&& (row.intElectricidad == "ok")
-&& (row.intClaro == "ok")
-&& (row.intArnet == "ok")
-&& (row.intArsat == "ok")
-&& (row.intTelecom == "ok")){
+if((row.Interferencias == "ok"|| row.Interferencias == "Ok")){
   return '<div class="bg-success text-center">Interferencias Ok </div> '
 }
-
-              }},
-//               {
-//                 "data": "intTelefonica", render: function (data, type, row) {
-//                   if (row.intTelefonica == "pedir") {
-
-//                     return '<div class="bg-danger text-light text-center">  ' + row.intTelefonica + ' </div> '
-//                   }
-//                   if (row.intTelefonica == "Pedida" || row.intTelefonica == "En gestion") {
-
-//                     return '<div class="bg-warning text-center">  ' + row.intTelefonica + '. Vencimiento: ' + moment(row.intTelefonicaObtenida).format("d-MM-YY") + ' </div> '
-//                   }
-//                   if (row.intTelefonica == "ok") {
-
-//                     return '<div class="bg-success text-light">  ' + row.intTelefonica + '. Vencimiento: ' + moment(row.intTelefonicaObtenida).format("d-MM-YY") + ' </div> '
-//                   }
-
-//                 }
-//               },
-//               {
-//                 "data": "intAgua", render: function (data, type, row) {
-//                   const fechaHoy = new Date();
-//                   if (row.intAguaObtenida < fechaHoy) {
-//                     if (row.intAgua == null || row.intAgua == '') {
-//                       return ' ' + row.intAgua
-//                     }
-//                     else {
-//                       if(row.intAgua == "pedir"){
-
-// return '<div class="bg-danger text-light text-center">  '+row.intAgua + ' </div> '
-// }
-//               if(row.intAgua == "Pedida" || row.intAgua == "En gestion"){
-
-//               return '<div class="bg-warning">  '+row.intAgua + '. Vencimiento: '+moment(row.intAguaObtenida).format("d-MM-YY")+' </div> '
-//               }
-//               if(row.intAgua == "ok"){
-
-// return '<div class="bg-success text-light">  '+row.intAgua + '. Vencimiento: '+moment(row.intAguaObtenida).format("d-MM-YY")+' </div> '
-// }
-//                     };
-//                   } else {
-//                     if (row.intAgua == null || row.intAgua == '') {
-//                       return ' ' + row.intAgua
-//                     }
-//                     else {
-//                       if(row.intAgua == "pedir"){
-
-// return '<div class="bg-danger text-light text-center">  '+row.intAgua + ' </div> '
-// }
-//               if(row.intAgua == "Pedida" || row.intAgua == "En gestion"){
-
-//               return '<div class="bg-warning">  '+row.intAgua + '. Vencimiento: '+moment(row.intAguaObtenida).format("d-MM-YY")+' </div> '
-//               }
-//               if(row.intAgua == "ok"){
-
-// return '<div class="bg-success text-light">  '+row.intAgua + '. Vencimiento: '+moment(row.intAguaObtenida).format("d-MM-YY")+' </div> '
-// }
-//                     };
-//                   }
-//                 }
-//               },
-
-//               {
-//                 "data": "intCloaca", render: function (data, type, row) {
-//                   if (row.intCloaca == null || row.intCloaca == '') {
-//                     return  '<div class="bg-danger text-light text-center"> '+row.intCloaca +  ' </div> ' ;
-//                   }
-//                   else {
-//                     if(row.intCloaca == "pedir"){
-
-// return '<div class="bg-danger text-light text-center"> '+row.intCloaca +  ' </div> '
-// }
-//               if(row.intCloaca == "Pedida" || row.intCloaca == "En gestion"){
-
-//               return '<div class="bg-warning">  '+row.intCloaca + '. Vencimiento: '+moment(row.intCloacaObtenida).format("d-MM-YY")+' </div> '
-//               }
-//               if(row.intCloaca == "ok"){
-
-// return '<div class="bg-success text-light">  '+row.intCloaca + '. Vencimiento: '+moment(row.intCloacaObtenida).format("d-MM-YY")+' </div> '
-// }
-//                   };
-//                 }
-//               },
-//               {
-//                 "data": "intElectricidad", render: function (data, type, row) {
-//                   if (row.intElectricidad == null || row.intElectricidad == '') {
-//                     return ' ' + row.intElectricidad
-//                   }
-//                   else {
-//                     if(row.intElectricidad == "pedir"){
-
-// return '<div class="bg-danger">  '+row.intElectricidad + ' </div> '
-// }
-//               if(row.intElectricidad == "Pedida" || row.intElectricidad == "En gestion"){
-
-//               return '<div class="bg-warning">  '+row.intElectricidad + '. Vencimiento: '+moment(row.intElectricidadObtenida).format("d-MM-YY")+' </div> '
-//               }
-//               if(row.intElectricidad == "ok"){
-
-// return '<div class="bg-success text-light">  '+row.intElectricidad + '. Vencimiento: '+moment(row.intElectricidadObtenida).format("d-MM-YY")+' </div> '
-// }
-//                   };
-//                 }
-//               },
-//               {
-//                 "data": "intClaro", render: function (data, type, row) {
-//                   if (row.intClaro == null || row.intClaro == '') {
-//                     return ' ' + row.intClaro
-//                   }
-//                   else {
-//                     if(row.intClaro == "pedir"){
-
-// return '<div class="bg-danger">  '+row.intClaro + ' </div> '
-// }
-//               if(row.intClaro == "Pedida" || row.intClaro == "En gestion"){
-
-//               return '<div class="bg-warning">  '+row.intClaro + '. Vencimiento: '+moment(row.intClaroObtenida).format("d-MM-YY")+' </div> '
-//               }
-//               if(row.intClaro == "ok"){
-
-// return '<div class="bg-success text-light">  '+row.intClaro + '. Vencimiento: '+moment(row.intClaroObtenida).format("d-MM-YY")+' </div> '
-// }
-//                   };
-//                 }
-//               },
-//               {
-//                 "data": "intArnet", render: function (data, type, row) {
-//                   if (row.intArnet == null || row.intArnet == '') {
-//                     return ' ' + row.intArnet
-//                   }
-//                   else {
-//                     if(row.intArnet == "pedir"){
-
-// return '<div class="bg-danger">  '+row.intArnet + ' </div> '
-// }
-//               if(row.intArnet == "Pedida" || row.intArnet == "En gestion"){
-
-//               return '<div class="bg-warning">  '+row.intArnet + '. Vencimiento: '+moment(row.intArnetObtenida).format("d-MM-YY")+' </div> '
-//               }
-//               if(row.intArnet == "ok"){
-
-// return '<div class="bg-success text-light">  '+row.intArnet + '. Vencimiento: '+moment(row.intArnetObtenida).format("d-MM-YY")+' </div> '
-// }
-//                   };
-//                 }
-//               },
-//               {
-//                 "data": "intArsat", render: function (data, type, row) {
-//                   if (row.intArsat == null || row.intArsat == '') {
-//                     return ' ' + row.intArsat
-//                   }
-//                   else {
-//                     if(row.intArsat == "pedir"){
-
-// return '<div class="bg-danger">  '+row.intArsat + ' </div> '
-// }
-//               if(row.intArsat == "Pedida" || row.intArsat == "En gestion"){
-
-//               return '<div class="bg-warning">  '+row.intArsat + '. Vencimiento: '+moment(row.intArsatObtenida).format("d-MM-YY")+' </div> '
-//               }
-//               if(row.intArsat == "ok"){
-
-// return '<div class="bg-success text-light">  '+row.intArsat + '. Vencimiento: '+moment(row.intArsatObtenida).format("d-MM-YY")+' </div> '
-// }
-//                   };
-//                 }
-//               },
-//               {
-//                 "data": "intTelecom", render: function (data, type, row) {
-//                   if (row.intTelecom == null || row.intTelecom == '') {
-//                     return ' ' + row.intTelecom
-//                   }
-//                   else {
-//                     if(row.intTelecom == "pedir"){
-
-// return '<div class="bg-danger">  '+row.intTelecom + ' </div> '
-// }
-//               if(row.intTelecom == "Pedida" || row.intTelecom == "En gestion"){
-
-//               return '<div class="bg-warning">  '+row.intTelecom + '. Vencimiento: '+moment(row.intTelecomObtenida).format("d-MM-YY")+' </div> '
-//               }
-//               if(row.intTelecom == "ok"){
-
-// return '<div class="bg-success text-light">  '+row.intTelecom + '. Vencimiento: '+moment(row.intTelecomObtenida).format("d-MM-YY")+' </div> '
-// }
-//                   };
-//                 }
-//               },
+              }
+            },
+            {
+              render: function(data,type,row){
+              //  if(((row.PerMunicipal=="pedir")||(row.PerMunicipal=="Sin presentar"))|| ((row.DPV=="pedir")||(row.DPV=="Sin presentar"))|| ((row.DNV=="pedir")||(row.DNV=="Sin presentar"))|| ((row.Hidraulica=="pedir")||(row.Hidraulica=="Sin presentar"))|| ((row.Ferrocarriles=="pedir")||(row.Ferrocarriles=="Sin presentar"))||((row.YPF=="pedir")||(row.YPF=="Sin presentar"))|| ((row.Privado=="pedir")||(row.Privado=="Sin presentar")))
+              if(row.Permisos=="Sin presentar" || row.Permisos=="Pedir")
+              {
+return '<div class="bg-danger text-center"> Hay permisos por pedir </div> ';
+               } 
+               if(row.Permisos=="EnGestion")
+              {
+return '<div class="bg-warning text-center">En gestión </div> ';
+               } 
+               if(row.Permisos=="NC" || row.Permisos=="ok"|| row.Permisos=="Ok")
+              {
+return '<div class="bg-success text-center">Ok</div> ';
+               } 
+              }
+            }
             ],
           });
         });
