@@ -96,7 +96,7 @@ router.get('/vencimientos', (req, res) => {
     // }
 })
 router.get('/interferencias/info', (req, res) => {
-    const sql = 'SELECT c.id, c.Nombre, c.NCarpeta, c.intTelefonica, c.intTelefonicaPedida, c.intTelefonicaObtenida, c.intAgua, c.intAguaPedida, c.intAguaObtenida, c.intCloaca,c.intCloacasPedida, c.intCloacasObtenida, c.intClaro, c.intClaroPedida, c.intClaroObtenida, c.intElectricidad, c.intElectricidadPedida, c.intElectricidadObtenida, c.intArnet ,  c.intArnetPedida, c.intArnetObtenida,c.intArsat, c.intArsatPedida, c.intArsatObtenida, c.intTelecomPedida, c.intTelecomObtenida, c.intTelecom FROM clientes c';
+    const sql = 'SELECT c.id, c.Nombre, c.NCarpeta, a.Interferencias , a.Permisos FROM clientes c, clientes_tareasgenerales a where a.Nombre= c.Nombre';
     res.locals.moment = moment;
     connection.query(sql, (error, results) => {
         if (error) console.log(error);
@@ -849,6 +849,9 @@ router.post('/act1pCarpEcogas/:id', (req, res) => {
     if (Contrato == "Observado" || Presupuesto == "Observado" || Sucedaneo == "Observado" || NotaDeExcepcion == "Observado") {
         Comercial = "Observado";
     }
+    if (Contrato == "Presentado" || Presupuesto == "Presentado" || Sucedaneo == "Presentado" || NotaDeExcepcion == "Presentado") {
+        Comercial = "Presentado";
+    }
     //Tecnica
     if ((Pcaprobado == "ok") && (PlanoTipo == "ok" || PlanoTipo == "NC")) {
         Tecnica = "ok";
@@ -940,8 +943,7 @@ router.post('/act2pCarpEcogas/:id', (req, res) => {
     var id = req.body.id;
     var Nombre = req.body.Nombre;
     var sql = "";
-    var FechaDiaActual = new Date();
-    console.log("Fecha dia actual es:" + FechaDiaActual);
+    var FechaDiaActual =new Date()
     // Primera seccion 
     var MailAutorizacion = req.body.MailAutorizacion;
     var PlanDeTrabajo = req.body.PlanDeTrabajo
@@ -1016,7 +1018,6 @@ router.post('/act2pCarpEcogas/:id', (req, res) => {
     var AvisoInicioObraART = req.body.AvisoInicioObraART;
     var AvisoInicioObraIERIC = req.body.AvisoInicioObraIERIC;
     var ActaInicioEfectivo = req.body.ActaInicioEfectivo;
-    console.log("Mostrando opciones seleccionadas de las interferencias: Cloacas " + req.body.intCloacas + ". Telefonica:" + req.body.intTelefonica + ".Claro: " + req.body.intClaro + ". Arnet:" + req.body.intArnet + ". Arsat:" + req.body.intArsat + ". Telecom: " + req.body.intTelecom);
     //Variables generales
     var DocumentacionObra, Seguridad, Interferencias, Permisos, Matriculas, Ambiente, Avisos, PermisosEspeciales;
 
@@ -1051,10 +1052,14 @@ router.post('/act2pCarpEcogas/:id', (req, res) => {
         Interferencias = "EnGestion";
     }
     //Vencimientos de interferencias (Si se vencen, se pondran en modo "Pedir")
-    if (intAguaObtenida > FechaDiaActual || intAguaPedida > FechaDiaActual) {
-        intAgua = "Pedir";
+    if (new Date(intAguaObtenida) > FechaDiaActual || new Date(intCloacasObtenida) > FechaDiaActual|| new Date(intTelefonicaObtenida)> FechaDiaActual || new Date(intArnetObtenida)> FechaDiaActual|| new Date(intClaroObtenida)> FechaDiaActual || new Date(intElectricidadObtenida)> FechaDiaActual|| new Date(intTelecomObtenida)> FechaDiaActual ) {
+        Interferencias = "Pedir";
     }
     //Permisos
+    if ((PerMunicipal == "Pedir" || Irrigacion == "Pedir" || DPV == "Pedir" || DNV == "Pedir" || FERROCARRIL == "Pedir" || HIDRAULICA == "Pedir")||(PerMunicipal == "pedir" || Irrigacion == "pedir" || DPV == "pedir" || DNV == "pedir" || FERROCARRIL == "pedir" || HIDRAULICA == "pedir")|| (PerMunicipal == "Sin presentar" || Irrigacion == "Sin presentar" || DPV == "Sin presentar" || DNV == "Sin presentar" || FERROCARRIL == "Sin presentar" || HIDRAULICA == "Sin presentar")) 
+    {
+        Permisos = "Pedir";
+    }
     if ((PerMunicipal == "ok" || PerMunicipal == "NC") && (Irrigacion == "ok" || Irrigacion == "NC") && (DPV == "ok" || DPV == "NC") && (DNV == "ok" || DNV == "NC") && (FERROCARRIL == "ok" || FERROCARRIL == "NC") && (HIDRAULICA == "ok" || HIDRAULICA == "NC")) {
         Permisos = "ok";
     }
