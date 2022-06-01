@@ -159,7 +159,7 @@ Avisos de la obra (ART,IERIC)
                   return '<div class="bg-danger text-light text-center"> Pedir interferencias  </div> ';
                 }
 if(row.Interferencias=="EnGestion"){
-  return '<div class="bg-warning  text-light text-center">Interferencias pedidas y/o en gestion </div> ';
+  return '<div class="bg-warning  text-center">Interferencias pedidas y/o en gestion </div> ';
 }
 if((row.Interferencias == "ok"|| row.Interferencias == "Ok")){
   return '<div class="bg-success  text-light text-center">Interferencias Ok </div> '
@@ -178,7 +178,7 @@ return '<div class="bg-danger text-light text-center"> Hay permisos por pedir </
                } 
                if(row.Permisos=="EnGestion")
               {
-return '<div class="bg-warning text-light text-center">En gestión </div> ';
+return '<div class="bg-warning text-center">En gestión </div> ';
                } 
                if(row.Permisos=="NC" || row.Permisos=="ok"|| row.Permisos=="Ok")
               {
@@ -200,7 +200,7 @@ if(row.Avisos=="ok"|| row.Avisos=="Ok")
 }
 if(row.Avisos=="EnGestion"|| row.Avisos=="EnGestion")
 {
-  return '<div class="bg-warning text-light text-center">En gestión</div> ';
+  return '<div class="bg-warning text-center">En gestión</div> ';
 }
 if((row.Avisos==null || row.Avisos=="")){
   return '<div class="text-center">!</div> ';
@@ -220,7 +220,7 @@ if(row.Seguridad=="ok"|| row.Seguridad=="Ok")
 }
 if(row.Seguridad=="EnGestion"|| row.Seguridad=="EnGestion")
 {
-  return '<div class="bg-warning text-light text-center">En gestión</div> ';
+  return '<div class="bg-warning text-center">En gestión</div> ';
 }
 if((row.Seguridad==null || row.Seguridad=="")){
   return '<div class="text-center">!</div> ';
