@@ -96,7 +96,7 @@ router.get('/vencimientos', (req, res) => {
     // }
 })
 router.get('/interferencias/info', (req, res) => {
-    const sql = 'SELECT c.id, c.Nombre, c.NCarpeta, a.Interferencias , a.Permisos FROM clientes c, clientes_tareasgenerales a where a.Nombre= c.Nombre';
+    const sql = 'SELECT c.id, c.Nombre, c.NCarpeta, a.Seguridad, a.Interferencias, a.Avisos , a.Permisos FROM clientes c, clientes_tareasgenerales a where a.Nombre= c.Nombre';
     res.locals.moment = moment;
     connection.query(sql, (error, results) => {
         if (error) console.log(error);
@@ -1032,7 +1032,7 @@ router.post('/act2pCarpEcogas/:id', (req, res) => {
         DocumentacionObra = "Sin presentar";
     }
     //Seguridad
-    if (Programadeseguridad == "ok" && CronogramaSyH == "ok" && SeguroRC == "ok" && Monotributos == "ok" && SeguroAccidentesPersonales == "ok") {
+    if (Programadeseguridad == "ok" && CronogramaSyH == "ok" && SeguroRC == "ok" && (Monotributos == "ok"||Monotributos == "NC") && (SeguroAccidentesPersonales == "ok"||SeguroAccidentesPersonales == "NC")) {
         Seguridad = "ok";
     }
     if (Programadeseguridad == "EnGestion" || CronogramaSyH == "EnGestion" || SeguroRC == "EnGestion" || Monotributos == "EnGestion" || SeguroAccidentesPersonales == "EnGestion") {
@@ -1052,7 +1052,7 @@ router.post('/act2pCarpEcogas/:id', (req, res) => {
         Interferencias = "EnGestion";
     }
     //Vencimientos de interferencias (Si se vencen, se pondran en modo "Pedir")
-    if (new Date(intAguaObtenida) > FechaDiaActual || new Date(intCloacasObtenida) > FechaDiaActual|| new Date(intTelefonicaObtenida)> FechaDiaActual || new Date(intArnetObtenida)> FechaDiaActual|| new Date(intClaroObtenida)> FechaDiaActual || new Date(intElectricidadObtenida)> FechaDiaActual|| new Date(intTelecomObtenida)> FechaDiaActual ) {
+    if (new Date(intAguaObtenida) < FechaDiaActual || new Date(intCloacasObtenida) < FechaDiaActual|| new Date(intTelefonicaObtenida)< FechaDiaActual || new Date(intArnetObtenida)< FechaDiaActual|| new Date(intClaroObtenida)< FechaDiaActual || new Date(intElectricidadObtenida)< FechaDiaActual|| new Date(intTelecomObtenida)< FechaDiaActual ) {
         Interferencias = "Pedir";
     }
     //Permisos
@@ -1114,6 +1114,11 @@ router.post('/act2pCarpEcogas/:id', (req, res) => {
     }
     if (AvisoInicioObraART == "Sin presentar" || AvisoInicioObraIERIC == "Sin presentar" || ActaInicioEfectivo == "Sin presentar") {
         Avisos = "Sin presentar";
+    }
+    //Vencimientos de avisos
+    if(new Date(VencimientoAvisoObraArt)<FechaDiaActual || new Date(VencimientoAvisoObraIeric)<FechaDiaActual)
+    {
+        Avisos = "Renovar";
     }
 
 
