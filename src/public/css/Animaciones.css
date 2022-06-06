@@ -1,0 +1,6 @@
+#LogoJoval{
+    transition: ease-in .4s;
+}
+#LogoJoval:hover{
+    transform: scale(1.2);
+}

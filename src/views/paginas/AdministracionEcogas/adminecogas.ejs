@@ -20,8 +20,10 @@
 
   <script type="text/javascript" src="./DataTables/datatables.js"></script>
  
- 
-
+ <!-- Componentes de react -->
+ <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script> 
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+<link rel="stylesheet" href="../css/Animaciones.css">
   <title class="text-center">Administración Ecogas</title>
 </head>
 
@@ -73,8 +75,8 @@
           <th class="text-center">
 <div class="btn-group btn-group-sm" role="group">
            <button class="btn btn-outline-primary btn-sm" id="Prel"> Prel</button>
-           <button class="btn btn-outline-primary btn-sm" id="1P"> 1P</button>
-           <button class="btn btn-outline-primary btn-sm" id="2P"> 2P</button>
+           <button class="btn btn-outline-primary btn-sm" id="1ra"> 1P</button>
+           <button class="btn btn-outline-primary btn-sm" id="2da"> 2P</button>
           </div>
            <div class="btn-group btn-group-sm" role="group">
            <button class="btn btn-outline-primary btn-sm" id="Obras"> Obras</button>
@@ -213,14 +215,14 @@ $('#Prel').on('click', function() {
     .columns()
     .search('')
     .column(5)
-    .search('1ra')
+    .search('1ra parte')
     .draw();
 });  $('#2da').on('click', function() {
     tabla
     .columns()
     .search('')
     .column(5)
-    .search('2da')
+    .search('2da parte')
     .draw();
 });  $('#Obras').on('click', function() {
     tabla

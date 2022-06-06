@@ -1121,6 +1121,22 @@ router.post('/act2pCarpEcogas/:id', (req, res) => {
         Avisos = "Renovar";
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Automatización de estados.
+    //Esta seccion trabajara en base a las opciones elegidas por el usuario, permitiendo que se escriba texto en historial de la carpeta seleccionada, o cambiar otros estados de la misma.
+    if(MailAutorizacion=="Recibido"){
+        var TextoenHistorial= "Se ha recibido el mail de autorización.";
+        var TextoenHistorial2 ="Presentar Segunda parte."
+        Comercial="Ok(S)";
+        Tecnica="Ok(S)";
+        sql = 'Insert into historialdecambios set ? where Nombre_sub =?';
+        connection.query(sql,[{Nombre_sub:Nombre, Tarea_Realizada_sub: TextoenHistorial , Proxima_Tarea_sub: TextoenHistorial2 , Fecha_Tarea_sub: FechaDiaActual , Fecha_Proxima_Tarea_sub:(fechaActual+5),EtapaTarea_sub:"2da parte"
+        },Nombre], (error, results) => {
+            if (error) {
+                console.log(error);
+            }
+        })
+    }
 
     sql = 'Update clientes_tareasgenerales Set ? where Nombre=?';
     connection.query(sql, [{ PlanDeTrabajo: PlanDeTrabajo, DocumentacionObra: DocumentacionObra, Seguridad: Seguridad, Interferencias: Interferencias, Permisos: Permisos, Matriculas: Matriculas, Ambiente: Ambiente, Avisos: Avisos, NotaCumplimentoNormativas: NotaCumplimentoNormativa, DDJJNAG153: DDJJNAG153, Avisos: Avisos, PermisosEspeciales: PermisosEspeciales }, Nombre],
@@ -1141,6 +1157,7 @@ router.post('/act2pCarpEcogas/:id', (req, res) => {
             }
 
         })
+        
 
     connection.query(sql, [{
         //Segunda Parte
