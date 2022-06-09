@@ -73,7 +73,7 @@
                     <%=clientes.EtapaTarea_sub%>
                   </th>
                   <%}%>
-                    <%if (clientes.EtapaTarea_sub=="Sin Presentar" ){%>
+                    <%if (clientes.EtapaTarea_sub=="Sin Presentar" || clientes.EtapaTarea_sub=="Preliminar"  ){%>
                       <th class="bg-light text-black">
                         <%=clientes.EtapaTarea_sub%>
                       </th>
@@ -83,7 +83,7 @@
                             <%=clientes.EtapaTarea_sub%>
                           </th>
                           <%}%>
-                            <%if (clientes.EtapaTarea_sub==null){%>
+                            <%if (clientes.EtapaTarea_sub==null ||  clientes.EtapaTarea_sub==""){%>
                               <th class="bg-dark">
                                 <%=clientes.EtapaTarea_sub%>
                               </th>
