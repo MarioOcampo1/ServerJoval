@@ -1297,7 +1297,7 @@ router.post('/actObrasCarpEcogas/:id', (req, res) => {
         })
     sql = 'Update adminecogas_tareas_por_carpeta Set ? where Nombre=?';
     connection.query(sql, [{ 
-        DocumentacionInspeccion: DocumentacionInspeccion, ComunicacionObras: ComunicacionObras
+        DocInspeccion: DocumentacionInspeccion, ComunicacionObras: ComunicacionObras
      }, Nombre],
         (error, results) => {
 
