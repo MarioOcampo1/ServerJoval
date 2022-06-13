@@ -702,6 +702,12 @@ router.post('/guardarNuevoCliente', (req, res) => {
             var Permisos = "Sin presentar";
         }
     }
+    var sql = 'Insert into finanzas_pago_de_obras set ?';
+    connection.query(sql, {
+        Nombre: Nombre, NCarpeta: NCarpeta 
+    }, (error, results) => {
+        if (error) console.log(error);
+    })
     var sql = 'Insert into adgastareas set ?';
     connection.query(sql, {
         Nombre: Nombre
@@ -981,7 +987,7 @@ router.post('/act1pCarpEcogas/:id', (req, res) => {
         connection.query(sql, [{
             //Primera Parte
             Contrato: Contrato, Presupuesto: Presupuesto, Sucedaneo: Sucedaneo, NotaDeExcepcion: NotaDeExcepcion, PCaprobado: Pcaprobado,
-            PlanoTipo: PlanoTipo, CartaOferta: CartaOferta, PlanoAnexo: PlanoAnexo, HidraulicaVisacion: HidraulicaVisacion, DNVVisacion: DNVVisacion, FerrocarrilesVisacion: FerrocarrilesVisacion
+            PlanoTipo: PlanoTipo, CartaOferta: CartaOferta, PlanoAnexo: PlanoAnexo,
         }, Nombre],
             (error, results) => {
 
@@ -1185,7 +1191,7 @@ router.post('/act2pCarpEcogas/:id', (req, res) => {
         Comercial="Ok(S)";
         Tecnica="Ok(S)";
         sql = 'Insert into historialdecambios set ? where Nombre_sub =?';
-        connection.query(sql,[{Nombre_sub:Nombre, Tarea_Realizada_sub: TextoenHistorial , Proxima_Tarea_sub: TextoenHistorial2 , Fecha_Tarea_sub: FechaDiaActual , Fecha_Proxima_Tarea_sub:(fechaActual+5),EtapaTarea_sub:"2da parte"
+        connection.query(sql,[{Nombre_sub:Nombre, Tarea_Realizada_sub: TextoenHistorial , Proxima_Tarea_sub: TextoenHistorial2 , Fecha_Tarea_sub: FechaDiaActual , Fecha_Proxima_Tarea_sub:(FechaDiaActual+5),EtapaTarea_sub:"2da parte"
         },Nombre], (error, results) => {
             if (error) {
                 console.log(error);

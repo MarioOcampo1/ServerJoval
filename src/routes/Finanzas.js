@@ -64,7 +64,7 @@ router.get('/Finanzas', (req, res) => {
         res.render('paginas/Finanzas/Home.ejs');
 })
 router.get('/PagoDeObras',(req,res)=>{
-    var sql= 'Select * from clientes';
+    var sql= 'Select * from finanzas_pago_de_obras';
     connection.query(sql, (error, results) => {
         if (error) console.log(error);
 

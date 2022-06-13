@@ -7,6 +7,10 @@
     <title>Document</title>
 </head>
 <body>
+  <link rel="stylesheet" type="text/css" href="./DataTables/datatables.css"/>
+
+  <script type="text/javascript" src="./DataTables/datatables.js"></script>
+ 
     <%- include('./partials/menusuperior.ejs'); %>
     <%if(results){%>
 <div class="container-fluid">
@@ -17,16 +21,156 @@
   </a>
   <table id="TablaPagoObras" class="table table-striped table-bordered table-hover " style="width:100%">
 <thead>
-    <tr>
+  <tr>
+    <td>
         <h6>Carpeta</h6>
-    </tr>
-    <%= results.Nombre%>
+    </td>
+    <td>
+      <h6>N° Carpeta</h6>
+    </td>
+    <td>
+      <h6>Anticipo Financiero</h6>
+    </td>
+    <td>
+      <h6>Cuota 1</h6>
+    </td>
+    <td>
+      <h6>Cuota 2 </h6>
+    </td>
+    <td>
+      <h6>Cuota 3 </h6>
+    </td>
+    <td>
+      <h6>Cuota 4 </h6>
+    </td>
+    <td>
+      <h6>Cuota 5 </h6>
+    </td>
+    <td>
+      <h6>Cuota 6 </h6>
+    </td>
+ 
+    <td>
+      <h6>Cuota 7 </h6>
+    </td>
+    <td>
+      <h6>Cuota 8 </h6>
+    </td>
+    <td>
+      <h6>Cuota 9 </h6>
+    </td>
+    <td>
+      <h6>Cuota 10 </h6>
+    </td>
+    <td>
+      <h6>Cuota 11</h6>
+    </td>
+    <td>
+      <h6>Cuota 12</h6>
+    </td>
+<td>
+  <h6>PermisoIrrigacion</h6>
+</td>
+<td>
+  <h6>DNV </h6>
+</td>
+<td>
+  <h6>DPV </h6>
+</td>
+<td>
+  <h6>Hidraulica</h6>
+</td>
+<td>
+  <h6>FFCC</h6>
+</td>
+<td>
+  <h6>Municipalidad</h6>
+</td>
+<td>
+  <h6>Detalle</h6>
+</td>
+<td>
+  <h6>Servicio domiciliario</h6>
+</td>
+</tr>
 </thead>
 <tbody class="text-center">
+  <% results.forEach((datosTabla) => { %>
+    <tr>
+    <td id="Nombre" onClick="TransmitirDatos(id);">
+      <%= datosTabla.Nombre%>
+    </td>
+    <td id="NCarpeta" onClick="TransmitirDatos(id);">
+      <%= datosTabla.NCarpeta%>
+      </td>
+      <td id="AnticipoFinanciero" onClick="TransmitirDatos(id);">
+        <%= datosTabla.AnticipoFinanciero%>
+      </td>
+      <td id="Cuota1" onClick="TransmitirDatos(id);">
+        <%= datosTabla.Cuota1%>
+      </td>
+      <td id="Cuota2" onClick="TransmitirDatos(id);">
+        <%= datosTabla.Cuota2%>
+      </td>
+      <td id="Cuota3" onClick="TransmitirDatos(id);">
+        <%= datosTabla.Cuota3%>
+      </td>
+      <td id="Cuota4" onClick="TransmitirDatos(id);">
+        <%= datosTabla.Cuota4%>
+      </td>
+      <td id="Cuota5" onClick="TransmitirDatos(id);">
+        <%= datosTabla.Cuota5%>
+      </td>
+      <td id="Cuota6" onClick="TransmitirDatos(id);">
+        <%= datosTabla.Cuota6%>
+      </td>
+      <td id="Cuota7" onClick="TransmitirDatos(id);">
+        <%= datosTabla.Cuota7%>
+      </td>
+      <td id="Cuota8" onClick="TransmitirDatos(id);">
+        <%= datosTabla.Cuota8%>
+      </td>
+      <td id="Cuota9" onClick="TransmitirDatos(id);">
+        <%= datosTabla.Cuota9%>
+      </td>
+      <td id="Cuota10" onClick="TransmitirDatos(id);">
+        <%= datosTabla.Cuota10%>
+      </td>
+      <td id="Cuota11" onClick="TransmitirDatos(id);">
+        <%= datosTabla.Cuota11%>
+      </td>
+      <td id="Cuota12" onClick="TransmitirDatos(id);">
+        <%= datosTabla.Cuota12%>
+      </td>
+      <td id="PermisoIr" onClick="TransmitirDatos(id);">
+        <%= datosTabla.PermisoIrrigacion%>
+      </td>
+      <td id="PermisoDNV" onClick="TransmitirDatos(id);">
+        <%= datosTabla.PermisoDNV%>
+      </td>
+      <td id="PermisoDPV" onClick="TransmitirDatos(id);">
+        <%= datosTabla.PermisoDPV%>
+      </td>
+      <td id="PermisoHidraulica" onClick="TransmitirDatos(id);">
+        <%= datosTabla.PermisoHidraulica%>
+      </td>
+      <td id="PermisoFFCC" onClick="TransmitirDatos(id);">
+        <%= datosTabla.PermisoFFCC%>
+      </td>
+      <td id="PermisoMunicipal" onClick="TransmitirDatos(id);">
+        <%= datosTabla.PermisoMunicipal%>
+      </td>
+      <td id="DescripcionPermisos" onClick="TransmitirDatos(id);">
+        <%= datosTabla.DescripcionPermisos%>
+      </td>
+      <td id="ServicioDomiciliario" onClick="TransmitirDatos(id);">
+        <%= datosTabla.ServicioDomiciliario%>
+      </td>
 
+    <%});%>
 </tbody>
   </table>
-  <script>  
+  <!-- <script>  
     $("#TablaPagoObras").css("width","100%")
 
   $(document).ready(function(){
@@ -53,12 +197,19 @@
 
         //    return row.Nombre ;
         // }
+        },
+        {
+          "data": "Ncarpeta"
         }
     ]
     })
 });
-</script>
+</script> -->
 <%}%>
 </body>
-    
+    <script>
+      function TransmitirDatos(id){
+window.open
+      }
+    </script>
 </html>
