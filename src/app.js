@@ -1,5 +1,6 @@
 const express = require('express');
 const passport = require('passport');
+const excel= require('xlsx');
 const PassportLocal = require('passport-local').Strategy;
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
@@ -47,6 +48,7 @@ app.use(express.static('public'));
 app.use(require('./routes/AdminEcogas')); //Usa el enrutador
 app.use(require('./routes/AdminGeneral'));
 app.use(require('./routes/Compra-Venta'));
+app.use(require('./routes/Finanzas'));
 
 //404 Handler
 app.use((req,res,next)=>{

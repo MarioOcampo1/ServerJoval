@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <%- include('./partials/menusuperior.ejs'); %>
+    <%if(results){%>
+<div class="container-fluid">
+    <h1 class="text-center">Pago de obras</h1>
+</div>
+<a href="/nuevocliente">
+    <button class="btn btn-success">Nuevo Cliente</button>
+  </a>
+  <table id="TablaPagoObras" class="table table-striped table-bordered table-hover " style="width:100%">
+<thead>
+    <tr>
+        <h6>Carpeta</h6>
+    </tr>
+    <%= results.Nombre%>
+</thead>
+<tbody class="text-center">
+
+</tbody>
+  </table>
+  <script>  
+    $("#TablaPagoObras").css("width","100%")
+
+  $(document).ready(function(){
+   
+      var url = '/PagoDeObras';
+      
+    var tabla= $('#TablaPagoObras').DataTable({
+        "orderCellsTop": true,
+        "fixedHeader": true,
+      "paging": false,
+      "ordering": true,
+      "scrollX": true,
+      "destroy":true,    
+      "order":[[6,'desc']],
+        "language": { url: "//cdn.datatables.net/plug-ins/1.11.3/i18n/es_es.json" },
+        "ajax": {
+          "url": url,
+          "dataSrc": "",
+        }, 
+               
+        "columns": [
+          {"data": "Nombre",
+        //    render: function(data,type,row){
+
+        //    return row.Nombre ;
+        // }
+        }
+    ]
+    })
+});
+</script>
+<%}%>
+</body>
+    
+</html>
