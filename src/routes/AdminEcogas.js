@@ -1295,16 +1295,7 @@ router.post('/actObrasCarpEcogas/:id', (req, res) => {
                 console.log(error);
             }
         })
-    sql = 'Update adminecogas_tareas_por_carpeta Set ? where Nombre=?';
-    connection.query(sql, [{ 
-        DocInspeccion: DocumentacionInspeccion, ComunicacionObras: ComunicacionObras
-     }, Nombre],
-        (error, results) => {
-
-            if (error) {
-                console.log(error);
-            }
-        })
+    
     sql = 'Update adminecogas_tareas_por_carpeta Set ? where Nombre=?';
     if (FechaInicioTrabajos) {
         if (FechaFindeobra) {
