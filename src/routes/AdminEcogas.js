@@ -265,11 +265,11 @@ var resultados;
                     contador = contador + 1;
                 });
                 sql = 'Select * from adminecogas_interferencias_y_permisos Where Nombre=?';
-                connection.query(sql, [Nombre], (error, results) => {
+                connection.query(sql, [Nombre], (error, interferenciasypermisos) => {
                     if (error) console.log(error);
                     
                     sql = 'Select * from adminecogas_tareas_por_carpeta Where Nombre=?';
-                    connection.query(sql, [Nombre], (error, results) => {
+                    connection.query(sql, [Nombre], (error, tareasporcarpeta) => {
                         if (error) console.log(error);
                         
                 sql = 'Select * from clientes where id=?';
@@ -278,7 +278,8 @@ var resultados;
                     
                     if (error) console.log(error);
                     if (results.length > 0) {
-                        res.render('paginas/AdministracionEcogas/editarTareas', { user: results[0],resultados:resultados, CodigoVigentes: CodigoVigentes, CodigoEnUsoVigentes: CodigoEnUsoVigentes, CodigoFinalizadas: CodigoFinalizadas });
+                     
+                        res.render('paginas/AdministracionEcogas/editarTareas', { user: results[0],interferenciasypermisos:interferenciasypermisos[0],tareasporcarpeta:tareasporcarpeta[0], CodigoVigentes: CodigoVigentes, CodigoEnUsoVigentes: CodigoEnUsoVigentes, CodigoFinalizadas: CodigoFinalizadas });
                     }
                     else {
                         res.redirect('/adminecogas');
@@ -879,7 +880,7 @@ router.post('/actPrelCarpEcogas/:id', (req, res) => {
         sql = 'Update adminecogas_tareas_por_carpeta Set ? where Nombre=?';
         connection.query(sql, [{
             Mensura: Mensura, TituloDePropiedad: TituloDePropiedad, ActaCargoVigente: ActaCargoVigente, ActaConstitutiva: ActaConstitutiva,
-            DniComitente: DniComitente, Cotizacion: Cotizacion, Contrato: Contrato
+            Cotizacion: Cotizacion, Contrato: Contrato
         }, Nombre],
             (error, results) => {
     

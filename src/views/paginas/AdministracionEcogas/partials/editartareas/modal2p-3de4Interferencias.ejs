@@ -7,7 +7,7 @@
         </div>
         <div class="card-text">
             <form-check>
-                <%if (user.intTelefonica!="En gestion" && user.intTelefonica!="Pedida" && user.intTelefonica!="ok" ) {%>
+                <%if (interferenciasypermisos.intTelefonica!="En gestion" && interferenciasypermisos.intTelefonica!="Pedida" && interferenciasypermisos.intTelefonica!="ok" ) {%>
                     <input type="radio" name="intTelefonica" id="intTelefonica" value="En gestion">
                     En
                     gestión
@@ -19,17 +19,17 @@
                     Ok
                     <div id="intTelefonicaPedida" style="display: none;">
                         Fecha en la que se pidió:
-                        <input type="date" name="intTelefonicaPedida" value="<%= user.intTelefonicaPedida%>"
-                            id="intTelefonicaPedida" placeholder="<%= user.intTelefonicaPedida %>">
+                        <input type="date" name="intTelefonicaPedida" value="<%= interferenciasypermisos.intTelefonicaPedida%>"
+                            id="intTelefonicaPedida" placeholder="<%= interferenciasypermisos.intTelefonicaPedida %>">
                     </div>
                     <div id="intTelefonicaObtenida" style="display: none;">
                         Fecha en la que se vence:
 
                         <input type="date" name="intTelefonicaObtenida" id="intTelefonicaObtenida"
-                            value="<%= user.intTelefonicaObtenida%>">
+                            value="<%= interferenciasypermisos.intTelefonicaObtenida%>">
                     </div>
                     <%}%>
-                        <%if (user.intTelefonica=="En gestion" ) {%>
+                        <%if (interferenciasypermisos.intTelefonica=="En gestion" ) {%>
                             <input checked type="radio" name="intTelefonica" id="intTelefonica" value="En gestion">
                             En
                             gestión
@@ -41,17 +41,17 @@
                             Ok
                             <div id="intTelefonicaPedida" style="display: none;">
                                 Fecha en la que se pidió:
-                                <input type="date" name="intTelefonicaPedida" value="<%= user.intTelefonicaPedida%>"
-                                    id="intTelefonicaPedida" placeholder="<%= user.intTelefonicaPedida %>">
+                                <input type="date" name="intTelefonicaPedida" value="<%= interferenciasypermisos.intTelefonicaPedida%>"
+                                    id="intTelefonicaPedida" placeholder="<%= interferenciasypermisos.intTelefonicaPedida %>">
                             </div>
                             <div id="intTelefonicaObtenida" style="display: none;">
                                 Fecha en la que se vence:
         
                                 <input type="date" name="intTelefonicaObtenida" id="intTelefonicaObtenida"
-                                    value="<%= user.intTelefonicaObtenida%>">
+                                    value="<%= interferenciasypermisos.intTelefonicaObtenida%>">
                             </div>
                             <%}%>
-                                <%if (user.intTelefonica=="Pedida" ) {%>
+                                <%if (interferenciasypermisos.intTelefonica=="Pedida" ) {%>
                                     <input  type="radio" name="intTelefonica" id="intTelefonica" value="En gestion">
                                     En
                                     gestión
@@ -63,17 +63,17 @@
                                     Ok
                                     <div id="intTelefonicaPedida" style="display: block;">
                                         Fecha en la que se pidió:
-                                        <input type="date" name="intTelefonicaPedida" value="<%= user.intTelefonicaPedida%>"
-                                            id="intTelefonicaPedida" placeholder="<%= user.intTelefonicaPedida %>">
+                                        <input type="date" name="intTelefonicaPedida" value="<%= interferenciasypermisos.intTelefonicaPedida%>"
+                                            id="intTelefonicaPedida" placeholder="<%= interferenciasypermisos.intTelefonicaPedida %>">
                                     </div>
                                     <div id="intTelefonicaObtenida" style="display: none;">
                                         Fecha en la que se vence:
                 
                                         <input type="date" name="intTelefonicaObtenida" id="intTelefonicaObtenida"
-                                            value="<%= user.intTelefonicaObtenida%>">
+                                            value="<%= interferenciasypermisos.intTelefonicaObtenida%>">
                                     </div>
                                     <%}%>
-                                        <%if (user.intTelefonica=="ok" ) { %>
+                                        <%if (interferenciasypermisos.intTelefonica=="ok" ) { %>
                                             <input  type="radio" name="intTelefonica" id="intTelefonica" value="En gestion">
                                             En
                                             gestión
@@ -85,14 +85,14 @@
                                             Ok
                                             <div id="intTelefonicaPedida" style="display: none;">
                                                 Fecha en la que se pidió:
-                                                <input type="date" name="intTelefonicaPedida" value="<%= user.intTelefonicaPedida%>"
-                                                    id="intTelefonicaPedida" placeholder="<%= user.intTelefonicaPedida %>">
+                                                <input type="date" name="intTelefonicaPedida" value="<%= interferenciasypermisos.intTelefonicaPedida%>"
+                                                    id="intTelefonicaPedida" placeholder="<%= interferenciasypermisos.intTelefonicaPedida %>">
                                             </div>
                                             <div id="intTelefonicaObtenida" style="display: block;">
                                                 Fecha en la que se vence:
                         
                                                 <input type="date" name="intTelefonicaObtenida" id="intTelefonicaObtenida"
-                                                    value="<%= user.intTelefonicaObtenida%>">
+                                                    value="<%= interferenciasypermisos.intTelefonicaObtenida%>">
                                             </div>
                                             <%}%>
 
@@ -103,8 +103,8 @@
         <div class="card-title">Agua</div>
         <div class="card-text">
             <form-check>
-                <input hidden type="radio" name="intAgua" id="intAgua" value="<%=user.intAgua%>" checked>
-                <%if (user.intAgua!="En gestion" && user.intAgua!="Pedida" && user.intAgua!="ok" ) {%>
+                <input hidden type="radio" name="intAgua" id="intAgua" value="<%=interferenciasypermisos.intAgua%>" checked>
+                <%if (interferenciasypermisos.intAgua!="En gestion" && interferenciasypermisos.intAgua!="Pedida" && interferenciasypermisos.intAgua!="ok" ) {%>
                     <input type="radio" name="intAgua" id="intAgua" value="En gestion">
                     En gestión
                     <input type="radio" name="intAgua" id="intAgua" value="Pedida"
@@ -114,15 +114,15 @@
                         onclick="estadoInterferencia('intAguaPedida', 'intAguaObtenida',false,true);">Ok
                     <div id="intAguaPedida" style="display: none;">
                         Fecha en la que se pidió
-                        <input type="date" name="intAguaPedida" id="intAguaPedida" value="<%= user.intAguaPedida%>">
+                        <input type="date" name="intAguaPedida" id="intAguaPedida" value="<%= interferenciasypermisos.intAguaPedida%>">
                     </div>
                     <div id="intAguaObtenida" style="display: none;">
                         Fecha en la que se vence
                         <input type="date" name="intAguaObtenida" id="intAguaObtenida"
-                            value="<%= user.intAguaObtenida%>">
+                            value="<%= interferenciasypermisos.intAguaObtenida%>">
                     </div>
                     <%}%>
-                        <%if(user.intAgua=="En gestion"){%>
+                        <%if(interferenciasypermisos.intAgua=="En gestion"){%>
                             <input checked type="radio" name="intAgua" id="intAgua" value="En gestion">
                             En gestión
                             <input type="radio" name="intAgua" id="intAgua" value="Pedida"
@@ -133,15 +133,15 @@
                             <div id="intAguaPedida" style="display: none;">
                                 Fecha en la que se pidió
                                 <input type="date" name="intAguaPedida" id="intAguaPedida"
-                                    value="<%= user.intAguaPedida%>">
+                                    value="<%= interferenciasypermisos.intAguaPedida%>">
                             </div>
                             <div id="intAguaObtenida" style="display: none;">
                                 Fecha en la que se vence
                                 <input type="date" name="intAguaObtenida" id="intAguaObtenida"
-                                    value="<%= user.intAguaObtenida%>">
+                                    value="<%= interferenciasypermisos.intAguaObtenida%>">
                             </div>
                             <%}%>
-                                <%if (user.intAgua=="Pedida" ){%>
+                                <%if (interferenciasypermisos.intAgua=="Pedida" ){%>
                                     <input type="radio" name="intAgua" id="intAgua" value="En gestion"> En gestión
                                     <input checked type="radio" name="intAgua" id="intAgua" value="Pedida"
                                         onclick="estadoInterferencia('intAguaPedida', 'intAguaObtenida',true,false);">
@@ -152,15 +152,15 @@
                                     <div id="intAguaPedida" style="display: block;">
                                         Fecha en la que se pidió
                                         <input type="date" name="intAguaPedida" id="intAguaPedida"
-                                            value="<%= user.intAguaPedida%>">
+                                            value="<%= interferenciasypermisos.intAguaPedida%>">
                                     </div>
                                     <div id="intAguaObtenida" style="display: none;">
                                         Fecha en la que se vence
                                         <input type="date" name="intAguaObtenida" id="intAguaObtenida"
-                                            value="<%= user.intAguaObtenida%>">
+                                            value="<%= interferenciasypermisos.intAguaObtenida%>">
                                     </div>
                                     <%}%>
-                                        <%if (user.intAgua=="ok" ){%>
+                                        <%if (interferenciasypermisos.intAgua=="ok" ){%>
                                             <input type="radio" name="intAgua" id="intAgua" value="En gestion"> En
                                             gestión
                                             <input type="radio" name="intAgua" id="intAgua" value="Pedida"
@@ -172,22 +172,22 @@
                                             <div id="intAguaPedida" style="display: none;">
                                                 Fecha en la que se pidió
                                                 <input type="date" name="intAguaPedida" id="intAguaPedida"
-                                                    value="<%= user.intAguaPedida%>">
+                                                    value="<%= interferenciasypermisos.intAguaPedida%>">
                                             </div>
                                             <div id="intAguaObtenida" style="display: block;">
                                                 Fecha en la que se vence
                                                 <input type="date" name="intAguaObtenida" id="intAguaObtenida"
-                                                    value="<%= user.intAguaObtenida%>">
+                                                    value="<%= interferenciasypermisos.intAguaObtenida%>">
                                             </div>
                                             <%}%>
 
                                                 <!-- <div id="intAguaPedida" style="display: none;">
                     Fecha en la que se pidió
-                    <input type="date" name="intAguaPedida" id="intAguaPedida" value="<%= user.intAguaPedida%>">
+                    <input type="date" name="intAguaPedida" id="intAguaPedida" value="<%= interferenciasypermisos.intAguaPedida%>">
                 </div>
                 <div id="intAguaObtenida" style="display: none;">
                     Fecha en la que se vence
-                    <input type="date" name="intAguaObtenida" id="intAguaObtenida" value="<%= user.intAguaObtenida%>">
+                    <input type="date" name="intAguaObtenida" id="intAguaObtenida" value="<%= interferenciasypermisos.intAguaObtenida%>">
                 </div> -->
             </form-check>
         </div>
@@ -197,8 +197,8 @@
         </div>
         <div class="card-text">
             <form-check>
-                <input hidden type="radio" name="intCloacas" id="intCloacas" value="<%=user.intCloacas%>" checked>
-                <%if (user.intCloaca!="En gestion" && user.intCloaca!="Pedida" && user.intCloaca!="ok" ) {%>
+                <input hidden type="radio" name="intCloacas" id="intCloacas" value="<%=interferenciasypermisos.intCloacas%>" checked>
+                <%if (interferenciasypermisos.intCloaca!="En gestion" && interferenciasypermisos.intCloaca!="Pedida" && interferenciasypermisos.intCloaca!="ok" ) {%>
                     <input type="radio" name="intCloacas" id="intCloacas" value="En gestion"> En
                     gestión
                     <input type="radio" name="intCloacas" id="intCloacas" value="Pedida"
@@ -210,15 +210,15 @@
                     <div id="intCloacasPedida" style="display: none;">
                         Fecha en la que se pidió
                         <input type="date" name="intCloacasPedida" id="intCloacasPedida"
-                            value="<%= user.intCloacasPedida%>">
+                            value="<%= interferenciasypermisos.intCloacasPedida%>">
                     </div>
                     <div id="intCloacasObtenida" style="display: none;">
                         Fecha en la que se vence
                         <input type="date" name="intCloacasObtenida" id="intCloacasObtenida"
-                            value="<%= user.intCloacasObtenida%>">
+                            value="<%= interferenciasypermisos.intCloacasObtenida%>">
                     </div>
                     <%}%>
-                        <%if(user.intCloaca=="En gestion"){%>
+                        <%if(interferenciasypermisos.intCloaca=="En gestion"){%>
                             <input checked type="radio" name="intCloacas" id="intCloacas" value="En gestion"> En
                             gestión
                             <input type="radio" name="intCloacas" id="intCloacas" value="Pedida"
@@ -230,15 +230,15 @@
                             <div id="intCloacasPedida" style="display: none;">
                                 Fecha en la que se pidió
                                 <input type="date" name="intCloacasPedida" id="intCloacasPedida"
-                                    value="<%= user.intCloacasPedida%>">
+                                    value="<%= interferenciasypermisos.intCloacasPedida%>">
                             </div>
                             <div id="intCloacasObtenida" style="display: none;">
                                 Fecha en la que se vence
                                 <input type="date" name="intCloacasObtenida" id="intCloacasObtenida"
-                                    value="<%= user.intCloacasObtenida%>">
+                                    value="<%= interferenciasypermisos.intCloacasObtenida%>">
                             </div>
                             <%}%>
-                                <%if( user.intCloaca=="Pedida" ){%>
+                                <%if( interferenciasypermisos.intCloaca=="Pedida" ){%>
                                     <input type="radio" name="intCloacas" id="intCloacas" value="En gestion"> En
                                     gestión
                                     <input checked type="radio" name="intCloacas" id="intCloacas" value="Pedida"
@@ -250,15 +250,15 @@
                                     <div id="intCloacasPedida" style="display: block;">
                                         Fecha en la que se pidió
                                         <input type="date" name="intCloacasPedida" id="intCloacasPedida"
-                                            value="<%= user.intCloacasPedida%>">
+                                            value="<%= interferenciasypermisos.intCloacasPedida%>">
                                     </div>
                                     <div id="intCloacasObtenida" style="display: none;">
                                         Fecha en la que se vence
                                         <input type="date" name="intCloacasObtenida" id="intCloacasObtenida"
-                                            value="<%= user.intCloacasObtenida%>">
+                                            value="<%= interferenciasypermisos.intCloacasObtenida%>">
                                     </div>
                                     <%}%>
-                                        <%if( user.intCloaca=="ok" ){%>
+                                        <%if( interferenciasypermisos.intCloaca=="ok" ){%>
                                             <input type="radio" name="intCloacas" id="intCloacas" value="En gestion"> En
                                             gestión
                                             <input type="radio" name="intCloacas" id="intCloacas" value="Pedida"
@@ -270,12 +270,12 @@
                                             <div id="intCloacasPedida" style="display: none;">
                                                 Fecha en la que se pidió
                                                 <input type="date" name="intCloacasPedida" id="intCloacasPedida"
-                                                    value="<%= user.intCloacasPedida%>">
+                                                    value="<%= interferenciasypermisos.intCloacasPedida%>">
                                             </div>
                                             <div id="intCloacasObtenida" style="display: block;">
                                                 Fecha en la que se vence
                                                 <input type="date" name="intCloacasObtenida" id="intCloacasObtenida"
-                                                    value="<%= user.intCloacasObtenida%>">
+                                                    value="<%= interferenciasypermisos.intCloacasObtenida%>">
                                             </div>
                                             <%}%>
 
@@ -288,9 +288,9 @@
         </div>
         <div class="card-text">
             <form-check>
-                <input hidden type="radio" name="intElectricidad" id="intElectricidad" value="<%=user.intElectricidad%>"
+                <input hidden type="radio" name="intElectricidad" id="intElectricidad" value="<%=interferenciasypermisos.intElectricidad%>"
                     checked>
-                <%if (user.intElectricidad!="En gestion" && user.intElectricidad!="Pedida" && user.intElectricidad!="ok"
+                <%if (interferenciasypermisos.intElectricidad!="En gestion" && interferenciasypermisos.intElectricidad!="Pedida" && interferenciasypermisos.intElectricidad!="ok"
                     ) {%>
 
                     <input type="radio" name="intElectricidad" id="intElectricidad" value="En gestion"> En
@@ -304,15 +304,15 @@
                     <div id="intElectricidadPedida" style="display: none;">
                         Fecha en la que se pidió
                         <input type="date" name="intElectricidadPedida" id="intElectricidadPedida"
-                            value="<%= user.intElectricidadPedida%>">
+                            value="<%= interferenciasypermisos.intElectricidadPedida%>">
                     </div>
                     <div id="intElectricidadObtenida" style="display: none;">
                         Fecha en la que se vence
                         <input type="date" name="intElectricidadObtenida" id="intElectricidadObtenida"
-                            value="<%= user.intElectricidadObtenida%>">
+                            value="<%= interferenciasypermisos.intElectricidadObtenida%>">
                     </div>
                     <%}%>
-                        <%if(user.intElectricidad=="En gestion"){%>
+                        <%if(interferenciasypermisos.intElectricidad=="En gestion"){%>
                             <input checked type="radio" name="intElectricidad" id="intElectricidad" value="En gestion">
                             En
                             gestión
@@ -325,16 +325,16 @@
                             <div id="intElectricidadPedida" style="display: none;">
                                 Fecha en la que se pidió
                                 <input type="date" name="intElectricidadPedida" id="intElectricidadPedida"
-                                    value="<%= user.intElectricidadPedida%>">
+                                    value="<%= interferenciasypermisos.intElectricidadPedida%>">
                             </div>
                             <div id="intElectricidadObtenida" style="display: none;">
                                 Fecha en la que se vence
                                 <input type="date" name="intElectricidadObtenida" id="intElectricidadObtenida"
-                                    value="<%= user.intElectricidadObtenida%>">
+                                    value="<%= interferenciasypermisos.intElectricidadObtenida%>">
                             </div>
 
                             <%}%>
-                                <%if(user.intElectricidad=="Pedida"){%>
+                                <%if(interferenciasypermisos.intElectricidad=="Pedida"){%>
                                     <input type="radio" name="intElectricidad" id="intElectricidad" value="En gestion">
                                     En
                                     gestión
@@ -349,16 +349,16 @@
                                     <div id="intElectricidadPedida" style="display: block;">
                                         Fecha en la que se pidió
                                         <input type="date" name="intElectricidadPedida" id="intElectricidadPedida"
-                                            value="<%= user.intElectricidadPedida%>">
+                                            value="<%= interferenciasypermisos.intElectricidadPedida%>">
                                     </div>
                                     <div id="intElectricidadObtenida" style="display: none;">
                                         Fecha en la que se vence
                                         <input type="date" name="intElectricidadObtenida" id="intElectricidadObtenida"
-                                            value="<%= user.intElectricidadObtenida%>">
+                                            value="<%= interferenciasypermisos.intElectricidadObtenida%>">
                                     </div>
 
                                     <%}%>
-                                        <%if(user.intElectricidad=="ok"){%>
+                                        <%if(interferenciasypermisos.intElectricidad=="ok"){%>
                                             <input type="radio" name="intElectricidad" id="intElectricidad"
                                                 value="En gestion"> En
                                             gestión
@@ -373,13 +373,13 @@
                                             <div id="intElectricidadPedida" style="display: none;">
                                                 Fecha en la que se pidió
                                                 <input type="date" name="intElectricidadPedida"
-                                                    id="intElectricidadPedida" value="<%= user.intElectricidadPedida%>">
+                                                    id="intElectricidadPedida" value="<%= interferenciasypermisos.intElectricidadPedida%>">
                                             </div>
                                             <div id="intElectricidadObtenida" style="display: block;">
                                                 Fecha en la que se vence
                                                 <input type="date" name="intElectricidadObtenida"
                                                     id="intElectricidadObtenida"
-                                                    value="<%= user.intElectricidadObtenida%>">
+                                                    value="<%= interferenciasypermisos.intElectricidadObtenida%>">
                                             </div>
 
                                             <%}%>
@@ -392,8 +392,8 @@
         </div>
         <div class="card-text">
             <form-check>
-                <%if (user.intClaro!="En gestion" && user.intClaro!="Pedida" && user.intClaro!="ok" ) {%>
-                    <input hidden type="radio" name="intClaro" id="intClaro" value="<%=user.intClaro%>" checked>
+                <%if (interferenciasypermisos.intClaro!="En gestion" && interferenciasypermisos.intClaro!="Pedida" && interferenciasypermisos.intClaro!="ok" ) {%>
+                    <input hidden type="radio" name="intClaro" id="intClaro" value="<%=interferenciasypermisos.intClaro%>" checked>
 
                     <input type="radio" name="intClaro" id="intClaro" value="En gestion"> En
                     gestión
@@ -405,15 +405,15 @@
                     Ok
                     <div id="intClaroPedida" style="display: none;">
                         Fecha en la que se pidió
-                        <input type="date" name="intClaroPedida" id="intClaroPedida" value="<%= user.intClaroPedida%>">
+                        <input type="date" name="intClaroPedida" id="intClaroPedida" value="<%= interferenciasypermisos.intClaroPedida%>">
                     </div>
                     <div id="intClaroObtenida" style="display: none;">
                         Fecha en la que se vence
                         <input type="date" name="intClaroObtenida" id="intClaroObtenida"
-                            value="<%= user.intClaroObtenida%>">
+                            value="<%= interferenciasypermisos.intClaroObtenida%>">
                     </div>
                     <%}%>
-                        <%if (user.intClaro=="En gestion" ){%>
+                        <%if (interferenciasypermisos.intClaro=="En gestion" ){%>
 
                             <input checked type="radio" name="intClaro" id="intClaro" value="En gestion"> En
                             gestión
@@ -426,15 +426,15 @@
                             <div id="intClaroPedida" style="display: none;">
                                 Fecha en la que se pidió
                                 <input type="date" name="intClaroPedida" id="intClaroPedida"
-                                    value="<%= user.intClaroPedida%>">
+                                    value="<%= interferenciasypermisos.intClaroPedida%>">
                             </div>
                             <div id="intClaroObtenida" style="display: none;">
                                 Fecha en la que se vence
                                 <input type="date" name="intClaroObtenida" id="intClaroObtenida"
-                                    value="<%= user.intClaroObtenida%>">
+                                    value="<%= interferenciasypermisos.intClaroObtenida%>">
                             </div>
                             <%}%>
-                                <%if (user.intClaro=="Pedida" ){%>
+                                <%if (interferenciasypermisos.intClaro=="Pedida" ){%>
 
                                     <input type="radio" name="intClaro" id="intClaro" value="En gestion"> En
                                     gestión
@@ -447,15 +447,15 @@
                                     <div id="intClaroPedida" style="display: block;">
                                         Fecha en la que se pidió
                                         <input type="date" name="intClaroPedida" id="intClaroPedida"
-                                            value="<%= user.intClaroPedida%>">
+                                            value="<%= interferenciasypermisos.intClaroPedida%>">
                                     </div>
                                     <div id="intClaroObtenida" style="display: none;">
                                         Fecha en la que se vence
                                         <input type="date" name="intClaroObtenida" id="intClaroObtenida"
-                                            value="<%= user.intClaroObtenida%>">
+                                            value="<%= interferenciasypermisos.intClaroObtenida%>">
                                     </div>
                                     <%}%>
-                                        <%if (user.intClaro=="ok" ){%>
+                                        <%if (interferenciasypermisos.intClaro=="ok" ){%>
 
                                             <input type="radio" name="intClaro" id="intClaro" value="En gestion"> En
                                             gestión
@@ -468,12 +468,12 @@
                                             <div id="intClaroPedida" style="display: none;">
                                                 Fecha en la que se pidió
                                                 <input type="date" name="intClaroPedida" id="intClaroPedida"
-                                                    value="<%= user.intClaroPedida%>">
+                                                    value="<%= interferenciasypermisos.intClaroPedida%>">
                                             </div>
                                             <div id="intClaroObtenida" style="display: block;">
                                                 Fecha en la que se vence
                                                 <input type="date" name="intClaroObtenida" id="intClaroObtenida"
-                                                    value="<%= user.intClaroObtenida%>">
+                                                    value="<%= interferenciasypermisos.intClaroObtenida%>">
                                             </div>
                                             <%}%>
             </form-check>
@@ -485,8 +485,8 @@
         </div>
         <div class="card-text">
             <form-check>
-                <%if (user.intArnet!="En gestion" && user.intArnet!="Pedida" && user.intArnet!="ok" ) {%>
-                    <input hidden type="radio" name="intArnet" id="intArnet" value="<%=user.intArnet%>" checked>
+                <%if (interferenciasypermisos.intArnet!="En gestion" && interferenciasypermisos.intArnet!="Pedida" && interferenciasypermisos.intArnet!="ok" ) {%>
+                    <input hidden type="radio" name="intArnet" id="intArnet" value="<%=interferenciasypermisos.intArnet%>" checked>
                     <input type="radio" name="intArnet" id="intArnet" value="En gestion"> En
                     gestión
                     <input type="radio" name="intArnet" id="intArnet" value="Pedida"
@@ -497,15 +497,15 @@
                     Ok
                     <div id="intArnetPedida" style="display: none;">
                         Fecha en la que se pidió
-                        <input type="date" name="intArnetPedida" id="intArnetPedida" value="<%= user.intArnetPedida%>">
+                        <input type="date" name="intArnetPedida" id="intArnetPedida" value="<%= interferenciasypermisos.intArnetPedida%>">
                     </div>
                     <div id="intArnetObtenida" style="display: none;">
                         Fecha en la que se vence
                         <input type="date" name="intArnetObtenida" id="intArnetObtenida"
-                            value="<%= user.intArnetObtenida%>">
+                            value="<%= interferenciasypermisos.intArnetObtenida%>">
                     </div>
                     <%}%>
-                        <%if (user.intArnet=="EnGestion" ){%>
+                        <%if (interferenciasypermisos.intArnet=="EnGestion" ){%>
                             <input checked type="radio" name="intArnet" id="intArnet" value="En gestion"> En
                             gestión
                             <input type="radio" name="intArnet" id="intArnet" value="Pedida"
@@ -517,15 +517,15 @@
                             <div id="intArnetPedida" style="display: none;">
                                 Fecha en la que se pidió
                                 <input type="date" name="intArnetPedida" id="intArnetPedida"
-                                    value="<%= user.intArnetPedida%>">
+                                    value="<%= interferenciasypermisos.intArnetPedida%>">
                             </div>
                             <div id="intArnetObtenida" style="display: none;">
                                 Fecha en la que se vence
                                 <input type="date" name="intArnetObtenida" id="intArnetObtenida"
-                                    value="<%= user.intArnetObtenida%>">
+                                    value="<%= interferenciasypermisos.intArnetObtenida%>">
                             </div>
                             <%}%>
-                                <%if (user.intArnet=="Pedida" ){%>
+                                <%if (interferenciasypermisos.intArnet=="Pedida" ){%>
                                     <input type="radio" name="intArnet" id="intArnet" value="En gestion"> En
                                     gestión
                                     <input checked type="radio" name="intArnet" id="intArnet" value="Pedida"
@@ -537,16 +537,16 @@
                                     <div id="intArnetPedida" style="display: block;">
                                         Fecha en la que se pidió
                                         <input type="date" name="intArnetPedida" id="intArnetPedida"
-                                            value="<%= user.intArnetPedida%>">
+                                            value="<%= interferenciasypermisos.intArnetPedida%>">
                                     </div>
                                     <div id="intArnetObtenida" style="display: none;">
                                         Fecha en la que se vence
                                         <input type="date" name="intArnetObtenida" id="intArnetObtenida"
-                                            value="<%= user.intArnetObtenida%>">
+                                            value="<%= interferenciasypermisos.intArnetObtenida%>">
                                     </div>
                                     <%}%>
 
-                                        <%if (user.intArnet=="ok" ){%>
+                                        <%if (interferenciasypermisos.intArnet=="ok" ){%>
                                             <input type="radio" name="intArnet" id="intArnet" value="En gestion"> En
                                             gestión
                                             <input type="radio" name="intArnet" id="intArnet" value="Pedida"
@@ -558,12 +558,12 @@
                                             <div id="intArnetPedida" style="display: none;">
                                                 Fecha en la que se pidió
                                                 <input type="date" name="intArnetPedida" id="intArnetPedida"
-                                                    value="<%= user.intArnetPedida%>">
+                                                    value="<%= interferenciasypermisos.intArnetPedida%>">
                                             </div>
                                             <div id="intArnetObtenida" style="display: block;">
                                                 Fecha en la que se vence
                                                 <input type="date" name="intArnetObtenida" id="intArnetObtenida"
-                                                    value="<%= user.intArnetObtenida%>">
+                                                    value="<%= interferenciasypermisos.intArnetObtenida%>">
                                             </div>
                                             <%}%>
             </form-check>
@@ -575,8 +575,8 @@
         </div>
         <div class="card-text">
             <form-check>
-                <%if (user.intArsat!="En gestion" && user.intArsat!="Pedida" && user.intArsat!="ok" ) {%>
-                    <input hidden type="radio" name="intArsat" id="intArsat" value="<%=user.intArsat%>" checked>
+                <%if (interferenciasypermisos.intArsat!="En gestion" && interferenciasypermisos.intArsat!="Pedida" && interferenciasypermisos.intArsat!="ok" ) {%>
+                    <input hidden type="radio" name="intArsat" id="intArsat" value="<%=interferenciasypermisos.intArsat%>" checked>
                     <input type="radio" name="intArsat" id="intArsat" value="En gestion"> En
                     gestión
                     <input type="radio" name="intArsat" id="intArsat" value="Pedida"
@@ -587,15 +587,15 @@
                     Ok
                     <div id="intArsatPedida" style="display: none;">
                         Fecha en la que se pidió
-                        <input type="date" name="intArsatPedida" id="intArsatPedida" value="<%= user.intArsatPedida%>">
+                        <input type="date" name="intArsatPedida" id="intArsatPedida" value="<%= interferenciasypermisos.intArsatPedida%>">
                     </div>
                     <div id="intArsatObtenida" style="display: none;">
                         Fecha en la que se vence
                         <input type="date" name="intArsatObtenida" id="intArsatObtenida"
-                            value="<%= user.intArsatObtenida%>">
+                            value="<%= interferenciasypermisos.intArsatObtenida%>">
                     </div>
                     <%}%>
-                        <%if(user.intArsat=="En gestion"){%>
+                        <%if(interferenciasypermisos.intArsat=="En gestion"){%>
                             <input checked type="radio" name="intArsat" id="intArsat" value="En gestion"> En
                             gestión
                             <input type="radio" name="intArsat" id="intArsat" value="Pedida"
@@ -607,15 +607,15 @@
                             <div id="intArsatPedida" style="display: none;">
                                 Fecha en la que se pidió
                                 <input type="date" name="intArsatPedida" id="intArsatPedida"
-                                    value="<%= user.intArsatPedida%>">
+                                    value="<%= interferenciasypermisos.intArsatPedida%>">
                             </div>
                             <div id="intArsatObtenida" style="display: none;">
                                 Fecha en la que se vence
                                 <input type="date" name="intArsatObtenida" id="intArsatObtenida"
-                                    value="<%= user.intArsatObtenida%>">
+                                    value="<%= interferenciasypermisos.intArsatObtenida%>">
                             </div>
                             <%}%>
-                                <%if(user.intArsat=="Pedida"){%>
+                                <%if(interferenciasypermisos.intArsat=="Pedida"){%>
                                     <input type="radio" name="intArsat" id="intArsat" value="En gestion"> En
                                     gestión
                                     <input checked type="radio" name="intArsat" id="intArsat" value="Pedida"
@@ -627,15 +627,15 @@
                                     <div id="intArsatPedida" style="display: block;">
                                         Fecha en la que se pidió
                                         <input type="date" name="intArsatPedida" id="intArsatPedida"
-                                            value="<%= user.intArsatPedida%>">
+                                            value="<%= interferenciasypermisos.intArsatPedida%>">
                                     </div>
                                     <div id="intArsatObtenida" style="display: none;">
                                         Fecha en la que se vence
                                         <input type="date" name="intArsatObtenida" id="intArsatObtenida"
-                                            value="<%= user.intArsatObtenida%>">
+                                            value="<%= interferenciasypermisos.intArsatObtenida%>">
                                     </div>
                                     <%}%>
-                                        <%if(user.intArsat=="ok"){%>
+                                        <%if(interferenciasypermisos.intArsat=="ok"){%>
                                             <input type="radio" name="intArsat" id="intArsat" value="En gestion"> En
                                             gestión
                                             <input type="radio" name="intArsat" id="intArsat" value="Pedida"
@@ -647,12 +647,12 @@
                                             <div id="intArsatPedida" style="display: none;">
                                                 Fecha en la que se pidió
                                                 <input type="date" name="intArsatPedida" id="intArsatPedida"
-                                                    value="<%= user.intArsatPedida%>">
+                                                    value="<%= interferenciasypermisos.intArsatPedida%>">
                                             </div>
                                             <div id="intArsatObtenida" style="display: block;">
                                                 Fecha en la que se vence
                                                 <input type="date" name="intArsatObtenida" id="intArsatObtenida"
-                                                    value="<%= user.intArsatObtenida%>">
+                                                    value="<%= interferenciasypermisos.intArsatObtenida%>">
                                             </div>
                                             <%}%>
             </form-check>
@@ -664,8 +664,8 @@
         </div>
         <div class="card-text">
             <form-check>
-                <%if (user.intTelecom!="En gestion" && user.intTelecom!="Pedida" && user.intTelecom!="ok" ) {%>
-                    <input hidden type="radio" name="intTelecom" id="intTelecom" value="<%=user.intTelecom%>" checked>
+                <%if (interferenciasypermisos.intTelecom!="En gestion" && interferenciasypermisos.intTelecom!="Pedida" && interferenciasypermisos.intTelecom!="ok" ) {%>
+                    <input hidden type="radio" name="intTelecom" id="intTelecom" value="<%=interferenciasypermisos.intTelecom%>" checked>
                     <input type="radio" name="intTelecom" id="intTelecom" value="En gestion"> En
                     gestión
                     <input type="radio" name="intTelecom" id="intTelecom" value="Pedida"
@@ -677,15 +677,15 @@
                     <div id="intTelecomPedida" style="display: none;">
                         Fecha en la que se pidió
                         <input type="date" name="intTelecomPedida" id="intTelecomPedida"
-                            value="<%= user.intTelecomPedida%>">
+                            value="<%= interferenciasypermisos.intTelecomPedida%>">
                     </div>
                     <div id="intTelecomObtenida" style="display: none;">
                         Fecha en la que se vence
                         <input type="date" name="intTelecomObtenida" id="intTelecomObtenida"
-                            value="<%= user.intTelecomObtenida%>">
+                            value="<%= interferenciasypermisos.intTelecomObtenida%>">
                     </div>
                     <%}%>
-                        <%if(user.intTelecom=="En gestion"){%>
+                        <%if(interferenciasypermisos.intTelecom=="En gestion"){%>
                             <input checked type="radio" name="intTelecom" id="intTelecom" value="En gestion"> En
                             gestión
                             <input type="radio" name="intTelecom" id="intTelecom" value="Pedida"
@@ -697,16 +697,16 @@
                             <div id="intTelecomPedida" style="display: none;">
                                 Fecha en la que se pidió
                                 <input type="date" name="intTelecomPedida" id="intTelecomPedida"
-                                    value="<%= user.intTelecomPedida%>">
+                                    value="<%= interferenciasypermisos.intTelecomPedida%>">
                             </div>
                             <div id="intTelecomObtenida" style="display:none;">
                                 Fecha en la que se vence
                                 <input type="date" name="intTelecomObtenida" id="intTelecomObtenida"
-                                    value="<%= user.intTelecomObtenida%>">
+                                    value="<%= interferenciasypermisos.intTelecomObtenida%>">
                             </div>
                             <%}%>
 
-                                <%if(user.intTelecom=="Pedida"){%>
+                                <%if(interferenciasypermisos.intTelecom=="Pedida"){%>
                                     <input type="radio" name="intTelecom" id="intTelecom" value="En gestion"> En
                                     gestión
                                     <input checked type="radio" name="intTelecom" id="intTelecom" value="Pedida"
@@ -718,15 +718,15 @@
                                     <div id="intTelecomPedida" style="display:block;">
                                         Fecha en la que se pidió
                                         <input type="date" name="intTelecomPedida" id="intTelecomPedida"
-                                            value="<%= user.intTelecomPedida%>">
+                                            value="<%= interferenciasypermisos.intTelecomPedida%>">
                                     </div>
                                     <div id="intTelecomObtenida" style="display:none;">
                                         Fecha en la que se vence
                                         <input type="date" name="intTelecomObtenida" id="intTelecomObtenida"
-                                            value="<%= user.intTelecomObtenida%>">
+                                            value="<%= interferenciasypermisos.intTelecomObtenida%>">
                                     </div>
                                     <%}%>
-                                        <%if(user.intTelecom=="ok"){%>
+                                        <%if(interferenciasypermisos.intTelecom=="ok"){%>
                                             <input type="radio" name="intTelecom" id="intTelecom" value="En gestion">
                                             En
                                             gestión
@@ -740,12 +740,12 @@
                                             <div id="intTelecomPedida" style="display:none;">
                                                 Fecha en la que se pidió
                                                 <input type="date" name="intTelecomPedida" id="intTelecomPedida"
-                                                    value="<%= user.intTelecomPedida%>">
+                                                    value="<%= interferenciasypermisos.intTelecomPedida%>">
                                             </div>
                                             <div id="intTelecomObtenida" style="display: block;">
                                                 Fecha en la que se vence
                                                 <input type="date" name="intTelecomObtenida" id="intTelecomObtenida"
-                                                    value="<%= user.intTelecomObtenida%>">
+                                                    value="<%= interferenciasypermisos.intTelecomObtenida%>">
                                                 <%}%>
             </form-check>
         </div>

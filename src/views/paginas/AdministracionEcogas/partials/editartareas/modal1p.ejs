@@ -34,12 +34,12 @@
                                     <select class="form-control"
                                         id="Contrato"
                                         name="Contrato"
-                                        value="<%= user.Contrato%>"
-                                        placeholder="<%= user.Contrato%>">
+                                        value="<%= tareasporcarpeta.Contrato%>"
+                                        placeholder="<%= tareasporcarpeta.Contrato%>">
                                         <option hidden
-                                            value="<%=user.Contrato%>"
+                                            value="<%=tareasporcarpeta.Contrato%>"
                                             selected>
-                                            <%=user.Contrato%>
+                                            <%=tareasporcarpeta.Contrato%>
                                         </option>
                                         <option
                                             value="Sin presentar">
@@ -59,12 +59,12 @@
                                 <div class="card-title">Fecha de firma del contrato
                                                                     </div>
                                 <div class="card-text">
-                                    <%if(user.Fechafirmacontrato){%>
-                                        <%=user.Fechafirmacontrato%>                           
+                                    <%if(tareasporcarpeta.Fechafirmacontrato){%>
+                                        <%=tareasporcarpeta.Fechafirmacontrato%>                           
                                         <%}%>
-                                  <input type="date" name="FechaFirmaContrato" id="FechaFirmaContrato"placeholder="<%= user.Fechafirmacontrato%>">
+                                  <input type="date" name="FechaFirmaContrato" id="FechaFirmaContrato"placeholder="<%= tareasporcarpeta.Fechafirmacontrato%>">
 <script>
-var fecha = "<%=user.Fechafirmacontrato%>";
+var fecha = "<%=tareasporcarpeta.Fechafirmacontrato%>";
 console.log("la fecha es : "+ fecha);
                                         var FechaModificada= moment(Fecha, "MM/DD/YYYY");
                                         console.log("La fecha modificada es: "+ FechaModificada);
@@ -79,12 +79,12 @@ console.log("la fecha es : "+ fecha);
                                     <select class="form-control"
                                         id="Presupuesto"
                                         name="Presupuesto"
-                                        value="<%= user.Presupuesto%>"
-                                        placeholder="<%= user.Presupuesto%>">
+                                        value="<%= tareasporcarpeta.Presupuesto%>"
+                                        placeholder="<%= tareasporcarpeta.Presupuesto%>">
                                         <option hidden
-                                            value="<%=user.Presupuesto%>"
+                                            value="<%=tareasporcarpeta.Presupuesto%>"
                                             selected>
-                                            <%=user.Presupuesto%>
+                                            <%=tareasporcarpeta.Presupuesto%>
                                         </option>
                                         <option
                                             value="Sin presentar">
@@ -107,12 +107,12 @@ console.log("la fecha es : "+ fecha);
                                     <select class="form-control"
                                         id="Sucedaneo"
                                         name="Sucedaneo"
-                                        value="<%= user.Sucedaneo%>"
-                                        placeholder="<%= user.Sucedaneo%>">
+                                        value="<%= tareasporcarpeta.Sucedaneo%>"
+                                        placeholder="<%= tareasporcarpeta.Sucedaneo%>">
                                         <option hidden
-                                            value="<%=user.Sucedaneo%>"
+                                            value="<%=tareasporcarpeta.Sucedaneo%>"
                                             selected>
-                                            <%=user.Sucedaneo%>
+                                            <%=tareasporcarpeta.Sucedaneo%>
                                         </option>
                                         <option value="EnGestion">En
                                             gestion
@@ -134,12 +134,12 @@ console.log("la fecha es : "+ fecha);
                                     <select class="form-control"
                                         id="NotaDeExcepcion"
                                         name="NotaDeExcepcion"
-                                        value="<%= user.NotaDeExcepcion%>"
-                                        placeholder="<%= user.NotaDeExcepcion%>">
+                                        value="<%= tareasporcarpeta.NotaDeExcepcion%>"
+                                        placeholder="<%= tareasporcarpeta.NotaDeExcepcion%>">
                                         <option hidden
-                                            value="<%=user.NotaDeExcepcion%>"
+                                            value="<%=tareasporcarpeta.NotaDeExcepcion%>"
                                             selected>
-                                            <%=user.NotaDeExcepcion%>
+                                            <%=tareasporcarpeta.NotaDeExcepcion%>
                                         </option>
                                         <option value="EnGestion">En
                                             gestion
@@ -166,12 +166,12 @@ console.log("la fecha es : "+ fecha);
                                     <select class="form-control"
                                         id="PCaprobado"
                                         name="PCaprobado"
-                                        value="<%= user.PCaprobado%>"
-                                        placeholder="<%= user.PCaprobado%>">
+                                        value="<%= tareasporcarpeta.PCaprobado%>"
+                                        placeholder="<%= tareasporcarpeta.PCaprobado%>">
                                         <option hidden
-                                            value="<%=user.PCaprobado%>"
+                                            value="<%=tareasporcarpeta.PCaprobado%>"
                                             selected>
-                                            <%=user.PCaprobado%>
+                                            <%=tareasporcarpeta.PCaprobado%>
                                         </option>
                                         <option value="Sin presentar">
                                             Sin presentar
@@ -197,10 +197,10 @@ console.log("la fecha es : "+ fecha);
                                     <select class="form-control"
                                         id="PlanoTipo"
                                         name="PlanoTipo"
-                                        value="<%= user.PlanoTipo%>"
-                                        placeholder="<%= user.PlanoTipo%>">
-                                        <option hidden value="<%=user.PlanoTipo%>" selected>
-                                            <%=user.PlanoTipo%>
+                                        value="<%= tareasporcarpeta.PlanoTipo%>"
+                                        placeholder="<%= tareasporcarpeta.PlanoTipo%>">
+                                        <option hidden value="<%=tareasporcarpeta.PlanoTipo%>" selected>
+                                            <%=tareasporcarpeta.PlanoTipo%>
                                         </option>
                                         <option value="Sin presentar">
                                             Sin presentar
@@ -226,7 +226,7 @@ console.log("la fecha es : "+ fecha);
                             <div class="card p-3 border-secondary">
                                 <div class="card-header">
                                     Permisos especiales</div>
-                                    <%if (user.Privado=="NC"){%>
+                                    <%if (tareasporcarpeta.Privado=="NC"){%>
                                         <form-check>
                                             <input hidden checked type="radio"
                                             name="CartaOferta"
@@ -241,12 +241,12 @@ console.log("la fecha es : "+ fecha);
                                     <select class="form-control"
                                         id="CartaOferta"
                                         name="CartaOferta"
-                                        value="<%= user.CartaOferta%>"
-                                        placeholder="<%= user.CartaOferta%>">
+                                        value="<%= tareasporcarpeta.CartaOferta%>"
+                                        placeholder="<%= tareasporcarpeta.CartaOferta%>">
                                         <option hidden
-                                            value="<%=user.CartaOferta%>"
+                                            value="<%=tareasporcarpeta.CartaOferta%>"
                                             selected>
-                                            <%=user.CartaOferta%>
+                                            <%=tareasporcarpeta.CartaOferta%>
                                         </option>
                                         <option
                                             value="Sin presentar">
@@ -268,7 +268,7 @@ console.log("la fecha es : "+ fecha);
 
                                 </div>
                                 <%}%>
-                                <%if (user.Privado=="NC"){%>
+                                <%if (interferenciasypermisos.Privado=="NC"){%>
                                     <form-check>
                                         <input hidden checked type="radio"
                                         name="PlanoAnexo"
@@ -283,12 +283,12 @@ console.log("la fecha es : "+ fecha);
                                     <select class="form-control"
                                         id="PlanoAnexo"
                                         name="PlanoAnexo"
-                                        value="<%= user.PlanoAnexo%>"
-                                        placeholder="<%= user.PlanoAnexo%>">
+                                        value="<%= tareasporcarpeta.PlanoAnexo%>"
+                                        placeholder="<%= tareasporcarpeta.PlanoAnexo%>">
                                         <option
-                                            value="<%=user.PlanoAnexo%>"
+                                            value="<%=tareasporcarpeta.PlanoAnexo%>"
                                             selected>
-                                            <%=user.PlanoAnexo%>
+                                            <%=tareasporcarpeta.PlanoAnexo%>
                                         </option>
                                         <option
                                             value="Sin presentar">
@@ -309,7 +309,7 @@ console.log("la fecha es : "+ fecha);
                                 </div>
                                 <%}%>
                                 <div class="card-title">
-                                <%if (user.Hidraulica=="NC"){%>
+                                <%if (interferenciasypermisos.Hidraulica=="NC"){%>
                                     <form-check>
                                         <input hidden checked type="radio"
                                         name="HIDRAULICA1"
@@ -324,12 +324,12 @@ console.log("la fecha es : "+ fecha);
                                     <select class="form-control"
                                         id="HIDRAULICA1"
                                         name="HIDRAULICA1"
-                                       placeholder="<%=user.HidraulicaVisacion%>">
+                                       placeholder="<%=interferenciasypermisos.HidraulicaVisacion%>">
                                         <option  id="HIDRAULICA1"
                                         name="HIDRAULICA1"
-                                            value= "<%=user.HidraulicaVisacion%>"
+                                            value= "<%=interferenciasypermisos.HidraulicaVisacion%>"
                                             selected hidden>
-                                            <%=user.HidraulicaVisacion%>
+                                            <%=interferenciasypermisos.HidraulicaVisacion%>
                                         </option>
                                         <option  id="HIDRAULICA1"
                                         name="HIDRAULICA1"
@@ -353,7 +353,7 @@ console.log("la fecha es : "+ fecha);
                                     </select>
                                 </div>
                                 <%}%>
-                                <%if (user.Ferrocarriles=="NC"){%>
+                                <%if (interferenciasypermisos.Ferrocarriles=="NC"){%>
                                     <input hidden checked type="radio"
                                     name="FERROCARRIL1"
                                     id="FERROCARRIL1"
@@ -366,12 +366,12 @@ console.log("la fecha es : "+ fecha);
                                     <select class="form-control"
                                         id="FERROCARRIL1"
                                         name="FERROCARRIL1"
-                                        value="<%=user.FerrocarrilesVisacion%>"
-                                        placeholder="<%=user.FerrocarrilesVisacion%>">
+                                        value="<%=interferenciasypermisos.FerrocarrilesVisacion%>"
+                                        placeholder="<%=interferenciasypermisos.FerrocarrilesVisacion%>">
                                         <option hidden
-                                            value="<%=user.FerrocarrilesVisacion%>"
+                                            value="<%=interferenciasypermisos.FerrocarrilesVisacion%>"
                                             selected>
-                                            <%=user.FerrocarrilesVisacion%>
+                                            <%=interferenciasypermisos.FerrocarrilesVisacion%>
                                         </option>
                                         <option
                                             value="Sin presentar">
@@ -388,7 +388,7 @@ console.log("la fecha es : "+ fecha);
                                     </select>
                                 </div>
                                 <%}%>
-                                <%if (user.DNV=="NC"){%>
+                                <%if (interferenciasypermisos.DNV=="NC"){%>
                                     <input hidden checked type="radio"
                                     name="DNV1"
                                     id="DNV1"
@@ -400,12 +400,12 @@ console.log("la fecha es : "+ fecha);
                                 <div class="card-text">
                                     <select class="form-control"
                                         id="DNV1" name="DNV1"
-                                        value="<%=user.DNVVisacion%>"
-                                        placeholder="<%=user.DNVVisacion%>">
+                                        value="<%=interferenciasypermisos.DNVVisacion%>"
+                                        placeholder="<%=interferenciasypermisos.DNVVisacion%>">
                                         <option hidden
-                                            value="<%=user.DNVVisacion%>"
+                                            value="<%=interferenciasypermisos.DNVVisacion%>"
                                             selected>
-                                            <%=user.DNVVisacion%>
+                                            <%=interferenciasypermisos.DNVVisacion%>
                                         </option>
                                         <option
                                             value="Sin presentar">

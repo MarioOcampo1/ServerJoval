@@ -3,9 +3,9 @@
     <div class="card-header bg-primary text-white">
         Permisos
     </div>
-    <%if (user.Hidraulica=="NC" ){%>
+    <%if (interferenciasypermisos.Hidraulica=="NC" ){%>
         <form-check>
-            <input hidden checked type="radio" name="HIDRAULICA" id="HIDRAULICA" value="<%=user.Hidraulica%>">
+            <input hidden checked type="radio" name="HIDRAULICA" id="HIDRAULICA" value="<%=interferenciasypermisos.Hidraulica%>">
         </form-check>
         <%}else{%>
 
@@ -16,7 +16,7 @@
                 <div class="card-text">
                     <form-check>
 
-                        <!-- <%if (user.Hidraulica=="Pedir"){%>
+                        <!-- <%if (interferenciasypermisos.Hidraulica=="Pedir"){%>
                                                                                                 <input checked type="radio"
                                                                                                 name="HIDRAULICA"
                                                                                                 id="HIDRAULICA"
@@ -27,19 +27,19 @@
                                                                                                 id="HIDRAULICA"
                                                                                                 value="Pedir"> Pedir
                                                                                             <%}%> -->
-                        <%if (user.Hidraulica=="EnGestion" ){%>
+                        <%if (interferenciasypermisos.Hidraulica=="EnGestion" ){%>
                             <input checked type="radio" name="HIDRAULICA" id="HIDRAULICA" value="EnGestion"> En gestion
                             <%}else{%>
                                 <input type="radio" name="HIDRAULICA" id="HIDRAULICA" value="EnGestion"> En gestion
                                 <%}%>
 
-                                    <%if (user.Hidraulica=="ok" ){%>
+                                    <%if (interferenciasypermisos.Hidraulica=="ok" ){%>
                                         <input checked type="radio" name="HIDRAULICA" id="HIDRAULICA" value="ok"> Ok
                                         <div id="VencimientoHidraulica" style="display:block;">
                                             Fecha en la que se pidió:
                                             <input type="date" onfocus="(this.type='date')" onblur="(this.type='text')"
                                                 name="VencimientoHidraulica" id="VencimientoHidraulica"
-                                                value="<%= user.VencimientoHidraulica%>" placeholder="<%= user.VencimientoHidraulica%>">
+                                                value="<%= interferenciasypermisos.VencimientoHidraulica%>" placeholder="<%= interferenciasypermisos.VencimientoHidraulica%>">
                                         </div>
                                         <%}else{%>
                                             <input type="radio" name="HIDRAULICA" id="HIDRAULICA" value="ok"
@@ -48,8 +48,8 @@
                                                 Fecha en la que se pidió
                                                 <input type="date" onfocus="(this.type='date')"
                                                     onblur="(this.type='text')" name="VencimientoHidraulica"
-                                                    id="VencimientoHidraulica" value="<%= user.VencimientoHidraulica%>"
-                                                    placeholder="<%= user.VencimientoHidraulica%>">
+                                                    id="VencimientoHidraulica" value="<%= interferenciasypermisos.VencimientoHidraulica%>"
+                                                    placeholder="<%= interferenciasypermisos.VencimientoHidraulica%>">
                                             </div>
                                             <%}%>
 
@@ -58,10 +58,10 @@
             </div>
             <%}%>
 
-                <%if (user.Ferrocarriles=="NC" ){%>
+                <%if (interferenciasypermisos.Ferrocarriles=="NC" ){%>
                     <form-check>
                         <input hidden checked type="radio" name="FERROCARRIL" id="FERROCARRIL"
-                            value="<%=user.Ferrocarriles%>">
+                            value="<%=interferenciasypermisos.Ferrocarriles%>">
                     </form-check>
                     <% }else{%>
 
@@ -70,7 +70,7 @@
                             </div>
                             <div class="card-text">
                                 <form-check>
-                                    <!-- <%if (user.Ferrocarriles=="Pedir"){%>
+                                    <!-- <%if (interferenciasypermisos.Ferrocarriles=="Pedir"){%>
                                                                                                 <input checked type="radio"
                                                                                                 name="FERROCARRIL"
                                                                                                 id="FERROCARRIL"
@@ -81,7 +81,7 @@
                                                                                                 id="FERROCARRIL"
                                                                                                 value="Pedir"> Pedir
                                                                                             <%}%> -->
-                                    <%if (user.Ferrocarriles=="EnGestion" ){%>
+                                    <%if (interferenciasypermisos.Ferrocarriles=="EnGestion" ){%>
                                         <input checked type="radio" name="FERROCARRIL" id="FERROCARRIL"
                                             value="EnGestion"> En gestion
                                         <%}else{%>
@@ -89,7 +89,7 @@
                                             En gestion
                                             <%}%>
 
-                                                <%if (user.Ferrocarriles=="ok" ){%>
+                                                <%if (interferenciasypermisos.Ferrocarriles=="ok" ){%>
                                                     <input checked type="radio" name="FERROCARRIL" id="FERROCARRIL"
                                                         value="ok"> Ok
                                                     <div id="VencimientoFerrocarril" style="display:block;">
@@ -97,8 +97,8 @@
                                                         <input type="date" onfocus="(this.type='date')"
                                                             onblur="(this.type='text')" name="VencimientoFerrocarril"
                                                             id="VencimientoFerrocarril"
-                                                            value="<%= user.VencimientoFerrocarril%>"
-                                                            placeholder="<%= user.VencimientoFerrocarril%>">
+                                                            value="<%= interferenciasypermisos.VencimientoFerrocarril%>"
+                                                            placeholder="<%= interferenciasypermisos.VencimientoFerrocarril%>">
                                                     </div>
                                                     <%}else{%>
                                                         <input type="radio" name="FERROCARRIL" id="FERROCARRIL"
@@ -111,11 +111,11 @@
                                                                 onblur="(this.type='text')"
                                                                 name="VencimientoFerrocarril"
                                                                 id="VencimientoFerrocarril"
-                                                                value="<%= user.VencimientoFerrocarril%>"
-                                                                placeholder="<%= user.VencimientoFerrocarril%>">
+                                                                value="<%= interferenciasypermisos.VencimientoFerrocarril%>"
+                                                                placeholder="<%= interferenciasypermisos.VencimientoFerrocarril%>">
                                                         </div>
                                                         <%}%>
-                                                            <!-- <%if (user.Ferrocarriles=="NC"){%>
+                                                            <!-- <%if (interferenciasypermisos.Ferrocarriles=="NC"){%>
                                                                                                 <input checked type="radio"
                                                                                                 name="FERROCARRIL"
                                                                                                 id="FERROCARRIL"
@@ -133,7 +133,7 @@
                         <%}%>
                             <form-check>
 
-                                <%if (user.PerMunicipal=="NC" ){%>
+                                <%if (interferenciasypermisos.PerMunicipal=="NC" ){%>
                                     <form-check>
                                         <input hidden checked type="radio" name="PerMunicipal" id="PerMunicipal"
                                             value="NC">
@@ -146,7 +146,7 @@
                                                 Municipal </div>
                                             <div class="card-text">
                                                 <form-check>
-                                                    <!-- <%if (user.PerMunicipal=="Pedir"){%>
+                                                    <!-- <%if (interferenciasypermisos.PerMunicipal=="Pedir"){%>
                                                                                                 <input checked type="radio"
                                                                                                 name="PerMunicipal"
                                                                                                 id="PerMunicipal"
@@ -157,7 +157,7 @@
                                                                                                 id="PerMunicipal"
                                                                                                 value="Pedir"> Pedir
                                                                                             <%}%> -->
-                                                    <%if (user.PerMunicipal=="EnGestion" ){%>
+                                                    <%if (interferenciasypermisos.PerMunicipal=="EnGestion" ){%>
                                                         <input checked type="radio" name="PerMunicipal"
                                                             id="PerMunicipal" value="EnGestion"> En gestion
                                                         <%}else{%>
@@ -165,7 +165,7 @@
                                                                 value="EnGestion"> En gestion
                                                             <%}%>
 
-                                                                <%if (user.PerMunicipal=="ok" ){%>
+                                                                <%if (interferenciasypermisos.PerMunicipal=="ok" ){%>
                                                                     <input checked type="radio" name="PerMunicipal"
                                                                         id="PerMunicipal" value="ok"> Ok
                                                                         <div id="VencimientoMunicipal" style="display:block;">
@@ -175,8 +175,8 @@
                                                                             onblur="(this.type='text')"
                                                                             name="VencimientoMunicipal"
                                                                             id="VencimientoMunicipal"
-                                                                            value="<%= user.VencimientoMunicipal%>"
-                                                                            placeholder="<%= user.VencimientoMunicipal%>">
+                                                                            value="<%= interferenciasypermisos.VencimientoMunicipal%>"
+                                                                            placeholder="<%= interferenciasypermisos.VencimientoMunicipal%>">
                                                                     </div>
                                                                     <%}else{%>
                                                                         <input type="radio" name="PerMunicipal"
@@ -191,11 +191,11 @@
                                                                                 onblur="(this.type='text')"
                                                                                 name="VencimientoMunicipal"
                                                                                 id="VencimientoMunicipal"
-                                                                                value="<%= user.VencimientoMunicipal%>"
-                                                                                placeholder="<%= user.VencimientoMunicipal%>">
+                                                                                value="<%= interferenciasypermisos.VencimientoMunicipal%>"
+                                                                                placeholder="<%= interferenciasypermisos.VencimientoMunicipal%>">
                                                                         </div>
                                                                         <%}%>
-                                                                            <!-- <%if (user.PerMunicipal=="NC"){%>
+                                                                            <!-- <%if (interferenciasypermisos.PerMunicipal=="NC"){%>
                                                                                                 <input checked type="radio"
                                                                                                 name="PerMunicipal"
                                                                                                 id="PerMunicipal"
@@ -214,10 +214,10 @@
                                         </div>
                                         <%}%>
 
-                                            <%if (user.DNV=="NC" ){%>
+                                            <%if (interferenciasypermisos.DNV=="NC" ){%>
                                                 <form-check>
                                                     <input hidden checked type="radio" name="DNV" id="DNV"
-                                                        value="<%=user.DNV%>">
+                                                        value="<%=interferenciasypermisos.DNV%>">
                                                 </form-check>
                                                 <% }else{%>
 
@@ -225,7 +225,7 @@
                                                         <div class="card-title">DNV</div>
                                                         <div class="card-text">
                                                             <form-check>
-                                                                <!-- <%if (user.DNV=="Pedir"){%>
+                                                                <!-- <%if (interferenciasypermisos.DNV=="Pedir"){%>
                                                                                                 <input checked type="radio"
                                                                                                 name="DNV"
                                                                                                 id="DNV"
@@ -236,7 +236,7 @@
                                                                                                 id="DNV"
                                                                                                 value="Pedir"> Pedir
                                                                                             <%}%> -->
-                                                                <%if (user.DNV=="EnGestion" ){%>
+                                                                <%if (interferenciasypermisos.DNV=="EnGestion" ){%>
                                                                     <input checked type="radio" name="DNV" id="DNV"
                                                                         value="EnGestion"> En gestion
                                                                     <%}else{%>
@@ -244,7 +244,7 @@
                                                                             value="EnGestion"> En gestion
                                                                         <%}%>
 
-                                                                            <%if (user.DNV=="ok" ){%>
+                                                                            <%if (interferenciasypermisos.DNV=="ok" ){%>
                                                                                 <input checked type="radio" name="DNV"
                                                                                     id="DNV" value="ok"> Ok
                                                                                     <div id="VencimientoDNV"
@@ -255,8 +255,8 @@
                                                                                         onblur="(this.type='text')"
                                                                                         name="VencimientoDNV"
                                                                                         id="VencimientoDNV"
-                                                                                        value="<%= user.VencimientoDNV%>"
-                                                                                        placeholder="<%= user.VencimientoDNV%>">
+                                                                                        value="<%= interferenciasypermisos.VencimientoDNV%>"
+                                                                                        placeholder="<%= interferenciasypermisos.VencimientoDNV%>">
                                                                                 </div>
                                                                                 <%}else{%>
                                                                                     <input type="radio" name="DNV"
@@ -271,11 +271,11 @@
                                                                                             onblur="(this.type='text')"
                                                                                             name="VencimientoDNV"
                                                                                             id="VencimientoDNV"
-                                                                                            value="<%= user.VencimientoDNV%>"
-                                                                                            placeholder="<%= user.VencimientoDNV%>">
+                                                                                            value="<%= interferenciasypermisos.VencimientoDNV%>"
+                                                                                            placeholder="<%= interferenciasypermisos.VencimientoDNV%>">
                                                                                     </div>
                                                                                     <%}%>
-                                                                                        <!-- <%if (user.DNV=="NC"){%>
+                                                                                        <!-- <%if (interferenciasypermisos.DNV=="NC"){%>
                                                                                                 <input checked type="radio"
                                                                                                 name="DNV"
                                                                                                 id="DNV"
@@ -293,17 +293,17 @@
                                                     </div>
                                                     <%}%>
 
-                                                        <%if (user.DPV=="NC" ){%>
+                                                        <%if (interferenciasypermisos.DPV=="NC" ){%>
 
                                                             <input hidden checked type="radio" name="DPV" id="DPV"
-                                                                value="<%=user.DPV%>">
+                                                                value="<%=interferenciasypermisos.DPV%>">
                                                             <%}else{%>
 
                                                                 <div class="card-body">
                                                                     <div class="card-title">DPV</div>
                                                                     <div class="card-text">
                                                                         <form-check>
-                                                                            <!-- <%if (user.DPV=="Pedir"){%>
+                                                                            <!-- <%if (interferenciasypermisos.DPV=="Pedir"){%>
                                                                                                 <input checked type="radio"
                                                                                                 name="DPV"
                                                                                                 id="DPV"
@@ -314,7 +314,7 @@
                                                                                                 id="DPV"
                                                                                                 value="Pedir"> Pedir
                                                                                             <%}%> -->
-                                                                            <%if (user.DPV=="EnGestion" ){%>
+                                                                            <%if (interferenciasypermisos.DPV=="EnGestion" ){%>
                                                                                 <input checked type="radio" name="DPV"
                                                                                     id="DPV" value="EnGestion"> En
                                                                                 gestion
@@ -324,7 +324,7 @@
                                                                                     gestion
                                                                                     <%}%>
 
-                                                                                        <%if (user.DPV=="ok" ){%>
+                                                                                        <%if (interferenciasypermisos.DPV=="ok" ){%>
                                                                                             <input checked type="radio"
                                                                                                 name="DPV" id="DPV"
                                                                                                 value="ok"> Ok
@@ -337,8 +337,8 @@
                                                                                                     onblur="(this.type='text')"
                                                                                                     name="VencimientoDPV"
                                                                                                     id="VencimientoDPV"
-                                                                                                    value="<%= user.VencimientoDPV%>"
-                                                                                                    placeholder="<%= user.VencimientoDPV%>">
+                                                                                                    value="<%= interferenciasypermisos.VencimientoDPV%>"
+                                                                                                    placeholder="<%= interferenciasypermisos.VencimientoDPV%>">
                                                                                             </div>
                                                                                             <%}else{%>
                                                                                                 <input type="radio"
@@ -355,11 +355,11 @@
                                                                                                         onblur="(this.type='text')"
                                                                                                         name="VencimientoDPV"
                                                                                                         id="VencimientoDPV"
-                                                                                                        value="<%= user.VencimientoDPV%>"
-                                                                                                        placeholder="<%= user.VencimientoDPV%>">
+                                                                                                        value="<%= interferenciasypermisos.VencimientoDPV%>"
+                                                                                                        placeholder="<%= interferenciasypermisos.VencimientoDPV%>">
                                                                                                 </div>
                                                                                                 <%}%>
-                                                                                                    <!-- <%if (user.DPV=="NC"){%>
+                                                                                                    <!-- <%if (interferenciasypermisos.DPV=="NC"){%>
                                                                                                 <input checked type="radio"
                                                                                                 name="DPV"
                                                                                                 id="DPV"
@@ -377,10 +377,10 @@
 
                                                                 <%}%>
 
-                                                                    <%if (user.Irrigacion=="NC" ){%>
+                                                                    <%if (interferenciasypermisos.Irrigacion=="NC" ){%>
                                                                         <input hidden checked type="radio"
                                                                             name="Irrigacion" id="Irrigacion"
-                                                                            value="<%=user.Irrigacion%>">
+                                                                            value="<%=interferenciasypermisos.Irrigacion%>">
                                                                         <% }else{%>
 
                                                                             <div class="card-body">
@@ -388,7 +388,7 @@
                                                                                 </div>
                                                                                 <div class="card-text">
                                                                                     <form-check>
-                                                                                        <!-- <%if (user.Irrigacion=="Pedir"){%>
+                                                                                        <!-- <%if (interferenciasypermisos.Irrigacion=="Pedir"){%>
                                                                                                 <input checked type="radio"
                                                                                                 name="Irrigacion"
                                                                                                 id="Irrigacion"
@@ -399,7 +399,7 @@
                                                                                                 id="Irrigacion"
                                                                                                 value="Pedir"> Pedir
                                                                                             <%}%> -->
-                                                                                        <%if (user.Irrigacion=="EnGestion"
+                                                                                        <%if (interferenciasypermisos.Irrigacion=="EnGestion"
                                                                                             ){%>
                                                                                             <input checked type="radio"
                                                                                                 name="Irrigacion"
@@ -415,7 +415,7 @@
                                                                                                 gestion
                                                                                                 <%}%>
 
-                                                                                                    <%if (user.Irrigacion=="ok"
+                                                                                                    <%if (interferenciasypermisos.Irrigacion=="ok"
                                                                                                         ){%>
                                                                                                         <input checked
                                                                                                             type="radio"
@@ -434,8 +434,8 @@
                                                                                                             onblur="(this.type='text')"
                                                                                                             name="VencimientoIrrigacion"
                                                                                                             id="VencimientoIrrigacion"
-                                                                                                            value="<%= user.VencimientoIrrigacion%>"
-                                                                                                            placeholder="<%= user.VencimientoIrrigacion%>">
+                                                                                                            value="<%= interferenciasypermisos.VencimientoIrrigacion%>"
+                                                                                                            placeholder="<%= interferenciasypermisos.VencimientoIrrigacion%>">
                                                                                                     </div>
                                                                                                         <%}else{%>
                                                                                                             <input
@@ -456,11 +456,11 @@
                                                                                                                     onblur="(this.type='text')"
                                                                                                                     name="VencimientoIrrigacion"
                                                                                                                     id="VencimientoIrrigacion"
-                                                                                                                    value="<%= user.VencimientoIrrigacion%>"
-                                                                                                                    placeholder="<%= user.VencimientoIrrigacion%>">
+                                                                                                                    value="<%= interferenciasypermisos.VencimientoIrrigacion%>"
+                                                                                                                    placeholder="<%= interferenciasypermisos.VencimientoIrrigacion%>">
                                                                                                             </div>
                                                                                                             <%}%>
-                                                                                                                <!-- <%if (user.Irrigacion=="NC"){%>
+                                                                                                                <!-- <%if (interferenciasypermisos.Irrigacion=="NC"){%>
                                                                                                 <input checked type="radio"
                                                                                                 name="Irrigacion"
                                                                                                 id="Irrigacion"
@@ -477,10 +477,10 @@
                                                                             </div>
                                                                             <%}%>
 
-                                                                                <%if (user.Privado=="NC" ){%>
+                                                                                <%if (interferenciasypermisos.Privado=="NC" ){%>
                                                                                     <input hidden checked type="radio"
                                                                                         name="PRIVADO" id="PRIVADO"
-                                                                                        value="<%=user.Privado%>">
+                                                                                        value="<%=interferenciasypermisos.Privado%>">
                                                                                     <% }else{%>
 
                                                                                         <div class="card-body">
@@ -489,7 +489,7 @@
                                                                                             </div>
                                                                                             <div class="card-text">
                                                                                                 <form-check>
-                                                                                                    <!-- <%if (user.Privado=="pedir"){%>
+                                                                                                    <!-- <%if (interferenciasypermisos.Privado=="pedir"){%>
                                                                                                 <input checked type="radio"
                                                                                                 name="PRIVADO"
                                                                                                 id="PRIVADO"
@@ -501,7 +501,7 @@
                                                                                                 value="pedir"> Pedir
                                                                                             <%}%>
                                                                                        -->
-                                                                                                    <%if (user.Privado=="EnGestion"
+                                                                                                    <%if (interferenciasypermisos.Privado=="EnGestion"
                                                                                                         ){%>
                                                                                                         <input checked
                                                                                                             type="radio"
@@ -520,7 +520,7 @@
                                                                                                             gestión
                                                                                                             <%}%>
 
-                                                                                                                <%if (user.Privado=="ok"
+                                                                                                                <%if (interferenciasypermisos.Privado=="ok"
                                                                                                                     ){%>
                                                                                                                     <input
                                                                                                                         checked
@@ -543,8 +543,8 @@
                                                                                                                         onblur="(this.type='text')"
                                                                                                                         name="VencimientoPrivado"
                                                                                                                         id="VencimientoPrivado"
-                                                                                                                        value="<%= user.VencimientoPrivado%>"
-                                                                                                                        placeholder="<%= user.VencimientoPrivado%>">
+                                                                                                                        value="<%= interferenciasypermisos.VencimientoPrivado%>"
+                                                                                                                        placeholder="<%= interferenciasypermisos.VencimientoPrivado%>">
                                                                                                                 </div>
                                                                                                                     <%}else{%>
                                                                                                                         <input
@@ -568,11 +568,11 @@
                                                                                                                                 onblur="(this.type='text')"
                                                                                                                                 name="VencimientoPrivado"
                                                                                                                                 id="VencimientoPrivado"
-                                                                                                                                value="<%= user.VencimientoPrivado%>"
-                                                                                                                                placeholder="<%= user.VencimientoPrivado%>">
+                                                                                                                                value="<%= interferenciasypermisos.VencimientoPrivado%>"
+                                                                                                                                placeholder="<%= interferenciasypermisos.VencimientoPrivado%>">
                                                                                                                         </div>
                                                                                                                         <%}%>
-                                                                                                                            <!-- <%if (user.Privado=="NC"){%>
+                                                                                                                            <!-- <%if (interferenciasypermisos.Privado=="NC"){%>
                                                                                                     <input checked type="radio"
                                                                                                     name="PRIVADO"
                                                                                                     id="PRIVADO"
@@ -589,13 +589,13 @@
                                                                                         </div>
                                                                                         <%}%>
 
-                                                                                            <%if (user.Otrospermisos=="NC"
+                                                                                            <%if (interferenciasypermisos.Otrospermisos=="NC"
                                                                                                 ){%>
                                                                                                 <input hidden checked
                                                                                                     type="radio"
                                                                                                     name="Otrospermisos"
                                                                                                     id="Otrospermisos"
-                                                                                                    value="<%=user.Otrospermisos%>">
+                                                                                                    value="<%=interferenciasypermisos.Otrospermisos%>">
                                                                                                 <%}else{%>
 
                                                                                                     <div
@@ -608,7 +608,7 @@
                                                                                                         <div
                                                                                                             class="card-text">
                                                                                                             <form-check>
-                                                                                                                <!-- <%if (user.Otrospermisos=="pedir"){%>
+                                                                                                                <!-- <%if (interferenciasypermisos.Otrospermisos=="pedir"){%>
                                                                                                 <input checked type="radio"
                                                                                                 name="Otrospermisos"
                                                                                                 id="Otrospermisos"
@@ -619,7 +619,7 @@
                                                                                                 id="Otrospermisos"
                                                                                                 value="pedir"> Pedir
                                                                                             <%}%> -->
-                                                                                                                <%if (user.Otrospermisos=="EnGestion"
+                                                                                                                <%if (interferenciasypermisos.Otrospermisos=="EnGestion"
                                                                                                                     ){%>
                                                                                                                     <input
                                                                                                                         checked
@@ -639,7 +639,7 @@
                                                                                                                         gestión
                                                                                                                         <%}%>
 
-                                                                                                                            <%if (user.Otrospermisos=="ok"
+                                                                                                                            <%if (interferenciasypermisos.Otrospermisos=="ok"
                                                                                                                                 ){%>
                                                                                                                                 <input
                                                                                                                                     checked
@@ -662,8 +662,8 @@
                                                                                                                                     onblur="(this.type='text')"
                                                                                                                                     name="VencimientoOtrosPermisos"
                                                                                                                                     id="VencimientoOtrosPermisos"
-                                                                                                                                    value="<%= user.VencimientoOtrosPermisos%>"
-                                                                                                                                    placeholder="<%= user.VencimientoOtrosPermisos%>">
+                                                                                                                                    value="<%= interferenciasypermisos.VencimientoOtrosPermisos%>"
+                                                                                                                                    placeholder="<%= interferenciasypermisos.VencimientoOtrosPermisos%>">
                                                                                                                             </div>
                                                                                                                                 <%}else{%>
                                                                                                                                     <input
@@ -687,11 +687,11 @@
                                                                                                                                             onblur="(this.type='text')"
                                                                                                                                             name="VencimientoOtrosPermisos"
                                                                                                                                             id="VencimientoOtrosPermisos"
-                                                                                                                                            value="<%= user.VencimientoOtrosPermisos%>"
-                                                                                                                                            placeholder="<%= user.VencimientoOtrosPermisos%>">
+                                                                                                                                            value="<%= interferenciasypermisos.VencimientoOtrosPermisos%>"
+                                                                                                                                            placeholder="<%= interferenciasypermisos.VencimientoOtrosPermisos%>">
                                                                                                                                     </div>
                                                                                                                                     <%}%>
-                                                                                                                                        <!-- <%if (user.Otrospermisos=="NC"){%>
+                                                                                                                                        <!-- <%if (interferenciasypermisos.Otrospermisos=="NC"){%>
                                                                                                 <input checked type="radio"
                                                                                                 name="Otrospermisos"
                                                                                                 id="Otrospermisos"

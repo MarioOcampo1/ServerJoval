@@ -1,92 +1,73 @@
- <!--Preliminar-->
- <th>
+<!--Preliminar-->
+<th>
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary"
-        data-toggle="modal" data-target="#ModalPreliminar">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalPreliminar">
         Preliminar
     </button>
 
     <!-- Modal -->
-    <div class="modal fade" id="ModalPreliminar" tabindex="-1"
-        role="dialog" aria-labelledby="ModalPreliminar aria-hidden="
-        true">
-        <div class="modal-dialog modal-dialog-centered"
-            role="document">
+    <div class="modal fade" id="ModalPreliminar" tabindex="-1" role="dialog" aria-labelledby="ModalPreliminar"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="ModalPreliminar">
                         Preliminar</h5>
-                    <button type="button" class="close"
-                        data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="/actualizarEtapas/<%= user.id%>"
-                        id="formPreliminar" method="post">
+                    <form action="/actualizarEtapas/<%= user.id%>" id="formPreliminar" method="post">
                         <div class="container">
                             <div class="card p-3 border-secondary">
                                 <div class="card-title">
-                                    <label class="mx-auto"
-                                        for="DocumentacionDelTerreno">Documentación
+                                    <label class="mx-auto" for="DocumentacionDelTerreno">Documentación
                                         del
                                         terreno</label>
                                 </div>
                                 <br>
                                 <div class="card-body">
 
-                                    <label
-                                        for="Mensura">Mensura</label>
-                                    <select class="form-control"
-                                        id="Mensura" name="Mensura"
-                                        value="<%= user.Mensura%>"
-                                        placeholder="<%= user.Mensura%>">
-                                        <option hidden
-                                            value="<%=user.Mensura%>"
-                                            selected>
-                                            <%=user.Mensura%>
+                                    <label for="Mensura">Mensura</label>
+                                    <select class="form-control" id="Mensura" name="Mensura"
+                                        value="<%= tareasporcarpeta.Mensura%>"
+                                        placeholder="<% tareasporcarpeta.Mensura%>">
+                                        <option hidden value="<%=tareasporcarpeta.Mensura%>" selected>
+                                            <%=tareasporcarpeta.Mensura%>
                                         </option>
-                                        <option
-                                            value="Sin presentar">
+                                        <option value="Sin presentar">
                                             Sin presentar
                                         </option>
                                         <option value="EnGestion">En
                                             gestión
                                         </option>
-                                        <option
-                                        value="Presentado">
-                                        Presentado
-                                    </option>
+                                        <option value="Presentado">
+                                            Presentado
+                                        </option>
                                         <option value="Observado">
                                             Observado</option>
                                         <option value="ok">ok
                                         </option>
                                     </select>
-                                    <label
-                                        for="TituloDePropiedad">Titulo
+                                    <label for="TituloDePropiedad">Titulo
                                         de
                                         propiedad</label>
-                                    <select class="form-control"
-                                        id="TituloDePropiedad"
-                                        name="TituloDePropiedad"
-                                        value="<%= user.TituloDePropiedad%>"
-                                        placeholder="<%= user.TituloDePropiedad%>">
-                                        <option hidden
-                                            value="<%=user.TituloDePropiedad%>"
-                                            selected>
-                                            <%=user.TituloDePropiedad%>
+                                    <select class="form-control" id="TituloDePropiedad" name="TituloDePropiedad"
+                                        value="<%= tareasporcarpeta.TituloDePropiedad%>"
+                                        placeholder="<%= tareasporcarpeta.TituloDePropiedad%>">
+                                        <option hidden value="<%=tareasporcarpeta.TituloDePropiedad%>" selected>
+                                            <%=tareasporcarpeta.TituloDePropiedad%>
                                         </option>
-                                        <option
-                                            value="Sin presentar">
+                                        <option value="Sin presentar">
                                             Sin presentar
                                         </option>
                                         <option value="EnGestion">En
                                             gestion
                                         </option>
-                                        <option
-                                        value="Presentado">
-                                        Presentado
-                                    </option>
+                                        <option value="Presentado">
+                                            Presentado
+                                        </option>
                                         <option value="ok">ok
                                         </option>
                                         <option value="Observado">Observado
@@ -99,36 +80,27 @@
                             <br>
                             <div class="card p-3 border-secondary">
                                 <div class="card-title">
-                                    <label
-                                        for="DocumentacionSociedad"
-                                        class="mx-auto">
+                                    <label for="DocumentacionSociedad" class="mx-auto">
                                         Documentación de la Sociedad</label>
                                 </div>
                                 <div class="card-body">
                                     <div class="card-title">
-                                        <label
-                                            for="ActaConstitutiva">
+                                        <label for="ActaConstitutiva">
                                             Acta
                                             constitutiva</label>
                                     </div>
                                     <div class="card-text">
-                                        <select class="form-control"
-                                            id="ActaConstitutiva"
-                                            name="ActaConstitutiva"
-                                            value="<%= user.ActaConstitutiva%>"
-                                            placeholder="<%= user.ActaConstitutiva%>">
-                                            <option hidden
-                                                value="<%=user.ActaConstitutiva%>"
-                                                selected>
-                                                <%=user.ActaConstitutiva%>
+                                        <select class="form-control" id="ActaConstitutiva" name="ActaConstitutiva"
+                                            value="<%= tareasporcarpeta.ActaConstitutiva%>"
+                                            placeholder="<%= tareasporcarpeta.ActaConstitutiva%>">
+                                            <option hidden value="<%=tareasporcarpeta.ActaConstitutiva%>" selected>
+                                                <%=tareasporcarpeta.ActaConstitutiva%>
                                             </option>
-                                            <option
-                                                value="Sin presentar">
+                                            <option value="Sin presentar">
                                                 Sin
                                                 presentar
                                             </option>
-                                            <option
-                                                value="EnGestion">
+                                            <option value="EnGestion">
                                                 En gestion
                                             </option>
                                             <option value="ok">
@@ -138,27 +110,20 @@
                                             </option>
 
                                         </select>
-                                        <label
-                                            for="ActaCargoVigente">
+                                        <label for="ActaCargoVigente">
                                             Acta en cargo
                                             vigente</label>
-                                        <select class="form-control"
-                                            id="ActaCargoVigente"
-                                            name="ActaCargoVigente"
-                                            value="<%= user.ActaCargoVigente%>"
-                                            placeholder="<%= user.ActaCargoVigente%>">
-                                            <option hidden
-                                                value="<%=user.ActaCargoVigente%>"
-                                                selected>
-                                                <%=user.ActaCargoVigente%>
+                                        <select class="form-control" id="ActaCargoVigente" name="ActaCargoVigente"
+                                            value="<%= tareasporcarpeta.ActaCargoVigente%>"
+                                            placeholder="<%= tareasporcarpeta.ActaCargoVigente%>">
+                                            <option hidden value="<%=tareasporcarpeta.ActaCargoVigente%>" selected>
+                                                <%=tareasporcarpeta.ActaCargoVigente%>
                                             </option>
-                                            <option
-                                                value="Sin presentar">
+                                            <option value="Sin presentar">
                                                 Sin
                                                 presentar
                                             </option>
-                                            <option
-                                                value="EnGestion">
+                                            <option value="EnGestion">
                                                 En gestion
                                             </option>
                                             <option value="ok">
@@ -170,13 +135,10 @@
                                         </select>
                                         <label for="DniComitente">
                                             DNI del
-                                            Comitente:  <%= user.DniComitente%></label>
+                                            Comitente: <%= tareasporcarpeta.DniComitente%></label>
                                         <br>
-                                        <input type="text"
-                                            name="DniComitente"
-                                            id="DniComitente"
-                                            maxlength="10"
-                                            placeholder="<%= user.DniComitente%>">
+                                        <input type="text" name="DniComitente" id="DniComitente" maxlength="10"
+                                            placeholder="<%= tareasporcarpeta.DniComitente%>">
 
                                         </select>
                                     </div>
@@ -191,15 +153,11 @@
 
                                 <label for="Cotizacion">
                                     Cotización</label>
-                                <select class="form-control"
-                                    id="Cotizacion"
-                                    name="Cotizacion"
-                                    value="<%= user.Cotizacion%>"
-                                    placeholder="<%= user.Cotizacion%>">
-                                    <option
-                                        value="<%=user.Cotizacion%>"
-                                        selected>
-                                        <%=user.Cotizacion%>
+                                <select class="form-control" id="Cotizacion" name="Cotizacion"
+                                    value="<%= tareasporcarpeta.Cotizacion%>"
+                                    placeholder="<%= tareasporcarpeta.Cotizacion%>">
+                                    <option value="<%=tareasporcarpeta.Cotizacion%>" selected>
+                                        <%=tareasporcarpeta.Cotizacion%>
                                     </option>
                                     <option value="Sin presentar">
                                         Sin
@@ -213,21 +171,16 @@
 
                                 <label for="Contrato"> Contrato
                                     preliminar</label>
-                                <select class="form-control"
-                                    id="ContratoPreliminar" name="ContratoPreliminar"
-                                    value="<%= user.Contrato%>"
-                                    placeholder="<%= user.Contrato%>">
-                                    <option
-                                        value="<%=user.Contrato%>"
-                                        selected>
-                                        <%=user.Contrato%>
+                                <select class="form-control" id="ContratoPreliminar" name="ContratoPreliminar"
+                                    value="<%= tareasporcarpeta.Contrato%>"
+                                    placeholder="<%= tareasporcarpeta.Contrato%>">
+                                    <option value="<%=tareasporcarpeta.Contrato%>" selected>
+                                        <%=tareasporcarpeta.Contrato%>
                                     </option>
-                                    <option
-                                        value="Sin presentar(Preliminar)">
+                                    <option value="Sin presentar(Preliminar)">
                                         Sin
                                         presentar/Hacer</option>
-                                    <option
-                                        value="EnGestion(Preliminar)">
+                                    <option value="EnGestion(Preliminar)">
                                         En gestion
                                     </option>
                                     <option value="Ok(Preliminar)">
@@ -238,18 +191,12 @@
 
                         </div>
                         <div class="modal-footer">
-                            <button type="button"
-                                class="btn btn-secondary"
-                                data-dismiss="modal"
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal"
                                 onclick="CerrarModal()">Cerrar</button>
-                            <button type="submit"
-                                form="actPrelCarpEcogas"
-                                class="btn btn-primary fixed-bottom">Guardar
+                            <button type="submit" form="actPrelCarpEcogas" class="btn btn-primary fixed-bottom">Guardar
                                 Cambios</button>
                         </div>
                 </div>
             </div>
         </div>
 </th>
-
-
