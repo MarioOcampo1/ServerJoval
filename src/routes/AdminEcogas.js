@@ -251,9 +251,7 @@ var resultados;
                 var CodigoVigentes = 0;
                 var CodigoEnUsoVigentes = "";
                 var CodigoFinalizadas = 0;
-                results.forEach(element => {
-                    resultados.push(element);
-                });
+                
                 JSON.parse((JSON.stringify(results)), function (k, v) {
                     if (contador == 1) {
                         CodigoVigentes = v;
@@ -269,21 +267,15 @@ var resultados;
                 sql = 'Select * from adminecogas_interferencias_y_permisos Where Nombre=?';
                 connection.query(sql, [Nombre], (error, results) => {
                     if (error) console.log(error);
-                    results.forEach(element => {
-                        resultados.push(element);
-                    });
+                    
                     sql = 'Select * from adminecogas_tareas_por_carpeta Where Nombre=?';
                     connection.query(sql, [Nombre], (error, results) => {
                         if (error) console.log(error);
-                        results.forEach(element => {
-                            resultados.push(element);
-                        });
+                        
                 sql = 'Select * from clientes where id=?';
 
                 connection.query(sql, [id], (error, results) => {
-                    results.forEach(element => {
-                        resultados.push(element);
-                    });
+                    
                     if (error) console.log(error);
                     if (results.length > 0) {
                         res.render('paginas/AdministracionEcogas/editarTareas', { user: results[0],resultados:resultados, CodigoVigentes: CodigoVigentes, CodigoEnUsoVigentes: CodigoEnUsoVigentes, CodigoFinalizadas: CodigoFinalizadas });
