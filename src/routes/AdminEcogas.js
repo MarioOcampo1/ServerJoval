@@ -229,7 +229,7 @@ router.get('/editarTareas/:id', (req, res) => {
         const id = req.params.id;
         var Nombre = '';
         var sql = 'Select Nombre from clientes where id=?';
-
+var resultados;
         connection.query(sql, [id], (error, results) => {
 
             if (error) console.log(error);
@@ -242,6 +242,9 @@ router.get('/editarTareas/:id', (req, res) => {
                     }
                     return Nombre;
                 });
+                results.forEach(element => {
+                    resultados.push(element);
+                });
             }
             sql = 'Select * from codificacioncarpetas Where Nombre=?';
             connection.query(sql, [Nombre], (error, results) => {
@@ -250,7 +253,9 @@ router.get('/editarTareas/:id', (req, res) => {
                 var CodigoVigentes = 0;
                 var CodigoEnUsoVigentes = "";
                 var CodigoFinalizadas = 0;
-
+                results.forEach(element => {
+                    resultados.push(element);
+                });
                 JSON.parse((JSON.stringify(results)), function (k, v) {
                     if (contador == 1) {
                         CodigoVigentes = v;
@@ -266,16 +271,24 @@ router.get('/editarTareas/:id', (req, res) => {
                 sql = 'Select * from adminecogas_interferencias_y_permisos Where Nombre=?';
                 connection.query(sql, [Nombre], (error, results) => {
                     if (error) console.log(error);
-                
+                    results.forEach(element => {
+                        resultados.push(element);
+                    });
                     sql = 'Select * from adminecogas_tareas_por_carpeta Where Nombre=?';
                     connection.query(sql, [Nombre], (error, results) => {
                         if (error) console.log(error);
+                        results.forEach(element => {
+                            resultados.push(element);
+                        });
                 sql = 'Select * from clientes where id=?';
 
                 connection.query(sql, [id], (error, results) => {
+                    results.forEach(element => {
+                        resultados.push(element);
+                    });
                     if (error) console.log(error);
                     if (results.length > 0) {
-                        res.render('paginas/AdministracionEcogas/editarTareas', { user: results[0], CodigoVigentes: CodigoVigentes, CodigoEnUsoVigentes: CodigoEnUsoVigentes, CodigoFinalizadas: CodigoFinalizadas });
+                        res.render('paginas/AdministracionEcogas/editarTareas', { user: results[0],resultados:resultados, CodigoVigentes: CodigoVigentes, CodigoEnUsoVigentes: CodigoEnUsoVigentes, CodigoFinalizadas: CodigoFinalizadas });
                     }
                     else {
                         res.redirect('/adminecogas');
@@ -1185,22 +1198,23 @@ router.post('/act2pCarpEcogas/:id', (req, res) => {
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     //Automatización de estados.
     //Esta seccion trabajara en base a las opciones elegidas por el usuario, permitiendo que se escriba texto en historial de la carpeta seleccionada, o cambiar otros estados de la misma.
-    if(MailAutorizacion=="Recibido"){
-        var TextoenHistorial= "Se ha recibido el mail de autorización.";
-        var TextoenHistorial2 ="Presentar Segunda parte."
-        Comercial="Ok(S)";
-        Tecnica="Ok(S)";
-        sql = 'Insert into historialdecambios set ? where Nombre_sub =?';
-        connection.query(sql,[{Nombre_sub:Nombre, Tarea_Realizada_sub: TextoenHistorial , Proxima_Tarea_sub: TextoenHistorial2 , Fecha_Tarea_sub: FechaDiaActual , Fecha_Proxima_Tarea_sub:(FechaDiaActual+5),EtapaTarea_sub:"2da parte"
-        },Nombre], (error, results) => {
-            if (error) {
-                console.log(error);
-            }
-        })
-    }
+    // if(MailAutorizacion=="Recibido"){
+    //     var TextoenHistorial= "Se ha recibido el mail de autorización.";
+    //     var TextoenHistorial2 ="Presentar Segunda parte."
+    //     Comercial="Ok(S)";
+    //     Tecnica="Ok(S)";
+    //     sql = 'Insert into historialdecambios set ? where Nombre_sub =?';
+    //     connection.query(sql,[{Nombre_sub:Nombre, Tarea_Realizada_sub: TextoenHistorial , Proxima_Tarea_sub: TextoenHistorial2 , Fecha_Tarea_sub: FechaDiaActual , Fecha_Proxima_Tarea_sub:(FechaDiaActual+5),EtapaTarea_sub:"2da parte"
+    //     },Nombre], (error, results) => {
+    //         if (error) {
+    //             console.log(error);
+    //         }
+    //     })
+    // }
 
     sql = 'Update clientes_tareasgenerales Set ? where Nombre=?';
-    connection.query(sql, [{ PlanDeTrabajo: PlanDeTrabajo, DocumentacionObra: DocumentacionObra, Seguridad: Seguridad, Interferencias: Interferencias, Permisos: Permisos, Matriculas: Matriculas, Ambiente: Ambiente, Avisos: Avisos, NotaCumplimentoNormativas: NotaCumplimentoNormativa, DDJJNAG153: DDJJNAG153, Avisos: Avisos, PermisosEspeciales: PermisosEspeciales }, Nombre],
+    connection.query(sql, [{ PlanDeTrabajo: PlanDeTrabajo, DocumentacionObra: DocumentacionObra, Seguridad: Seguridad, Interferencias: Interferencias, Permisos: Permisos, Matriculas: Matriculas, Ambiente: Ambiente, Avisos: Avisos, NotaCumplimentoNormativas: NotaCumplimentoNormativa, DDJJNAG153: DDJJNAG153, Avisos: Avisos, PermisosEspeciales: PermisosEspeciales
+     }, Nombre],
         (error, results) => {
 
             if (error) {
@@ -1217,8 +1231,6 @@ router.post('/act2pCarpEcogas/:id', (req, res) => {
          //Estado de las interferencias
          intTelefonica: intTelefonica, intClaro: intClaro, intAgua: intAgua,
          intCloaca: intCloacas, intElectricidad: intElectricidad, intTelecom: intTelecom, intArnet: intArnet, intArsat: intArsat,
-         
-         AvisoInicioObraIERIC: AvisoInicioObraIERIC, AvisoInicioObraART: AvisoInicioObraART,
 
         VencimientoDNV: VencimientoDNV, VencimientoDPV: VencimientoDPV, VencimientoFerrocarril: VencimientoFerrocarril, VencimientoHidraulica: VencimientoHidraulica, VencimientoIrrigacion: VencimientoIrrigacion, VencimientoMunicipal: VencimientoMunicipal, VencimientoOtrosPermisos: VencimientoOtrosPermisos, VencimientoPrivado: VencimientoPrivado, VencimientoAvisoObraArt: VencimientoAvisoObraArt, VencimientoAvisoObraIeric: VencimientoAvisoObraIeric
         }, Nombre],
@@ -1234,7 +1246,7 @@ router.post('/act2pCarpEcogas/:id', (req, res) => {
         MailAutorizacion: MailAutorizacion, PlanDeTrabajo: PlanDeTrabajo, SolicitudInicioObras: SolicitudInicioObras, CertificadoRT: CertificadoRT, Programadeseguridad: Programadeseguridad,
         CronogramaSyH: CronogramaSyH, SeguroRC: SeguroRC, Monotributos: Monotributos, SeguroAccidentesPersonales: SeguroAccidentesPersonales,
         MatriculaFusionista: MatriculaFusionista, MatriculaSoldador: MatriculaSoldador, EstudioImpactoAmbiental: EstudioImpactoAmbiental, CronogramaAmbiente: CronogramaAmbiente, NotaCumplimentoNormativa: NotaCumplimentoNormativa, DDJJNAG153: DDJJNAG153,
-        ActaInicioEfectivo: ActaInicioEfectivo,
+        ActaInicioEfectivo: ActaInicioEfectivo,  AvisoInicioObraIERIC: AvisoInicioObraIERIC, AvisoInicioObraART: AvisoInicioObraART,
     }, id],
         (error, results) => {
 
