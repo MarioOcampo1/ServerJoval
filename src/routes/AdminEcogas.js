@@ -242,9 +242,7 @@ var resultados;
                     }
                     return Nombre;
                 });
-                results.forEach(element => {
-                    resultados.push(element);
-                });
+               
             }
             sql = 'Select * from codificacioncarpetas Where Nombre=?';
             connection.query(sql, [Nombre], (error, results) => {
