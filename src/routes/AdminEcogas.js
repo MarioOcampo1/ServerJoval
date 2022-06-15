@@ -278,7 +278,7 @@ var resultados;
                     
                     if (error) console.log(error);
                     if (results.length > 0) {
-                     
+                     //Se procede a enviar al front, los resultados de las consultas sql, prestar atencion que para que ejs pueda resolver el contenido de las sentencias hay que tratar las mismas como un arreglo [0], sino no funciona.
                         res.render('paginas/AdministracionEcogas/editarTareas', { user: results[0],interferenciasypermisos:interferenciasypermisos[0],tareasporcarpeta:tareasporcarpeta[0], CodigoVigentes: CodigoVigentes, CodigoEnUsoVigentes: CodigoEnUsoVigentes, CodigoFinalizadas: CodigoFinalizadas });
                     }
                     else {
@@ -550,20 +550,20 @@ router.post('/update/:id', (req, res) => {
         if (error) console.log(error);
 
     })
-    sql = 'Update adminecogas_interferencias_y_permisos set? whre Nombre=?';
+    sql = 'Update adminecogas_interferencias_y_permisos set? where Nombre=?';
     connection.query(sql,[{
         Nombre: NombreCarpeta,NCarpeta: NCarpeta,
         DNV: DNV, DPV: DPV, Irrigacion: Irrigacion,
         Hidraulica: HIDRAULICA, Ferrocarriles: FERROCARRIL,PerMunicipal: PerMunicipal, Privado: Privado
 
-    },Nombre],(error,results)=>{
+    },NombreOriginal],(error,results)=>{
         if (error) console.log(error);
     })
-    sql = 'Update adminecogas_tareas_por_carpeta set? whre Nombre=?';
+    sql = 'Update adminecogas_tareas_por_carpeta set? where Nombre=?';
     connection.query(sql,[{
         Nombre: NombreCarpeta,NCarpeta: NCarpeta,
       
-    },Nombre],(error,results)=>{
+    },NombreOriginal],(error,results)=>{
         if (error) console.log(error);
     })
     sql = 'Update clientes Set ? where id =?';
