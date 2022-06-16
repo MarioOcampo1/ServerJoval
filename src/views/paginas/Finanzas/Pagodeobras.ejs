@@ -69,7 +69,7 @@
       <h6>Cuota 12</h6>
     </td>
 <td>
-  <h6>PermisoIrrigacion</h6>
+  <h6>Irrigación</h6>
 </td>
 <td>
   <h6>DNV </h6>
@@ -97,129 +97,142 @@
 <tbody class="text-center">
   <% results.forEach((datosTabla) => { %>
     <tr>
-    <td id="Nombre" onClick="abrirModal();">
+    <td id="Nombre" >
+      <button onclick="abrirModal()">
       <%= datosTabla.Nombre%>
+      </button>
     </td>
-    <td id="NCarpeta" onClick="abrirModal();">
+    <td id="NCarpeta" >
+      <button onclick="abrirModal()">
       <%= datosTabla.NCarpeta%>
+      </button>
       </td>
-      <td id="AnticipoFinanciero" onClick="abrirModal();">
+      <td id="AnticipoFinanciero" >
+        <button onclick="abrirModal()">
         <%= datosTabla.AnticipoFinanciero%>
+        </button>
       </td>
-      <td id="Cuota1" onClick="abrirModal();">
+      <td id="Cuota1" >
+        <button onclick="abrirModal()">
         <%= datosTabla.Cuota1%>
+        </button>
       </td>
-      <td id="Cuota2" onClick="abrirModal();">
+      <td id="Cuota2" >
+        <button onclick="abrirModal()">
         <%= datosTabla.Cuota2%>
+        </button>
       </td>
-      <td id="Cuota3" onClick="abrirModal();">
+      <td id="Cuota3" >
+        <button onclick="abrirModal()">
         <%= datosTabla.Cuota3%>
+        </button>
       </td>
-      <td id="Cuota4" onClick="abrirModal();">
+      <td id="Cuota4" >
+        <button onclick="abrirModal()">
         <%= datosTabla.Cuota4%>
+        </button>
       </td>
-      <td id="Cuota5" onClick="abrirModal();">
+      <td id="Cuota5" >
+        <button onclick="abrirModal()">
         <%= datosTabla.Cuota5%>
+        </button>
       </td>
-      <td id="Cuota6" onClick="abrirModal();">
+      <td id="Cuota6" >
+        <button onclick="abrirModal()">
         <%= datosTabla.Cuota6%>
+        </button>
       </td>
-      <td id="Cuota7" onClick="abrirModal();">
+      <td id="Cuota7" >
+        <button onclick="abrirModal()">
         <%= datosTabla.Cuota7%>
+        </button>
       </td>
-      <td id="Cuota8" onClick="abrirModal();">
+      <td id="Cuota8" >
+        <button onclick="abrirModal()">
         <%= datosTabla.Cuota8%>
+        </button>
       </td>
-      <td id="Cuota9" onClick="abrirModal();">
+      <td id="Cuota9" >
+        <button onclick="abrirModal()">
         <%= datosTabla.Cuota9%>
+        </button>
       </td>
-      <td id="Cuota10" onClick="abrirModal();">
+      <td id="Cuota10" >
+        <button onclick="abrirModal()">
         <%= datosTabla.Cuota10%>
+        </button>
       </td>
-      <td id="Cuota11" onClick="abrirModal();">
+      <td id="Cuota11" >
+        <button onclick="abrirModal()">
         <%= datosTabla.Cuota11%>
+        </button>
       </td>
-      <td id="Cuota12" onClick="abrirModal();">
+      <td id="Cuota12" >
+        <button onclick="abrirModal()">
         <%= datosTabla.Cuota12%>
+        </button>
       </td>
-      <td id="PermisoIr" onClick="abrirModal();">
+      <td id="PermisoIr" >
+        <button onclick="abrirModal()">
         <%= datosTabla.PermisoIrrigacion%>
+        </button>
       </td>
-      <td id="PermisoDNV" onClick="abrirModal();">
+      <td id="PermisoDNV" >
+        <button onclick="abrirModal()">
         <%= datosTabla.PermisoDNV%>
+        </button>
       </td>
-      <td id="PermisoDPV" onClick="abrirModal();">
+      <td id="PermisoDPV" >
+        <button onclick="abrirModal()">
         <%= datosTabla.PermisoDPV%>
+        </button>
       </td>
-      <td id="PermisoHidraulica" onClick="abrirModal();">
+      <td id="PermisoHidraulica" >
+        <button onclick="abrirModal()">
         <%= datosTabla.PermisoHidraulica%>
+        </button>
       </td>
-      <td id="PermisoFFCC" onClick="abrirModal();">
+      <td id="PermisoFFCC" >
+        <button onclick="abrirModal()">
         <%= datosTabla.PermisoFFCC%>
+        </button>
       </td>
-      <td id="PermisoMunicipal" onClick="abrirModal();">
+      <td id="PermisoMunicipal" >
+        <button onclick="abrirModal()">
         <%= datosTabla.PermisoMunicipal%>
+        </button>
       </td>
-      <td id="DescripcionPermisos" onClick="abrirModal();">
+      <td id="DescripcionPermisos" >
+        <button onclick="abrirModal()">
         <%= datosTabla.DescripcionPermisos%>
+        </button>
       </td>
-      <td id="ServicioDomiciliario" onClick="abrirModal();">
+      <td id="ServicioDomiciliario" >
+        <button onclick="abrirModal()">
         <%= datosTabla.ServicioDomiciliario%>
+        </button>
       </td>
 
     <%});%>
 </tbody>
   </table>
-  <!-- <script>  
-    $("#TablaPagoObras").css("width","100%")
 
-  $(document).ready(function(){
-   
-      var url = '/PagoDeObras';
-      
-    var tabla= $('#TablaPagoObras').DataTable({
-        "orderCellsTop": true,
-        "fixedHeader": true,
-      "paging": false,
-      "ordering": true,
-      "scrollX": true,
-      "destroy":true,    
-      "order":[[6,'desc']],
-        "language": { url: "//cdn.datatables.net/plug-ins/1.11.3/i18n/es_es.json" },
-        "ajax": {
-          "url": url,
-          "dataSrc": "",
-        }, 
-               
-        "columns": [
-          {"data": "Nombre",
-        //    render: function(data,type,row){
-
-        //    return row.Nombre ;
-        // }
-        },
-        {
-          "data": "Ncarpeta"
-        }
-    ]
-    })
-});
-</script> -->
-<div class="modal" tabindex="-1" role="dialog" id="ModalPrincipal">
+<!-- Modal -->
+<div class="modal fade" id="ModalPrincipal" tabindex="-1" role="dialog" aria-labelledby="ModalPrincipalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <h5 class="modal-title" id="ModalPrincipalLabel">Modal title</h5>
+        <button type="button" class="close"onclick="$('#ModalPrincipal').modal('hide');" aria-label="Cerrar">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <p>Modal body text goes here.</p>
+        ...
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Save changes</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary"onclick="$('#ModalPrincipal').modal('hide');">Cerrar</button>
+        <button type="button" class="btn btn-danger">Save changes</button>
       </div>
     </div>
   </div>
@@ -228,7 +241,10 @@
 </body>
     <script>
       function abrirModal(){
-$("#ModalPrincipal").modal(show);
+        return{
+          
+        }
+$("#ModalPrincipal").modal('show');
       }
     </script>
 </html>
