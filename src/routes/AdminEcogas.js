@@ -516,14 +516,14 @@ router.post('/update/:id', (req, res) => {
     })
     //Se procede a buscar en la codificacion de las carpetas, si el codigo nuevo es de una carpeta Eliminada, dichas carpetas tienen en "CodigoEnUsoVigentes" una letra "E"
     //El objetivo es eliminar por completo la carpeta. 
-    sql= "Delete from codificacioncarpetas where CodigoEnUsoVigentes='E' and CodigoVigentes=?"
+    sql= "Delete from codificacioncarpetas where CodigoEnUsoVigentes='E' &&  CodigoVigentes=?"
     connection.query(sql,[CodigoNuevo],(error)=>{
         if(error) console.log(error);
     })
     //En caso de que el codigo no provenga de la carpeta eliminada, sino de una finalizada, se procede
     //a dejar la carpeta finalizada sin "CodigoVigentes". 
     //Esto es con motivo de que deje de figurar como que el codigo esta disponible.
-    sql = "Update codificacioncarpetas SET? where CodigoEnUsoVigentes='F' and CodigoVigentes=?";
+    sql = "Update codificacioncarpetas SET? where CodigoEnUsoVigentes='F' && CodigoVigentes=?";
     connection.query(sql,[{
         CodigoVigentes:null
     },CodigoNuevo],(error)=>{
@@ -706,6 +706,14 @@ router.post('/guardarNuevoCliente', (req, res) => {
             var Permisos = "Sin presentar";
         }
     }
+    sql = 'Insert into clientes set ?';
+    connection.query(sql, {
+        Nombre: Nombre, NCarpeta: NCarpeta, Comitente: Comitente, Ubicacion: Departamento,TipoDeRed: TipoDeRed
+    }, (error, results) => {
+        if (error) console.log(error);
+
+    })
+
     var sql = 'Insert into finanzas_pago_de_obras set ?';
     connection.query(sql, {
         Nombre: Nombre, NCarpeta: NCarpeta 
@@ -731,9 +739,9 @@ router.post('/guardarNuevoCliente', (req, res) => {
         if (error) console.log(error);
     })
     sql = 'Insert into codificacioncarpetas Set?';
-    connection.query(sql, {
-        CodigoVigentes: Codigo, CodigoEnUsoVigentes: "S", Nombre: Nombre
-    }, (error, results) => {
+    connection.query(sql, [{
+        Nombre:Nombre, CodigoVigentes: Codigo, CodigoEnUsoVigentes: "S",
+    },], (error, results) => {
         if (error) console.log(error);
 
     })
@@ -744,7 +752,7 @@ router.post('/guardarNuevoCliente', (req, res) => {
     //En caso de que el codigo no provenga de la carpeta eliminada, sino de una finalizada, se procede
     //a dejar la carpeta finalizada sin "CodigoVigentes". 
     //Esto es con motivo de que deje de figurar como que el codigo esta disponible.
-    sql = 'Update codificacioncarpetas set? where CodigoEnUsoVigentes:"F" and CodigoVigentes=?';
+    sql = 'Update codificacioncarpetas set? where CodigoEnUsoVigentes="F" and CodigoVigentes=?';
     connection.query(sql,[{
         CodigoVigentes:null
     },Codigo],(error)=>{
@@ -759,16 +767,14 @@ router.post('/guardarNuevoCliente', (req, res) => {
         if (results.length > 0) {
             res.redirect('/adminecogas');
         }
-        else {
-            res.redirect('/adminecogas');
-
-        }
+     
     })
     sql = 'Insert into adminecogas_interferencias_y_permisos Set?';
-    connection.query(sql, {
-        Nombre: Nombre, NCarpeta: NCarpeta, DNV: DNV, DPV: DPV, Irrigacion: IRRIGACION,
+    connection.query(sql, [{
+        Nombre:Nombre,
+        DNV: DNV, DPV: DPV, Irrigacion: IRRIGACION,
         Hidraulica: HIDRAULICA, PerMunicipal: PerMunicipal, Ferrocarriles: FERROCARRIL, Privado: Privado, OtrosPermisos: OTROSPERMISOS
-    }, (error, results) => {
+    } ], (error, results) => {
         if (error) console.log(error);
 
         if (results.length > 0) {
@@ -780,22 +786,7 @@ router.post('/guardarNuevoCliente', (req, res) => {
         }
     })
 
-    sql = 'Insert into clientes set ?';
-    connection.query(sql, {
-        Nombre: Nombre, NCarpeta: NCarpeta, Comitente: Comitente, Ubicacion: Departamento, DNV: DNV, DPV: DPV, Irrigacion: IRRIGACION,
-        Hidraulica: HIDRAULICA, PerMunicipal: PerMunicipal, Ferrocarriles: FERROCARRIL, Privado: Privado, OtrosPermisos: OTROSPERMISOS, TipoDeRed: TipoDeRed
-    }, (error, results) => {
-        if (error) console.log(error);
-
-        if (results.length > 0) {
-            res.redirect('/adminecogas');
-        }
-        else {
-            res.redirect('/adminecogas');
-
-        }
-    })
-
+   
 })
 router.post('/guardarNuevoContacto', (req, res) => {
     const Nombre = req.body.Nombre;
