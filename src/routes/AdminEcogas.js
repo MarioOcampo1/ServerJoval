@@ -627,14 +627,7 @@ CodigoEnUsoVigentes:"E"
             }
 
         })
-        sql = 'Delete FROM clientes WHERE id =?';
-        res.locals.moment = moment;
-        connection.query(sql, [id], (error, results) => {
-            if (error) console.log(error);
-            if (results.length > 0) {
-    
-            }
-        })
+        
         sql = 'Delete FROM adminecogas_interferencias_y_permisos WHERE Nombre =?';
         connection.query(sql, [id], (error, results) => {
             if (error) console.log(error);
@@ -651,14 +644,23 @@ CodigoEnUsoVigentes:"E"
         })
     sql = 'Delete FROM clientes_tareasgenerales WHERE Nombre =?';
     connection.query(sql, [Nombre], (error, results) => {
-        if (error) console.log(error);
-        if (results.length > 0) {
-            res.redirect('/adminecogas');
-        }
-        else { res.redirect('/adminecogas'); }
+        if (error) console.log(error);     
     })
-  
-    
+    sql = 'Update historialdecambios set? WHERE Nombre_sub =?';
+    connection.query(sql, [{
+        Si_NO_TareaRealizada: "S"
+    },Nombre], (error, results) => {
+        if (error) console.log(error);     
+    })
+    sql = 'Update clientes set? WHERE id =?';
+        res.locals.moment = moment;
+        connection.query(sql, [{
+            Estado:"ELIMINADO",
+        },id], (error, results) => {
+            if (error) console.log(error);
+                res.redirect('/adminecogas');
+        })
+
 })
 router.post('/editarContacto/delete/Contacto/:id', (req, res) => {
     const id = req.params.id;
