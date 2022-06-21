@@ -97,118 +97,118 @@
 <tbody class="text-center">
   <% results.forEach((datosTabla) => { %>
     <tr>
-    <td id="Nombre" >
-      <button onclick="abrirModal()">
+    <td  >
+      <button id="Nombre" onclick="abrirModal(this.id)">
       <%= datosTabla.Nombre%>
       </button>
     </td>
-    <td id="NCarpeta" >
-      <button onclick="abrirModal()">
+    <td  >
+      <button id="NCarpeta" onclick="abrirModal(this.id)">
       <%= datosTabla.NCarpeta%>
       </button>
       </td>
-      <td id="AnticipoFinanciero" >
-        <button onclick="abrirModal()">
+      <td  >
+        <button id="AnticipoFinanciero" onclick="abrirModal(this.id)">
         <%= datosTabla.AnticipoFinanciero%>
         </button>
       </td>
-      <td id="Cuota1" >
-        <button onclick="abrirModal()">
+      <td  >
+        <button id="Cuota1" onclick="abrirModal(this.id)">
         <%= datosTabla.Cuota1%>
         </button>
       </td>
-      <td id="Cuota2" >
-        <button onclick="abrirModal()">
+      <td  >
+        <button id="Cuota2" onclick="abrirModal(this.id)">
         <%= datosTabla.Cuota2%>
         </button>
       </td>
-      <td id="Cuota3" >
-        <button onclick="abrirModal()">
+      <td  >
+        <button id="Cuota3" onclick="abrirModal(this.id)">
         <%= datosTabla.Cuota3%>
         </button>
       </td>
-      <td id="Cuota4" >
-        <button onclick="abrirModal()">
+      <td  >
+        <button id="Cuota4" onclick="abrirModal(this.id)">
         <%= datosTabla.Cuota4%>
         </button>
       </td>
-      <td id="Cuota5" >
-        <button onclick="abrirModal()">
+      <td  >
+        <button id="Cuota5" onclick="abrirModal(this.id)">
         <%= datosTabla.Cuota5%>
         </button>
       </td>
-      <td id="Cuota6" >
-        <button onclick="abrirModal()">
+      <td  >
+        <button id="Cuota6" onclick="abrirModal(this.id)">
         <%= datosTabla.Cuota6%>
         </button>
       </td>
-      <td id="Cuota7" >
-        <button onclick="abrirModal()">
+      <td  >
+        <button id="Cuota7" onclick="abrirModal(this.id)">
         <%= datosTabla.Cuota7%>
         </button>
       </td>
-      <td id="Cuota8" >
-        <button onclick="abrirModal()">
+      <td  >
+        <button id="Cuota8" onclick="abrirModal(this.id)">
         <%= datosTabla.Cuota8%>
         </button>
       </td>
-      <td id="Cuota9" >
-        <button onclick="abrirModal()">
+      <td  >
+        <button id="Cuota9" onclick="abrirModal(this.id)">
         <%= datosTabla.Cuota9%>
         </button>
       </td>
-      <td id="Cuota10" >
-        <button onclick="abrirModal()">
+      <td  >
+        <button id="Cuota10" onclick="abrirModal(this.id)">
         <%= datosTabla.Cuota10%>
         </button>
       </td>
-      <td id="Cuota11" >
-        <button onclick="abrirModal()">
+      <td  >
+        <button id="Cuota11" onclick="abrirModal(this.id)">
         <%= datosTabla.Cuota11%>
         </button>
       </td>
-      <td id="Cuota12" >
-        <button onclick="abrirModal()">
+      <td  >
+        <button id="Cuota12" onclick="abrirModal(this.id)">
         <%= datosTabla.Cuota12%>
         </button>
       </td>
-      <td id="PermisoIr" >
-        <button onclick="abrirModal()">
+      <td  >
+        <button id="PermisoIr" onclick="abrirModal(this.id)">
         <%= datosTabla.PermisoIrrigacion%>
         </button>
       </td>
-      <td id="PermisoDNV" >
-        <button onclick="abrirModal()">
+      <td  >
+        <button id="PermisoDNV" onclick="abrirModal(this.id)">
         <%= datosTabla.PermisoDNV%>
         </button>
       </td>
-      <td id="PermisoDPV" >
-        <button onclick="abrirModal()">
+      <td  >
+        <button id="PermisoDPV" onclick="abrirModal(this.id)">
         <%= datosTabla.PermisoDPV%>
         </button>
       </td>
-      <td id="PermisoHidraulica" >
-        <button onclick="abrirModal()">
+      <td  >
+        <button id="PermisoHidraulica" onclick="abrirModal(this.id)">
         <%= datosTabla.PermisoHidraulica%>
         </button>
       </td>
-      <td id="PermisoFFCC" >
-        <button onclick="abrirModal()">
+      <td  >
+        <button id="PermisoFFCC" onclick="abrirModal(this.id)">
         <%= datosTabla.PermisoFFCC%>
         </button>
       </td>
-      <td id="PermisoMunicipal" >
-        <button onclick="abrirModal()">
+      <td  >
+        <button id="PermisoMunicipal" onclick="abrirModal(this.id)">
         <%= datosTabla.PermisoMunicipal%>
         </button>
       </td>
-      <td id="DescripcionPermisos" >
-        <button onclick="abrirModal()">
+      <td  >
+        <button id="DescripcionPermisos" onclick="abrirModal(this.id)">
         <%= datosTabla.DescripcionPermisos%>
         </button>
       </td>
-      <td id="ServicioDomiciliario" >
-        <button onclick="abrirModal()">
+      <td  >
+        <button id="ServicioDomiciliario" onclick="abrirModal(this.id)">
         <%= datosTabla.ServicioDomiciliario%>
         </button>
       </td>
@@ -218,32 +218,66 @@
   </table>
 
 <!-- Modal -->
+<div class="container-fluid">
 <div class="modal fade" id="ModalPrincipal" tabindex="-1" role="dialog" aria-labelledby="ModalPrincipalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="ModalPrincipalLabel">Modal title</h5>
+        <h5 class="modal-title"id="TituloModal"></h5>
         <button type="button" class="close"onclick="$('#ModalPrincipal').modal('hide');" aria-label="Cerrar">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        ...
+        <form action="/guardarValor" method="post">
+          <div class="row">
+            <div class="col ">
+            <label for="Monto">Monto</label>
+            <input type="number"step="0.01" name="ValorIngresado" id="ValorIngresado">
+          </div>
+          <div class="col ">
+            <label for="Descripcion">Descripción</label>
+            <input type="text" name="DetalleDeIngreso" id="DetalleDeIngreso">
+          </div>
+<div class="col text-center">
+  <h6>¿Cliente ha pagado?</h6>
+  <label class="text-center" for="">Si</label>
+
+  <input type="radio" name="SeleccionPagado" id="PagadoSi">
+  <label  for="">No</label>
+  <input type="radio" name="SeleccionPagado" id="PagadoNo">
+</div>
+<div class="col">
+  <label for="">Fecha de pago</label>
+  <input type="date" name="FechaPago" id="FechaPago">
+</div>
+</div>
+<div class="row">
+  <div class="col">
+    <label for="">Imprimir comprobante</label>
+    <button>Imprimir</button>
+  </div>
+<div class="col">
+  <label for="">Cargar comprobante de pago</label>
+<input type="file" name="ComprobantePago" id="ComprobantePago">
+</div>
+
+</div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary"onclick="$('#ModalPrincipal').modal('hide');">Cerrar</button>
-        <button type="button" class="btn btn-danger">Save changes</button>
+        <button type="submit" class="btn btn-danger">Guardar</button>
+      </form>
       </div>
     </div>
   </div>
 </div>
+</div>
 <%}%>
 </body>
     <script>
-      function abrirModal(){
-        return{
-          
-        }
+      function abrirModal(id){
+        document.getElementById("TituloModal").innerHTML = id ;
 $("#ModalPrincipal").modal('show');
       }
     </script>
