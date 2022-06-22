@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clientes</title>
+</head>
+<body>
+    <%- include('../partials/menusuperior.ejs'); %>
+    <h1>Clientes de obra</h1>
+    <% if(results){ %>
+        <h2>
+            Se ha detectado contenido en la BD.
+        </h2>
+    <%   }else{ %>
+        <h2>Esta carpeta no contiene clientes cargados aún</h2>
+<label for="">Ingrese un archivo excel con los clientes</label>
+
+        <input type="file" name="Clientes" id="Clientes">
+    <% } %>
+</body>
+</html>

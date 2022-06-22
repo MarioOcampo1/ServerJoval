@@ -710,7 +710,14 @@ router.post('/guardarNuevoCliente', (req, res) => {
     }
     sql = 'Insert into clientes set ?';
     connection.query(sql, {
-        Nombre: Nombre, NCarpeta: NCarpeta, Comitente: Comitente, Ubicacion: Departamento,TipoDeRed: TipoDeRed
+        Nombre: Nombre, NCarpeta: NCarpeta, Comitente: Comitente, Ubicacion: Departamento,
+    }, (error, results) => {
+        if (error) console.log(error);
+
+    })
+    sql = 'Insert into adminecogas_tareas_por_carpeta set ?';
+    connection.query(sql, {
+        Nombre: Nombre, NCarpeta: NCarpeta,TipoDeRed: TipoDeRed
     }, (error, results) => {
         if (error) console.log(error);
 

@@ -77,6 +77,13 @@ router.get('/PagoDeObras',(req,res)=>{
             res.send('Ningun resultado encontrado');
         }
     })
-
-   
+})
+    router.get('/Pagodeobras/clientes/:Nombre',(req,res)=>{
+        var Nombre = req.params.Nombre;
+        var sql= 'Select * from finanzas_clientes_por_obra WHERE NombreObra=?';
+        connection.query(sql,[Nombre], (error, results) => {
+            if (error) console.log(error);
+                console.log("Se procede a cargar la pagina clientes por pago de obras");
+                res.render('paginas/Finanzas/Pagodeobras/clientes.ejs', {results:results});
+        })
 })

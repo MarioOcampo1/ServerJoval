@@ -6,13 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body>
-  <link rel="stylesheet" type="text/css" href="./DataTables/datatables.css"/>
-
-  <script type="text/javascript" src="./DataTables/datatables.js"></script>
- 
+<body> 
     <%- include('./partials/menusuperior.ejs'); %>
-    <%if(results){%>
 <div class="container-fluid">
     <h1 class="text-center">Pago de obras</h1>
 </div>
@@ -98,119 +93,119 @@
   <% results.forEach((datosTabla) => { %>
     <tr>
     <td  >
-      <button id="Nombre" onclick="abrirModal(this.id)">
+      <button id=" <%= datosTabla.Nombre%>" onclick="abrirModal(this.id)">
       <%= datosTabla.Nombre%>
       </button>
     </td>
     <td  >
-      <button id="NCarpeta" onclick="abrirModal(this.id)">
+      
       <%= datosTabla.NCarpeta%>
-      </button>
+     
       </td>
       <td  >
-        <button id="AnticipoFinanciero" onclick="abrirModal(this.id)">
+        
         <%= datosTabla.AnticipoFinanciero%>
-        </button>
+       
       </td>
       <td  >
-        <button id="Cuota1" onclick="abrirModal(this.id)">
+        
         <%= datosTabla.Cuota1%>
-        </button>
+       
       </td>
       <td  >
-        <button id="Cuota2" onclick="abrirModal(this.id)">
+        
         <%= datosTabla.Cuota2%>
-        </button>
+       
       </td>
       <td  >
-        <button id="Cuota3" onclick="abrirModal(this.id)">
+        
         <%= datosTabla.Cuota3%>
-        </button>
+       
       </td>
       <td  >
-        <button id="Cuota4" onclick="abrirModal(this.id)">
+        
         <%= datosTabla.Cuota4%>
-        </button>
+       
       </td>
       <td  >
-        <button id="Cuota5" onclick="abrirModal(this.id)">
+        
         <%= datosTabla.Cuota5%>
-        </button>
+       
       </td>
       <td  >
-        <button id="Cuota6" onclick="abrirModal(this.id)">
+        
         <%= datosTabla.Cuota6%>
-        </button>
+       
       </td>
       <td  >
-        <button id="Cuota7" onclick="abrirModal(this.id)">
+        
         <%= datosTabla.Cuota7%>
-        </button>
+       
       </td>
       <td  >
-        <button id="Cuota8" onclick="abrirModal(this.id)">
+        
         <%= datosTabla.Cuota8%>
-        </button>
+       
       </td>
       <td  >
-        <button id="Cuota9" onclick="abrirModal(this.id)">
+        
         <%= datosTabla.Cuota9%>
-        </button>
+       
       </td>
       <td  >
-        <button id="Cuota10" onclick="abrirModal(this.id)">
+        
         <%= datosTabla.Cuota10%>
-        </button>
+       
       </td>
       <td  >
-        <button id="Cuota11" onclick="abrirModal(this.id)">
+        
         <%= datosTabla.Cuota11%>
-        </button>
+       
       </td>
       <td  >
-        <button id="Cuota12" onclick="abrirModal(this.id)">
+        
         <%= datosTabla.Cuota12%>
-        </button>
+       
       </td>
       <td  >
-        <button id="PermisoIr" onclick="abrirModal(this.id)">
+        
         <%= datosTabla.PermisoIrrigacion%>
-        </button>
+       
       </td>
       <td  >
-        <button id="PermisoDNV" onclick="abrirModal(this.id)">
+        
         <%= datosTabla.PermisoDNV%>
-        </button>
+       
       </td>
       <td  >
-        <button id="PermisoDPV" onclick="abrirModal(this.id)">
+        
         <%= datosTabla.PermisoDPV%>
-        </button>
+       
       </td>
       <td  >
-        <button id="PermisoHidraulica" onclick="abrirModal(this.id)">
+        
         <%= datosTabla.PermisoHidraulica%>
-        </button>
+       
       </td>
       <td  >
-        <button id="PermisoFFCC" onclick="abrirModal(this.id)">
+        
         <%= datosTabla.PermisoFFCC%>
-        </button>
+       
       </td>
       <td  >
-        <button id="PermisoMunicipal" onclick="abrirModal(this.id)">
+        
         <%= datosTabla.PermisoMunicipal%>
-        </button>
+       
       </td>
       <td  >
-        <button id="DescripcionPermisos" onclick="abrirModal(this.id)">
+        
         <%= datosTabla.DescripcionPermisos%>
-        </button>
+       
       </td>
-      <td  >
-        <button id="ServicioDomiciliario" onclick="abrirModal(this.id)">
+      <td>
+        
         <%= datosTabla.ServicioDomiciliario%>
-        </button>
+       
       </td>
 
     <%});%>
@@ -224,6 +219,8 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title"id="TituloModal"></h5>
+        <button type="submit" id="NombreCarpetaParaBoton" onclick="VerCLientes()">Clientes de obra</button>
+     
         <button type="button" class="close"onclick="$('#ModalPrincipal').modal('hide');" aria-label="Cerrar">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -273,12 +270,22 @@
   </div>
 </div>
 </div>
-<%}%>
+
 </body>
     <script>
       function abrirModal(id){
         document.getElementById("TituloModal").innerHTML = id ;
+        document.getElementById("NombreCarpetaParaBoton").id = id ;
 $("#ModalPrincipal").modal('show');
+      }
+      function VerCLientes(){
+       var NombreCarpeta= event.target.id;
+       NombreCarpeta= NombreCarpeta.trim();
+       var url= ("/Pagodeobras/clientes/"+ NombreCarpeta);
+      $.ajax({
+        url: url,
+        type: "GET"
+      })
       }
     </script>
 </html>
