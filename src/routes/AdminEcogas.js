@@ -708,6 +708,10 @@ router.post('/guardarNuevoCliente', (req, res) => {
             var Permisos = "Sin presentar";
         }
     }
+    console.log("ATENCION: SE PROCEDE A GUARDAR NUEVO CLIENTE DE GAS");
+    console.log("DATOS DEL CLIENTE QUE SE GUARDA");
+    console.log('NOMBRE:${Nombre}, NCarpeta: ${NCarpeta}');
+
     sql = 'Insert into clientes set ?';
     connection.query(sql, {
         Nombre: Nombre, NCarpeta: NCarpeta, Comitente: Comitente, Ubicacion: Departamento,
