@@ -220,7 +220,6 @@
       <div class="modal-header">
         <h5 class="modal-title"id="TituloModal"></h5>
         <button type="submit" id="NombreCarpetaParaBoton" onclick="VerCLientes()">Clientes de obra</button>
-     
         <button type="button" class="close"onclick="$('#ModalPrincipal').modal('hide');" aria-label="Cerrar">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -282,10 +281,7 @@ $("#ModalPrincipal").modal('show');
        var NombreCarpeta= event.target.id;
        NombreCarpeta= NombreCarpeta.trim();
        var url= ("/Pagodeobras/clientes/"+ NombreCarpeta);
-      $.ajax({
-        url: url,
-        type: "GET"
-      })
+     window.open(url);
       }
     </script>
 </html>

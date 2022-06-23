@@ -9,15 +9,18 @@
 <body>
     <%- include('../partials/menusuperior.ejs'); %>
     <h1>Clientes de obra</h1>
+    <form action="/Pagodeobras/clientes/FormularioCliente" method="get">
+        <button type="submit">Nuevo cliente</button>
+    </form>
+       
     <% if(results){ %>
         <h2>
             Se ha detectado contenido en la BD.
         </h2>
-    <%   }else{ %>
+    <%}else{%>
         <h2>Esta carpeta no contiene clientes cargados aún</h2>
 <label for="">Ingrese un archivo excel con los clientes</label>
-
         <input type="file" name="Clientes" id="Clientes">
-    <% } %>
+    <%}%>
 </body>
 </html>
