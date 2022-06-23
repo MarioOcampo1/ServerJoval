@@ -80,7 +80,7 @@ router.get('/PagoDeObras', (req, res) => {
 })
 router.get('/Pagodeobras/clientes/FormularioCliente', (req, res) => {
     console.log("Descargando archivo Excel");
-    res.download('src/views/paginas/Finanzas/archivos/NuevoCliente.xlsx', function (error) {
+    res.download('/views/paginas/Finanzas/archivos/NuevoCliente.xlsx', function (error) {
         console.log("Error : ", error)
     });
 })
