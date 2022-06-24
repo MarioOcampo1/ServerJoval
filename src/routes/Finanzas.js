@@ -82,7 +82,7 @@ router.get('/PagoDeObras', (req, res) => {
 router.get('/Pagodeobras/clientes/FormularioCliente', (req, res) => {
     console.log("Descargando archivo Excel");
     console.log("Dirname tiene:" + __dirname);
-    res.download((__dirname+'./views/paginas/Finanzas/archivos/NuevoCliente.xlsx'), function (error) {
+    res.download(('./src/views/paginas/Finanzas/archivos/NuevoCliente.xlsx'), function (error) {
         console.log(error);
         // ACTUALMENTE ESTO NO FUNCIONA XQ DIRNAME TRAE CONSIGO LA CARPETA routes, CUANDO DEBERIA DE TERMINAR EN SRC
     });

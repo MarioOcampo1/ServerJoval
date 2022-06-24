@@ -9,7 +9,6 @@ const nodemon = require('nodemon');
 const { dirname } = require('path');
 const path = require('path'); //El modulo path nos permite concatenar directorios, para poder usar todos y hacerlos multiplataforma.
 const morgan = require('morgan');
-const { MACROMAN_BIN } = require('mysql/lib/protocol/constants/charsets');
 //Middlewares //Son funciones que se van ejecutando antes de que llegue a las rutas.
 app.use(morgan('dev'));
 app.use(express.urlencoded({extended: true }));
