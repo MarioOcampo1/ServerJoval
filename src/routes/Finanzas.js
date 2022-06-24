@@ -6,6 +6,7 @@ const passport = require('passport');
 const PassportLocal = require('passport-local').Strategy;
 const router = Router();
 const moment = require('moment');
+
 module.exports = router;
 router.use(session({
     secret: 'mi secreto',
@@ -48,6 +49,7 @@ passport.deserializeUser(function (id, done) {
 const mysql = require('mysql');
 const { NULL } = require('mysql/lib/protocol/constants/types');
 const { routes } = require('../app');
+const path= require('path');
 const connection = mysql.createConnection({
     host: '127.0.0.1',
     user: 'root',
@@ -79,12 +81,16 @@ router.get('/PagoDeObras', (req, res) => {
         }
     })
 })
+
 router.get('/Pagodeobras/clientes/FormularioCliente', (req, res) => {
     console.log("Descargando archivo Excel");
     console.log("Dirname tiene:" + __dirname);
-    res.download(('./src/views/paginas/Finanzas/archivos/NuevoCliente.xlsx'), function (error) {
+    let url =path.join(__dirname,'../','/views/paginas/Finanzas/archivos/NuevoCliente.xlsx')
+    console.log("url contiene:" + url);
+    res.download(url, function (error) {
         console.log(error);
-        // ACTUALMENTE ESTO NO FUNCIONA XQ DIRNAME TRAE CONSIGO LA CARPETA routes, CUANDO DEBERIA DE TERMINAR EN SRC
+        // ACTUALMENTE ESTO NO FUNCIONA XQ DIRNAME TRAE CONSIGO LA CARPETA routes, HAY QUE BUSCAR LA FORMA DE IR UNA CARPETA POR ENCIMA DE ROUTES. ESTO SE PRODUCE
+        // DEBIDO A QUE FINANZAS.JS ESTA DENTRO DE ROUTES, Y ESA ES LA DIRECCION DESDE DONDE ARRANCA __DIRNAME
     });
 })
 

@@ -5,8 +5,9 @@ const session = require('express-session')
 const passport = require('passport');
 const PassportLocal = require('passport-local').Strategy;
 const router = Router();
-const moment = require('moment');
 module.exports = router;
+const moment = require('moment');
+
 router.use(session({
     secret: 'mi secreto',
     resave: true,

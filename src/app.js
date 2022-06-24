@@ -39,9 +39,7 @@ done(null,)
 })
 //Settings
 app.set('port', 3000); //configura port, con el valor 3000, en app
-
 app.set('public', path.join(__dirname,'public' ));
-
 app.set('views', path.join(__dirname,'views' )); //path concatena dirname con la carpeta llamada views.
 
 app.set('view engine','ejs'); //Ejs es un lenguaje que nos permite ser utilizado dentro de un html, permitiendo tener condicionales, bucles, dentro del html. 
@@ -55,7 +53,6 @@ app.use(require('./routes/AdminEcogas')); //Usa el enrutador
 app.use(require('./routes/AdminGeneral'));
 app.use(require('./routes/Compra-Venta'));
 app.use(require('./routes/Finanzas'));
-
 //404 Handler
 app.use((req,res,next)=>{
 res.status(404).render('404.ejs');
