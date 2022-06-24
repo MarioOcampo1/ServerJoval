@@ -711,7 +711,7 @@ router.post('/guardarNuevoCliente', (req, res) => {
     }
     console.log("ATENCION: SE PROCEDE A GUARDAR NUEVO CLIENTE DE GAS");
     console.log("DATOS DEL CLIENTE QUE SE GUARDA");
-    console.log('NOMBRE:${Nombre}, NCarpeta: ${NCarpeta}');
+    console.log('NOMBRE:'+Nombre+', NCarpeta:'+ NCarpeta);
 
     sql = 'Insert into clientes set ?';
     connection.query(sql, {
@@ -772,17 +772,7 @@ router.post('/guardarNuevoCliente', (req, res) => {
     },Codigo],(error)=>{
         if(error) console.log(error);
     })
-    sql = 'Insert into adminecogas_tareas_por_carpeta Set?';
-    connection.query(sql, {
-        Nombre: Nombre, NCarpeta: NCarpeta
-    }, (error, results) => {
-        if (error) console.log(error);
-
-        if (results.length > 0) {
-            res.redirect('/adminecogas');
-        }
-     
-    })
+  
     sql = 'Insert into adminecogas_interferencias_y_permisos Set?';
     connection.query(sql, [{
         Nombre:Nombre,
