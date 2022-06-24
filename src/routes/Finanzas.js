@@ -47,6 +47,7 @@ passport.deserializeUser(function (id, done) {
 //Seteo server original
 const mysql = require('mysql');
 const { NULL } = require('mysql/lib/protocol/constants/types');
+const { routes } = require('../app');
 const connection = mysql.createConnection({
     host: '127.0.0.1',
     user: 'root',
@@ -80,8 +81,10 @@ router.get('/PagoDeObras', (req, res) => {
 })
 router.get('/Pagodeobras/clientes/FormularioCliente', (req, res) => {
     console.log("Descargando archivo Excel");
-    res.download('/views/paginas/Finanzas/archivos/NuevoCliente.xlsx', function (error) {
-        console.log("Error : ", error)
+    console.log("Dirname tiene:" + __dirname);
+    res.download((__dirname+'./views/paginas/Finanzas/archivos/NuevoCliente.xlsx'), function (error) {
+        console.log(error);
+        // ACTUALMENTE ESTO NO FUNCIONA XQ DIRNAME TRAE CONSIGO LA CARPETA routes, CUANDO DEBERIA DE TERMINAR EN SRC
     });
 })
 
