@@ -904,6 +904,10 @@ router.post('/act1pCarpEcogas/:id', (req, res) => {
     var DNVVisacion = req.body.DNV1;
     var FerrocarrilesVisacion = req.body.FERROCARRIL1;
     var FechaFirmaContrato = req.body.FechaFirmaContrato;
+    var CuestionarioRelevamientoAmbiental = req.body.CuestionarioRelevamientoAmbiental;
+    var DDJJInicialAmbiental= req.body.DDJJInicialAmbiental;
+    var ListaVerificacionAmbiental= req.body.ListaVerificacionAmbiental;
+    var DocumentacionAmbiente="Sin Presentar";
     // Variables Generales
     var Comercial;
     var Tecnica, PermisosEspeciales;
@@ -959,11 +963,19 @@ router.post('/act1pCarpEcogas/:id', (req, res) => {
     if (CartaOferta == "Sin presentar" || PlanoAnexo == "Sin presentar" || DNVVisacion == "Sin presentar" || HidraulicaVisacion == "Sin presentar" || FerrocarrilesVisacion == "Sin presentar" || CartaOferta == "Pedir" || PlanoAnexo == "Pedir" || DNVVisacion == "Pedir" || HidraulicaVisacion == "Pedir" || FerrocarrilesVisacion == "Pedir") {
         PermisosEspeciales = "Sin presentar";
     }
+//Documentacion Ambiental
+if(CuestionarioRelevamientoAmbiental =="ok"&&DDJJInicialAmbiental=="ok" && (ListaVerificacionAmbiental=="ok"|| ListaVerificacionAmbiental=="NC"))
+{
+     DocumentacionAmbiente="ok";
+}
+if(CuestionarioRelevamientoAmbiental =="EnGestion"||DDJJInicialAmbiental=="EnGestion" || ListaVerificacionAmbiental=="EnGestion")
+{ DocumentacionAmbiente="EnGestion"; }
+
 
     console.log("id:" + id + "," + Contrato, "", Comercial, "", Presupuesto, "", Sucedaneo, "",)
     console.log("El valor que contiene la fecha del contrato es: " + FechaFirmaContrato);
     sql = 'Update clientes_tareasgenerales Set ? where Nombre=?';
-    connection.query(sql, [{ Comercial: Comercial, Tecnica: Tecnica, PermisosEspeciales: PermisosEspeciales }, Nombre],
+    connection.query(sql, [{ Comercial: Comercial, Tecnica: Tecnica, PermisosEspeciales: PermisosEspeciales, DocumentacionAmbiental:DocumentacionAmbiente }, Nombre],
         (error, results) => {
 
             if (error) {
@@ -986,7 +998,7 @@ router.post('/act1pCarpEcogas/:id', (req, res) => {
         connection.query(sql, [{
             //Primera Parte
             Contrato: Contrato, Presupuesto: Presupuesto, Sucedaneo: Sucedaneo, NotaDeExcepcion: NotaDeExcepcion, PCaprobado: Pcaprobado,
-            PlanoTipo: PlanoTipo, CartaOferta: CartaOferta, PlanoAnexo: PlanoAnexo,
+            PlanoTipo: PlanoTipo, CartaOferta: CartaOferta, PlanoAnexo: PlanoAnexo,CuestionarioRelevamientoAmbiental:CuestionarioRelevamientoAmbiental,DDJJInicialAmbiental:DDJJInicialAmbiental,ListaVerificacionAmbiental:ListaVerificacionAmbiental
         }, Nombre],
             (error, results) => {
 

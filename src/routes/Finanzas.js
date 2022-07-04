@@ -6,7 +6,6 @@ const passport = require('passport');
 const PassportLocal = require('passport-local').Strategy;
 const router = Router();
 const moment = require('moment');
-
 module.exports = router;
 router.use(session({
     secret: 'mi secreto',
@@ -49,7 +48,7 @@ passport.deserializeUser(function (id, done) {
 const mysql = require('mysql');
 const { NULL } = require('mysql/lib/protocol/constants/types');
 const { routes } = require('../app');
-const path= require('path');
+const path = require('path');
 const connection = mysql.createConnection({
     host: '127.0.0.1',
     user: 'root',
@@ -85,12 +84,11 @@ router.get('/PagoDeObras', (req, res) => {
 router.get('/Pagodeobras/clientes/FormularioCliente', (req, res) => {
     console.log("Descargando archivo Excel");
     console.log("Dirname tiene:" + __dirname);
-    let url =path.join(__dirname,'../','/views/paginas/Finanzas/archivos/NuevoCliente.xlsx')
+    let url = path.join(__dirname, '../', '/views/paginas/Finanzas/archivos/NuevoCliente.xlsx')
     console.log("url contiene:" + url);
     res.download(url, function (error) {
         console.log(error);
-        // ACTUALMENTE ESTO NO FUNCIONA XQ DIRNAME TRAE CONSIGO LA CARPETA routes, HAY QUE BUSCAR LA FORMA DE IR UNA CARPETA POR ENCIMA DE ROUTES. ESTO SE PRODUCE
-        // DEBIDO A QUE FINANZAS.JS ESTA DENTRO DE ROUTES, Y ESA ES LA DIRECCION DESDE DONDE ARRANCA __DIRNAME
+
     });
 })
 
@@ -99,8 +97,40 @@ router.get('/Pagodeobras/clientes/:Nombre', (req, res) => {
     var sql = 'Select * from finanzas_clientes_por_obra WHERE NombreObra=?';
     connection.query(sql, [Nombre], (error, results) => {
         if (error) console.log(error);
+        var contador=0;
+        var json = JSON.parse(JSON.stringify(results));
+        for (let i = 0; i < results.length; i++) {
+            const element = JSON.parse(JSON.stringify(results[i]));
+            if( element.NombreCliente!=null);
+            contador++;
+        }
+        if(contador>0){
+            res.render('paginas/Finanzas/Pagodeobras/clientes.ejs', { Clientes: results });
+        }
         console.log("Se procede a cargar la pagina clientes por pago de obras");
-        res.render('paginas/Finanzas/Pagodeobras/clientes.ejs', { results: results });
        
     })
 })
+router.get('/Pagodeobras/clientes/:Nombre/VerClientes', (req, res) => {
+    var Nombre = req.params.Nombre;
+    var sql = 'Select NombreCliente from finanzas_clientes_por_obra WHERE NombreObra=?';
+    connection.query(sql, [Nombre], (error, clientes) => {
+        if (error) console.log(error);
+        var contador=0;
+        var json = JSON.parse(JSON.stringify(clientes));
+        for (let i = 0; i < clientes.length; i++) {
+            const element = JSON.parse(JSON.stringify(clientes[i]));
+            if( element.NombreCliente!=null);
+            contador++;
+        }
+        if(contador>0){
+            res.send(clientes);
+        }
+        else{
+           res.send("No se han encontrado clientes");
+
+        }
+       
+    })
+})
+

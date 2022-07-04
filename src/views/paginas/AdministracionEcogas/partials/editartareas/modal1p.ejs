@@ -1,24 +1,19 @@
- <!--Primera Parte-->
- <th>
+<!--Primera Parte-->
+<th>
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn btn-primary"
-        data-toggle="modal" data-target="#PrimeraParte">
+    <button type="button" class="btn btn btn-primary" data-toggle="modal" data-target="#PrimeraParte">
         1P Primera Parte
     </button>
     <!-- Modal -->
-    <div class="modal fade" id="PrimeraParte" tabindex="-1"
-        role="dialog" aria-labelledby="PrimeraParte"
+    <div class="modal fade" id="PrimeraParte" tabindex="-1" role="dialog" aria-labelledby="PrimeraParte"
         aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered"
-            role="document">
+        <div class="modal-dialog  modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title"
-                        id="exampleModalLongTitle">
+                    <h5 class="modal-title" id="exampleModalLongTitle">
                         Primera Parte
                     </h5>
-                    <button type="button" class="close"
-                        data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -31,18 +26,13 @@
                                 <div class="card-title">Contrato
                                 </div>
                                 <div class="card-text">
-                                    <select class="form-control"
-                                        id="Contrato"
-                                        name="Contrato"
+                                    <select class="form-control" id="Contrato" name="Contrato"
                                         value="<%= tareasporcarpeta.Contrato%>"
                                         placeholder="<%= tareasporcarpeta.Contrato%>">
-                                        <option hidden
-                                            value="<%=tareasporcarpeta.Contrato%>"
-                                            selected>
+                                        <option hidden value="<%=tareasporcarpeta.Contrato%>" selected>
                                             <%=tareasporcarpeta.Contrato%>
                                         </option>
-                                        <option
-                                            value="Sin presentar">
+                                        <option value="Sin presentar">
                                             Hacer
                                         </option>
                                         <option value="EnGestion">En
@@ -51,43 +41,39 @@
                                         <option value="SinFirmar">
                                             Sin firmar</option>
                                         <option value="Presentado">Presentado
-                                            <option value="Observado">Observado
+                                        <option value="Observado">Observado
                                         <option value="ok">Ok
                                         </option>
                                     </select>
                                 </div>
                                 <div class="card-title">Fecha de firma del contrato
-                                                                    </div>
+                                </div>
                                 <div class="card-text">
                                     <%if(tareasporcarpeta.Fechafirmacontrato){%>
-                                        <%=tareasporcarpeta.Fechafirmacontrato%>                           
-                                        <%}%>
-                                  <input type="date" name="FechaFirmaContrato" id="FechaFirmaContrato"placeholder="<%= tareasporcarpeta.Fechafirmacontrato%>">
-<script>
-var fecha = "<%=tareasporcarpeta.Fechafirmacontrato%>";
-console.log("la fecha es : "+ fecha);
-                                        var FechaModificada= moment(Fecha, "MM/DD/YYYY");
-                                        console.log("La fecha modificada es: "+ FechaModificada);
-                                        document.write(FechaModificada);
-                                     
-</script>
-    
+                                        <%=tareasporcarpeta.Fechafirmacontrato%>
+                                            <%}%>
+                                                <input type="date" name="FechaFirmaContrato" id="FechaFirmaContrato"
+                                                    placeholder="<%= tareasporcarpeta.Fechafirmacontrato%>">
+                                                <script>
+                                                    var fecha = "<%=tareasporcarpeta.Fechafirmacontrato%>";
+                                                    console.log("la fecha es : " + fecha);
+                                                    var FechaModificada = moment(Fecha, "MM/DD/YYYY");
+                                                    console.log("La fecha modificada es: " + FechaModificada);
+                                                    document.write(FechaModificada);
+
+                                                </script>
+
                                 </div>
                                 <div class="card-title">
                                     Presupuesto detallado</div>
                                 <div class="card-text">
-                                    <select class="form-control"
-                                        id="Presupuesto"
-                                        name="Presupuesto"
+                                    <select class="form-control" id="Presupuesto" name="Presupuesto"
                                         value="<%= tareasporcarpeta.Presupuesto%>"
                                         placeholder="<%= tareasporcarpeta.Presupuesto%>">
-                                        <option hidden
-                                            value="<%=tareasporcarpeta.Presupuesto%>"
-                                            selected>
+                                        <option hidden value="<%=tareasporcarpeta.Presupuesto%>" selected>
                                             <%=tareasporcarpeta.Presupuesto%>
                                         </option>
-                                        <option
-                                            value="Sin presentar">
+                                        <option value="Sin presentar">
                                             Hacer</option>
                                         <option value="EnGestion">En
                                             gestion
@@ -104,14 +90,10 @@ console.log("la fecha es : "+ fecha);
                                 <div class="card-t">Sucedáneo
                                 </div>
                                 <div class="card-text">
-                                    <select class="form-control"
-                                        id="Sucedaneo"
-                                        name="Sucedaneo"
+                                    <select class="form-control" id="Sucedaneo" name="Sucedaneo"
                                         value="<%= tareasporcarpeta.Sucedaneo%>"
                                         placeholder="<%= tareasporcarpeta.Sucedaneo%>">
-                                        <option hidden
-                                            value="<%=tareasporcarpeta.Sucedaneo%>"
-                                            selected>
+                                        <option hidden value="<%=tareasporcarpeta.Sucedaneo%>" selected>
                                             <%=tareasporcarpeta.Sucedaneo%>
                                         </option>
                                         <option value="EnGestion">En
@@ -131,14 +113,10 @@ console.log("la fecha es : "+ fecha);
                                 <div class="card-t">Nota De
                                     Excepción</div>
                                 <div class="card-text">
-                                    <select class="form-control"
-                                        id="NotaDeExcepcion"
-                                        name="NotaDeExcepcion"
+                                    <select class="form-control" id="NotaDeExcepcion" name="NotaDeExcepcion"
                                         value="<%= tareasporcarpeta.NotaDeExcepcion%>"
                                         placeholder="<%= tareasporcarpeta.NotaDeExcepcion%>">
-                                        <option hidden
-                                            value="<%=tareasporcarpeta.NotaDeExcepcion%>"
-                                            selected>
+                                        <option hidden value="<%=tareasporcarpeta.NotaDeExcepcion%>" selected>
                                             <%=tareasporcarpeta.NotaDeExcepcion%>
                                         </option>
                                         <option value="EnGestion">En
@@ -163,14 +141,10 @@ console.log("la fecha es : "+ fecha);
                                 <div class="card-title">PC
                                 </div>
                                 <div class="card-text">
-                                    <select class="form-control"
-                                        id="PCaprobado"
-                                        name="PCaprobado"
+                                    <select class="form-control" id="PCaprobado" name="PCaprobado"
                                         value="<%= tareasporcarpeta.PCaprobado%>"
                                         placeholder="<%= tareasporcarpeta.PCaprobado%>">
-                                        <option hidden
-                                            value="<%=tareasporcarpeta.PCaprobado%>"
-                                            selected>
+                                        <option hidden value="<%=tareasporcarpeta.PCaprobado%>" selected>
                                             <%=tareasporcarpeta.PCaprobado%>
                                         </option>
                                         <option value="Sin presentar">
@@ -194,9 +168,7 @@ console.log("la fecha es : "+ fecha);
 
                                     <label for="PlanoTipo">Plano
                                         tipo</label>
-                                    <select class="form-control"
-                                        id="PlanoTipo"
-                                        name="PlanoTipo"
+                                    <select class="form-control" id="PlanoTipo" name="PlanoTipo"
                                         value="<%= tareasporcarpeta.PlanoTipo%>"
                                         placeholder="<%= tareasporcarpeta.PlanoTipo%>">
                                         <option hidden value="<%=tareasporcarpeta.PlanoTipo%>" selected>
@@ -226,215 +198,295 @@ console.log("la fecha es : "+ fecha);
                             <div class="card p-3 border-secondary">
                                 <div class="card-header">
                                     Permisos especiales</div>
-                                    <%if (tareasporcarpeta.Privado=="NC"){%>
-                                        <form-check>
-                                            <input hidden checked type="radio"
-                                            name="CartaOferta"
-                                            id="CartaOferta"
-                                            value="NC"> 
-                                            
-                                        </form-check>
-                                        <% }else{%>
-                                <div class="card-title">Carta
-                                    oferta</div>
-                                <div class="card-text">
-                                    <select class="form-control"
-                                        id="CartaOferta"
-                                        name="CartaOferta"
-                                        value="<%= tareasporcarpeta.CartaOferta%>"
-                                        placeholder="<%= tareasporcarpeta.CartaOferta%>">
-                                        <option hidden
-                                            value="<%=tareasporcarpeta.CartaOferta%>"
-                                            selected>
-                                            <%=tareasporcarpeta.CartaOferta%>
-                                        </option>
-                                        <option
-                                            value="Sin presentar">
-                                            Sin presentar
-                                        </option>
-                                        <option value="EnGestion">En
-                                            gestion
-                                        </option>
-                                        <option value="Presentado">
-                                            Presentado
-                                        </option>
-                                        <option value="Observado">
-                                            Observado</option>
-                                        <option value="ok">ok
-                                        </option>
-                                       
-
-                                    </select>
-
-                                </div>
-                                <%}%>
-                                <%if (interferenciasypermisos.Privado=="NC"){%>
+                                <%if (tareasporcarpeta.Privado=="NC" ){%>
                                     <form-check>
-                                        <input hidden checked type="radio"
-                                        name="PlanoAnexo"
-                                        id="PlanoAnexo"
-                                        value="NC"> 
+                                        <input hidden checked type="radio" name="CartaOferta" id="CartaOferta"
+                                            value="NC">
+
                                     </form-check>
                                     <% }else{%>
+                                        <div class="card-title">Carta
+                                            oferta</div>
+                                        <div class="card-text">
+                                            <select class="form-control" id="CartaOferta" name="CartaOferta"
+                                                value="<%= tareasporcarpeta.CartaOferta%>"
+                                                placeholder="<%= tareasporcarpeta.CartaOferta%>">
+                                                <option hidden value="<%=tareasporcarpeta.CartaOferta%>" selected>
+                                                    <%=tareasporcarpeta.CartaOferta%>
+                                                </option>
+                                                <option value="Sin presentar">
+                                                    Sin presentar
+                                                </option>
+                                                <option value="EnGestion">En
+                                                    gestion
+                                                </option>
+                                                <option value="Presentado">
+                                                    Presentado
+                                                </option>
+                                                <option value="Observado">
+                                                    Observado</option>
+                                                <option value="ok">ok
+                                                </option>
 
-                                <div class="card-title">Plano
-                                    anexo</div>
-                                <div class="card-text">
-                                    <select class="form-control"
-                                        id="PlanoAnexo"
-                                        name="PlanoAnexo"
-                                        value="<%= tareasporcarpeta.PlanoAnexo%>"
-                                        placeholder="<%= tareasporcarpeta.PlanoAnexo%>">
-                                        <option
-                                            value="<%=tareasporcarpeta.PlanoAnexo%>"
-                                            selected>
-                                            <%=tareasporcarpeta.PlanoAnexo%>
-                                        </option>
-                                        <option
-                                            value="Sin presentar">
-                                            Sin presentar
-                                        </option>
-                                        <option value="EnGestion">En
-                                            gestion
-                                        </option>
-                                        <option value="Presentado">
-                                            Presentado
-                                        </option>
-                                        <option value="Observado">
-                                            Observado</option>
-                                        <option value="ok">ok
-                                        </option>
-                                    </select>
 
-                                </div>
-                                <%}%>
-                                <div class="card-title">
-                                <%if (interferenciasypermisos.Hidraulica=="NC"){%>
-                                    <form-check>
-                                        <input hidden checked type="radio"
-                                        name="HIDRAULICA1"
-                                        id="HIDRAULICA1"
-                                        value="NC"> 
-                                    </form-check>
-                                <%}else{%>
+                                            </select>
 
-                                <div class="card-title">
-                                    Hidraúlica </div>
-                                <div class="card-text">
-                                    <select class="form-control"
-                                        id="HIDRAULICA1"
-                                        name="HIDRAULICA1"
-                                       placeholder="<%=interferenciasypermisos.HidraulicaVisacion%>">
-                                        <option  id="HIDRAULICA1"
-                                        name="HIDRAULICA1"
-                                            value= "<%=interferenciasypermisos.HidraulicaVisacion%>"
-                                            selected hidden>
-                                            <%=interferenciasypermisos.HidraulicaVisacion%>
-                                        </option>
-                                        <option  id="HIDRAULICA1"
-                                        name="HIDRAULICA1"
-                                            value="Sin presentar">
-                                            Sin presentar
-                                        </option>
-                                        <option  id="HIDRAULICA1"
-                                        name="HIDRAULICA1"
-                                            value="Presentado">
-                                            Presentado
-                                        </option>
-                                        <option  id="HIDRAULICA1"
-                                        name="HIDRAULICA1" value="EnGestion">En
-                                            gestion
-                                        </option>
-                                        <option  id="HIDRAULICA1"
-                                        name="HIDRAULICA1" value="Visado">Visado
-                                        </option>
-                                      
+                                        </div>
+                                        <%}%>
+                                            <%if (interferenciasypermisos.Privado=="NC" ){%>
+                                                <form-check>
+                                                    <input hidden checked type="radio" name="PlanoAnexo" id="PlanoAnexo"
+                                                        value="NC">
+                                                </form-check>
+                                                <% }else{%>
 
-                                    </select>
-                                </div>
-                                <%}%>
-                                <%if (interferenciasypermisos.Ferrocarriles=="NC"){%>
-                                    <input hidden checked type="radio"
-                                    name="FERROCARRIL1"
-                                    id="FERROCARRIL1"
-                                    value="NC"> 
-                                <%}else{%>
+                                                    <div class="card-title">Plano
+                                                        anexo</div>
+                                                    <div class="card-text">
+                                                        <select class="form-control" id="PlanoAnexo" name="PlanoAnexo"
+                                                            value="<%= tareasporcarpeta.PlanoAnexo%>"
+                                                            placeholder="<%= tareasporcarpeta.PlanoAnexo%>">
+                                                            <option value="<%=tareasporcarpeta.PlanoAnexo%>" selected>
+                                                                <%=tareasporcarpeta.PlanoAnexo%>
+                                                            </option>
+                                                            <option value="Sin presentar">
+                                                                Sin presentar
+                                                            </option>
+                                                            <option value="EnGestion">En
+                                                                gestion
+                                                            </option>
+                                                            <option value="Presentado">
+                                                                Presentado
+                                                            </option>
+                                                            <option value="Observado">
+                                                                Observado</option>
+                                                            <option value="ok">ok
+                                                            </option>
+                                                        </select>
 
-                                <div class="card-title">
-                                    Ferrocarriles</div>
-                                <div class="card-text">
-                                    <select class="form-control"
-                                        id="FERROCARRIL1"
-                                        name="FERROCARRIL1"
-                                        value="<%=interferenciasypermisos.FerrocarrilesVisacion%>"
-                                        placeholder="<%=interferenciasypermisos.FerrocarrilesVisacion%>">
-                                        <option hidden
-                                            value="<%=interferenciasypermisos.FerrocarrilesVisacion%>"
-                                            selected>
-                                            <%=interferenciasypermisos.FerrocarrilesVisacion%>
-                                        </option>
-                                        <option
-                                            value="Sin presentar">
-                                            Sin presentar
-                                        </option>
-                                        <option value="EnGestion">En
-                                            gestion
-                                        </option>
-                                        <option value="Presentado">Presentado
-                                        </option>
-                                        <option value="Visado">Visado
-                                        </option>
-                                       
-                                    </select>
-                                </div>
-                                <%}%>
-                                <%if (interferenciasypermisos.DNV=="NC"){%>
-                                    <input hidden checked type="radio"
-                                    name="DNV1"
-                                    id="DNV1"
-                                    value="NC"> 
-                                <%}else{%>
-                               
-                                <div class="card-title">DNV
-                                </div>
-                                <div class="card-text">
-                                    <select class="form-control"
-                                        id="DNV1" name="DNV1"
-                                        value="<%=interferenciasypermisos.DNVVisacion%>"
-                                        placeholder="<%=interferenciasypermisos.DNVVisacion%>">
-                                        <option hidden
-                                            value="<%=interferenciasypermisos.DNVVisacion%>"
-                                            selected>
-                                            <%=interferenciasypermisos.DNVVisacion%>
-                                        </option>
-                                        <option
-                                            value="Sin presentar">
-                                            Sin presentar
-                                        </option>
-                                        <option value="EnGestion">En
-                                            gestion
-                                        </option>
-                                        <option value="Presentado">Presentado
-                                        </option>
-                                        
-                                        <option value="Visado">Visado
-                                        </option>
-                                        
-                                    </select>
-                                </div>
-                                <%}%>
+                                                    </div>
+                                                    <%}%>
+                                                        <div class="card-title">
+                                                            <%if (interferenciasypermisos.Hidraulica=="NC" ){%>
+                                                                <form-check>
+                                                                    <input hidden checked type="radio"
+                                                                        name="HIDRAULICA1" id="HIDRAULICA1" value="NC">
+                                                                </form-check>
+                                                                <%}else{%>
 
+                                                                    <div class="card-title">
+                                                                        Hidraúlica </div>
+                                                                    <div class="card-text">
+                                                                        <select class="form-control" id="HIDRAULICA1"
+                                                                            name="HIDRAULICA1"
+                                                                            placeholder="<%=interferenciasypermisos.HidraulicaVisacion%>">
+                                                                            <option id="HIDRAULICA1" name="HIDRAULICA1"
+                                                                                value="<%=interferenciasypermisos.HidraulicaVisacion%>"
+                                                                                selected hidden>
+                                                                                <%=interferenciasypermisos.HidraulicaVisacion%>
+                                                                            </option>
+                                                                            <option id="HIDRAULICA1" name="HIDRAULICA1"
+                                                                                value="Sin presentar">
+                                                                                Sin presentar
+                                                                            </option>
+                                                                            <option id="HIDRAULICA1" name="HIDRAULICA1"
+                                                                                value="Presentado">
+                                                                                Presentado
+                                                                            </option>
+                                                                            <option id="HIDRAULICA1" name="HIDRAULICA1"
+                                                                                value="EnGestion">En
+                                                                                gestion
+                                                                            </option>
+                                                                            <option id="HIDRAULICA1" name="HIDRAULICA1"
+                                                                                value="Visado">Visado
+                                                                            </option>
+
+
+                                                                        </select>
+                                                                    </div>
+                                                                    <%}%>
+                                                                        <%if (interferenciasypermisos.Ferrocarriles=="NC"
+                                                                            ){%>
+                                                                            <input hidden checked type="radio"
+                                                                                name="FERROCARRIL1" id="FERROCARRIL1"
+                                                                                value="NC">
+                                                                            <%}else{%>
+
+                                                                                <div class="card-title">
+                                                                                    Ferrocarriles</div>
+                                                                                <div class="card-text">
+                                                                                    <select class="form-control"
+                                                                                        id="FERROCARRIL1"
+                                                                                        name="FERROCARRIL1"
+                                                                                        value="<%=interferenciasypermisos.FerrocarrilesVisacion%>"
+                                                                                        placeholder="<%=interferenciasypermisos.FerrocarrilesVisacion%>">
+                                                                                        <option hidden
+                                                                                            value="<%=interferenciasypermisos.FerrocarrilesVisacion%>"
+                                                                                            selected>
+                                                                                            <%=interferenciasypermisos.FerrocarrilesVisacion%>
+                                                                                        </option>
+                                                                                        <option value="Sin presentar">
+                                                                                            Sin presentar
+                                                                                        </option>
+                                                                                        <option value="EnGestion">En
+                                                                                            gestion
+                                                                                        </option>
+                                                                                        <option value="Presentado">
+                                                                                            Presentado
+                                                                                        </option>
+                                                                                        <option value="Visado">Visado
+                                                                                        </option>
+
+                                                                                    </select>
+                                                                                </div>
+                                                                                <%}%>
+                                                                                    <%if (interferenciasypermisos.DNV=="NC"
+                                                                                        ){%>
+                                                                                        <input hidden checked
+                                                                                            type="radio" name="DNV1"
+                                                                                            id="DNV1" value="NC">
+                                                                                        <%}else{%>
+
+                                                                                            <div class="card-title">DNV
+                                                                                            </div>
+                                                                                            <div class="card-text">
+                                                                                                <select
+                                                                                                    class="form-control"
+                                                                                                    id="DNV1"
+                                                                                                    name="DNV1"
+                                                                                                    value="<%=interferenciasypermisos.DNVVisacion%>"
+                                                                                                    placeholder="<%=interferenciasypermisos.DNVVisacion%>">
+                                                                                                    <option hidden
+                                                                                                        value="<%=interferenciasypermisos.DNVVisacion%>"
+                                                                                                        selected>
+                                                                                                        <%=interferenciasypermisos.DNVVisacion%>
+                                                                                                    </option>
+                                                                                                    <option
+                                                                                                        value="Sin presentar">
+                                                                                                        Sin presentar
+                                                                                                    </option>
+                                                                                                    <option
+                                                                                                        value="EnGestion">
+                                                                                                        En
+                                                                                                        gestion
+                                                                                                    </option>
+                                                                                                    <option
+                                                                                                        value="Presentado">
+                                                                                                        Presentado
+                                                                                                    </option>
+
+                                                                                                    <option
+                                                                                                        value="Visado">
+                                                                                                        Visado
+                                                                                                    </option>
+
+                                                                                                </select>
+                                                                                            </div>
+                                                                                            <%}%>
+
+                                                        </div>
                             </div>
+                            <br>
+                            <div class="card p-3 border-secondary">
+                                <div class="card-header">
+                                    Documentacion Ambiente
+                                </div>
+                                <div class="card-body">
+
+                                    <div class="card-title">Cuestionario de relevamiento ambiental</div>
+                                    <div class="card-text">
+                                        <select class="form-control" id="CuestionarioRelevamientoAmbiental"
+                                            name="CuestionarioRelevamientoAmbiental"
+                                            value="<%=interferenciasypermisos.CuestionarioRelevamientoAmbiental%>"
+                                            placeholder="<%=interferenciasypermisos.CuestionarioRelevamientoAmbiental%>">
+                                            <option hidden
+                                                value="<%=interferenciasypermisos.CuestionarioRelevamientoAmbiental%>"
+                                                selected>
+                                                <%=interferenciasypermisos.CuestionarioRelevamientoAmbiental%>
+                                            </option>
+                                            <option value="Sin presentar">
+                                                Sin presentar
+                                            </option>
+                                            <option value="EnGestion">En
+                                                gestion
+                                            </option>
+                                            <option value="Entregado">Entregado
+                                            </option>
+
+                                            <option value="Observado">Observado
+                                            </option>
+                                            <option value="ok">Ok
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="card-title">
+                                        DDJJ inicial ambiental
+                                    </div>
+                                    <div class="card-text">
+                                        <select class="form-control" id="DDJJInicialAmbiental"
+                                            name="DDJJInicialAmbiental"
+                                            value="<%=interferenciasypermisos.DDJJInicialAmbiental%>"
+                                            placeholder="<%=interferenciasypermisos.DDJJInicialAmbiental%>">
+                                            <option hidden value="<%=interferenciasypermisos.DDJJInicialAmbiental%>"
+                                                selected>
+                                                <%=interferenciasypermisos.DDJJInicialAmbiental%>
+                                            </option>
+                                            <option value="Sin presentar">
+                                                Sin presentar
+                                            </option>
+                                            <option value="EnGestion">En
+                                                gestion
+                                            </option>
+                                            <option value="Presentado">Presentado
+                                            </option>
+
+                                            <option value="Observado">Observado
+                                            </option>
+                                            <option value="ok">Ok
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="card-title">
+                                        Lista de verificacion ambiental
+                                    </div>
+                                    <div class="card-text">
+                                        <select class="form-control" id="ListaVerificacionAmbiental"
+                                            name="ListaVerificacionAmbiental"
+                                            value="<%=interferenciasypermisos.ListaVerificacionAmbiental%>"
+                                            placeholder="<%=interferenciasypermisos.ListaVerificacionAmbiental%>">
+                                            <option hidden
+                                                value="<%=interferenciasypermisos.ListaVerificacionAmbiental%>"
+                                                selected>
+                                                <%=interferenciasypermisos.ListaVerificacionAmbiental%>
+                                            </option>
+                                            <option value="Sin presentar">
+                                                Sin presentar
+                                            </option>
+                                            <option value="EnGestion">En
+                                                gestion
+                                            </option>
+                                            <option value="Presentado">Presentado
+                                            </option>
+
+                                            <option value="Observado">Observado
+                                            </option>
+                                            <option value="ok">Ok
+                                            </option>
+                                            <option value="NC">No corresponde
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
 
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary"
-                        data-dismiss="modal"
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
                         onclick="CerrarModal()">Cerrar</button>
-                    <button type="submit" class="btn btn-primary fixed-bottom"
-                        form="act1pCarpEcogas">Guardar
+                    <button type="submit" class="btn btn-primary fixed-bottom" form="act1pCarpEcogas">Guardar
                         Cambios</button>
                 </div>
             </div>

@@ -1,26 +1,53 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clientes</title>
+    <title>Finanzas-Clientes</title>
 </head>
+
 <body>
-    <%- include('../partials/menusuperior.ejs'); %>
-    <h1>Clientes de obra</h1>
-    <form action="/Pagodeobras/clientes/FormularioCliente" method="get">
-        <button type="submit">Nuevo cliente</button>
-    </form>
+    <div class="card">
+        <div class="card-title">
+            <h3 class="text-center"> Clientes de obra <%=Clientes[0].NombreObra %>
+            </h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col">
+                    <form action="/Pagodeobras/clientes/FormularioCliente" method="get">
+                        Ingresar nuevos clientes
+                        <button id="plantilla" type="submit">Plantilla</button>
+                    </form>
+                </div>
+                <div class=" col">
+                    <form action="/Pagodeobras/clientes/CargarClientes" method="post">
+                       Cargar archivo de clientes
+                        <input class="form-control" type="file" id="Clientes">
+                        <button type="submit" class="btn-sm m-1 btn-outline-success">Enviar</button>
+                    </form>
+                </div>
+                <div class="col"></div>
+            </div>
+        </div>
+    </div>
+  
        
-    <% if(results.NomreCliente){ %>
-        <h2>
-            Se ha detectado contenido en la BD.
-        </h2>
-    <%}else{%>
-        <h2>Esta carpeta no contiene clientes cargados aún</h2>
-<label for="">Ingrese un archivo excel con los clientes</label>
-        <input type="file" name="Clientes" id="Clientes">
-    <%}%>
+
+        Nombre de obra => <h1>
+            <%= Clientes[0].NombreObra %>
+        </h1>
+        <% if(Clientes[0].NombreCliente){ %>
+            <h2>
+                Se ha detectado contenido en la BD.
+            </h2>
+            <%}else{%>
+                <h2>Esta carpeta no contiene clientes cargados aún</h2>
+
+                <%}%>
+
 </body>
+
 </html>
