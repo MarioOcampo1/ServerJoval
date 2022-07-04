@@ -63,7 +63,7 @@
                                 <button id="Preliminar" class="btn text-light">Preliminar</button>
 
                             </th>
-                            <th id="SeccionTabla" class="text-center text-light bg-dark"  value="2" colspan="3">
+                            <th id="SeccionTabla" class="text-center text-light bg-dark"  value="2" colspan="4">
                                 <button id="1P" class="btn text-light">1ra parte</button>
 
                             </th>
@@ -137,6 +137,10 @@
 
                             <th  class="text-center  MenuSuperior">
                                 <button class="btn"> Permisos especiales    </button>
+                                
+                            </th>
+                            <th  class="text-center  MenuSuperior">
+                                <button class="btn"> Doc de ambiente    </button>
                                 
                             </th>
                             <th  class="text-center  MenuSuperior">
@@ -446,6 +450,34 @@
                                                 <%}%>
                                                 <%if(clientes.PermisosEspeciales!="ok"&& clientes.PermisosEspeciales!="EnGestion"&& clientes.PermisosEspeciales!="Presentado"&& clientes.PermisosEspeciales!="Sin presentar"&& clientes.PermisosEspeciales!="Observado"){%>
                                                     <%if(clientes.PermisosEspeciales==null||clientes.PermisosEspeciales==""){ %>
+                                                        <td class="text-dark bg-danger">
+                                                         !
+                                                        </td>
+                                                        <%}%>
+                                                    <%}%>
+                                                     <!-- DocumentacionAmbiental  -->
+                                 <%if(clientes.DocumentacionAmbiental=="ok" || clientes.DocumentacionAmbiental=="NC"){%>
+                                    <td class="text-light bg-success">
+                                        <%=clientes.DocumentacionAmbiental%>
+                                    </td>
+                                    <%}%>
+                                    <%if(clientes.DocumentacionAmbiental=="EnGestion" || clientes.DocumentacionAmbiental=="Presentado"){%>
+                                        <td class="text-dark bg-warning">
+                                            <%=clientes.DocumentacionAmbiental%> 
+                                        </td>
+                                        <%}%>
+                                        <%if(clientes.DocumentacionAmbiental=="Sin presentar"){%>
+                                            <td class="text-light bg-danger">
+                                                <%=clientes.DocumentacionAmbiental%> 
+                                            </td>
+                                            <%}%>
+                                            <%if(clientes.DocumentacionAmbiental=="Observado" || clientes.DocumentacionAmbiental=="Pedir"){%>
+                                                <td class="text-light bg-danger">
+                                                    <%=clientes.DocumentacionAmbiental%> 
+                                                </td>
+                                                <%}%>
+                                                <%if(clientes.DocumentacionAmbiental!="ok"&& clientes.DocumentacionAmbiental!="EnGestion"&& clientes.DocumentacionAmbiental!="Presentado"&& clientes.DocumentacionAmbiental!="Sin presentar"&& clientes.DocumentacionAmbiental!="Observado"){%>
+                                                    <%if(clientes.DocumentacionAmbiental==null||clientes.DocumentacionAmbiental==""){ %>
                                                         <td class="text-dark bg-danger">
                                                          !
                                                         </td>
