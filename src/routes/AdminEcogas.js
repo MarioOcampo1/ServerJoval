@@ -1342,7 +1342,7 @@ router.post('/actObrasCarpEcogas/:id', (req, res) => {
 
             ActaDeInicio: ActaDeInicio, Permisos: Permisos, Interferencias: Interferencias, LibroOrdenesServicio: LibroOrdenesServicio, LibroNotasPedido: LibroNotasPedido, PCEntregadoInspeccion: PCEntregadoInspeccion, AvisosDeObra: AvisosDeObra, CronogramaFirmadoComitente: CronogramaFirmadoComitente,
             OrdenServicio: OrdenServicio,
-        }, id],
+        }, Nombre],
             (error, results) => {
 
                 if (error) {
