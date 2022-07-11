@@ -1244,7 +1244,7 @@ router.post('/act2pCarpEcogas/:id', (req, res) => {
         CronogramaSyH: CronogramaSyH, SeguroRC: SeguroRC, Monotributos: Monotributos, SeguroAccidentesPersonales: SeguroAccidentesPersonales,
         MatriculaFusionista: MatriculaFusionista, MatriculaSoldador: MatriculaSoldador, EstudioImpactoAmbiental: EstudioImpactoAmbiental, CronogramaAmbiente: CronogramaAmbiente, NotaCumplimentoNormativa: NotaCumplimentoNormativa, DDJJNAG153: DDJJNAG153,
         ActaInicioEfectivo: ActaInicioEfectivo, AvisoInicioObraIERIC: AvisoInicioObraIERIC, AvisoInicioObraART: AvisoInicioObraART,
-    }, id],
+    }, Nombre],
         (error, results) => {
 
             if (error) {
