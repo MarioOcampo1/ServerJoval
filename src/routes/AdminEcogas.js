@@ -245,7 +245,7 @@ router.get('/editarTareas/:id', (req, res) => {
                 });
 
             }
-            console.log("Nombre al cual se esta ingresando:" + Nombre);
+            console.log("Nombre al cual se esta ingresando:" + Nombre)
             sql = 'Select * from codificacioncarpetas Where Nombre=?';
             connection.query(sql, [Nombre], (error, results) => {
                 if (error) console.log(error);
@@ -272,6 +272,12 @@ router.get('/editarTareas/:id', (req, res) => {
 
                     sql = 'Select * from adminecogas_tareas_por_carpeta Where Nombre=?';
                     connection.query(sql, [Nombre], (error, tareasporcarpeta) => {
+                        if (error) console.log(error);
+
+                        sql = 'Select * from clientes where id=?';
+
+                        connection.query(sql, [id], (error, results) => {
+
                             if (error) console.log(error);
                             if (results.length > 0) {
                                 //Se procede a enviar al front, los resultados de las consultas sql, prestar atencion que para que ejs pueda resolver el contenido de las sentencias hay que tratar las mismas como un arreglo [0], sino no funciona.
@@ -280,7 +286,7 @@ router.get('/editarTareas/:id', (req, res) => {
                             else {
                                 res.redirect('/adminecogas');
                             }
-                        
+                        })
                     })
                 })
 
@@ -1335,7 +1341,7 @@ router.post('/actObrasCarpEcogas/:id', (req, res) => {
         connection.query(sql, [{
 
             ActaDeInicio: ActaDeInicio, Permisos: Permisos, Interferencias: Interferencias, LibroOrdenesServicio: LibroOrdenesServicio, LibroNotasPedido: LibroNotasPedido, PCEntregadoInspeccion: PCEntregadoInspeccion, AvisosDeObra: AvisosDeObra, CronogramaFirmadoComitente: CronogramaFirmadoComitente,
-            OrdenServicio: OrdenServicio
+            OrdenServicio: OrdenServicio,
         }, id],
             (error, results) => {
 
