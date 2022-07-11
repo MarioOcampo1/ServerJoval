@@ -23,31 +23,62 @@
                     </form>
                 </div>
                 <div class=" col">
-                    <form action="/Pagodeobras/clientes/CargarClientes" method="post">
-                       Cargar archivo de clientes
-                        <input class="form-control" type="file" id="Clientes">
-                        <button type="submit" class="btn-sm m-1 btn-outline-success">Enviar</button>
+                    <form id="FormularioArchivo" action="/Pagodeobras/clientes/cargarArchivoConClientes"name="FormularioArchivoExcel" method="POST" enctype="multipart/form-data">
+
+                        Cargar archivo de clientes
+                        <input name="NombreCarpeta" value="<%=Clientes[0].NombreObra %>" type="text" hidden>
+                        <input class="form-control" type="file" name="ClientesACargar" id="Archivo">
+                        <button type="button" class="btn-sm m-1 btn-outline-success"id="BotonCargarArchivo" >Enviar</button>
+                       <div class="progress progress-bar bg-secondary">
+                        <progress class="progress" id="BarraProgresoArchivo"role="progressbar" style="width: 100%;"value="0"  valuemax="100">
+                        </progress>
+                    </div>
                     </form>
                 </div>
-                <div class="col"></div>
+                <div id="Mensaje" class="col">
+
+                </div>
             </div>
         </div>
     </div>
-  
-       
 
-        Nombre de obra => <h1>
-            <%= Clientes[0].NombreObra %>
-        </h1>
-        <% if(Clientes[0].NombreCliente){ %>
-            <h2>
-                Se ha detectado contenido en la BD.
-            </h2>
-            <%}else{%>
-                <h2>Esta carpeta no contiene clientes cargados aún</h2>
 
-                <%}%>
 
+    Nombre de obra => <h1>
+        <%= Clientes[0].NombreObra %>
+    </h1>
+    <% if(Clientes[0].NombreCliente){ %>
+        <h2>
+            Se ha detectado contenido en la BD.
+        </h2>
+        <%}else{%>
+            <h2>Esta carpeta no contiene clientes cargados aún</h2>
+
+            <%}%>
 </body>
 
+<script>
+    //     $('#BotonCargarArchivo').on('click',setTimeout( function () {
+    // document.FormularioArchivoExcel.submit();
+    // },10000));
+
+    $('#BotonCargarArchivo').click(function() {
+        console.log("intentando cargar archivo con ajax");
+    let form = document.querySelector('#FormularioArchivo');
+    // form.addEventListener('submit', function () {
+        let inputfile = document.querySelector('#Archivo').files[0];
+        let progressbar = document.querySelector('#BarraProgresoArchivo');
+        let formdata = new FormData();
+        formdata.append("ClientesACargar", inputfile);
+        let ajax = new XMLHttpRequest();
+        ajax.upload.addEventListener("#BarraProgresoArchivo", function (e) {
+            let porcentaje = ((e.loaded / e.total) * 100);
+            console.log(porcentaje);
+            progressbar.value = Math.round(porcentaje);
+        });
+        // ajax.open("POST", "/Pagodeobras/clientes/cargarArchivoConClientes");
+        // ajax.send(formdata);
+    });
+// });
+</script>
 </html>

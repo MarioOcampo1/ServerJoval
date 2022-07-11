@@ -20,9 +20,7 @@
           <td>
             <h6>Carpeta</h6>
           </td>
-          <td>
-            <h6>N° Carpeta</h6>
-          </td>
+
           <td>
             <h6>Anticipo Financiero</h6>
           </td>
@@ -96,11 +94,6 @@
               <button id=" <%= datosTabla.Nombre%>" onclick="abrirModal(this.id)">
                 <%= datosTabla.Nombre%>
               </button>
-            </td>
-            <td>
-
-              <%= datosTabla.NCarpeta%>
-
             </td>
             <td>
 
@@ -347,21 +340,21 @@
   function mostrarAdherente() {
     nombreCarpeta = nombreCarpeta.trim();
     var url = ("/Pagodeobras/clientes/" + nombreCarpeta + "/VerClientes");
-   
-    $.get(url).done(function(cliente){
-      for (let i = 0; i < cliente.length; i++) {
-          var element = JSON.parse(JSON.stringify(cliente[i]));
-          let texto=JSON.stringify(element.NombreCliente);
-          texto= texto.replace('"',""); //Como el objeto JSON es traducido con comillas, con este comando las vamos limpiando.
-          texto= texto.replace('"',"");
-            $('#adherente').append('<option value="'+texto+'">'+texto+'</option>');
-            console.log('<option value="'+texto+'">'+texto+'</option>');
-    }
 
-  }
+    $.get(url).done(function (cliente) {
+      for (let i = 0; i < cliente.length; i++) {
+        var element = JSON.parse(JSON.stringify(cliente[i]));
+        let texto = JSON.stringify(element.NombreCliente);
+        texto = texto.replace('"', ""); //Como el objeto JSON es traducido con comillas, con este comando las vamos limpiando.
+        texto = texto.replace('"', "");
+        $('#adherente').append('<option value="' + texto + '">' + texto + '</option>');
+        console.log('<option value="' + texto + '">' + texto + '</option>');
+      }
+
+    }
     )
-       
-   
+
+
     document.getElementById("divadherente").style.display = "block";
 
   }
