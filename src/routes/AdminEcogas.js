@@ -1335,7 +1335,7 @@ router.post('/actObrasCarpEcogas/:id', (req, res) => {
         connection.query(sql, [{
 
             ActaDeInicio: ActaDeInicio, Permisos: Permisos, Interferencias: Interferencias, LibroOrdenesServicio: LibroOrdenesServicio, LibroNotasPedido: LibroNotasPedido, PCEntregadoInspeccion: PCEntregadoInspeccion, AvisosDeObra: AvisosDeObra, CronogramaFirmadoComitente: CronogramaFirmadoComitente,
-            OrdenServicio: OrdenServicio,
+            OrdenServicio: OrdenServicio
         }, id],
             (error, results) => {
 
