@@ -1028,6 +1028,8 @@ $.each(registros, function(indice,elemento){
     })
 })
 jQuery("#Preliminar").click(function(){
+
+   
     //Primero Dibuja todo
     jQuery("#EstadoGeneral SeccionTabla").show();
     jQuery("#EstadoGeneral #EncabezadoPreliminar").show();
@@ -1039,12 +1041,17 @@ jQuery("#Preliminar").click(function(){
     jQuery("#EstadoGeneral tbody>tr").show();
 
     //Luego borra lo que hagafalta
+   
     jQuery("#EstadoGeneral SeccionTabla").hide();
     jQuery("#EstadoGeneral #Encabezado1P").hide();
     jQuery("#EstadoGeneral #Encabezado2P").hide();
     jQuery("#EstadoGeneral #EncabezadoObras").hide();
     jQuery("#EstadoGeneral #EncabezadoCaos").hide();
     jQuery("#EstadoGeneral #EncabezadoFin").hide();
+//Busca en "Estado" la palabra clave
+let palabra = "preliminar";
+jQuery("#EstadoGeneral tbody>tr").hide();
+jQuery("#EstadoGeneral td:contiene-palabra('" + palabra + "')").parent("tr").show();
 
 })
 jQuery("#1P").click(function(){
@@ -1063,6 +1070,9 @@ jQuery("#1P").click(function(){
     jQuery("#EstadoGeneral #EncabezadoObras").hide();
     jQuery("#EstadoGeneral #EncabezadoCaos").hide();
     jQuery("#EstadoGeneral #EncabezadoFin").hide();
+    let palabra = "1ra parte";
+jQuery("#EstadoGeneral tbody>tr").hide();
+jQuery("#EstadoGeneral td:contiene-palabra('" + palabra + "')").parent("tr").show();
 
 })
 jQuery("#2P").click(function(){
@@ -1082,6 +1092,10 @@ jQuery("#2P").click(function(){
     jQuery("#EstadoGeneral #EncabezadoCaos").hide();
     jQuery("#EstadoGeneral #EncabezadoFin").hide();
 
+    let palabra = "2da parte";
+jQuery("#EstadoGeneral tbody>tr").hide();
+jQuery("#EstadoGeneral td:contiene-palabra('" + palabra + "')").parent("tr").show();
+
 })
 jQuery("#Obras").click(function(){
     jQuery("#EstadoGeneral SeccionTabla").show();
@@ -1100,6 +1114,10 @@ jQuery("#Obras").click(function(){
     jQuery("#EstadoGeneral #EncabezadoCaos").hide();
     jQuery("#EstadoGeneral #EncabezadoFin").hide();
 
+    let palabra = "Obras";
+jQuery("#EstadoGeneral tbody>tr").hide();
+jQuery("#EstadoGeneral td:contiene-palabra('" + palabra + "')").parent("tr").show();
+
 })
 jQuery("#Caos").click(function(){
     jQuery("#EstadoGeneral SeccionTabla").show();
@@ -1117,6 +1135,10 @@ jQuery("#Caos").click(function(){
     jQuery("#EstadoGeneral #Encabezado2P").hide();
     jQuery("#EstadoGeneral #EncabezadoObras").hide();
     jQuery("#EstadoGeneral #EncabezadoFin").hide();
+
+    let palabra = "Caos";
+jQuery("#EstadoGeneral tbody>tr").hide();
+jQuery("#EstadoGeneral td:contiene-palabra('" + palabra + "')").parent("tr").show();
 
 })
 jQuery("#LimpiarFiltros").click(function(){
