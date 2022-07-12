@@ -105,6 +105,8 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Tareas de la carpeta -->
             <div class="container-fluid">
                 <div class="card-header text-center Titulo cuerpo">
                     <h3 class="Titulo">Tareas de la carpeta</h3>
@@ -136,15 +138,12 @@
                             </div>
                         </div>
                         <div class="row p-1">
-
-
                             <div class="col-sm-2">
                                 Proxima Tarea:
                             </div>
                             <div class="col">
                                 <input class="container-fluid" type="text" name="ProximaTarea" id="ProximaTarea"
                                     placeholder="Ingrese la proxima tarea">
-
                             </div>
                         </div>
                         <div class="row p-1">
@@ -154,10 +153,8 @@
                             <div class="col-sm-2">
                                 <input class="container-fluid" type="date" required name="Fecha_limite"
                                     id="Fecha_limite" value="<%=user.Fecha_limite%>">
-
                             </div>
                         </div>
-
                     </div>
                     <div class="row ">
                         <div class="col p-2 text-center">
@@ -226,8 +223,10 @@
                                                     <h3 class="text-center">Etapas de la carpeta</h3>
                                                     <tr class="table-active">
 
+    
                                                         <%- include('./partials/editartareas/modalpreliminar.ejs')%>
                                                             </form>
+                                                      
                                                             <form action=" /act1pCarpEcogas/<%=user.id%>"
                                                                 id="act1pCarpEcogas" method="post">
                                                                 <input type="hidden" name="Nombre" id="Nombre"

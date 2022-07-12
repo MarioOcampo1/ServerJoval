@@ -6,8 +6,7 @@
     </button>
 
     <!-- Modal -->
-    <div class="modal fade" id="ModalPreliminar" tabindex="-1" role="dialog" aria-labelledby="ModalPreliminar"
-        aria-hidden="true">
+    <div class="modal fade" id="ModalPreliminar" tabindex="-1" role="dialog" aria-labelledby="ModalPreliminar"aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -20,6 +19,7 @@
                 <div class="modal-body">
                     <form action="/actualizarEtapas/<%= user.id%>" id="formPreliminar" method="post">
                         <div class="container">
+                            <div class="col">
                             <div class="card p-3 border-secondary">
                                 <div class="card-title">
                                     <label class="mx-auto" for="DocumentacionDelTerreno">Documentación
@@ -28,7 +28,7 @@
                                 </div>
                                 <br>
                                 <div class="card-body">
-
+                                  
                                     <label for="Mensura">Mensura</label>
                                     <select class="form-control" id="Mensura" name="Mensura"
                                         value="<%= tareasporcarpeta.Mensura%>"
@@ -77,6 +77,8 @@
 
                                 </div>
                             </div>
+                        </div>
+                        <div class="col">
                             <br>
                             <div class="card p-3 border-secondary">
                                 <div class="card-title">
@@ -144,6 +146,7 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
                             <br>
                             <div class="card p-3 border-secondary">
                                 <div class="card-title">
