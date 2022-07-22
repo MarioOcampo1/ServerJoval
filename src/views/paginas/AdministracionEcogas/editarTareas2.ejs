@@ -12,7 +12,7 @@
     <link href="../css/editarTareas.css" rel="stylesheet" type="text/css">
     <script src="https://code.jquery.com/jquery-3.6.0.js"
         integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-        
+
 </head>
 
 <body class="body editarTareas">
@@ -108,7 +108,7 @@
             </div>
 
             <!-- Tareas de la carpeta -->
-            <div class="container-fluid">
+            <!-- <div class="container-fluid">
                 <div class="card-header text-center Titulo cuerpo">
                     <h3 class="Titulo">Tareas de la carpeta</h3>
                 </div>
@@ -204,151 +204,220 @@
                         </div>
                         </div>
                 </form>
-            </div>
+            </div> -->
             <div class="card text-center">
-              <div class="card-body">
-                    <div class="btn-group " role="group">
-                    <button class="btn btn-outline-primary">Preliminar</button>
-                    <button class="btn btn-outline-primary">1P</button>
-                    <button class="btn btn-outline-primary">2P</button>
-                    <button class="btn btn-outline-primary">Obras</button>
-                    <button class="btn btn-outline-primary">Caos</button>
-                    <button class="btn btn-outline-primary">Final</button>
-                    </div>      
+                <div class="card-body">
+                    <div class="btn-group" role="group">
+                        <button class="btn btn-outline-primary">Preliminar</button>
+                        <button class="btn btn-outline-primary">1P</button>
+                        <button class="btn btn-outline-primary">2P</button>
+                        <button class="btn btn-outline-primary">Obras</button>
+                        <button class="btn btn-outline-primary">Caos</button>
+                        <button class="btn btn-outline-primary">Final</button>
                     </div>
-               
-              </div>
-<div class="list-group">
-        <div  class="list-group-item list-group-item-action ">
-        
-    <form action=" /actPrelCarpEcogas/<%=user.id%>" id="actPrelCarpEcogas" method="post">
-        <input type="hidden" name="Nombre" id="Nombre" value="<%= user.Nombre%>">
-        <input type="hidden" name="id" id="id" value="<%= user.id%>">
-<!-- CODIGO DE LA PARTE PRELIMINAR -->
+                </div>
+
+            </div>
+            <div id="Preliminar" class="container-fluid">
+
+               <%var i=0 ;%>
+               <%var CategoriaMostrada="";%>
+                <!-- CODIGO DE LA PARTE PRELIMINAR -->
+
+               <h1 class="text-center" id="Preliminar">
+                Preliminar
+            </h1>
+<% NombreDeTarea.forEach((NombreTarea)=>{ %>
+        <%if (NombreTarea.Etapa=="Preliminar"){%>
+                              
+                                <form action=" /actPrelCarpEcogas/<%=user.id%>" id="actPrelCarpEcogas" method="post">
+                                    <input type="hidden" name="Nombre" id="Nombre" value="<%= user.Nombre%>">
+                                    <input type="hidden" name="id" id="id" value="<%= user.id%>">
+
+                                  
+                                    <ul>
+                                        <div class="row">
+                                           
+                                            <div class="col">
+                                                <h5 class="text-primary ">
+                                                    <% var CategoriaporMostrar=NombreTarea.CategoriaPrincipal%> <!--Guarda en la variable, la categoria que se va a mostrar, para compararla con la existente.-->
+                                                       
+                        <% if(CategoriaporMostrar!=CategoriaMostrada){%><!------Compara el Subtitulo, para que no se repita y llene de informacion inecesaria la pagina.------>
+                                                            <%CategoriaMostrada=CategoriaporMostrar;%> <!--Asignamos el nombre de la categoria principal(subtitulo) para analizarlo en la proxima vuelta del for.-->
+                                                                <%=NombreTarea.CategoriaPrincipal%><!---- Escribe el nombre de la categoria. Ejemplo: "DocumentacionTerreno"-->
+                        <%}%>
+                                                </h5>
+                                                <h6 class="">
+                                                    <%=NombreTarea.CategoriaSecundaria%><!--Escribre el nombre de la segunda categoria. -->
+                                                </h6>
+                                                <div class="container border">
+                                                    <h6 class="text-success">
+                                                        <%=NombreTarea.Elemento%><!--Escribre el nombre del elemento. Ejemplo: Mensura-->
+                                                        <button>Agregar Comentario</button>
+                                                    </h6>
+                                                    <%var nombreDeLaTarea=NombreTarea.Elemento;%>
+
+                                                        <%var cadenaArmada=("tareasporcarpeta[0]."+ nombreDeLaTarea); %>
+                    <%if(cadenaArmada==NombreTarea.Elemento){%>
+                                                                <h6>
+                                                                    <% cadenaArmada%>
+                                                                </h6>
+                                            
+                    <%}%>
+                        <%var tareasporcarpeta=[];%>
+                        <%tareasporcarpetaJSON.forEach((element) => {%>
+                            <%tareasporcarpeta.push([element,tareasporcarpetaJSON[element]]);%>
+                            <%console.log(element);%>
+                            <%console.log(tareasporcarpetaJSON[element]);%>
+                        <%});%>
+                <%        for (let j = 0; j < tareasporcarpeta.length; j++) {%>
+                            <%if(NombreTarea.Elemento==tareasporcarpeta[j]){%>
+                            Estado de la tarea: <%=tareasporcarpeta[j+1]%>
+                        <%}}%>
+
+                                                    
+                                                 
+                                                                    <ul>
+                                                                        
+                                                                        <div class="form-check-inline">
+                                                                            <input class="form-check-input" name="<%=cadenaArmada%>"
+                                                                                type="radio" id="Sin presentar"
+                                                                                value="Sin presentar"> <label for="Sin presentar">
+                                                                                Sin presentar</label>
+                                                                        </div>
+                                                                        <div class="form-check-inline">
+                                                                            <input class="form-check-input" name="<%=cadenaArmada%>"
+                                                                                type="radio" id="EnGestion" value="EnGestion">
+                                                                            <label for="EnGestion"></label> En gestion
+                                                                        </div>
+                                                                        <div class="form-check-inline">
+                                                                            <input class="form-check-input" name="<%=cadenaArmada%>"
+                                                                                type="radio" id="Presentado" value="Presentado">
+                                                                            <label for="Presentado"></label> Presentado
+                                                                        </div>
+                                                                        <div class="form-check-inline">
+                                                                            <input class="form-check-input" name="<%=cadenaArmada%>"
+                                                                                type="radio" id="Observado" value="Observado">
+                                                                            <label for="Observado"></label> Observado
+                                                                        </div>
+                                                                        <div class="form-check-inline">
+                                                                            <input class="form-check-input" name="<%=cadenaArmada%>"
+                                                                                type="radio" id="ok" value="ok"> <label
+                                                                                for="ok"></label> Ok
+                                                                        </div>
+                                                                    </ul>
+                                                                    <label for="Ingreso<%=cadenaArmada%>">Comentarios</label>
+                                                                    <input class="container-fluid"type="text" name="Ingreso<%=cadenaArmada%>" id="Ingreso<%=cadenaArmada%>">
+                                                                </div>
+                                                              
+
+                                            </div>
+                                           
+                                        </div>
+                                        
+                                    </ul>
+                                    
+        <%}else{}%>
+                                </form>
+            </div>
+
+            <%i=i+1;%>
+<%});%>
+  <!--FIN PRELIMINAR-->
 
 
 
 
-    <h6>Mensura</h6>
-<div class="form-check-inline">
-  <input class="form-check-input" name="Mensura" type="radio"  id="Sin presentar" value="Sin presentar" > <label for="Sin presentar"> Sin presentar</label>
-</div>
-<div class="form-check-inline">
-    <input class="form-check-input" name="Mensura" type="radio"  id="EnGestion" value="EnGestion" > <label for="EnGestion" ></label> En gestion
-</div>
-<div class="form-check-inline">
-  <input class="form-check-input" name="Mensura" type="radio"  id="Presentado" value="Presentado" > <label for="Presentado" ></label>  Presentado
-</div>
-<div class="form-check-inline">
-  <input class="form-check-input" name="Mensura" type="radio"  id="Observado" value="Observado" > <label for="Observado" ></label>  Observado
-</div>
-<div class="form-check-inline">
-  <input class="form-check-input" name="Mensura" type="radio"  id="ok" value="ok" > <label for="ok" ></label>  Ok
-    
-</div>
 
+<%}%>
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+                    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+                    crossorigin="anonymous"></script>
 
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+                    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+                    crossorigin="anonymous"></script>
+                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+                    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+                    crossorigin="anonymous"></script>
 
+                <script>
+                    function estadoInterferencia(nombrePedida, nombreObtenida, booleanIntPedida, boolRecibida) {
+                        if (booleanIntPedida) {
+                            elemento = document.getElementById(nombrePedida);
+                            elemento.style.display = "block";
+                        }
+                        else {
+                            elemento = document.getElementById(nombrePedida);
+                            elemento.style.display = "none";
+                        }
+                        if (boolRecibida) {
+                            elemento = document.getElementById(nombreObtenida);
+                            elemento.style.display = "block";
+                        }
+                        else {
+                            elemento = document.getElementById(nombreObtenida);
+                            elemento.style.display = "none";
+                        }
+                    }
+                    function FechaVencimientoPermiso(NombreCasilleroMostrar) {
+                        document.getElementById(NombreCasilleroMostrar).style.display = "block";
+                    }
+                </script>
+                <script>
+                    $(document).ready(
+                        function AbrirEstadoCarpeta() {
+                            var user = '<%= user.Estado %>';
+                            if ((user) == "Preliminar") {
+                                $('#ModalPreliminar').modal('show');
+                            };
+                            if ((user) == "1ra parte") {
+                                $('#PrimeraParte').modal('show');
+                            };
+                            if ((user) == "2da parte") {
+                                $('#ModalSegundaParte').modal('show');
+                            };
+                            if ((user) == "Caos") {
+                                $('#ModalCaos').modal('show');
+                            };
+                            if ((user) == "Obras") {
+                                $('#ModalObras').modal('show');
+                            }
+                            function RevisarFechasVencidas() {
 
+                            }
+                        }
+                    );
+                </script>
+                <script>
+                    function CerrarModal() {
+                        $('#ModalPreliminar').modal('hide');
+                        $('#PrimeraParte').modal('hide');
+                        $('#ModalSegundaParte').modal('hide');
+                        $('#ModalCaos').modal('hide');
 
+                    }
+                    function MostrarFechaConMoment(Fecha) {
+                        moment.locale('es');
+                        FechaModificada = moment(Fecha).locale('es').format("DD-MM-YYYY");
+                        return FechaModificada;
+                    }
+                    $('#CodigoCarpeta').click(function () {
+                        $.ajax({
+                            url: '/CodigoCarpeta',
+                            method: "GET",
+                            success: function (data) {
+                                $('#tablaAjax').html(data);
+                            },
+                            error: function (error) {
+                                console.log('ERROR:' + error);
+                            },
+                        });
+                        $('#ModalCodigosCarpeta').modal('show');
 
-    </form>
-</div>
-    <div  class="list-group-item list-group-item-action">Item</div>
-        <div  class="list-group-item list-group-item-action disabled">Disabled item</div>
-</div>  
-                                        <% } %>
-                                            <script
-                                                src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-                                                integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-                                                crossorigin="anonymous"></script>
+                    })
 
-                                            <script
-                                                src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-                                                integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-                                                crossorigin="anonymous"></script>
-                                            <script
-                                                src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-                                                integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-                                                crossorigin="anonymous"></script>
-
-                                            <script>
-                                                function estadoInterferencia(nombrePedida, nombreObtenida, booleanIntPedida, boolRecibida) {
-                                                    if (booleanIntPedida) {
-                                                        elemento = document.getElementById(nombrePedida);
-                                                        elemento.style.display = "block";
-                                                    }
-                                                    else {
-                                                        elemento = document.getElementById(nombrePedida);
-                                                        elemento.style.display = "none";
-                                                    }
-                                                    if (boolRecibida) {
-                                                        elemento = document.getElementById(nombreObtenida);
-                                                        elemento.style.display = "block";
-                                                    }
-                                                    else {
-                                                        elemento = document.getElementById(nombreObtenida);
-                                                        elemento.style.display = "none";
-                                                    }
-                                                }
-                                                function FechaVencimientoPermiso(NombreCasilleroMostrar) {
-                                                    document.getElementById(NombreCasilleroMostrar).style.display = "block";
-                                                }
-                                            </script>
-                                            <script>
-                                                $(document).ready(
-                                                    function AbrirEstadoCarpeta() {
-                                                        var user = '<%= user.Estado %>';
-                                                        if ((user) == "Preliminar") {
-                                                            $('#ModalPreliminar').modal('show');
-                                                        };
-                                                        if ((user) == "1ra parte") {
-                                                            $('#PrimeraParte').modal('show');
-                                                        };
-                                                        if ((user) == "2da parte") {
-                                                            $('#ModalSegundaParte').modal('show');
-                                                        };
-                                                        if ((user) == "Caos") {
-                                                            $('#ModalCaos').modal('show');
-                                                        };
-                                                        if ((user) == "Obras") {
-                                                            $('#ModalObras').modal('show');
-                                                        }
-                                                        function RevisarFechasVencidas() {
-
-                                                        }
-                                                    }
-                                                );
-                                            </script>
-                                            <script>
-                                                function CerrarModal() {
-                                                    $('#ModalPreliminar').modal('hide');
-                                                    $('#PrimeraParte').modal('hide');
-                                                    $('#ModalSegundaParte').modal('hide');
-                                                    $('#ModalCaos').modal('hide');
-
-                                                }
-                                                function MostrarFechaConMoment(Fecha) {
-                                                    moment.locale('es');
-                                                    FechaModificada = moment(Fecha).locale('es').format("DD-MM-YYYY");
-                                                    return FechaModificada;
-                                                }
-                                                $('#CodigoCarpeta').click(function () {
-                                                    $.ajax({
-                                                        url: '/CodigoCarpeta',
-                                                        method: "GET",
-                                                        success: function (data) {
-                                                            $('#tablaAjax').html(data);
-                                                        },
-                                                        error: function (error) {
-                                                            console.log('ERROR:' + error);
-                                                        },
-                                                    });
-                                                    $('#ModalCodigosCarpeta').modal('show');
-
-                                                })
-
-                                            </script>
+                </script>
 
 </body>
 

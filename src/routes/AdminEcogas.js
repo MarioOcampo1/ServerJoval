@@ -299,8 +299,12 @@ router.get('/EditarTareas2/:id', (req, res) => {
     res.locals.moment = moment;
     const id = req.params.id;
     var Nombre = '';
-    var sql = 'Select Nombre from clientes where id=?';
     var resultados;
+    var NombreDeTarea; //Muestra el nombre de cada estado. Para poder mostrar en orden todos los datos de la carpeta.
+    var InformacionDeLaCarpeta=[]; //Contiene la información de cada estado de la carpeta
+    console.log(Nombre);
+
+    var sql = 'Select Nombre from clientes where id=?';
     connection.query(sql, [id], (error, results) => {
 
         if (error) console.log(error);
@@ -315,7 +319,16 @@ router.get('/EditarTareas2/:id', (req, res) => {
             });
 
         }
-        console.log("Nombre al cual se esta ingresando:" + Nombre)
+        sql = 'Select * from adminecogas_distribucion_etapas_carpeta';
+        connection.query(sql, [Nombre], (error, etapaTarea) => {
+            if (error) console.log(error);
+            var elementoJSON = JSON.parse((JSON.stringify(etapaTarea)), function (k, v) {
+                var element = v;
+                NombreDeTarea = etapaTarea;
+                return "";
+            });
+        });
+
         sql = 'Select * from codificacioncarpetas Where Nombre=?';
         connection.query(sql, [Nombre], (error, results) => {
             if (error) console.log(error);
@@ -341,17 +354,24 @@ router.get('/EditarTareas2/:id', (req, res) => {
                 if (error) console.log(error);
 
                 sql = 'Select * from adminecogas_tareas_por_carpeta Where Nombre=?';
-                connection.query(sql, [Nombre], (error, tareasporcarpeta) => {
+                connection.query(sql, [Nombre], (error, InfoTareaPorCarpeta) => {
                     if (error) console.log(error);
-
+                    JSON.parse((JSON.stringify(InfoTareaPorCarpeta)), function (k, v) {
+                    InfoTareaPorCarpeta.forEach(element => {
+                        InformacionDeLaCarpeta.push( k);
+                        InformacionDeLaCarpeta.push(v);
+                    })
+                })
                     sql = 'Select * from clientes where id=?';
 
                     connection.query(sql, [id], (error, results) => {
 
                         if (error) console.log(error);
                         if (results.length > 0) {
+
+
                             //Se procede a enviar al front, los resultados de las consultas sql, prestar atencion que para que ejs pueda resolver el contenido de las sentencias hay que tratar las mismas como un arreglo [0], sino no funciona.
-                            res.render('paginas/AdministracionEcogas/editarTareas2.ejs', { user: results[0], interferenciasypermisos: interferenciasypermisos[0], tareasporcarpeta: tareasporcarpeta[0], CodigoVigentes: CodigoVigentes, CodigoEnUsoVigentes: CodigoEnUsoVigentes, CodigoFinalizadas: CodigoFinalizadas });
+                            res.render('paginas/AdministracionEcogas/editarTareas2.ejs', { user: results[0], NombreDeTarea: NombreDeTarea, tareasporcarpetaJSON: InformacionDeLaCarpeta, interferenciasypermisos: interferenciasypermisos[0], CodigoVigentes: CodigoVigentes, CodigoEnUsoVigentes: CodigoEnUsoVigentes, CodigoFinalizadas: CodigoFinalizadas });
                         }
                         else {
                             res.redirect('/adminecogas');
@@ -369,6 +389,7 @@ router.get('/edit/:id', (req, res) => {
         res.locals.moment = moment;
         const id = req.params.id;
         var Nombre;
+        var interferenciasypermisos2;
         var sql = 'Select Nombre from clientes where id=?'
         connection.query(sql, [id], (error, results) => {
             if (error) console.log(error);
@@ -394,11 +415,22 @@ router.get('/edit/:id', (req, res) => {
                         CodigoBDLimpio = v;
                     }
                 })
+                sql = 'Select * from adminecogas_interferencias_y_permisos where Nombre=?';
+                connection.query(sql, [Nombre], (error, interferenciasypermisos) => {
+                    if (error) console.log(error);
+
+                    interferenciasypermisos2 = interferenciasypermisos;
+                
+                    sql = 'Select TipoDeRed from adminecogas_tareas_por_carpeta where Nombre=?';
+                    connection.query(sql, [Nombre], (error, TipoDeRed) => {
+                        if (error) console.log(error);
+    
                 sql = 'Select * from clientes where id=?';
                 connection.query(sql, [id], (error, results) => {
                     if (error) console.log(error);
                     if (results.length > 0) {
-                        res.render('paginas/AdministracionEcogas/edit', { user: results[0], Codigo: CodigoBDLimpio });
+                        console.log(interferenciasypermisos2);
+                        res.render('paginas/AdministracionEcogas/edit', { user: results[0],TipoDeRed:TipoDeRed, Codigo: CodigoBDLimpio, interferenciasypermisos: interferenciasypermisos2 });
                     }
                     else {
 
@@ -406,7 +438,8 @@ router.get('/edit/:id', (req, res) => {
 
                     }
                 })
-
+            })
+            })
             })
         })
 
@@ -625,21 +658,21 @@ router.post('/update/:id', (req, res) => {
     connection.query(sql, [{
         Nombre: NombreCarpeta, NCarpeta: NCarpeta,
         DNV: DNV, DPV: DPV, Irrigacion: Irrigacion,
-        Hidraulica: HIDRAULICA, Ferrocarriles: FERROCARRIL, PerMunicipal: PerMunicipal, Privado: Privado
+        Hidraulica: HIDRAULICA, Ferrocarriles: FERROCARRIL, PerMunicipal: PerMunicipal, Privado: Privado, Otrospermisos: OTROSPERMISOS
 
     }, NombreOriginal], (error, results) => {
         if (error) console.log(error);
     })
     sql = 'Update adminecogas_tareas_por_carpeta set? where Nombre=?';
     connection.query(sql, [{
-        Nombre: NombreCarpeta, NCarpeta: NCarpeta,
+        Nombre: NombreCarpeta, NCarpeta: NCarpeta, TipoDeRed:TipoDeRed
 
     }, NombreOriginal], (error, results) => {
         if (error) console.log(error);
     })
     sql = 'Update clientes Set ? where id =?';
     connection.query(sql, [{
-        Nombre: NombreCarpeta, NCarpeta: NCarpeta, Comitente: Comitente, Ubicacion: Departamento, TipoDeRed: TipoDeRed
+        Nombre: NombreCarpeta, NCarpeta: NCarpeta, Comitente: Comitente, Ubicacion: Departamento,
     }, id]
         , (error, results) => {
             if (error) console.log(error);
