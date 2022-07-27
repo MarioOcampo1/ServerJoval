@@ -148,6 +148,8 @@
             data= data.toISOString();
             var fecha = new Date(data);
             var fechaActual = new Date();
+            var diaActual= fechaActual;
+        var diaData= fecha;
             fecha = fecha.toISOString();
             fechaActual = fechaActual.toISOString();
 
@@ -160,12 +162,15 @@
         '<div style="display:none">'+ data+'</div> <br>  <div class="bg-primary text-dark">'+ fecha+' </div>';
       }
       if (fechaActual>fecha){
+        console.log(diaActual - diaData);
+        var diferenciaDias= ( diaActual.getTime() - diaData.getTime()); 
+        console.log("Nombre de carpeta: " + row.Nombre_sub+ " fecha actual - fecha =" + diferenciaDias);
         fecha = moment(fecha).locale('es').format("DD-MM-YYYY");
-           return '<div style="display:none">'+ data+'</div> <br>     <div class="bg-danger text-light">'+ fecha+' </div>';
+           return '<div style="display:none">'+ data+'</div> <br>     <div id="TextoParpadeante" class="bg-danger text-light">'+ fecha+' </div>';
           }
     if (fechaActual<fecha){
       fecha = moment(fecha).locale('es').format("DD-MM-YYYY");
-       return '<div style="display:none">'+ data+'</div> <br>  <div class="bg-success text-light">'+ fecha+' </div>';
+       return '<div style="display:none">'+ data+'</div> <br>  <div  class="bg-success text-light">'+ fecha+' </div>';
     }
    
            }},      

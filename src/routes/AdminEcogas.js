@@ -1075,9 +1075,9 @@ router.post('/act1pCarpEcogas/:id', (req, res) => {
     if (CuestionarioRelevamientoAmbiental == "ok" && DDJJInicialAmbiental == "ok" && (ListaVerificacionAmbiental == "ok" || ListaVerificacionAmbiental == "NC")) {
         DocumentacionAmbiente = "ok";
     }
-    if (CuestionarioRelevamientoAmbiental == "EnGestion" || DDJJInicialAmbiental == "EnGestion" || ListaVerificacionAmbiental == "EnGestion") { DocumentacionAmbiente = "EnGestion"; }
-
-
+    if (CuestionarioRelevamientoAmbiental == "EnGestion" || DDJJInicialAmbiental == "EnGestion" || ListaVerificacionAmbiental == "EnGestion") { DocumentacionAmbiente = "EnGestion" ; }
+    if (CuestionarioRelevamientoAmbiental == "Presentado" || DDJJInicialAmbiental == "Presentado" || ListaVerificacionAmbiental == "Presentado") { DocumentacionAmbiente = "Presentado" ; }
+    if (CuestionarioRelevamientoAmbiental == "Observado" || DDJJInicialAmbiental == "Observado" || ListaVerificacionAmbiental == "Observado") { DocumentacionAmbiente = "Observado" ; }
     console.log("id:" + id + "," + Contrato, "", Comercial, "", Presupuesto, "", Sucedaneo, "",)
     console.log("El valor que contiene la fecha del contrato es: " + FechaFirmaContrato);
     sql = 'Update clientes_tareasgenerales Set ? where Nombre=?';
@@ -1203,7 +1203,7 @@ router.post('/act2pCarpEcogas/:id', (req, res) => {
     if (SolicitudInicioObras == "ok" && CertificadoRT == "ok") {
         DocumentacionObra = "ok";
     }
-    if (SolicitudInicioObras == "EnGestion" || CertificadoRT == "EnGestion") {
+    if (SolicitudInicioObras == "Presentado" || CertificadoRT == "EnGestion") {
         DocumentacionObra = "EnGestion";
     }
     if (SolicitudInicioObras == "Sin presentar" || CertificadoRT == "Sin presentar") {
