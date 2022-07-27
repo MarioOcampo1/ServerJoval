@@ -29,6 +29,9 @@ passport.use(new PassportLocal(function (username, password, done) {
     if (username == "mpereyra" && password == "theboss") {
         return done(null, { id: 3, name: "Mauricio" });
     }
+    if(username=="sebas" && password == "4321"){
+        return done(null,{id: 4 , name: "Sebas"});
+        }
 
     done(null, false); // Esta linea define a traves del null, que no hubo ningun error, pero el al mismo tiempo, a traves del false, indica que el usuario no se ha encontrado.
     // Cuando el sistema, quiere guardar que el usuario 1 ingreso al sistema, a esa llamada se le llama Serialización.
@@ -41,10 +44,13 @@ passport.deserializeUser(function (id, done) {
         done(null, { id: 1, name: "Mario" });
     }
     if (id == 2) {
-        done(null, { id: 1, name: "Gustavo" });
+        done(null, { id: 2, name: "Gustavo" });
     }
     if (id == 3) {
-        done(null, { id: 1, name: "Mauricio" });
+        done(null, { id: 3, name: "Mauricio" });
+    }
+    if (id == 3) {
+        done(null, { id: 4, name: "Sebas" });
     }
 })
 //Seteo server original

@@ -9,7 +9,7 @@ module.exports = router;
 const moment = require('moment');
 
 router.use(session({
-    secret: 'mi secreto',
+    secret: 'misecreto',
     resave: true,
     saveUninitialized: true
 }))
@@ -28,7 +28,11 @@ passport.use(new PassportLocal(function (username, password, done) {
     if (username == "mpereyra" && password == "theboss") {
         return done(null, { id: 3, name: "Mauricio" });
     }
-
+    if(username=="sebas" && password == "4321"){
+        return done(null,{id: 4, name: "Sebas"});
+        }
+        if(err){return done(err);}
+console.log("Ningun usuario encontrado");
     done(null, false); // Esta linea define a traves del null, que no hubo ningun error, pero el al mismo tiempo, a traves del false, indica que el usuario no se ha encontrado.
     // Cuando el sistema, quiere guardar que el usuario 1 ingreso al sistema, a esa llamada se le llama Serialización.
 }))
@@ -36,14 +40,17 @@ passport.serializeUser(function (user, done) {
     done(null, user.id);
 })
 passport.deserializeUser(function (id, done) {
-    if (id == 1) {
-        done(null, { id: 1, name: "Mario" });
+   if (id == 1) {
+        done(null, { id: 1 });
     }
     if (id == 2) {
-        done(null, { id: 1, name: "Gustavo" });
+        done(null, { id: 2 });
     }
     if (id == 3) {
-        done(null, { id: 1, name: "Mauricio" });
+        done(null, { id: 3 });
+    }
+    if (id == 4) {
+        done(null, { id: 4 });
     }
 })
 //Seteo server original
@@ -75,6 +82,11 @@ router.get('/index', (req, res, next) => {
         }
     }
 })
+router.post('/login', passport.authenticate('local', {
+    successRedirect: "/index",
+    failureRedirect: "/", failureMessage: true
+})
+)
 router.get('/vencimientos', (req, res) => {
     // if(req.isAuthenticated()){
     const sql = 'SELECT c.id, c.Nombre, c.NCarpeta, c.intTelefonica, c.intTelefonicaPedida, c.intTelefonicaObtenida, c.intAgua, c.intAguaPedida, c.intAguaObtenida, c.intCloaca,c.intCloacasPedida, c.intCloacasObtenida, c.intClaro, c.intClaroPedida, c.intClaroObtenida, c.intElectricidad, c.intElectricidadPedida, c.intElectricidadObtenida, c.intArnet ,  c.intArnetPedida, c.intArnetObtenida,c.intArsat, c.intArsatPedida, c.intArsatObtenida, c.intTelecomPedida, c.intTelecomObtenida, c.intTelecom FROM clientes c';
@@ -522,15 +534,8 @@ router.get('/GuiaParaElNuevo', (req, res) => {
 
     } else { res.redirect('/'); }
 })
-
-
-
 //Rutas Post
-router.post('/login', passport.authenticate('local', {
-    successRedirect: "/index",
-    failureRedirect: "/", failureMessage: true
-})
-)
+
 router.post('/actualizarcontacto/:id', (req, res) => {
     const id = req.body.id;
     const Nombre = req.body.Nombre;

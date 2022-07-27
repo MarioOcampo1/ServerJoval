@@ -18,18 +18,28 @@ app.use(express.urlencoded({extended: true }));
 app.use(express.json());
 app.use(cookieParser('secreto'));
 app.use(session({
-    secret: 'mi secreto',
+    secret: 'misecreto',
     resave:true,
     saveUninitialized: true
 }))
-app.use(passport.initialize());
-app.use(passport.session());
-passport.use(new PassportLocal(function(username,password, done){
-    if(username=="Mario" && password == "asd"){
-return    done(null,{id: 1 , name: "Mario"});
-}
-done(null, false);
-// Cuando el sistema, quiere guardar que el usuario 1 ingreso al sistema, a esa llamada se le llama Serialización.
+passport.use(new PassportLocal(function (username, password, done) {
+
+    if (username == "mocampo" && password == "asd") {
+        return done(null, { id: 1, name: "Mario" });
+    }
+    if (username == "gmaceira" && password == "January2072") {
+        return done(null, { id: 2, name: "Gustavo" });
+    }
+    if (username == "mpereyra" && password == "theboss") {
+        return done(null, { id: 3, name: "Mauricio" });
+    }
+    if(username=="sebas" && password == "4321"){
+        return done(null,{id: 4, name: "Sebas"});
+        }
+        if(err){return done(err);}
+console.log("Ningun usuario encontrado");
+    done(null, false); 
+    
 }))
 passport.serializeUser(function(user,done){
     done(null,user.id);
