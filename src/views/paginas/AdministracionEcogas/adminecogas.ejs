@@ -166,7 +166,7 @@
         if (dias>7){
           return '<div  style="display:none">'+ data+'</div> <br><div id="TextoParpadeante" class="bg-black text-danger"><h4>'+ fecha+'</h4> </div>';
           Blink();
-        }if(dias>1){
+        }if(dias>0){
            return '<div style="display:none">'+ data+'</div> <br>     <div class="bg-danger text-light">'+ fecha+' </div>';
            Blink();
           }
@@ -174,11 +174,11 @@
             return '<div style="display:none">'+ data+'</div> <br>     <div class="bg-warning text-dark">'+ fecha+' </div>';
           }
           }
-          if (fechaActual==fecha){
-      fecha = moment(fecha).locale('es').format("DD-MM-YYYY");
-        return 
-        '<div style="display:none">'+ data+'</div> <br>  <div class="bg-warning text-dark">'+ fecha+' </div>';
-      }
+      //     if (fechaActual==fecha){
+      // fecha = moment(fecha).locale('es').format("DD-MM-YYYY");
+      //   return 
+      //   '<div style="display:none">'+ data+'</div> <br>  <div class="bg-warning text-dark">'+ fecha+' </div>';
+      // }
     if (fechaActual<fecha){
       console.log("fecha elegida:"+ fecha+"dias con anticipacion:"+ dias);
       if (dias>30 )
