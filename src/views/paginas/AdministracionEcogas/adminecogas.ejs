@@ -156,13 +156,9 @@
         var dias=diferenciaDias/(1000*3600*24);
         dias = parseInt(dias); //Para que el sistema pueda calcular mejor la diferencia entre fechas, pasamos el numero con coma, a numero entero.
         //}
-
-   
-    
    
       if (fechaActual>fecha){//Dias atrasados
         fecha = moment(fecha).locale('es').format("DD-MM-YYYY");
-       console.log("La fecha es mas antigua: "+fecha +"El nombre de la carpeta es:" + data);
         if (dias>7){
           return '<div  style="display:none">'+ data+'</div> <br><div id="TextoParpadeante" class="bg-black text-danger"><h4>'+ fecha+'</h4> </div>';
           Blink();
@@ -180,12 +176,10 @@
       //   '<div style="display:none">'+ data+'</div> <br>  <div class="bg-warning text-dark">'+ fecha+' </div>';
       // }
     if (fechaActual<fecha){
-      console.log("fecha elegida:"+ fecha+"dias con anticipacion:"+ dias);
-      if (dias>30 )
+      if (dias>30)
       { fecha = moment(fecha).locale('es').format("DD-MM-YYYY");
        return '<div style="display:none">'+ data+'</div> <br>  <div  class="bg-primary text-light">'+ fecha+' </div>';
-      }if(dias>1){
-
+      }if(dias>(-4)){
       fecha = moment(fecha).locale('es').format("DD-MM-YYYY");
        return '<div style="display:none">'+ data+'</div> <br>  <div  class="bg-success text-light">'+ fecha+' </div>';
     }}
