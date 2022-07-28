@@ -123,7 +123,6 @@
                
         "columns": [
           {"width": "5%","data": "CodigoVigentes", render: function(data,type,row){
-           console.log("Codigos vigentes para ser usados:" + row.CodigoVigentes);
             if(row.CodigoVigentes==null || row.CodigoEnUsoVigentes=="F"){
               return ('<div class="text-light bg-success " title="Carpeta Finalizada. Codigo fisico.">'+row.CodigoFinalizadas+'</div>' );
             }
@@ -150,6 +149,7 @@
             var fechaActual = new Date();
             var diaActual= fechaActual;
         var diaData= fecha;
+
             fecha = fecha.toISOString();
             fechaActual = fechaActual.toISOString();
 
@@ -162,11 +162,21 @@
         '<div style="display:none">'+ data+'</div> <br>  <div class="bg-primary text-dark">'+ fecha+' </div>';
       }
       if (fechaActual>fecha){
-        console.log(diaActual - diaData);
-        var diferenciaDias= ( diaActual.getTime() - diaData.getTime()); 
-        console.log("Nombre de carpeta: " + row.Nombre_sub+ " fecha actual - fecha =" + diferenciaDias);
         fecha = moment(fecha).locale('es').format("DD-MM-YYYY");
-           return '<div style="display:none">'+ data+'</div> <br>     <div id="TextoParpadeante" class="bg-danger text-light">'+ fecha+' </div>';
+        //Calculamos la diferencia entre los dias =>{
+        var diferenciaDias= Math.abs(diaActual-diaData);
+        var dias=diferenciaDias/(1000*3600*24);
+        dias = parseInt(dias); //Para que el sistema pueda calcular mejor la diferencia entre fechas, pasamos el numero con coma, a numero entero.
+        //}
+        console.log("Nombre de carpeta: " + row.Nombre_sub+ " fecha actual - fecha =" + dias);
+        if (dias>2){
+          
+          return '<div  style="display:none">'+ data+'</div> <br><div id="TextoParpadeante" class="bg-black text-danger"><h4>'+ fecha+'</h4> </div>';
+          Blink();
+        }else{
+           return '<div style="display:none">'+ data+'</div> <br>     <div class="bg-danger text-light">'+ fecha+' </div>';
+           Blink();
+          }
           }
     if (fechaActual<fecha){
       fecha = moment(fecha).locale('es').format("DD-MM-YYYY");
@@ -177,12 +187,8 @@
           {"width": "1%","data": "Estado"},
 
         ],
-      
- 
-        
       });
-
-Fuente: https://www.iteramos.com/pregunta/18592/jquery-datatables-controlar-el-ancho-de-la-tabla
+     
 
 //Buscadores con botones.
    $('#Mauricio').on('click', function() {
@@ -261,6 +267,7 @@ console.log("la nueva fecha es:" + NuevaFecha);
 
      </script>
 <%}%>
+
 </body>
 
 </html>
