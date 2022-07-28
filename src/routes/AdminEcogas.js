@@ -89,7 +89,7 @@ router.post('/login', passport.authenticate('local', {
 )
 router.get('/vencimientos', (req, res) => {
     // if(req.isAuthenticated()){
-    const sql = 'SELECT c.id, c.Nombre, c.NCarpeta, c.intTelefonica, c.intTelefonicaPedida, c.intTelefonicaObtenida, c.intAgua, c.intAguaPedida, c.intAguaObtenida, c.intCloaca,c.intCloacasPedida, c.intCloacasObtenida, c.intClaro, c.intClaroPedida, c.intClaroObtenida, c.intElectricidad, c.intElectricidadPedida, c.intElectricidadObtenida, c.intArnet ,  c.intArnetPedida, c.intArnetObtenida,c.intArsat, c.intArsatPedida, c.intArsatObtenida, c.intTelecomPedida, c.intTelecomObtenida, c.intTelecom FROM clientes c';
+    const sql = 'SELECT c.id, c.Nombre, c.NCarpeta, c.intTelefonica, c.intTelefonicaPedida, c.intTelefonicaObtenida, c.intAgua, c.intAguaPedida, c.intAguaObtenida, c.intCloaca,c.intCloacasPedida, c.intCloacasObtenida, c.intClaro, c.intClaroPedida, c.intClaroObtenida, c.intElectricidad, c.intElectricidadPedida, c.intElectricidadObtenida, c.intArnet ,  c.intArnetPedida, c.intArnetObtenida,c.intArsat, c.intArsatPedida, c.intArsatObtenida, c.intTelecomPedida, c.intTelecomObtenida, c.intTelecom FROM adminecogas_interferencias_y_permisos c';
     res.locals.moment = moment;
     connection.query(sql, (error, results) => {
         if (error) console.log(error);
@@ -123,7 +123,6 @@ router.get('/interferencias/info', (req, res) => {
         }
     })
 })
-
 //Administracion Ecogas
 router.get('/adminecogas', (req, res) => {
     if (req.isAuthenticated()) {
@@ -154,6 +153,7 @@ router.get('/adminecogas/TablaGeneral', (req, res) => {
         if (error) console.log(error);
 
         if (results.length > 0) {
+
             res.send(results); //en {results:results} lo que hago es guardar los resultados que envia la bd, en la variable results
 
         }
@@ -163,7 +163,20 @@ router.get('/adminecogas/TablaGeneral', (req, res) => {
     })
 
 })
-
+router.get('/adminecogas/TablaGeneral/notificaciones/:Nombre',(req,res)=>{
+    if (req.isAuthenticated()) {
+    var sql= 'Select * from adminecogas_tareas_por_carpeta where Nombre =?'
+    connection.query(sql,(error,tareasporcarpeta)=>{
+        if (error) console.log(error);   
+        if (results.length > 0) {
+            res.send(tareasporcarpeta);
+        }
+    })
+}
+else {
+    res.redirect('/');
+}
+})
 router.get('/estadogeneral', (req, res) => {
     if (req.isAuthenticated()) {
         res.locals.moment = moment;
@@ -198,7 +211,6 @@ router.get('/nuevocliente', (req, res) => {
         res.redirect('/');
     }
 })
-
 router.get('/contactos', (req, res) => {
     if (req.isAuthenticated()) {
         res.locals.moment = moment;
@@ -235,7 +247,6 @@ router.get('/editarContacto/:id', (req, res) => {
     } else { res.redirect('/'); }
 
 })
-
 router.get('/editarTareas/:id', (req, res) => {
     if (req.isAuthenticated()) {
         res.locals.moment = moment;
@@ -395,7 +406,6 @@ router.get('/EditarTareas2/:id', (req, res) => {
         })
     })
 })
-
 router.get('/edit/:id', (req, res) => {
     if (req.isAuthenticated()) {
         res.locals.moment = moment;
@@ -527,7 +537,6 @@ router.get('/CodigoCarpeta', (req, res) => {
 
     } else { res.redirect('/'); }
 })
-
 router.get('/GuiaParaElNuevo', (req, res) => {
     if (req.isAuthenticated()) {
         res.render('paginas/AdministracionEcogas/GuiaParaNuevo.ejs');
@@ -535,7 +544,6 @@ router.get('/GuiaParaElNuevo', (req, res) => {
     } else { res.redirect('/'); }
 })
 //Rutas Post
-
 router.post('/actualizarcontacto/:id', (req, res) => {
     const id = req.body.id;
     const Nombre = req.body.Nombre;
@@ -1519,7 +1527,6 @@ router.post('/actFinalCarpEcogas/:id', (req, res) => {
         })
     res.redirect(req.get('referer'));
 })
-
 //Opciones de editar tareas POST
 router.post('/ActualizarEstadoCarpeta/:id', (req, res) => {
     console.log("Actualizando estado de carpeta");

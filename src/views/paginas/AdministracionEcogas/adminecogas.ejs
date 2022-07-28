@@ -93,6 +93,10 @@
           </th>
           <th class="text-center">
             <h6>Estado</h6>
+            </th>
+            <th>
+
+            </th>
         </tr>
       </thead>
       <tbody class="text-center">
@@ -186,7 +190,8 @@
    
            }},      
           {"width": "1%","data": "Estado"},
-
+          { render: function(data,row,type){
+            return '<div> <img src=".././images/SimboloInterferencias.png" alt="Interferencias">  </div>';}}
         ],
       });
      
