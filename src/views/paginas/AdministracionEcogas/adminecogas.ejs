@@ -174,11 +174,11 @@
             return '<div style="display:none">'+ data+'</div> <br>     <div class="bg-warning text-dark">'+ fecha+' </div>';
           }
           }
-      //     if (fechaActual==fecha){
-      // fecha = moment(fecha).locale('es').format("DD-MM-YYYY");
-      //   return 
-      //   '<div style="display:none">'+ data+'</div> <br>  <div class="bg-warning text-dark">'+ fecha+' </div>';
-      // }
+          if (fechaActual==fecha){
+      fecha = moment(fecha).locale('es').format("DD-MM-YYYY");
+        return 
+        '<div style="display:none">'+ data+'</div> <br>  <div class="bg-warning text-dark">'+ fecha+' </div>';
+      }
     if (fechaActual<fecha){
       console.log("fecha elegida:"+ fecha+"dias con anticipacion:"+ dias);
       if (dias>30 )
