@@ -305,7 +305,12 @@
                                         <%=clientes.DocumentacionTerreno%>
                                     </td>
                                     <%}%>
-                                    <%if(clientes.DocumentacionTerreno=="EnGestion" || clientes.DocumentacionTerreno=="Presentado"){%>
+                                    <%if( clientes.DocumentacionTerreno=="Presentado"){%>
+                                        <td id="EncabezadoPreliminar" class="text-dark bg-info">
+                                            <%=clientes.DocumentacionTerreno%>
+                                        </td>
+                                        <%}%>
+                                    <%if(clientes.DocumentacionTerreno=="EnGestion" ){%>
                                         <td id="EncabezadoPreliminar" class="text-dark bg-warning">
                                             <%=clientes.DocumentacionTerreno%>
                                         </td>
@@ -334,7 +339,12 @@
                                                 <%=clientes.DocumentacionSociedad%>
                                             </td>
                                             <%}%>
-                                            <%if(clientes.DocumentacionSociedad=="EnGestion" || clientes.DocumentacionSociedad=="Presentado"){%>
+                                            <%if( clientes.DocumentacionSociedad=="Presentado"){%>
+                                                <td id="EncabezadoPreliminar" class="text-dark bg-info">
+                                                    <%=clientes.DocumentacionSociedad%>
+                                                </td>
+                                                <%}%>
+                                            <%if(clientes.DocumentacionSociedad=="EnGestion" ){%>
                                                 <td id="EncabezadoPreliminar" class="text-dark bg-warning">
                                                     <%=clientes.DocumentacionSociedad%>
                                                 </td>
@@ -361,7 +371,12 @@
                                     <%=clientes.DocumentacionContractual%>
                                 </td>
                                 <%}%>
-                                <%if(clientes.DocumentacionContractual=="EnGestion" || clientes.DocumentacionContractual=="Presentado"){%>
+                                <%if( clientes.DocumentacionContractual=="Presentado"){%>
+                                    <td id="EncabezadoPreliminar" class="text-dark bg-info">
+                                        <%=clientes.DocumentacionContractual%>
+                                    </td>
+                                    <%}%>
+                                <%if(clientes.DocumentacionContractual=="EnGestion" ){%>
                                     <td id="EncabezadoPreliminar" class="text-dark bg-warning">
                                         <%=clientes.DocumentacionContractual%>
                                     </td>
@@ -389,7 +404,12 @@
                                     <%=clientes.Comercial%>
                                 </td>
                                 <%}%>
-                                <%if(clientes.Comercial=="EnGestion" || clientes.Comercial=="Presentado"){%>
+                                <%if( clientes.Comercial=="Presentado"){%>
+                                    <td id="Encabezado1P" class="text-dark bg-info">
+                                        <%=clientes.Comercial%>
+                                    </td>
+                                    <%}%>
+                                <%if(clientes.Comercial=="EnGestion" ){%>
                                     <td id="Encabezado1P" class="text-dark bg-warning">
                                         <%=clientes.Comercial%>
                                     </td>
@@ -417,7 +437,12 @@
                                     <%=clientes.Tecnica%>
                                 </td>
                                 <%}%>
-                                <%if(clientes.Tecnica=="EnGestion" || clientes.Tecnica=="Presentado"){%>
+                                <%if( clientes.Tecnica=="Presentado"){%>
+                                    <td id="Encabezado1P" class="text-dark bg-info">
+                                        <%=clientes.Tecnica%> 
+                                    </td>
+                                    <%}%>
+                                <%if(clientes.Tecnica=="EnGestion" ){%>
                                     <td id="Encabezado1P" class="text-dark bg-warning">
                                         <%=clientes.Tecnica%> 
                                     </td>
@@ -443,7 +468,12 @@
                                         <%=clientes.PermisosEspeciales%>
                                     </td>
                                     <%}%>
-                                    <%if(clientes.PermisosEspeciales=="EnGestion" || clientes.PermisosEspeciales=="Presentado"){%>
+                                    <%if( clientes.PermisosEspeciales=="Presentado"){%>
+                                        <td id="Encabezado1P" class="text-dark bg-info">
+                                            <%=clientes.PermisosEspeciales%> 
+                                        </td>
+                                        <%}%>
+                                    <%if(clientes.PermisosEspeciales=="EnGestion" ){%>
                                         <td id="Encabezado1P" class="text-dark bg-warning">
                                             <%=clientes.PermisosEspeciales%> 
                                         </td>
@@ -471,7 +501,12 @@
                                         <%=clientes.DocumentacionAmbiental%>
                                     </td>
                                     <%}%>
-                                    <%if(clientes.DocumentacionAmbiental=="EnGestion" || clientes.DocumentacionAmbiental=="Presentado"){%>
+                                    <%if( clientes.DocumentacionAmbiental=="Presentado"){%>
+                                        <td id="Encabezado1P" class="text-dark bg-info">
+                                            <%=clientes.DocumentacionAmbiental%> 
+                                        </td>
+                                        <%}%>
+                                    <%if(clientes.DocumentacionAmbiental=="EnGestion" ){%>
                                         <td id="Encabezado1P" class="text-dark bg-warning">
                                             <%=clientes.DocumentacionAmbiental%> 
                                         </td>
@@ -571,7 +606,12 @@
                                     <%=clientes.Interferencias%>
                                 </td>
                                 <%}%>
-                                <%if(clientes.Interferencias=="EnGestion" || clientes.Interferencias=="Pedida"){%>
+                                <%if( clientes.Interferencias=="Pedida"){%>
+                                    <td id="Encabezado2P" class="text-dark bg-info">
+                                        <%=clientes.Interferencias%> 
+                                    </td>
+                                    <%}%>
+                                <%if(clientes.Interferencias=="EnGestion" ){%>
                                     <td id="Encabezado2P" class="text-dark bg-warning">
                                         <%=clientes.Interferencias%> 
                                     </td>
@@ -838,7 +878,12 @@
                                     <%=clientes.PlanosyCroquis%>
                                 </td>
                                 <%}%>
-                                <%if(clientes.PlanosyCroquis=="EnGestion" || clientes.PlanosyCroquis=="Aprobado/Impreso" ||  clientes.PlanosyCroquis=="Presentado" ){%>
+                                <%if( clientes.PlanosyCroquis=="Aprobado/Impreso" ||  clientes.PlanosyCroquis=="Presentado" ){%>
+                                    <td id="EncabezadoCaos" class="text-dark bg-info">
+                                        <%=clientes.PlanosyCroquis%> 
+                                    </td>
+                                    <%}%>
+                                <%if(clientes.PlanosyCroquis=="EnGestion" ){%>
                                     <td id="EncabezadoCaos" class="text-dark bg-warning">
                                         <%=clientes.PlanosyCroquis%> 
                                     </td>
