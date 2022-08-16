@@ -26,8 +26,8 @@ User
     if (username == "mpereyra" && password == "theboss") {
         return done(null, { id: 3, name: "Mauricio" });
     }
-    if(username=="sebas" && password == "4321"){
-        return done(null,{id: 4 , name: "Sebas"});
+    if(username=="Daiana" && password == "Drodriguez"){
+        return done(null,{id: 4 , name: "Daiana"});
         
         }
 
@@ -49,7 +49,7 @@ passport.deserializeUser(function (id, done) {
         done(null, { id: 3, name: "Mauricio" });
     }
     if (id == 4) {
-        done(null, { id: 4, name: "Sebas" });
+        done(null, { id: 4, name: "Daiana" });
     }
 })
 //Seteo server original
@@ -80,4 +80,25 @@ router.get('/download/logoJoval', (req, res) => {
     var filepath = '/LogoJoval.jpg';
     var filename = 'Logo Joval.jpeg';
     res.download(filepath, filename);
+})
+router.get('/seguros/Albacaucion',(req,res)=>{
+    if (req.isAuthenticated()) {
+        var sql= 'Select Nombre from obras';
+connection.query(sql,(error,obras)=>{
+    var sql= 'Select * from admingeneral_seguros_albacaucion'
+
+        res.locals.moment = moment;
+        connection.query(sql, (error, results) => {
+            if (error) console.log(error);
+
+           
+                res.render('paginas/AdministracionGeneral/Albacaucion.ejs', { results: results, obras:obras }); //en {results:results} lo que hago es guardar los resultados que envia la bd, en la variable results
+          
+           
+        })
+    })
+    }
+    else {
+        res.redirect('/');
+    }
 })
