@@ -93,6 +93,10 @@
           </th>
           <th class="text-center">
             <h6>Estado</h6>
+            </th>
+            <th>
+
+            </th>
         </tr>
       </thead>
       <tbody class="text-center">
@@ -149,43 +153,45 @@
             var fechaActual = new Date();
             var diaActual= fechaActual;
         var diaData= fecha;
-
             fecha = fecha.toISOString();
             fechaActual = fechaActual.toISOString();
-
-
-    // fechaActual=moment(fechaActual).format("DD-MM-YYYY");
-    
-    if (fechaActual==fecha){
-      fecha = moment(fecha).locale('es').format("DD-MM-YYYY");
-        return 
-        '<div style="display:none">'+ data+'</div> <br>  <div class="bg-primary text-dark">'+ fecha+' </div>';
-      }
-      if (fechaActual>fecha){
-        fecha = moment(fecha).locale('es').format("DD-MM-YYYY");
-        //Calculamos la diferencia entre los dias =>{
-        var diferenciaDias= Math.abs(diaActual-diaData);
+ //Calculamos la diferencia entre los dias =>{
+  var diferenciaDias= Math.abs(diaActual-diaData);
         var dias=diferenciaDias/(1000*3600*24);
         dias = parseInt(dias); //Para que el sistema pueda calcular mejor la diferencia entre fechas, pasamos el numero con coma, a numero entero.
         //}
-        console.log("Nombre de carpeta: " + row.Nombre_sub+ " fecha actual - fecha =" + dias);
-        if (dias>2){
-          
+   
+      if (fechaActual>fecha){//Dias atrasados
+        fecha = moment(fecha).locale('es').format("DD-MM-YYYY");
+        if (dias>7){
           return '<div  style="display:none">'+ data+'</div> <br><div id="TextoParpadeante" class="bg-black text-danger"><h4>'+ fecha+'</h4> </div>';
           Blink();
-        }else{
+        }if(dias>0){
            return '<div style="display:none">'+ data+'</div> <br>     <div class="bg-danger text-light">'+ fecha+' </div>';
            Blink();
           }
+          if(dias==0){
+            return '<div style="display:none">'+ data+'</div> <br>     <div class="bg-warning text-dark">'+ fecha+' </div>';
           }
+          }
+      //     if (fechaActual==fecha){
+      // fecha = moment(fecha).locale('es').format("DD-MM-YYYY");
+      //   return 
+      //   '<div style="display:none">'+ data+'</div> <br>  <div class="bg-warning text-dark">'+ fecha+' </div>';
+      // }
     if (fechaActual<fecha){
+      if (dias>30)
+      { fecha = moment(fecha).locale('es').format("DD-MM-YYYY");
+       return '<div style="display:none">'+ data+'</div> <br>  <div  class="bg-primary text-light">'+ fecha+' </div>';
+      }if(dias>(-4)){
       fecha = moment(fecha).locale('es').format("DD-MM-YYYY");
        return '<div style="display:none">'+ data+'</div> <br>  <div  class="bg-success text-light">'+ fecha+' </div>';
-    }
+    }}
    
            }},      
           {"width": "1%","data": "Estado"},
-
+          { render: function(data,row,type){
+            return '<div> <img src=".././images/SimboloInterferencias.png" alt="Interferencias">  </div>';}}
         ],
       });
      

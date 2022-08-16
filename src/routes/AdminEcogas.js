@@ -28,8 +28,8 @@ passport.use(new PassportLocal(function (username, password, done) {
     if (username == "mpereyra" && password == "theboss") {
         return done(null, { id: 3, name: "Mauricio" });
     }
-    if(username=="sebas" && password == "4321"){
-        return done(null,{id: 4, name: "Sebas"});
+    if(username=="Daiana" && password == "Drodriguez"){
+        return done(null,{id: 4, name: "Daiana"});
         }
         if(err){return done(err);}
 console.log("Ningun usuario encontrado");
@@ -89,7 +89,7 @@ router.post('/login', passport.authenticate('local', {
 )
 router.get('/vencimientos', (req, res) => {
     // if(req.isAuthenticated()){
-    const sql = 'SELECT c.id, c.Nombre, c.NCarpeta, c.intTelefonica, c.intTelefonicaPedida, c.intTelefonicaObtenida, c.intAgua, c.intAguaPedida, c.intAguaObtenida, c.intCloaca,c.intCloacasPedida, c.intCloacasObtenida, c.intClaro, c.intClaroPedida, c.intClaroObtenida, c.intElectricidad, c.intElectricidadPedida, c.intElectricidadObtenida, c.intArnet ,  c.intArnetPedida, c.intArnetObtenida,c.intArsat, c.intArsatPedida, c.intArsatObtenida, c.intTelecomPedida, c.intTelecomObtenida, c.intTelecom FROM clientes c';
+    const sql = 'SELECT c.Nombre, c.NCarpeta, c.intTelefonica, c.intTelefonicaPedida, c.intTelefonicaObtenida, c.intAgua, c.intAguaPedida, c.intAguaObtenida, c.intCloaca,c.intCloacasPedida, c.intCloacasObtenida, c.intClaro, c.intClaroPedida, c.intClaroObtenida, c.intElectricidad, c.intElectricidadPedida, c.intElectricidadObtenida, c.intArnet ,  c.intArnetPedida, c.intArnetObtenida,c.intArsat, c.intArsatPedida, c.intArsatObtenida, c.intTelecomPedida, c.intTelecomObtenida, c.intTelecom FROM adminecogas_interferencias_y_permisos c';
     res.locals.moment = moment;
     connection.query(sql, (error, results) => {
         if (error) console.log(error);
@@ -109,7 +109,7 @@ router.get('/vencimientos', (req, res) => {
     // }
 })
 router.get('/interferencias/info', (req, res) => {
-    const sql = 'SELECT c.id, c.Nombre, c.NCarpeta, a.Seguridad, a.Interferencias, a.Avisos , a.Permisos FROM clientes c, clientes_tareasgenerales a where a.Nombre= c.Nombre';
+    const sql = 'SELECT c.id, c.Nombre, c.NCarpeta, a.Seguridad, a.Interferencias, a.Avisos , a.Permisos FROM obras c, obras_tareasgenerales a where a.Nombre= c.Nombre';
     res.locals.moment = moment;
     connection.query(sql, (error, results) => {
         if (error) console.log(error);
@@ -123,11 +123,10 @@ router.get('/interferencias/info', (req, res) => {
         }
     })
 })
-
 //Administracion Ecogas
 router.get('/adminecogas', (req, res) => {
     if (req.isAuthenticated()) {
-        const sql = 'SELECT c.id, c.Nombre, c.NCarpeta, c.TareaRealizada, c.ProximaTarea, c.EtapaTarea, c.FechaLimite FROM clientes c  ';
+        const sql = 'SELECT c.id, c.Nombre, c.NCarpeta, c.TareaRealizada, c.ProximaTarea, c.EtapaTarea, c.FechaLimite FROM obras c  ';
         res.locals.moment = moment;
         connection.query(sql, (error, results) => {
             if (error) console.log(error);
@@ -147,13 +146,14 @@ router.get('/adminecogas', (req, res) => {
     }
 })
 router.get('/adminecogas/TablaGeneral', (req, res) => {
-    // const sql = 'SELECT c.id, c.Nombre, c.NCarpeta,a.ResponsableDeTarea, c.TareaRealizada, c.ProximaTarea,c.EtapaTarea, c.FechaLimite, c.Estado FROM clientes c, historialdecambios a where c.Nombre = a.Nombre_sub'; //SQL ORIGINAL
-    var sql = 'Select b.CodigoVigentes,b.CodigoEnUsoVigentes,b.CodigoFinalizadas, c.Nombre_sub, a.NCarpeta, a.Estado, a.id, c.ResponsableDeTarea,c.Tarea_Realizada_sub, c.Proxima_Tarea_sub, c.Fecha_Proxima_Tarea_sub, c.EtapaTarea_sub from  clientes a, codificacioncarpetas b, historialdecambios c  where a.Nombre = c.Nombre_sub AND a.Nombre = b.Nombre and c.Si_NO_TareaRealizada != "S"  '; //AND (DATE_SUB(CURDATE(), interval 7 day)) <= c.Fecha_Proxima_Tarea_sub  Permite mostrar las fechas proximas a vencerse. ';
+    // const sql = 'SELECT c.id, c.Nombre, c.NCarpeta,a.ResponsableDeTarea, c.TareaRealizada, c.ProximaTarea,c.EtapaTarea, c.FechaLimite, c.Estado FROM obras c, historialdecambios a where c.Nombre = a.Nombre_sub'; //SQL ORIGINAL
+    var sql = 'Select b.CodigoVigentes,b.CodigoEnUsoVigentes,b.CodigoFinalizadas, c.Nombre_sub, a.NCarpeta, a.Estado, a.id, c.ResponsableDeTarea,c.Tarea_Realizada_sub, c.Proxima_Tarea_sub, c.Fecha_Proxima_Tarea_sub, c.EtapaTarea_sub from  obras a, codificacioncarpetas b, historialdecambios c  where a.Nombre = c.Nombre_sub AND a.Nombre = b.Nombre and c.Si_NO_TareaRealizada != "S"  '; //AND (DATE_SUB(CURDATE(), interval 7 day)) <= c.Fecha_Proxima_Tarea_sub  Permite mostrar las fechas proximas a vencerse. ';
     res.locals.moment = moment;
     connection.query(sql, (error, results) => {
         if (error) console.log(error);
 
         if (results.length > 0) {
+
             res.send(results); //en {results:results} lo que hago es guardar los resultados que envia la bd, en la variable results
 
         }
@@ -163,14 +163,27 @@ router.get('/adminecogas/TablaGeneral', (req, res) => {
     })
 
 })
-
+router.get('/adminecogas/TablaGeneral/notificaciones/:Nombre',(req,res)=>{
+    if (req.isAuthenticated()) {
+    var sql= 'Select * from adminecogas_tareas_por_carpeta where Nombre =?'
+    connection.query(sql,(error,tareasporcarpeta)=>{
+        if (error) console.log(error);   
+        if (results.length > 0) {
+            res.send(tareasporcarpeta);
+        }
+    })
+}
+else {
+    res.redirect('/');
+}
+})
 router.get('/estadogeneral', (req, res) => {
     if (req.isAuthenticated()) {
         res.locals.moment = moment;
-        const sql = 'SELECT e.CodigoVigentes, c.id, c.Nombre  ,c.NCarpeta,  c.Ubicacion ,c.Comitente ,c.Estado, c.Fechafirmacontrato  ,b.DocumentacionTerreno ,b.DocumentacionSociedad ,b.DocumentacionContractual  ,b.Comercial ,b.Tecnica ,b.PermisosEspeciales ,b.DocumentacionObra  ,b.Seguridad,b.Interferencias, b.Permisos, b.PlanDeTrabajo, b.Matriculas, b.Ambiente, b.NotaCumplimentoNormativas, b.DDJJNAG153, b.Avisos, b.DocumentacionInspeccion, b.ComunicacionObras, b.ActasFinalesEcogas, b.PlanosyCroquis, b.ConformeEntidades, b.PruebaHermeticidad, b.InformesFinales, b.PresentacionFinal, d.MailAutorizacion, b.HabilitacionObra, b.DocumentacionAmbiental  from clientes_tareasgenerales b , codificacioncarpetas e, clientes c, adminecogas_tareas_por_carpeta d where b.Nombre = c.Nombre AND b.Nombre = e.Nombre AND d.Nombre = e.Nombre';
-        // const sql = 'SELECT c.id, c.Nombre  ,c.NCarpeta,  c.Ubicacion ,c.Comitente ,c.Estado, c.Fechafirmacontrato ,b.DocumentacionTerreno, b.DocumentacionSociedad,b.DocumentacionContractual  ,b.Comercial ,b.Tecnica,b.PermisosEspeciales ,b.DocumentacionObra  ,b.Seguridad,b.Interferencias, b.Permisos, b.PlanDeTrabajo, b.Matriculas, b.Ambiente, b.NotaCumplimentoNormativas, b.DDJJNAG153, b.Avisos, b.DocumentacionInspeccion, b.ComunicacionObras, b.ActasFinalesEcogas, b.PlanosyCroquis, b.ConformeEntidades, b.PruebaHermeticidad, b.InformesFinales,b.PresentacionFinal, b.HabilitacionObra  from clientes c , clientes_tareasgenerales b  ';
-        // const sql='Select * from clientes c';
-        // const sql='Select * from clientes_tareasgenerales b';
+        const sql = 'SELECT e.CodigoVigentes, c.id, c.Nombre  ,c.NCarpeta,  c.Ubicacion ,c.Comitente ,c.Estado, c.Fechafirmacontrato  ,b.DocumentacionTerreno ,b.DocumentacionSociedad ,b.DocumentacionContractual  ,b.Comercial ,b.Tecnica ,b.PermisosEspeciales ,b.DocumentacionObra  ,b.Seguridad,b.Interferencias, b.Permisos, b.PlanDeTrabajo, b.Matriculas, b.Ambiente, b.NotaCumplimentoNormativas, b.DDJJNAG153, b.Avisos, b.DocumentacionInspeccion, b.ComunicacionObras, b.ActasFinalesEcogas, b.PlanosyCroquis, b.ConformeEntidades, b.PruebaHermeticidad, b.InformesFinales, b.PresentacionFinal, d.MailAutorizacion, b.HabilitacionObra, b.DocumentacionAmbiental  from obras_tareasgenerales b , codificacioncarpetas e, obras c, adminecogas_tareas_por_carpeta d where b.Nombre = c.Nombre AND b.Nombre = e.Nombre AND d.Nombre = e.Nombre';
+        // const sql = 'SELECT c.id, c.Nombre  ,c.NCarpeta,  c.Ubicacion ,c.Comitente ,c.Estado, c.Fechafirmacontrato ,b.DocumentacionTerreno, b.DocumentacionSociedad,b.DocumentacionContractual  ,b.Comercial ,b.Tecnica,b.PermisosEspeciales ,b.DocumentacionObra  ,b.Seguridad,b.Interferencias, b.Permisos, b.PlanDeTrabajo, b.Matriculas, b.Ambiente, b.NotaCumplimentoNormativas, b.DDJJNAG153, b.Avisos, b.DocumentacionInspeccion, b.ComunicacionObras, b.ActasFinalesEcogas, b.PlanosyCroquis, b.ConformeEntidades, b.PruebaHermeticidad, b.InformesFinales,b.PresentacionFinal, b.HabilitacionObra  from obras c , obras_tareasgenerales b  ';
+        // const sql='Select * from obras c';
+        // const sql='Select * from obras_tareasgenerales b';
 
         connection.query(sql, (error, results) => {
             if (error) console.log(error);
@@ -198,7 +211,6 @@ router.get('/nuevocliente', (req, res) => {
         res.redirect('/');
     }
 })
-
 router.get('/contactos', (req, res) => {
     if (req.isAuthenticated()) {
         res.locals.moment = moment;
@@ -235,13 +247,12 @@ router.get('/editarContacto/:id', (req, res) => {
     } else { res.redirect('/'); }
 
 })
-
 router.get('/editarTareas/:id', (req, res) => {
     if (req.isAuthenticated()) {
         res.locals.moment = moment;
         const id = req.params.id;
         var Nombre = '';
-        var sql = 'Select Nombre from clientes where id=?';
+        var sql = 'Select Nombre from obras where id=?';
         var resultados;
         connection.query(sql, [id], (error, results) => {
 
@@ -286,7 +297,7 @@ router.get('/editarTareas/:id', (req, res) => {
                     connection.query(sql, [Nombre], (error, tareasporcarpeta) => {
                         if (error) console.log(error);
 
-                        sql = 'Select * from clientes where id=?';
+                        sql = 'Select * from obras where id=?';
 
                         connection.query(sql, [id], (error, results) => {
 
@@ -316,7 +327,7 @@ router.get('/EditarTareas2/:id', (req, res) => {
     var InformacionDeLaCarpeta=[]; //Contiene la información de cada estado de la carpeta
     console.log(Nombre);
 
-    var sql = 'Select Nombre from clientes where id=?';
+    var sql = 'Select Nombre from obras where id=?';
     connection.query(sql, [id], (error, results) => {
 
         if (error) console.log(error);
@@ -374,7 +385,7 @@ router.get('/EditarTareas2/:id', (req, res) => {
                         InformacionDeLaCarpeta.push(v);
                     })
                 })
-                    sql = 'Select * from clientes where id=?';
+                    sql = 'Select * from obras where id=?';
 
                     connection.query(sql, [id], (error, results) => {
 
@@ -395,14 +406,13 @@ router.get('/EditarTareas2/:id', (req, res) => {
         })
     })
 })
-
 router.get('/edit/:id', (req, res) => {
     if (req.isAuthenticated()) {
         res.locals.moment = moment;
         const id = req.params.id;
         var Nombre;
         var interferenciasypermisos2;
-        var sql = 'Select Nombre from clientes where id=?'
+        var sql = 'Select Nombre from obras where id=?'
         connection.query(sql, [id], (error, results) => {
             if (error) console.log(error);
             if (results.length > 0) {
@@ -437,7 +447,7 @@ router.get('/edit/:id', (req, res) => {
                     connection.query(sql, [Nombre], (error, TipoDeRed) => {
                         if (error) console.log(error);
     
-                sql = 'Select * from clientes where id=?';
+                sql = 'Select * from obras where id=?';
                 connection.query(sql, [id], (error, results) => {
                     if (error) console.log(error);
                     if (results.length > 0) {
@@ -461,7 +471,7 @@ router.get('/historialcarpeta/:Nombre', (req, res) => {
     if (req.isAuthenticated()) {
         var id;
         const Nombre = req.params.Nombre;
-        var sql = 'SELECT id FROM clientes WHERE Nombre =?';
+        var sql = 'SELECT id FROM obras WHERE Nombre =?';
         connection.query(sql, [Nombre], (error, results) => {
             if (error) console.log(error);
             if (results.length > 0) {
@@ -527,7 +537,6 @@ router.get('/CodigoCarpeta', (req, res) => {
 
     } else { res.redirect('/'); }
 })
-
 router.get('/GuiaParaElNuevo', (req, res) => {
     if (req.isAuthenticated()) {
         res.render('paginas/AdministracionEcogas/GuiaParaNuevo.ejs');
@@ -535,7 +544,6 @@ router.get('/GuiaParaElNuevo', (req, res) => {
     } else { res.redirect('/'); }
 })
 //Rutas Post
-
 router.post('/actualizarcontacto/:id', (req, res) => {
     const id = req.body.id;
     const Nombre = req.body.Nombre;
@@ -645,7 +653,7 @@ router.post('/update/:id', (req, res) => {
         if (error) console.log(error);
 
     })
-    sql = 'Update clientes_tareasgenerales Set? where Nombre=?';
+    sql = 'Update obras_tareasgenerales Set? where Nombre=?';
     connection.query(sql, [{
         Nombre: NombreCarpeta
     }, NombreOriginal], (error, results) => {
@@ -675,7 +683,7 @@ router.post('/update/:id', (req, res) => {
     }, NombreOriginal], (error, results) => {
         if (error) console.log(error);
     })
-    sql = 'Update clientes Set ? where id =?';
+    sql = 'Update obras Set ? where id =?';
     connection.query(sql, [{
         Nombre: NombreCarpeta, NCarpeta: NCarpeta, Comitente: Comitente, Ubicacion: Departamento,
     }, id]
@@ -701,7 +709,7 @@ router.post('/ActualizarProximasTareas/:id', (req, res) => {
     var sql = "";
 
     if (Fecha_limite) {
-        sql = 'Update  clientes set ? where id=?';
+        sql = 'Update  obras set ? where id=?';
         connection.query(sql, [{ EtapaTarea: EtapaTarea, TareaRealizada: TareaRealizada, ProximaTarea: ProximaTarea, Fechalimite: Fecha_limite }, id], (error, results) => {
             if (error) console.log(error);
         })
@@ -751,7 +759,7 @@ router.post('/edit/delete/:id', (req, res) => {
 
         }
     })
-    sql = 'Delete FROM clientes_tareasgenerales WHERE Nombre =?';
+    sql = 'Delete FROM obras_tareasgenerales WHERE Nombre =?';
     connection.query(sql, [Nombre], (error, results) => {
         if (error) console.log(error);
     })
@@ -761,7 +769,7 @@ router.post('/edit/delete/:id', (req, res) => {
     }, Nombre], (error, results) => {
         if (error) console.log(error);
     })
-    sql = 'Update clientes set? WHERE id =?';
+    sql = 'Update obras set? WHERE id =?';
     res.locals.moment = moment;
     connection.query(sql, [{
         Estado: "ELIMINADO",
@@ -821,7 +829,7 @@ router.post('/guardarNuevoCliente', (req, res) => {
     console.log("DATOS DEL CLIENTE QUE SE GUARDA");
     console.log('NOMBRE:' + Nombre + ', NCarpeta:' + NCarpeta);
 
-    sql = 'Insert into clientes set ?';
+    sql = 'Insert into obras set ?';
     connection.query(sql, {
         Nombre: Nombre, NCarpeta: NCarpeta, Comitente: Comitente, Ubicacion: Departamento,
     }, (error, results) => {
@@ -854,7 +862,7 @@ router.post('/guardarNuevoCliente', (req, res) => {
     }, (error, results) => {
         if (error) console.log(error);
     })
-    sql = 'Insert into clientes_tareasgenerales set ?';
+    sql = 'Insert into obras_tareasgenerales set ?';
     connection.query(sql, {
         Nombre: Nombre, PermisosEspeciales: PermisosEspeciales, Permisos: Permisos
     }, (error, results) => {
@@ -968,7 +976,7 @@ router.post('/actPrelCarpEcogas/:id', (req, res) => {
         DocumentacionContractual = "Sin presentar";
     }
     console.log("documentacion terreno:" + DocumentacionTerreno);
-    sql = 'Update clientes_tareasgenerales Set ? where Nombre=?';
+    sql = 'Update obras_tareasgenerales Set ? where Nombre=?';
     connection.query(sql, [{
         DocumentacionTerreno: DocumentacionTerreno, DocumentacionSociedad: DocumentacionSociedad,
         DocumentacionContractual: DocumentacionContractual
@@ -1080,7 +1088,7 @@ router.post('/act1pCarpEcogas/:id', (req, res) => {
     if (CuestionarioRelevamientoAmbiental == "Observado" || DDJJInicialAmbiental == "Observado" || ListaVerificacionAmbiental == "Observado") { DocumentacionAmbiente = "Observado" ; }
     console.log("id:" + id + "," + Contrato, "", Comercial, "", Presupuesto, "", Sucedaneo, "",)
     console.log("El valor que contiene la fecha del contrato es: " + FechaFirmaContrato);
-    sql = 'Update clientes_tareasgenerales Set ? where Nombre=?';
+    sql = 'Update obras_tareasgenerales Set ? where Nombre=?';
     connection.query(sql, [{ Comercial: Comercial, Tecnica: Tecnica, PermisosEspeciales: PermisosEspeciales, DocumentacionAmbiental: DocumentacionAmbiente }, Nombre],
         (error, results) => {
 
@@ -1314,7 +1322,7 @@ router.post('/act2pCarpEcogas/:id', (req, res) => {
     //     })
     // }
 
-    sql = 'Update clientes_tareasgenerales Set ? where Nombre=?';
+    sql = 'Update obras_tareasgenerales Set ? where Nombre=?';
     connection.query(sql, [{
         PlanDeTrabajo: PlanDeTrabajo, DocumentacionObra: DocumentacionObra, Seguridad: Seguridad, Interferencias: Interferencias, Permisos: Permisos, Matriculas: Matriculas, Ambiente: Ambiente, Avisos: Avisos, NotaCumplimentoNormativas: NotaCumplimentoNormativa, DDJJNAG153: DDJJNAG153, Avisos: Avisos, PermisosEspeciales: PermisosEspeciales
     }, Nombre],
@@ -1402,7 +1410,7 @@ router.post('/actObrasCarpEcogas/:id', (req, res) => {
     if (OrdenServicio == "Si") {
         ComunicacionObras = "Leer historial de carpeta";
     }
-    sql = 'Update clientes_tareasgenerales Set ? where Nombre=?';
+    sql = 'Update obras_tareasgenerales Set ? where Nombre=?';
     connection.query(sql, [{ DocumentacionInspeccion: DocumentacionInspeccion, ComunicacionObras: ComunicacionObras }, Nombre],
         (error, results) => {
 
@@ -1471,7 +1479,7 @@ router.post('/actCaosCarpEcogas/:id', (req, res) => {
     var ConformeDePermisos = req.body.ConformeDePermisos;
     var PruebaHermeticidad = req.body.PruebaHermeticidad;
     var InformesFinales = req.body.InformesFinales;
-    sql = 'Update clientes_tareasgenerales Set ? where Nombre=?';
+    sql = 'Update obras_tareasgenerales Set ? where Nombre=?';
     connection.query(sql, [{ ActasFinalesEcogas: ActasFinales, PlanosyCroquis: PlanosyCroquis, ConformeEntidades: ConformeDePermisos, PruebaHermeticidad: PruebaHermeticidad, InformesFinales: InformesFinales }, Nombre],
         (error, results) => {
             if (error) {
@@ -1500,7 +1508,7 @@ router.post('/actFinalCarpEcogas/:id', (req, res) => {
     var HabilitacionObra = req.body.HabilitacionFinal;
     var HabilitacionFinal = req.body.HabilitacionFinal;
 
-    sql = 'Update clientes_tareasgenerales Set ? where Nombre=?';
+    sql = 'Update obras_tareasgenerales Set ? where Nombre=?';
     connection.query(sql, [{ PresentacionFinal: PresentacionFinal, HabilitacionObra: HabilitacionObra }, Nombre],
         (error, results) => {
 
@@ -1519,7 +1527,6 @@ router.post('/actFinalCarpEcogas/:id', (req, res) => {
         })
     res.redirect(req.get('referer'));
 })
-
 //Opciones de editar tareas POST
 router.post('/ActualizarEstadoCarpeta/:id', (req, res) => {
     console.log("Actualizando estado de carpeta");
@@ -1563,7 +1570,7 @@ router.post('/ActualizarEstadoCarpeta/:id', (req, res) => {
     }, Nombre], (error, results) => {
         if (error) console.log(error);
     })
-    var sql = 'Update clientes Set ? where id=?';
+    var sql = 'Update obras Set ? where id=?';
     connection.query(sql, [{
         Estado: Estado,
     }, id], (error, results) => {
