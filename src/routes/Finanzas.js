@@ -29,8 +29,8 @@ passport.use(new PassportLocal(function (username, password, done) {
     if (username == "mpereyra" && password == "theboss") {
         return done(null, { id: 3, name: "Mauricio" });
     }
-    if(username=="sebas" && password == "4321"){
-        return done(null,{id: 4 , name: "Sebas"});
+    if(username=="Daiana" && password == "Drodriguez"){
+        return done(null,{id: 4 , name: "Daiana"});
         }
 
     done(null, false); // Esta linea define a traves del null, que no hubo ningun error, pero el al mismo tiempo, a traves del false, indica que el usuario no se ha encontrado.
@@ -49,8 +49,8 @@ passport.deserializeUser(function (id, done) {
     if (id == 3) {
         done(null, { id: 3, name: "Mauricio" });
     }
-    if (id == 3) {
-        done(null, { id: 4, name: "Sebas" });
+    if (id == 4) {
+        done(null, { id: 4, name: "Daiana" });
     }
 })
 //Seteo server original
@@ -69,10 +69,23 @@ connection.connect(error => {
     if (error) console.log(error);
 })
 //Settings
+router.get('Finanzas/NuevoCliente',(req,res)=>{
+    res.render('paginas/Finanzas/nuevocliente.ejs');
+})
 //Rutas Get
 router.get('/Finanzas', (req, res) => {
-    //     if(req.isAuthenticated()){
+        if(req.isAuthenticated()){
     res.render('paginas/Finanzas/Home.ejs');
+        }
+})
+router.get('/Finanzas/NuevoCliente',(req,res)=>{
+    var sql= 'Select Nombre from obras';
+    connection.query(sql,(error,results)=>{
+        if (error) console.log(error);
+else{
+    res.render('paginas/Finanzas/nuevocliente.ejs',{nombreObra:results});
+
+}    })
 })
 router.get('/PagoDeObras', (req, res) => {
     var sql = 'Select * from finanzas_pago_de_obras';
@@ -80,7 +93,6 @@ router.get('/PagoDeObras', (req, res) => {
         if (error) console.log(error);
 
         if (results.length > 0) {
-            console.log("Se procede a cargar la pagina pago de obras");
             res.render('paginas/Finanzas/Pagodeobras.ejs', { results: results });
 
         }
@@ -120,6 +132,7 @@ router.get('/Pagodeobras/clientes/:Nombre', (req, res) => {
        
     })
 })
+
 router.get('/Pagodeobras/clientes/:Nombre/VerClientes', (req, res) => {
     var Nombre = req.params.Nombre;
     var sql = 'Select NombreCliente from finanzas_clientes_por_obra WHERE NombreObra=?';
@@ -142,6 +155,7 @@ router.get('/Pagodeobras/clientes/:Nombre/VerClientes', (req, res) => {
        
     })
 })
+
 router.post('/Pagodeobras/clientes/cargarArchivoConClientes', (req, res) => {
     console.log("Intentando guardar archivo en servidor");
 
@@ -170,29 +184,19 @@ console.log(nombres[0].Nombre);
 
 res.send(datos);
 })
-
-
-
-
-
-
-
-
-//     var sql = 'Select * from finanzas_clientes_por_obra WHERE NombreObra=?';
-//     connection.query(sql, [Nombre], (error, results) => {
-//         if (error) console.log(error);
-//         var contador=0;
-//         var json = JSON.parse(JSON.stringify(results));
-//         for (let i = 0; i < results.length; i++) {
-//             const element = JSON.parse(JSON.stringify(results[i]));
-//             if( element.NombreCliente!=null);
-//             contador++;
-//         }
-//         if(contador>0){
-//             res.render('paginas/Finanzas/Pagodeobras/clientes.ejs', { Clientes: results });
-//         }
-//         console.log("Se procede a cargar la pagina clientes por pago de obras");
-       
-//     })
-// })
-
+router.post('/Finanzas/guardarCliente', (req,res)=>{
+var Nombre = req.body.Nombre;
+var Apellido = req.body.Apellido;
+var DNI = req.body.DNI;
+var Teléfono = req.body.Teléfono;
+var Correo = req.body.Correo;
+var Domicilio = req.body.Domicilio;
+var Obra = req.body.Obra;
+sql='insert into finanzas_clientes_por_obra set?';
+connection.query(sql,{
+    NombreCliente:Nombre, NombreObra:Obra, DNICliente: DNI, Telefono:Teléfono, Correo:Correo, Direccion:Domicilio
+},(error, results)=>{
+    if (error) console.log(error);
+else(res.send("Cliente cargado satisfactoriamente"))
+})
+})

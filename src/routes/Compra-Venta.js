@@ -26,8 +26,8 @@ if(username=="gmaceira" && password == "January2072"){
 if(username=="mpereyra" && password == "theboss"){
     return    done(null,{id: 3 , name: "Mauricio"});
 }
-if(username=="sebas" && password == "4321"){
-    return done(null,{id: 4 , name: "Sebas"});
+if(username=="Daiana" && password == "Drodriguez"){
+    return done(null,{id: 4 , name: "Daiana"});
     
     }
 
@@ -48,7 +48,7 @@ done(null,{id:1, name: "Mario"});
                 done(null,{id:3, name: "Mauricio"});
                     }
                     if( id==3){
-                        done(null,{id:4, name: "Sebas"});
+                        done(null,{id:4, name: "Daiana"});
                             }
 })
 //Seteo server original
