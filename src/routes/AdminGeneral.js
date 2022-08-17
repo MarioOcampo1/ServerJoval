@@ -159,3 +159,15 @@ VigenciaPoliza:VigenciaPoliza,Riesgo:DescripcionRiesgo, Valor:ValorAPagar, Monto
         })
     }
 })
+router.post('/BorrarPoliza/:id', (req,res)=>{
+    if (req.isAuthenticated()) {
+        var id= req.params.id;
+      var sql= 'DELETE FROM admingeneral_seguros_albacaucion WHERE ID_poliza = ?'
+        connection.query(sql,[id],(error,results)=>{
+            if (error) console.log(error);  
+            else{
+                res.redirect('/seguros/Albacaucion');   
+            }
+        })
+    }
+})

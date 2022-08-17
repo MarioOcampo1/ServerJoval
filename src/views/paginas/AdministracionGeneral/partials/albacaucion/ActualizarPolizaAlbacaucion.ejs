@@ -12,7 +12,11 @@
     
     <h1 class="text-center bg-warning">Actualizar póliza de Albacaución</h1>
     <div class="btn-group m-1" role="group" aria-label="Botones">
-        <button type="button" class="btn btn-danger" onclick="javascript:history.back()">Volver atrás</button>
+        <button type="button" class="btn btn-outline-secondary" onclick="javascript:history.back()">Volver atrás</button>
+        <form id="formularioBorrarBoton"action="/BorrarPoliza/<%=obras[0].ID_poliza%>" method="post" >
+            <button type="button" class="btn btn-outline-danger" onclick="mostrarAlerta()">Borrar póliza</button>
+        </form>
+
       </div>
     <form class="" action="/ActualizarPolizaAlbacaucion/<%=obras[0].ID_poliza%>" method="post">
    
@@ -84,4 +88,15 @@
         </form>
 
 </body>
+<script>
+    function mostrarAlerta(){
+    if(    window.confirm("ATENCIÓN. Esta por borrar una póliza del sistema.¿Desea continuar con el proceso?")){
+        window.alert("La poliza ha sido borrada");
+        document.getElementById('formularioBorrarBoton').submit();
+    }
+else {
+    window.alert("Operación cancelada.");
+} 
+    }
+</script>
 </html>
