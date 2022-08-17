@@ -86,19 +86,76 @@ router.get('/seguros/Albacaucion',(req,res)=>{
         var sql= 'Select Nombre from obras';
 connection.query(sql,(error,obras)=>{
     var sql= 'Select * from admingeneral_seguros_albacaucion'
-
         res.locals.moment = moment;
         connection.query(sql, (error, results) => {
             if (error) console.log(error);
-
-           
-                res.render('paginas/AdministracionGeneral/Albacaucion.ejs', { results: results, obras:obras }); //en {results:results} lo que hago es guardar los resultados que envia la bd, en la variable results
-          
-           
+// res.send(results);
+                res.render('paginas/AdministracionGeneral/Seguros/Albacaucion.ejs', { results: results, moment:moment, obras:obras }); //en {results:results} lo que hago es guardar los resultados que envia la bd, en la variable results
         })
     })
     }
     else {
         res.redirect('/');
+    }
+})
+router.post('/GuardarPolizaAlbacaucion',(req,res)=>{
+    if (req.isAuthenticated()) {
+        let Aseguradora= req.body.Aseguradora;
+        let NombreObra = req.body.NombreObra;
+        let NPoliza= req.body.NPoliza;
+        let FechaEmisionPoliza = req.body.FechaEmisionPoliza;
+         let VigenciaPoliza = req.body.VigenciaPoliza;
+         let DescripcionRiesgo= req.body.DescripcionRiesgo;
+         let ValorAPagar = req.body.Valor;
+         let montoAsegurado = req.body.MontoAsegurado;
+        var sql= 'Insert into admingeneral_seguros_albacaucion set?'
+        connection.query(sql,{
+Aseguradora:Aseguradora, Obra:NombreObra, NumeroPoliza:NPoliza, FechaEmisionPoliza:FechaEmisionPoliza,
+VigenciaPoliza:VigenciaPoliza,Riesgo:DescripcionRiesgo, Valor:ValorAPagar, MontoAsegurado: montoAsegurado
+        },(error,results)=>{
+            if (error) console.log(error);  
+            else{
+                res.redirect('/seguros/Albacaucion');   
+            }
+        })
+    }
+
+})
+router.get('/seguros/ActualizarPolizaAlbacaucion/:id', (req,res)=>{
+    if (req.isAuthenticated()) {
+        var id= req.params.id;
+        console.log("El id seleccionado es:"+ id);
+        var sql= 'Select * from admingeneral_seguros_albacaucion WHERE ID_poliza = ?';
+        connection.query(sql,id,(error,results)=>{
+            if (error) console.log(error);  
+            else{
+                // res.send(results);
+                res.render('paginas/AdministracionGeneral/partials/albacaucion/ActualizarPolizaAlbacaucion.ejs', {obras:results, moment:moment});  
+            }
+        })
+
+    }
+})
+router.post('/ActualizarPolizaAlbacaucion/:id', (req,res)=>{
+    if (req.isAuthenticated()) {
+        let id= req.params.id;
+        let Aseguradora= req.body.Aseguradora;
+        let Obra = req.body.Obra;
+        let NPoliza= req.body.NPoliza;
+        let FechaEmisionPoliza = req.body.FechaEmisionPoliza;
+         let VigenciaPoliza = req.body.VigenciaPoliza;
+         let DescripcionRiesgo= req.body.DescripcionRiesgo;
+         let ValorAPagar = req.body.Valor;
+         let montoAsegurado = req.body.MontoAsegurado;
+        var sql= 'UPDATE admingeneral_seguros_albacaucion set? WHERE ID_poliza = ?'
+        connection.query(sql,[{
+Aseguradora:Aseguradora, NumeroPoliza:NPoliza, FechaEmisionPoliza:FechaEmisionPoliza, Obra:Obra,
+VigenciaPoliza:VigenciaPoliza,Riesgo:DescripcionRiesgo, Valor:ValorAPagar, MontoAsegurado: montoAsegurado
+        }, id],(error,results)=>{
+            if (error) console.log(error);  
+            else{
+                res.redirect('/seguros/Albacaucion');   
+            }
+        })
     }
 })
