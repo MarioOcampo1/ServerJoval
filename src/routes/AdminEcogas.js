@@ -126,13 +126,25 @@ router.get('/interferencias/info', (req, res) => {
 //Administracion Ecogas
 router.get('/adminecogas', (req, res) => {
     if (req.isAuthenticated()) {
-        const sql = 'SELECT c.id, c.Nombre, c.NCarpeta, c.TareaRealizada, c.ProximaTarea, c.EtapaTarea, c.FechaLimite FROM obras c  ';
+        let sql;
+        // INTERFERENCIAS
+        var interferenciasypermisos;
+sql= 'Select * from adminecogas_interferencias_y_permisos';
+connection.query(sql, (error, results) => {
+    if (error) console.log(error);
+
+    if (results.length > 0) {
+       interferenciasypermisos= results;
+        }
+    })
+        // FIN INTERFERENCIAS
+        sql = 'SELECT c.id, c.Nombre, c.NCarpeta, c.TareaRealizada, c.ProximaTarea, c.EtapaTarea, c.FechaLimite FROM obras c  ';
         res.locals.moment = moment;
         connection.query(sql, (error, results) => {
             if (error) console.log(error);
 
             if (results.length > 0) {
-                res.render('paginas/AdministracionEcogas/adminecogas.ejs', { results: results }); //en {results:results} lo que hago es guardar los resultados que envia la bd, en la variable results
+                res.render('paginas/AdministracionEcogas/adminecogas.ejs', { results: results, interferenciasypermisos: interferenciasypermisos }); //en {results:results} lo que hago es guardar los resultados que envia la bd, en la variable results
 
             }
             else {

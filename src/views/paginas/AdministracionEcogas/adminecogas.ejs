@@ -47,7 +47,15 @@
    </div>
   </div>
   </div>
+<div id="Avisos" class="container">
+<button disabled class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#Interferencias" onclick="document.getElementById('interferencias').style.display='block'">Interferencias</button>
+<button disabled>Permisos</button>
+<button disabled>Documentación</button>
 
+</div>
+<div id=interferencias class="" style="display: none ;">
+  <%- include('./interferencias.ejs')%>
+</div>
     <br>
     <div class="table-responsive " style="width:100%">
     <table id="comunicacionDiaria" class="table table-striped table-bordered table-hover " style="width:100%">
