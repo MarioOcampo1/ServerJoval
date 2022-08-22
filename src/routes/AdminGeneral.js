@@ -108,10 +108,11 @@ router.post('/GuardarPolizaAlbacaucion',(req,res)=>{
          let DescripcionRiesgo= req.body.DescripcionRiesgo;
          let ValorAPagar = req.body.Valor;
          let montoAsegurado = req.body.MontoAsegurado;
+         let Asegurado = req.body.Asegurado;
         var sql= 'Insert into admingeneral_seguros_albacaucion set?'
         connection.query(sql,{
 Aseguradora:Aseguradora, Obra:NombreObra, NumeroPoliza:NPoliza, FechaEmisionPoliza:FechaEmisionPoliza,
-VigenciaPoliza:VigenciaPoliza,Riesgo:DescripcionRiesgo, Valor:ValorAPagar, MontoAsegurado: montoAsegurado
+VigenciaPoliza:VigenciaPoliza,Riesgo:DescripcionRiesgo, Valor:ValorAPagar, MontoAsegurado: montoAsegurado, NombreAsegurado: Asegurado
         },(error,results)=>{
             if (error) console.log(error);  
             else{
@@ -147,10 +148,11 @@ router.post('/ActualizarPolizaAlbacaucion/:id', (req,res)=>{
          let DescripcionRiesgo= req.body.DescripcionRiesgo;
          let ValorAPagar = req.body.Valor;
          let montoAsegurado = req.body.MontoAsegurado;
+         let Asegurado = req.body.Asegurado;
         var sql= 'UPDATE admingeneral_seguros_albacaucion set? WHERE ID_poliza = ?'
         connection.query(sql,[{
 Aseguradora:Aseguradora, NumeroPoliza:NPoliza, FechaEmisionPoliza:FechaEmisionPoliza, Obra:Obra,
-VigenciaPoliza:VigenciaPoliza,Riesgo:DescripcionRiesgo, Valor:ValorAPagar, MontoAsegurado: montoAsegurado
+VigenciaPoliza:VigenciaPoliza,Riesgo:DescripcionRiesgo, Valor:ValorAPagar, MontoAsegurado: montoAsegurado, NombreAsegurado:Asegurado
         }, id],(error,results)=>{
             if (error) console.log(error);  
             else{

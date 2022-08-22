@@ -1,0 +1,22 @@
+@media print {
+    body{
+        visibility:hidden;
+    }
+    .noImprimible{
+        display: none;
+        visibility: hidden;
+    }
+    #printsection, #printsection * {
+       
+        orientation: landscape;
+        visibility: visible;
+    }
+    #printsection {
+        background: red;
+        background-color: red;
+        
+    }
+.bordeExterno{
+    border-style: solid;
+}
+}

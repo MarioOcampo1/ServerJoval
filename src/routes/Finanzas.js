@@ -78,6 +78,11 @@ router.get('/Finanzas', (req, res) => {
     res.render('paginas/Finanzas/Home.ejs');
         }
 })
+router.get('/Finanzas_Cobros', (req, res) => {
+    if(req.isAuthenticated()){
+res.render('paginas/Finanzas/Cobros.ejs');
+    }
+})
 router.get('/Finanzas/NuevoCliente',(req,res)=>{
     var sql= 'Select Nombre from obras';
     connection.query(sql,(error,results)=>{
@@ -87,13 +92,13 @@ else{
 
 }    })
 })
-router.get('/PagoDeObras', (req, res) => {
-    var sql = 'Select * from finanzas_pago_de_obras';
-    connection.query(sql, (error, results) => {
+router.get('/cobroDeObras', (req, res) => {
+    var sql = 'Select * from finanzas_clientes_por_obra';
+    connection.query(sql, (error, clientes) => {
         if (error) console.log(error);
 
-        if (results.length > 0) {
-            res.render('paginas/Finanzas/Pagodeobras.ejs', { results: results });
+        if (clientes.length > 0) {
+            res.render('paginas/Finanzas/cobrodeobras.ejs', { clientes: clientes });
 
         }
         else {
@@ -102,7 +107,7 @@ router.get('/PagoDeObras', (req, res) => {
     })
 })
 
-router.get('/Pagodeobras/clientes/FormularioCliente', (req, res) => {
+router.get('/cobrodeobras/clientes/FormularioCliente', (req, res) => {
     console.log("Descargando archivo Excel");
     console.log("Dirname tiene:" + __dirname);
     let url = path.join(__dirname, '../', '/views/paginas/Finanzas/archivos/NuevoCliente.xlsx')
@@ -113,7 +118,7 @@ router.get('/Pagodeobras/clientes/FormularioCliente', (req, res) => {
     });
 })
 
-router.get('/Pagodeobras/clientes/:Nombre', (req, res) => {
+router.get('/cobrodeobras/clientes/:Nombre', (req, res) => {
     var Nombre = req.params.Nombre;
     var sql = 'Select * from finanzas_clientes_por_obra WHERE NombreObra=?';
     connection.query(sql, [Nombre], (error, results) => {
@@ -126,14 +131,14 @@ router.get('/Pagodeobras/clientes/:Nombre', (req, res) => {
             contador++;
         }
         if(contador>0){
-            res.render('paginas/Finanzas/Pagodeobras/clientes.ejs', { Clientes: results });
+            res.render('paginas/Finanzas/cobrodeobras/clientes.ejs', { Clientes: results });
         }
-        console.log("Se procede a cargar la pagina clientes por pago de obras");
+        console.log("Se procede a cargar la pagina clientes por cobro de obras");
        
     })
 })
 
-router.get('/Pagodeobras/clientes/:Nombre/VerClientes', (req, res) => {
+router.get('/cobrodeobras/clientes/:Nombre/VerClientes', (req, res) => {
     var Nombre = req.params.Nombre;
     var sql = 'Select NombreCliente from finanzas_clientes_por_obra WHERE NombreObra=?';
     connection.query(sql, [Nombre], (error, clientes) => {
@@ -156,7 +161,7 @@ router.get('/Pagodeobras/clientes/:Nombre/VerClientes', (req, res) => {
     })
 })
 
-router.post('/Pagodeobras/clientes/cargarArchivoConClientes', (req, res) => {
+router.post('/cobrodeobras/clientes/cargarArchivoConClientes', (req, res) => {
     console.log("Intentando guardar archivo en servidor");
 
     var Nombre = req.body.NombreCarpeta;
@@ -199,4 +204,16 @@ connection.query(sql,{
     if (error) console.log(error);
 else(res.send("Cliente cargado satisfactoriamente"))
 })
+})
+router.post('/ImprimirComprobante',(req,res)=>{
+   var Nombre= req.body.NombreCompleto;
+var Domicilio= req.body.Domicilio;
+var ValorIngresado= req.body.ValorIngresado;
+var Concepto= req.body.Concepto;
+var FechaPago= req.body.FechaPago;
+var ObservacionesDelPago= req.body.ObservacionesDelPago;
+var ComprobantePago = req.body.ComprobantePago;
+
+    var sql= 'Insert into finanzas_clientes_por_obra_cobros set?';
+   
 })
