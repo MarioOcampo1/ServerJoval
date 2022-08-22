@@ -74,7 +74,7 @@
             
             <button id="Mauricio"class=" btn btn-outline-primary btn-sm "> Mauricio</button>
             <button id="Gustavo"class="  btn btn-outline-primary btn-sm"> Gustavo</button>
-            <button id="Gustavo"class="  btn btn-outline-primary btn-sm"> Daiana</button>
+            <button id="Daiana"class="  btn btn-outline-primary btn-sm"> Daiana</button>
 
           </th>
           <th class="text-center">
@@ -229,7 +229,7 @@ $('#Daiana').on('click', function() {
     .columns()
     .search('')
     .column(3)
-    .search('Dai')
+    .search('Daiana')
     .draw();
     
 });
@@ -285,7 +285,6 @@ console.log("response date tiene:" + responseDate);
     var NuevaFecha = new Date(datePieces[2], (datePieces[1] - 1), datePieces[0],
                          timePieces[0], timePieces[1], timePieces[2]);
 
-console.log("la nueva fecha es:" + NuevaFecha);
     return(new Date(datePieces[2], (datePieces[1] - 1), datePieces[0],
                          timePieces[0], timePieces[1], timePieces[2]))
 }
