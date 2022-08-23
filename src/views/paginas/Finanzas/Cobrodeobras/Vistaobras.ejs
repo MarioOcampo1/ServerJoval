@@ -11,14 +11,15 @@
         </thead>
         <tbody>
             <tr>
-                <td scope="row"></td>
-                <td></td>
-                <td></td>
+            <%cobroObras.forEach((obra)=>{  %>
+                <td>
+                    <%= obra.NombreObra%>
+</td>
+                <td>
+                    <%= obra.NombreCliente%>
+                    </td>
+        <% })%>
             </tr>
-            <tr>
-                <td scope="row"></td>
-                <td></td>
-                <td></td>
-            </tr>
+            
         </tbody>
 </table>

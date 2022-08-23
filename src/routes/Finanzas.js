@@ -93,18 +93,42 @@ else{
 }    })
 })
 router.get('/cobroDeObras', (req, res) => {
-    var sql = 'Select * from finanzas_clientes_por_obra';
+    var sql = 'Select * FROM FINANZAS_clientes_por_obra_cobros '
+    var cobroObras;
+connection.query(sql,(error,resultados)=>{
+cobroObras= resultados;
+})
+var obras;
+sql='Select Nombre From obras';
+connection.query(sql,(error,resultado)=>{
+    obras=resultado;
+})
+     sql = 'Select * from finanzas_clientes_por_obra';
     connection.query(sql, (error, clientes) => {
+        
+        
         if (error) console.log(error);
 
         if (clientes.length > 0) {
-            res.render('paginas/Finanzas/cobrodeobras.ejs', { clientes: clientes });
-
+            res.render('paginas/Finanzas/cobrodeobras.ejs', { clientes: clientes, cobroObras: cobroObras, NombreObras: obras });
+// res.send(obras) ;
         }
         else {
             res.send('Ningun resultado encontrado');
         }
     })
+})
+router.get('/cobrodeobras/clientes/LocalizarClientes/:NombreObra',(req,res)=>{
+var sql
+var NombreObra = req.params.NombreObra;
+console.log("Nombre"+ NombreObra);
+sql= 'SELECT * FROM finanzas_clientes_por_obra where NombreObra=?'
+connection.query(sql,[NombreObra],(error,results)=>{
+    if (error) console.log(error);
+    if(results){
+        res.send(results);
+    }
+})
 })
 
 router.get('/cobrodeobras/clientes/FormularioCliente', (req, res) => {
@@ -120,6 +144,7 @@ router.get('/cobrodeobras/clientes/FormularioCliente', (req, res) => {
 
 router.get('/cobrodeobras/clientes/:Nombre', (req, res) => {
     var Nombre = req.params.Nombre;
+    
     var sql = 'Select * from finanzas_clientes_por_obra WHERE NombreObra=?';
     connection.query(sql, [Nombre], (error, results) => {
         if (error) console.log(error);

@@ -15,6 +15,7 @@
       <h1 class="text-center "><u>
         Cobro de obras</u></h1>
 <button class="btn btn-success"  onclick="AlternarPlanilla()">Alternar vista</button>
+<button class="btn btn-success" onclick="CargarPago();">Nuevo pago</button>
 
       <h2 class="text-center VistaClientes ">Lista de clientes</h2>
 
@@ -32,8 +33,9 @@ Agregar nuevo cliente
     <table id="TablaClientes" class="table table-striped table-bordered table-hover " style="width:100%; display: table;">
       <thead>
         <tr>
+          <td>Obra</td>
           <td>
-            Nombre
+            Cliente
           </td>
           <td>
             DNI
@@ -56,9 +58,11 @@ Teléfono
         <% clientes.forEach((datosTabla)=> { %>
           <tr>
             <td>
-              <button type="button" id="<%= datosTabla.NombreCliente%>" onclick="CargarPago(this);">
+
+              <%= datosTabla.NombreObra%>
+            </td>
+            <td>
             <%= datosTabla.NombreCliente%>
-          </button>
             </td>
             <td>
               <%= datosTabla.DNICliente%>
@@ -100,16 +104,23 @@ Teléfono
               <form action="/ImprimirComprobante" method="post">
                 <h4 id="NombreCliente" class="text-center"></h4>
                 <div class="form">
-
+                  <label class="form-label" for="Obra">Obra </label>
+                  <input list="obras" type="text" name="Obra" id="Obra">
+                  <datalist id="obras">
+<%NombreObras.forEach((element)=>{%>
+  <option value="<%=element.Nombre%>"></option>
+  <%})%>
+                  </datalist>
+                  <p class="form-text noImprimible">Seleccione la obra a la que corresponde el cliente</p>
                 <div class="row">
                   <div class="col">
                       <label class="form-label" for="NombreCompleto">Nombre </label>
-<input required  class="form-control" type="text" name="NombreCompleto" id="NombreCompleto">
-<p class="form-text noImprimible">Ingrese el nombre que figurara en el comprobante de pago.</p>
+                      <select name="NombreCompleto" id="NombreCompleto"></select>
+                     <p class="form-text noImprimible">Seleccione que figurara en el comprobante de pago.</p>
                   </div>
                     <div class="col">
                       <label class="form-label" for="Domicilio">Domicilio:</label>
-                      <input required  class="form-control" type="text" name="Domicilio" id="Domicilio">
+                      <input required  class="form-control" type="text" name="Domicilio" id="InputDomicilio">
                       <p class="form-text noImprimible">Domicilio que corresponde a la obra.</p>
 
                     </div>
@@ -184,14 +195,35 @@ Teléfono
         </div>
       </div>
     </div>
-  
 </body>
 <script>
+
+var select = document.getElementById("Obra");
+select.addEventListener('blur', function(){
+ var NombreObra= this.value;
+ var url= ("/cobrodeobras/clientes/LocalizarClientes/"+NombreObra);
+ $.get(url, function(data){
+  $("#NombreCompleto").empty();
+  data.forEach(Element => {
+    console.log(Element);
+    console.log("Direccion: "+ Element.Direccion);
+  $("#NombreCompleto").append(
+  '<option type="radio" value="'+Element.NombreCliente+'">'+Element.NombreCliente+'</option>'
+);
+$("#InputDomicilio").val(
+  Element.Direccion
+);
+
+  });
+
+ }
  
+ )
+});
+var id= data.id;
+console.log(id);
+
   function CargarPago(data){
-  var NombreCliente= data.id;
-console.log(NombreCliente);
-$('#NombreCliente').html('Comprobante de pago ' +NombreCliente);
 $('#ModalPrincipal').modal("show");
   }
 function AlternarPlanilla(){
