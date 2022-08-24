@@ -124,11 +124,30 @@ Teléfono
                 <div class="row">
                   <div class="col ">
                     <label class="form-label" for="ValorIngresado">Importe</label>
-                    <input required  class="form-control" type="number" step="0.01" name="ValorIngresado" id="ValorIngresado">
+                    <input  required  class="form-control" type="number" step="0.01" name="ValorIngresado" id="ValorIngresado">
+                 
                   </div>
                   <div class="col ">
                     <label class="form-label" for="Concepto">Concepto</label>
-                    <input required  class="form-control" type="text" name="Concepto" id="Concepto">
+                    <input required list="ConceptosDePago"  class="form-control" type="text" name="Concepto" id="Concepto">
+                    <datalist id="ConceptosDePago">
+                      <option value="AnticipoFinanciero"></option>
+                      <option value="Cuota 1"></option>
+                      <option value="Cuota 2"></option>
+                      <option value="Cuota 3"></option>
+                      <option value="Cuota 4"></option>
+                      <option value="Cuota 5"></option>
+                      <option value="Cuota 6"></option>
+                      <option value="Ingreso de documentacion comienzo tramite"></option>
+                      <option value="Permiso Municipal"></option>
+                      <option value="Permiso DNV"></option>
+                      <option value="Permiso DPV"></option>
+                      <option value="Permiso Irrigacion"></option>
+                      <option value="Poliza caucion"></option>
+                      
+                      
+                      
+                                          </datalist>
                   </div>
                  
                   <div class="col">
@@ -201,7 +220,7 @@ select.addEventListener('blur', function(){
  var url= ("/cobrodeobras/clientes/LocalizarClientes/"+NombreObra);
  $.get(url, function(data){
   $("#NombreCompleto").empty();
-  
+  document.getElementById('FechaPago').valueAsDate = new Date();
 
   data.forEach(Element => {
   $("#NombreCompleto").append(
