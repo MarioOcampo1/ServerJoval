@@ -40,9 +40,7 @@ Agregar nuevo cliente
           <td>
             DNI
           </td>
-          <td>
-            Obra
-          </td>
+         
           <td>
 Teléfono
           </td>
@@ -67,9 +65,7 @@ Teléfono
             <td>
               <%= datosTabla.DNICliente%>
               </td>
-              <td>
-                <%= datosTabla.NombreObra%>
-                </td>
+            
                 <td>
                   <%= datosTabla.Telefono%>
                   </td>
@@ -199,27 +195,32 @@ Teléfono
 <script>
 
 var select = document.getElementById("Obra");
+var ClienteSeleccionado;
 select.addEventListener('blur', function(){
  var NombreObra= this.value;
  var url= ("/cobrodeobras/clientes/LocalizarClientes/"+NombreObra);
  $.get(url, function(data){
   $("#NombreCompleto").empty();
+  
+
   data.forEach(Element => {
-    console.log(Element);
-    console.log("Direccion: "+ Element.Direccion);
   $("#NombreCompleto").append(
   '<option type="radio" value="'+Element.NombreCliente+'">'+Element.NombreCliente+'</option>'
+)});
+  $("#NombreCompleto").change(function(){
+let nombreCliente=$('#NombreCompleto option:selected').text(); //Trae solo el nombre del cliente que ha sido seleccionado.
+    var cliente = data.find(element => nombreCliente  == element.NombreCliente); //Busca entre todos los clientes, el cliente que estamos usando y lo guarda en la variable.
+  $("#InputDomicilio").empty();
+  $("#InputDomicilio").val(
+    cliente.Direccion
 );
-$("#InputDomicilio").val(
-  Element.Direccion
-);
-
-  });
-
+})
  }
  
  )
+ 
 });
+
 var id= data.id;
 console.log(id);
 

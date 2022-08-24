@@ -109,7 +109,7 @@ connection.query(sql,(error,resultado)=>{
         
         if (error) console.log(error);
 
-        if (clientes.length > 0) {
+        if (clientes.length) {
             res.render('paginas/Finanzas/cobrodeobras.ejs', { clientes: clientes, cobroObras: cobroObras, NombreObras: obras });
 // res.send(obras) ;
         }
