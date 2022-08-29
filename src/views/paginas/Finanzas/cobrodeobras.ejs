@@ -6,48 +6,48 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pago de obras</title>
-  <link rel="stylesheet" type="text/css" href="../css/print.css" media="print" />
+  <link rel="stylesheet" type="text/css" href="../css/print.css" media="all" />
+
 </head>
 
 <body>
   <%- include('./partials/menusuperior.ejs'); %>
     <div class="container-fluid">
       <h1 class="text-center "><u>
-        Cobro de obras</u></h1>
-<button class="btn btn-success"  onclick="AlternarPlanilla()">Alternar vista</button>
-<button class="btn btn-success" onclick="CargarPago();">Nuevo pago</button>
+          Cobro de obras</u></h1>
+      <button class="btn btn-success" onclick="CargarPago();">Nuevo pago</button>
 
       <h2 class="text-center VistaClientes ">Lista de clientes</h2>
 
     </div>
-<div class="container VistaClientes">
-  <a class="btn btn-outline-danger" href="Finanzas/NuevoCliente">
-Agregar nuevo cliente
-</a>
-<label for="BuscadorCliente">Buscar cliente</label>
-<input class="border border-danger" type="text" name="BuscadorCliente" id="BuscadorCliente">
-</div>
-<br>
-<%- include('./Cobrodeobras/Vistaobras.ejs'); %>
+    <div class="container VistaClientes">
+      <a class="btn btn-outline-danger" href="Finanzas/NuevoCliente">
+        Agregar nuevo cliente
+      </a>
+      <label for="BuscadorCliente">Buscar cliente</label>
+      <input class="border border-danger" type="text" name="BuscadorCliente" id="BuscadorCliente">
+    </div>
+    <br>
 
-    <table id="TablaClientes" class="table table-striped table-bordered table-hover " style="width:100%; display: table;">
+    <table id="TablaClientes" class="table table-striped table-bordered table-hover "
+      style="width:100%; display: table;">
       <thead>
         <tr>
-          <td>Obra</td>
-          <td>
+          <td class="text-center">Obra</td>
+          <td class="text-center">
             Cliente
           </td>
-          <td>
+          <td class="text-center">
             DNI
           </td>
-         
-          <td>
-Teléfono
+
+          <td class="text-center">
+            Teléfono
           </td>
-          <td>
-        Correo    
+          <td class="text-center">
+            Correo
           </td>
-          <td>
+          <td class="text-center">
             Domicilio
           </td>
         </tr>
@@ -56,33 +56,37 @@ Teléfono
         <% clientes.forEach((datosTabla)=> { %>
           <tr>
             <td>
+              <a href="Finanzas/cobrodeobras/VerObra/<%= datosTabla.NombreObra%>">
+                <%= datosTabla.NombreObra%>
+              </a>
 
-              <%= datosTabla.NombreObra%>
             </td>
             <td>
-            <%= datosTabla.NombreCliente%>
+              <a href="Finanzas/CobroDeObras/EditarCliente/<%=datosTabla.ID_cliente%>">
+                <%= datosTabla.NombreCliente%>
+              </a>
             </td>
             <td>
               <%= datosTabla.DNICliente%>
-              </td>
-            
-                <td>
-                  <%= datosTabla.Telefono%>
-                  </td>
-                  <td>
-                    <%= datosTabla.Correo%>
-                    </td>
-                    <td>
-                    <%= datosTabla.Direccion%>
-                    </td>
-                                
+            </td>
+
+            <td>
+              <%= datosTabla.Telefono%>
+            </td>
+            <td>
+              <%= datosTabla.Correo%>
+            </td>
+            <td>
+              <%= datosTabla.Direccion%>
+            </td>
+
 
             <%});%>
       </tbody>
     </table>
 
     <!-- Modal para cargar pago de cliente -->
-    <div id="printsection" class="printsection">
+
     <div class="container-fluid">
       <div class="modal fade" id="ModalPrincipal" tabindex="-1" role="dialog" aria-labelledby="ModalPrincipalLabel"
         aria-hidden="true">
@@ -90,100 +94,123 @@ Teléfono
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="TituloModal"></h5>
-              <button class="noImprimible" type="submit" id="BotonConNombreDeCarpeta" onclick="VerCLientes()">Cargar clientes por lotes</button>
-              <button type="button" class="close noImprimible" onclick="$('#ModalPrincipal').modal('hide');" aria-label="Cerrar">
+              <button class="noImprimible" type="submit" id="BotonConNombreDeCarpeta" onclick="VerCLientes()">Cargar
+                clientes por lotes</button>
+              <button type="button" class="close noImprimible" onclick="$('#ModalPrincipal').modal('hide');"
+                aria-label="Cerrar">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div class="modal-body bordeExterno">
+            <div id="printsection" class="printsection">
 
-              <form action="/ImprimirComprobante" method="post">
-                <h4 id="NombreCliente" class="text-center"></h4>
-                <div class="form">
-                  <label class="form-label" for="Obra">Obra </label>
-                  <input list="obras" type="text" name="Obra" id="Obra">
-                  <datalist id="obras">
-<%NombreObras.forEach((element)=>{%>
-  <option value="<%=element.Nombre%>"></option>
-  <%})%>
-                  </datalist>
-                  <p class="form-text noImprimible">Seleccione la obra a la que corresponde el cliente</p>
-                <div class="row">
-                  <div class="col">
-                      <label class="form-label" for="NombreCompleto">Nombre </label>
-                      <select name="NombreCompleto" id="NombreCompleto"></select>
-                     <p class="form-text noImprimible">Seleccione que figurara en el comprobante de pago.</p>
+              <div class="modal-body bordeExterno">
+                <form action="/ImprimirComprobante" method="post">
+                  <input type="number" name="IDCliente" id="IDCliente" hidden>
+                  <div class="Imprimible">
+                    <img src="../images/logo.png" alt="Joval S.A." id="LogoJoval">
+                    <h1 class=" text-center" id="Encabezado">Comprobante de pago</h1>
                   </div>
-                    <div class="col">
-                      <label class="form-label" for="Domicilio">Domicilio:</label>
-                      <input required  class="form-control" type="text" name="Domicilio" id="InputDomicilio">
-                      <p class="form-text noImprimible">Domicilio que corresponde a la obra.</p>
+
+                  <div class="form">
+                    <div class="row">
+                      <div class="col-auto">
+                        <label class="form-label text-center" for="Obra">Obra </label>
+                        <input list="obras" type="text" name="Obra" id="Obra">
+                        <datalist id="obras">
+                          <%NombreObras.forEach((element)=>{%>
+                            <option value="<%=element.Nombre%>"></option>
+                            <%})%>
+                        </datalist>
+
+                        <p class="form-text noImprimible">Seleccione la obra a la que corresponde el cliente</p>
+
+                      </div>
+                      <div class="col-auto">
+                        <label class="form-label text-center" for="NombreCompleto">Nombre </label>
+                        <select name="NombreCompleto" id="NombreCompleto">
+                          '<option type="radio" value="" selected> </option>'
+                        </select>
+                      </div>
+                      <div class="form-row">
+                        <label class="form-label col-sm-2 col-form-label" for="InputDomicilio">Domicilio</label>
+                        <input required class="form-control" type="text" name="Domicilio" id="InputDomicilio"
+                          placeholder="Domicilio">
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col ">
+                        <label class="form-label text-center" for="ValorIngresado">Importe</label>
+                        <input required class="form-control" type="number" step="0.01" name="ValorIngresado"
+                          id="ValorIngresado">
+
+                      </div>
+                      <div class="col ">
+                        <label class="form-label text-center" for="Concepto">Concepto</label>
+                        <select name="Concepto" id="Concepto">
+                          <!-- <input required list="ConceptosDePago"  class="form-control" type="text" name="Concepto" id="Concepto"> -->
+                          <!-- <datalist id="ConceptosDePago"> -->
+                          <option value="1">Anticipo Financiero</option>
+                          <option value="2">Cuota 1</option>
+                          <option value="3">Cuota 2</option>
+                          <option value="4">Cuota 3</option>
+                          <option value="5">Cuota 4</option>
+                          <option value="6">Cuota 5</option>
+                          <option value="7">Cuota 6</option>
+                          <option value="8">Cuota 7</option>
+                          <option value="9">Cuota 8</option>
+                          <option value="10">Cuota 9</option>
+                          <option value="11">Cuota 10</option>
+                          <option value="12">Cuota 11</option>
+                          <option value="13">Cuota 12</option>
+                          <option value="14">Permiso DNV</option>
+                          <option value="15">Permiso DPV</option>
+                          <option value="16">Permiso Hidraulica</option>
+                          <option value="17">Permiso FFCC</option>
+                          <option value="18">Permiso Privado</option>
+                          <option value="19">Permiso Municipal</option>
+                          <option value="20">Servicio Domiciliario</option>
+                          <option value="21">Ingreso de documentacion comienzo tramite</option>
+                          <option value="22">Permiso Irrigacion</option>
+                          <!-- </datalist> -->
+                        </select>
+                      </div>
+
+                      <div class="col">
+                        <label class="form-label text-center" for="FechaPago"> Fecha de pago</label>
+
+                        <input required class="form-control" type="date" name="FechaPago" id="FechaPago">
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col">
+                        <label class="form-label text-center" for="ObservacionesDelPago">Observaciones</label>
+                        <input class="form-control" type="text" name="ObservacionesDelPago" id="ObservacionesDelPago">
+
+                        <label class="form-label text-center noImprimible" for="ComprobantePago"> Cargar comprobante de
+                          pago </label>
+                        <div class="noImprimible">
+                          <input class="form-control " type="file" name="ComprobantePago" id="ComprobantePago">
+                        </div>
+                        <p class="form-text noImprimible noImprimible">En caso de que la persona pague con
+                          transferencias, cheques, etc.</p>
+                      </div>
 
                     </div>
                   </div>
-                <div class="row">
-                  <div class="col ">
-                    <label class="form-label" for="ValorIngresado">Importe</label>
-                    <input  required  class="form-control" type="number" step="0.01" name="ValorIngresado" id="ValorIngresado">
-                 
-                  </div>
-                  <div class="col ">
-                    <label class="form-label" for="Concepto">Concepto</label>
-                    <input required list="ConceptosDePago"  class="form-control" type="text" name="Concepto" id="Concepto">
-                    <datalist id="ConceptosDePago">
-                      <option value="AnticipoFinanciero"></option>
-                      <option value="Cuota 1"></option>
-                      <option value="Cuota 2"></option>
-                      <option value="Cuota 3"></option>
-                      <option value="Cuota 4"></option>
-                      <option value="Cuota 5"></option>
-                      <option value="Cuota 6"></option>
-                      <option value="Ingreso de documentacion comienzo tramite"></option>
-                      <option value="Permiso Municipal"></option>
-                      <option value="Permiso DNV"></option>
-                      <option value="Permiso DPV"></option>
-                      <option value="Permiso Irrigacion"></option>
-                      <option value="Poliza caucion"></option>
-                      
-                      
-                      
-                                          </datalist>
-                  </div>
-                 
-                  <div class="col">
-                    <label class="form-label" for="FechaPago"> Fecha de pago</label>
-                   
-                    <input required class="form-control"type="date" name="FechaPago" id="FechaPago">
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col">
-                    <label class="form-label" for="ObservacionesDelPago">Observaciones</label>
-                    <input required  class="form-control" type="text" name="ObservacionesDelPago" id="ObservacionesDelPago">
-
-                    <label class="form-label noImprimible"  for="ComprobantePago">  Cargar comprobante de pago </label>
-                    <div class="noImprimible">
-                    <input class="form-control " type="file" name="ComprobantePago" id="ComprobantePago">
-                  </div>
-                    <p class="form-text noImprimible noImprimible">En caso de que la persona pague con transferencias, cheques, etc.</p>
-                  </div>
-
-                </div>
               </div>
             </div>
-          
             <div class="modal-footer noImprimible">
-              <button class="btn" onclick="window.print(); return false;">Imprimir comprobante</button>
-              <button type="button" class="btn btn-secondary "
+              <button class="btn noImprimible" onclick="window.print(); return false;">Imprimir comprobante</button>
+              <button type="button " class="btn btn-secondary  noImprimible"
                 onclick="$('#ModalPrincipal').modal('hide');">Cerrar</button>
-              <button type="submit" class="btn btn-danger ">Guardar</button>
+              <button type="submit" class="btn btn-danger  noImprimible">Guardar</button>
               </form>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+    </div>
     <!-- Modal Cliente -->
     <div class="modal fade" id="modalclientes" tabindex="-1" role="dialog" aria-labelledby="modalclientesTitle"
       aria-hidden="true">
@@ -213,72 +240,80 @@ Teléfono
 </body>
 <script>
 
-var select = document.getElementById("Obra");
-var ClienteSeleccionado;
-select.addEventListener('blur', function(){
- var NombreObra= this.value;
- var url= ("/cobrodeobras/clientes/LocalizarClientes/"+NombreObra);
- $.get(url, function(data){
-  $("#NombreCompleto").empty();
-  document.getElementById('FechaPago').valueAsDate = new Date();
+  var select = document.getElementById("Obra");
+  var ClienteSeleccionado;
+  select.addEventListener('blur', function () {
+    var NombreObra = this.value;
+    var url = ("/cobrodeobras/clientes/LocalizarClientes/" + NombreObra);
+    $.get(url, function (data) {
+      $("#NombreCompleto").empty();
+      $("#NombreCompleto").append(
+        '<option type="radio" value=" " selected> </option>'
+      )
+      document.getElementById('FechaPago').valueAsDate = new Date();
 
-  data.forEach(Element => {
-  $("#NombreCompleto").append(
-  '<option type="radio" value="'+Element.NombreCliente+'">'+Element.NombreCliente+'</option>'
-)});
-  $("#NombreCompleto").change(function(){
-let nombreCliente=$('#NombreCompleto option:selected').text(); //Trae solo el nombre del cliente que ha sido seleccionado.
-    var cliente = data.find(element => nombreCliente  == element.NombreCliente); //Busca entre todos los clientes, el cliente que estamos usando y lo guarda en la variable.
-  $("#InputDomicilio").empty();
-  $("#InputDomicilio").val(
-    cliente.Direccion
-);
-})
- }
- 
- )
- 
-});
+      data.forEach(Element => {
+        $("#NombreCompleto").append(
+          '<option type="radio" value="' + Element.NombreCliente + '">' + Element.NombreCliente + '</option>'
+        )
 
-var id= data.id;
-console.log(id);
+        console.log(Element.ID_cliente);
+      });
+      $("#NombreCompleto").change(function () {
+        let nombreCliente = $('#NombreCompleto option:selected').text(); //Trae solo el nombre del cliente que ha sido seleccionado.
+        var cliente = data.find(element => nombreCliente == element.NombreCliente); //Busca entre todos los clientes, el cliente que estamos usando y lo guarda en la variable.
+        console.log(cliente);
+        $("#InputDomicilio").empty();
+        $("#InputDomicilio").val(
+          cliente.Direccion
+        );
+        $('#IDCliente').val(
+          cliente.ID_cliente
+        )
+      })
+    }
 
-  function CargarPago(data){
-$('#ModalPrincipal').modal("show");
+    )
+
+  });
+  function CargarPago(data) {
+    $('#ModalPrincipal').modal("show");
   }
-function AlternarPlanilla(){
-  var TablaClientes= document.getElementById('TablaClientes').style.display;
-  console.log(TablaClientes);
-  if(TablaClientes=='table'){
-    $('#TablaClientes').css("display","none");
-    $('#TablaObras').css("display","table");
-$(".VistaClientes").css("display","none");
-    }
-    else{
-      $('#TablaClientes').css("display","table");
-    $('#TablaObras').css("display","none");
-    $(".VistaClientes").css("display","block");
 
-    }
-}
+// function AlternarPlanilla(){
+//   var TablaClientes= document.getElementById('TablaClientes').style.display;
+//   console.log(TablaClientes);
+//   if(TablaClientes=='table'){
+//     $('#TablaClientes').css("display","none");
+//     $('#TablaObras').css("display","table");
+// $(".VistaClientes").css("display","none");
+//     }
+//     else{
+//       $('#TablaClientes').css("display","table");
+//     $('#TablaObras').css("display","none");
+//     $(".VistaClientes").css("display","block");
+
+//     }
+// }
 </script>
 <script>
-  jQuery("#BuscadorCliente").keyup(function(){
-    if( jQuery(this).val() != "0"){
-        jQuery("#TablaClientes tbody>tr").hide();
-        jQuery("#TablaClientes td:contiene-palabra('" + jQuery(this).val() + "')").parent("tr").show();
+  jQuery("#BuscadorCliente").keyup(function () {
+    if (jQuery(this).val() != "0") {
+      jQuery("#TablaClientes tbody>tr").hide();
+      jQuery("#TablaClientes td:contiene-palabra('" + jQuery(this).val() + "')").parent("tr").show();
     }
-    else{
-        jQuery("#TablaClientes tbody>tr").show();
+    else {
+      jQuery("#TablaClientes tbody>tr").show();
     }
   })
-  
-jQuery.extend(jQuery.expr[":"], 
-{
-    "contiene-palabra": function(elem, i, match, array) {
+
+  jQuery.extend(jQuery.expr[":"],
+    {
+      "contiene-palabra": function (elem, i, match, array) {
         return (elem.textContent || elem.innerText || jQuery(elem).text() || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
-    }
-});
+      }
+    });
 
 </script>
+
 </html>

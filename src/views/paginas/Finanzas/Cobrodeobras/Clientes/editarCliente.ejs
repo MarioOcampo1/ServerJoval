@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edición cliente obras</title>
+</head>
+<body>
+    <%- include('../../../Finanzas/partials/menusuperior.ejs'); %>
+
+
+    <div class="container-fluid">
+    <h1 class="text-center">Editar cliente de obras</h1>
+    </div>
+    <form action="/Finanzas/Cobrodeobras/EditarCliente/<%=results[0].ID_cliente%>" method="post">
+    <div class="form-group">
+        <div class="container">
+        <div class="row p-3">
+            <div class="col">
+                <label for="Nombre">Nombre</label>
+                <input value="<%=results[0].NombreCliente%>" type="text" class="form-control" id="Nombre" name="Nombre"
+                  placeholder="Ingrese el nombre ">
+            </div>
+          
+            <div class="col">
+                <div class="form-group">
+                    <label for="DNI">DNI</label>
+                    <input value="<%=results[0].DNICliente%>" required type="number" class="form-control" id="DNI" name="DNI" placeholder="DNI">
+                  </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="Teléfono">Teléfono</label>
+                    <input value="<%=results[0].Telefono%>" required type="tel" class="form-control" id="Teléfono" name="Teléfono" placeholder="Teléfono">
+                  </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="Correo">Correo</label>
+                    <input value="<%=results[0].Correo%>" required type="email" class="form-control" id="Correo" name="Correo" placeholder="Correo">
+                  </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="Direccion">Dirección</label>
+                    <input value="<%=results[0].Direccion%>" required type="text" class="form-control" id="Direccion" name="Direccion" placeholder="Domicilio">
+                  </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="Facturar">¿Es un cliente al cúal se debe de facturar?</label>
+<Select>
+    <option value="N" selected>No</option>
+    <option value="S">Sí</option>
+
+</Select>                  </div>
+            </div>
+        </div>
+        <div class="row p-3">
+            <div class="col">Seleccione la obra a la cúal pertenece
+                <select name="Obra" id="Obra">
+                    <option selected value="<%=results[0].NombreObra%>"><%=results[0].NombreObra%></option>
+                    <%obras.forEach((obra)=>{ %>
+                       <option value="<%=obra.Nombre%>"><%=obra.Nombre%></option> 
+                        <%})%>
+                </select>
+            </div>
+            <div class="col">
+                <button class="btn btn-danger" onclick="history.go(-1);">Cancelar</button>
+                <button class="btn btn-success" type="submit">Guardar cliente</button>
+            </div>
+        </div>
+      </div>
+      </div>
+    </form>
+     
+     
+</html>

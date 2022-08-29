@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Finanzas:Vista de la obra</title>
+</head>
+<body>
+    <%- include('../../partials/menusuperior.ejs'); %>
+
+<div class="VistaObra" >
+<div class="Encabezado">
+ <button class="btn btn-danger m-2" onclick="history.go(-1)">Atrás</button>   
+<h1 class="text-center"> Obra <%=Clientes[0].NombreObra%></h1>
+</div>
+<h2>Lista de clientes que contiene la obra</h2>
+  <label for="Buscador">Buscar</label>
+<table id="TablaObras" class="table table-bordered table-inverse table-responsive" style="display: block; width:100%;">
+    <thead class="thead-default">
+        <tr>
+            <th>Cliente</th>
+            <th>Domicilio</th>
+            <th>Anticipo financiero </th>
+            <th>Cuota1 </th>
+            <th>Cuota2 </th>
+            <th>Cuota3 </th>
+            <th>Cuota4 </th>
+            <th>Cuota5 </th>
+            <th>Cuota6 </th>
+            <th>Cuota7 </th>
+            <th>Cuota8 </th>
+            <th>Cuota9 </th>
+            <th>Cuota10 </th>
+             <th>Cuota11 </th>
+             <th>Cuota12 </th>
+            <th>Permiso DNV </th>
+            <th>Permiso DPV </th>
+            <th>Permiso Hidraulica </th>
+            <th>Permiso FFCC </th>
+            <th>Permiso Privado </th>
+            <th>Permiso Municipal </th>
+            <th>Servicio Domiciliario </th>
+            <th>Ingreso documentación por comienzo tramite </th>
+            <th>Permiso Irrigación  </th>
+            
+        </tr>
+        </thead>
+        <tbody>
+            <tr>
+            <% Clientes.forEach((cliente)=>{  %>
+                <td>
+                    <%= cliente.NombreCliente%>
+
+</td>
+                <td>
+                    <%= cliente.Direccion%>
+                    </td>
+                </th>
+            <th><% %> </th>
+            <th><% %> </th>
+            <th><% %> </th>
+            <th><% %> </th>
+            <th><% %> </th>
+            <th><% %> </th>
+            <th><% %> </th>
+            <th><% %> </th>
+            <th><% %> </th>
+            <th><% %> </th>
+            <th><% %> </th>
+            <th><% %> </th>
+            <th><% %> </th>
+            <th><% %> </th>
+            <th><% %> </th>
+            <th><% %> </th>
+            <th><% %> </th>
+            <th><% %> </th>
+            <th><% %> </th>
+            <th><% %> </th>
+            <th><% %> </th>
+        <% })%>
+            </tr>
+            
+        </tbody>
+</table>
+</div>
+</body>
+<script>
+    $('#TipoCobro').click(function(){
+$('#FormTipoCobro').submit();
+    })
+</script>
+</html>

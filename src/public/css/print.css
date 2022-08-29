@@ -1,22 +1,57 @@
+
 @media print {
-    body{
-        visibility:hidden;
+    body {
+        visibility: hidden;
     }
-    .noImprimible{
+
+    .Imprimible {
+        display: block;
+        visibility: visible;
+    }
+
+    .noImprimible {
         display: none;
         visibility: hidden;
     }
-    #printsection, #printsection * {
-       
+
+    #printsection,
+    #printsection * {
+
         orientation: landscape;
         visibility: visible;
+        margin: 0;
+
     }
+
     #printsection {
         background: red;
         background-color: red;
-        
+
     }
-.bordeExterno{
-    border-style: solid;
+
+    .bordeExterno {
+        border-style: solid;
+    }
+   
+    #LogoJoval{
+        display: inline;
+        max-width: 15%;
+        height: auto;
+        margin-bottom: 5%;
+    }
+    #Encabezado{
+        display: inline;
+        text-align: center;
+        margin-left: 15%;
+    }
 }
+@media screen {
+    .Imprimible{
+        display: none;
+        background-color: red;
+    }
+    #LogoJoval{
+        display: none;
+    }
+  
 }
