@@ -307,40 +307,59 @@ router.get('/Finanzas/cobrodeobras/VerObra/:NombreObra', (req, res) => {
     var clientesObra;
     var tiposDeCobros
    
+  
+    
+   
     var sql = 'SELECT id FROM obras WHERE Nombre =?';
     connection.query(sql, [NombreObra], (error, results) => {
         if (error) console.log(error);
         id = results[0].id;
-       
     })
-    sql= 'Select * FROM finanzas_clientes_por_obra_tiposdecobros'
+function seleccionarClientes(){
+    var sql = 'Select * FROM finanzas_clientes_por_obra_tiposdecobros'
     connection.query(sql,(error,results)=>{
         if (error) console.log(error);
         tiposDeCobros=results;
+        
     })
-    sql = 'SELECT * FROM finanzas_clientes_por_obra_cobros WHERE id_Obra =?'
+}
+function seleccionarCobros(){
+    var sql = 'SELECT * FROM finanzas_clientes_por_obra_cobros WHERE id_Obra =?'
     connection.query(sql, [id], (error, cobrosObra) => {
         if (error) console.log(error);
         cobrosXobra = cobrosObra;
+        console.log(cobrosXobra);
     })
-    sql = 'SELECT * FROM finanzas_clientes_por_obra WHERE NombreObra =?'
+}
+function seleccionaryMostrar(){
+    var sql = 'SELECT * FROM finanzas_clientes_por_obra WHERE NombreObra =?'
     connection.query(sql, [NombreObra], (error, clientes) => {
         if (error) console.log(error);
-        clientesObra=clientes;
-      
-    })
-    setTimeout(function(){
+        else{
+            clientesObra=clientes;
     res.render('paginas/Finanzas/Cobrodeobras/Obras/Vistaobras.ejs',{Clientes:clientesObra,Cobros:cobrosXobra, tiposDeCobros:tiposDeCobros});
-    },2000)
+
+        }
+        
+    })
+}
+setTimeout(seleccionarClientes,1000);
+setTimeout(seleccionarCobros,2000);
+setTimeout(seleccionaryMostrar,2000);
+
+
+   
+ 
 })
+
 router.post('/Finanzas/cobrodeobras/VerObra/tiposDeCobros',(req,res)=>{
     var NombreObra= req.body.NombreObra;
-    var sql='Select id from obras where Nombre =?';
+    var sql= 'Select id from obras where Nombre =?';
 connection.query(sql,NombreObra,(error,results)=>{
     id_obra=results[0].Nombre;
 })
 
-sql='Update finanzas_obras set? WHERE id_obra =? and id_tipo_de_cobro =?';
+sql= 'Update finanzas_obras set? WHERE id_obra =? and id_tipo_de_cobro =?';
 
 console.log("guardando dato");
 connection.query(sql,[{ },id_obra],(error,results)=>{
