@@ -324,18 +324,11 @@ function seleccionarClientes(){
     })
 }
 function seleccionarCobros(){
-    var sql = 'SELECT id_tCobro,ID_cliente,Observaciones,FechaPago,id_Obra,Importe,SUM(Importe) as SumaDeImportes FROM finanzas_clientes_por_obra_cobros WHERE id_Obra =? '
+    var sql = 'SELECT * FROM finanzas_clientes_por_obra_cobros WHERE id_Obra =? '
     connection.query(sql, [id], (error, cobrosObra) => {
+       
         if (error) console.log(error);
-        cobrosObra.forEach(element => {
-            var a=JSON.parse(JSON.stringify(element));
-            
-            var b= a[Object.keys(a)[Object.keys(a).length-1]]; //Este codigo se obtuvo de:https://www.iteramos.com/pregunta/47747/obtener-el-ultimo-elemento-de-un-objeto-javascript
-            //El objetivo de esta funcion, es poder obener el valor de "SUM(Importe)" y asignarselo a una variable.
-             
-        });
         cobrosXobra = cobrosObra;
-        console.log(cobrosXobra);
     })
 }
 function seleccionaryMostrar(){
@@ -344,14 +337,14 @@ function seleccionaryMostrar(){
         if (error) console.log(error);
         else{
             clientesObra=clientes;
-    res.render('paginas/Finanzas/Cobrodeobras/Obras/Vistaobras.ejs',{Clientes:clientesObra,Cobros:cobrosXobra, tiposDeCobros:tiposDeCobros});
+    res.render('paginas/Finanzas/Cobrodeobras/Obras/Vistaobras.ejs',{Clientes:clientesObra,Cobros:cobrosXobra, NombreDelCobro:tiposDeCobros});
 
         }
         
     })
 }
 setTimeout(seleccionarClientes,1000);
-setTimeout(seleccionarCobros,2000);
+setTimeout(seleccionarCobros,1000);
 setTimeout(seleccionaryMostrar,2000);
 
 

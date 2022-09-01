@@ -61,22 +61,22 @@
                                 <%= cliente.Direccion%>
                             </td>
                             
-                            <%Cobros.forEach((cobrocliente)=>{%>
-                                <%if(cobrocliente.ID_cliente==cliente.ID_cliente){%>
-                                    <%tiposDeCobros.forEach((tipoCobro)=>{%>
-                                        <%if( tipoCobro.ID_TipoDeCobro==cobrocliente.id_tCobro){%>
+                            <%Cobros.forEach((Cobro)=>{%>
+                                <%if(Cobro.ID_cliente==cliente.ID_cliente){%>
+                                    <%NombreDelCobro.forEach((NombreDelCobro)=>{%>
+                                        <%if( NombreDelCobro.ID_TipoDeCobro==Cobro.id_tCobro){%>
                                             <td class="text-center">
-                                                <%=cobrocliente.SumaDeImportes%>
+                                                <%=Cobro.Importe%>
                                             </td>
                                             <%}else{%>
-                                                <td class="text-center">.......</td><%}%>
-
+                                              <%}%>
+                                           
                                                 <% })%>
-                                            
+                                         
                                                     <%}})%>
-                                               
+                                                </tr>  
                                                         <% })%>
-                                                    </tr>
+                                                       
                    
 
                 </tbody>
