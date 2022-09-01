@@ -66,16 +66,17 @@
                                     <%tiposDeCobros.forEach((tipoCobro)=>{%>
                                         <%if( tipoCobro.ID_TipoDeCobro==cobrocliente.id_tCobro){%>
                                             <td class="text-center">
-                                                <%=cobrocliente.Importe%>
+                                                <%=cobrocliente.SumaDeImportes%>
                                             </td>
                                             <%}else{%>
                                                 <td class="text-center">.......</td><%}%>
 
                                                 <% })%>
-                                            </tr>
+                                            
                                                     <%}})%>
                                                
                                                         <% })%>
+                                                    </tr>
                    
 
                 </tbody>
