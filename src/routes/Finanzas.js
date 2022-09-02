@@ -240,28 +240,102 @@ router.post('/ImprimirComprobante', (req, res) => {
     sql = 'Select id from obras where Nombre =?';
     connection.query(sql, [Obra], (error, results) => {
         if (error) console.log(error);
-        
+
         else {
             id_Obra = results[0].id;
-            console.log(id_Obra);
         }
-      
-    })
-    setTimeout(function(){
-        sql = 'insert into finanzas_clientes_por_obra_cobros set?';
-        connection.query(sql, [{
-            ID_cliente: ID, id_tCobro: Concepto, Observaciones: ObservacionesDelPago, FechaPago: FechaPago, Importe: ValorIngresado, id_Obra: id_Obra
-        }], (error, results) => {
+        sql = 'Select * from finanzas_clientes_por_obra_cobros where ID_cliente =? '
+        connection.query(sql, [ID], (error, results) => {
             if (error) console.log(error);
-            else {
-                    res.redirect(req.get('referer'));
+            console.log("Results contiene "+ results.length + " valores")
+            if(results.length>0){
             
-            }
+            results.forEach((dato) => {
+                if (dato.id_tCobro == Concepto) {
+                    console.log(dato.Importe)
+                    console.log(ValorIngresado)
+
+                    ValorIngresado=parseFloat(ValorIngresado) +parseFloat( dato.Importe)
+                    console.log("Se ha detectado que existe un pago con el mismo concepto en la BD. Intentando actualizarlo...")
+                    setTimeout(function () {
+                        sql = 'Update finanzas_clientes_por_obra_cobros set? where id_tcobro=? and ID_cliente =? and id_Obra';
+                        connection.query(sql, [{
+                            ID_cliente: ID, id_tCobro: Concepto, Observaciones: ObservacionesDelPago, FechaPago: FechaPago, Importe: ValorIngresado, id_Obra: id_Obra
+                        }, Concepto, ID, id_Obra], (error, results) => {
+                            if (error) console.log(error);
+                            
+                        })
+                        sql = 'insert into finanzas_clientes_por_obra_cobros_historia set?';
+                        connection.query(sql, [{
+                            ID_cliente: ID, id_tCobro: Concepto, Observaciones: ObservacionesDelPago, FechaPago: FechaPago, Importe: ValorIngresado, id_Obra: id_Obra
+                        }], (error, results) => {
+                            console.log("cargando pago en historia");
+                            if (error) console.log(error);
+                            else {
+                                res.redirect(req.get('referer'));
+        
+                            }
+                        })
+                    }, 2000)
+                }
+                else{
+                    setTimeout(function () {
+                    console.log("Cargando pago nuevo en BD...")
+
+                        sql = 'insert into finanzas_clientes_por_obra_cobros set?';
+                        connection.query(sql, [{
+                            ID_cliente: ID, id_tCobro: Concepto, Observaciones: ObservacionesDelPago, FechaPago: FechaPago, Importe: ValorIngresado, id_Obra: id_Obra
+                        }], (error, results) => {
+                            if (error) console.log(error);
+                       
+                        })
+                        sql = 'insert into finanzas_clientes_por_obra_cobros_historia set?';
+                        connection.query(sql, [{
+                            ID_cliente: ID, id_tCobro: Concepto, Observaciones: ObservacionesDelPago, FechaPago: FechaPago, Importe: ValorIngresado, id_Obra: id_Obra
+                        }], (error, results) => {
+                            console.log("cargando pago en historia");
+                            if (error) console.log(error);
+                            else {
+                                res.redirect(req.get('referer'));
+        
+                            }
+                        })
+                    }, 2000)
+                }
+                
+            })
+        }
+        if(results.length==0){
+            setTimeout(function () {
+                console.log("Cargando pago nuevo en BD...")
+                sql = 'insert into finanzas_clientes_por_obra_cobros set?';
+                connection.query(sql, [{
+                    ID_cliente: ID, id_tCobro: Concepto, Observaciones: ObservacionesDelPago, FechaPago: FechaPago, Importe: ValorIngresado, id_Obra: id_Obra
+                }], (error, results) => {
+                    if (error) console.log(error);
+                    else {
+                    }
+                })
+                sql = 'insert into finanzas_clientes_por_obra_cobros_historia set?';
+                connection.query(sql, [{
+                    ID_cliente: ID, id_tCobro: Concepto, Observaciones: ObservacionesDelPago, FechaPago: FechaPago, Importe: ValorIngresado, id_Obra: id_Obra
+                }], (error, results) => {
+                    console.log("cargando pago en historia");
+                    if (error) console.log(error);
+                    else {
+                        res.redirect(req.get('referer'));
+
+                    }
+                })
+            }, 2000)
+        }
+
         })
-        },2000)
-   
-    // Dedicidimos donde guardar el concepto de pago
-  
+
+    })
+
+
+
 })
 router.get('/Finanzas/CobroDeObras/EditarCliente/:id', (req, res) => {
     var id = req.params.id;
@@ -306,63 +380,63 @@ router.get('/Finanzas/cobrodeobras/VerObra/:NombreObra', (req, res) => {
     var cobrosXobra;
     var clientesObra;
     var tiposDeCobros
-   
-  
-    
-   
+
+
+
+
     var sql = 'SELECT id FROM obras WHERE Nombre =?';
     connection.query(sql, [NombreObra], (error, results) => {
         if (error) console.log(error);
         id = results[0].id;
     })
-function seleccionarClientes(){
-    var sql = 'Select * FROM finanzas_clientes_por_obra_tiposdecobros'
-    connection.query(sql,(error,results)=>{
-        if (error) console.log(error);
-        tiposDeCobros=results;
-        
-    })
-}
-function seleccionarCobros(){
-    var sql = 'SELECT * FROM finanzas_clientes_por_obra_cobros WHERE id_Obra =? '
-    connection.query(sql, [id], (error, cobrosObra) => {
-       
-        if (error) console.log(error);
-        cobrosXobra = cobrosObra;
-    })
-}
-function seleccionaryMostrar(){
-    var sql = 'SELECT * FROM finanzas_clientes_por_obra WHERE NombreObra =?'
-    connection.query(sql, [NombreObra], (error, clientes) => {
-        if (error) console.log(error);
-        else{
-            clientesObra=clientes;
-    res.render('paginas/Finanzas/Cobrodeobras/Obras/Vistaobras.ejs',{Clientes:clientesObra,Cobros:cobrosXobra, NombreDelCobro:tiposDeCobros});
+    function seleccionarClientes() {
+        var sql = 'Select * FROM finanzas_clientes_por_obra_tiposdecobros'
+        connection.query(sql, (error, results) => {
+            if (error) console.log(error);
+            tiposDeCobros = results;
 
-        }
-        
-    })
-}
-setTimeout(seleccionarClientes,1000);
-setTimeout(seleccionarCobros,1000);
-setTimeout(seleccionaryMostrar,2000);
+        })
+    }
+    function seleccionarCobros() {
+        var sql = 'SELECT * FROM finanzas_clientes_por_obra_cobros WHERE id_Obra =? '
+        connection.query(sql, [id], (error, cobrosObra) => {
+
+            if (error) console.log(error);
+            cobrosXobra = cobrosObra;
+        })
+    }
+    function seleccionaryMostrar() {
+        var sql = 'SELECT * FROM finanzas_clientes_por_obra WHERE NombreObra =?'
+        connection.query(sql, [NombreObra], (error, clientes) => {
+            if (error) console.log(error);
+            else {
+                clientesObra = clientes;
+                res.render('paginas/Finanzas/Cobrodeobras/Obras/Vistaobras.ejs', { Clientes: clientesObra, Cobros: cobrosXobra, NombreDelCobro: tiposDeCobros });
+
+            }
+
+        })
+    }
+    setTimeout(seleccionarClientes, 1000);
+    setTimeout(seleccionarCobros, 1000);
+    setTimeout(seleccionaryMostrar, 2000);
 
 
-   
- 
+
+
 })
 
-router.post('/Finanzas/cobrodeobras/VerObra/tiposDeCobros',(req,res)=>{
-    var NombreObra= req.body.NombreObra;
-    var sql= 'Select id from obras where Nombre =?';
-connection.query(sql,NombreObra,(error,results)=>{
-    id_obra=results[0].Nombre;
-})
+router.post('/Finanzas/cobrodeobras/VerObra/tiposDeCobros', (req, res) => {
+    var NombreObra = req.body.NombreObra;
+    var sql = 'Select id from obras where Nombre =?';
+    connection.query(sql, NombreObra, (error, results) => {
+        id_obra = results[0].Nombre;
+    })
 
-sql= 'Update finanzas_obras set? WHERE id_obra =? and id_tipo_de_cobro =?';
+    sql = 'Update finanzas_obras set? WHERE id_obra =? and id_tipo_de_cobro =?';
 
-console.log("guardando dato");
-connection.query(sql,[{ },id_obra],(error,results)=>{
-   
-})
+    console.log("guardando dato");
+    connection.query(sql, [{}, id_obra], (error, results) => {
+
+    })
 })
