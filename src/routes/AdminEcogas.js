@@ -823,7 +823,7 @@ router.post('/guardarNuevoCliente', (req, res) => {
     // const TipoRed =req.body.Tipos-de-red;
     if (DNV == null) { DNV = "NC"; }
     if (PerMunicipal == null) { PerMunicipal = "NC"; }
-
+    if (Privado == null) { Privado = "NC"; }
     if (DPV == null) { DPV = "NC"; }
     if (IRRIGACION == null) { IRRIGACION = "NC"; }
     if (HIDRAULICA == null) { HIDRAULICA = "NC"; }

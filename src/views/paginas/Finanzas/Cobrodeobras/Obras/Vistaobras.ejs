@@ -53,8 +53,6 @@
                 <tbody>
                     <tr>
                         <% Clientes.forEach((cliente)=>{ %>
-                            <%Cobros.forEach((Cobro)=>{%>
-                                <%if(Cobro.ID_cliente==cliente.ID_cliente){%>
                             <td>
                                 <%= cliente.NombreCliente%>
 
@@ -62,8 +60,9 @@
                             <td>
                                 <%= cliente.Direccion%>
                             </td>
-                            
-                           
+                          <%Cobros.find%>  
+                          <%Cobros.forEach((Cobro)=>{%>
+                                <%if(Cobro.ID_cliente==cliente.ID_cliente){%>
                                     <%NombreDelCobro.forEach((NombreDelCobro)=>{%>
                                         <%if( NombreDelCobro.ID_TipoDeCobro==Cobro.id_tCobro){%>
                                             <td class="text-center">
@@ -76,9 +75,9 @@
                                               <%}%>
                                            
                                                 <% })%>
-                                            </tr>  
+                                         
                                                     <%}})%>
-                                                
+                                                </tr>  
                                                         <% })%>
                                                        
                    
