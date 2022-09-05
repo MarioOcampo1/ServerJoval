@@ -400,7 +400,7 @@ router.get('/Finanzas/cobrodeobras/VerObra/:NombreObra', (req, res) => {
     function seleccionarCobros() {
         var sql = 'SELECT * FROM finanzas_clientes_por_obra_cobros WHERE id_Obra =? '
         connection.query(sql, [id], (error, cobrosObra) => {
-
+           
             if (error) console.log(error);
             cobrosXobra = cobrosObra;
         })
