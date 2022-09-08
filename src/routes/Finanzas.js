@@ -111,7 +111,7 @@ router.get('/cobroDeObras', (req, res) => {
         if (error) console.log(error);
 
         if (clientes.length > 0) {
-            res.render('paginas/Finanzas/cobrodeobras.ejs', { clientes: clientes, cobroObras: cobroObras, NombreObras: obras });
+            res.render('paginas/Finanzas/CobroObrasVistaPrincipal.ejs', { clientes: clientes, cobroObras: cobroObras, NombreObras: obras });
             // res.send(clientes) ;
         }
         else {
@@ -395,7 +395,7 @@ router.get('/Finanzas/cobrodeobras/VerObra/:NombreObra', (req, res) => {
         sql = 'Select * from finanzas_clientes_por_obra_cobros a Inner Join finanzas_clientes_por_obra b on a.ID_cliente=b.ID_cliente WHERE a.id_Obra =?'
         connection.query(sql, id, (error, results) => {
             if (error) console.log(error);
-            if (results > 0) {
+            if (results.length > 0) {
                 clientes = results;
                 res.render('paginas/Finanzas/Cobrodeobras/Obras/Vistaobras.ejs', { Clientes: clientes });
 
