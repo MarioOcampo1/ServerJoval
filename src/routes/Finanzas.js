@@ -106,15 +106,13 @@ router.get('/cobroDeObras', (req, res) => {
     connection.query(sql, (error, resultado) => {
         obras = resultado;
     })
-    sql = 'Select * from finanzas_clientes_por_obra';
+    sql = 'Select * from finanzas_clientes_por_obra INNER JOIN obras ON id_Obra = id';
     connection.query(sql, (error, clientes) => {
-
-
         if (error) console.log(error);
 
-        if (clientes.length) {
+        if (clientes.length > 0) {
             res.render('paginas/Finanzas/cobrodeobras.ejs', { clientes: clientes, cobroObras: cobroObras, NombreObras: obras });
-            // res.send(obras) ;
+            // res.send(clientes) ;
         }
         else {
             res.send('Ningun resultado encontrado');
@@ -124,14 +122,21 @@ router.get('/cobroDeObras', (req, res) => {
 router.get('/cobrodeobras/clientes/LocalizarClientes/:NombreObra', (req, res) => {
     var sql
     var NombreObra = req.params.NombreObra;
-    console.log("Nombre" + NombreObra);
-    sql = 'SELECT * FROM finanzas_clientes_por_obra where NombreObra=?';
+    sql = 'Select id from obras where Nombre=?'
+    var idObra = "";
     connection.query(sql, [NombreObra], (error, results) => {
-        if (error) console.log(error);
-        if (results) {
-            res.send(results);
-        }
+        idObra = results[0].id;
     })
+    sql = 'SELECT * FROM finanzas_clientes_por_obra where id_Obra=?';
+    setTimeout(() => {
+        connection.query(sql, [idObra], (error, results) => {
+            if (error) console.log(error);
+            if (results) {
+                res.send(results);
+            }
+        })
+    }, 1000);
+
 })
 
 router.get('/cobrodeobras/clientes/FormularioCliente', (req, res) => {
@@ -218,25 +223,33 @@ router.post('/Finanzas/guardarCliente', (req, res) => {
     var Correo = req.body.Correo;
     var Domicilio = req.body.Domicilio;
     var Obra = req.body.Obra;
-    sql = 'insert into finanzas_clientes_por_obra set?';
-    connection.query(sql, {
-        NombreCliente: Nombre, NombreObra: Obra, DNICliente: DNI, Telefono: Teléfono, Correo: Correo, Direccion: Domicilio
-    }, (error, results) => {
-        if (error) console.log(error);
-        else (res.send("Cliente cargado satisfactoriamente"))
+    sql = 'Select id FROM obras where Nombre=?'
+    connection.query(sql, Obra, (error, results) => {
+        var id_Obra = results[0];
     })
+    setTimeout(() => {
+        sql = 'insert into finanzas_clientes_por_obra set?';
+        connection.query(sql, {
+            NombreCliente: Nombre, id_Obra: id_Obra, DNICliente: DNI, Telefono: Teléfono, Correo: Correo, Direccion: Domicilio
+        }, (error, results) => {
+            if (error) console.log(error);
+            else (res.send("Cliente cargado satisfactoriamente"))
+        })
+    }, 2000);
+
 })
 router.post('/ImprimirComprobante', (req, res) => {
     let sql = '';
     var ID = req.body.IDCliente;
     var Nombre = req.body.NombreCompleto;
     var Domicilio = req.body.Domicilio;
-    var ValorIngresado = req.body.ValorIngresado;
+    var ValorIngresado = parseFloat(req.body.ValorIngresado);
     var Concepto = req.body.Concepto;
     var FechaPago = req.body.FechaPago;
     var ObservacionesDelPago = req.body.ObservacionesDelPago;
     var Obra = req.body.Obra;
     var id_Obra;
+    console.log("El Valor ingresado es:" + ValorIngresado);
     sql = 'Select id from obras where Nombre =?';
     connection.query(sql, [Obra], (error, results) => {
         if (error) console.log(error);
@@ -244,94 +257,86 @@ router.post('/ImprimirComprobante', (req, res) => {
         else {
             id_Obra = results[0].id;
         }
-        sql = 'Select * from finanzas_clientes_por_obra_cobros where ID_cliente =? '
-        connection.query(sql, [ID], (error, results) => {
-            if (error) console.log(error);
-            console.log("Results contiene "+ results.length + " valores")
-            if(results.length>0){
-            
-            results.forEach((dato) => {
-                if (dato.id_tCobro == Concepto) {
-                    console.log(dato.Importe)
-                    console.log(ValorIngresado)
-
-                    ValorIngresado=parseFloat(ValorIngresado) +parseFloat( dato.Importe)
-                    console.log("Se ha detectado que existe un pago con el mismo concepto en la BD. Intentando actualizarlo...")
-                    setTimeout(function () {
-                        sql = 'Update finanzas_clientes_por_obra_cobros set? where id_tcobro=? and ID_cliente =? and id_Obra';
-                        connection.query(sql, [{
-                            ID_cliente: ID, id_tCobro: Concepto, Observaciones: ObservacionesDelPago, FechaPago: FechaPago, Importe: ValorIngresado, id_Obra: id_Obra
-                        }, Concepto, ID, id_Obra], (error, results) => {
-                            if (error) console.log(error);
-                            
-                        })
-                        sql = 'insert into finanzas_clientes_por_obra_cobros_historia set?';
-                        connection.query(sql, [{
-                            ID_cliente: ID, id_tCobro: Concepto, Observaciones: ObservacionesDelPago, FechaPago: FechaPago, Importe: ValorIngresado, id_Obra: id_Obra
-                        }], (error, results) => {
-                            console.log("cargando pago en historia");
-                            if (error) console.log(error);
-                            else {
-                                res.redirect(req.get('referer'));
-        
-                            }
-                        })
-                    }, 2000)
+    })
+    
+    sql = 'Select ' + Concepto + ' FROM finanzas_clientes_por_obra_cobros WHERE ID_cliente =?'
+    connection.query(sql, [ID], (error, results) => {
+        if (error) console.log(error);
+        if (results.length > 0) {
+            var a = '';
+            JSON.parse((JSON.stringify(results)), function (k, v) {
+                if (k == Concepto) {
+                    a = v
                 }
-                else{
-                    setTimeout(function () {
-                    console.log("Cargando pago nuevo en BD...")
 
-                        sql = 'insert into finanzas_clientes_por_obra_cobros set?';
-                        connection.query(sql, [{
-                            ID_cliente: ID, id_tCobro: Concepto, Observaciones: ObservacionesDelPago, FechaPago: FechaPago, Importe: ValorIngresado, id_Obra: id_Obra
-                        }], (error, results) => {
-                            if (error) console.log(error);
-                       
-                        })
-                        sql = 'insert into finanzas_clientes_por_obra_cobros_historia set?';
-                        connection.query(sql, [{
-                            ID_cliente: ID, id_tCobro: Concepto, Observaciones: ObservacionesDelPago, FechaPago: FechaPago, Importe: ValorIngresado, id_Obra: id_Obra
-                        }], (error, results) => {
-                            console.log("cargando pago en historia");
-                            if (error) console.log(error);
-                            else {
-                                res.redirect(req.get('referer'));
-        
-                            }
-                        })
-                    }, 2000)
-                }
-                
+            });
+            console.log("El cliente seleccionado tiene pagos existentes. Actualizando pagos.")
+            if (a == null) {
+            } else {
+                ValorIngresado = ValorIngresado + parseFloat(a)
+            }
+            sql = 'UPDATE finanzas_clientes_por_obra_cobros set ' + Concepto + ' = ' + ValorIngresado + ' where ID_cliente = ' + ID + ' and id_Obra = ' + id_Obra + '';
+            connection.query(sql, (error, results) => {
+                if (error) console.log(error);
             })
-        }
-        if(results.length==0){
-            setTimeout(function () {
-                console.log("Cargando pago nuevo en BD...")
-                sql = 'insert into finanzas_clientes_por_obra_cobros set?';
-                connection.query(sql, [{
-                    ID_cliente: ID, id_tCobro: Concepto, Observaciones: ObservacionesDelPago, FechaPago: FechaPago, Importe: ValorIngresado, id_Obra: id_Obra
-                }], (error, results) => {
+            sql='Select MAX(id_cobro) from finanzas_clientes_por_obra_cobros where id_Obra='+id_Obra+'';
+            var id_Cobro;
+            connection.query(sql,(error,results)=>{
+                if (error) console.log(error);
+id_Cobro=results[0].id_Cobro
+            })
+            if(ObservacionesDelPago==null){
+                sql='Insert into finanzas_clientes_por_obra_cobros_observaciones set?'
+                connection.query(sql,{id_cobro:id_Cobro, Observacion:"Sin observaciones"},(error,results)=>{
                     if (error) console.log(error);
-                    else {
-                    }
+                    res.send("Cliente cargado exitosamente");
                 })
-                sql = 'insert into finanzas_clientes_por_obra_cobros_historia set?';
-                connection.query(sql, [{
-                    ID_cliente: ID, id_tCobro: Concepto, Observaciones: ObservacionesDelPago, FechaPago: FechaPago, Importe: ValorIngresado, id_Obra: id_Obra
-                }], (error, results) => {
-                    console.log("cargando pago en historia");
-                    if (error) console.log(error);
-                    else {
-                        res.redirect(req.get('referer'));
-
-                    }
-                })
-            }, 2000)
-        }
-
+            }
+    else{
+        sql='Insert into finanzas_clientes_por_obra_cobros_observaciones set?'
+        connection.query(sql,{id_cobro:id_Cobro, Observacion:ObservacionesDelPago},(error,results)=>{
+            if (error) console.log(error);
+            res.send("Cliente cargado exitosamente");
         })
+    }
+        }
+        if (results.length == null || results.length == 0) {
+            console.log("No existen pagos ingresados de el cliente seleccionado")
+            console.log("Intentando cargar nuevo pago");
+            sql = 'Insert into finanzas_clientes_por_obra_cobros set?'
+            connection.query(sql, {
+                ID_cliente: ID, id_Obra: id_Obra,
+            }, (error, results) => {
+                if (error) console.log(error);
+            })
 
+            console.log("El cliente se ha cargado en el sistema, cargando el concepto de pago junto con su valor....");
+
+            sql = 'Update finanzas_clientes_por_obra_cobros set ' + Concepto + '=' + ValorIngresado + 'where ID_cliente =' + ID + ' and id_Obra=' + id_Obra + '';
+            connection.query(sql, (error, results) => {
+                if (error) console.log(error);
+            })
+            sql='Select MAX(id_cobro) from finanzas_clientes_por_obra_cobros where id_Obra='+id_Obra+'';
+            var id_Cobro;
+            connection.query(sql,(error,results)=>{
+                if (error) console.log(error);
+id_Cobro=results[0].id_Cobro
+            })
+            if(ObservacionesDelPago==null){
+                sql='Insert into finanzas_clientes_por_obra_cobros_observaciones set?'
+                connection.query(sql,{id_cobro:id_Cobro, Observacion:"Sin observaciones"},(error,results)=>{
+                    if (error) console.log(error);
+                    res.send("Cliente cargado exitosamente");
+                })
+            }
+    else{
+        sql='Insert into finanzas_clientes_por_obra_cobros_observaciones set?'
+        connection.query(sql,{id_cobro:id_Cobro, Observacion:ObservacionesDelPago},(error,results)=>{
+            if (error) console.log(error);
+            res.send("Cliente cargado exitosamente");
+        })
+    }
+        }
     })
 
 
@@ -380,50 +385,27 @@ router.get('/Finanzas/cobrodeobras/VerObra/:NombreObra', (req, res) => {
     var cobrosXobra;
     var clientesObra;
     var tiposDeCobros
-
-
-
-
     var sql = 'SELECT id FROM obras WHERE Nombre =?';
     connection.query(sql, [NombreObra], (error, results) => {
         if (error) console.log(error);
         id = results[0].id;
     })
-    function seleccionarClientes() {
-        var sql = 'Select * FROM finanzas_clientes_por_obra_tiposdecobros'
-        connection.query(sql, (error, results) => {
-            if (error) console.log(error);
-            tiposDeCobros = results;
 
-        })
-    }
-    function seleccionarCobros() {
-        var sql = 'SELECT * FROM finanzas_clientes_por_obra_cobros WHERE id_Obra =? '
-        connection.query(sql, [id], (error, cobrosObra) => {
-           
+    function cargarpagina() {
+        sql = 'Select * from finanzas_clientes_por_obra_cobros a Inner Join finanzas_clientes_por_obra b on a.ID_cliente=b.ID_cliente WHERE a.id_Obra =?'
+        connection.query(sql, id, (error, results) => {
             if (error) console.log(error);
-            cobrosXobra = cobrosObra;
-        })
-    }
-    function seleccionaryMostrar() {
-        var sql = 'SELECT * FROM finanzas_clientes_por_obra WHERE NombreObra =?'
-        connection.query(sql, [NombreObra], (error, clientes) => {
-            if (error) console.log(error);
-            else {
-                clientesObra = clientes;
-                res.render('paginas/Finanzas/Cobrodeobras/Obras/Vistaobras.ejs', { Clientes: clientesObra, Cobros: cobrosXobra, NombreDelCobro: tiposDeCobros });
+            if (results > 0) {
+                clientes = results;
+                res.render('paginas/Finanzas/Cobrodeobras/Obras/Vistaobras.ejs', { Clientes: clientes });
 
             }
-
+            else {
+                res.send('La obra no contiene pagos para mostrar');
+            }
         })
     }
-    setTimeout(seleccionarClientes, 1000);
-    setTimeout(seleccionarCobros, 1000);
-    setTimeout(seleccionaryMostrar, 2000);
-
-
-
-
+    setTimeout(cargarpagina, 2000);
 })
 
 router.post('/Finanzas/cobrodeobras/VerObra/tiposDeCobros', (req, res) => {
