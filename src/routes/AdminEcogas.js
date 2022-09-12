@@ -138,7 +138,7 @@ connection.query(sql, (error, results) => {
         }
     })
         // FIN INTERFERENCIAS
-        sql = 'SELECT c.id, c.Nombre, c.NCarpeta, c.TareaRealizada, c.ProximaTarea, c.EtapaTarea, c.FechaLimite FROM obras c  ';
+        sql = 'SELECT c.id, c.Nombre, c.NCarpeta, b.TareaRealizada, b.ProximaTarea, b.EtapaTarea, b.FechaLimite FROM obras c , adminecogas_tareas_por_carpeta b  ';
         res.locals.moment = moment;
         connection.query(sql, (error, results) => {
             if (error) console.log(error);

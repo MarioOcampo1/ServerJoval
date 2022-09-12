@@ -29,7 +29,7 @@
         <thead>
           <tr>
             <th scope="col">Obra</th>
-            <th scope="col">PDT n°</th>
+            <th scope="col">N°</th>
             <th scope="col">Cantidad de vecinos</th>
             <th scope="col">Monto total contrato</th>
             <th scope="col">Monto pagado</th>
@@ -38,12 +38,22 @@
           <tr class="">
             <%  for (let index = 0; index < NombreObras.length; index++) {%>
               <%    const element = NombreObras[index];%>
+              <%var contador=0;%>
               <td>
                 <a class="btn btn-sm" href="Finanzas/cobrodeobras/VerObra/<%= element.Nombre%>"><%= element.Nombre%></a
               </td>
-              <td></td>
               <td>
+                <%=element.NCarpeta%>
               </td>
+              <td><%clientes.forEach((clientes)=>{%>
+                
+              <%if(clientes.id_Obra==element.id){%>
+               <% contador=contador+1%>
+                <%}%>
+                <%})%>
+                <%=contador%>
+              </td>
+             
               <td></td>
               <td></td>
           </tr>

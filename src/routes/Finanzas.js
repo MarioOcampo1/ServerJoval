@@ -102,7 +102,7 @@ router.get('/cobroDeObras', (req, res) => {
         cobroObras = resultados;
     })
     var obras;
-    sql = 'Select Nombre From obras';
+    sql = 'Select * From obras';
     connection.query(sql, (error, resultado) => {
         obras = resultado;
     })
