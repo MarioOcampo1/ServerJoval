@@ -16,75 +16,41 @@
       <h1 class="text-center "><u>
           Cobro de obras</u></h1>
       <button class="btn btn-success" onclick="CargarPago();">Nuevo pago</button>
-
-      <h2 class="text-center VistaClientes ">Lista de clientes</h2>
-
-    </div>
-    <div class="container VistaClientes">
-      <a class="btn btn-outline-danger" href="Finanzas/NuevoCliente">
-        Agregar nuevo cliente
+      <a class="btn btn-success" href="Finanzas/NuevoCliente">
+        Nuevo cliente
       </a>
-      <label for="BuscadorCliente">Buscar cliente</label>
-      <input class="border border-danger" type="text" name="BuscadorCliente" id="BuscadorCliente">
     </div>
-    <br>
-
-    <table id="TablaClientes" class="table table-striped table-bordered table-hover "
-      style="width:100%; display: table;">
-      <thead>
-        <tr>
-          <td class="text-center">Obra</td>
-          <td class="text-center">
-            Cliente
-          </td>
-          <td class="text-center">
-            DNI
-          </td>
-
-          <td class="text-center">
-            Teléfono
-          </td>
-          <td class="text-center">
-            Correo
-          </td>
-          <td class="text-center">
-            Domicilio
-          </td>
-        </tr>
-      </thead>
-      <tbody class="text-center">
-        <% clientes.forEach((datosTabla)=> { %>
+    <div class="m-2 VistaClientes">
+    
+      <label for="BuscadorObra">Buscar obra</label>
+      <input class="border border-danger" type="text" name="BuscadorObra" id="BuscadorObra">
+    </div>
+      <table class="table" id="TablaPrincipal">
+        <thead>
           <tr>
-            <td>
-              <a href="Finanzas/cobrodeobras/VerObra/<%= datosTabla.Nombre%>">
-                <%= datosTabla.Nombre%>
-              </a>
-
-            </td>
-            <td>
-              <a href="Finanzas/CobroDeObras/EditarCliente/<%=datosTabla.ID_cliente%>">
-                <%= datosTabla.NombreCliente%>
-              </a>
-            </td>
-            <td>
-              <%= datosTabla.DNICliente%>
-            </td>
-
-            <td>
-              <%= datosTabla.Telefono%>
-            </td>
-            <td>
-              <%= datosTabla.Correo%>
-            </td>
-            <td>
-              <%= datosTabla.Direccion%>
-            </td>
-
-
-            <%});%>
-      </tbody>
-    </table>
-
+            <th scope="col">Obra</th>
+            <th scope="col">PDT n°</th>
+            <th scope="col">Cantidad de vecinos</th>
+            <th scope="col">Monto total contrato</th>
+            <th scope="col">Monto pagado</th>
+        </thead>
+        <tbody>
+          <tr class="">
+            <%  for (let index = 0; index < NombreObras.length; index++) {%>
+              <%    const element = NombreObras[index];%>
+              <td>
+                <a class="btn btn-sm" href="Finanzas/cobrodeobras/VerObra/<%= element.Nombre%>"><%= element.Nombre%></a
+              </td>
+              <td></td>
+              <td>
+              </td>
+              <td></td>
+              <td></td>
+          </tr>
+                <%}%>
+        </tbody>
+      </table>
+    
     <!-- Modal para cargar pago de cliente -->
 
     <div class="container-fluid">
@@ -297,13 +263,13 @@
 // }
 </script>
 <script>
-  jQuery("#BuscadorCliente").keyup(function () {
+    jQuery("#BuscadorObra").keyup(function () {
     if (jQuery(this).val() != "0") {
-      jQuery("#TablaClientes tbody>tr").hide();
-      jQuery("#TablaClientes td:contiene-palabra('" + jQuery(this).val() + "')").parent("tr").show();
+      jQuery("#TablaPrincipal tbody>tr").hide();
+      jQuery("#TablaPrincipal td:contiene-palabra('" + jQuery(this).val() + "')").parent("tr").show();
     }
     else {
-      jQuery("#TablaClientes tbody>tr").show();
+      jQuery("#TablaPrincipal tbody>tr").show();
     }
   })
 
@@ -313,7 +279,6 @@
         return (elem.textContent || elem.innerText || jQuery(elem).text() || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
       }
     });
-
 </script>
 
 </html>

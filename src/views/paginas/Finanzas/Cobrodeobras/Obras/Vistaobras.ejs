@@ -18,7 +18,12 @@
                 </h1>
             </div>
             <h2>Lista de clientes que contiene la obra</h2>
-            <label for="Buscador">Buscar</label>
+            <div class="container VistaClientes">
+    
+              <label for="BuscadorCliente">Buscar cliente</label>
+              <input class="border border-danger" type="text" name="BuscadorCliente" id="BuscadorCliente">
+            </div>
+            <br>
             <table id="TablaObras" class="table table-bordered table-inverse table-responsive"
                 style="display: block; width:100%;">
                 <thead class="thead-default">
@@ -53,11 +58,12 @@
                 <tbody>
                     <tr>
                         <% Clientes.forEach((cliente)=>{ %>
-                            <td>
+                            <td class="text-center">
+                              <a href="/Finanzas/CobroDeObras/EditarCliente/<%=cliente.ID_cliente%>">
                                 <%= cliente.NombreCliente%>
-
+                              </a>
                             </td>
-                            <td>
+                            <td class="text-center">
                                 <%= cliente.Direccion%>
                             </td>
                           <%if(cliente.AnticipoFinanciero==null){%>
@@ -182,6 +188,23 @@
     $('#TipoCobro').click(function () {
         $('#FormTipoCobro').submit();
     })
+    jQuery("#BuscadorCliente").keyup(function () {
+    if (jQuery(this).val() != "0") {
+      jQuery("#TablaObras tbody>tr").hide();
+      jQuery("#TablaObras td:contiene-palabra('" + jQuery(this).val() + "')").parent("tr").show();
+    }
+    else {
+      jQuery("#TablaObras tbody>tr").show();
+    }
+  })
+
+  jQuery.extend(jQuery.expr[":"],
+    {
+      "contiene-palabra": function (elem, i, match, array) {
+        return (elem.textContent || elem.innerText || jQuery(elem).text() || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
+      }
+    });
+
 </script>
 
 </html>
