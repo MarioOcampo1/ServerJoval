@@ -71,9 +71,6 @@ connection.connect(error => {
     if (error) console.log(error);
 })
 //Settings
-router.get('Finanzas/NuevoCliente', (req, res) => {
-    res.render('paginas/Finanzas/nuevocliente.ejs');
-})
 //Rutas Get
 router.get('/Finanzas', (req, res) => {
     if (req.isAuthenticated()) {
@@ -95,6 +92,59 @@ router.get('/Finanzas/NuevoCliente', (req, res) => {
         }
     })
 })
+router.get('/Finanzas/NuevoCliente/cargarLote', (req, res) => {
+    var sql = 'Select Nombre from obras';
+    connection.query(sql, (error, results) => {
+        if (error) console.log(error);   
+res.render('paginas/Finanzas/Cobrodeobras/Clientes/nuevoclienteLOTE.ejs',  { nombreObra: results })
+})
+    });
+router.post('/Finanzas/NuevoCliente/DescargarPlantilla',(req,res)=>{
+    let url = path.join(__dirname, '../', '/views/paginas/Finanzas/archivos/NuevoCliente.xlsx')
+    res.download(url, function (error) {
+        console.log(error);
+})
+
+});
+router.post('/Finanzas/NuevoCliente/cargarLote', (req,res)=>{
+// tutorial: https://www.youtube.com/watch?v=SJwWMdIJLmM&t=301s
+        var file= req.files.file
+        var obra= req.body.Obra;
+        var id_Obra;
+        file.mv('./src/views/paginas/Finanzas/archivos/upload/Clientesporlotes.xlsx',err=>{
+            if (err) console.log(err);
+    })
+    var sql='Select id from obras where Nombre=? '
+    connection.query(sql,obra,(error,r)=>{
+if(error)console.log(error);
+id_Obra= r[0].id;
+    })
+    setTimeout(() => {
+        sql='Insert into finanzas_clientes_por_obra set?'
+        var workbook = xlsx.readFile('./src/views/paginas/Finanzas/archivos/upload/Clientesporlotes.xlsx');
+        const workbookSheets= workbook.SheetNames;
+        const sheet = workbookSheets[0];
+        const dataExcel = xlsx.utils.sheet_to_json(workbook.Sheets[sheet]);
+        dataExcel.forEach(
+            element => {
+                console.log(element);
+            setTimeout(()=>{
+                connection.query(sql,[{
+                NombreCliente: element.Nombre,id_Obra:id_Obra, NombreObra:obra ,DNICliente:element.DNI ,Telefono:element.Telefono , Correo:element.Correo , Direccion:element.MznaYLote ,AnticipoFinanciero:element.AnticipoFinanciero,MontoCuota:element.MontoCuota,CuotasXCobrar:CuotasXCobrar, Facturar:element.Facturar
+            },id_Obra],(error,results)=>{
+    if(error)console.log(error);
+
+            });
+           
+        },250);
+           
+        }
+
+        );
+      res.send("Datos cargados en BD");
+    }, 2000);
+       
+});
 router.get('/cobroDeObras', (req, res) => {
     var sql = 'Select * FROM FINANZAS_clientes_por_obra_cobros '
     var cobroObras;
@@ -138,18 +188,6 @@ router.get('/cobrodeobras/clientes/LocalizarClientes/:NombreObra', (req, res) =>
     }, 1000);
 
 })
-
-router.get('/cobrodeobras/clientes/FormularioCliente', (req, res) => {
-    console.log("Descargando archivo Excel");
-    console.log("Dirname tiene:" + __dirname);
-    let url = path.join(__dirname, '../', '/views/paginas/Finanzas/archivos/NuevoCliente.xlsx')
-    console.log("url contiene:" + url);
-    res.download(url, function (error) {
-        console.log(error);
-
-    });
-})
-
 router.get('/cobrodeobras/clientes/:Nombre', (req, res) => {
     var Nombre = req.params.Nombre;
 
