@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuevo cliente</title>
+</head>
+
+<body>
+    <%- include('../../partials/menusuperior.ejs'); %>
+        <div class="container">
+            <h1 class="text-center">Carga de clientes por lote</h1>
+
+
+            <h3 class="text-center">
+                Le recordamos no modificar nada de la plantilla, solo cargar la información de los vecinos.
+            </h3>
+            <div class="m-3">
+            <form action="/Finanzas/NuevoCliente/DescargarPlantilla" method="post">
+                <button class="btn btn-info">Descargar plantilla Excel</button>
+            </form>
+        </div>
+        </div>
+        <form action="/Finanzas/NuevoCliente/cargarLote" method="post" enctype="multipart/form-data">
+            <div class="container">
+                <div class="row">
+                    <div class="col-6">
+                Seleccione la obra en la que se cargaran los clientes
+                <select name="Obra" id="">
+                    <% nombreObra.forEach((obra)=>{ %>
+                    <option value="<%=obra.Nombre%>"><%=obra.Nombre%></option>
+                    <%})%>
+                </select>
+            </div>
+            <div class="col ">
+                Cargar archivo
+                <input type="file" name="file" id="ArchivoCargaClientes">
+                <div class="progress progress-striped active">
+                    <div class="progress-bar progress-bar-success" style="width:0%">
+                    </div>
+                </div>
+            <button type="submit" id="btnEnviar" class="btn btn-success mt-3" disabled>Guardar</button>
+            </div>
+            </div>
+            </div>
+        </form>
+
+</body>
+<script>
+    
+    $('#ArchivoCargaClientes').on("change", function (e) {
+        setTimeout(() => {
+            $('#btnEnviar').prop('disabled', false)
+        }, 4000);
+        $(".progress-bar").animate({
+            width: "100%",
+        }, 4000);
+
+
+
+    })
+
+</script>
+
+</html>

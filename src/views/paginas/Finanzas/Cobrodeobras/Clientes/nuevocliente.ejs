@@ -8,12 +8,13 @@
 </head>
 <body>
     <%- include('../../partials/menusuperior.ejs'); %>
-    <div class="container-fluid">
+    <div class="container">
     <h1 class="text-center">Nuevo cliente</h1>
+    <button onclick="CargarClientesPorlote()">Cargar clientes por lote</button>
     </div>
     <form action="guardarCliente" method="post">
     <div class="form-group">
-        <div class="container">
+        
         <div class="row p-3">
             <div class="col">
                 <label for="Nombre">Nombre</label>
@@ -49,11 +50,9 @@
                     <input required type="text" class="form-control" id="Domicilio" name="Domicilio" placeholder="Domicilio">
                   </div>
             </div>
-            <div class="col">
-
-            </div>
+           
         </div>
-        <div class="row p-3">
+        <div class="row m-2 ">
             <div class="col">Seleccione la obra a la cúal pertenece
                 <select name="Obra" id="Obra">
                     <%nombreObra.forEach((obra)=>{ %>
@@ -62,12 +61,44 @@
                 </select>
             </div>
             <div class="col">
-                <button class="btn btn-danger" type="submit">Guardar cliente</button>
+                ¿Cuotas por cobrar?
+                <select name="CuotasQuePaga" id="CuotasQuePaga">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+            </select>
+            <br>
+            <label class="p-2" for="Importe">Monto de cada cuota</label>
+<input type="number" id="Importe" name="ImporteCuota">
+<br>
+<label class="p-2" for="Anticipo">Monto del anticipo financiero</label>
+<input type="number" id="Anticipo" name="ImporteAnticipoFinanciero">
             </div>
-        </div>
-      </div>
-      </div>
+          
+
+    </div>
+    </div>
+        <button class="btn btn-danger" type="submit">Guardar cliente</button>
     </form>
-     
+    <form action="/Finanzas/NuevoCliente/cargarLote" method="post" id="CargarclientesporlotePOST"></form>
+    <form action="/Finanzas/NuevoCliente/cargarLote" method="get" id="CargarclientesporloteGET"></form>
+
+    </body>
+    <script>
+function CargarClientesPorlote(){
+  document.getElementById('CargarclientesporloteGET').submit();
+
+  
+}
+    </script> 
      
 </html>

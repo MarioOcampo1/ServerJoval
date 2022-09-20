@@ -7,7 +7,7 @@ const PassportLocal = require('passport-local').Strategy;
 const router = Router();
 module.exports = router;
 const moment = require('moment');
-
+var xlsx = require('xlsx');
 router.use(session({
     secret: 'misecreto',
     resave: true,
@@ -1608,3 +1608,27 @@ router.post('/NuevaComunicacionSistema', (req, res) => {
 
 
 })
+//Informes para Marcelo
+router.get('ObtenerInformesObras',(req,res)=>{
+var sql='';
+var obras,tareasgenerales, historialdetareas;
+sql='Select * from obras'
+connection.query(sql,(error,results)=>{
+    if(error) console.log(error);
+    else{obras=results};
+})
+sql='Select * from obras_tareasgenerales '
+connection.query(sql,(error,results)=>{
+    if(error) console.log(error);
+    else{tareasgenerales=results};
+})
+sql='Select * from historialdecambios '
+connection.query(sql,(error,results)=>{
+    if(error) console.log(error);
+    else{historialdetareas=results};
+})
+setTimeout(() => {
+    
+}, 2000);
+})
+
