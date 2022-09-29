@@ -24,7 +24,7 @@
 
         <label for="BuscadorCliente">Buscar cliente</label>
         <input class="border border-danger" type="text" name="BuscadorCliente" id="BuscadorCliente">
-        <button class="btn btn-primary" onclick="ExportarAExcel();">Exportar planilla</button>
+        <button class="btn btn-primary" onclick="ExportarAExcel();" disabled>Exportar planilla</button>
         <button class="btn btn-primary" data-bs-toggle="modal"
           data-bs-target="#ModalConfiguracion">Configuración</button>
       </div>
@@ -561,24 +561,7 @@
               </td>
               <%}%>
 <%}%>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-          </tr>
+</tr>
           <% })%>
 
         </tbody>
@@ -589,9 +572,8 @@
 
     <!-- Modal Body -->
     <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
-    <div class="modal fade" id="ModalConfiguracion" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
-      role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-fullscreen-xxl-down" role="document">
+    <div class="modal fade" id="ModalConfiguracion" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-fullscreen" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="modalTitleId">Configuraciones de la carpeta</h5>

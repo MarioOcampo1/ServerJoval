@@ -141,7 +141,19 @@
               return ('<div class="text-light bg-success " title="Carpeta Finalizada. Codigo fisico.">'+row.CodigoFinalizadas+'</div>' );
             }
             else{
-              return '<div title="Codigo designado para ubicar en las carpetas fisicas de la oficina.">'+row.CodigoVigentes+'</div>';
+            var fecha = new Date();
+            if(row.Estado=="2da parte"){
+              if(row.intTelefonicaObtenida<fecha){
+                return '<div title="Codigo designado para ubicar en las carpetas fisicas de la oficina.">'+row.CodigoVigentes+'</div>'+
+              '<div class="btn btn-danger"> I </div>';
+              }
+              else{
+              return '<div title="Codigo designado para ubicar en las carpetas fisicas de la oficina.">'+row.CodigoVigentes+'</div>'              
+            }
+            }
+            else{
+              return '<div title="Codigo designado para ubicar en las carpetas fisicas de la oficina.">'+row.CodigoVigentes+'</div>'
+            }
             }
           }},
           {"width": "1%","data": "Nombre_sub", render: function(data,type,row){

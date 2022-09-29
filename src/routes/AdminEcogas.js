@@ -159,7 +159,7 @@ connection.query(sql, (error, results) => {
 })
 router.get('/adminecogas/TablaGeneral', (req, res) => {
     // const sql = 'SELECT c.id, c.Nombre, c.NCarpeta,a.ResponsableDeTarea, c.TareaRealizada, c.ProximaTarea,c.EtapaTarea, c.FechaLimite, c.Estado FROM obras c, historialdecambios a where c.Nombre = a.Nombre_sub'; //SQL ORIGINAL
-    var sql = 'Select b.CodigoVigentes,b.CodigoEnUsoVigentes,b.CodigoFinalizadas, c.Nombre_sub, a.NCarpeta, a.Estado, a.id, c.ResponsableDeTarea,c.Tarea_Realizada_sub, c.Proxima_Tarea_sub, c.Fecha_Proxima_Tarea_sub, c.EtapaTarea_sub from  obras a, codificacioncarpetas b, historialdecambios c  where a.Nombre = c.Nombre_sub AND a.Nombre = b.Nombre and c.Si_NO_TareaRealizada != "S"  '; //AND (DATE_SUB(CURDATE(), interval 7 day)) <= c.Fecha_Proxima_Tarea_sub  Permite mostrar las fechas proximas a vencerse. ';
+    var sql = 'Select a.NCarpeta,a.Estado,a.id, b.CodigoVigentes,b.CodigoEnUsoVigentes,b.CodigoFinalizadas, c.Nombre_sub,c.ResponsableDeTarea,c.Tarea_Realizada_sub, c.Proxima_Tarea_sub, c.Fecha_Proxima_Tarea_sub, c.EtapaTarea_sub, d.* from obras a, codificacioncarpetas b, historialdecambios c, adminecogas_interferencias_y_permisos d  where a.Nombre = c.Nombre_sub AND a.Nombre = b.Nombre and d.Nombre = a.Nombre and c.Si_NO_TareaRealizada != "S"'; 
     res.locals.moment = moment;
     connection.query(sql, (error, results) => {
         if (error) console.log(error);
@@ -943,7 +943,6 @@ router.post('/actPrelCarpEcogas/:id', (req, res) => {
     var sql = "";
     //Tareas generales
     var DocumentacionTerreno;
-
     //    Preliminar
     var Mensura = req.body.Mensura;
     var FechaFirmaContrato = req.body.FechaFirmaContrato;
@@ -953,7 +952,6 @@ router.post('/actPrelCarpEcogas/:id', (req, res) => {
     var DniComitente = req.body.DniComitente;
     var Cotizacion = req.body.Cotizacion;
     var Contrato = req.body.ContratoPreliminar;
-
     // Variables generales
     var DocumentacionSociedad;
     var DocumentacionContractual;
