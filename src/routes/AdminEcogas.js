@@ -722,11 +722,11 @@ router.post('/ActualizarProximasTareas/:id', (req, res) => {
     var sql = "";
 
     if (Fecha_limite) {
-        sql = 'Update  obras set ? where id=?';
-        connection.query(sql, [{ EtapaTarea: EtapaTarea, TareaRealizada: TareaRealizada, ProximaTarea: ProximaTarea, Fechalimite: Fecha_limite }, id], (error, results) => {
-            if (error) console.log(error);
-        })
-
+      
+sql='Update adminecogas_tareas_por_carpeta set? where id=?';
+connection.query(sql, [{EtapaTarea: EtapaTarea, TareaRealizada:TareaRealizada, Fechalimite: Fecha_limite}, id], (error,results)=>{
+    if (error) console.log(error);
+} )
         sql = 'Insert into historialdecambios set?';
         connection.query(sql, [{ EtapaTarea_sub: EtapaTarea, ResponsableDeTarea: ResponsableDeTarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: TareaRealizada, Proxima_Tarea_sub: ProximaTarea, Fecha_Proxima_Tarea_sub: Fecha_limite, Fecha_Tarea_sub: Fecha_Tarea_sub }], (error, results) => {
             if (error) console.log(error);
