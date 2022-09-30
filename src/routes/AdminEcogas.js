@@ -159,12 +159,13 @@ connection.query(sql, (error, results) => {
 })
 router.get('/adminecogas/TablaGeneral', (req, res) => {
     // const sql = 'SELECT c.id, c.Nombre, c.NCarpeta,a.ResponsableDeTarea, c.TareaRealizada, c.ProximaTarea,c.EtapaTarea, c.FechaLimite, c.Estado FROM obras c, historialdecambios a where c.Nombre = a.Nombre_sub'; //SQL ORIGINAL
-    var sql = 'Select a.NCarpeta,a.Estado,a.id, b.CodigoVigentes,b.CodigoEnUsoVigentes,b.CodigoFinalizadas, c.Nombre_sub,c.ResponsableDeTarea,c.Tarea_Realizada_sub, c.Proxima_Tarea_sub, c.Fecha_Proxima_Tarea_sub, c.EtapaTarea_sub, d.* from obras a, codificacioncarpetas b, historialdecambios c, adminecogas_interferencias_y_permisos d  where a.Nombre = c.Nombre_sub AND a.Nombre = b.Nombre and d.Nombre = a.Nombre and c.Si_NO_TareaRealizada != "S"'; 
+    var sql = 'Select a.NCarpeta,a.Estado,a.id, b.CodigoVigentes,b.CodigoEnUsoVigentes,b.CodigoFinalizadas, c.Nombre_sub,c.ResponsableDeTarea,c.Tarea_Realizada_sub, c.Proxima_Tarea_sub, c.Fecha_Proxima_Tarea_sub, c.EtapaTarea_sub, d.Interferencias, d.Permisos from obras a, codificacioncarpetas b, historialdecambios c, obras_tareasgenerales d  where a.Nombre = c.Nombre_sub AND a.Nombre = b.Nombre and d.Nombre = a.Nombre and c.Si_NO_TareaRealizada != "S"'; 
     res.locals.moment = moment;
     connection.query(sql, (error, results) => {
         if (error) console.log(error);
 
         if (results.length > 0) {
+
 
             res.send(results); //en {results:results} lo que hago es guardar los resultados que envia la bd, en la variable results
 
@@ -1247,6 +1248,7 @@ router.post('/act2pCarpEcogas/:id', (req, res) => {
     ) {
         Interferencias = "EnGestion";
     }
+
     //Vencimientos de interferencias (Si se vencen, se pondran en modo "Pedir")
     if (new Date(intAguaObtenida) < FechaDiaActual || new Date(intCloacasObtenida) < FechaDiaActual || new Date(intTelefonicaObtenida) < FechaDiaActual || new Date(intArnetObtenida) < FechaDiaActual || new Date(intClaroObtenida) < FechaDiaActual || new Date(intElectricidadObtenida) < FechaDiaActual || new Date(intTelecomObtenida) < FechaDiaActual) {
         Interferencias = "Pedir";
