@@ -176,20 +176,7 @@ router.get('/adminecogas/TablaGeneral', (req, res) => {
     })
 
 })
-router.get('/adminecogas/TablaGeneral/notificaciones/:Nombre',(req,res)=>{
-    if (req.isAuthenticated()) {
-    var sql= 'Select * from adminecogas_tareas_por_carpeta where Nombre =?'
-    connection.query(sql,(error,tareasporcarpeta)=>{
-        if (error) console.log(error);   
-        if (results.length > 0) {
-            res.send(tareasporcarpeta);
-        }
-    })
-}
-else {
-    res.redirect('/');
-}
-})
+
 router.get('/estadogeneral', (req, res) => {
     if (req.isAuthenticated()) {
         res.locals.moment = moment;

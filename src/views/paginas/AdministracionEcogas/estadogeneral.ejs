@@ -21,7 +21,10 @@
     <%- include('./partials/menusuperior.ejs')%>
         <h1 class="text-center">Estado General</h1>
 <div class="row">
-    <button onclick="document.getElementById('ObrasFinalizadas').style.display = 'block' ; ">Ver finalizadas</button>
+    <div class="btn-group" role="group" aria-label="Basic example">
+    <button class="btn btn-outline-secondary" onclick="document.getElementById('ObrasFinalizadas').style.display = 'block' ; ">Ver finalizadas</button>
+    <button class="btn btn-outline-secondary" onclick="ImprimirEstado()"> Imprimir estado</button>
+</div>
 </div>
 <div class="modal" id="ObrasFinalizadas" tabindex="-1" style="display:none;">
     <div class="modal-dialog">
@@ -1036,6 +1039,42 @@
         </div>
         </div>
         <%}%>
+        <!-- Modal Body -->
+        <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+        <div class="modal fade" id="ModalOpcionesDeImpresion" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="ModalOpcionesDeImpresion" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalTitleId">Impresión de estado</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-center">
+                       Seleccione el estado que desea imprimir
+                       <br>
+                       <div class="btn-group " role="group" aria-label="Opciones de impresion">
+                        <button type="button" class="btn btn-primary">Preliminar</button>
+                        <button type="button" class="btn btn-primary">1ra Parte</button>
+                        <button type="button" class="btn btn-primary">2da Parte</button>
+                        <button type="button" class="btn btn-primary">Obras</button>
+                        <button type="button" class="btn btn-primary">Caos</button>
+                        <button type="button" class="btn btn-info">Todos los estados</button>
+                        
+                        
+                       </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        <!-- Optional: Place to the bottom of scripts -->
+        <script>
+            const myModal = new bootstrap.Modal(document.getElementById('modalId'), options)
+        
+        </script>
 </body>
 
 <!-- <script type="text/javascript" src="/main.js"></script> -->
@@ -1206,6 +1245,11 @@ jQuery("#LimpiarFiltros").click(function(){
     jQuery("#EstadoGeneral tbody>tr").show();
     
 })
+function ImprimirEstado(){
+$("#ModalOpcionesDeImpresion").modal('show');
+$("#ModalOpcionesDeImpresion").modal('toggle');
+
+}
 </script>
 
 </html>

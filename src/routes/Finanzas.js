@@ -106,11 +106,13 @@ router.post('/Finanzas/NuevoCliente/DescargarPlantilla',(req,res)=>{
 })
 
 });
+// Carga de clientes por lote, archivo EXCEL
 router.post('/Finanzas/NuevoCliente/cargarLote', (req,res)=>{
 // tutorial: https://www.youtube.com/watch?v=SJwWMdIJLmM&t=301s
         var file= req.files.file
         var obra= req.body.Obra;
         var id_Obra;
+        var id_cliente;
         file.mv('./src/views/paginas/Finanzas/archivos/upload/Clientesporlotes.xlsx',err=>{
             if (err) console.log(err);
     })
@@ -129,12 +131,19 @@ id_Obra= r[0].id;
             element => {
             setTimeout(()=>{
                 connection.query(sql,[{
-                NombreCliente: element.Nombre,id_Obra:id_Obra, NombreObra:obra ,DNICliente:element.DNI ,Telefono:element.Telefono , Correo:element.Correo , Direccion:element.MznaYLote ,AnticipoFinanciero:element.AnticipoFinanciero,MontoCuota:element.MontoCuota,CuotasXCobrar:CuotasXCobrar, Facturar:element.Facturar
-            },id_Obra],(error,results)=>{
+                NombreCliente: element.Nombre,id_Obra:id_Obra, NombreObra:obra ,DNICliente:element.DNI ,Telefono:element.Telefono , Correo:element.Correo , Direccion:element.MznaYLote ,AnticipoFinanciero:element.AnticipoFinanciero, ServicioDomiciliario: element.ServicioDomiciliario,MontoCuota:element.MontoCuota,CuotasXCobrar:CuotasXCobrar, Facturar:element.Facturar
+            }],(error,results)=>{
     if(error)console.log(error);
-
             });
-           
+    sql='Select ID_cliente from finanzas_clientes_por_obra where NombreCliente=?'
+    connection.query(sql,[element.Nombre],(error,results)=>{
+id_cliente=results[0].ID_cliente;
+    })
+    console.log("id_cliente =" + id_cliente);
+           sql='Insert into finanzas_clientes_predeterminados set?'
+           connection.query(sql,[{
+            id_cliente: id_cliente,id_obra:id_Obra, AnticipoFinanciero:element.AnticipoFinanciero, ServicioDomiciliario: element.ServicioDomiciliario,Cuota1:element.MontoCuota,Cuota2:element.MontoCuota,Cuota3:element.MontoCuota,Cuota4:element.MontoCuota,Cuota5:element.MontoCuota,Cuota6:element.MontoCuota,Cuota7:element.MontoCuota,Cuota8:element.MontoCuota,Cuota9:element.MontoCuota,Cuota10:element.MontoCuota,Cuota11:element.MontoCuota,Cuota12:element.MontoCuota, CuotasXCobrar:CuotasXCobrar,ServicioDomiciliario:element.ServicioDomiciliario
+           }],)
         },250);
            
         }
