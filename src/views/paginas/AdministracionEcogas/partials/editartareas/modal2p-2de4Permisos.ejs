@@ -1,8 +1,12 @@
-<br>
-<div class="card p-1 border-primary text-center">
-    <div class="card-header bg-primary text-white">
+
+<div class="card p-1 border-primary text-center" >
+    <div class="card-header bg-primary text-white" id="SeccionPermisos">
         Permisos
     </div>
+    <div class="row border">
+        <div class="col border">
+
+        
     <%if (interferenciasypermisos.Hidraulica=="NC" ){%>
         <form-check>
             <input hidden checked type="radio" name="HIDRAULICA" id="HIDRAULICA" value="<%=interferenciasypermisos.Hidraulica%>">
@@ -56,6 +60,10 @@
                     </form-check>
                 </div>
             </div>
+        </div>
+        <div class="col border">
+
+        
             <%}%>
 
                 <%if (interferenciasypermisos.Ferrocarriles=="NC" ){%>
@@ -130,6 +138,10 @@
                                 </form-check>
                             </div>
                         </div>
+                    </div>
+                    <div class="col border">
+
+                    
                         <%}%>
                             <form-check>
 
@@ -212,6 +224,9 @@
                                                 </form-check>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="col border">
+                                        
                                         <%}%>
 
                                             <%if (interferenciasypermisos.DNV=="NC" ){%>
@@ -291,6 +306,14 @@
                                                             </form-check>
                                                         </div>
                                                     </div>
+                                                    
+                                    </div>
+                                    
+                                </div>
+                                <div class="row ">
+                                    <div class="col border">
+
+                                 
                                                     <%}%>
 
                                                         <%if (interferenciasypermisos.DPV=="NC" ){%>
@@ -374,7 +397,10 @@
                                                                         </form-check>
                                                                     </div>
                                                                 </div>
+                                                            </div>
+                                                            <div class="col border">
 
+                                                         
                                                                 <%}%>
 
                                                                     <%if (interferenciasypermisos.Irrigacion=="NC" ){%>
@@ -475,6 +501,9 @@
                                                                                     </form-check>
                                                                                 </div>
                                                                             </div>
+                                                                        </div>
+                                                                        <div class="col border">
+                                                                           
                                                                             <%}%>
 
                                                                                 <%if (interferenciasypermisos.Privado=="NC" ){%>
@@ -587,6 +616,8 @@
                                                                                                 </form-check>
                                                                                             </div>
                                                                                         </div>
+                                                                                    </div>
+                                                        </div>
                                                                                         <%}%>
 
                                                                                             <%if (interferenciasypermisos.Otrospermisos=="NC"
