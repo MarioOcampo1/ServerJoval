@@ -131,7 +131,7 @@ id_Obra= r[0].id;
             element => {
             setTimeout(()=>{
                 connection.query(sql,[{
-                NombreCliente: element.Nombre,id_Obra:id_Obra, NombreObra:obra ,DNICliente:element.DNI ,Telefono:element.Telefono , Correo:element.Correo , Direccion:element.MznaYLote ,AnticipoFinanciero:element.AnticipoFinanciero, ServicioDomiciliario: element.ServicioDomiciliario,MontoCuota:element.MontoCuota,CuotasXCobrar:CuotasXCobrar, Facturar:element.Facturar
+                NombreCliente: element.Nombre,id_Obra:id_Obra, NombreObra:obra ,DNICliente:element.DNI ,Telefono:element.Telefono , Correo:element.Correo , Direccion:element.MznaYLote ,AnticipoFinanciero:element.AnticipoFinanciero, ServicioDomiciliario: element.ServicioDomiciliario,MontoCuota:element.MontoCuota, Facturar:element.Facturar
             }],(error,results)=>{
     if(error)console.log(error);
             });
