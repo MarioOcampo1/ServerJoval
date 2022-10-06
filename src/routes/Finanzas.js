@@ -142,7 +142,7 @@ id_cliente=results[0].ID_cliente;
     console.log("id_cliente =" + id_cliente);
            sql='Insert into finanzas_clientes_predeterminados set?'
            connection.query(sql,[{
-            id_cliente: id_cliente,id_obra:id_Obra, AnticipoFinanciero:element.AnticipoFinanciero, ServicioDomiciliario: element.ServicioDomiciliario,Cuota1:element.MontoCuota,Cuota2:element.MontoCuota,Cuota3:element.MontoCuota,Cuota4:element.MontoCuota,Cuota5:element.MontoCuota,Cuota6:element.MontoCuota,Cuota7:element.MontoCuota,Cuota8:element.MontoCuota,Cuota9:element.MontoCuota,Cuota10:element.MontoCuota,Cuota11:element.MontoCuota,Cuota12:element.MontoCuota, CuotasXCobrar:CuotasXCobrar,ServicioDomiciliario:element.ServicioDomiciliario
+            id_cliente: id_cliente,id_obra:id_Obra, AnticipoFinanciero:element.AnticipoFinanciero, ServicioDomiciliario: element.ServicioDomiciliario,Cuota1:element.MontoCuota,Cuota2:element.MontoCuota,Cuota3:element.MontoCuota,Cuota4:element.MontoCuota,Cuota5:element.MontoCuota,Cuota6:element.MontoCuota,Cuota7:element.MontoCuota,Cuota8:element.MontoCuota,Cuota9:element.MontoCuota,Cuota10:element.MontoCuota,Cuota11:element.MontoCuota,Cuota12:element.MontoCuota,ServicioDomiciliario:element.ServicioDomiciliario
            }],)
         },250);
            
