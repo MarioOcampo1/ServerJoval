@@ -129,27 +129,42 @@ id_Obra= r[0].id;
         const dataExcel = xlsx.utils.sheet_to_json(workbook.Sheets[sheet]);
         dataExcel.forEach(
             element => {
-            setTimeout(()=>{
-                connection.query(sql,[{
-                NombreCliente: element.Nombre,id_Obra:id_Obra, NombreObra:obra ,DNICliente:element.DNI ,Telefono:element.Telefono , Correo:element.Correo , Direccion:element.MznaYLote ,AnticipoFinanciero:element.AnticipoFinanciero, ServicioDomiciliario: element.ServicioDomiciliario,MontoCuota:element.MontoCuota, Facturar:element.Facturar
-            }],(error,results)=>{
-    if(error)console.log(error);
-            });
-    sql='Select ID_cliente from finanzas_clientes_por_obra where NombreCliente=?'
-    connection.query(sql,[element.Nombre],(error,results)=>{
-id_cliente=results[0].ID_cliente;
-    })
-    console.log("id_cliente =" + id_cliente);
+                function cargarenBD1(){
+                    return new Promise((resolve,reject)=>{
+                        connection.query(sql,[{
+                            NombreCliente: element.Nombre,id_Obra:id_Obra, NombreObra:obra ,DNICliente:element.DNI ,Telefono:element.Telefono , Correo:element.Correo , Direccion:element.MznaYLote , Facturar:element.Facturar
+                        }],(error,results)=>{
+                if(error){
+                    reject(
+                    console.log(error)
+                    );
+                }
+else{
+    resolve(true);
+}
+                        });
+                    })
+                        
+                    }
+                    cargarenBD1().then((result)=>{
+                        function CargarenBD2(){
+                            sql='Select ID_cliente from finanzas_clientes_por_obra where NombreCliente=?';
+                            connection.query(sql,[element.Nombre],(error,results)=>{
+                        id_cliente=results[0].ID_cliente;
+                            });
+                            console.log("id_cliente =" + id_cliente);
            sql='Insert into finanzas_clientes_predeterminados set?'
            connection.query(sql,[{
             id_cliente: id_cliente,id_obra:id_Obra, AnticipoFinanciero:element.AnticipoFinanciero, ServicioDomiciliario: element.ServicioDomiciliario,Cuota1:element.MontoCuota,Cuota2:element.MontoCuota,Cuota3:element.MontoCuota,Cuota4:element.MontoCuota,Cuota5:element.MontoCuota,Cuota6:element.MontoCuota,Cuota7:element.MontoCuota,Cuota8:element.MontoCuota,Cuota9:element.MontoCuota,Cuota10:element.MontoCuota,Cuota11:element.MontoCuota,Cuota12:element.MontoCuota,ServicioDomiciliario:element.ServicioDomiciliario
-           }],)
-        },250);
-           
+           }],(error,results)=>{
+            if(error) console.log(error);
+           })
+                          }     
+                          CargarenBD2();
+                        })
         }
-
         );
-      res.redirect("/cobroDeObras");
+        res.redirect("/cobroDeObras");
     }, 2000);
        
 });
