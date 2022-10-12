@@ -1067,9 +1067,10 @@ router.post('/act1pCarpEcogas/:id', (req, res) => {
     if (CartaOferta == "EnGestion" || PlanoAnexo == "EnGestion" || DNVVisacion == "EnGestion"  || HidraulicaVisacion == "EnGestion"  || FerrocarrilesVisacion == "EnGestion" ) {
         PermisosEspeciales = "EnGestion";
     }
-    if (CartaOferta == "Presentado"|| PlanoAnexo == "Presentado" || DNVVisacion == "Presentado"|| HidraulicaVisacion == "Presentado"|| FerrocarrilesVisacion == "Presentado")
+    if (CartaOferta == "Presentado"|| PlanoAnexo == "Presentado" || DNVVisacion == "Presentado"|| HidraulicaVisacion == "Presentado"|| FerrocarrilesVisacion == "Presentado"){
+
 PermisosEspeciales="Presentado";
-    )
+    }
     if (CartaOferta == "Observado" || PlanoAnexo == "Observado" || DNVVisacion == "Observado" || HidraulicaVisacion == "Observado" || FerrocarrilesVisacion == "Observado") {
         PermisosEspeciales = "Observado";
     }
