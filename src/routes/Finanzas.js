@@ -154,7 +154,6 @@ else{
                                 connection.query(sql,[element.Nombre],(error,results)=>{
                                     if(error) console.log(error);
                                     else{
-                                    console.log(results);
                             id_cliente=results[0].ID_cliente;
                             resolve(true);
                         }
