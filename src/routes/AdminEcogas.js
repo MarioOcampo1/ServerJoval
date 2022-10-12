@@ -710,7 +710,7 @@ router.post('/ActualizarProximasTareas/:id', (req, res) => {
 
     if (Fecha_limite) {
       
-sql='Update adminecogas_tareas_por_carpeta set? where id=?';
+sql='Update adminecogas_tareas_por_carpeta set? where id_obra=?';
 connection.query(sql, [{EtapaTarea: EtapaTarea, TareaRealizada:TareaRealizada, Fechalimite: Fecha_limite}, id], (error,results)=>{
     if (error) console.log(error);
 } )
