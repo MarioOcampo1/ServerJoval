@@ -1063,14 +1063,13 @@ router.post('/act1pCarpEcogas/:id', (req, res) => {
     if ((CartaOferta == "ok" || CartaOferta == "NC" || CartaOferta == "") && (PlanoAnexo == "ok" || PlanoAnexo == "NC" || PlanoAnexo == "") && (DNVVisacion == "Visado" || DNVVisacion == "NC" || DNVVisacion == "") && (HidraulicaVisacion == "Visado" || HidraulicaVisacion == "NC" || HidraulicaVisacion == "") && (FerrocarrilesVisacion == "Visado" || FerrocarrilesVisacion == "NC" || FerrocarrilesVisacion == "")) {
         console.log("Permisos especiales sera cambiado a ok...");
         PermisosEspeciales = "ok";
-        console.log("El valor que contiene permisos especiales es: " + PermisosEspeciales);
     }
-    if (CartaOferta == "EnGestion" || CartaOferta == "Presentado" || PlanoAnexo == "EnGestion" || PlanoAnexo == "Presentado" || DNVVisacion == "EnGestion" || DNVVisacion == "Presentado" || HidraulicaVisacion == "EnGestion" || HidraulicaVisacion == "Presentado" || FerrocarrilesVisacion == "EnGestion" || FerrocarrilesVisacion == "Presentado") {
-        console.log("Permisos especiales sera cambiado a EnGestion...");
+    if (CartaOferta == "EnGestion" || PlanoAnexo == "EnGestion" || DNVVisacion == "EnGestion"  || HidraulicaVisacion == "EnGestion"  || FerrocarrilesVisacion == "EnGestion" ) {
         PermisosEspeciales = "EnGestion";
-        console.log("El valor que contiene permisos especiales es: " + PermisosEspeciales);
-
     }
+    if (CartaOferta == "Presentado"|| PlanoAnexo == "Presentado" || DNVVisacion == "Presentado"|| HidraulicaVisacion == "Presentado"|| FerrocarrilesVisacion == "Presentado")
+PermisosEspeciales="Presentado";
+    )
     if (CartaOferta == "Observado" || PlanoAnexo == "Observado" || DNVVisacion == "Observado" || HidraulicaVisacion == "Observado" || FerrocarrilesVisacion == "Observado") {
         PermisosEspeciales = "Observado";
     }
@@ -1084,8 +1083,6 @@ router.post('/act1pCarpEcogas/:id', (req, res) => {
     if (CuestionarioRelevamientoAmbiental == "EnGestion" || DDJJInicialAmbiental == "EnGestion" || ListaVerificacionAmbiental == "EnGestion") { DocumentacionAmbiente = "EnGestion" ; }
     if (CuestionarioRelevamientoAmbiental == "Presentado" || DDJJInicialAmbiental == "Presentado" || ListaVerificacionAmbiental == "Presentado") { DocumentacionAmbiente = "Presentado" ; }
     if (CuestionarioRelevamientoAmbiental == "Observado" || DDJJInicialAmbiental == "Observado" || ListaVerificacionAmbiental == "Observado") { DocumentacionAmbiente = "Observado" ; }
-    console.log("id:" + id + "," + Contrato, "", Comercial, "", Presupuesto, "", Sucedaneo, "",)
-    console.log("El valor que contiene la fecha del contrato es: " + FechaFirmaContrato);
     sql = 'Update obras_tareasgenerales Set ? where Nombre=?';
     connection.query(sql, [{ Comercial: Comercial, Tecnica: Tecnica, PermisosEspeciales: PermisosEspeciales, DocumentacionAmbiental: DocumentacionAmbiente }, Nombre],
         (error, results) => {
