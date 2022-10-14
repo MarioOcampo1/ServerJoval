@@ -18,6 +18,15 @@ router.use(cookieParser('Mi ultra secreto'));
 router.use(passport.initialize());
 router.use(passport.session());
 passport.use(new PassportLocal(function (username, password, done) {
+connection.query('Select * from usuariosregistrados',(error,results)=>{
+    if(error) console.log(error);
+for (let index = 0; index < results.length; index++) {
+    const element = results[index];
+    if (username == element.Usuario && password == element.Password) {
+        return done(null, { id: element.id, name: element.Usuario });
+    }
+}    
+})
 
     if (username == "mocampo" && password == "asd") {
         return done(null, { id: 1, name: "Mario" });

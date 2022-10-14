@@ -100,7 +100,7 @@
                         </tr>
                         <tr id="Segundotr">
                             <th id="DatosCarpeta"  class="text-center">
-                                <button class="btn"><h4>Código</h4>    </button>
+                                <button id="BTNCodigo" class="btn"><h4>Código</h4>    </button>
                             </th>
                             <th id="DatosCarpeta"  class="text-center ">
                                 <button class="btn"><h4>Nombre</h4>    </button>
@@ -1110,6 +1110,8 @@ $.each(registros, function(indice,elemento){
 })
         })
     })
+    // El codigo debajo simula un click en el boton de "Codigo", lo que hace que se ordenen los codigos de menos a mayor practicamente al abrir la ventana
+$('#BTNCodigo').trigger("click");
 })
 jQuery("#Preliminar").click(function(){
 
