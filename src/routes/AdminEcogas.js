@@ -137,6 +137,17 @@ connection.query(sql, (error, results) => {
        interferenciasypermisos= results;
         }
     })
+    setTimeout(() => {
+        RevisarVencimientos();
+    }, 2000);
+    async function RevisarVencimientos(){
+        var fechaActual = new Date().toUTCString();
+        console.log(fechaActual);
+        interferenciasypermisos.forEach(element => {
+            if (element.intTelefonicaObtenida){}
+        });
+    }
+   
         // FIN INTERFERENCIAS
         sql = 'SELECT c.id, c.Nombre, c.NCarpeta, b.TareaRealizada, b.ProximaTarea, b.EtapaTarea, b.FechaLimite FROM obras c , adminecogas_tareas_por_carpeta b  ';
         res.locals.moment = moment;
