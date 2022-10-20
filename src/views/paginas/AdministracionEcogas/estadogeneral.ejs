@@ -1114,8 +1114,6 @@ $.each(registros, function(indice,elemento){
 $('#BTNCodigo').trigger("click");
 })
 jQuery("#Preliminar").click(function(){
-
-   
     //Primero Dibuja todo
     jQuery("#EstadoGeneral SeccionTabla").show();
     jQuery("#EstadoGeneral #EncabezadoPreliminar").show();
@@ -1125,9 +1123,7 @@ jQuery("#Preliminar").click(function(){
     jQuery("#EstadoGeneral #EncabezadoCaos").show();
     jQuery("#EstadoGeneral #EncabezadoFin").show();
     jQuery("#EstadoGeneral tbody>tr").show();
-
     //Luego borra lo que hagafalta
-   
     jQuery("#EstadoGeneral SeccionTabla").hide();
     jQuery("#EstadoGeneral #Encabezado1P").hide();
     jQuery("#EstadoGeneral #Encabezado2P").hide();
@@ -1138,7 +1134,6 @@ jQuery("#Preliminar").click(function(){
 let palabra = "preliminar";
 jQuery("#EstadoGeneral tbody>tr").hide();
 jQuery("#EstadoGeneral td:contiene-palabra('" + palabra + "')").parent("tr").show();
-
 })
 jQuery("#1P").click(function(){
     jQuery("#EstadoGeneral SeccionTabla").show();
