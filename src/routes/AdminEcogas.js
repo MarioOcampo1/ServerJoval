@@ -895,6 +895,9 @@ router.post('/guardarNuevoCliente', (req, res) => {
         if (error) console.log(error);
 
     })
+//La siguiente sentencia, elimina la carpeta de la BD donde el codigo de la carpeta se encuentre en "E" de "Eliminado". Tarea necesaria
+// para que no figura el codigo como disponible.
+
     sql = "Delete from codificacioncarpetas where CodigoEnUsoVigentes= 'E' and CodigoVigentes=?"
     connection.query(sql, [Codigo], (error) => {
         if (error) console.log(error);
@@ -917,14 +920,14 @@ router.post('/guardarNuevoCliente', (req, res) => {
     }], (error, results) => {
         if (error) console.log(error);
 
-        if (results.length > 0) {
-            res.redirect('/adminecogas');
-        }
-        else {
-            res.redirect('/adminecogas');
-
-        }
+        
+           
+        
     })
+
+    //nuevocliente 2da parte
+    
+    res.redirect('/nuevocliente2daParte.ejs');
 
 
 })
