@@ -895,6 +895,9 @@ router.post('/guardarNuevoCliente', (req, res) => {
         if (error) console.log(error);
 
     })
+//La siguiente sentencia, elimina la carpeta de la BD donde el codigo de la carpeta se encuentre en "E" de "Eliminado". Tarea necesaria
+// para que no figura el codigo como disponible.
+
     sql = "Delete from codificacioncarpetas where CodigoEnUsoVigentes= 'E' and CodigoVigentes=?"
     connection.query(sql, [Codigo], (error) => {
         if (error) console.log(error);
@@ -917,14 +920,14 @@ router.post('/guardarNuevoCliente', (req, res) => {
     }], (error, results) => {
         if (error) console.log(error);
 
-        if (results.length > 0) {
-            res.redirect('/adminecogas');
-        }
-        else {
-            res.redirect('/adminecogas');
-
-        }
+        
+           
+        
     })
+
+    //nuevocliente 2da parte
+    
+    res.redirect('/nuevocliente2daParte.ejs');
 
 
 })
@@ -1042,9 +1045,21 @@ router.post('/act1pCarpEcogas/:id', (req, res) => {
     var DDJJInicialAmbiental = req.body.DDJJInicialAmbiental;
     var ListaVerificacionAmbiental = req.body.ListaVerificacionAmbiental;
     var DocumentacionAmbiente = "Sin Presentar";
+    var TituloDePropiedad = req.body.TituloDePropiedad;
+    var Mensura = req.body.Mensura;
     // Variables Generales
     var Comercial;
     var Tecnica, PermisosEspeciales;
+    //Documentacion del terreno
+    if ((Mensura == "ok" || Mensura == "NC") && (TituloDePropiedad == "ok" || TituloDePropiedad == "NC")) {
+        DocumentacionTerreno = "ok";
+    }
+    if (Mensura == "EnGestion" || TituloDePropiedad == "EnGestion") {
+        DocumentacionTerreno = "EnGestion";
+    }
+    if (Mensura == "Sin presentar" || TituloDePropiedad == "Sin presentar") {
+        DocumentacionTerreno = "Sin presentar";
+    }
     // Comercial
     if ((Contrato == "ok" || Contrato == "Ok(Preliminar)") && Presupuesto == "ok" && Sucedaneo == "ok" && (NotaDeExcepcion == "ok" || NotaDeExcepcion == "NC")) {
         Comercial = "ok";
@@ -1105,7 +1120,7 @@ PermisosEspeciales="Presentado";
     if (CuestionarioRelevamientoAmbiental == "Presentado" || DDJJInicialAmbiental == "Presentado" || ListaVerificacionAmbiental == "Presentado") { DocumentacionAmbiente = "Presentado" ; }
     if (CuestionarioRelevamientoAmbiental == "Observado" || DDJJInicialAmbiental == "Observado" || ListaVerificacionAmbiental == "Observado") { DocumentacionAmbiente = "Observado" ; }
     sql = 'Update obras_tareasgenerales Set ? where Nombre=?';
-    connection.query(sql, [{ Comercial: Comercial, Tecnica: Tecnica, PermisosEspeciales: PermisosEspeciales, DocumentacionAmbiental: DocumentacionAmbiente }, Nombre],
+    connection.query(sql, [{ DocumentacionTerreno:DocumentacionTerreno, Comercial: Comercial, Tecnica: Tecnica, PermisosEspeciales: PermisosEspeciales, DocumentacionAmbiental: DocumentacionAmbiente }, Nombre],
         (error, results) => {
 
             if (error) {
@@ -1126,7 +1141,7 @@ PermisosEspeciales="Presentado";
         })
     sql = 'Update adminecogas_tareas_por_carpeta Set ? where Nombre=?';
     connection.query(sql, [{
-        //Primera Parte
+        Mensura:Mensura,TituloDePropiedad:TituloDePropiedad,
         Contrato: Contrato, Presupuesto: Presupuesto, Sucedaneo: Sucedaneo, NotaDeExcepcion: NotaDeExcepcion, PCaprobado: Pcaprobado,
         PlanoTipo: PlanoTipo, CartaOferta: CartaOferta, PlanoAnexo: PlanoAnexo, CuestionarioRelevamientoAmbiental: CuestionarioRelevamientoAmbiental, DDJJInicialAmbiental: DDJJInicialAmbiental, ListaVerificacionAmbiental: ListaVerificacionAmbiental
     }, Nombre],
