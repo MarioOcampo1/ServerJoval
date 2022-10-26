@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actualizar Proximas tareas</title>
+</head>
+<body>
+   <form action="/ActualizarProximasTareas/<%= user.id%>" method="POST">
+
+
+
+                <!-- Tareas de la carpeta -->
+                <div class="container-fluid">
+                    <div class="card-header text-center Titulo cuerpo">
+                        <h3 class="Titulo">Tareas de la carpeta</h3>
+                    </div>
+                    <div class="card-body">
+
+                        <div class="border border-primary ">
+                            <div class="row ">
+                                <div class="col p-2 text-center">
+                                    <div class="form-group">
+                                        <h4>Seleccione la etapa de la tarea en la cual va a cargar la información</h4>
+                                        <label for="EstadoEtapa"> Etapa de la tarea:</label>
+                                        <input class="form-check-input" required type="radio" name="EtapaTarea"
+                                            id="EtapaTarea" value="Preliminar">
+                                        <label class="form-check-label" for="inlineRadio1">Preliminar</label>
+                                        <input class="form-check-input" type="radio" name="EtapaTarea" id="EtapaTarea"
+                                            value="1ra parte">
+                                        <label class="form-check-label" for="inlineRadio2">1° parte</label>
+                                        <input class="form-check-input" type="radio" name="EtapaTarea" id="EtapaTarea"
+                                            value="2da parte">
+                                        <label class="form-check-label" for="inlineRadio3"> 2° parte</label>
+                                        <input class="form-check-input" type="radio" name="EtapaTarea" id="EtapaTarea"
+                                            value="Obras">
+                                        <label class="form-check-label" for="inlineRadio4">Obras </label>
+                                        <input class="form-check-input" type="radio" name="EtapaTarea" id="EtapaTarea"
+                                            value="Caos">
+                                        <label class="form-check-label" for="inlineRadio5">Caos </label>
+
+                                        <input class="form-check-input" type="radio" name="EtapaTarea" id="EtapaTarea"
+                                            value="Finalizada">
+                                        <label class="form-check-label" for="inlineRadio6">Finalizada </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                            </div>
+                            <div class="row p-1">
+                                <div id="TareaAnterior" class="col-sm-2">
+                                    <input type="hidden" style="display:none" name="id" id="id" value="<%= user.id%>">
+                                    <input type="hidden" style="display:none" name="Nombre" id="Nombre"
+                                        value="<%= user.Nombre%>">
+
+                                    <p class=" font-weight-bold p-1">Tarea Anterior: </p>
+                                </div>
+                                <div class="col ">
+                                    <p>
+                                        <%= user.ProximaTarea%>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row p-1 ">
+                                <div class="col-sm-2">
+                                    Tarea Realizada:
+                                </div>
+                                <div class="col">
+                                    <input class="container-fluid" maxlength="500" type="text" name="TareaRealizada"
+                                        id="TareaRealizada" placeholder="Ingrese ultima tarea realizada">
+                                </div>
+                            </div>
+                            <div class="row p-1">
+                                <div class="col-sm-2">
+                                    Proxima Tarea:
+                                </div>
+                                <div class="col">
+                                    <input class="container-fluid" type="text" name="ProximaTarea" id="ProximaTarea"
+                                        placeholder="Ingrese la proxima tarea">
+                                </div>
+                            </div>
+                            <div class="row p-1">
+                                <div class="col-sm-2 ">
+                                    Fecha Limite:
+                                </div>
+                                <div class="col-sm-2">
+                                    <input class="container-fluid" type="date" required name="Fecha_limite"
+                                        id="Fecha_limite" value="<%=user.Fecha_limite%>">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row ">
+                            <div class="col p-2 text-center">
+                                <div class="form-group">
+                                    <label for="ResponsableDeTarea"> Responsable de la Tarea:</label>
+                                    <input type="radio" name="ResponsableDeTarea" id="ResponsableDeTarea" required
+                                        value="Mauricio"> Mauricio
+                                    <input type="radio" name="ResponsableDeTarea" id="ResponsableDeTarea"
+                                        value="Gustavo">
+                                    Gustavo
+                                    <input type="radio" name="ResponsableDeTarea" id="ResponsableDeTarea"
+                                        value="Daiana">
+                                    Daiana
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row ">
+                            <div class="col p-2 text-center">
+                                <div class="button-group text-center" role="group">
+                                    <button type="submit" class="btn btn-primary text-center">Actualizar Tarea</button>
+                                    <button onClick="history.go(-1);" class="btn btn-secondary text-center"">Cancelar</button>
+                                    </div>
+                            </div>
+                        </div>
+                        </div>
+                </form>
+</body>
+</html>

@@ -1,84 +1,68 @@
-<div class="card p-3 border-secondary" id="SeccionFinal">
-    <div class="card-header">Matriculas
-    </div>
-    <div class="card-title">Fusionista
-    </div>
-    <div class="card-text">
-        <select class="form-control"
-            id="MatriculaFusionista"
-            name="MatriculaFusionista"
-            value="<%= tareasporcarpeta.MatriculaFusionista%>"
-            placeholder="<%= tareasporcarpeta.MatriculaFusionista%>">
-            <option hidden
-                value="<%=tareasporcarpeta.MatriculaFusionista%>"
-                selected>
-                <%=tareasporcarpeta.MatriculaFusionista%>
-            </option>
-            <option value="EnGestion">En
-                gestion</option>
-            <option value="ok">Ok
-            </option>
-            <option value="NC">No
-                corresponde</option>
-        </select>
-    </div>
-    <br>
-    <div class="card-title">Soldador
-    </div>
-    <div class="card-text">
-
-        <select class="form-control"
-            id="MatriculaSoldador"
-            name="MatriculaSoldador"
-            value="<%= tareasporcarpeta.MatriculaSoldador%>"
-            placeholder="<%= tareasporcarpeta.MatriculaSoldador%>">
-            <option hidden
-                value="<%=tareasporcarpeta.MatriculaSoldador%>"
-                selected>
-                <%=tareasporcarpeta.MatriculaSoldador%>
-            </option>
-            <option value="EnGestion">En
-                gestion</option>
-            <option value="ok">Ok
-            </option>
-            <option value="NC">No
-                corresponde</option>
-        </select>
-    </div>
+    <div class="row border border-secondary m-1">
+<div class="col-4 border border-secondary">
+    <h5 class="fw-bolder text-center">
+        Matriculas
+    </h5>
+    <label for="MatriculaFusionista">Fusionista</label>
+    <select class="form-control"
+    id="MatriculaFusionista"
+    name="MatriculaFusionista"
+    value="<%= tareasporcarpeta.MatriculaFusionista%>"
+    placeholder="<%= tareasporcarpeta.MatriculaFusionista%>">
+    <option hidden
+        value="<%=tareasporcarpeta.MatriculaFusionista%>"
+        selected>
+        <%=tareasporcarpeta.MatriculaFusionista%>
+    </option>
+    <option value="EnGestion">En
+        gestion</option>
+    <option value="ok">Ok
+    </option>
+    <option value="NC">No
+        corresponde</option>
+</select>
+<label for="MatriculaSoldador">Soldador</label>
+<select class="form-control"
+id="MatriculaSoldador"
+name="MatriculaSoldador"
+value="<%= tareasporcarpeta.MatriculaSoldador%>"
+placeholder="<%= tareasporcarpeta.MatriculaSoldador%>">
+<option hidden
+    value="<%=tareasporcarpeta.MatriculaSoldador%>"
+    selected>
+    <%=tareasporcarpeta.MatriculaSoldador%>
+</option>
+<option value="EnGestion">En
+    gestion</option>
+<option value="ok">Ok
+</option>
+<option value="NC">No
+    corresponde</option>
+</select>
 </div>
-<br>
-<div class="card p-3 border-secondary">
-    <div class="card-header">Ambiente
-    </div>
-    <div class="card-title">Estudio de
-        impacto ambiental
-    </div>
-    <div class="card-text">
-        <select class="form-control"
-            id="EstudioImpactoAmbiental"
-            name="EstudioImpactoAmbiental"
-            value="<%= tareasporcarpeta.EstudioImpactoAmbiental%>"
-            placeholder="<%= tareasporcarpeta.EstudioImpactoAmbiental%>">
-            <option hidden
-                value="<%=tareasporcarpeta.EstudioImpactoAmbiental%>"
-                selected>
-                <%=tareasporcarpeta.EstudioImpactoAmbiental%>
-            </option>
-            <option value="pedir">Sin solicitar</option>
-            <option value="EnGestion">En
-                gestion</option>
-            <option value="ok">ok
-            </option>
-            <option value="NC">No
-                corresponde </option>
-        </select>
-        
-    </div>
-    <div class="card-title">Cronograma
-        de visitas ambiente
-    </div>
-    <div class="card-text">
-        <select class="form-control"
+<div class="col-4 border border-secondary">
+    <h5 class="fw-bolder text-center">Ambiente</h5>
+    <label for="EstudioImpactoAmbiental">Estudio de impacto ambiental</label>
+    <select class="form-control"
+    id="EstudioImpactoAmbiental"
+    name="EstudioImpactoAmbiental"
+    value="<%= tareasporcarpeta.EstudioImpactoAmbiental%>"
+    placeholder="<%= tareasporcarpeta.EstudioImpactoAmbiental%>">
+    <option hidden
+        value="<%=tareasporcarpeta.EstudioImpactoAmbiental%>"
+        selected>
+        <%=tareasporcarpeta.EstudioImpactoAmbiental%>
+    </option>
+    <option value="pedir">Sin solicitar</option>
+    <option value="EnGestion">En
+        gestion</option>
+    <option value="ok">ok
+    </option>
+    <option value="NC">No
+        corresponde </option>
+</select>
+<label for="CronogramaAmbiente">Cronograma de visitas ambiente</label>
+<select class="form-control"
             id="CronogramaAmbiente"
             name="CronogramaAmbiente"
             value="<%= tareasporcarpeta.CronogramaAmbiente%>"
@@ -94,15 +78,9 @@
             <option value="ok">ok
             </option>
         </select>
-    </div>
-</div>
-<br>
-<div class="card p-3 border-secondary">
-    <div class="card-header">Nota
-        cumplimento de normativas
-        vigentes</div>
-    <div class="card-text">
-        <select class="form-control"
+
+    <label for="NotaCumplimentoNormativa">Nota cumplimento de normativas vigentes</label>
+    <select class="form-control"
             id="NotaCumplimentoNormativa"
             name="NotaCumplimentoNormativa"
             value="<%= tareasporcarpeta.NotaCumplimentoNormativa%>"
@@ -117,39 +95,31 @@
                 gestion</option>
             <option value="ok">Ok</option>
         </select>
-    </div>
-</div>
-<br>
-<div class="card p-3 border-secondary">
-    <div class="card-header">DDJJ NAG
-        153</div>
-    <div class="card-text">
+        <label for="DDJJNAG153">
+            DDJJ NAG 153
+        </label>
         <select class="form-control"
-            id="DDJJNAG153"
-            name="DDJJNAG153"
-            value="<%= tareasporcarpeta.DDJJNAG153%>"
-            placeholder="<%= tareasporcarpeta.DDJJNAG153%>">
-            <option hidden
-                value="<%=tareasporcarpeta.DDJJNAG153%>"
-                selected>
-                <%=tareasporcarpeta.DDJJNAG153%>
-            </option>
-            <option value="Sin presentar">Sin solicitar</option>
-            <option value="EnGestion">En
-                gestion</option>
-            <option value="ok">Ok</option>
-        </select>
-    </div>
+                id="DDJJNAG153"
+                name="DDJJNAG153"
+                value="<%= tareasporcarpeta.DDJJNAG153%>"
+                placeholder="<%= tareasporcarpeta.DDJJNAG153%>">
+                <option hidden
+                    value="<%=tareasporcarpeta.DDJJNAG153%>"
+                    selected>
+                    <%=tareasporcarpeta.DDJJNAG153%>
+                </option>
+                <option value="Sin presentar">Sin solicitar</option>
+                <option value="EnGestion">En
+                    gestion</option>
+                <option value="ok">Ok</option>
+            </select>
 </div>
-<br>
-<div class="card p-3 border-secondary">
-    <div class="card-header">Avisos
-    </div>
-    <div class="card-title">Aviso de
-        inicio de obras ART
-    </div>
-    <div class="card-text">
-        <select class="form-control"
+
+<div class="col-4 border border-secondary pb-2">
+<h5 class="fw-bolder text-center">Avisos</h5>
+<label for="AvisoInicioObraART">Aviso de
+    inicio de obras ART</label>
+    <select class="form-control"
             id="AvisoInicioObraART"
             name="AvisoInicioObraART"
             value="<%= tareasporcarpeta.AvisoInicioObraART%>"
@@ -169,36 +139,34 @@
         </select>
         <label for="Vencimiento Obra Art"> Fecha de vencimiento aviso de ART:</label>
         <input type="date" name="VencimientoAvisoObraArt" id="VencimientoAvisoObraArt" value="<%=tareasporcarpeta.VencimientoAvisoObraArt%>">
-    </div>
-    <div class="card-title">Aviso de
-        inicio de obras IERIC
-    </div>
-    <div class="card-text">
-        <select class="form-control"
-            id="AvisoInicioObraIERIC"
-            name="AvisoInicioObraIERIC"
-            value="<%= tareasporcarpeta.AvisoInicioObraIERIC%>"
-            placeholder="<%= tareasporcarpeta.AvisoInicioObraIERIC%>">
-            <option hidden
-                value="<%=tareasporcarpeta.AvisoInicioObraIERIC%>"
-                selected>
-                <%=tareasporcarpeta.AvisoInicioObraIERIC%>
-            </option>
-            <option value="Sin presentar">
-                Sin presentar
-            </option>
-            <option value="EnGestion">En
-                gestion</option>
-            <option value="ok">ok
-            </option>
-        </select>
-        <label for="Vencimiento Obra Ieric"> Fecha vencimiento aviso de IERIC:</label>
-        <input type="date" name="VencimientoAvisoObraIeric" id="VencimientoAvisoObraIeric" value="<%=tareasporcarpeta.VencimientoAvisoObraIeric%>">
-    </div>
-    <div class="card-title">Acta de
-        inicio efectivo</div>
-    <div class="card-text">
-        <select class="form-control"
+        <label for="AvisoInicioObraIERIC">Aviso de
+            inicio de obras IERIC</label>
+            <select class="form-control"
+                id="AvisoInicioObraIERIC"
+                name="AvisoInicioObraIERIC"
+                value="<%= tareasporcarpeta.AvisoInicioObraIERIC%>"
+                placeholder="<%= tareasporcarpeta.AvisoInicioObraIERIC%>">
+                <option hidden
+                    value="<%=tareasporcarpeta.AvisoInicioObraIERIC%>"
+                    selected>
+                    <%=tareasporcarpeta.AvisoInicioObraIERIC%>
+                </option>
+                <option value="Sin presentar">
+                    Sin presentar
+                </option>
+                <option value="EnGestion">En
+                    gestion</option>
+                <option value="ok">ok
+                </option>
+            </select>
+    
+    <label for="Vencimiento Obra Ieric"> Fecha vencimiento aviso de IERIC:</label>
+    <input type="date" name="VencimientoAvisoObraIeric" id="VencimientoAvisoObraIeric" value="<%=tareasporcarpeta.VencimientoAvisoObraIeric%>">
+    <label for="ActaInicioEfectivo">
+        Acta de
+        inicio efectivo
+    </label>
+    <select class="form-control"
             id="ActaInicioEfectivo"
             name="ActaInicioEfectivo"
             value="<%= tareasporcarpeta.ActaInicioEfectivo%>"
@@ -217,6 +185,7 @@
             </option>
 
         </select>
+</div>
     </div>
 </div>
 

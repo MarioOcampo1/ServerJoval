@@ -1,245 +1,176 @@
- <!--Segunda Parte-->
- <th>
-    <button type="button" class="btn btn btn-primary"
-        data-toggle="modal" data-target="#ModalSegundaParte">
+<!--Segunda Parte-->
+<th>
+    <button type="button" class="btn btn btn-primary" data-toggle="modal" data-target="#ModalSegundaParte">
         2P Segunda Parte
     </button>
 
     <!-- Modal -->
-    <div class="modal fade" id="ModalSegundaParte" tabindex="-1"
-        role="dialog" aria-labelledby="ModalSegundaParte"
+    <div class="modal fade" id="ModalSegundaParte" tabindex="-1" role="dialog" aria-labelledby="ModalSegundaParte"
         aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-xl"
-            role="document">
+        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="ModalSegundaParte">
                         Segunda Parte
                     </h5>
-                    <button class="close"
-                        data-dismiss="modal" aria-label="Close">
+                    <button class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                
-                    <div class="container">
-                        <div class="card p-3 border-secondary " id="SeccionInicio">
-                            <div class="card-title">Mail de
-                                autorización</div>
-                            <div class="card-text">
-                                <select class="form-control"
-                                    id="MailAutorizacion"
-                                    name="MailAutorizacion"
-                                    value="<%= tareasporcarpeta.MailAutorizacion%>"
-                                    placeholder="<%= tareasporcarpeta.MailAutorizacion%>">
-                                    <option hidden
-                                        value="<%=tareasporcarpeta.MailAutorizacion%>"
-                                        selected>
-                                        <%=tareasporcarpeta.MailAutorizacion%>
-                                    </option>
-                                    <option value="No Recibido">
-                                        No Recibido</option>
-                                    <option value="Recibido">Recibido</option>
 
-                                </select>
-                            </div>
-                            </div>
-                            <br>
-                            <div class="card p-3 border-secondary">
-                                <div class="card-header">
-                                    Plan de trabajo</div>
-                                                               <div class="card-text">
-                                    <select class="form-control"
-                                        id="PlanDeTrabajo"
-                                        name="PlanDeTrabajo"
-                                        value="<%= tareasporcarpeta.PlanDeTrabajo%>"
-                                        placeholder="<%= tareasporcarpeta.PlanDeTrabajo%>">
-                                        <option hidden
-                                            value="<%=tareasporcarpeta.PlanDeTrabajo%>"
-                                            selected>
-                                            <%=tareasporcarpeta.PlanDeTrabajo%>
-                                        </option>
-                                        <option value="Sin presentar">Sin presentar
-    
-                                        <option value="EnGestion">En
-                                            gestion</option>
-                                                <option value="ok">ok
-                                        </option>
-    
-                                    </select>
-                                </div>
-                            </div>
-                                <br>
-                        <div class="card p-3 border-secondary">
-                            <div class="card-header">
-                                Documentación de obra</div>
-                            <div class="card-tit">Solicitud
-                                Inicio de obras</div>
-                            <div class="card-text">
-                                <select class="form-control"
-                                    id="SolicitudInicioObras"
-                                    name="SolicitudInicioObras"
-                                    value="<%= tareasporcarpeta.SolicitudInicioObras%>"
-                                    placeholder="<%= tareasporcarpeta.SolicitudInicioObras%>">
-                                    <option hidden
-                                        value="<%=tareasporcarpeta.SolicitudInicioObras%>"
-                                        selected>
-                                        <%=tareasporcarpeta.SolicitudInicioObras%>
-                                    </option>
-                                    <option value="Sin presentar">Sin presentar
+                    <div class="row p-2 mb-2 mt-2">
+                        <div class="col-4 border border-secondary text-center"><label for="MailAutorizacion">Mail de
+                                autorización</label>
+                            <select class="form-control" id="MailAutorizacion" name="MailAutorizacion"
+                                value="<%= tareasporcarpeta.MailAutorizacion%>"
+                                placeholder="<%= tareasporcarpeta.MailAutorizacion%>">
+                                <option hidden value="<%=tareasporcarpeta.MailAutorizacion%>" selected>
+                                    <%=tareasporcarpeta.MailAutorizacion%>
+                                </option>
+                                <option value="No Recibido">
+                                    No Recibido</option>
+                                <option value="Recibido">Recibido</option>
 
-                                    <option value="EnGestion">En
-                                        gestion</option>
-                                            <option value="ok">ok
-                                    </option>
+                            </select>
 
-                                </select>
-                            </div>
-                            <div class="card-title">Certificado
-                                del RT</div>
-                            <div class="card-text">
-                                <select class="form-control"
-                                    id="CertificadoRT"
-                                    name="CertificadoRT"
-                                    value="<%= tareasporcarpeta.CertificadoRT%>"
-                                    placeholder="<%= tareasporcarpeta.CertificadoRT%>">
-                                    <option hidden
-                                        value="<%=tareasporcarpeta.CertificadoRT%>"
-                                        selected>
-                                        <%=tareasporcarpeta.CertificadoRT%>
-                                    </option>
-                                    <option value="Sin presentar">
-                                        Sin presentar
-                                    </option>
-                                    <option value="EnGestion">En
-                                        gestion</option>
-                                    <option value="ok">ok
-                                    </option>
+                            <label for="PlanDeTrabajo">Plan de trabajo</label>
+                            <select class="form-control" id="PlanDeTrabajo" name="PlanDeTrabajo"
+                                value="<%= tareasporcarpeta.PlanDeTrabajo%>"
+                                placeholder="<%= tareasporcarpeta.PlanDeTrabajo%>">
+                                <option hidden value="<%=tareasporcarpeta.PlanDeTrabajo%>" selected>
+                                    <%=tareasporcarpeta.PlanDeTrabajo%>
+                                </option>
+                                <option value="Sin presentar">Sin presentar
 
-                                </select>
-                            </div>
+                                <option value="EnGestion">En
+                                    gestion</option>
+                                <option value="ok">ok
+                                </option>
+
+                            </select>
+
                         </div>
-                        <br>
-                        <div class="card p-3 border-secondary">
-                            <div class="card-header">Seguridad
-                            </div>
-                            <div class="card-title">Programa de
-                                seguridad</div>
-                            <div class="card-text">
-                                <select class="form-control"
-                                    id="Programadeseguridad"
-                                    name="Programadeseguridad"
-                                    value="<%= tareasporcarpeta.Programadeseguridad%>"
-                                    placeholder="<%= tareasporcarpeta.Programadeseguridad%>">
-                                    <option hidden
-                                        value="<%=tareasporcarpeta.Programadeseguridad%>"
-                                        selected>
-                                        <%=tareasporcarpeta.Programadeseguridad%>
-                                    </option>
-                                    <option value="Sin presentar">
-                                        Sin presentar
-                                    </option>
-                                    <option value="EnGestion">En
-                                        gestion</option>
-                                    <option value="ok">ok
-                                    </option>
+                        <div class="col-4 border border-secondary  text-center">
+                            <h5 class="fw-bolder">Documentación de obras</h5>
+                            <label class="text-center" for="SolicitudInicioObras">Solicitud Inicio de obras</label>
+                            <select class="form-control" id="SolicitudInicioObras" name="SolicitudInicioObras"
+                                value="<%= tareasporcarpeta.SolicitudInicioObras%>"
+                                placeholder="<%= tareasporcarpeta.SolicitudInicioObras%>">
+                                <option hidden value="<%=tareasporcarpeta.SolicitudInicioObras%>" selected>
+                                    <%=tareasporcarpeta.SolicitudInicioObras%>
+                                </option>
+                                <option value="Sin presentar">Sin presentar
 
-                                </select>
-                            </div>
-                            <div class="card-title">Cronograma
-                                de visitas SyH</div>
-                            <div class="card-text">
-                                <select class="form-control"
-                                    id="CronogramaSyH"
-                                    name="CronogramaSyH"
-                                    value="<%= tareasporcarpeta.CronogramaSyH%>"
-                                    placeholder="<%= tareasporcarpeta.CronogramaSyH%>">
-                                    <option
-                                        value="<%=tareasporcarpeta.CronogramaSyH%>"
-                                        selected>
-                                        <%=tareasporcarpeta.CronogramaSyH%>
-                                    </option>
-                                    <option value="Sin presentar">
-                                        Sin presentar
-                                    </option>
-                                    <option value="EnGestion">En
-                                        gestion</option>
-                                    <option value="ok">ok
-                                    </option>
+                                <option value="EnGestion">En
+                                    gestion</option>
+                                <option value="ok">ok
+                                </option>
 
-                                </select>
-                            </div>
-                            <div class="card-title">Seguro
-                                responsabilidad civil
-                            </div>
-                            <div class="card-text">
-                                <select class="form-control"
-                                    id="SeguroRC" name="SeguroRC"
-                                    value="<%= tareasporcarpeta.SeguroRC%>"
-                                    placeholder="<%= tareasporcarpeta.SeguroRC%>">
-                                    <option
-                                        value="<%=tareasporcarpeta.SeguroRC%>"
-                                        selected>
-                                        <%=tareasporcarpeta.SeguroRC%>
-                                    </option>
-                                    <option value="Sin presentar">
-                                        Sin presentar
-                                    </option>
-                                    <option value="EnGestion">En
-                                        gestion</option>
-                                    <option value="ok">ok
-                                    </option>
+                            </select>
+                            <label class="text-center" for="CertificadoRT">Certificado del RT</label>
+                            <select class="form-control" id="CertificadoRT" name="CertificadoRT"
+                                value="<%= tareasporcarpeta.CertificadoRT%>"
+                                placeholder="<%= tareasporcarpeta.CertificadoRT%>">
+                                <option hidden value="<%=tareasporcarpeta.CertificadoRT%>" selected>
+                                    <%=tareasporcarpeta.CertificadoRT%>
+                                </option>
+                                <option value="Sin presentar">
+                                    Sin presentar
+                                </option>
+                                <option value="EnGestion">En
+                                    gestion</option>
+                                <option value="ok">ok
+                                </option>
 
-                                </select>
-                            </div>
-                            <div class="card-title">Monotributos
-                            </div>
-                            <div class="card-text">
-                                <select class="form-control"
-                                    id="Monotributos"
-                                    name="Monotributos"
-                                    value="<%= tareasporcarpeta.Monotributos%>"
-                                    placeholder="<%= tareasporcarpeta.Monotributos%>">
-                                    <option
-                                        value="<%=tareasporcarpeta.Monotributos%>"
-                                        selected>
-                                        <%=tareasporcarpeta.Monotributos%>
-                                    </option>
-                                    <option value="Sin presentar">
-                                        Sin presentar
-                                    </option>
-                                    <option value="EnGestion">En
-                                        gestion</option>
-                                    <option value="ok">ok
-                                    </option>
-
-                                </select>
-                            </div>
-                            
-                            <div class="card-title">Seguro
-                                accidentes personales
-                            </div>
-                            <div class="card-text">
-                                <select class="form-control"
-                                    id="SeguroAccidentesPersonales"
-                                    name="SeguroAccidentesPersonales"
-                                    value="<%= tareasporcarpeta.SeguroAccidentesPersonales%>"
-                                    placeholder="<%= tareasporcarpeta.SeguroAccidentesPersonales%>">
-                                    <option
-                                        value="<%=tareasporcarpeta.SeguroAccidentesPersonales%>"
-                                        selected>
-                                        <%=tareasporcarpeta.SeguroAccidentesPersonales%>
-                                    </option>
-                                    <option value="Sin presentar">
-                                        Sin presentar
-                                    </option>
-                                    <option value="EnGestion">En
-                                        gestion</option>
-                                    <option value="ok">ok
-                                    </option>
-
-                                </select>
-                            </div>
+                            </select>
                         </div>
-                      
+
+
+                        <div class="col-4 pb-2 border border-secondary ">
+                            <h5 class="fw-bolder text-center">Seguridad</h5>
+                            <label class="text-center" for="Programadeseguridad">Programa de seguridad</label>
+                            <select class="form-control" id="Programadeseguridad" name="Programadeseguridad"
+                                value="<%= tareasporcarpeta.Programadeseguridad%>"
+                                placeholder="<%= tareasporcarpeta.Programadeseguridad%>">
+                                <option hidden value="<%=tareasporcarpeta.Programadeseguridad%>" selected>
+                                    <%=tareasporcarpeta.Programadeseguridad%>
+                                </option>
+                                <option value="Sin presentar">
+                                    Sin presentar
+                                </option>
+                                <option value="EnGestion">En
+                                    gestion</option>
+                                <option value="ok">ok
+                                </option>
+
+                            </select>
+                            <label class="text-center" for="CronogramaSyH">Cronograma de visitas SyH</label>
+                            <select class="form-control" id="CronogramaSyH" name="CronogramaSyH"
+                                value="<%= tareasporcarpeta.CronogramaSyH%>"
+                                placeholder="<%= tareasporcarpeta.CronogramaSyH%>">
+                                <option value="<%=tareasporcarpeta.CronogramaSyH%>" selected>
+                                    <%=tareasporcarpeta.CronogramaSyH%>
+                                </option>
+                                <option value="Sin presentar">
+                                    Sin presentar
+                                </option>
+                                <option value="EnGestion">En
+                                    gestion</option>
+                                <option value="ok">ok
+                                </option>
+
+                            </select>
+                            <label class="text-center" for="SeguroRC">Seguro
+                                responsabilidad civil</label>
+                            <select class="form-control" id="SeguroRC" name="SeguroRC"
+                                value="<%= tareasporcarpeta.SeguroRC%>" placeholder="<%= tareasporcarpeta.SeguroRC%>">
+                                <option value="<%=tareasporcarpeta.SeguroRC%>" selected>
+                                    <%=tareasporcarpeta.SeguroRC%>
+                                </option>
+                                <option value="Sin presentar">
+                                    Sin presentar
+                                </option>
+                                <option value="EnGestion">En
+                                    gestion</option>
+                                <option value="ok">ok
+                                </option>
+
+                            </select>
+                            <label class="text-center" for="Monotributos">Monotributos</label>
+                            <select class="form-control" id="Monotributos" name="Monotributos"
+                                value="<%= tareasporcarpeta.Monotributos%>"
+                                placeholder="<%= tareasporcarpeta.Monotributos%>">
+                                <option value="<%=tareasporcarpeta.Monotributos%>" selected>
+                                    <%=tareasporcarpeta.Monotributos%>
+                                </option>
+                                <option value="Sin presentar">
+                                    Sin presentar
+                                </option>
+                                <option value="EnGestion">En
+                                    gestion</option>
+                                <option value="ok">ok
+                                </option>
+
+                            </select>
+                            <label class="text-center" for="SeguroAccidentesPersonales">Seguro accidentes
+                                personales</label>
+                            <select class="form-control" id="SeguroAccidentesPersonales"
+                                name="SeguroAccidentesPersonales"
+                                value="<%= tareasporcarpeta.SeguroAccidentesPersonales%>"
+                                placeholder="<%= tareasporcarpeta.SeguroAccidentesPersonales%>">
+                                <option value="<%=tareasporcarpeta.SeguroAccidentesPersonales%>" selected>
+                                    <%=tareasporcarpeta.SeguroAccidentesPersonales%>
+                                </option>
+                                <option value="Sin presentar">
+                                    Sin presentar
+                                </option>
+                                <option value="EnGestion">En
+                                    gestion</option>
+                                <option value="ok">ok
+                                </option>
+
+                            </select>
+
+                        </div>
+                    </div>

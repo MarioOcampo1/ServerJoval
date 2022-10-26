@@ -248,6 +248,7 @@ router.get('/contactos', (req, res) => {
         })
     } else { res.redirect('/'); }
 })
+//Editar Tareas
 router.get('/editarContacto/:id', (req, res) => {
     if (req.isAuthenticated()) {
         res.locals.moment = moment;
@@ -426,6 +427,9 @@ router.get('/EditarTareas2/:id', (req, res) => {
         })
     })
 })
+
+//
+
 router.get('/edit/:id', (req, res) => {
     if (req.isAuthenticated()) {
         res.locals.moment = moment;
@@ -1020,7 +1024,7 @@ router.post('/actPrelCarpEcogas/:id', (req, res) => {
                 console.log(error);
             }
             else {
-                res.redirect(req.get('referer'));
+                             
             }
 
         })

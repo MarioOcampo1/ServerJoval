@@ -100,964 +100,685 @@
                                     </div>
                                 </form>
                             </div>
-                            <form action="/ActualizarProximasTareas/<%= user.id%>" method="POST">
-
                         </div>
                     </div>
                 </div>
             </div>
-
-            <!-- Tareas de la carpeta -->
-            <div class="container-fluid">
-                <div class="card-header text-center Titulo cuerpo">
-                    <h3 class="Titulo">Tareas de la carpeta</h3>
-                </div>
-                <div class="card-body">
-
-                    <div class="border border-primary ">
-                        <div class="row p-1">
-                            <div class="col-sm-2">
-                                <input type="hidden" style="display:none" name="id" id="id" value="<%= user.id%>">
-                                <input type="hidden" style="display:none" name="Nombre" id="Nombre"
-                                    value="<%= user.Nombre%>">
-
-                                <p class=" font-weight-bold p-1">Tarea Anterior: </p>
-                            </div>
-                            <div class="col ">
-                                <p>
-                                    <%= user.ProximaTarea%>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="row p-1 ">
-                            <div class="col-sm-2">
-                                Tarea Realizada:
-                            </div>
-                            <div class="col">
-                                <input class="container-fluid" maxlength="500" type="text" name="TareaRealizada"
-                                    id="TareaRealizada" placeholder="Ingrese ultima tarea realizada">
-                            </div>
-                        </div>
-                        <div class="row p-1">
-                            <div class="col-sm-2">
-                                Proxima Tarea:
-                            </div>
-                            <div class="col">
-                                <input class="container-fluid" type="text" name="ProximaTarea" id="ProximaTarea"
-                                    placeholder="Ingrese la proxima tarea">
-                            </div>
-                        </div>
-                        <div class="row p-1">
-                            <div class="col-sm-2 ">
-                                Fecha Limite:
-                            </div>
-                            <div class="col-sm-2">
-                                <input class="container-fluid" type="date" required name="Fecha_limite"
-                                    id="Fecha_limite" value="<%=user.Fecha_limite%>">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row ">
-                        <div class="col p-2 text-center">
-                            <div class="form-group">
-                                <label for="EstadoEtapa"> Etapa de la tarea:</label>
-                                <input class="form-check-input" required type="radio" name="EtapaTarea" id="EtapaTarea"
-                                    value="Preliminar">
-                                <label class="form-check-label" for="inlineRadio1">Preliminar</label>
-                                <input class="form-check-input" type="radio" name="EtapaTarea" id="EtapaTarea"
-                                    value="1ra parte">
-                                <label class="form-check-label" for="inlineRadio2">1° parte</label>
-                                <input class="form-check-input" type="radio" name="EtapaTarea" id="EtapaTarea"
-                                    value="2da parte">
-                                <label class="form-check-label" for="inlineRadio3"> 2° parte</label>
-                                <input class="form-check-input" type="radio" name="EtapaTarea" id="EtapaTarea"
-                                    value="Obras">
-                                <label class="form-check-label" for="inlineRadio4">Obras </label>
-                                <input class="form-check-input" type="radio" name="EtapaTarea" id="EtapaTarea"
-                                    value="Caos">
-                                <label class="form-check-label" for="inlineRadio5">Caos </label>
-
-                                <input class="form-check-input" type="radio" name="EtapaTarea" id="EtapaTarea"
-                                    value="Finalizada">
-                                <label class="form-check-label" for="inlineRadio6">Finalizada </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row ">
-                        <div class="col p-2 text-center">
-                            <div class="form-group">
-                                <label for="ResponsableDeTarea"> Responsable de la Tarea:</label>
-                                <input type="radio" name="ResponsableDeTarea" id="ResponsableDeTarea" required
-                                    value="Mauricio"> Mauricio
-                                <input type="radio" name="ResponsableDeTarea" id="ResponsableDeTarea" value="Gustavo">
-                                Gustavo
-                                <input type="radio" name="ResponsableDeTarea" id="ResponsableDeTarea" value="Daiana">
-                                Daiana
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row ">
-                        <div class="col p-2 text-center">
-                            <div class="button-group text-center" role="group">
-                                <button type="submit" class="btn btn-primary text-center">Actualizar Tarea</button>
-                                <button onClick="history.go(-1);" class="btn btn-secondary text-center"">Cancelar</button>
-                                    </div>
-                            </div>
-                        </div>
-                        </div>
-                </form>
-            </div>
-        </div>
-    </div>
-            <br>
-    </div>
+            
+          
             <form action=" /actPrelCarpEcogas/<%=user.id%>" id="actPrelCarpEcogas" method="post">
-                                    <input type="hidden" name="Nombre" id="Nombre" value="<%= user.Nombre%>">
-                                    <input type="hidden" name="id" id="id" value="<%= user.id%>">
+                                        <input type="hidden" name="Nombre" id="Nombre" value="<%= user.Nombre%>">
+                                        <input type="hidden" name="id" id="id" value="<%= user.id%>">
 
-                                    <div class=" container">
+                                        <div class=" container">
 
-                                        <div class="table-responsive">
-                                            <table class="table table-striped table-bordered table-sm table-hover "
-                                                style="width: 100%">
-                                                <thead>
-
-
-                                                    <h3 class="text-center">Etapas de la carpeta</h3>
-                                                    <tr class="table-active">
+                                            <div class="table-responsive">
+                                                <table class="table table-striped table-bordered table-sm table-hover "
+                                                    style="width: 100%">
+                                                    <thead>
 
 
-                                                        <%- include('./partials/editartareas/modalpreliminar.ejs')%>
-                                                            </form>
-
-                                                            <form action=" /act1pCarpEcogas/<%=user.id%>"
-                                                                id="act1pCarpEcogas" method="post">
-                                                                <input type="hidden" name="Nombre" id="Nombre"
-                                                                    value="<%= user.Nombre%>">
-                                                                <input type="hidden" name="id" id="id"
-                                                                    value="<%= user.id%>">
-
-                                                                <%- include('./partials/editartareas/modal1p.ejs')%>
-                                                            </form>
-                                                            <form action=" /act2pCarpEcogas/<%=user.id%>"
-                                                                id="act2pCarpEcogas" method="post">
-                                                                <input type="hidden" name="Nombre" id="Nombre"
-                                                                    value="<%= user.Nombre%>">
-                                                                <input type="hidden" name="id" id="id"
-                                                                    value="<%= user.id%>">
-                                                                <%-
-                                                                    include('./partials/editartareas/modal2p-1de4Inicio.ejs')%>
-                                                                    <%-
-                                                                        include('./partials/editartareas/modal2p-2de4Permisos.ejs')%>
-                                                                        <%-
-                                                                            include('./partials/editartareas/modal2p-3de4Interferencias.ejs')%>
-
-                                                                            <%-
-                                                                                include('./partials/editartareas/modal2p-4de4Final.ejs')%>
-                                                            </form>
-                                                            <form action=" /actObrasCarpEcogas/<%=user.id%>"
-                                                                id="actObrasCarpEcogas" method="post">
-                                                                <input type="hidden" name="id" id="id"
-                                                                    value="<%= user.id%>">
-                                                                <input type="hidden" name="Nombre" id="Nombre"
-                                                                    value="<%= user.Nombre%>">
-                                                                <input type="hidden" name="PCaprobado" id="PCaprobado"
-                                                                    value="<%= tareasporcarpeta.PCaprobado%>">
-                                                                <input type="hidden" name="Avisos" id="Avisos"
-                                                                    value="<%= tareasporcarpeta.Avisos%>">
-
-                                                                <!-- Obras -->
-                                                                <th>
-                                                                    <button type="button" class="btn btn-primary"
-                                                                        data-toggle="modal" data-target="#ModalObras">
-                                                                        Obras
-                                                                    </button>
-                                                                    <!-- Modal -->
-                                                                    <div class="modal fade" id="ModalObras"
-                                                                        tabindex="-1" role="dialog"
-                                                                        aria-labelledby="Obras aria-hidden=" true">
-                                                                        <div class="modal-dialog modal-dialog-centered"
-                                                                            role="document">
-                                                                            <div class="modal-content">
-                                                                                <div class="modal-header">
-                                                                                    <h5 class="modal-title" id="Obras">
-                                                                                        Obras
-                                                                                    </h5>
-                                                                                    <button type="button" class="close"
-                                                                                        data-dismiss="modal"
-                                                                                        aria-label="Close">
-                                                                                        <span
-                                                                                            aria-hidden="true">&times;</span>
-                                                                                    </button>
-                                                                                </div>
-                                                                                <div class="modal-body">
-                                                                                    <div class="container">
-                                                                                        <div
-                                                                                            class="card p-3 border-secondary">
-                                                                                            <div class="card-header">
-                                                                                                Documentación presentada
-                                                                                                a
-                                                                                                inspección</div>
-                                                                                            <div class="card-title">
-                                                                                                Actas de
-                                                                                                inicio</div>
-                                                                                            <div class="card-text">
-                                                                                                <select
-                                                                                                    class="form-control"
-                                                                                                    id="ActasDeInicio"
-                                                                                                    name="ActasDeInicio"
-                                                                                                    value="<%= tareasporcarpeta.ActasDeInicio%>"
-                                                                                                    placeholder="<%= tareasporcarpeta.ActasDeInicio%>">
-                                                                                                    <option hidden
-                                                                                                        value="<%=tareasporcarpeta.ActaDeInicio%>"
-                                                                                                        selected>
-                                                                                                        <%=tareasporcarpeta.ActaDeInicio%>
-                                                                                                    </option>
-                                                                                                    <option
-                                                                                                        value="Sin presentar">
-                                                                                                        Sin presentar
-                                                                                                    </option>
-                                                                                                    <option
-                                                                                                        value="Presentado">
-                                                                                                        Presentado
-                                                                                                    </option>
-
-                                                                                                </select>
-                                                                                            </div>
-                                                                                            <div class="card-title">
-                                                                                                Permisos
-                                                                                            </div>
-                                                                                            <div class="card-text">
-                                                                                                <select
-                                                                                                    class="form-control"
-                                                                                                    id="Permisos"
-                                                                                                    name="Permisos"
-                                                                                                    value="<%= tareasporcarpeta.Permisos%>"
-                                                                                                    placeholder="<%= tareasporcarpeta.Permisos%>">
-                                                                                                    <option
-                                                                                                        value="<%=tareasporcarpeta.Permisos%>"
-                                                                                                        selected>
-                                                                                                        <%=tareasporcarpeta.Permisos%>
-                                                                                                    </option>
-                                                                                                    <option
-                                                                                                        value="Sin presentar">
-                                                                                                        Sin presentar
-                                                                                                    </option>
-                                                                                                    <option
-                                                                                                        value="Presentados">
-                                                                                                        Presentados
-                                                                                                    </option>
-
-                                                                                                </select>
-                                                                                            </div>
-                                                                                            <div class="card-title">
-                                                                                                Interferencias</div>
-                                                                                            <div class="card-text">
-                                                                                                <select
-                                                                                                    class="form-control"
-                                                                                                    id="Interferencias"
-                                                                                                    name="Interferencias"
-                                                                                                    value="<%= tareasporcarpeta.Interferencias%>"
-                                                                                                    placeholder="<%= tareasporcarpeta.Interferencias%>">
-                                                                                                    <option
-                                                                                                        value="<%=tareasporcarpeta.Interferencias%>"
-                                                                                                        selected>
-                                                                                                        <%=tareasporcarpeta.Interferencias%>
-                                                                                                    </option>
-                                                                                                    <option
-                                                                                                        value="Sin presentar">
-                                                                                                        Sin presentar
-                                                                                                    </option>
-                                                                                                    <option
-                                                                                                        value="Presentado">
-                                                                                                        Presentado
-                                                                                                    </option>
-
-                                                                                                </select>
-                                                                                            </div>
-                                                                                            <div class="card-title">
-                                                                                                Libro de
-                                                                                                ordenes de servicios
-                                                                                            </div>
-                                                                                            <div class="card-text">
-                                                                                                <select
-                                                                                                    class="form-control"
-                                                                                                    id="LibroOrdenesServicio"
-                                                                                                    name="LibroOrdenesServicio"
-                                                                                                    value="<%= tareasporcarpeta.LibroOrdenesServicio%>"
-                                                                                                    placeholder="<%= tareasporcarpeta.LibroOrdenesServicio%>">
-                                                                                                    <option
-                                                                                                        value="<%=tareasporcarpeta.LibroOrdenesServicio%>"
-                                                                                                        selected>
-                                                                                                        <%=tareasporcarpeta.LibroOrdenesServicio%>
-                                                                                                    </option>
-                                                                                                    <option
-                                                                                                        value="Sin presentar">
-                                                                                                        Sin presentar
-                                                                                                    </option>
-                                                                                                    <option
-                                                                                                        value="Presentado">
-                                                                                                        Presentado
-                                                                                                    </option>
-
-                                                                                                </select>
-                                                                                            </div>
-
-                                                                                            <div class="card-title">
-                                                                                                Libro de
-                                                                                                de notas de
-                                                                                                pedido
-                                                                                            </div>
-                                                                                            <div class="card-text">
-                                                                                                <select
-                                                                                                    class="form-control"
-                                                                                                    id="LibroNotasPedido"
-                                                                                                    name="LibroNotasPedido"
-                                                                                                    value="<%= tareasporcarpeta.LibroNotasPedido%>"
-                                                                                                    placeholder="<%= tareasporcarpeta.LibroNotasPedido%>">
-                                                                                                    <option
-                                                                                                        value="<%=tareasporcarpeta.LibroNotasPedido%>"
-                                                                                                        selected>
-                                                                                                        <%=tareasporcarpeta.LibroNotasPedido%>
-                                                                                                    </option>
-                                                                                                    <option
-                                                                                                        value="Sin presentar">
-                                                                                                        Sin presentar
-                                                                                                    </option>
-                                                                                                    <option
-                                                                                                        value="Presentado">
-                                                                                                        Presentado
-                                                                                                    </option>
-
-                                                                                                </select>
-                                                                                            </div>
-                                                                                            <div class="card-title">PC
-                                                                                                entregado a
-                                                                                                inspección
-                                                                                            </div>
-                                                                                            <div class="card-text">
-                                                                                                <select
-                                                                                                    class="form-control"
-                                                                                                    id="PCEntregadoInspeccion"
-                                                                                                    name="PCEntregadoInspeccion"
-                                                                                                    value="<%= tareasporcarpeta.PCEntregadoInspeccion%>"
-                                                                                                    placeholder="<%= tareasporcarpeta.PCEntregadoInspeccion%>">
-                                                                                                    <option hidden
-                                                                                                        value="<%=tareasporcarpeta.PCEntregadoInspeccion%>"
-                                                                                                        selected>
-                                                                                                        <%=tareasporcarpeta.PCEntregadoInspeccion%>
-                                                                                                    </option>
-                                                                                                    <option
-                                                                                                        value="Sin presentar">
-                                                                                                        Sin presentar
-                                                                                                    </option>
-                                                                                                    <option
-                                                                                                        value="Presentado">
-                                                                                                        Presentado
-                                                                                                    </option>
-
-                                                                                                </select>
-                                                                                            </div>
-                                                                                            <div class="card-title">
-                                                                                                Avisos</div>
-                                                                                            <div class="card-text">
-                                                                                                <select
-                                                                                                    class="form-control"
-                                                                                                    id="AvisosDeObra"
-                                                                                                    name="AvisosDeObra"
-                                                                                                    value="<%= tareasporcarpeta.AvisosDeObra%>"
-                                                                                                    placeholder="<%= tareasporcarpeta.AvisosDeObra%>">
-                                                                                                    <option
-                                                                                                        value="<%=tareasporcarpeta.AvisosDeObra%>"
-                                                                                                        selected>
-                                                                                                        <%=tareasporcarpeta.AvisosDeObra%>
-                                                                                                    </option>
-                                                                                                    <option
-                                                                                                        value="Sin presentar">
-                                                                                                        Sin presentar
-                                                                                                    </option>
-                                                                                                    <option
-                                                                                                        value="Presentado">
-                                                                                                        Presentado
-                                                                                                    </option>
-
-                                                                                                </select>
-                                                                                            </div>
-                                                                                            <div class="card-title">
-                                                                                                Cronograma
-                                                                                                firmado por comitente
-                                                                                            </div>
-                                                                                            <div class="card-text">
-                                                                                                <select
-                                                                                                    class="form-control"
-                                                                                                    id="CronogramaFirmadoComitente"
-                                                                                                    name="CronogramaFirmadoComitente"
-                                                                                                    value="<%= tareasporcarpeta.CronogramaFirmadoComitente%>"
-                                                                                                    placeholder="<%= tareasporcarpeta.CronogramaFirmadoComitente%>">
-                                                                                                    <option
-                                                                                                        value="<%=tareasporcarpeta.CronogramaFirmadoComitente%>"
-                                                                                                        selected>
-                                                                                                        <%=tareasporcarpeta.CronogramaFirmadoComitente%>
-                                                                                                    </option>
-                                                                                                    <option
-                                                                                                        value="Sin presentar">
-                                                                                                        Sin presentar
-                                                                                                    </option>
-                                                                                                    <option
-                                                                                                        value="Presentado">
-                                                                                                        Presentado
-                                                                                                    </option>
-
-                                                                                                </select>
-                                                                                            </div>
-
-                                                                                        </div>
-                                                                                        <br>
-                                                                                        <div
-                                                                                            class="card p-3 border-secondary">
-                                                                                            <div class="card-header">
-                                                                                                Comunicación de obras
-                                                                                            </div>
-                                                                                            <div class="card-title">
-                                                                                                Orden de
-                                                                                                servicio</div>
-                                                                                            <div class="card-text">
-                                                                                                <select
-                                                                                                    class="form-control"
-                                                                                                    id="OrdenServicio"
-                                                                                                    name="OrdenServicio"
-                                                                                                    value="<%= tareasporcarpeta.OrdenServicio%>"
-                                                                                                    placeholder="<%= tareasporcarpeta.OrdenServicio%>">
-                                                                                                    <option
-                                                                                                        value="<%=tareasporcarpeta.OrdenServicio%>"
-                                                                                                        selected>
-                                                                                                        <%=tareasporcarpeta.OrdenServicio%>
-                                                                                                    </option>
-                                                                                                    <option value="Si">
-                                                                                                        Si
-                                                                                                    </option>
-                                                                                                    <option value="No">
-                                                                                                        No
-                                                                                                    </option>
-
-                                                                                                </select>
-                                                                                            </div>
-                                                                                            <div class="card-title">
-                                                                                                Fecha de comienzo de
-                                                                                                obras</div>
-                                                                                            <div class="card-text">
-                                                                                                <input type="date"
-                                                                                                    name="FechaInicioTrabajos"
-                                                                                                    id="FechaInicioTrabajos"
-                                                                                                    value="<%=tareasporcarpeta.FechaInicioTrabajos%>">
-                                                                                                <%=tareasporcarpeta.FechaInicioTrabajos%>
-                                                                                            </div>
-                                                                                            <div class="card-title">
-                                                                                                Fecha fin de obras</div>
-                                                                                            <div class="card-text">
-                                                                                                <input type="date"
-                                                                                                    name="FechaFindeobra"
-                                                                                                    id="FechaFindeobra"
-                                                                                                    value="<%=tareasporcarpeta.FechaFindeobra%>">
-                                                                                                <%=tareasporcarpeta.FechaFindeobra%>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="modal-footer">
-                                                                                        <button type="button"
-                                                                                            class="btn btn-secondary"
-                                                                                            data-dismiss="modal"
-                                                                                            onclick="CerrarModal()">
-                                                                                            Cerrar</button>
-                                                                                        <button type="submit"
-                                                                                            class="btn btn-primary fixed-bottom"
-                                                                                            form="actObrasCarpEcogas">Guardar
-                                                                                            Cambios</button>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                </th>
-                                                            </form>
-                                                            <form action=" /actCaosCarpEcogas/<%=user.id%>"
-                                                                id="actCaosCarpEcogas" method="post">
-                                                                <input type="hidden" name="id" id="id"
-                                                                    value="<%= user.id%>">
-                                                                <input type="hidden" name="Nombre" id="Nombre"
-                                                                    value="<%= user.Nombre%>">
-                                                                <input type="hidden" name="PCaprobado" id="PCaprobado"
-                                                                    value="<%= tareasporcarpeta.PCaprobado%>">
-                                                                <input type="hidden" name="Avisos" id="Avisos"
-                                                                    value="<%= tareasporcarpeta.Avisos%>">
-                                                                <!--Caos-->
-                                                                <th>
-                                                                    <button type="button" class="btn btn-primary"
-                                                                        data-toggle="modal" data-target="#ModalCaos">
-                                                                        Caos
-                                                                    </button>
-
-                                                                    <!-- Modal -->
-                                                                    <div class="modal fade" id="ModalCaos" tabindex="-1"
-                                                                        role="dialog"
-                                                                        aria-labelledby="Caos aria-hidden=" true">
-                                                                        <div class="modal-dialog modal-dialog-centered"
-                                                                            role="document">
-                                                                            <div class="modal-content">
-                                                                                <div class="modal-header">
-                                                                                    <h5 class="modal-title" id="Caos">
-                                                                                        CAOS
-                                                                                        (Conforme a obras)</h5>
-                                                                                    <button type="button" class="close"
-                                                                                        data-dismiss="modal"
-                                                                                        aria-label="Close">
-                                                                                        <span
-                                                                                            aria-hidden="true">&times;</span>
-                                                                                    </button>
-                                                                                </div>
-                                                                                <div class="modal-body">
-                                                                                    <div class="container">
-                                                                                        <div
-                                                                                            class="card p-3 border-secondary">
-                                                                                            <div class="card-header">
-                                                                                                Actas
-                                                                                                finales de Ecogas</div>
-                                                                                            <select class="form-control"
-                                                                                                id="ActasFinales"
-                                                                                                name="ActasFinales"
-                                                                                                value="<%= tareasporcarpeta.ActasFinales%>"
-                                                                                                placeholder="<%= tareasporcarpeta.ActasFinales%>">
-                                                                                                <option hidden
-                                                                                                    value="<%=tareasporcarpeta.ActasFinales%>"
-                                                                                                    selected>
-                                                                                                    <%=tareasporcarpeta.ActasFinales%>
-                                                                                                </option>
-                                                                                                <option
-                                                                                                    value="Sin recibir">
-                                                                                                    Sin recibir</option>
-                                                                                                <option
-                                                                                                    value="Recibidas">
-                                                                                                    Recibidas
-                                                                                                </option>
-                                                                                                <option
-                                                                                                    value="Firmadas">
-                                                                                                    Firmadas</option>
-                                                                                                <option value="ok">ok
-                                                                                                </option>
-                                                                                            </select>
-                                                                                            <div class="card-header">
-                                                                                                Planos y
-                                                                                                croquis</div>
-                                                                                            <div class="card-text">
-                                                                                                <select
-                                                                                                    class="form-control"
-                                                                                                    id="PlanosyCroquis"
-                                                                                                    name="PlanosyCroquis"
-                                                                                                    value="<%= tareasporcarpeta.PlanosyCroquis%>"
-                                                                                                    placeholder="<%= tareasporcarpeta.PlanosyCroquis%>">
-                                                                                                    <option hidden
-                                                                                                        value="<%=tareasporcarpeta.PlanosyCroquis%>"
-                                                                                                        selected>
-                                                                                                        <%=tareasporcarpeta.PlanosyCroquis%>
-                                                                                                    </option>
-                                                                                                    <option
-                                                                                                        value="EnGestion">
-                                                                                                        En
-                                                                                                        gestion</option>
-                                                                                                    <option
-                                                                                                        value="Presentado">
-                                                                                                        Presentado
-                                                                                                    <option
-                                                                                                        value="Aprobado/Impreso">
-                                                                                                        Aprobado/Impreso
-                                                                                                    <option value="ok">
-                                                                                                        ok
-                                                                                                    </option>
+                                                        <h3 class="text-center">Etapas de la carpeta</h3>
+                                                        <tr class="table-active">
 
 
-                                                                                                </select>
-                                                                                            </div>
+                                                            <%- include('./partials/editartareas/modalpreliminar.ejs')%>
+            </form>
 
-                                                                                            </select>
-                                                                                            <div class="card-title">
-                                                                                                Conformes de
-                                                                                                Permisos</div>
-                                                                                            <select class="form-control"
-                                                                                                id="ConformeDePermisos"
-                                                                                                name="ConformeDePermisos"
-                                                                                                value="<%= tareasporcarpeta.ConformeDePermisos%>"
-                                                                                                placeholder="<%= tareasporcarpeta.ConformeDePermisos%>">
-                                                                                                <option
-                                                                                                    value="<%=tareasporcarpeta.ConformeDePermisos%>"
-                                                                                                    selected>
-                                                                                                    <%=tareasporcarpeta.ConformeDePermisos%>
-                                                                                                </option>
-                                                                                                <option
-                                                                                                    value="Sin presentar">
-                                                                                                    Sin presentar
-                                                                                                </option>
-                                                                                                <option
-                                                                                                    value="Solicitado">
-                                                                                                    Solicitado</option>
-                                                                                                <option
-                                                                                                    value="Entregado">
-                                                                                                    Entregado</option>
-                                                                                                <option value="ok">ok
-                                                                                                </option>
+            <form action=" /act1pCarpEcogas/<%=user.id%>" id="act1pCarpEcogas" method="post">
+                <input type="hidden" name="Nombre" id="Nombre" value="<%= user.Nombre%>">
+                <input type="hidden" name="id" id="id" value="<%= user.id%>">
 
-                                                                                            </select>
-                                                                                            <div class="card-title">
-                                                                                                Prueba de
-                                                                                                hermeticidad</div>
-                                                                                            <select class="form-control"
-                                                                                                id="PruebaHermeticidad"
-                                                                                                name="PruebaHermeticidad"
-                                                                                                value="<%= tareasporcarpeta.PruebaHermeticidad%>"
-                                                                                                placeholder="<%= tareasporcarpeta.PruebaHermeticidad%>">
-                                                                                                <option
-                                                                                                    value="<%=tareasporcarpeta.PruebaHermeticidad%>"
-                                                                                                    selected>
-                                                                                                    <%=tareasporcarpeta.PruebaHermeticidad%>
-                                                                                                </option>
-                                                                                                <option
-                                                                                                    value="Sin realizar">
-                                                                                                    Sin realizar
-                                                                                                </option>
-                                                                                                <option
-                                                                                                    value="Realizada">
-                                                                                                    Realizada</option>
-                                                                                                <option value="ok">ok
-                                                                                                </option>
+                <%- include('./partials/editartareas/modal1p.ejs')%>
+            </form>
+            <form action=" /act2pCarpEcogas/<%=user.id%>" id="act2pCarpEcogas" method="post">
+                <input type="hidden" name="Nombre" id="Nombre" value="<%= user.Nombre%>">
+                <input type="hidden" name="id" id="id" value="<%= user.id%>">
+                <%- include('./partials/editartareas/modal2p-1de4Inicio.ejs')%>
+                    <%- include('./partials/editartareas/modal2p-2de4Permisos.ejs')%>
+                        <%- include('./partials/editartareas/modal2p-3de4Interferencias.ejs')%>
 
-                                                                                            </select>
-                                                                                            <div class="card-title">
-                                                                                                Informes
-                                                                                                finales</div>
-                                                                                            <select class="form-control"
-                                                                                                id="InformesFinales"
-                                                                                                name="InformesFinales"
-                                                                                                value="<%= tareasporcarpeta.InformesFinales%>"
-                                                                                                placeholder="<%= tareasporcarpeta.InformesFinales%>">
-                                                                                                <option
-                                                                                                    value="<%=tareasporcarpeta.InformesFinales%>"
-                                                                                                    selected>
-                                                                                                    <%=tareasporcarpeta.InformesFinales%>
-                                                                                                </option>
-                                                                                                <option
-                                                                                                    value="EnGestion">En
-                                                                                                    gestion</option>
-                                                                                                <option
-                                                                                                    value="Firmados">
-                                                                                                    Firmados</option>
-                                                                                                <option value="ok">ok
-                                                                                                </option>
+                            <%- include('./partials/editartareas/modal2p-4de4Final.ejs')%>
+            </form>
+            <form action=" /actObrasCarpEcogas/<%=user.id%>" id="actObrasCarpEcogas" method="post">
+                <input type="hidden" name="id" id="id" value="<%= user.id%>">
+                <input type="hidden" name="Nombre" id="Nombre" value="<%= user.Nombre%>">
+                <input type="hidden" name="PCaprobado" id="PCaprobado" value="<%= tareasporcarpeta.PCaprobado%>">
+                <input type="hidden" name="Avisos" id="Avisos" value="<%= tareasporcarpeta.Avisos%>">
 
-                                                                                            </select>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="modal-footer">
-                                                                                        <button type="button"
-                                                                                            class="btn btn-secondary"
-                                                                                            data-dismiss="modal"
-                                                                                            onclick="CerrarModal()">
-                                                                                            Cerrar</button>
-                                                                                        <button type="submit"
-                                                                                            class="btn btn-primary fixed-bottom"
-                                                                                            form="actCaosCarpEcogas">Guardar
-                                                                                            Cambios</button>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                </th>
+                <!-- Obras -->
+                <th>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalObras">
+                        Obras
+                    </button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="ModalObras" tabindex="-1" role="dialog"
+                        aria-labelledby="Obras aria-hidden=" true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="Obras">
+                                        Obras
+                                    </h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="container">
+                                        <div class="card p-3 border-secondary">
+                                            <div class="card-header">
+                                                Documentación presentada
+                                                a
+                                                inspección</div>
+                                            <div class="card-title">
+                                                Actas de
+                                                inicio</div>
+                                            <div class="card-text">
+                                                <select class="form-control" id="ActasDeInicio" name="ActasDeInicio"
+                                                    value="<%= tareasporcarpeta.ActasDeInicio%>"
+                                                    placeholder="<%= tareasporcarpeta.ActasDeInicio%>">
+                                                    <option hidden value="<%=tareasporcarpeta.ActaDeInicio%>" selected>
+                                                        <%=tareasporcarpeta.ActaDeInicio%>
+                                                    </option>
+                                                    <option value="Sin presentar">
+                                                        Sin presentar
+                                                    </option>
+                                                    <option value="Presentado">
+                                                        Presentado
+                                                    </option>
 
-                                                            </form>
+                                                </select>
+                                            </div>
+                                            <div class="card-title">
+                                                Permisos
+                                            </div>
+                                            <div class="card-text">
+                                                <select class="form-control" id="Permisos" name="Permisos"
+                                                    value="<%= tareasporcarpeta.Permisos%>"
+                                                    placeholder="<%= tareasporcarpeta.Permisos%>">
+                                                    <option value="<%=tareasporcarpeta.Permisos%>" selected>
+                                                        <%=tareasporcarpeta.Permisos%>
+                                                    </option>
+                                                    <option value="Sin presentar">
+                                                        Sin presentar
+                                                    </option>
+                                                    <option value="Presentados">
+                                                        Presentados
+                                                    </option>
 
-                                                            <form action="/actFinalCarpEcogas/<%=user.id%>"
-                                                                id="actFinalCarpEcogas" method="post">
-                                                                <input type="hidden" name="Nombre" id="Nombre"
-                                                                    value="<%= user.Nombre%>">
-                                                                <input type="hidden" name="id" id="id"
-                                                                    value="<%= user.id%>">
+                                                </select>
+                                            </div>
+                                            <div class="card-title">
+                                                Interferencias</div>
+                                            <div class="card-text">
+                                                <select class="form-control" id="Interferencias" name="Interferencias"
+                                                    value="<%= tareasporcarpeta.Interferencias%>"
+                                                    placeholder="<%= tareasporcarpeta.Interferencias%>">
+                                                    <option value="<%=tareasporcarpeta.Interferencias%>" selected>
+                                                        <%=tareasporcarpeta.Interferencias%>
+                                                    </option>
+                                                    <option value="Sin presentar">
+                                                        Sin presentar
+                                                    </option>
+                                                    <option value="Presentado">
+                                                        Presentado
+                                                    </option>
+
+                                                </select>
+                                            </div>
+                                            <div class="card-title">
+                                                Libro de
+                                                ordenes de servicios
+                                            </div>
+                                            <div class="card-text">
+                                                <select class="form-control" id="LibroOrdenesServicio"
+                                                    name="LibroOrdenesServicio"
+                                                    value="<%= tareasporcarpeta.LibroOrdenesServicio%>"
+                                                    placeholder="<%= tareasporcarpeta.LibroOrdenesServicio%>">
+                                                    <option value="<%=tareasporcarpeta.LibroOrdenesServicio%>" selected>
+                                                        <%=tareasporcarpeta.LibroOrdenesServicio%>
+                                                    </option>
+                                                    <option value="Sin presentar">
+                                                        Sin presentar
+                                                    </option>
+                                                    <option value="Presentado">
+                                                        Presentado
+                                                    </option>
+
+                                                </select>
+                                            </div>
+
+                                            <div class="card-title">
+                                                Libro de
+                                                de notas de
+                                                pedido
+                                            </div>
+                                            <div class="card-text">
+                                                <select class="form-control" id="LibroNotasPedido"
+                                                    name="LibroNotasPedido"
+                                                    value="<%= tareasporcarpeta.LibroNotasPedido%>"
+                                                    placeholder="<%= tareasporcarpeta.LibroNotasPedido%>">
+                                                    <option value="<%=tareasporcarpeta.LibroNotasPedido%>" selected>
+                                                        <%=tareasporcarpeta.LibroNotasPedido%>
+                                                    </option>
+                                                    <option value="Sin presentar">
+                                                        Sin presentar
+                                                    </option>
+                                                    <option value="Presentado">
+                                                        Presentado
+                                                    </option>
+
+                                                </select>
+                                            </div>
+                                            <div class="card-title">PC
+                                                entregado a
+                                                inspección
+                                            </div>
+                                            <div class="card-text">
+                                                <select class="form-control" id="PCEntregadoInspeccion"
+                                                    name="PCEntregadoInspeccion"
+                                                    value="<%= tareasporcarpeta.PCEntregadoInspeccion%>"
+                                                    placeholder="<%= tareasporcarpeta.PCEntregadoInspeccion%>">
+                                                    <option hidden value="<%=tareasporcarpeta.PCEntregadoInspeccion%>"
+                                                        selected>
+                                                        <%=tareasporcarpeta.PCEntregadoInspeccion%>
+                                                    </option>
+                                                    <option value="Sin presentar">
+                                                        Sin presentar
+                                                    </option>
+                                                    <option value="Presentado">
+                                                        Presentado
+                                                    </option>
+
+                                                </select>
+                                            </div>
+                                            <div class="card-title">
+                                                Avisos</div>
+                                            <div class="card-text">
+                                                <select class="form-control" id="AvisosDeObra" name="AvisosDeObra"
+                                                    value="<%= tareasporcarpeta.AvisosDeObra%>"
+                                                    placeholder="<%= tareasporcarpeta.AvisosDeObra%>">
+                                                    <option value="<%=tareasporcarpeta.AvisosDeObra%>" selected>
+                                                        <%=tareasporcarpeta.AvisosDeObra%>
+                                                    </option>
+                                                    <option value="Sin presentar">
+                                                        Sin presentar
+                                                    </option>
+                                                    <option value="Presentado">
+                                                        Presentado
+                                                    </option>
+
+                                                </select>
+                                            </div>
+                                            <div class="card-title">
+                                                Cronograma
+                                                firmado por comitente
+                                            </div>
+                                            <div class="card-text">
+                                                <select class="form-control" id="CronogramaFirmadoComitente"
+                                                    name="CronogramaFirmadoComitente"
+                                                    value="<%= tareasporcarpeta.CronogramaFirmadoComitente%>"
+                                                    placeholder="<%= tareasporcarpeta.CronogramaFirmadoComitente%>">
+                                                    <option value="<%=tareasporcarpeta.CronogramaFirmadoComitente%>"
+                                                        selected>
+                                                        <%=tareasporcarpeta.CronogramaFirmadoComitente%>
+                                                    </option>
+                                                    <option value="Sin presentar">
+                                                        Sin presentar
+                                                    </option>
+                                                    <option value="Presentado">
+                                                        Presentado
+                                                    </option>
+
+                                                </select>
+                                            </div>
+
+                                        </div>
+                                        <br>
+                                        <div class="card p-3 border-secondary">
+                                            <div class="card-header">
+                                                Comunicación de obras
+                                            </div>
+                                            <div class="card-title">
+                                                Orden de
+                                                servicio</div>
+                                            <div class="card-text">
+                                                <select class="form-control" id="OrdenServicio" name="OrdenServicio"
+                                                    value="<%= tareasporcarpeta.OrdenServicio%>"
+                                                    placeholder="<%= tareasporcarpeta.OrdenServicio%>">
+                                                    <option value="<%=tareasporcarpeta.OrdenServicio%>" selected>
+                                                        <%=tareasporcarpeta.OrdenServicio%>
+                                                    </option>
+                                                    <option value="Si">
+                                                        Si
+                                                    </option>
+                                                    <option value="No">
+                                                        No
+                                                    </option>
+
+                                                </select>
+                                            </div>
+                                            <div class="card-title">
+                                                Fecha de comienzo de
+                                                obras</div>
+                                            <div class="card-text">
+                                                <input type="date" name="FechaInicioTrabajos" id="FechaInicioTrabajos"
+                                                    value="<%=tareasporcarpeta.FechaInicioTrabajos%>">
+                                                <%=tareasporcarpeta.FechaInicioTrabajos%>
+                                            </div>
+                                            <div class="card-title">
+                                                Fecha fin de obras</div>
+                                            <div class="card-text">
+                                                <input type="date" name="FechaFindeobra" id="FechaFindeobra"
+                                                    value="<%=tareasporcarpeta.FechaFindeobra%>">
+                                                <%=tareasporcarpeta.FechaFindeobra%>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                            onclick="CerrarModal()">
+                                            Cerrar</button>
+                                        <button type="submit" class="btn btn-primary fixed-bottom"
+                                            form="actObrasCarpEcogas">Guardar
+                                            Cambios</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </th>
+            </form>
+            <form action=" /actCaosCarpEcogas/<%=user.id%>" id="actCaosCarpEcogas" method="post">
+                <input type="hidden" name="id" id="id" value="<%= user.id%>">
+                <input type="hidden" name="Nombre" id="Nombre" value="<%= user.Nombre%>">
+                <input type="hidden" name="PCaprobado" id="PCaprobado" value="<%= tareasporcarpeta.PCaprobado%>">
+                <input type="hidden" name="Avisos" id="Avisos" value="<%= tareasporcarpeta.Avisos%>">
+                <!--Caos-->
+                <th>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalCaos">
+                        Caos
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="ModalCaos" tabindex="-1" role="dialog"
+                        aria-labelledby="Caos aria-hidden=" true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="Caos">
+                                        CAOS
+                                        (Conforme a obras)</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="container">
+                                        <div class="card p-3 border-secondary">
+                                            <div class="card-header">
+                                                Actas
+                                                finales de Ecogas</div>
+                                            <select class="form-control" id="ActasFinales" name="ActasFinales"
+                                                value="<%= tareasporcarpeta.ActasFinales%>"
+                                                placeholder="<%= tareasporcarpeta.ActasFinales%>">
+                                                <option hidden value="<%=tareasporcarpeta.ActasFinales%>" selected>
+                                                    <%=tareasporcarpeta.ActasFinales%>
+                                                </option>
+                                                <option value="Sin recibir">
+                                                    Sin recibir</option>
+                                                <option value="Recibidas">
+                                                    Recibidas
+                                                </option>
+                                                <option value="Firmadas">
+                                                    Firmadas</option>
+                                                <option value="ok">ok
+                                                </option>
+                                            </select>
+                                            <div class="card-header">
+                                                Planos y
+                                                croquis</div>
+                                            <div class="card-text">
+                                                <select class="form-control" id="PlanosyCroquis" name="PlanosyCroquis"
+                                                    value="<%= tareasporcarpeta.PlanosyCroquis%>"
+                                                    placeholder="<%= tareasporcarpeta.PlanosyCroquis%>">
+                                                    <option hidden value="<%=tareasporcarpeta.PlanosyCroquis%>"
+                                                        selected>
+                                                        <%=tareasporcarpeta.PlanosyCroquis%>
+                                                    </option>
+                                                    <option value="EnGestion">
+                                                        En
+                                                        gestion</option>
+                                                    <option value="Presentado">
+                                                        Presentado
+                                                    <option value="Aprobado/Impreso">
+                                                        Aprobado/Impreso
+                                                    <option value="ok">
+                                                        ok
+                                                    </option>
 
 
-                                                                <!--Finalizada-->
-                                                                <th>
-                                                                    <button type="button" class="btn btn-primary"
-                                                                        data-toggle="modal"
-                                                                        data-target="#ModalFinalizacion">
-                                                                        Finalización
-                                                                    </button>
+                                                </select>
+                                            </div>
 
-                                                                    <!-- Modal -->
-                                                                    <div class="modal fade" id="ModalFinalizacion"
-                                                                        tabindex="-1" role="dialog"
-                                                                        aria-labelledby="Caos aria-hidden=" true">
-                                                                        <div class="modal-dialog modal-dialog-centered"
-                                                                            role="document">
-                                                                            <div class="modal-content">
-                                                                                <div class="modal-header">
-                                                                                    <h5 class="modal-title"
-                                                                                        id="ModalFinalizacion">
-                                                                                        Finalización</h5>
-                                                                                    <button type="button" class="close"
-                                                                                        data-dismiss="modal"
-                                                                                        aria-label="Close">
-                                                                                        <span
-                                                                                            aria-hidden="true">&times;</span>
-                                                                                    </button>
-                                                                                </div>
-                                                                                <div class="modal-body">
-                                                                                    <div class="container">
-                                                                                        <div
-                                                                                            class="card p-3 border-secondary">
-                                                                                            <label
-                                                                                                for="PresentacionFinal">Presentacion
-                                                                                                Final</label>
-                                                                                            <select class="form-control"
-                                                                                                id="PresentacionFinal"
-                                                                                                name="PresentacionFinal"
-                                                                                                value="<%= tareasporcarpeta.PresentacionFinal%>"
-                                                                                                placeholder="<%= tareasporcarpeta.PresentacionFinal%>">
-                                                                                                <option hidden
-                                                                                                    value="<%=tareasporcarpeta.PresentacionFinal%>"
-                                                                                                    selected>
-                                                                                                    <%=tareasporcarpeta.PresentacionFinal%>
-                                                                                                </option>
-                                                                                                <option
-                                                                                                    value="Sin presentar">
-                                                                                                    Sin presentar
-                                                                                                </option>
-                                                                                                <option value="ok">ok
-                                                                                                </option>
-                                                                                            </select>
-                                                                                            <label
-                                                                                                for="HabilitacionFinal">Habilitación
-                                                                                                de
-                                                                                                Obra</label>
-                                                                                            <select class="form-control"
-                                                                                                id="HabilitacionFinal"
-                                                                                                name="HabilitacionFinal"
-                                                                                                value="<%= tareasporcarpeta.HabilitacionFinal%>"
-                                                                                                placeholder="<%= tareasporcarpeta.HabilitacionFinal%>">
-                                                                                                <option hidden
-                                                                                                    value="<%=tareasporcarpeta.HabilitacionFinal%>"
-                                                                                                    selected>
-                                                                                                    <%=tareasporcarpeta.HabilitacionFinal%>
-                                                                                                </option>
-                                                                                                <option value="No">No
-                                                                                                    realizada
-                                                                                                </option>
-                                                                                                <option value="ok">Ok
-                                                                                                </option>
-                                                                                            </select>
+                                            </select>
+                                            <div class="card-title">
+                                                Conformes de
+                                                Permisos</div>
+                                            <select class="form-control" id="ConformeDePermisos"
+                                                name="ConformeDePermisos"
+                                                value="<%= tareasporcarpeta.ConformeDePermisos%>"
+                                                placeholder="<%= tareasporcarpeta.ConformeDePermisos%>">
+                                                <option value="<%=tareasporcarpeta.ConformeDePermisos%>" selected>
+                                                    <%=tareasporcarpeta.ConformeDePermisos%>
+                                                </option>
+                                                <option value="Sin presentar">
+                                                    Sin presentar
+                                                </option>
+                                                <option value="Solicitado">
+                                                    Solicitado</option>
+                                                <option value="Entregado">
+                                                    Entregado</option>
+                                                <option value="ok">ok
+                                                </option>
 
-                                                                                        </div>
+                                            </select>
+                                            <div class="card-title">
+                                                Prueba de
+                                                hermeticidad</div>
+                                            <select class="form-control" id="PruebaHermeticidad"
+                                                name="PruebaHermeticidad"
+                                                value="<%= tareasporcarpeta.PruebaHermeticidad%>"
+                                                placeholder="<%= tareasporcarpeta.PruebaHermeticidad%>">
+                                                <option value="<%=tareasporcarpeta.PruebaHermeticidad%>" selected>
+                                                    <%=tareasporcarpeta.PruebaHermeticidad%>
+                                                </option>
+                                                <option value="Sin realizar">
+                                                    Sin realizar
+                                                </option>
+                                                <option value="Realizada">
+                                                    Realizada</option>
+                                                <option value="ok">ok
+                                                </option>
 
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="modal-footer">
-                                                                                    <button type="button"
-                                                                                        class="btn btn-secondary"
-                                                                                        data-dismiss="modal"
-                                                                                        onclick="CerrarModal()">Cerrar</button>
-                                                                                    <button type="submit"
-                                                                                        class="btn btn-primary fixed-bottom"
-                                                                                        form="actFinalCarpEcogas">Guardar
-                                                                                        Cambios</button>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </th>
-                                                            </form>
-                                                            <form action=" /actualizarEtapas/<%=user.id%>"
-                                                                id="actPrelCarpEcogas" method="post">
+                                            </select>
+                                            <div class="card-title">
+                                                Informes
+                                                finales</div>
+                                            <select class="form-control" id="InformesFinales" name="InformesFinales"
+                                                value="<%= tareasporcarpeta.InformesFinales%>"
+                                                placeholder="<%= tareasporcarpeta.InformesFinales%>">
+                                                <option value="<%=tareasporcarpeta.InformesFinales%>" selected>
+                                                    <%=tareasporcarpeta.InformesFinales%>
+                                                </option>
+                                                <option value="EnGestion">En
+                                                    gestion</option>
+                                                <option value="Firmados">
+                                                    Firmados</option>
+                                                <option value="ok">ok
+                                                </option>
 
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <!-- Ifs de las etapas de la carpeta, controlan la frase que se muestra al usuario debajo de cada etapa. -->
-                                                        <th class="table-primary">
-                                                            <!-- Gestion de la primera parte, muestra en "Etapas de la carpeta", un resumen de como va cada area de la carpeta -->
-                                                            <% if(tareasporcarpeta.Mensura=="ok" &&
-                                                                tareasporcarpeta.TituloDePropiedad=="ok" &&
-                                                                (tareasporcarpeta.DocumentaciónSociedad=="ok" ||
-                                                                tareasporcarpeta.DocumentaciónSociedad=="NC" )&&
-                                                                (tareasporcarpeta.ActaCargoVigente=="ok" ||
-                                                                tareasporcarpeta.ActaCargoVigente=="NC" ) &&
-                                                                tareasporcarpeta.Cotizacion=="ok" &&
-                                                                (tareasporcarpeta.Contrato=="ok" ||
-                                                                tareasporcarpeta.Contrato=="Ok(Preliminar" )){%>
-                                                                <p>Finalizada</p>
-                                                                <%}%>
-                                                                    <%if(tareasporcarpeta.Mensura=="EnGestion"||
-                                                                        tareasporcarpeta.TituloDePropiedad=="EnGestion"
-                                                                        ||
-                                                                        tareasporcarpeta.DocumentaciónSociedad=="EnGestion"
-                                                                        ||
-                                                                        tareasporcarpeta.ActaCargoVigente=="EnGestion"
-                                                                        || tareasporcarpeta.Cotizacion=="EnGestion" ){%>
-                                                                        <p>Se encuentra en gestión </p>
-                                                                        <%}%>
-                                                        </th>
-                                                        <th class="table-primary">
-                                                            <!-- Configuracion de el cuadro de "Primera parte" -->
-                                                            <%if(tareasporcarpeta.Contrato=="ok" &&
-                                                                tareasporcarpeta.PCaprobado=="ok" &&
-                                                                tareasporcarpeta.MailAutorizacion=="ok" ){%>
-                                                                Finalizada
-                                                                <%} if(tareasporcarpeta.Contrato=="EnGestion" ||
-                                                                    tareasporcarpeta.PCaprobado=="EnGestion" ){%>
-                                                                    <p>Se encuentra en gestión </p>
-                                                                    <%}%>
-                                                        </th>
-                                                        <th class="table-primary">
-                                                            <!-- Configuracion cuadro "Segunda Parte" -->
-                                                            <%if(tareasporcarpeta.AvisoInicioObras=="ok" &&
-                                                                tareasporcarpeta.CertificadoRT=="ok" &&
-                                                                tareasporcarpeta.Interferencias=="ok" &&
-                                                                tareasporcarpeta.Permisos=="ok" &&
-                                                                tareasporcarpeta.Programadeseguridad=="ok" ){%>
-                                                                Finalizada
-                                                                <%}%>
-                                                                    <%if(tareasporcarpeta.MailAutorizacion=="EnGestion"
-                                                                        || tareasporcarpeta.CertificadoRT=="EnGestion"
-                                                                        || tareasporcarpeta.Interferencias=="EnGestion"
-                                                                        || tareasporcarpeta.Permisos=="EnGestion" ||
-                                                                        tareasporcarpeta.Programadeseguridad=="EnGestion"
-                                                                        ){%>
-                                                                        En Gestion
-                                                                        <%}%>
-                                                        </th>
-                                                        <th class="table-primary">
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                            onclick="CerrarModal()">
+                                            Cerrar</button>
+                                        <button type="submit" class="btn btn-primary fixed-bottom"
+                                            form="actCaosCarpEcogas">Guardar
+                                            Cambios</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </th>
 
-                                                        </th>
-                                                        <th class="table-primary">
-                                                            <!-- Configuracion cuadro "Caos" -->
-                                                            <%if(tareasporcarpeta.DocInspeccion=="ok"&&
-                                                                tareasporcarpeta.PlanosyCroquis=="ok" &&
-                                                                tareasporcarpeta.ActasFinales=="ok" &&
-                                                                tareasporcarpeta.InformesFinales=="ok" &&
-                                                                tareasporcarpeta.ConformedePermisos=="ok"
-                                                                &&tareasporcarpeta.PresentacionFinal=="ok" ){%>
-                                                                Finalizada
-                                                                <%}%>
-                                                                    <%if(tareasporcarpeta.DocInspeccion=="EnGestion"||
-                                                                        tareasporcarpeta.PlanosyCroquis=="EnGestion"
-                                                                        ||tareasporcarpeta.ActasFinales=="EnGestion" ||
-                                                                        tareasporcarpeta.InformesFinales=="EnGestion"
-                                                                        ||tareasporcarpeta.ConformedePermisos=="EnGestion"
-                                                                        ||tareasporcarpeta.PresentacionFinal=="EnGestion"
-                                                                        ){%>
-                                                                        En Gestion
-                                                                        <%}%>
-                                                        </th>
-                                                        <th class="table-primary">
-                                                            <%if(tareasporcarpeta.PresentacionFinal=="ok"){%>
-                                                                Finalizada
-                                                                <%}%>
-                                                        </th>
+            </form>
 
-                                                    </tr>
-                                                </tbody>
+            <form action="/actFinalCarpEcogas/<%=user.id%>" id="actFinalCarpEcogas" method="post">
+                <input type="hidden" name="Nombre" id="Nombre" value="<%= user.Nombre%>">
+                <input type="hidden" name="id" id="id" value="<%= user.id%>">
 
 
+                <!--Finalizada-->
+                <th>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalFinalizacion">
+                        Finalización
+                    </button>
 
-                                                </form>
+                    <!-- Modal -->
+                    <div class="modal fade" id="ModalFinalizacion" tabindex="-1" role="dialog"
+                        aria-labelledby="Caos aria-hidden=" true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="ModalFinalizacion">
+                                        Finalización</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="container">
+                                        <div class="card p-3 border-secondary">
+                                            <label for="PresentacionFinal">Presentacion
+                                                Final</label>
+                                            <select class="form-control" id="PresentacionFinal" name="PresentacionFinal"
+                                                value="<%= tareasporcarpeta.PresentacionFinal%>"
+                                                placeholder="<%= tareasporcarpeta.PresentacionFinal%>">
+                                                <option hidden value="<%=tareasporcarpeta.PresentacionFinal%>" selected>
+                                                    <%=tareasporcarpeta.PresentacionFinal%>
+                                                </option>
+                                                <option value="Sin presentar">
+                                                    Sin presentar
+                                                </option>
+                                                <option value="ok">ok
+                                                </option>
+                                            </select>
+                                            <label for="HabilitacionFinal">Habilitación
+                                                de
+                                                Obra</label>
+                                            <select class="form-control" id="HabilitacionFinal" name="HabilitacionFinal"
+                                                value="<%= tareasporcarpeta.HabilitacionFinal%>"
+                                                placeholder="<%= tareasporcarpeta.HabilitacionFinal%>">
+                                                <option hidden value="<%=tareasporcarpeta.HabilitacionFinal%>" selected>
+                                                    <%=tareasporcarpeta.HabilitacionFinal%>
+                                                </option>
+                                                <option value="No">No
+                                                    realizada
+                                                </option>
+                                                <option value="ok">Ok
+                                                </option>
+                                            </select>
+
                                         </div>
 
-                                        <% } %>
-                                            <script
-                                                src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-                                                integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-                                                crossorigin="anonymous"></script>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                        onclick="CerrarModal()">Cerrar</button>
+                                    <button type="submit" class="btn btn-primary fixed-bottom"
+                                        form="actFinalCarpEcogas">Guardar
+                                        Cambios</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </th>
+            </form>
+            <form action=" /actualizarEtapas/<%=user.id%>" id="actPrelCarpEcogas" method="post">
 
-                                            <script
-                                                src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-                                                integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-                                                crossorigin="anonymous"></script>
-                                            <script
-                                                src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-                                                integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-                                                crossorigin="anonymous"></script>
+                </thead>
+                <tbody>
+                    <tr>
+                        <!-- Ifs de las etapas de la carpeta, controlan la frase que se muestra al usuario debajo de cada etapa. -->
+                        <th class="table-primary">
+                            <!-- Gestion de la primera parte, muestra en "Etapas de la carpeta", un resumen de como va cada area de la carpeta -->
+                            <% if(tareasporcarpeta.Mensura=="ok" && tareasporcarpeta.TituloDePropiedad=="ok" &&
+                                (tareasporcarpeta.DocumentaciónSociedad=="ok" ||
+                                tareasporcarpeta.DocumentaciónSociedad=="NC" )&&
+                                (tareasporcarpeta.ActaCargoVigente=="ok" || tareasporcarpeta.ActaCargoVigente=="NC" ) &&
+                                tareasporcarpeta.Cotizacion=="ok" && (tareasporcarpeta.Contrato=="ok" ||
+                                tareasporcarpeta.Contrato=="Ok(Preliminar" )){%>
+                                <p>Finalizada</p>
+                                <%}%>
+                                    <%if(tareasporcarpeta.Mensura=="EnGestion"||
+                                        tareasporcarpeta.TituloDePropiedad=="EnGestion" ||
+                                        tareasporcarpeta.DocumentaciónSociedad=="EnGestion" ||
+                                        tareasporcarpeta.ActaCargoVigente=="EnGestion" ||
+                                        tareasporcarpeta.Cotizacion=="EnGestion" ){%>
+                                        <p>Se encuentra en gestión </p>
+                                        <%}%>
+                        </th>
+                        <th class="table-primary">
+                            <!-- Configuracion de el cuadro de "Primera parte" -->
+                            <%if(tareasporcarpeta.Contrato=="ok" && tareasporcarpeta.PCaprobado=="ok" &&
+                                tareasporcarpeta.MailAutorizacion=="ok" ){%>
+                                Finalizada
+                                <%} if(tareasporcarpeta.Contrato=="EnGestion" ||
+                                    tareasporcarpeta.PCaprobado=="EnGestion" ){%>
+                                    <p>Se encuentra en gestión </p>
+                                    <%}%>
+                        </th>
+                        <th class="table-primary">
+                            <!-- Configuracion cuadro "Segunda Parte" -->
+                            <%if(tareasporcarpeta.AvisoInicioObras=="ok" && tareasporcarpeta.CertificadoRT=="ok" &&
+                                tareasporcarpeta.Interferencias=="ok" && tareasporcarpeta.Permisos=="ok" &&
+                                tareasporcarpeta.Programadeseguridad=="ok" ){%>
+                                Finalizada
+                                <%}%>
+                                    <%if(tareasporcarpeta.MailAutorizacion=="EnGestion" ||
+                                        tareasporcarpeta.CertificadoRT=="EnGestion" ||
+                                        tareasporcarpeta.Interferencias=="EnGestion" ||
+                                        tareasporcarpeta.Permisos=="EnGestion" ||
+                                        tareasporcarpeta.Programadeseguridad=="EnGestion" ){%>
+                                        En Gestion
+                                        <%}%>
+                        </th>
+                        <th class="table-primary">
 
-                                            <script>
-                                                function estadoInterferencia(nombrePedida, nombreObtenida, booleanIntPedida, boolRecibida) {
-                                                    if (booleanIntPedida) {
-                                                        elemento = document.getElementById(nombrePedida);
-                                                        elemento.style.display = "block";
-                                                    }
-                                                    else {
-                                                        elemento = document.getElementById(nombrePedida);
-                                                        elemento.style.display = "none";
-                                                    }
-                                                    if (boolRecibida) {
-                                                        elemento = document.getElementById(nombreObtenida);
-                                                        elemento.style.display = "block";
-                                                    }
-                                                    else {
-                                                        elemento = document.getElementById(nombreObtenida);
-                                                        elemento.style.display = "none";
-                                                    }
-                                                }
-                                                function FechaVencimientoPermiso(NombreCasilleroMostrar) {
-                                                    document.getElementById(NombreCasilleroMostrar).style.display = "block";
-                                                }
-                                            </script>
-                                            <script>
-                                                $(document).ready(
-                                                    function AbrirEstadoCarpeta() {
-                                                        var user = '<%= user.Estado %>';
-                                                        if ((user) == "Preliminar") {
-                                                            $('#ModalPreliminar').modal('show');
-                                                        };
-                                                        if ((user) == "1ra parte") {
-                                                            $('#PrimeraParte').modal('show');
-                                                        };
-                                                        if ((user) == "2da parte") {
-                                                            $('#ModalSegundaParte').modal('show');
-                                                        };
-                                                        if ((user) == "Caos") {
-                                                            $('#ModalCaos').modal('show');
-                                                        };
-                                                        if ((user) == "Obras") {
-                                                            $('#ModalObras').modal('show');
-                                                        }
-                                                        function RevisarFechasVencidas() {
+                        </th>
+                        <th class="table-primary">
+                            <!-- Configuracion cuadro "Caos" -->
+                            <%if(tareasporcarpeta.DocInspeccion=="ok"&& tareasporcarpeta.PlanosyCroquis=="ok" &&
+                                tareasporcarpeta.ActasFinales=="ok" && tareasporcarpeta.InformesFinales=="ok" &&
+                                tareasporcarpeta.ConformedePermisos=="ok" &&tareasporcarpeta.PresentacionFinal=="ok"
+                                ){%>
+                                Finalizada
+                                <%}%>
+                                    <%if(tareasporcarpeta.DocInspeccion=="EnGestion"||
+                                        tareasporcarpeta.PlanosyCroquis=="EnGestion"
+                                        ||tareasporcarpeta.ActasFinales=="EnGestion" ||
+                                        tareasporcarpeta.InformesFinales=="EnGestion"
+                                        ||tareasporcarpeta.ConformedePermisos=="EnGestion"
+                                        ||tareasporcarpeta.PresentacionFinal=="EnGestion" ){%>
+                                        En Gestion
+                                        <%}%>
+                        </th>
+                        <th class="table-primary">
+                            <%if(tareasporcarpeta.PresentacionFinal=="ok"){%>
+                                Finalizada
+                                <%}%>
+                        </th>
 
-                                                        }
-                                                    }
-                                                );
-                                            </script>
-                                            <script>
-                                                function CerrarModal() {
-                                                    $('#ModalPreliminar').modal('hide');
-                                                    $('#PrimeraParte').modal('hide');
-                                                    $('#ModalSegundaParte').modal('hide');
-                                                    $('#ModalCaos').modal('hide');
+                    </tr>
+                </tbody>
+</form>
+            
+            
 
-                                                }
-                                                function MostrarFechaConMoment(Fecha) {
-                                                    moment.locale('es');
-                                                    FechaModificada = moment(Fecha).locale('es').format("DD-MM-YYYY");
-                                                    return FechaModificada;
-                                                }
-                                                $('#CodigoCarpeta').click(function () {
-                                                    $.ajax({
-                                                        url: '/CodigoCarpeta',
-                                                        method: "GET",
-                                                        success: function (data) {
-                                                            $('#tablaAjax').html(data);
-                                                        },
-                                                        error: function (error) {
-                                                            console.log('ERROR:' + error);
-                                                        },
-                                                    });
-                                                    $('#ModalCodigosCarpeta').modal('show');
+            <% } %>
+            
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+                    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+                    crossorigin="anonymous"></script>
 
-                                                })
-                                               
-                                            </script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+                    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+                    crossorigin="anonymous"></script>
+                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+                    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+                    crossorigin="anonymous"></script>
+
+                <script>
+                    function estadoInterferencia(nombrePedida, nombreObtenida, booleanIntPedida, boolRecibida) {
+                        if (booleanIntPedida) {
+                            elemento = document.getElementById(nombrePedida);
+                            elemento.style.display = "block";
+                        }
+                        else {
+                            elemento = document.getElementById(nombrePedida);
+                            elemento.style.display = "none";
+                        }
+                        if (boolRecibida) {
+                            elemento = document.getElementById(nombreObtenida);
+                            elemento.style.display = "block";
+                        }
+                        else {
+                            elemento = document.getElementById(nombreObtenida);
+                            elemento.style.display = "none";
+                        }
+                    }
+                    function FechaVencimientoPermiso(NombreCasilleroMostrar) {
+                        document.getElementById(NombreCasilleroMostrar).style.display = "block";
+                    }
+                </script>
+                <script>
+                    $(document).ready(
+                        function AbrirEstadoCarpeta() {
+                            var user = '<%= user.Estado %>';
+                            if ((user) == "Preliminar") {
+                                $('#ModalPreliminar').modal('show');
+                            };
+                            if ((user) == "1ra parte") {
+                                $('#PrimeraParte').modal('show');
+                            };
+                            if ((user) == "2da parte") {
+                                $('#ModalSegundaParte').modal('show');
+                            };
+                            if ((user) == "Caos") {
+                                $('#ModalCaos').modal('show');
+                            };
+                            if ((user) == "Obras") {
+                                $('#ModalObras').modal('show');
+                            }
+                            function RevisarFechasVencidas() {
+
+                            }
+                        }
+                    );
+                </script>
+                <script>
+                    function CerrarModal() {
+                        $('#ModalPreliminar').modal('hide');
+                        $('#PrimeraParte').modal('hide');
+                        $('#ModalSegundaParte').modal('hide');
+                        $('#ModalCaos').modal('hide');
+
+                    }
+                    function MostrarFechaConMoment(Fecha) {
+                        moment.locale('es');
+                        FechaModificada = moment(Fecha).locale('es').format("DD-MM-YYYY");
+                        return FechaModificada;
+                    }
+                    $('#CodigoCarpeta').click(function () {
+                        $.ajax({
+                            url: '/CodigoCarpeta',
+                            method: "GET",
+                            success: function (data) {
+                                $('#tablaAjax').html(data);
+                            },
+                            error: function (error) {
+                                console.log('ERROR:' + error);
+                            },
+                        });
+                        $('#ModalCodigosCarpeta').modal('show');
+
+                    })
+
+                </script>
 
 </body>
 
