@@ -1162,7 +1162,9 @@ PermisosEspeciales="Presentado";
 
         })
 
-    res.redirect(req.get('referer'));
+        var user = {id:id, Nombre:Nombre, etapa:"1era Parte",
+    }
+    res.render('./paginas/AdministracionEcogas/actualizarProximasTareas.ejs', {user:user})
 }
 )
 router.post('/act2pCarpEcogas/:id', (req, res) => {
@@ -1408,7 +1410,9 @@ router.post('/act2pCarpEcogas/:id', (req, res) => {
 
         })
 
-    res.redirect(req.get('referer'));
+        var user = {id:id, Nombre:Nombre, etapa:"2da Parte",
+    }
+    res.render('./paginas/AdministracionEcogas/actualizarProximasTareas.ejs', {user:user})
 
 })
 router.post('/actObrasCarpEcogas/:id', (req, res) => {
@@ -1508,7 +1512,9 @@ router.post('/actObrasCarpEcogas/:id', (req, res) => {
     }
 
 
-    res.redirect(req.get('referer'));
+    var user = {id:id, Nombre:Nombre, etapa:"Obras",
+                }
+                res.render('./paginas/AdministracionEcogas/actualizarProximasTareas.ejs', {user:user})
 
 })
 router.post('/actCaosCarpEcogas/:id', (req, res) => {
@@ -1538,7 +1544,9 @@ router.post('/actCaosCarpEcogas/:id', (req, res) => {
                 console.log(error);
             }
         })
-    res.redirect(req.get('referer'));
+        var user = {id:id, Nombre:Nombre, etapa:"Caos",
+    }
+    res.render('./paginas/AdministracionEcogas/actualizarProximasTareas.ejs', {user:user})
 
 })
 router.post('/actFinalCarpEcogas/:id', (req, res) => {
@@ -1566,7 +1574,9 @@ router.post('/actFinalCarpEcogas/:id', (req, res) => {
                 console.log(error);
             }
         })
-    res.redirect(req.get('referer'));
+        var user = {id:id, Nombre:Nombre, etapa:"Finalizada",
+    }
+    res.render('./paginas/AdministracionEcogas/actualizarProximasTareas.ejs', {user:user})
 })
 //Opciones de editar tareas POST
 router.post('/ActualizarEstadoCarpeta/:id', (req, res) => {
