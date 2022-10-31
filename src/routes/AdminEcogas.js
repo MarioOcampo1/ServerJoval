@@ -326,6 +326,7 @@ router.get('/editarTareas/:id', (req, res) => {
                             if (results.length > 0) {
                                 //Se procede a enviar al front, los resultados de las consultas sql, prestar atencion que para que ejs pueda resolver el contenido de las sentencias hay que tratar las mismas como un arreglo [0], sino no funciona.
                                 res.render('paginas/AdministracionEcogas/editarTareas', { user: results[0], interferenciasypermisos: interferenciasypermisos[0], tareasporcarpeta: tareasporcarpeta[0], CodigoVigentes: CodigoVigentes, CodigoEnUsoVigentes: CodigoEnUsoVigentes, CodigoFinalizadas: CodigoFinalizadas });
+                           
                             }
                             else {
                                 res.redirect('/adminecogas');

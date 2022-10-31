@@ -34,53 +34,69 @@
 
                                                     <label for="Mensura">Mensura</label>
                                                 </div>
-                                                <div class="card-text">
-                                                <div class="input-group ">
-                                                    <div class=" p-1">
-                                                        Sin Presentar<input id="" class="" type="radio" name="Mensura" value="Sin presentar">
-                                                    </div>
-                                                    <div class=" p-1">
-                                                        En Gestión<input id="" class="" type="radio" name="Mensura" value="EnGestion">
-                                                    </div>
-                                                  
-                                                    <div class=" p-1">
-                                                        Observado<input id="" class="" type="radio" name="Mensura" value="Observado">
-                                                    </div>
-                                                    <div class=" p-1">
-                                                        Ok<input id="" class="" type="radio" name="Mensura" value="ok">
-                                                    </div>
-                                                    <div class=" p-1">
-                                                        NC<input id="" class="" type="radio" name="Mensura" value="NC">
-                                                    </div>
+                                                <div class="text-success" id="EstadoTarea">
+                                                    Estado de la tarea: <%=tareasporcarpeta.Mensura%>
                                                 </div>
-                                                
+                                                <div class="card-text">
+                                                    <div class="input-group ">
+                                                        <div class=" p-1">
+                                                            Sin Presentar<input id="" class="" type="radio"
+                                                                name="Mensura" value="Sin presentar">
+                                                        </div>
+                                                        <div class=" p-1">
+                                                            En Gestión<input id="" class="" type="radio" name="Mensura"
+                                                                value="EnGestion">
+                                                        </div>
+
+                                                        <div class=" p-1">
+                                                            Observado<input id="" class="" type="radio" name="Mensura"
+                                                                value="Observado">
+                                                        </div>
+                                                        <div class=" p-1">
+                                                            Ok<input id="" class="" type="radio" name="Mensura"
+                                                                value="ok">
+                                                        </div>
+                                                        <div class=" p-1">
+                                                            NC<input id="" class="" type="radio" name="Mensura"
+                                                                value="NC">
+                                                        </div>
+                                                    </div>
+
+                                                </div>
                                             </div>
                                         </div>
-                                          </div>
-                                          <div class="row">
+                                        <div class="row">
                                             <div class="col-12 border">
                                                 <div class="card-title text-primary">
                                                     <label for="TituloDePropiedad">Titulo
                                                         de
                                                         propiedad</label>
                                                 </div>
-                                               <div class="card-text">
+                                                <div class="text-success" id="EstadoTarea">
+                                                    Estado de la tarea: <%=tareasporcarpeta.TituloDePropiedad %>
+                                                </div>
+                                                <div class="card-text">
                                                     <div class="input-group ">
                                                         <div class=" p-1">
-                                                            Sin Presentar<input id="" class="" type="radio" name="TituloDePropiedad" value="Sin presentar">
+                                                            Sin Presentar<input id="" class="" type="radio"
+                                                                name="TituloDePropiedad" value="Sin presentar">
                                                         </div>
                                                         <div class=" p-1">
-                                                            En Gestión<input id="" class="" type="radio" name="TituloDePropiedad" value="EnGestion">
+                                                            En Gestión<input id="" class="" type="radio"
+                                                                name="TituloDePropiedad" value="EnGestion">
                                                         </div>
-                                                      
+
                                                         <div class=" p-1">
-                                                            Observado<input id="" class="" type="radio" name="TituloDePropiedad" value="Observado">
+                                                            Observado<input id="" class="" type="radio"
+                                                                name="TituloDePropiedad" value="Observado">
                                                         </div>
                                                         <div class=" p-1">
-                                                            Ok<input id="" class="" type="radio" name="TituloDePropiedad" value="ok">
+                                                            Ok<input id="" class="" type="radio"
+                                                                name="TituloDePropiedad" value="ok">
                                                         </div>
                                                         <div class="p-1">
-                                                            NC<input id="" class="" type="radio" name="TituloDePropiedad" value="NC">
+                                                            NC<input id="" class="" type="radio"
+                                                                name="TituloDePropiedad" value="NC">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -100,17 +116,23 @@
                                         <div class="col-12 border">
                                             <div class="card-title text-primary">Contrato
                                             </div>
+                                            <div class="text-success" id="EstadoTarea">
+                                                Estado de la tarea: <%=tareasporcarpeta.Contrato %>
+                                            </div>
                                             <div class="card-text">
                                                 <div class="input-group ">
                                                     <div class="col-2.5 p-1">
-                                                        Sin Presentar<input id="" class="" type="radio" name="Contrato" value="Sin presentar">
+                                                        Sin Presentar<input id="" class="" type="radio" name="Contrato"
+                                                            value="Sin presentar">
                                                     </div>
                                                     <div class="col-2.5 p-1">
-                                                        En Gestión<input id="" class="" type="radio" name="Contrato" value="EnGestion">
+                                                        En Gestión<input id="" class="" type="radio" name="Contrato"
+                                                            value="EnGestion">
                                                     </div>
-                                                  
+
                                                     <div class="col-2.5 p-1">
-                                                        Observado<input id="" class="" type="radio" name="Contrato" value="Observado">
+                                                        Observado<input id="" class="" type="radio" name="Contrato"
+                                                            value="Observado">
                                                     </div>
                                                     <div class="col-2.5 p-1">
                                                         Ok<input id="" class="" type="radio" name="Contrato" value="ok">
@@ -120,107 +142,134 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                           </div>
-                                           <div class="row">
-                                        <div class="col-12 border">
-                                            <div class="card-title text-primary">Fecha de firma del contrato
-                                            </div>
-                                            <div class="card-text">
-                                                <%if(tareasporcarpeta.Fechafirmacontrato){%>
-                                                    <%=tareasporcarpeta.Fechafirmacontrato%>
-                                                        <%}%>
-                                                            <input type="date" name="FechaFirmaContrato"
-                                                                id="FechaFirmaContrato"
-                                                                placeholder="<%= tareasporcarpeta.Fechafirmacontrato%>">
-                                                            <script>
-                                                                var fecha = "<%=tareasporcarpeta.Fechafirmacontrato%>";
-                                                                console.log("la fecha es : " + fecha);
-                                                                var FechaModificada = moment(Fecha, "MM/DD/YYYY");
-                                                                console.log("La fecha modificada es: " + FechaModificada);
-                                                                document.write(FechaModificada);
-
-                                                            </script>
-
-                                            </div>
                                         </div>
-                                    </div>
-<div class="row">
-                                        <div class="col-12 border">
-                                            <div class="card-title text-primary">
-                                                Presupuesto detallado</div>
-                                            <div class="card-text">
-                                                <div class="input-group ">
-                                                    <div class="col-2.5 p-1">
-                                                        Sin Presentar<input id="" class="" type="radio" name="Presupuesto" value="Sin presentar">
-                                                    </div>
-                                                    <div class="col-2.5 p-1">
-                                                        En Gestión<input id="" class="" type="radio" name="Presupuesto" value="EnGestion">
-                                                    </div>
-                                                  
-                                                    <div class="col-2.5 p-1">
-                                                        Observado<input id="" class="" type="radio" name="Presupuesto" value="Observado">
-                                                    </div>
-                                                    <div class="col-2.5 p-1">
-                                                        Ok<input id="" class="" type="radio" name="Presupuesto" value="ok">
-                                                    </div>
-                                                    <div class="col-2 p-1">
-                                                        NC<input id="" class="" type="radio" name="Presupuesto" value="NC">
-                                                    </div>
+                                        <div class="row">
+                                            <div class="col-12 border">
+                                                <div class="card-title text-primary">Fecha de firma del contrato
                                                 </div>
-                                                
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12 border">
-                                            <div class="card-title text-primary">Sucedáneo
-                                            </div>
-                                            <div class="card-text">
-                                                <div class="input-group ">
-                                                    <div class="col-2.5 p-1">
-                                                        Sin Presentar<input id="" class="" type="radio" name="Sucedaneo" value="Sin presentar">
-                                                    </div>
-                                                    <div class="col-2.5 p-1">
-                                                        En Gestión<input id="" class="" type="radio" name="Sucedaneo" value="EnGestion">
-                                                    </div>
-                                                  
-                                                    <div class="col-2.5 p-1">
-                                                        Observado<input id="" class="" type="radio" name="Sucedaneo" value="Observado">
-                                                    </div>
-                                                    <div class="col-2.5 p-1">
-                                                        Ok<input id="" class="" type="radio" name="Sucedaneo" value="ok">
-                                                    </div>
-                                                    <div class="col-2 p-1">
-                                                        NC<input id="" class="" type="radio" name="Sucedaneo" value="NC">
-                                                    </div>
+                                                <div class="text-success" id="EstadoTarea">
+                                                    Estado de la tarea: <%=tareasporcarpeta.Fechafirmacontrato %>
                                                 </div>
-                                                
+                                                <div class="card-text">
+                                                    <%if(tareasporcarpeta.Fechafirmacontrato){%>
+                                                        <%=tareasporcarpeta.Fechafirmacontrato%>
+                                                            <%}%>
+                                                                <input type="date" name="FechaFirmaContrato"
+                                                                    id="FechaFirmaContrato"
+                                                                    placeholder="<%= tareasporcarpeta.Fechafirmacontrato%>">
+                                                                <script>
+                                                                    var fecha = "<%=tareasporcarpeta.Fechafirmacontrato%>";
+                                                                    console.log("la fecha es : " + fecha);
+                                                                    var FechaModificada = moment(Fecha, "MM/DD/YYYY");
+                                                                    console.log("La fecha modificada es: " + FechaModificada);
+                                                                    document.write(FechaModificada);
+
+                                                                </script>
+
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                        <div class="row">
+                                            <div class="col-12 border">
+                                                <div class="card-title text-primary">
+                                                    Presupuesto detallado</div>
+                                                <div class="text-success" id="EstadoTarea">
+                                                    Estado de la tarea: <%=tareasporcarpeta.Presupuesto %>
+                                                </div>
+                                                <div class="card-text">
+                                                    <div class="input-group ">
+                                                        <div class="col-2.5 p-1">
+                                                            Sin Presentar<input id="" class="" type="radio"
+                                                                name="Presupuesto" value="Sin presentar">
+                                                        </div>
+                                                        <div class="col-2.5 p-1">
+                                                            En Gestión<input id="" class="" type="radio"
+                                                                name="Presupuesto" value="EnGestion">
+                                                        </div>
+
+                                                        <div class="col-2.5 p-1">
+                                                            Observado<input id="" class="" type="radio"
+                                                                name="Presupuesto" value="Observado">
+                                                        </div>
+                                                        <div class="col-2.5 p-1">
+                                                            Ok<input id="" class="" type="radio" name="Presupuesto"
+                                                                value="ok">
+                                                        </div>
+                                                        <div class="col-2 p-1">
+                                                            NC<input id="" class="" type="radio" name="Presupuesto"
+                                                                value="NC">
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12 border">
+                                                <div class="card-title text-primary">Sucedáneo
+                                                </div>
+                                                <div class="text-success" id="EstadoTarea">
+                                                    Estado de la tarea: <%=tareasporcarpeta.Sucedaneo %>
+                                                </div>
+                                                <div class="card-text">
+                                                    <div class="input-group ">
+                                                        <div class="col-2.5 p-1">
+                                                            Sin Presentar<input id="" class="" type="radio"
+                                                                name="Sucedaneo" value="Sin presentar">
+                                                        </div>
+                                                        <div class="col-2.5 p-1">
+                                                            En Gestión<input id="" class="" type="radio"
+                                                                name="Sucedaneo" value="EnGestion">
+                                                        </div>
+
+                                                        <div class="col-2.5 p-1">
+                                                            Observado<input id="" class="" type="radio" name="Sucedaneo"
+                                                                value="Observado">
+                                                        </div>
+                                                        <div class="col-2.5 p-1">
+                                                            Ok<input id="" class="" type="radio" name="Sucedaneo"
+                                                                value="ok">
+                                                        </div>
+                                                        <div class="col-2 p-1">
+                                                            NC<input id="" class="" type="radio" name="Sucedaneo"
+                                                                value="NC">
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="col-12 border border">
                                             <div class="card-title text-primary">Nota De
                                                 Excepción</div>
+                                            <div class="text-success" id="EstadoTarea">
+                                                Estado de la tarea: <%=tareasporcarpeta.NotaDeExcepcion %>
+                                            </div>
                                             <div class="card-text">
                                                 <div class="input-group ">
                                                     <div class="col-2.5 p-1">
-                                                        Sin Presentar<input id="" class="" type="radio" name="NotaDeExcepcion" value="Sin presentar">
+                                                        Sin Presentar<input id="" class="" type="radio"
+                                                            name="NotaDeExcepcion" value="Sin presentar">
                                                     </div>
                                                     <div class="col-2.5 p-1">
-                                                        En Gestión<input id="" class="" type="radio" name="NotaDeExcepcion" value="EnGestion">
+                                                        En Gestión<input id="" class="" type="radio"
+                                                            name="NotaDeExcepcion" value="EnGestion">
                                                     </div>
-                                                  
+
                                                     <div class="col-2.5 p-1">
-                                                        Observado<input id="" class="" type="radio" name="NotaDeExcepcion" value="Observado">
+                                                        Observado<input id="" class="" type="radio"
+                                                            name="NotaDeExcepcion" value="Observado">
                                                     </div>
                                                     <div class="col-2.5 p-1">
-                                                        Ok<input id="" class="" type="radio" name="NotaDeExcepcion" value="ok">
+                                                        Ok<input id="" class="" type="radio" name="NotaDeExcepcion"
+                                                            value="ok">
                                                     </div>
                                                     <div class="col-2 p-1">
-                                                        NC<input id="" class="" type="radio" name="NotaDeExcepcion" value="NC">
+                                                        NC<input id="" class="" type="radio" name="NotaDeExcepcion"
+                                                            value="NC">
                                                     </div>
                                                 </div>
-                                               
+
                                             </div>
                                         </div>
                                     </div>
@@ -234,26 +283,34 @@
                                         <div class="col-12 border">
                                             <div class="card-title text-primary">PC
                                             </div>
+                                            <div class="text-success" id="EstadoTarea">
+                                                Estado de la tarea: <%=tareasporcarpeta.PCaprobado %>
+                                            </div>
                                             <div class="card-text">
                                                 <div class="input-group ">
                                                     <div class="col-2.5 p-1">
-                                                        Sin Presentar<input id="" class="" type="radio" name="PCaprobado" value="Sin presentar">
+                                                        Sin Presentar<input id="" class="" type="radio"
+                                                            name="PCaprobado" value="Sin presentar">
                                                     </div>
                                                     <div class="col-2.5 p-1">
-                                                        En Gestión<input id="" class="" type="radio" name="PCaprobado" value="EnGestion">
+                                                        En Gestión<input id="" class="" type="radio" name="PCaprobado"
+                                                            value="EnGestion">
                                                     </div>
-                                                  
+
                                                     <div class="col-2.5 p-1">
-                                                        Observado<input id="" class="" type="radio" name="PCaprobado" value="Observado">
+                                                        Observado<input id="" class="" type="radio" name="PCaprobado"
+                                                            value="Observado">
                                                     </div>
                                                     <div class="col-2.5 p-1">
-                                                        Ok<input id="" class="" type="radio" name="PCaprobado" value="ok">
+                                                        Ok<input id="" class="" type="radio" name="PCaprobado"
+                                                            value="ok">
                                                     </div>
                                                     <div class="col-2 p-1">
-                                                        NC<input id="" class="" type="radio" name="PCaprobado" value="NC">
+                                                        NC<input id="" class="" type="radio" name="PCaprobado"
+                                                            value="NC">
                                                     </div>
                                                 </div>
-                                              
+
                                             </div>
                                         </div>
                                         <div class="col-12 border">
@@ -262,26 +319,34 @@
                                                 <label for="PlanoTipo">Plano
                                                     tipo</label>
                                             </div>
+                                            <div class="text-success" id="EstadoTarea">
+                                                Estado de la tarea: <%=tareasporcarpeta.PlanoTipo %>
+                                            </div>
                                             <div class="card-text">
                                                 <div class="input-group ">
                                                     <div class="col-2.5 p-1">
-                                                        Sin Presentar<input id="" class="" type="radio" name="PlanoTipo" value="Sin presentar">
+                                                        Sin Presentar<input id="" class="" type="radio" name="PlanoTipo"
+                                                            value="Sin presentar">
                                                     </div>
                                                     <div class="col-2.5 p-1">
-                                                        En Gestión<input id="" class="" type="radio" name="PlanoTipo" value="EnGestion">
+                                                        En Gestión<input id="" class="" type="radio" name="PlanoTipo"
+                                                            value="EnGestion">
                                                     </div>
-                                                  
+
                                                     <div class="col-2.5 p-1">
-                                                        Observado<input id="" class="" type="radio" name="PlanoTipo" value="Observado">
+                                                        Observado<input id="" class="" type="radio" name="PlanoTipo"
+                                                            value="Observado">
                                                     </div>
                                                     <div class="col-2.5 p-1">
-                                                        Ok<input id="" class="" type="radio" name="PlanoTipo" value="ok">
+                                                        Ok<input id="" class="" type="radio" name="PlanoTipo"
+                                                            value="ok">
                                                     </div>
                                                     <div class="col-2 p-1">
-                                                        NC<input id="" class="" type="radio" name="PlanoTipo" value="NC">
+                                                        NC<input id="" class="" type="radio" name="PlanoTipo"
+                                                            value="NC">
                                                     </div>
                                                 </div>
-                                                
+
                                             </div>
                                         </div>
                                     </div>
@@ -291,178 +356,218 @@
                                 <div class="card-header bg-primary text-white">
                                     Permisos especiales</div>
                                 <div class="card-body">
-                                    
-                                        <div class="row">      
-                                    <div class="col-12 border">
-                                        
-                                        <%if (interferenciasypermisos.Privado=="NC" ){%>
 
-                                            <form-check>
-                                                <input hidden checked type="radio" name="CartaOferta" id="CartaOferta"
+                                    <div class="row">
+                                        <div class="col-12 border">
+
+                                            <%if (interferenciasypermisos.Privado=="NC" ){%>
+
+                                                <form-check>
+                                                    <input hidden checked type="radio" name="CartaOferta"
+                                                        id="CartaOferta" value="NC">
+
+                                                </form-check>
+                                                <% }else{%>
+                                                    <div class="card-title text-primary">Carta
+                                                        oferta</div>
+                                                    <div class="text-success" id="EstadoTarea">
+                                                        Estado de la tarea: <%=tareasporcarpeta.CartaOferta %>
+                                                    </div>
+                                                    <div class="card-text">
+                                                        <div class="input-group ">
+                                                            <div class="col-2.5 p-1">
+                                                                Sin Presentar<input id="" class="" type="radio"
+                                                                    name="CartaOferta" value="Sin presentar">
+                                                            </div>
+                                                            <div class="col-2.5 p-1">
+                                                                En Gestión<input id="" class="" type="radio"
+                                                                    name="CartaOferta" value="EnGestion">
+                                                            </div>
+
+                                                            <div class="col-2.5 p-1">
+                                                                Observado<input id="" class="" type="radio"
+                                                                    name="CartaOferta" value="Observado">
+                                                            </div>
+                                                            <div class="col-2.5 p-1">
+                                                                Ok<input id="" class="" type="radio" name="CartaOferta"
+                                                                    value="ok">
+                                                            </div>
+                                                            <div class="col-2 p-1">
+                                                                NC<input id="" class="" type="radio" name="CartaOferta"
+                                                                    value="NC">
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+                                                    <%}%>
+
+                                        </div>
+                                        <div class="col-12 border">
+                                            <%if (interferenciasypermisos.Privado=="NC" ){%>
+                                                <form-check>
+                                                    <input hidden checked type="radio" name="PlanoAnexo" id="PlanoAnexo"
+                                                        value="NC">
+                                                </form-check>
+                                                <% }else{%>
+
+                                                    <div class="card-title text-primary">Plano
+                                                        anexo</div>
+                                                    <div class="text-success" id="EstadoTarea">
+                                                        Estado de la tarea: <%=tareasporcarpeta.PlanoAnexo %>
+                                                    </div>
+                                                    <div class="card-text">
+                                                        <div class="input-group ">
+                                                            <div class="col-2.5 p-1">
+                                                                Sin Presentar<input id="" class="" type="radio"
+                                                                    name="PlanoAnexo" value="Sin presentar">
+                                                            </div>
+                                                            <div class="col-2.5 p-1">
+                                                                En Gestión<input id="" class="" type="radio"
+                                                                    name="PlanoAnexo" value="EnGestion">
+                                                            </div>
+
+                                                            <div class="col-2.5 p-1">
+                                                                Presentado<input id="" class="" type="radio"
+                                                                    name="PlanoAnexo" value="Presentado">
+                                                            </div>
+                                                            <div class="col-2.5 p-1">
+                                                                Visado<input id="" class="" type="radio"
+                                                                    name="PlanoAnexo" value="Visado">
+                                                            </div>
+                                                            <div class="col-2 p-1">
+                                                                NC<input id="" class="" type="radio" name="PlanoAnexo"
+                                                                    value="NC">
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+                                                    <%}%>
+                                        </div>
+                                        <div class="col-12 border">
+                                            <%if (interferenciasypermisos.Hidraulica=="NC" ){%>
+                                                <form-check>
+                                                    <input hidden checked type="radio" name="HIDRAULICA1"
+                                                        id="HIDRAULICA1" value="NC">
+                                                </form-check>
+                                                <%}else{%>
+
+                                                    <div class="card-title text-primary">
+                                                        Hidraúlica </div>
+                                                    <div class="text-success" id="EstadoTarea">
+                                                        Estado de la tarea: <%=tareasporcarpeta.HIDRAULICA1 %>
+                                                    </div>
+                                                    <div class="card-text">
+                                                        <div class="input-group ">
+                                                            <div class="col-2.5 p-1">
+                                                                Sin Presentar<input id="" class="" type="radio"
+                                                                    name="HIDRAULICA1" value="Sin presentar">
+                                                            </div>
+                                                            <div class="col-2.5 p-1">
+                                                                En Gestión<input id="" class="" type="radio"
+                                                                    name="HIDRAULICA1" value="EnGestion">
+                                                            </div>
+
+                                                            <div class="col-2.5 p-1">
+                                                                Presentado<input id="" class="" type="radio"
+                                                                    name="HIDRAULICA1" value="Presentado">
+                                                            </div>
+                                                            <div class="col-2.5 p-1">
+                                                                Visado<input id="" class="" type="radio"
+                                                                    name="HIDRAULICA1" value="Visado">
+                                                            </div>
+                                                            <div class="col-2 p-1">
+                                                                NC<input id="" class="" type="radio" name="HIDRAULICA1"
+                                                                    value="NC">
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <%}%>
+                                        </div>
+                                        <div class="col-12 border">
+                                            <%if (interferenciasypermisos.Ferrocarriles=="NC" ){%>
+                                                <input hidden checked type="radio" name="FERROCARRIL1" id="FERROCARRIL1"
                                                     value="NC">
+                                                <%}else{%>
 
-                                            </form-check>
-                                            <% }else{%>
-                                                <div class="card-title text-primary">Carta
-                                                    oferta</div>
-                                                <div class="card-text">
-                                                    <div class="input-group ">
-                                                        <div class="col-2.5 p-1">
-                                                            Sin Presentar<input id="" class="" type="radio" name="CartaOferta" value="Sin presentar">
-                                                        </div>
-                                                        <div class="col-2.5 p-1">
-                                                            En Gestión<input id="" class="" type="radio" name="CartaOferta" value="EnGestion">
-                                                        </div>
-                                                      
-                                                        <div class="col-2.5 p-1">
-                                                            Observado<input id="" class="" type="radio" name="CartaOferta" value="Observado">
-                                                        </div>
-                                                        <div class="col-2.5 p-1">
-                                                            Ok<input id="" class="" type="radio" name="CartaOferta" value="ok">
-                                                        </div>
-                                                        <div class="col-2 p-1">
-                                                            NC<input id="" class="" type="radio" name="CartaOferta" value="NC">
-                                                        </div>
+                                                    <div class="card-title text-primary">
+                                                        Ferrocarriles</div>
+                                                    <div class="text-success" id="EstadoTarea">
+                                                        Estado de la tarea: <%=tareasporcarpeta.FERROCARRIL1 %>
                                                     </div>
-                                                  
+                                                    <div class="card-text">
+                                                        <div class="input-group ">
+                                                            <div class="col-2.5 p-1">
+                                                                Sin Presentar<input id="" class="" type="radio"
+                                                                    name="FERROCARRIL1" value="Sin presentar">
+                                                            </div>
+                                                            <div class="col-2.5 p-1">
+                                                                En Gestión<input id="" class="" type="radio"
+                                                                    name="FERROCARRIL1" value="EnGestion">
+                                                            </div>
 
-                                                </div>
-                                                <%}%>
-                                                
-                                    </div>
-                                    <div class="col-12 border">
-                                        <%if (interferenciasypermisos.Privado=="NC" ){%>
-                                            <form-check>
-                                                <input hidden checked type="radio" name="PlanoAnexo" id="PlanoAnexo"
-                                                    value="NC">
-                                            </form-check>
-                                            <% }else{%>
+                                                            <div class="col-2.5 p-1">
+                                                                Presentado<input id="" class="" type="radio"
+                                                                    name="FERROCARRIL1" value="Presentado">
+                                                            </div>
+                                                            <div class="col-2.5 p-1">
+                                                                Visado<input id="" class="" type="radio"
+                                                                    name="FERROCARRIL1" value="Visado">
+                                                            </div>
+                                                            <div class="col-2 p-1">
+                                                                NC<input id="" class="" type="radio" name="FERROCARRIL1"
+                                                                    value="NC">
+                                                            </div>
+                                                        </div>
 
-                                                <div class="card-title text-primary">Plano
-                                                    anexo</div>
-                                                <div class="card-text">
-                                                    <div class="input-group ">
-                                                        <div class="col-2.5 p-1">
-                                                            Sin Presentar<input id="" class="" type="radio" name="PlanoAnexo" value="Sin presentar">
-                                                        </div>
-                                                        <div class="col-2.5 p-1">
-                                                            En Gestión<input id="" class="" type="radio" name="PlanoAnexo" value="EnGestion">
-                                                        </div>
-                                                      
-                                                        <div class="col-2.5 p-1">
-                                                            Presentado<input id="" class="" type="radio" name="PlanoAnexo" value="Presentado">
-                                                        </div>
-                                                        <div class="col-2.5 p-1">
-                                                            Visado<input id="" class="" type="radio" name="PlanoAnexo" value="Visado">
-                                                        </div>
-                                                        <div class="col-2 p-1">
-                                                            NC<input id="" class="" type="radio" name="PlanoAnexo" value="NC">
-                                                        </div>
                                                     </div>
-                                                    
+                                                    <%}%>
+                                        </div>
+                                        <div class="col-12 border">
+                                            <%if (interferenciasypermisos.DNV=="NC" ){%>
+                                                <input hidden checked type="radio" name="DNV1" id="DNV1" value="NC">
+                                                <%}else{%>
 
-                                                </div>
-                                                <%}%>
-                                    </div>
-                                    <div class="col-12 border">
-                                        <%if (interferenciasypermisos.Hidraulica=="NC" ){%>
-                                            <form-check>
-                                                <input hidden checked type="radio" name="HIDRAULICA1" id="HIDRAULICA1"
-                                                    value="NC">
-                                            </form-check>
-                                            <%}else{%>
-
-                                                <div class="card-title text-primary">
-                                                    Hidraúlica </div>
-                                                <div class="card-text">
-                                                    <div class="input-group ">
-                                                        <div class="col-2.5 p-1">
-                                                            Sin Presentar<input id="" class="" type="radio" name="HIDRAULICA1" value="Sin presentar">
-                                                        </div>
-                                                        <div class="col-2.5 p-1">
-                                                            En Gestión<input id="" class="" type="radio" name="HIDRAULICA1" value="EnGestion">
-                                                        </div>
-                                                      
-                                                        <div class="col-2.5 p-1">
-                                                            Presentado<input id="" class="" type="radio" name="HIDRAULICA1" value="Presentado">
-                                                        </div>
-                                                        <div class="col-2.5 p-1">
-                                                            Visado<input id="" class="" type="radio" name="HIDRAULICA1" value="Visado">
-                                                        </div>
-                                                        <div class="col-2 p-1">
-                                                            NC<input id="" class="" type="radio" name="HIDRAULICA1" value="NC">
-                                                        </div>
+                                                    <div class="card-title text-primary">DNV
                                                     </div>
-                                                    
-                                                </div>
-                                                <%}%>
-                                    </div>
-                                    <div class="col-12 border">
-                                        <%if (interferenciasypermisos.Ferrocarriles=="NC" ){%>
-                                            <input hidden checked type="radio" name="FERROCARRIL1" id="FERROCARRIL1"
-                                                value="NC">
-                                            <%}else{%>
-
-                                                <div class="card-title text-primary">
-                                                    Ferrocarriles</div>
-                                                <div class="card-text">
-                                                    <div class="input-group ">
-                                                        <div class="col-2.5 p-1">
-                                                            Sin Presentar<input id="" class="" type="radio" name="FERROCARRIL1" value="Sin presentar">
-                                                        </div>
-                                                        <div class="col-2.5 p-1">
-                                                            En Gestión<input id="" class="" type="radio" name="FERROCARRIL1" value="EnGestion">
-                                                        </div>
-                                                      
-                                                        <div class="col-2.5 p-1">
-                                                            Presentado<input id="" class="" type="radio" name="FERROCARRIL1" value="Presentado">
-                                                        </div>
-                                                        <div class="col-2.5 p-1">
-                                                            Visado<input id="" class="" type="radio" name="FERROCARRIL1" value="Visado">
-                                                        </div>
-                                                        <div class="col-2 p-1">
-                                                            NC<input id="" class="" type="radio" name="FERROCARRIL1" value="NC">
-                                                        </div>
+                                                    <div class="text-success" id="EstadoTarea">
+                                                        Estado de la tarea: <%=tareasporcarpeta.DNV1 %>
                                                     </div>
-                                                    
-                                                </div>
-                                                <%}%>
-                                    </div>
-                                    <div class="col-12 border">
-                                        <%if (interferenciasypermisos.DNV=="NC" ){%>
-                                            <input hidden checked type="radio" name="DNV1" id="DNV1" value="NC">
-                                            <%}else{%>
+                                                    <div class="card-text">
+                                                        <div class="input-group ">
+                                                            <div class="col-2.5 p-1">
+                                                                Sin Presentar<input id="" class="" type="radio"
+                                                                    name="DNV1" value="Sin presentar">
+                                                            </div>
+                                                            <div class="col-2.5 p-1">
+                                                                En Gestión<input id="" class="" type="radio" name="DNV1"
+                                                                    value="EnGestion">
+                                                            </div>
 
-                                                <div class="card-title text-primary">DNV
-                                                </div>
-                                                <div class="card-text">
-                                                    <div class="input-group ">
-                                                        <div class="col-2.5 p-1">
-                                                            Sin Presentar<input id="" class="" type="radio" name="DNV1" value="Sin presentar">
+                                                            <div class="col-2.5 p-1">
+                                                                Presentado<input id="" class="" type="radio" name="DNV1"
+                                                                    value="Presentado">
+                                                            </div>
+                                                            <div class="col-2.5 p-1">
+                                                                Visado<input id="" class="" type="radio" name="DNV1"
+                                                                    value="Visado">
+                                                            </div>
+                                                            <div class="col-2 p-1">
+                                                                NC<input id="" class="" type="radio" name="DNV1"
+                                                                    value="NC">
+                                                            </div>
                                                         </div>
-                                                        <div class="col-2.5 p-1">
-                                                            En Gestión<input id="" class="" type="radio" name="DNV1" value="EnGestion">
-                                                        </div>
-                                                      
-                                                        <div class="col-2.5 p-1">
-                                                            Presentado<input id="" class="" type="radio" name="DNV1" value="Presentado">
-                                                        </div>
-                                                        <div class="col-2.5 p-1">
-                                                            Visado<input id="" class="" type="radio" name="DNV1" value="Visado">
-                                                        </div>
-                                                        <div class="col-2 p-1">
-                                                            NC<input id="" class="" type="radio" name="DNV1" value="NC">
-                                                        </div>
+
                                                     </div>
-                                                   
-                                                </div>
-                                                <%}%>
+                                                    <%}%>
+                                        </div>
+
                                     </div>
+
 
                                 </div>
-
-
-                            </div>
 
                             </div>
 
@@ -471,81 +576,105 @@
                                     Documentacion Ambiente
                                 </div>
                                 <div class="card-body">
-                                <div class="row">
-                                    <div class="col-12 border">
-                                        <div class="card-title text-primary">Cuestionario de relevamiento ambiental</div>
-                                    <div class="card-text">
-                                        <div class="input-group ">
-                                            <div class="col-2.5 p-1">
-                                                Sin Presentar<input id="" class="" type="radio" name="CuestionarioRelevamientoAmbiental" value="Sin presentar">
+                                    <div class="row">
+                                        <div class="col-12 border">
+                                            <div class="card-title text-primary">Cuestionario de relevamiento ambiental
                                             </div>
-                                            <div class="col-2.5 p-1">
-                                                En Gestión<input id="" class="" type="radio" name="CuestionarioRelevamientoAmbiental" value="EnGestion">
+                                            <div class="text-success" id="EstadoTarea">
+                                                Estado de la tarea: <%=tareasporcarpeta.CuestionarioRelevamientoAmbiental %>
                                             </div>
-                                          
-                                            <div class="col-2.5 p-1">
-                                                Observado<input id="" class="" type="radio" name="CuestionarioRelevamientoAmbiental" value="Observado">
+                                            <div class="card-text">
+                                                <div class="input-group ">
+                                                    <div class="col-2.5 p-1">
+                                                        Sin Presentar<input id="" class="" type="radio"
+                                                            name="CuestionarioRelevamientoAmbiental"
+                                                            value="Sin presentar">
+                                                    </div>
+                                                    <div class="col-2.5 p-1">
+                                                        En Gestión<input id="" class="" type="radio"
+                                                            name="CuestionarioRelevamientoAmbiental" value="EnGestion">
+                                                    </div>
+
+                                                    <div class="col-2.5 p-1">
+                                                        Observado<input id="" class="" type="radio"
+                                                            name="CuestionarioRelevamientoAmbiental" value="Observado">
+                                                    </div>
+                                                    <div class="col-2.5 p-1">
+                                                        Ok<input id="" class="" type="radio"
+                                                            name="CuestionarioRelevamientoAmbiental" value="ok">
+                                                    </div>
+
+                                                </div>
+
                                             </div>
-                                            <div class="col-2.5 p-1">
-                                                Ok<input id="" class="" type="radio" name="CuestionarioRelevamientoAmbiental" value="ok">
-                                            </div>
-                                            
                                         </div>
-                                        
-                                    </div> 
+                                        <div class="col-12 border">
+                                            <div class="card-title text-primary">
+                                                DDJJ inicial ambiental
+                                            </div>
+                                            <div class="text-success" id="EstadoTarea">
+                                                Estado de la tarea: <%=tareasporcarpeta.DDJJInicialAmbiental %>
+                                            </div>
+                                            <div class="card-text">
+                                                <div class="input-group ">
+                                                    <div class="col-2.5 p-1">
+                                                        Sin Presentar<input id="" class="" type="radio"
+                                                            name="DDJJInicialAmbiental" value="Sin presentar">
+                                                    </div>
+                                                    <div class="col-2.5 p-1">
+                                                        En Gestión<input id="" class="" type="radio"
+                                                            name="DDJJInicialAmbiental" value="EnGestion">
+                                                    </div>
+
+                                                    <div class="col-2.5 p-1">
+                                                        Observado<input id="" class="" type="radio"
+                                                            name="DDJJInicialAmbiental" value="Observado">
+                                                    </div>
+                                                    <div class="col-2.5 p-1">
+                                                        Ok<input id="" class="" type="radio" name="DDJJInicialAmbiental"
+                                                            value="ok">
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-12 border">
+                                            <div class="card-title text-primary">
+                                                Lista de verificacion ambiental
+                                            </div>
+                                            <div class="text-success" id="EstadoTarea">
+                                                Estado de la tarea: <%=tareasporcarpeta.ListaVerificacionAmbiental %>
+                                            </div>
+                                            <div class="card-text">
+                                                <div class="input-group ">
+                                                    <div class="col-2.5 p-1">
+                                                        Sin Presentar<input id="" class="" type="radio"
+                                                            name="ListaVerificacionAmbiental" value="Sin presentar">
+                                                    </div>
+                                                    <div class="col-2.5 p-1">
+                                                        En Gestión<input id="" class="" type="radio"
+                                                            name="ListaVerificacionAmbiental" value="EnGestion">
+                                                    </div>
+
+                                                    <div class="col-2.5 p-1">
+                                                        Observado<input id="" class="" type="radio"
+                                                            name="ListaVerificacionAmbiental" value="Observado">
+                                                    </div>
+                                                    <div class="col-2.5 p-1">
+                                                        Ok<input id="" class="" type="radio"
+                                                            name="ListaVerificacionAmbiental" value="ok">
+                                                    </div>
+                                                    <div class="col-2 p-1">
+                                                        NC<input id="" class="" type="radio"
+                                                            name="ListaVerificacionAmbiental" value="NC">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
                                     </div>
-                                    <div class="col-12 border">
-                                        <div class="card-title text-primary">
-                                            DDJJ inicial ambiental
-                                        </div>
-                                        <div class="card-text">
-                                            <div class="input-group ">
-                                                <div class="col-2.5 p-1">
-                                                    Sin Presentar<input id="" class="" type="radio" name="DDJJInicialAmbiental" value="Sin presentar">
-                                                </div>
-                                                <div class="col-2.5 p-1">
-                                                    En Gestión<input id="" class="" type="radio" name="DDJJInicialAmbiental" value="EnGestion">
-                                                </div>
-                                              
-                                                <div class="col-2.5 p-1">
-                                                    Observado<input id="" class="" type="radio" name="DDJJInicialAmbiental" value="Observado">
-                                                </div>
-                                                <div class="col-2.5 p-1">
-                                                    Ok<input id="" class="" type="radio" name="DDJJInicialAmbiental" value="ok">
-                                                </div>
-                                                
-                                            </div>
-                                            
-                                        </div>  
-                                    </div>
-                                    <div class="col-12 border">
-                                        <div class="card-title text-primary">
-                                            Lista de verificacion ambiental
-                                        </div>
-                                        <div class="card-text">
-                                            <div class="input-group ">
-                                                <div class="col-2.5 p-1">
-                                                    Sin Presentar<input id="" class="" type="radio" name="ListaVerificacionAmbiental" value="Sin presentar">
-                                                </div>
-                                                <div class="col-2.5 p-1">
-                                                    En Gestión<input id="" class="" type="radio" name="ListaVerificacionAmbiental" value="EnGestion">
-                                                </div>
-                                              
-                                                <div class="col-2.5 p-1">
-                                                    Observado<input id="" class="" type="radio" name="ListaVerificacionAmbiental" value="Observado">
-                                                </div>
-                                                <div class="col-2.5 p-1">
-                                                    Ok<input id="" class="" type="radio" name="ListaVerificacionAmbiental" value="ok">
-                                                </div>
-                                                <div class="col-2 p-1">
-                                                    NC<input id="" class="" type="radio" name="ListaVerificacionAmbiental" value="NC">
-                                                </div>
-                                            </div>
-                                            
-                                        </div>
-                                    </div>
-                                    
-                                </div>
                                 </div>
                             </div>
                         </div>

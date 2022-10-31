@@ -23,149 +23,180 @@
                             <div class="card p-3 mt-3 border-secondary">
                                 <div class="col-12">
                                     <div class="card-header bg-primary text-white">
-                                        <label class="mx-auto" for="DocumentacionDelTerreno">Documentación
+                                        <label for="DocumentacionDelTerreno">Documentación
                                             del
                                             terreno</label>
+                                        
                                     </div>
                                     <div class="card-body">
-                                    <div class="row ">
-                                       
-                                       
-                                        <div class="col-12 border">
-                                           
-                                            <div class="card-title text-primary">
-                                                <label for="Mensura">Mensura</label>
-                                            </div>
-                                            <div class="card-text">
-    <div class="input-group">
-            <div class="col-2.5 p-1">
-                Sin Presentar<input id="" class="input" type="radio" name="Mensura" value="Sin presentar">
-            </div>
-            <div class="col-2.5 p-1">
-                En Gestión<input id="" class="input" type="radio" name="Mensura" value="EnGestion">
-            </div>
-            <div class="col-2.5 p-1">
-                Presentado<input id="" class="input" type="radio" name="Mensura" value="Presentado">
-            </div>
-            <div class="col-2.5 p-1">
-                Observado<input id="" class="input" type="radio" name="Mensura" value="Observado">
-            </div>
-            <div class="col-2 p-1">
-                Ok<input id="" class="input" type="radio" name="Mensura" value="Ok">
-            </div>
-            
-       </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                   
                                         <div class="row ">
-                                        <div class="col-12 border">
-                                            <div class="card-title text-primary">
-                                                <label for="TituloDePropiedad">Titulo
-                                                    de
-                                                    propiedad</label>
+
+
+                                            <div class="col-12 border">
+
+                                                <div class="card-title ">
+                                                    <label for="Mensura">Mensura</label>
+                                                <div class="text-primary  col-3" id="Estado"> Estado de la tarea:<%=tareasporcarpeta.Mensura%></div>    
+                                                </div>
+                                                
+                                                <div class="card-text">
+                                                    <div class="input-group">
+
+                                                        <div class="col-2.5 p-1">
+                                                            Sin Presentar<input id="" class="input" type="radio"
+                                                                name="Mensura" value="Sin presentar">
+                                                        </div>
+                                                        <div class="col-2.5 p-1">
+                                                            En Gestión<input id="" class="input" type="radio"
+                                                                name="Mensura" value="EnGestion">
+                                                        </div>
+                                                        <div class="col-2.5 p-1">
+                                                            Presentado<input id="" class="input" type="radio"
+                                                                name="Mensura" value="Presentado">
+                                                        </div>
+                                                        <div class="col-2.5 p-1">
+                                                            Observado<input id="" class="input" type="radio"
+                                                                name="Mensura" value="Observado">
+                                                        </div>
+                                                        <div class="col-2 p-1">
+                                                            Ok<input id="" class="input" type="radio" name="Mensura"
+                                                                value="Ok">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="card-text">
-                                                <div class="input-group ">
-                                                <div class="col-2.5 p-1">
-                                                    Sin Presentar<input id="" class="input" type="radio" name="TituloDePropiedad" value="Sin presentar">
+                                        </div>
+
+                                        <div class="row ">
+                                            <div class="col-12 border">
+                                                <div class="card-title ">
+                                                    <label for="TituloDePropiedad">Titulo de
+                                                        propiedad</label>
+                                                <div class="text-primary  col-3" id="Estado"> Estado de la tarea: <%=tareasporcarpeta.TituloDePropiedad%></div>    
                                                 </div>
-                                                <div class="col-2.5 p-1">
-                                                    En Gestión<input id="" class="input" type="radio" name="TituloDePropiedad" value="EnGestion">
+                                                
+                                                <div class="card-text">
+                                                    <div class="input-group ">
+                                                        <div class="col-2.5 p-1">
+                                                            Sin Presentar<input id="" class="input" type="radio"
+                                                                name="TituloDePropiedad" value="Sin presentar">
+                                                        </div>
+                                                        <div class="col-2.5 p-1">
+                                                            En Gestión<input id="" class="input" type="radio"
+                                                                name="TituloDePropiedad" value="EnGestion">
+                                                        </div>
+                                                        <div class="col-2.5 p-1">
+                                                            Presentado<input id="" class="input" type="radio"
+                                                                name="TituloDePropiedad" value="Presentado">
+                                                        </div>
+                                                        <div class="col-2.5 p-1">
+                                                            Observado<input id="" class="input" type="radio"
+                                                                name="TituloDePropiedad" value="Observado">
+                                                        </div>
+                                                        <div class="col-2 p-1">
+                                                            Ok<input id="" class="input" type="radio"
+                                                                name="TituloDePropiedad" value="Ok">
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="col-2.5 p-1">
-                                                    Presentado<input id="" class="input" type="radio" name="TituloDePropiedad" value="Presentado">
-                                                </div>
-                                                <div class="col-2.5 p-1">
-                                                    Observado<input id="" class="input" type="radio" name="TituloDePropiedad" value="Observado">
-                                                </div>
-                                                <div class="col-2 p-1">
-                                                    Ok<input id="" class="input" type="radio" name="TituloDePropiedad" value="Ok">
-                                                </div>
+
                                             </div>
-                                            </div>
-    
                                         </div>
                                     </div>
+
                                 </div>
-                                
-                                </div>
-                            
+
                             </div>
                             <div class="card p-3 mt-3 border-secondary">
                                 <div class="card-header bg-primary text-white">
                                     <label for="DocumentacionSociedad" class="mx-auto">
                                         Documentación de la Sociedad</label>
-                                         
+                                    
+
                                 </div>
                                 <div class="card-body">
                                     <div class="row ">
                                         <div class="col-12 border">
-                                            <div class="card-title text-primary">
-                                                <label for="ActaConstitutiva">
-                                                    Acta
+                                            <div class="card-title ">
+                                                <label for="ActaConstitutiva">Acta
                                                     constitutiva</label>
+                                            <div class="text-primary  col-3" id="Estado"> Estado de la tarea:<%=tareasporcarpeta.ActaConstitutiva %></div>    
                                             </div>
+                                            
                                             <div class="card-text">
                                                 <div class="input-group ">
                                                     <div class="col-2.5 p-1">
-                                                        Sin Presentar<input id="" class="input" type="radio" name="ActaConstitutiva" value="Sin presentar">
+                                                        Sin Presentar<input id="" class="input" type="radio"
+                                                            name="ActaConstitutiva" value="Sin presentar">
                                                     </div>
                                                     <div class="col-2.5 p-1">
-                                                        En Gestión<input id="" class="input" type="radio" name="ActaConstitutiva" value="EnGestion">
+                                                        En Gestión<input id="" class="input" type="radio"
+                                                            name="ActaConstitutiva" value="EnGestion">
                                                     </div>
-                                                  
+
                                                     <div class="col-2.5 p-1">
-                                                        Observado<input id="" class="input" type="radio" name="ActaConstitutiva" value="Observado">
+                                                        Observado<input id="" class="input" type="radio"
+                                                            name="ActaConstitutiva" value="Observado">
+                                                    </div>
+                                                    <div class="col-2.5 p-1">
+                                                        Ok<input id="" class="input" type="radio"
+                                                            name="ActaConstitutiva" value="ok">
                                                     </div>
                                                     <div class="col-2 p-1">
-                                                        Ok<input id="" class="input" type="radio" name="ActaConstitutiva" value="ok">
-                                                    </div>
-                                                    <div class="col-2 p-1">
-                                                        NC<input id="" class="input" type="radio" name="ActaConstitutiva" value="NC">
+                                                        NC<input id="" class="input" type="radio"
+                                                            name="ActaConstitutiva" value="NC">
                                                     </div>
                                                 </div>
-                                               
+
                                             </div>
                                         </div>
                                         <div class="col-12 border">
-                                            <div class="card-title text-primary">
+                                            <div class="card-title ">
                                                 <label for="ActaCargoVigente">
                                                     Acta en cargo
                                                     vigente</label>
+                                            <div class="text-primary  col-3" id="Estado"> Estado de la tarea:<%=tareasporcarpeta.ActaCargoVigente%></div>    
                                             </div>
+                                            
                                             <div class="card-text">
                                                 <div class="input-group ">
                                                     <div class="col-2.5 p-1">
-                                                        Sin Presentar<input id="" class="input" type="radio" name="ActaCargoVigente" value="Sin presentar">
+                                                        Sin Presentar<input id="" class="input" type="radio"
+                                                            name="ActaCargoVigente" value="Sin presentar">
                                                     </div>
                                                     <div class="col-2.5 p-1">
-                                                        En Gestión<input id="" class="input" type="radio" name="ActaCargoVigente" value="EnGestion">
+                                                        En Gestión<input id="" class="input" type="radio"
+                                                            name="ActaCargoVigente" value="EnGestion">
                                                     </div>
-                                                  
+
                                                     <div class="col-2.5 p-1">
-                                                        Observado<input id="" class="input" type="radio" name="ActaCargoVigente" value="Observado">
+                                                        Observado<input id="" class="input" type="radio"
+                                                            name="ActaCargoVigente" value="Observado">
+                                                    </div>
+                                                    <div class="col-2.5 p-1">
+                                                        Ok<input id="" class="input" type="radio"
+                                                            name="ActaCargoVigente" value="ok">
                                                     </div>
                                                     <div class="col-2 p-1">
-                                                        Ok<input id="" class="input" type="radio" name="ActaCargoVigente" value="ok">
-                                                    </div>
-                                                    <div class="col-2 p-1">
-                                                        NC<input id="" class="input" type="radio" name="ActaCargoVigente" value="NC">
+                                                        NC<input id="" class="input" type="radio"
+                                                            name="ActaCargoVigente" value="NC">
                                                     </div>
                                                 </div>
-                                                
+
                                             </div>
                                         </div>
                                         <div class="col-12 border">
-                                            <div class="card-title text-primary">
+                                            <div class="card-title ">
                                                 <label for="DniComitente">
                                                     DNI del
                                                     Comitente: <%= tareasporcarpeta.DniComitente%></label>
+                                            <div class="text-primary  col-3" id="Estado"> Estado de la tarea:<%=tareasporcarpeta.DniComitente%></div>    
                                             </div>
+                                            
                                             <div class="card-text">
-                                                <input type="textinput" name="DniComitente" id="DniComitente" maxlength="10"
-                                                    placeholder="<%= tareasporcarpeta.DniComitente%>">
+                                                <input type="textinput" name="DniComitente" id="DniComitente"
+                                                    maxlength="10" placeholder="<%= tareasporcarpeta.DniComitente%>">
                                             </div>
                                         </div>
                                     </div>
@@ -177,50 +208,60 @@
                                 </div>
                                 <div class="row ">
                                     <div class="col-12 border">
-                                        <div class="card-title text-primary">
+                                        <div class="card-title ">
                                             <label for="Cotizacion">
                                                 Cotización</label>
+                                        <div class="text-primary  col-3" id="Estado"> Estado de la tarea:<%=tareasporcarpeta.Cotizacion%></div>    
                                         </div>
+                                        
                                         <div class="card-body">
                                             <div class="input-group ">
                                                 <div class="col-2.5 p-1">
-                                                    Sin Presentar<input id="" class="input" type="radio" name="Cotizacion" value="Sin presentar">
+                                                    Sin Presentar<input id="" class="input" type="radio"
+                                                        name="Cotizacion" value="Sin presentar">
                                                 </div>
                                                 <div class="col-2.5 p-1">
-                                                    En Gestión<input id="" class="input" type="radio" name="Cotizacion" value="EnGestion">
+                                                    En Gestión<input id="" class="input" type="radio" name="Cotizacion"
+                                                        value="EnGestion">
                                                 </div>
-                                                                                    
+
                                                 <div class="col-2 p-1">
-                                                    Ok<input id="" class="input" type="radio" name="Cotizacion" value="ok">
+                                                    Ok<input id="" class="input" type="radio" name="Cotizacion"
+                                                        value="ok">
                                                 </div>
-                                                
+
                                             </div>
-                                           
+
                                         </div>
                                     </div>
                                     <div class="col-12 border">
-                                       
-                                        <div class="card-title text-primary">
+
+                                        <div class="card-title ">
                                             <label for="Contrato"> Contrato
-                                                preliminar</label>
+                                                preliminar </label>
+                                        <div class="text-primary  col-3" id="Estado"> Estado de la tarea:<%=tareasporcarpeta.Contrato%></div>    
                                         </div>
+                                        
                                         <div class="card-body">
-                                        <div class="card-text">
-                                            <div class="input-group ">
-                                                <div class="col-2.5 p-1">
-                                                    Sin Presentar<input id="" class="input" type="radio" name="ContratoPreliminar" value="Sin presentar(Preliminar)">
+                                            <div class="card-text">
+                                                <div class="input-group ">
+                                                    <div class="col-2.5 p-1">
+                                                        Sin Presentar<input id="" class="input" type="radio"
+                                                            name="ContratoPreliminar" value="Sin presentar(Preliminar)">
+                                                    </div>
+                                                    <div class="col-2.5 p-1">
+                                                        En Gestión<input id="" class="input" type="radio"
+                                                            name="ContratoPreliminar" value="EnGestion(Preliminar)">
+                                                    </div>
+
+
+                                                    <div class="col-2 p-1">
+                                                        Ok<input id="" class="input" type="radio"
+                                                            name="ContratoPreliminar" value="ok(Preliminar)">
+                                                    </div>
+
                                                 </div>
-                                                <div class="col-2.5 p-1">
-                                                    En Gestión<input id="" class="input" type="radio" name="ContratoPreliminar" value="EnGestion(Preliminar)">
-                                                </div>
-                                              
-                                                
-                                                <div class="col-2 p-1">
-                                                    Ok<input id="" class="input" type="radio" name="ContratoPreliminar" value="ok(Preliminar)">
-                                                </div>
-                                                
                                             </div>
-                                        </div>  
                                         </div>
                                     </div>
                                 </div>
