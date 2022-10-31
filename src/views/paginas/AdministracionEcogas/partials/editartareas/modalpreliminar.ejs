@@ -21,7 +21,7 @@
                     <form action="/actualizarEtapas/<%= user.id%>" id="formPreliminar" method="post">
                         <div class="container">
                             <div class="card p-3 mt-3 border-secondary">
-                                <div class="col-12">
+                                <div class="col-6">
                                     <div class="card-header bg-primary text-white">
                                         <label for="DocumentacionDelTerreno">Documentación
                                             del
@@ -29,9 +29,9 @@
                                         
                                     </div>
                                     <div class="card-body">
+                                      
+
                                         <div class="row ">
-
-
                                             <div class="col-12 border">
 
                                                 <div class="card-title ">
@@ -63,9 +63,11 @@
                                                                 value="Ok">
                                                         </div>
 
+
                                                     </div>
                                                 </div>
                                             </div>
+                                           
                                         </div>
 
                                         <div class="row ">
@@ -106,7 +108,57 @@
                                     </div>
 
                                 </div>
-
+<div class="col-6">
+    <div class="row">
+        <form action="ActualizarTarea/<%=tareasporcarpeta.Mensura%>/<%=user.id%>" method="post">
+            <div class="row ">
+                <div class="col  text-center">
+                    <span>
+                        Responsable de la Tarea:
+                    </span>
+                         
+                        <input class="form-check-input-inline" type="radio" name="ResponsableDeTarea" id="ResponsableDeTarea" required
+                            value="Mauricio">
+                             Mauricio
+                        <input class="form-check-input-inline" type="radio" name="ResponsableDeTarea" id="ResponsableDeTarea"
+                            value="Gustavo">
+                        Gustavo
+                        <input class="form-check-input-inline" type="radio" name="ResponsableDeTarea" id="ResponsableDeTarea"
+                            value="Daiana">
+                        Daiana
+                </div>
+            </div>
+            <div class="row p-1 ">
+                <div class="input-group">
+                    <span class="" id="TareaRealizada">Tarea Realizada:</span>
+                    
+                    <input class="form-control"  type="text" name="TareaRealizada"
+                        id="TareaRealizada" placeholder="Ingrese ultima tarea realizada" aria-describedby="TareaRealizada">
+                </div>
+              
+            </div>
+            <div class="row p-1">
+                <div class="input-group">
+                    <span class="" id="ProximaTarea">Proxima Tarea:</span>
+                    
+                    <input class="form-control"  type="text" name="ProximaTarea"
+                        id="ProximaTarea" placeholder="Ingrese la proxima tarea" aria-describedby="ProximaTarea">
+                </div>
+               
+            </div>
+            <div class="row p-1">
+                <div class="input-group">
+                    <span class="" id="Fecha_limite">Fecha Limite:</span>
+                    
+                    <input class="form-control"  type="date" name="Fecha_limite"
+                        id="Fecha_limite" placeholder="Ingrese ultima tarea realizada" aria-describedby="Fecha_limite">
+                </div>
+               
+            </div>
+    </form>
+        
+    </div>
+</div>
                             </div>
                             <div class="card p-3 mt-3 border-secondary">
                                 <div class="card-header bg-primary text-white">
