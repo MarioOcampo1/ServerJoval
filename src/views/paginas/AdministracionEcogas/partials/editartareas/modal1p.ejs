@@ -22,63 +22,68 @@
                         <div class="container">
                             <div class="col">
                                 <div class="card p-3 border-secondary">
-                                    <div class="card-header">
+                                    <div class="card-header bg-primary text-white">
                                         Documentación
                                         del
                                         terreno</div>
 
                                     <div class="card-body">
                                         <div class="row">
-                                            <div class="col-6">
-                                                <label for="Mensura">Mensura</label>
-                                                <select class="form-control" id="Mensura" name="Mensura"
-                                                    value="<%= tareasporcarpeta.Mensura%>"
-                                                    placeholder="<% tareasporcarpeta.Mensura%>">
-                                                    <option hidden value="<%=tareasporcarpeta.Mensura%>" selected>
-                                                        <%=tareasporcarpeta.Mensura%>
-                                                    </option>
-                                                    <option value="Sin presentar">
-                                                        Sin presentar
-                                                    </option>
-                                                    <option value="EnGestion">En
-                                                        gestión
-                                                    </option>
-                                                    <option value="Presentado">
-                                                        Presentado
-                                                    </option>
-                                                    <option value="Observado">
-                                                        Observado</option>
-                                                    <option value="ok">ok
-                                                    </option>
-                                                </select>
-                                            </div>
-                                            <div class="col-6">
-                                                <label for="TituloDePropiedad">Titulo
-                                                    de
-                                                    propiedad</label>
-                                                <select class="form-control" id="TituloDePropiedad"
-                                                    name="TituloDePropiedad"
-                                                    value="<%= tareasporcarpeta.TituloDePropiedad%>"
-                                                    placeholder="<%= tareasporcarpeta.TituloDePropiedad%>">
-                                                    <option hidden value="<%=tareasporcarpeta.TituloDePropiedad%>"
-                                                        selected>
-                                                        <%=tareasporcarpeta.TituloDePropiedad%>
-                                                    </option>
-                                                    <option value="Sin presentar">
-                                                        Sin presentar
-                                                    </option>
-                                                    <option value="EnGestion">En
-                                                        gestion
-                                                    </option>
-                                                    <option value="Presentado">
-                                                        Presentado
-                                                    </option>
-                                                    <option value="ok">ok
-                                                    </option>
-                                                    <option value="Observado">Observado
-                                                    </option>
+                                            <div class="col-12 border">
+                                                <div class="card-title text-primary">
 
-                                                </select>
+                                                    <label for="Mensura">Mensura</label>
+                                                </div>
+                                                <div class="card-text">
+                                                <div class="input-group ">
+                                                    <div class=" p-1">
+                                                        Sin Presentar<input id="" class="" type="radio" name="Mensura" value="Sin presentar">
+                                                    </div>
+                                                    <div class=" p-1">
+                                                        En Gestión<input id="" class="" type="radio" name="Mensura" value="EnGestion">
+                                                    </div>
+                                                  
+                                                    <div class=" p-1">
+                                                        Observado<input id="" class="" type="radio" name="Mensura" value="Observado">
+                                                    </div>
+                                                    <div class=" p-1">
+                                                        Ok<input id="" class="" type="radio" name="Mensura" value="ok">
+                                                    </div>
+                                                    <div class=" p-1">
+                                                        NC<input id="" class="" type="radio" name="Mensura" value="NC">
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                          </div>
+                                          <div class="row">
+                                            <div class="col-12 border">
+                                                <div class="card-title text-primary">
+                                                    <label for="TituloDePropiedad">Titulo
+                                                        de
+                                                        propiedad</label>
+                                                </div>
+                                               <div class="card-text">
+                                                    <div class="input-group ">
+                                                        <div class=" p-1">
+                                                            Sin Presentar<input id="" class="" type="radio" name="TituloDePropiedad" value="Sin presentar">
+                                                        </div>
+                                                        <div class=" p-1">
+                                                            En Gestión<input id="" class="" type="radio" name="TituloDePropiedad" value="EnGestion">
+                                                        </div>
+                                                      
+                                                        <div class=" p-1">
+                                                            Observado<input id="" class="" type="radio" name="TituloDePropiedad" value="Observado">
+                                                        </div>
+                                                        <div class=" p-1">
+                                                            Ok<input id="" class="" type="radio" name="TituloDePropiedad" value="ok">
+                                                        </div>
+                                                        <div class="p-1">
+                                                            NC<input id="" class="" type="radio" name="TituloDePropiedad" value="NC">
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -86,37 +91,39 @@
                             </div>
                             <br>
                             <div class="card p-3 mb-4 border-secondary">
-                                <div class="card-header">
+                                <div class="card-header bg-primary text-white">
                                     Comercial</div>
                                 <div class="card-body">
 
                                     <div class="row">
 
-                                        <div class="col-2">
-                                            <div class="card-title">Contrato
+                                        <div class="col-12 border">
+                                            <div class="card-title text-primary">Contrato
                                             </div>
-                                            <select class="form-control" id="Contrato" name="Contrato"
-                                                value="<%= tareasporcarpeta.Contrato%>"
-                                                placeholder="<%= tareasporcarpeta.Contrato%>">
-                                                <option hidden value="<%=tareasporcarpeta.Contrato%>" selected>
-                                                    <%=tareasporcarpeta.Contrato%>
-                                                </option>
-                                                <option value="Sin presentar">
-                                                    Hacer
-                                                </option>
-                                                <option value="EnGestion">En
-                                                    gestion
-                                                </option>
-                                                <option value="SinFirmar">
-                                                    Sin firmar</option>
-                                                <option value="Presentado">Presentado
-                                                <option value="Observado">Observado
-                                                <option value="ok">Ok
-                                                </option>
-                                            </select>
-                                        </div>
-                                        <div class="col-2">
-                                            <div class="card-title">Fecha de firma del contrato
+                                            <div class="card-text">
+                                                <div class="input-group ">
+                                                    <div class="col-2.5 p-1">
+                                                        Sin Presentar<input id="" class="" type="radio" name="Contrato" value="Sin presentar">
+                                                    </div>
+                                                    <div class="col-2.5 p-1">
+                                                        En Gestión<input id="" class="" type="radio" name="Contrato" value="EnGestion">
+                                                    </div>
+                                                  
+                                                    <div class="col-2.5 p-1">
+                                                        Observado<input id="" class="" type="radio" name="Contrato" value="Observado">
+                                                    </div>
+                                                    <div class="col-2.5 p-1">
+                                                        Ok<input id="" class="" type="radio" name="Contrato" value="ok">
+                                                    </div>
+                                                    <div class="col-2 p-1">
+                                                        NC<input id="" class="" type="radio" name="Contrato" value="NC">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                           </div>
+                                           <div class="row">
+                                        <div class="col-12 border">
+                                            <div class="card-title text-primary">Fecha de firma del contrato
                                             </div>
                                             <div class="card-text">
                                                 <%if(tareasporcarpeta.Fechafirmacontrato){%>
@@ -136,165 +143,158 @@
 
                                             </div>
                                         </div>
-                                        <div class="col-2">
-                                            <div class="card-title">
+                                    </div>
+<div class="row">
+                                        <div class="col-12 border">
+                                            <div class="card-title text-primary">
                                                 Presupuesto detallado</div>
                                             <div class="card-text">
-                                                <select class="form-control" id="Presupuesto" name="Presupuesto"
-                                                    value="<%= tareasporcarpeta.Presupuesto%>"
-                                                    placeholder="<%= tareasporcarpeta.Presupuesto%>">
-                                                    <option hidden value="<%=tareasporcarpeta.Presupuesto%>" selected>
-                                                        <%=tareasporcarpeta.Presupuesto%>
-                                                    </option>
-                                                    <option value="Sin presentar">
-                                                        Hacer</option>
-                                                    <option value="EnGestion">En
-                                                        gestion
-                                                    </option>
-                                                    <option value="Presentado">
-                                                        Presentado
-                                                    </option>
-                                                    <option value="Observado">
-                                                        Observado</option>
-                                                    <option value="ok">Ok
-                                                    </option>
-                                                </select>
+                                                <div class="input-group ">
+                                                    <div class="col-2.5 p-1">
+                                                        Sin Presentar<input id="" class="" type="radio" name="Presupuesto" value="Sin presentar">
+                                                    </div>
+                                                    <div class="col-2.5 p-1">
+                                                        En Gestión<input id="" class="" type="radio" name="Presupuesto" value="EnGestion">
+                                                    </div>
+                                                  
+                                                    <div class="col-2.5 p-1">
+                                                        Observado<input id="" class="" type="radio" name="Presupuesto" value="Observado">
+                                                    </div>
+                                                    <div class="col-2.5 p-1">
+                                                        Ok<input id="" class="" type="radio" name="Presupuesto" value="ok">
+                                                    </div>
+                                                    <div class="col-2 p-1">
+                                                        NC<input id="" class="" type="radio" name="Presupuesto" value="NC">
+                                                    </div>
+                                                </div>
+                                                
                                             </div>
                                         </div>
-                                        <div class="col-2">
-                                            <div class="card-title">Sucedáneo
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 border">
+                                            <div class="card-title text-primary">Sucedáneo
                                             </div>
                                             <div class="card-text">
-                                                <select class="form-control" id="Sucedaneo" name="Sucedaneo"
-                                                    value="<%= tareasporcarpeta.Sucedaneo%>"
-                                                    placeholder="<%= tareasporcarpeta.Sucedaneo%>">
-                                                    <option hidden value="<%=tareasporcarpeta.Sucedaneo%>" selected>
-                                                        <%=tareasporcarpeta.Sucedaneo%>
-                                                    </option>
-                                                    <option value="EnGestion">En
-                                                        gestion
-                                                    </option>
-                                                    <option value="Firmado">
-                                                        Firmado</option>
-                                                    <option value="Presentado">
-                                                        Presentado
-                                                    </option>
-                                                    <option value="Observado">
-                                                        Observado</option>
-                                                    <option value="ok">Ok
-                                                    </option>
-                                                </select>
+                                                <div class="input-group ">
+                                                    <div class="col-2.5 p-1">
+                                                        Sin Presentar<input id="" class="" type="radio" name="Sucedaneo" value="Sin presentar">
+                                                    </div>
+                                                    <div class="col-2.5 p-1">
+                                                        En Gestión<input id="" class="" type="radio" name="Sucedaneo" value="EnGestion">
+                                                    </div>
+                                                  
+                                                    <div class="col-2.5 p-1">
+                                                        Observado<input id="" class="" type="radio" name="Sucedaneo" value="Observado">
+                                                    </div>
+                                                    <div class="col-2.5 p-1">
+                                                        Ok<input id="" class="" type="radio" name="Sucedaneo" value="ok">
+                                                    </div>
+                                                    <div class="col-2 p-1">
+                                                        NC<input id="" class="" type="radio" name="Sucedaneo" value="NC">
+                                                    </div>
+                                                </div>
+                                                
                                             </div>
                                         </div>
-                                        <div class="col-2">
-                                            <div class="card-title">Nota De
+                                    </div>
+                                        <div class="col-12 border border">
+                                            <div class="card-title text-primary">Nota De
                                                 Excepción</div>
                                             <div class="card-text">
-                                                <select class="form-control" id="NotaDeExcepcion" name="NotaDeExcepcion"
-                                                    value="<%= tareasporcarpeta.NotaDeExcepcion%>"
-                                                    placeholder="<%= tareasporcarpeta.NotaDeExcepcion%>">
-                                                    <option hidden value="<%=tareasporcarpeta.NotaDeExcepcion%>"
-                                                        selected>
-                                                        <%=tareasporcarpeta.NotaDeExcepcion%>
-                                                    </option>
-                                                    <option value="EnGestion">En
-                                                        gestion
-                                                    </option>
-                                                    <option value="Presentado">
-                                                        Presentado
-                                                    </option>
-                                                    <option value="Observado">
-                                                        Observado</option>
-                                                    <option value="ok">Ok
-                                                    </option>
-                                                    <option value="NC">No
-                                                        corresponde</option>
-
-                                                </select>
+                                                <div class="input-group ">
+                                                    <div class="col-2.5 p-1">
+                                                        Sin Presentar<input id="" class="" type="radio" name="NotaDeExcepcion" value="Sin presentar">
+                                                    </div>
+                                                    <div class="col-2.5 p-1">
+                                                        En Gestión<input id="" class="" type="radio" name="NotaDeExcepcion" value="EnGestion">
+                                                    </div>
+                                                  
+                                                    <div class="col-2.5 p-1">
+                                                        Observado<input id="" class="" type="radio" name="NotaDeExcepcion" value="Observado">
+                                                    </div>
+                                                    <div class="col-2.5 p-1">
+                                                        Ok<input id="" class="" type="radio" name="NotaDeExcepcion" value="ok">
+                                                    </div>
+                                                    <div class="col-2 p-1">
+                                                        NC<input id="" class="" type="radio" name="NotaDeExcepcion" value="NC">
+                                                    </div>
+                                                </div>
+                                               
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="card p-3 mb-4 border-secondary">
-                                <div class="card-header">Tecnica
+                                <div class="card-header bg-primary text-white">Tecnica
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-6">
-                                            <div class="card-title">PC
+                                        <div class="col-12 border">
+                                            <div class="card-title text-primary">PC
                                             </div>
                                             <div class="card-text">
-                                                <select class="form-control" id="PCaprobado" name="PCaprobado"
-                                                    value="<%= tareasporcarpeta.PCaprobado%>"
-                                                    placeholder="<%= tareasporcarpeta.PCaprobado%>">
-                                                    <option hidden value="<%=tareasporcarpeta.PCaprobado%>" selected>
-                                                        <%=tareasporcarpeta.PCaprobado%>
-                                                    </option>
-                                                    <option value="Sin presentar">
-                                                        Sin presentar
-                                                    </option>
-                                                    <option value="EnGestion">En
-                                                        gestion
-                                                    </option>
-                                                    <option value="Presentado">
-                                                        Presentado
-                                                    <option value="Observado">
-                                                        Observado</option>
-                                                    <option value="ok">
-                                                        Ok
-                                                    </option>
-                                                    <option value="NC">
-                                                        No corresponde
-                                                    </option>
-
-                                                </select>
+                                                <div class="input-group ">
+                                                    <div class="col-2.5 p-1">
+                                                        Sin Presentar<input id="" class="" type="radio" name="PCaprobado" value="Sin presentar">
+                                                    </div>
+                                                    <div class="col-2.5 p-1">
+                                                        En Gestión<input id="" class="" type="radio" name="PCaprobado" value="EnGestion">
+                                                    </div>
+                                                  
+                                                    <div class="col-2.5 p-1">
+                                                        Observado<input id="" class="" type="radio" name="PCaprobado" value="Observado">
+                                                    </div>
+                                                    <div class="col-2.5 p-1">
+                                                        Ok<input id="" class="" type="radio" name="PCaprobado" value="ok">
+                                                    </div>
+                                                    <div class="col-2 p-1">
+                                                        NC<input id="" class="" type="radio" name="PCaprobado" value="NC">
+                                                    </div>
+                                                </div>
+                                              
                                             </div>
                                         </div>
-                                        <div class="col-6">
-                                            <div class="card-title">
+                                        <div class="col-12 border">
+                                            <div class="card-title text-primary">
 
                                                 <label for="PlanoTipo">Plano
                                                     tipo</label>
                                             </div>
                                             <div class="card-text">
-
-                                                <select class="form-control" id="PlanoTipo" name="PlanoTipo"
-                                                    value="<%= tareasporcarpeta.PlanoTipo%>"
-                                                    placeholder="<%= tareasporcarpeta.PlanoTipo%>">
-                                                    <option hidden value="<%=tareasporcarpeta.PlanoTipo%>" selected>
-                                                        <%=tareasporcarpeta.PlanoTipo%>
-                                                    </option>
-                                                    <option value="Sin presentar">
-                                                        Sin presentar
-                                                    </option>
-                                                    <option value="EnGestion">En
-                                                        gestion
-                                                    </option>
-                                                    <option value="Presentado">
-                                                        Presentado
-                                                    </option>
-                                                    <option value="Observado">
-                                                        Observado</option>
-                                                    <option value="ok">
-                                                        Ok
-                                                    </option>
-                                                    <option value="NC">
-                                                        No corresponde
-                                                    </option>
-                                                </select>
+                                                <div class="input-group ">
+                                                    <div class="col-2.5 p-1">
+                                                        Sin Presentar<input id="" class="" type="radio" name="PlanoTipo" value="Sin presentar">
+                                                    </div>
+                                                    <div class="col-2.5 p-1">
+                                                        En Gestión<input id="" class="" type="radio" name="PlanoTipo" value="EnGestion">
+                                                    </div>
+                                                  
+                                                    <div class="col-2.5 p-1">
+                                                        Observado<input id="" class="" type="radio" name="PlanoTipo" value="Observado">
+                                                    </div>
+                                                    <div class="col-2.5 p-1">
+                                                        Ok<input id="" class="" type="radio" name="PlanoTipo" value="ok">
+                                                    </div>
+                                                    <div class="col-2 p-1">
+                                                        NC<input id="" class="" type="radio" name="PlanoTipo" value="NC">
+                                                    </div>
+                                                </div>
+                                                
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-
                             <div class="card p-3 mb-4 border-secondary">
-                                <div class="row">
-                                    <div class="card-header">
-                                        Permisos especiales</div>
-                                    <div class="col-2">
+                                <div class="card-header bg-primary text-white">
+                                    Permisos especiales</div>
+                                <div class="card-body">
+                                    
+                                        <div class="row">      
+                                    <div class="col-12 border">
+                                        
                                         <%if (interferenciasypermisos.Privado=="NC" ){%>
 
                                             <form-check>
@@ -303,37 +303,34 @@
 
                                             </form-check>
                                             <% }else{%>
-                                                <div class="card-title">Carta
+                                                <div class="card-title text-primary">Carta
                                                     oferta</div>
                                                 <div class="card-text">
-                                                    <select class="form-control" id="CartaOferta" name="CartaOferta"
-                                                        value="<%= tareasporcarpeta.CartaOferta%>"
-                                                        placeholder="<%= tareasporcarpeta.CartaOferta%>">
-                                                        <option hidden value="<%=tareasporcarpeta.CartaOferta%>"
-                                                            selected>
-                                                            <%=tareasporcarpeta.CartaOferta%>
-                                                        </option>
-                                                        <option value="Sin presentar">
-                                                            Sin presentar
-                                                        </option>
-                                                        <option value="EnGestion">En
-                                                            gestion
-                                                        </option>
-                                                        <option value="Presentado">
-                                                            Presentado
-                                                        </option>
-                                                        <option value="Observado">
-                                                            Observado</option>
-                                                        <option value="ok">ok
-                                                        </option>
-
-
-                                                    </select>
+                                                    <div class="input-group ">
+                                                        <div class="col-2.5 p-1">
+                                                            Sin Presentar<input id="" class="" type="radio" name="CartaOferta" value="Sin presentar">
+                                                        </div>
+                                                        <div class="col-2.5 p-1">
+                                                            En Gestión<input id="" class="" type="radio" name="CartaOferta" value="EnGestion">
+                                                        </div>
+                                                      
+                                                        <div class="col-2.5 p-1">
+                                                            Observado<input id="" class="" type="radio" name="CartaOferta" value="Observado">
+                                                        </div>
+                                                        <div class="col-2.5 p-1">
+                                                            Ok<input id="" class="" type="radio" name="CartaOferta" value="ok">
+                                                        </div>
+                                                        <div class="col-2 p-1">
+                                                            NC<input id="" class="" type="radio" name="CartaOferta" value="NC">
+                                                        </div>
+                                                    </div>
+                                                  
 
                                                 </div>
                                                 <%}%>
+                                                
                                     </div>
-                                    <div class="col-2">
+                                    <div class="col-12 border">
                                         <%if (interferenciasypermisos.Privado=="NC" ){%>
                                             <form-check>
                                                 <input hidden checked type="radio" name="PlanoAnexo" id="PlanoAnexo"
@@ -341,34 +338,33 @@
                                             </form-check>
                                             <% }else{%>
 
-                                                <div class="card-title">Plano
+                                                <div class="card-title text-primary">Plano
                                                     anexo</div>
                                                 <div class="card-text">
-                                                    <select class="form-control" id="PlanoAnexo" name="PlanoAnexo"
-                                                        value="<%= tareasporcarpeta.PlanoAnexo%>"
-                                                        placeholder="<%= tareasporcarpeta.PlanoAnexo%>">
-                                                        <option value="<%=tareasporcarpeta.PlanoAnexo%>" selected>
-                                                            <%=tareasporcarpeta.PlanoAnexo%>
-                                                        </option>
-                                                        <option value="Sin presentar">
-                                                            Sin presentar
-                                                        </option>
-                                                        <option value="EnGestion">En
-                                                            gestion
-                                                        </option>
-                                                        <option value="Presentado">
-                                                            Presentado
-                                                        </option>
-                                                        <option value="Observado">
-                                                            Observado</option>
-                                                        <option value="ok">ok
-                                                        </option>
-                                                    </select>
+                                                    <div class="input-group ">
+                                                        <div class="col-2.5 p-1">
+                                                            Sin Presentar<input id="" class="" type="radio" name="PlanoAnexo" value="Sin presentar">
+                                                        </div>
+                                                        <div class="col-2.5 p-1">
+                                                            En Gestión<input id="" class="" type="radio" name="PlanoAnexo" value="EnGestion">
+                                                        </div>
+                                                      
+                                                        <div class="col-2.5 p-1">
+                                                            Presentado<input id="" class="" type="radio" name="PlanoAnexo" value="Presentado">
+                                                        </div>
+                                                        <div class="col-2.5 p-1">
+                                                            Visado<input id="" class="" type="radio" name="PlanoAnexo" value="Visado">
+                                                        </div>
+                                                        <div class="col-2 p-1">
+                                                            NC<input id="" class="" type="radio" name="PlanoAnexo" value="NC">
+                                                        </div>
+                                                    </div>
+                                                    
 
                                                 </div>
                                                 <%}%>
                                     </div>
-                                    <div class="col-2">
+                                    <div class="col-12 border">
                                         <%if (interferenciasypermisos.Hidraulica=="NC" ){%>
                                             <form-check>
                                                 <input hidden checked type="radio" name="HIDRAULICA1" id="HIDRAULICA1"
@@ -376,99 +372,89 @@
                                             </form-check>
                                             <%}else{%>
 
-                                                <div class="card-title">
+                                                <div class="card-title text-primary">
                                                     Hidraúlica </div>
                                                 <div class="card-text">
-                                                    <select class="form-control" id="HIDRAULICA1" name="HIDRAULICA1"
-                                                        placeholder="<%=interferenciasypermisos.HidraulicaVisacion%>">
-                                                        <option id="HIDRAULICA1" name="HIDRAULICA1"
-                                                            value="<%=interferenciasypermisos.HidraulicaVisacion%>"
-                                                            selected hidden>
-                                                            <%=interferenciasypermisos.HidraulicaVisacion%>
-                                                        </option>
-                                                        <option id="HIDRAULICA1" name="HIDRAULICA1"
-                                                            value="Sin presentar">
-                                                            Sin presentar
-                                                        </option>
-                                                        <option id="HIDRAULICA1" name="HIDRAULICA1" value="Presentado">
-                                                            Presentado
-                                                        </option>
-                                                        <option id="HIDRAULICA1" name="HIDRAULICA1" value="EnGestion">En
-                                                            gestion
-                                                        </option>
-                                                        <option id="HIDRAULICA1" name="HIDRAULICA1" value="Visado">
-                                                            Visado
-                                                        </option>
-
-
-                                                    </select>
+                                                    <div class="input-group ">
+                                                        <div class="col-2.5 p-1">
+                                                            Sin Presentar<input id="" class="" type="radio" name="HIDRAULICA1" value="Sin presentar">
+                                                        </div>
+                                                        <div class="col-2.5 p-1">
+                                                            En Gestión<input id="" class="" type="radio" name="HIDRAULICA1" value="EnGestion">
+                                                        </div>
+                                                      
+                                                        <div class="col-2.5 p-1">
+                                                            Presentado<input id="" class="" type="radio" name="HIDRAULICA1" value="Presentado">
+                                                        </div>
+                                                        <div class="col-2.5 p-1">
+                                                            Visado<input id="" class="" type="radio" name="HIDRAULICA1" value="Visado">
+                                                        </div>
+                                                        <div class="col-2 p-1">
+                                                            NC<input id="" class="" type="radio" name="HIDRAULICA1" value="NC">
+                                                        </div>
+                                                    </div>
+                                                    
                                                 </div>
                                                 <%}%>
                                     </div>
-                                    <div class="col-2">
+                                    <div class="col-12 border">
                                         <%if (interferenciasypermisos.Ferrocarriles=="NC" ){%>
                                             <input hidden checked type="radio" name="FERROCARRIL1" id="FERROCARRIL1"
                                                 value="NC">
                                             <%}else{%>
 
-                                                <div class="card-title">
+                                                <div class="card-title text-primary">
                                                     Ferrocarriles</div>
                                                 <div class="card-text">
-                                                    <select class="form-control" id="FERROCARRIL1" name="FERROCARRIL1"
-                                                        value="<%=interferenciasypermisos.FerrocarrilesVisacion%>"
-                                                        placeholder="<%=interferenciasypermisos.FerrocarrilesVisacion%>">
-                                                        <option hidden
-                                                            value="<%=interferenciasypermisos.FerrocarrilesVisacion%>"
-                                                            selected>
-                                                            <%=interferenciasypermisos.FerrocarrilesVisacion%>
-                                                        </option>
-                                                        <option value="Sin presentar">
-                                                            Sin presentar
-                                                        </option>
-                                                        <option value="EnGestion">En
-                                                            gestion
-                                                        </option>
-                                                        <option value="Presentado">
-                                                            Presentado
-                                                        </option>
-                                                        <option value="Visado">Visado
-                                                        </option>
-
-                                                    </select>
+                                                    <div class="input-group ">
+                                                        <div class="col-2.5 p-1">
+                                                            Sin Presentar<input id="" class="" type="radio" name="FERROCARRIL1" value="Sin presentar">
+                                                        </div>
+                                                        <div class="col-2.5 p-1">
+                                                            En Gestión<input id="" class="" type="radio" name="FERROCARRIL1" value="EnGestion">
+                                                        </div>
+                                                      
+                                                        <div class="col-2.5 p-1">
+                                                            Presentado<input id="" class="" type="radio" name="FERROCARRIL1" value="Presentado">
+                                                        </div>
+                                                        <div class="col-2.5 p-1">
+                                                            Visado<input id="" class="" type="radio" name="FERROCARRIL1" value="Visado">
+                                                        </div>
+                                                        <div class="col-2 p-1">
+                                                            NC<input id="" class="" type="radio" name="FERROCARRIL1" value="NC">
+                                                        </div>
+                                                    </div>
+                                                    
                                                 </div>
                                                 <%}%>
                                     </div>
-                                    <div class="col">
+                                    <div class="col-12 border">
                                         <%if (interferenciasypermisos.DNV=="NC" ){%>
                                             <input hidden checked type="radio" name="DNV1" id="DNV1" value="NC">
                                             <%}else{%>
 
-                                                <div class="card-title">DNV
+                                                <div class="card-title text-primary">DNV
                                                 </div>
                                                 <div class="card-text">
-                                                    <select class="form-control" id="DNV1" name="DNV1"
-                                                        value="<%=interferenciasypermisos.DNVVisacion%>"
-                                                        placeholder="<%=interferenciasypermisos.DNVVisacion%>">
-                                                        <option hidden value="<%=interferenciasypermisos.DNVVisacion%>"
-                                                            selected>
-                                                            <%=interferenciasypermisos.DNVVisacion%>
-                                                        </option>
-                                                        <option value="Sin presentar">
-                                                            Sin presentar
-                                                        </option>
-                                                        <option value="EnGestion">
-                                                            En
-                                                            gestion
-                                                        </option>
-                                                        <option value="Presentado">
-                                                            Presentado
-                                                        </option>
-
-                                                        <option value="Visado">
-                                                            Visado
-                                                        </option>
-
-                                                    </select>
+                                                    <div class="input-group ">
+                                                        <div class="col-2.5 p-1">
+                                                            Sin Presentar<input id="" class="" type="radio" name="DNV1" value="Sin presentar">
+                                                        </div>
+                                                        <div class="col-2.5 p-1">
+                                                            En Gestión<input id="" class="" type="radio" name="DNV1" value="EnGestion">
+                                                        </div>
+                                                      
+                                                        <div class="col-2.5 p-1">
+                                                            Presentado<input id="" class="" type="radio" name="DNV1" value="Presentado">
+                                                        </div>
+                                                        <div class="col-2.5 p-1">
+                                                            Visado<input id="" class="" type="radio" name="DNV1" value="Visado">
+                                                        </div>
+                                                        <div class="col-2 p-1">
+                                                            NC<input id="" class="" type="radio" name="DNV1" value="NC">
+                                                        </div>
+                                                    </div>
+                                                   
                                                 </div>
                                                 <%}%>
                                     </div>
@@ -476,101 +462,86 @@
                                 </div>
 
 
-
+                            </div>
 
                             </div>
 
                             <div class="card p-3 mb-4 border-secondary">
-                                <div class="card-header">
+                                <div class="card-header bg-primary text-white">
                                     Documentacion Ambiente
                                 </div>
                                 <div class="card-body">
                                 <div class="row">
-                                    <div class="col-4">
-                                        <div class="card-title">Cuestionario de relevamiento ambiental</div>
+                                    <div class="col-12 border">
+                                        <div class="card-title text-primary">Cuestionario de relevamiento ambiental</div>
                                     <div class="card-text">
-                                        <select class="form-control" id="CuestionarioRelevamientoAmbiental"
-                                            name="CuestionarioRelevamientoAmbiental"
-                                            value="<%=tareasporcarpeta.CuestionarioRelevamientoAmbiental%>"
-                                            placeholder="<%=tareasporcarpeta.CuestionarioRelevamientoAmbiental%>">
-                                            <option hidden
-                                                value="<%=tareasporcarpeta.CuestionarioRelevamientoAmbiental%>"
-                                                selected>
-                                                <%=tareasporcarpeta.CuestionarioRelevamientoAmbiental%>
-                                            </option>
-                                            <option value="Sin presentar">
-                                                Sin presentar
-                                            </option>
-                                            <option value="EnGestion">En
-                                                gestion
-                                            </option>
-                                            <option value="Presentado">Presentado
-                                            </option>
-
-                                            <option value="Observado">Observado
-                                            </option>
-                                            <option value="ok">Ok
-                                            </option>
-                                        </select>
+                                        <div class="input-group ">
+                                            <div class="col-2.5 p-1">
+                                                Sin Presentar<input id="" class="" type="radio" name="CuestionarioRelevamientoAmbiental" value="Sin presentar">
+                                            </div>
+                                            <div class="col-2.5 p-1">
+                                                En Gestión<input id="" class="" type="radio" name="CuestionarioRelevamientoAmbiental" value="EnGestion">
+                                            </div>
+                                          
+                                            <div class="col-2.5 p-1">
+                                                Observado<input id="" class="" type="radio" name="CuestionarioRelevamientoAmbiental" value="Observado">
+                                            </div>
+                                            <div class="col-2.5 p-1">
+                                                Ok<input id="" class="" type="radio" name="CuestionarioRelevamientoAmbiental" value="ok">
+                                            </div>
+                                            
+                                        </div>
+                                        
                                     </div> 
                                     </div>
-                                    <div class="col-4">
-                                        <div class="card-title">
+                                    <div class="col-12 border">
+                                        <div class="card-title text-primary">
                                             DDJJ inicial ambiental
                                         </div>
                                         <div class="card-text">
-                                            <select class="form-control" id="DDJJInicialAmbiental"
-                                                name="DDJJInicialAmbiental"
-                                                value="<%=tareasporcarpeta.DDJJInicialAmbiental%>"
-                                                placeholder="<%=tareasporcarpeta.DDJJInicialAmbiental%>">
-                                                <option hidden value="<%=tareasporcarpeta.DDJJInicialAmbiental%>" selected>
-                                                    <%=tareasporcarpeta.DDJJInicialAmbiental%>
-                                                </option>
-                                                <option value="Sin presentar">
-                                                    Sin presentar
-                                                </option>
-                                                <option value="EnGestion">En
-                                                    gestion
-                                                </option>
-                                                <option value="Presentado">Presentado
-                                                </option>
-    
-                                                <option value="Observado">Observado
-                                                </option>
-                                                <option value="ok">Ok
-                                                </option>
-                                            </select>
+                                            <div class="input-group ">
+                                                <div class="col-2.5 p-1">
+                                                    Sin Presentar<input id="" class="" type="radio" name="DDJJInicialAmbiental" value="Sin presentar">
+                                                </div>
+                                                <div class="col-2.5 p-1">
+                                                    En Gestión<input id="" class="" type="radio" name="DDJJInicialAmbiental" value="EnGestion">
+                                                </div>
+                                              
+                                                <div class="col-2.5 p-1">
+                                                    Observado<input id="" class="" type="radio" name="DDJJInicialAmbiental" value="Observado">
+                                                </div>
+                                                <div class="col-2.5 p-1">
+                                                    Ok<input id="" class="" type="radio" name="DDJJInicialAmbiental" value="ok">
+                                                </div>
+                                                
+                                            </div>
+                                            
                                         </div>  
                                     </div>
-                                    <div class="col-4">
-                                        <div class="card-title">
+                                    <div class="col-12 border">
+                                        <div class="card-title text-primary">
                                             Lista de verificacion ambiental
                                         </div>
                                         <div class="card-text">
-                                            <select class="form-control" id="ListaVerificacionAmbiental"
-                                                name="ListaVerificacionAmbiental"
-                                                value="<%=tareasporcarpeta.ListaVerificacionAmbiental%>"
-                                                placeholder="<%=tareasporcarpeta.ListaVerificacionAmbiental%>">
-                                                <option hidden value="<%=tareasporcarpeta.ListaVerificacionAmbiental%>"
-                                                    selected>
-                                                    <%=tareasporcarpeta.ListaVerificacionAmbiental%>
-                                                </option>
-                                                <option value="Sin presentar">
-                                                    Sin presentar
-                                                </option>
-                                                <option value="EnGestion">En
-                                                    gestion
-                                                </option>
-                                                <option value="Presentado">Presentado
-                                                </option>
-    
-                                                <option value="Observado">Observado
-                                                </option>
-                                                <option value="ok">Ok
-                                                </option>
-                                                <option value="NC">No corresponde
-                                                </option>
-                                            </select>
+                                            <div class="input-group ">
+                                                <div class="col-2.5 p-1">
+                                                    Sin Presentar<input id="" class="" type="radio" name="ListaVerificacionAmbiental" value="Sin presentar">
+                                                </div>
+                                                <div class="col-2.5 p-1">
+                                                    En Gestión<input id="" class="" type="radio" name="ListaVerificacionAmbiental" value="EnGestion">
+                                                </div>
+                                              
+                                                <div class="col-2.5 p-1">
+                                                    Observado<input id="" class="" type="radio" name="ListaVerificacionAmbiental" value="Observado">
+                                                </div>
+                                                <div class="col-2.5 p-1">
+                                                    Ok<input id="" class="" type="radio" name="ListaVerificacionAmbiental" value="ok">
+                                                </div>
+                                                <div class="col-2 p-1">
+                                                    NC<input id="" class="" type="radio" name="ListaVerificacionAmbiental" value="NC">
+                                                </div>
+                                            </div>
+                                            
                                         </div>
                                     </div>
                                     

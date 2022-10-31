@@ -567,6 +567,7 @@ router.get('/GuiaParaElNuevo', (req, res) => {
 
     } else { res.redirect('/'); }
 })
+
 //Rutas Post
 router.post('/actualizarcontacto/:id', (req, res) => {
     const id = req.body.id;
@@ -1024,7 +1025,10 @@ router.post('/actPrelCarpEcogas/:id', (req, res) => {
                 console.log(error);
             }
             else {
-                             
+                var user = {id:id, Nombre:Nombre, etapa:"Preliminar",
+                }
+                res.render('./paginas/AdministracionEcogas/actualizarProximasTareas.ejs', {user:user})
+                
             }
 
         })
