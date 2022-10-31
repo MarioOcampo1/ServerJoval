@@ -1002,7 +1002,6 @@ router.post('/actPrelCarpEcogas/:id', (req, res) => {
     if (Cotizacion == "Sin presentar" || (Contrato == "Sin presentar" || Contrato == "Sin presentar(Preliminar)")) {
         DocumentacionContractual = "Sin presentar";
     }
-    console.log("documentacion terreno:" + DocumentacionTerreno);
     sql = 'Update obras_tareasgenerales Set ? where Nombre=?';
     connection.query(sql, [{
         DocumentacionTerreno: DocumentacionTerreno, DocumentacionSociedad: DocumentacionSociedad,
@@ -1059,6 +1058,7 @@ router.post('/act1pCarpEcogas/:id', (req, res) => {
     // Variables Generales
     var Comercial;
     var Tecnica, PermisosEspeciales;
+      var DocumentacionTerreno;
     //Documentacion del terreno
     if ((Mensura == "ok" || Mensura == "NC") && (TituloDePropiedad == "ok" || TituloDePropiedad == "NC")) {
         DocumentacionTerreno = "ok";
