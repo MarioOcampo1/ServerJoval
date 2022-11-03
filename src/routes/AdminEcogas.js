@@ -869,13 +869,6 @@ router.post('/guardarNuevoCliente', (req, res) => {
         if (error) console.log(error);
 
     })
-
-    var sql = 'Insert into finanzas_pago_de_obras set ?';
-    connection.query(sql, {
-        Nombre: Nombre, NCarpeta: NCarpeta
-    }, (error, results) => {
-        if (error) console.log(error);
-    })
     var sql = 'Insert into adgastareas set ?';
     connection.query(sql, {
         Nombre: Nombre
