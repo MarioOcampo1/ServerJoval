@@ -18,159 +18,892 @@
                     </button>
                 </div>
                 <div class="modal-body">
+                    <div class="form-group">
+                        <div class="container">
 
-                    <div class="row p-2 mb-2 mt-2">
-                        <div class="col-4 border border-secondary text-center"><label for="MailAutorizacion">Mail de
-                                autorización</label>
-                            <select class="form-control" id="MailAutorizacion" name="MailAutorizacion"
-                                value="<%= tareasporcarpeta.MailAutorizacion%>"
-                                placeholder="<%= tareasporcarpeta.MailAutorizacion%>">
-                                <option hidden value="<%=tareasporcarpeta.MailAutorizacion%>" selected>
-                                    <%=tareasporcarpeta.MailAutorizacion%>
-                                </option>
-                                <option value="No Recibido">
-                                    No Recibido</option>
-                                <option value="Recibido">Recibido</option>
+                            <div class="card mb-3 p-3 border-secondary">
+                                <div class="card-header bg-primary text-white">
+                                    Comienzo gestión 2da Parte</div>
 
-                            </select>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-6 border">
+                                            <div class="card-title text-primary" onclick="document.getElementById('Mailautorizacionbody').style.display= 'block'">
 
-                            <label for="PlanDeTrabajo">Plan de trabajo</label>
-                            <select class="form-control" id="PlanDeTrabajo" name="PlanDeTrabajo"
-                                value="<%= tareasporcarpeta.PlanDeTrabajo%>"
-                                placeholder="<%= tareasporcarpeta.PlanDeTrabajo%>">
-                                <option hidden value="<%=tareasporcarpeta.PlanDeTrabajo%>" selected>
-                                    <%=tareasporcarpeta.PlanDeTrabajo%>
-                                </option>
-                                <option value="Sin presentar">Sin presentar
+                                                <label for="MailAutorizacion">Mail de
+                                                    autorización</label>
 
-                                <option value="EnGestion">En
-                                    gestion</option>
-                                <option value="ok">ok
-                                </option>
-
-                            </select>
-
-                        </div>
-                        <div class="col-4 border border-secondary  text-center">
-                            <h5 class="fw-bolder">Documentación de obras</h5>
-                            <label class="text-center" for="SolicitudInicioObras">Solicitud Inicio de obras</label>
-                            <select class="form-control" id="SolicitudInicioObras" name="SolicitudInicioObras"
-                                value="<%= tareasporcarpeta.SolicitudInicioObras%>"
-                                placeholder="<%= tareasporcarpeta.SolicitudInicioObras%>">
-                                <option hidden value="<%=tareasporcarpeta.SolicitudInicioObras%>" selected>
-                                    <%=tareasporcarpeta.SolicitudInicioObras%>
-                                </option>
-                                <option value="Sin presentar">Sin presentar
-
-                                <option value="EnGestion">En
-                                    gestion</option>
-                                <option value="ok">ok
-                                </option>
-
-                            </select>
-                            <label class="text-center" for="CertificadoRT">Certificado del RT</label>
-                            <select class="form-control" id="CertificadoRT" name="CertificadoRT"
-                                value="<%= tareasporcarpeta.CertificadoRT%>"
-                                placeholder="<%= tareasporcarpeta.CertificadoRT%>">
-                                <option hidden value="<%=tareasporcarpeta.CertificadoRT%>" selected>
-                                    <%=tareasporcarpeta.CertificadoRT%>
-                                </option>
-                                <option value="Sin presentar">
-                                    Sin presentar
-                                </option>
-                                <option value="EnGestion">En
-                                    gestion</option>
-                                <option value="ok">ok
-                                </option>
-
-                            </select>
-                        </div>
+                                            </div>
+                                            <div class="text-success" id="EstadoTarea">
+                                                Estado de la tarea: <%=tareasporcarpeta.MailAutorizacion%>
+                                            </div>
+                                            <div class="card-text" id="Mailautorizacionbody" style="display: none;">
+                                                <div class="input-group ">
+                                                    <div class=" p-1">
+                                                        <input hidden id="" class="" type="radio"
+                                                            name="MailAutorizacion"
+                                                            value="<%= tareasporcarpeta.MailAutorizacion%>" checked>
+                                                    </div>
+                                                    <div class=" p-1">
+                                                        No Recibido<input id="" class="" type="radio"
+                                                            name="MailAutorizacion" value="No Recibido"
+                                                            onclick="llamarAFormularioEditarTareas('MailAutorizacion');">
+                                                    </div>
+                                                    <div class=" p-1">
+                                                        Recibido<input id="" class="" type="radio"
+                                                            name="MailAutorizacion" value="Recibido"
+                                                            onclick="llamarAFormularioEditarTareas('MailAutorizacion');">
+                                                    </div>
 
 
-                        <div class="col-4 pb-2 border border-secondary ">
-                            <h5 class="fw-bolder text-center">Seguridad</h5>
-                            <label class="text-center" for="Programadeseguridad">Programa de seguridad</label>
-                            <select class="form-control" id="Programadeseguridad" name="Programadeseguridad"
-                                value="<%= tareasporcarpeta.Programadeseguridad%>"
-                                placeholder="<%= tareasporcarpeta.Programadeseguridad%>">
-                                <option hidden value="<%=tareasporcarpeta.Programadeseguridad%>" selected>
-                                    <%=tareasporcarpeta.Programadeseguridad%>
-                                </option>
-                                <option value="Sin presentar">
-                                    Sin presentar
-                                </option>
-                                <option value="EnGestion">En
-                                    gestion</option>
-                                <option value="ok">ok
-                                </option>
+                                                </div>
 
-                            </select>
-                            <label class="text-center" for="CronogramaSyH">Cronograma de visitas SyH</label>
-                            <select class="form-control" id="CronogramaSyH" name="CronogramaSyH"
-                                value="<%= tareasporcarpeta.CronogramaSyH%>"
-                                placeholder="<%= tareasporcarpeta.CronogramaSyH%>">
-                                <option value="<%=tareasporcarpeta.CronogramaSyH%>" selected>
-                                    <%=tareasporcarpeta.CronogramaSyH%>
-                                </option>
-                                <option value="Sin presentar">
-                                    Sin presentar
-                                </option>
-                                <option value="EnGestion">En
-                                    gestion</option>
-                                <option value="ok">ok
-                                </option>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 border p-1 bg-dark text-white formularioEditarTareasALlenar"
+                                            id="form1MailAutorizacion" style="display: none;">
 
-                            </select>
-                            <label class="text-center" for="SeguroRC">Seguro
-                                responsabilidad civil</label>
-                            <select class="form-control" id="SeguroRC" name="SeguroRC"
-                                value="<%= tareasporcarpeta.SeguroRC%>" placeholder="<%= tareasporcarpeta.SeguroRC%>">
-                                <option value="<%=tareasporcarpeta.SeguroRC%>" selected>
-                                    <%=tareasporcarpeta.SeguroRC%>
-                                </option>
-                                <option value="Sin presentar">
-                                    Sin presentar
-                                </option>
-                                <option value="EnGestion">En
-                                    gestion</option>
-                                <option value="ok">ok
-                                </option>
+                                            <div class="row ">
+                                                <div class="col">
+                                                    <span>
+                                                        Responsable de la Tarea:
+                                                    </span>
+                                                    <select name="ResponsableDeTarea" id="">
+                                                        <option value="" selected></option>
+                                                        <option value="Mauricio">Mauricio</option>
+                                                        <option value="Gustavo">Gustavo</option>
+                                                        <option value="Daiana">Daiana</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row pb-1 ">
+                                                <div class="input-group-sm">
+                                                    <span class="">Tarea Realizada:</span>
+                                                    <input class="form-control" type="text" name="TareaRealizada"
+                                                        id="TareaRealizada" placeholder="Ingrese ultima tarea realizada"
+                                                        aria-describedby="TareaRealizada">
+                                                </div>
+                                            </div>
+                                            <div class="row pb-1">
+                                                <div class="input-group-sm">
+                                                    <span class="">Proxima Tarea:</span>
+                                                    <input class="form-control" type="text" name="ProximaTarea"
+                                                        id="ProximaTarea" placeholder="Ingrese la proxima tarea"
+                                                        aria-describedby="ProximaTarea">
+                                                </div>
+                                            </div>
+                                            <div class="row pb-1">
+                                                <div class="input-group-sm">
+                                                    <span class="">Fecha Limite:</span>
+                                                    <input class="form-control" type="date" name="Fecha_limite"
+                                                        id="Fecha_limite" placeholder="Ingrese ultima tarea realizada"
+                                                        aria-describedby="Fecha_limite">
 
-                            </select>
-                            <label class="text-center" for="Monotributos">Monotributos</label>
-                            <select class="form-control" id="Monotributos" name="Monotributos"
-                                value="<%= tareasporcarpeta.Monotributos%>"
-                                placeholder="<%= tareasporcarpeta.Monotributos%>">
-                                <option value="<%=tareasporcarpeta.Monotributos%>" selected>
-                                    <%=tareasporcarpeta.Monotributos%>
-                                </option>
-                                <option value="Sin presentar">
-                                    Sin presentar
-                                </option>
-                                <option value="EnGestion">En
-                                    gestion</option>
-                                <option value="ok">ok
-                                </option>
+                                                </div>
 
-                            </select>
-                            <label class="text-center" for="SeguroAccidentesPersonales">Seguro accidentes
-                                personales</label>
-                            <select class="form-control" id="SeguroAccidentesPersonales"
-                                name="SeguroAccidentesPersonales"
-                                value="<%= tareasporcarpeta.SeguroAccidentesPersonales%>"
-                                placeholder="<%= tareasporcarpeta.SeguroAccidentesPersonales%>">
-                                <option value="<%=tareasporcarpeta.SeguroAccidentesPersonales%>" selected>
-                                    <%=tareasporcarpeta.SeguroAccidentesPersonales%>
-                                </option>
-                                <option value="Sin presentar">
-                                    Sin presentar
-                                </option>
-                                <option value="EnGestion">En
-                                    gestion</option>
-                                <option value="ok">ok
-                                </option>
+                                            </div>
+                                            <div class="row-p-1">
+                                                <div class="input-group mt-1">
+                                                    <input type="file" class="form-control" placeholder="Archivo"
+                                                        aria-label="Archivo">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="input-group-sm pt-2">
 
-                            </select>
+                                                </div>
+
+
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6 border">
+                                            <div class="card-title text-primary" onclick="document.getElementById('plantrabajobody').style.display= 'block'">
+                                                <label for="PlanDeTrabajo">Plan de trabajo</label>
+                                            </div>
+                                            <div class="text-success" id="EstadoTarea">
+                                                Estado de la tarea: <%=tareasporcarpeta.PlanDeTrabajo %>
+                                            </div>
+                                            <div class="card-text" id="plantrabajobody" style="display: none;">
+                                                <div class="input-group ">
+                                                    <div class=" p-1">
+                                                        <input hidden id="" class="" type="radio" name="PlanDeTrabajo"
+                                                            value="<%=tareasporcarpeta.PlanDeTrabajo%>"
+                                                            onclick="llamarAFormularioEditarTareas('PlanDeTrabajo');"
+                                                            checked>
+                                                    </div>
+                                                    <div class=" p-1">
+                                                        Sin Presentar<input id="" class="" type="radio"
+                                                            name="PlanDeTrabajo" value="Sin presentar"
+                                                            onclick="llamarAFormularioEditarTareas('PlanDeTrabajo');">
+                                                    </div>
+                                                    <div class=" p-1">
+                                                        En Gestión<input id="" class="" type="radio"
+                                                            name="PlanDeTrabajo" value="EnGestion"
+                                                            onclick="llamarAFormularioEditarTareas('PlanDeTrabajo');">
+                                                    </div>
+
+                                                    <div class=" p-1">
+                                                        Observado<input id="" class="" type="radio" name="PlanDeTrabajo"
+                                                            value="Observado"
+                                                            onclick="llamarAFormularioEditarTareas('PlanDeTrabajo');">
+                                                    </div>
+                                                    <div class=" p-1">
+                                                        Ok<input id="" class="" type="radio" name="PlanDeTrabajo"
+                                                            value="ok"
+                                                            onclick="llamarAFormularioEditarTareas('PlanDeTrabajo');">
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 border p-1 bg-dark text-white formularioEditarTareasALlenar"
+                                            id="form1PlanDeTrabajo" style="display:none;">
+
+                                            <div class="row ">
+                                                <div class="col">
+                                                    <span>
+                                                        Responsable de la Tarea:
+                                                    </span>
+                                                    <select name="ResponsableDeTarea" id="">
+                                                        <option value="" selected></option>
+                                                        <option value="Mauricio">Mauricio</option>
+                                                        <option value="Gustavo">Gustavo</option>
+                                                        <option value="Daiana">Daiana</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row pb-1 ">
+                                                <div class="input-group-sm">
+                                                    <span class="">Tarea Realizada:</span>
+                                                    <input class="form-control" type="text" name="TareaRealizada"
+                                                        id="TareaRealizada" placeholder="Ingrese ultima tarea realizada"
+                                                        aria-describedby="TareaRealizada">
+                                                </div>
+                                            </div>
+                                            <div class="row pb-1">
+                                                <div class="input-group-sm">
+                                                    <span class="">Proxima Tarea:</span>
+                                                    <input class="form-control" type="text" name="ProximaTarea"
+                                                        id="ProximaTarea" placeholder="Ingrese la proxima tarea"
+                                                        aria-describedby="ProximaTarea">
+                                                </div>
+                                            </div>
+                                            <div class="row pb-1">
+                                                <div class="input-group-sm">
+                                                    <span class="">Fecha Limite:</span>
+                                                    <input class="form-control" type="date" name="Fecha_limite"
+                                                        id="Fecha_limite" placeholder="Ingrese ultima tarea realizada"
+                                                        aria-describedby="Fecha_limite">
+
+                                                </div>
+
+                                            </div>
+                                            <div class="row-p-1">
+                                                <div class="input-group mt-1">
+                                                    <input type="file" class="form-control" placeholder="Archivo"
+                                                        aria-label="Archivo">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="input-group-sm pt-2">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="card mb-3 p-3 border-secondary">
+                                <div class="card-header bg-primary text-white">
+                                    Documentación de obras</div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-6 border">
+                                            <div class="card-title text-primary" onclick="document.getElementById('SolicitudInicioObrasbody).style.display= 'block'">
+
+                                                <label for="SolicitudInicioObras">Solicitud inicio de obras</label>
+
+                                            </div>
+                                            <div class="text-success" id="EstadoTarea">
+                                                Estado de la tarea: <%=tareasporcarpeta.SolicitudInicioObras%>
+                                            </div>
+                                            <div class="card-text" id="SolicitudInicioObrasbody" style="display: none;">
+                                                <div class="input-group ">
+                                                    <div class=" p-1">
+                                                        <input hidden id="" class="" type="radio"
+                                                            name="SolicitudInicioObras"
+                                                            value="<%= tareasporcarpeta.SolicitudInicioObras%>" checked>
+                                                    </div>
+                                                    <div class=" p-1">
+                                                        Sin presentar<input id="" class="" type="radio"
+                                                            name="SolicitudInicioObras" value="Sin presentar"
+                                                            onclick="llamarAFormularioEditarTareas('SolicitudInicioObras');">
+                                                    </div>
+                                                    <div class=" p-1">
+                                                        En Gestión<input id="" class="" type="radio"
+                                                            name="SolicitudInicioObras" value="EnGestion"
+                                                            onclick="llamarAFormularioEditarTareas('SolicitudInicioObras');">
+                                                    </div>
+                                                    <div class=" p-1">
+                                                        Ok<input id="" class="" type="radio" name="SolicitudInicioObras"
+                                                            value="ok"
+                                                            onclick="llamarAFormularioEditarTareas('SolicitudInicioObras');">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-6 border p-1 bg-dark text-white formularioEditarTareasALlenar"
+                                            id="form1SolicitudInicioObras" style="display: none;">
+
+                                            <div class="row ">
+                                                <div class="col">
+                                                    <span>
+                                                        Responsable de la Tarea:
+                                                    </span>
+                                                    <select name="ResponsableDeTarea" id="">
+                                                        <option value="" selected></option>
+                                                        <option value="Mauricio">Mauricio</option>
+                                                        <option value="Gustavo">Gustavo</option>
+                                                        <option value="Daiana">Daiana</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row pb-1 ">
+                                                <div class="input-group-sm">
+                                                    <span class="">Tarea Realizada:</span>
+                                                    <input class="form-control" type="text" name="TareaRealizada"
+                                                        id="TareaRealizada" placeholder="Ingrese ultima tarea realizada"
+                                                        aria-describedby="TareaRealizada">
+                                                </div>
+                                            </div>
+                                            <div class="row pb-1">
+                                                <div class="input-group-sm">
+                                                    <span class="">Proxima Tarea:</span>
+                                                    <input class="form-control" type="text" name="ProximaTarea"
+                                                        id="ProximaTarea" placeholder="Ingrese la proxima tarea"
+                                                        aria-describedby="ProximaTarea">
+                                                </div>
+                                            </div>
+                                            <div class="row pb-1">
+                                                <div class="input-group-sm">
+                                                    <span class="">Fecha Limite:</span>
+                                                    <input class="form-control" type="date" name="Fecha_limite"
+                                                        id="Fecha_limite" placeholder="Ingrese ultima tarea realizada"
+                                                        aria-describedby="Fecha_limite">
+
+                                                </div>
+
+                                            </div>
+                                            <div class="row-p-1">
+                                                <div class="input-group mt-1">
+                                                    <input type="file" class="form-control" placeholder="Archivo"
+                                                        aria-label="Archivo">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="input-group-sm pt-2">
+
+                                                </div>
+
+
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6 border">
+                                            <div class="card-title text-primary" onclick="document.getElementById('CertificadoRTbody').style.display= 'block'">
+                                                <label for="CertificadoRT">Certificado del RT</label>
+                                            </div>
+                                            <div class="text-success" id="EstadoTarea">
+                                                Estado de la tarea: <%=tareasporcarpeta.CertificadoRT %>
+                                            </div>
+                                            <div class="card-text" id="CertificadoRTbody" style="display: none;">
+                                                <div class="input-group ">
+                                                    <div class=" p-1">
+                                                        <input hidden id="" class="" type="radio" name="CertificadoRT"
+                                                            value="<%=tareasporcarpeta.CertificadoRT%>"
+                                                            onclick="llamarAFormularioEditarTareas('CertificadoRT');"
+                                                            checked>
+                                                    </div>
+                                                    <div class=" p-1">
+                                                        Sin Presentar<input id="" class="" type="radio"
+                                                            name="CertificadoRT" value="Sin presentar"
+                                                            onclick="llamarAFormularioEditarTareas('CertificadoRT');">
+                                                    </div>
+                                                    <div class=" p-1">
+                                                        En Gestión<input id="" class="" type="radio"
+                                                            name="CertificadoRT" value="EnGestion"
+                                                            onclick="llamarAFormularioEditarTareas('CertificadoRT');">
+                                                    </div>
+
+                                                    <div class=" p-1">
+                                                        Observado<input id="" class="" type="radio" name="CertificadoRT"
+                                                            value="Observado"
+                                                            onclick="llamarAFormularioEditarTareas('CertificadoRT');">
+                                                    </div>
+                                                    <div class=" p-1">
+                                                        Ok<input id="" class="" type="radio" name="CertificadoRT"
+                                                            value="ok"
+                                                            onclick="llamarAFormularioEditarTareas('CertificadoRT');">
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 border p-1 bg-dark text-white formularioEditarTareasALlenar"
+                                            id="form1CertificadoRT" style="display:none;">
+
+                                            <div class="row ">
+                                                <div class="col">
+                                                    <span>
+                                                        Responsable de la Tarea:
+                                                    </span>
+                                                    <select name="ResponsableDeTarea" id="">
+                                                        <option value="" selected></option>
+                                                        <option value="Mauricio">Mauricio</option>
+                                                        <option value="Gustavo">Gustavo</option>
+                                                        <option value="Daiana">Daiana</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row pb-1 ">
+                                                <div class="input-group-sm">
+                                                    <span class="">Tarea Realizada:</span>
+                                                    <input class="form-control" type="text" name="TareaRealizada"
+                                                        id="TareaRealizada" placeholder="Ingrese ultima tarea realizada"
+                                                        aria-describedby="TareaRealizada">
+                                                </div>
+                                            </div>
+                                            <div class="row pb-1">
+                                                <div class="input-group-sm">
+                                                    <span class="">Proxima Tarea:</span>
+                                                    <input class="form-control" type="text" name="ProximaTarea"
+                                                        id="ProximaTarea" placeholder="Ingrese la proxima tarea"
+                                                        aria-describedby="ProximaTarea">
+                                                </div>
+                                            </div>
+                                            <div class="row pb-1">
+                                                <div class="input-group-sm">
+                                                    <span class="">Fecha Limite:</span>
+                                                    <input class="form-control" type="date" name="Fecha_limite"
+                                                        id="Fecha_limite" placeholder="Ingrese ultima tarea realizada"
+                                                        aria-describedby="Fecha_limite">
+
+                                                </div>
+
+                                            </div>
+                                            <div class="row-p-1">
+                                                <div class="input-group mt-1">
+                                                    <input type="file" class="form-control" placeholder="Archivo"
+                                                        aria-label="Archivo">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="input-group-sm pt-2">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="card mb-3 p-3 border-secondary">
+                                <div class="card-header bg-primary text-white">
+                                    Seguridad</div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-6 border">
+                                            <div class="card-title text-primary" onclick="document.getElementById('Programadeseguridadbody').style.display= 'block'">
+
+                                                <label for="Programadeseguridad">Programa de seguridad</label>
+
+                                            </div>
+                                            <div class="text-success" id="EstadoTarea">
+                                                Estado de la tarea: <%=tareasporcarpeta.Programadeseguridad%>
+                                            </div>
+                                            <div class="card-text" id="Programadeseguridadbody" style="display: none;">
+                                                <div class="input-group ">
+                                                    <div class=" p-1">
+                                                        <input hidden id="" class="" type="radio"
+                                                            name="Programadeseguridad"
+                                                            value="<%= tareasporcarpeta.Programadeseguridad%>" checked>
+                                                    </div>
+                                                    <div class=" p-1">
+                                                        Sin presentar<input id="" class="" type="radio"
+                                                            name="Programadeseguridad" value="Sin presentar"
+                                                            onclick="llamarAFormularioEditarTareas('Programadeseguridad');">
+                                                    </div>
+                                                    <div class=" p-1">
+                                                        En Gestión<input id="" class="" type="radio"
+                                                            name="Programadeseguridad" value="EnGestion"
+                                                            onclick="llamarAFormularioEditarTareas('Programadeseguridad');">
+                                                    </div>
+                                                    <div class=" p-1">
+                                                        Ok<input id="" class="" type="radio" name="Programadeseguridad"
+                                                            value="ok"
+                                                            onclick="llamarAFormularioEditarTareas('Programadeseguridad');">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-6 border p-1 bg-dark text-white formularioEditarTareasALlenar"
+                                            id="form1Programadeseguridad" style="display: none;">
+
+                                            <div class="row ">
+                                                <div class="col">
+                                                    <span>
+                                                        Responsable de la Tarea:
+                                                    </span>
+                                                    <select name="ResponsableDeTarea" id="">
+                                                        <option value="" selected></option>
+                                                        <option value="Mauricio">Mauricio</option>
+                                                        <option value="Gustavo">Gustavo</option>
+                                                        <option value="Daiana">Daiana</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row pb-1 ">
+                                                <div class="input-group-sm">
+                                                    <span class="">Tarea Realizada:</span>
+                                                    <input class="form-control" type="text" name="TareaRealizada"
+                                                        id="TareaRealizada" placeholder="Ingrese ultima tarea realizada"
+                                                        aria-describedby="TareaRealizada">
+                                                </div>
+                                            </div>
+                                            <div class="row pb-1">
+                                                <div class="input-group-sm">
+                                                    <span class="">Proxima Tarea:</span>
+                                                    <input class="form-control" type="text" name="ProximaTarea"
+                                                        id="ProximaTarea" placeholder="Ingrese la proxima tarea"
+                                                        aria-describedby="ProximaTarea">
+                                                </div>
+                                            </div>
+                                            <div class="row pb-1">
+                                                <div class="input-group-sm">
+                                                    <span class="">Fecha Limite:</span>
+                                                    <input class="form-control" type="date" name="Fecha_limite"
+                                                        id="Fecha_limite" placeholder="Ingrese ultima tarea realizada"
+                                                        aria-describedby="Fecha_limite">
+
+                                                </div>
+
+                                            </div>
+                                            <div class="row-p-1">
+                                                <div class="input-group mt-1">
+                                                    <input type="file" class="form-control" placeholder="Archivo"
+                                                        aria-label="Archivo">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="input-group-sm pt-2">
+
+                                                </div>
+
+
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6 border">
+                                            <div class="card-title text-primary" onclick="document.getElementById('CronogramaSyHbody').style.display= 'block'">
+                                                <label for="CronogramaSyH">Cronograma de visitas seguridad e
+                                                    higiene</label>
+                                            </div>
+                                            <div class="text-success" id="EstadoTarea">
+                                                Estado de la tarea: <%=tareasporcarpeta.CronogramaSyH %>
+                                            </div>
+                                            <div class="card-text" id="CronogramaSyHbody" style="display: none;">
+                                                <div class="input-group ">
+                                                    <div class=" p-1">
+                                                        <input hidden id="" class="" type="radio" name="CronogramaSyH"
+                                                            value="<%=tareasporcarpeta.CronogramaSyH%>"
+                                                            onclick="llamarAFormularioEditarTareas('CronogramaSyH');"
+                                                            checked>
+                                                    </div>
+                                                    <div class=" p-1">
+                                                        Sin Presentar<input id="" class="" type="radio"
+                                                            name="CronogramaSyH" value="Sin presentar"
+                                                            onclick="llamarAFormularioEditarTareas('CronogramaSyH');">
+                                                    </div>
+                                                    <div class=" p-1">
+                                                        En Gestión<input id="" class="" type="radio"
+                                                            name="CronogramaSyH" value="EnGestion"
+                                                            onclick="llamarAFormularioEditarTareas('CronogramaSyH');">
+                                                    </div>
+
+                                                    <div class=" p-1">
+                                                        Observado<input id="" class="" type="radio" name="CronogramaSyH"
+                                                            value="Observado"
+                                                            onclick="llamarAFormularioEditarTareas('CronogramaSyH');">
+                                                    </div>
+                                                    <div class=" p-1">
+                                                        Ok<input id="" class="" type="radio" name="CronogramaSyH"
+                                                            value="ok"
+                                                            onclick="llamarAFormularioEditarTareas('CronogramaSyH');">
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 border p-1 bg-dark text-white formularioEditarTareasALlenar"
+                                            id="form1CronogramaSyH" style="display:none;">
+
+                                            <div class="row ">
+                                                <div class="col">
+                                                    <span>
+                                                        Responsable de la Tarea:
+                                                    </span>
+                                                    <select name="ResponsableDeTarea" id="">
+                                                        <option value="" selected></option>
+                                                        <option value="Mauricio">Mauricio</option>
+                                                        <option value="Gustavo">Gustavo</option>
+                                                        <option value="Daiana">Daiana</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row pb-1 ">
+                                                <div class="input-group-sm">
+                                                    <span class="">Tarea Realizada:</span>
+                                                    <input class="form-control" type="text" name="TareaRealizada"
+                                                        id="TareaRealizada" placeholder="Ingrese ultima tarea realizada"
+                                                        aria-describedby="TareaRealizada">
+                                                </div>
+                                            </div>
+                                            <div class="row pb-1">
+                                                <div class="input-group-sm">
+                                                    <span class="">Proxima Tarea:</span>
+                                                    <input class="form-control" type="text" name="ProximaTarea"
+                                                        id="ProximaTarea" placeholder="Ingrese la proxima tarea"
+                                                        aria-describedby="ProximaTarea">
+                                                </div>
+                                            </div>
+                                            <div class="row pb-1">
+                                                <div class="input-group-sm">
+                                                    <span class="">Fecha Limite:</span>
+                                                    <input class="form-control" type="date" name="Fecha_limite"
+                                                        id="Fecha_limite" placeholder="Ingrese ultima tarea realizada"
+                                                        aria-describedby="Fecha_limite">
+
+                                                </div>
+
+                                            </div>
+                                            <div class="row-p-1">
+                                                <div class="input-group mt-1">
+                                                    <input type="file" class="form-control" placeholder="Archivo"
+                                                        aria-label="Archivo">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="input-group-sm pt-2">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6 border">
+                                            <div class="card-title text-primary" onclick="document.getElementById('SeguroRCbody').style.display= 'block'">
+                                                <label for="SeguroRC">Seguro de responsabilidad civil</label>
+                                            </div>
+                                            <div class="text-success" id="EstadoTarea">
+                                                Estado de la tarea: <%=tareasporcarpeta.SeguroRC %>
+                                            </div>
+                                            <div class="card-text" id="SeguroRCbody" style="display: none;">
+                                                <div class="input-group ">
+                                                    <div class=" p-1">
+                                                        <input hidden id="" class="" type="radio" name="SeguroRC"
+                                                            value="<%=tareasporcarpeta.SeguroRC%>"
+                                                            onclick="llamarAFormularioEditarTareas('SeguroRC');"
+                                                            checked>
+                                                    </div>
+                                                    <div class=" p-1">
+                                                        Sin Presentar<input id="" class="" type="radio" name="SeguroRC"
+                                                            value="Sin presentar"
+                                                            onclick="llamarAFormularioEditarTareas('SeguroRC');">
+                                                    </div>
+                                                    <div class=" p-1">
+                                                        En Gestión<input id="" class="" type="radio" name="SeguroRC"
+                                                            value="EnGestion"
+                                                            onclick="llamarAFormularioEditarTareas('SeguroRC');">
+                                                    </div>
+
+                                                    <div class=" p-1">
+                                                        Observado<input id="" class="" type="radio" name="SeguroRC"
+                                                            value="Observado"
+                                                            onclick="llamarAFormularioEditarTareas('SeguroRC');">
+                                                    </div>
+                                                    <div class=" p-1">
+                                                        Ok<input id="" class="" type="radio" name="SeguroRC" value="ok"
+                                                            onclick="llamarAFormularioEditarTareas('SeguroRC');">
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 border p-1 bg-dark text-white formularioEditarTareasALlenar"
+                                            id="form1SeguroRC" style="display:none;">
+
+                                            <div class="row ">
+                                                <div class="col">
+                                                    <span>
+                                                        Responsable de la Tarea:
+                                                    </span>
+                                                    <select name="ResponsableDeTarea" id="">
+                                                        <option value="" selected></option>
+                                                        <option value="Mauricio">Mauricio</option>
+                                                        <option value="Gustavo">Gustavo</option>
+                                                        <option value="Daiana">Daiana</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row pb-1 ">
+                                                <div class="input-group-sm">
+                                                    <span class="">Tarea Realizada:</span>
+                                                    <input class="form-control" type="text" name="TareaRealizada"
+                                                        id="TareaRealizada" placeholder="Ingrese ultima tarea realizada"
+                                                        aria-describedby="TareaRealizada">
+                                                </div>
+                                            </div>
+                                            <div class="row pb-1">
+                                                <div class="input-group-sm">
+                                                    <span class="">Proxima Tarea:</span>
+                                                    <input class="form-control" type="text" name="ProximaTarea"
+                                                        id="ProximaTarea" placeholder="Ingrese la proxima tarea"
+                                                        aria-describedby="ProximaTarea">
+                                                </div>
+                                            </div>
+                                            <div class="row pb-1">
+                                                <div class="input-group-sm">
+                                                    <span class="">Fecha Limite:</span>
+                                                    <input class="form-control" type="date" name="Fecha_limite"
+                                                        id="Fecha_limite" placeholder="Ingrese ultima tarea realizada"
+                                                        aria-describedby="Fecha_limite">
+
+                                                </div>
+
+                                            </div>
+                                            <div class="row-p-1">
+                                                <div class="input-group mt-1">
+                                                    <input type="file" class="form-control" placeholder="Archivo"
+                                                        aria-label="Archivo">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="input-group-sm pt-2">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+
+                                        <div class="col-6 border">
+                                            <div class="card-title text-primary" onclick="document.getElementById('monotributosbody').style.display= 'block'">
+                                                <label for="Monotributos">Monotributos</label>
+                                            </div>
+                                            <div class="text-success" id="EstadoTarea">
+                                                Estado de la tarea: <%=tareasporcarpeta.Monotributos %>
+                                            </div>
+                                            <div class="card-text" id="monotributosbody" style="display: none;">
+                                                <div class="input-group ">
+                                                    <div class=" p-1">
+                                                        <input hidden id="" class="" type="radio" name="Monotributos"
+                                                            value="<%=tareasporcarpeta.Monotributos%>"
+                                                            onclick="llamarAFormularioEditarTareas('Monotributos');"
+                                                            checked>
+                                                    </div>
+                                                    <div class=" p-1">
+                                                        Sin Presentar<input id="" class="" type="radio"
+                                                            name="Monotributos" value="Sin presentar"
+                                                            onclick="llamarAFormularioEditarTareas('Monotributos');">
+                                                    </div>
+                                                    <div class=" p-1">
+                                                        En Gestión<input id="" class="" type="radio" name="Monotributos"
+                                                            value="EnGestion"
+                                                            onclick="llamarAFormularioEditarTareas('Monotributos');">
+                                                    </div>
+
+                                                    <div class=" p-1">
+                                                        Observado<input id="" class="" type="radio" name="Monotributos"
+                                                            value="Observado"
+                                                            onclick="llamarAFormularioEditarTareas('Monotributos');">
+                                                    </div>
+                                                    <div class=" p-1">
+                                                        Ok<input id="" class="" type="radio" name="Monotributos"
+                                                            value="ok"
+                                                            onclick="llamarAFormularioEditarTareas('Monotributos');">
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 border p-1 bg-dark text-white formularioEditarTareasALlenar"
+                                            id="form1Monotributos" style="display:none;">
+
+                                            <div class="row ">
+                                                <div class="col">
+                                                    <span>
+                                                        Responsable de la Tarea:
+                                                    </span>
+                                                    <select name="ResponsableDeTarea" id="">
+                                                        <option value="" selected></option>
+                                                        <option value="Mauricio">Mauricio</option>
+                                                        <option value="Gustavo">Gustavo</option>
+                                                        <option value="Daiana">Daiana</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row pb-1 ">
+                                                <div class="input-group-sm">
+                                                    <span class="">Tarea Realizada:</span>
+                                                    <input class="form-control" type="text" name="TareaRealizada"
+                                                        id="TareaRealizada" placeholder="Ingrese ultima tarea realizada"
+                                                        aria-describedby="TareaRealizada">
+                                                </div>
+                                            </div>
+                                            <div class="row pb-1">
+                                                <div class="input-group-sm">
+                                                    <span class="">Proxima Tarea:</span>
+                                                    <input class="form-control" type="text" name="ProximaTarea"
+                                                        id="ProximaTarea" placeholder="Ingrese la proxima tarea"
+                                                        aria-describedby="ProximaTarea">
+                                                </div>
+                                            </div>
+                                            <div class="row pb-1">
+                                                <div class="input-group-sm">
+                                                    <span class="">Fecha Limite:</span>
+                                                    <input class="form-control" type="date" name="Fecha_limite"
+                                                        id="Fecha_limite" placeholder="Ingrese ultima tarea realizada"
+                                                        aria-describedby="Fecha_limite">
+
+                                                </div>
+
+                                            </div>
+                                            <div class="row-p-1">
+                                                <div class="input-group mt-1">
+                                                    <input type="file" class="form-control" placeholder="Archivo"
+                                                        aria-label="Archivo">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="input-group-sm pt-2">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+
+                                        <div class="col-6 border" >
+                                            <div class="card-title text-primary" onclick="document.getElementById('SeguroAccidentesPersonalesbody').style.display= 'block'">
+                                                <label for="SeguroAccidentesPersonales">Seguro accidentes
+                                                    personales</label>
+                                            </div>
+                                            <div class="text-success" id="EstadoTarea">
+                                                Estado de la tarea: <%=tareasporcarpeta.SeguroAccidentesPersonales %>
+                                            </div>
+                                            <div class="card-text" id="SeguroAccidentesPersonalesbody" style="display: none;">
+                                                <div class="input-group ">
+                                                    <div class=" p-1">
+                                                        <input hidden id="" class="" type="radio"
+                                                            name="SeguroAccidentesPersonales"
+                                                            value="<%=tareasporcarpeta.SeguroAccidentesPersonales%>"
+                                                            onclick="llamarAFormularioEditarTareas('SeguroAccidentesPersonales');"
+                                                            checked>
+                                                    </div>
+                                                    <div class=" p-1">
+                                                        Sin Presentar<input id="" class="" type="radio"
+                                                            name="SeguroAccidentesPersonales" value="Sin presentar"
+                                                            onclick="llamarAFormularioEditarTareas('SeguroAccidentesPersonales');">
+                                                    </div>
+                                                    <div class=" p-1">
+                                                        En Gestión<input id="" class="" type="radio"
+                                                            name="SeguroAccidentesPersonales" value="EnGestion"
+                                                            onclick="llamarAFormularioEditarTareas('SeguroAccidentesPersonales');">
+                                                    </div>
+
+                                                    <div class=" p-1">
+                                                        Observado<input id="" class="" type="radio"
+                                                            name="SeguroAccidentesPersonales" value="Observado"
+                                                            onclick="llamarAFormularioEditarTareas('SeguroAccidentesPersonales');">
+                                                    </div>
+                                                    <div class=" p-1">
+                                                        Ok<input id="" class="" type="radio"
+                                                            name="SeguroAccidentesPersonales" value="ok"
+                                                            onclick="llamarAFormularioEditarTareas('SeguroAccidentesPersonales');">
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 border p-1 bg-dark text-white formularioEditarTareasALlenar"
+                                            id="form1SeguroAccidentesPersonales" style="display:none;">
+
+                                            <div class="row ">
+                                                <div class="col">
+                                                    <span>
+                                                        Responsable de la Tarea:
+                                                    </span>
+                                                    <select name="ResponsableDeTarea" id="">
+                                                        <option value="" selected></option>
+                                                        <option value="Mauricio">Mauricio</option>
+                                                        <option value="Gustavo">Gustavo</option>
+                                                        <option value="Daiana">Daiana</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row pb-1 ">
+                                                <div class="input-group-sm">
+                                                    <span class="">Tarea Realizada:</span>
+                                                    <input class="form-control" type="text" name="TareaRealizada"
+                                                        id="TareaRealizada" placeholder="Ingrese ultima tarea realizada"
+                                                        aria-describedby="TareaRealizada">
+                                                </div>
+                                            </div>
+                                            <div class="row pb-1">
+                                                <div class="input-group-sm">
+                                                    <span class="">Proxima Tarea:</span>
+                                                    <input class="form-control" type="text" name="ProximaTarea"
+                                                        id="ProximaTarea" placeholder="Ingrese la proxima tarea"
+                                                        aria-describedby="ProximaTarea">
+                                                </div>
+                                            </div>
+                                            <div class="row pb-1">
+                                                <div class="input-group-sm">
+                                                    <span class="">Fecha Limite:</span>
+                                                    <input class="form-control" type="date" name="Fecha_limite"
+                                                        id="Fecha_limite" placeholder="Ingrese ultima tarea realizada"
+                                                        aria-describedby="Fecha_limite">
+
+                                                </div>
+
+                                            </div>
+                                            <div class="row-p-1">
+                                                <div class="input-group mt-1">
+                                                    <input type="file" class="form-control" placeholder="Archivo"
+                                                        aria-label="Archivo">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="input-group-sm pt-2">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
 
                         </div>
                     </div>
+                    
