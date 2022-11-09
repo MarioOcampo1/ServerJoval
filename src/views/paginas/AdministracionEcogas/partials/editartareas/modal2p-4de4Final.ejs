@@ -1,199 +1,793 @@
-    <div class="row border border-secondary m-1">
-<div class="col-4 border border-secondary">
-    <h5 class="fw-bolder text-center">
-        Matriculas
-    </h5>
-    <label for="MatriculaFusionista">Fusionista</label>
-    <select class="form-control"
-    id="MatriculaFusionista"
-    name="MatriculaFusionista"
-    value="<%= tareasporcarpeta.MatriculaFusionista%>"
-    placeholder="<%= tareasporcarpeta.MatriculaFusionista%>">
-    <option hidden
-        value="<%=tareasporcarpeta.MatriculaFusionista%>"
-        selected>
-        <%=tareasporcarpeta.MatriculaFusionista%>
-    </option>
-    <option value="EnGestion">En
-        gestion</option>
-    <option value="ok">Ok
-    </option>
-    <option value="NC">No
-        corresponde</option>
-</select>
-<label for="MatriculaSoldador">Soldador</label>
-<select class="form-control"
-id="MatriculaSoldador"
-name="MatriculaSoldador"
-value="<%= tareasporcarpeta.MatriculaSoldador%>"
-placeholder="<%= tareasporcarpeta.MatriculaSoldador%>">
-<option hidden
-    value="<%=tareasporcarpeta.MatriculaSoldador%>"
-    selected>
-    <%=tareasporcarpeta.MatriculaSoldador%>
-</option>
-<option value="EnGestion">En
-    gestion</option>
-<option value="ok">Ok
-</option>
-<option value="NC">No
-    corresponde</option>
-</select>
-</div>
-<div class="col-4 border border-secondary">
-    <h5 class="fw-bolder text-center">Ambiente</h5>
-    <label for="EstudioImpactoAmbiental">Estudio de impacto ambiental</label>
-    <select class="form-control"
-    id="EstudioImpactoAmbiental"
-    name="EstudioImpactoAmbiental"
-    value="<%= tareasporcarpeta.EstudioImpactoAmbiental%>"
-    placeholder="<%= tareasporcarpeta.EstudioImpactoAmbiental%>">
-    <option hidden
-        value="<%=tareasporcarpeta.EstudioImpactoAmbiental%>"
-        selected>
-        <%=tareasporcarpeta.EstudioImpactoAmbiental%>
-    </option>
-    <option value="pedir">Sin solicitar</option>
-    <option value="EnGestion">En
-        gestion</option>
-    <option value="ok">ok
-    </option>
-    <option value="NC">No
-        corresponde </option>
-</select>
-<label for="CronogramaAmbiente">Cronograma de visitas ambiente</label>
-<select class="form-control"
-            id="CronogramaAmbiente"
-            name="CronogramaAmbiente"
-            value="<%= tareasporcarpeta.CronogramaAmbiente%>"
-            placeholder="<%= tareasporcarpeta.CronogramaAmbiente%>">
-            <option hidden
-                value="<%=tareasporcarpeta.CronogramaAmbiente%>"
-                selected>
-                <%=tareasporcarpeta.CronogramaAmbiente%>
-            </option>
-            <option value="pedir">Sin Solicitar</option>
-            <option value="EnGestion">En
-                gestion</option>
-            <option value="ok">ok
-            </option>
-        </select>
+<div class="card p-3 mt-3 border-secondary">
 
-    <label for="NotaCumplimentoNormativa">Nota cumplimento de normativas vigentes</label>
-    <select class="form-control"
-            id="NotaCumplimentoNormativa"
-            name="NotaCumplimentoNormativa"
-            value="<%= tareasporcarpeta.NotaCumplimentoNormativa%>"
-            placeholder="<%= tareasporcarpeta.NotaCumplimentoNormativa%>">
-            <option hidden
-                value="<%=tareasporcarpeta.NotaCumplimentoNormativa%>"
-                selected>
-                <%=tareasporcarpeta.NotaCumplimentoNormativa%>
-            </option>
-            <option value="Sin presentar">Sin solicitar</option>
-            <option value="EnGestion">En
-                gestion</option>
-            <option value="ok">Ok</option>
-        </select>
-        <label for="DDJJNAG153">
-            DDJJ NAG 153
-        </label>
-        <select class="form-control"
-                id="DDJJNAG153"
-                name="DDJJNAG153"
-                value="<%= tareasporcarpeta.DDJJNAG153%>"
-                placeholder="<%= tareasporcarpeta.DDJJNAG153%>">
-                <option hidden
-                    value="<%=tareasporcarpeta.DDJJNAG153%>"
-                    selected>
-                    <%=tareasporcarpeta.DDJJNAG153%>
-                </option>
-                <option value="Sin presentar">Sin solicitar</option>
-                <option value="EnGestion">En
-                    gestion</option>
-                <option value="ok">Ok</option>
-            </select>
-</div>
+    <div class="card-header bg-primary text-white">
+        <label for="DocumentacionDelTerreno">Matriculas</label>
 
-<div class="col-4 border border-secondary pb-2">
-<h5 class="fw-bolder text-center">Avisos</h5>
-<label for="AvisoInicioObraART">Aviso de
-    inicio de obras ART</label>
-    <select class="form-control"
-            id="AvisoInicioObraART"
-            name="AvisoInicioObraART"
-            value="<%= tareasporcarpeta.AvisoInicioObraART%>"
-            placeholder="<%= tareasporcarpeta.AvisoInicioObraART%>">
-            <option hidden
-                value="<%=tareasporcarpeta.AvisoInicioObraART%>"
-                selected>
-                <%=tareasporcarpeta.AvisoInicioObraART%>
-            </option>
-            <option value="Sin presentar">
-                Sin presentar
-            </option>
-            <option value="EnGestion">En
-                gestion</option>
-            <option value="ok">ok
-            </option>
-        </select>
-        <label for="Vencimiento Obra Art"> Fecha de vencimiento aviso de ART:</label>
-        <input type="date" name="VencimientoAvisoObraArt" id="VencimientoAvisoObraArt" value="<%=tareasporcarpeta.VencimientoAvisoObraArt%>">
-        <label for="AvisoInicioObraIERIC">Aviso de
-            inicio de obras IERIC</label>
-            <select class="form-control"
-                id="AvisoInicioObraIERIC"
-                name="AvisoInicioObraIERIC"
-                value="<%= tareasporcarpeta.AvisoInicioObraIERIC%>"
-                placeholder="<%= tareasporcarpeta.AvisoInicioObraIERIC%>">
-                <option hidden
-                    value="<%=tareasporcarpeta.AvisoInicioObraIERIC%>"
-                    selected>
-                    <%=tareasporcarpeta.AvisoInicioObraIERIC%>
-                </option>
-                <option value="Sin presentar">
-                    Sin presentar
-                </option>
-                <option value="EnGestion">En
-                    gestion</option>
-                <option value="ok">ok
-                </option>
-            </select>
-    
-    <label for="Vencimiento Obra Ieric"> Fecha vencimiento aviso de IERIC:</label>
-    <input type="date" name="VencimientoAvisoObraIeric" id="VencimientoAvisoObraIeric" value="<%=tareasporcarpeta.VencimientoAvisoObraIeric%>">
-    <label for="ActaInicioEfectivo">
-        Acta de
-        inicio efectivo
-    </label>
-    <select class="form-control"
-            id="ActaInicioEfectivo"
-            name="ActaInicioEfectivo"
-            value="<%= tareasporcarpeta.ActaInicioEfectivo%>"
-            placeholder="<%= tareasporcarpeta.ActaInicioEfectivo%>">
-            <option hidden
-                value="<%=tareasporcarpeta.ActaInicioEfectivo%>"
-                selected>
-                <%=tareasporcarpeta.ActaInicioEfectivo%>
-            </option>
-            <option value="Sin presentar">
-                Sin presentar
-            </option>
-            <option value="EnGestion">En
-                gestion</option>
-            <option value="ok">ok
-            </option>
+    </div>
+    <div class="card-body">
+        <div class="row ">
+            <div class="col border">
+                <div class="card-title " onclick="document.getElementById('Fusionistabody').style.display= 'block'">
+                    <label for="MatriculaFusionista">Fusionista</label>
+                    <div class="text-success col-3" id="Estado"> Estado de la tarea:
+                        <%=tareasporcarpeta.MatriculaFusionista%>
+                    </div>
+                </div>
+                <div class="card-text" id="Fusionistabody" style="display: none;">
+                    <div class="input-group">
+                        <input hidden id="" class="input" type="radio" name="MatriculaFusionista"
+                            onclick="llamarAFormularioEditarTareas('MatriculaFusionista');"
+                            value="<%=tareasporcarpeta.MatriculaFusionista%>" checked>
+                        <div class="col-2.5 p-1">
+                            Sin Presentar<input id="" class="input" type="radio"
+                                onclick="llamarAFormularioEditarTareas('MatriculaFusionista');"
+                                name="MatriculaFusionista" value="Sin presentar">
 
-        </select>
+                        </div>
+                        <div class="col-2.5 p-1">
+                            En Gestión<input id="" class="input" type="radio" name="MatriculaFusionista"
+                                onclick="llamarAFormularioEditarTareas('MatriculaFusionista');" value="EnGestion">
+                        </div>
+                        <div class="col-2.5 p-1">
+                            Presentado<input id="" class="input" type="radio" name="MatriculaFusionista"
+                                onclick="llamarAFormularioEditarTareas('MatriculaFusionista');" value="Presentado">
+                        </div>
+                        <div class="col-2.5 p-1">
+                            Observado<input id="" class="input" type="radio" name="MatriculaFusionista"
+                                onclick="llamarAFormularioEditarTareas('MatriculaFusionista');" value="Observado">
+                        </div>
+                        <div class="col-2 p-1">
+                            Ok<input id="" class="input" type="radio" name="MatriculaFusionista"
+                                onclick="llamarAFormularioEditarTareas('MatriculaFusionista');" value="Ok">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 border p-1 bg-dark text-white formularioEditarTareasALlenar" id="form1MatriculaFusionista"
+                style="display: none;">
+
+                <div class="row ">
+                    <div class="col">
+                        <span>
+                            Responsable de la Tarea:
+                        </span>
+                        <select name="ResponsableDeTarea" id="">
+                            <option value="" selected></option>
+                            <option value="Mauricio">Mauricio</option>
+                            <option value="Gustavo">Gustavo</option>
+                            <option value="Daiana">Daiana</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row pb-1 ">
+                    <div class="input-group-sm">
+                        <span class="">Tarea Realizada:</span>
+                        <input class="form-control" type="text" name="TareaRealizada" id="TareaRealizada"
+                            placeholder="Ingrese ultima tarea realizada" aria-describedby="TareaRealizada">
+                    </div>
+                </div>
+                <div class="row pb-1">
+                    <div class="input-group-sm">
+                        <span class="">Proxima Tarea:</span>
+                        <input class="form-control" type="text" name="ProximaTarea" id="ProximaTarea"
+                            placeholder="Ingrese la proxima tarea" aria-describedby="ProximaTarea">
+                    </div>
+                </div>
+                <div class="row pb-1">
+                    <div class="input-group-sm">
+                        <span class="">Fecha Limite:</span>
+                        <input class="form-control" type="date" name="Fecha_limite" id="Fecha_limite"
+                            placeholder="Ingrese ultima tarea realizada" aria-describedby="Fecha_limite">
+
+                    </div>
+
+                </div>
+                <div class="row-p-1">
+                    <div class="input-group mt-1">
+                        <input type="file" class="form-control" placeholder="Archivo" aria-label="Archivo">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col border">
+                <div class="card-title " onclick="document.getElementById('SoldadorBody').style.display= 'block'">
+                    <label for="MatriculaSoldador">Soldador</label>
+                    <div class="text-success col-3" id="Estado"> Estado de la tarea:
+                        <%=tareasporcarpeta.MatriculaSoldador%>
+                    </div>
+                </div>
+                <div class="card-text" id="SoldadorBody" style="display: none;">
+                    <div class="input-group">
+                        <input hidden id="" class="input" type="radio" name="MatriculaSoldador"
+                            onclick="llamarAFormularioEditarTareas('MatriculaSoldador');"
+                            value="<%=tareasporcarpeta.MatriculaSoldador%>" checked>
+                        <div class="col-2.5 p-1">
+                            Sin Presentar<input id="" class="input" type="radio"
+                                onclick="llamarAFormularioEditarTareas('MatriculaSoldador');" name="MatriculaSoldador"
+                                value="Sin presentar">
+
+                        </div>
+                        <div class="col-2.5 p-1">
+                            En Gestión<input id="" class="input" type="radio" name="MatriculaSoldador"
+                                onclick="llamarAFormularioEditarTareas('MatriculaSoldador');" value="EnGestion">
+                        </div>
+                        <div class="col-2.5 p-1">
+                            Presentado<input id="" class="input" type="radio" name="MatriculaSoldador"
+                                onclick="llamarAFormularioEditarTareas('MatriculaSoldador');" value="Presentado">
+                        </div>
+                        <div class="col-2.5 p-1">
+                            Observado<input id="" class="input" type="radio" name="MatriculaSoldador"
+                                onclick="llamarAFormularioEditarTareas('MatriculaSoldador');" value="Observado">
+                        </div>
+                        <div class="col-2 p-1">
+                            Ok<input id="" class="input" type="radio" name="MatriculaSoldador"
+                                onclick="llamarAFormularioEditarTareas('MatriculaSoldador');" value="Ok">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 border p-1 bg-dark text-white formularioEditarTareasALlenar" id="form1MatriculaSoldador"
+                style="display: none;">
+
+                <div class="row ">
+                    <div class="col">
+                        <span>
+                            Responsable de la Tarea:
+                        </span>
+                        <select name="ResponsableDeTarea" id="">
+                            <option value="" selected></option>
+                            <option value="Mauricio">Mauricio</option>
+                            <option value="Gustavo">Gustavo</option>
+                            <option value="Daiana">Daiana</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row pb-1 ">
+                    <div class="input-group-sm">
+                        <span class="">Tarea Realizada:</span>
+                        <input class="form-control" type="text" name="TareaRealizada" id="TareaRealizada"
+                            placeholder="Ingrese ultima tarea realizada" aria-describedby="TareaRealizada">
+                    </div>
+                </div>
+                <div class="row pb-1">
+                    <div class="input-group-sm">
+                        <span class="">Proxima Tarea:</span>
+                        <input class="form-control" type="text" name="ProximaTarea" id="ProximaTarea"
+                            placeholder="Ingrese la proxima tarea" aria-describedby="ProximaTarea">
+                    </div>
+                </div>
+                <div class="row pb-1">
+                    <div class="input-group-sm">
+                        <span class="">Fecha Limite:</span>
+                        <input class="form-control" type="date" name="Fecha_limite" id="Fecha_limite"
+                            placeholder="Ingrese ultima tarea realizada" aria-describedby="Fecha_limite">
+
+                    </div>
+
+                </div>
+                <div class="row-p-1">
+                    <div class="input-group mt-1">
+                        <input type="file" class="form-control" placeholder="Archivo" aria-label="Archivo">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
 </div>
+<!-- {{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}} -->
+<div class="card p-3 mt-3 border-secondary">
+
+    <div class="card-header bg-primary text-white">
+        <label for="DocumentacionDelTerreno">Ambiente</label>
+
+    </div>
+    <div class="card-body">
+        <div class="row ">
+            <div class="col border">
+                <div class="card-title "
+                    onclick="document.getElementById('EstudioImpactoAmbientalBody').style.display= 'block'">
+                    <label for="EstudioImpactoAmbiental">Estudio de impacto ambiental</label>
+                    <div class="text-success col-3" id="Estado"> Estado de la tarea:
+                        <%=tareasporcarpeta.EstudioImpactoAmbiental%>
+                    </div>
+                </div>
+                <div class="card-text" id="EstudioImpactoAmbientalBody" style="display: none;">
+                    <div class="input-group">
+                        <input hidden id="" class="input" type="radio" name="EstudioImpactoAmbiental"
+                            onclick="llamarAFormularioEditarTareas('EstudioImpactoAmbiental');"
+                            value="<%=tareasporcarpeta.EstudioImpactoAmbiental%>" checked>
+                        <div class="col-2.5 p-1">
+                            Sin Presentar<input id="" class="input" type="radio"
+                                onclick="llamarAFormularioEditarTareas('EstudioImpactoAmbiental');"
+                                name="EstudioImpactoAmbiental" value="Sin presentar">
+
+                        </div>
+                        <div class="col-2.5 p-1">
+                            En Gestión<input id="" class="input" type="radio" name="EstudioImpactoAmbiental"
+                                onclick="llamarAFormularioEditarTareas('EstudioImpactoAmbiental');" value="EnGestion">
+                        </div>
+                        <div class="col-2.5 p-1">
+                            Presentado<input id="" class="input" type="radio" name="EstudioImpactoAmbiental"
+                                onclick="llamarAFormularioEditarTareas('EstudioImpactoAmbiental');" value="Presentado">
+                        </div>
+                        <div class="col-2.5 p-1">
+                            Observado<input id="" class="input" type="radio" name="EstudioImpactoAmbiental"
+                                onclick="llamarAFormularioEditarTareas('EstudioImpactoAmbiental');" value="Observado">
+                        </div>
+                        <div class="col-2 p-1">
+                            Ok<input id="" class="input" type="radio" name="EstudioImpactoAmbiental"
+                                onclick="llamarAFormularioEditarTareas('EstudioImpactoAmbiental');" value="Ok">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 border p-1 bg-dark text-white formularioEditarTareasALlenar"
+                id="form1EstudioImpactoAmbiental" style="display: none;">
+
+                <div class="row ">
+                    <div class="col">
+                        <span>
+                            Responsable de la Tarea:
+                        </span>
+                        <select name="ResponsableDeTarea" id="">
+                            <option value="" selected></option>
+                            <option value="Mauricio">Mauricio</option>
+                            <option value="Gustavo">Gustavo</option>
+                            <option value="Daiana">Daiana</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row pb-1 ">
+                    <div class="input-group-sm">
+                        <span class="">Tarea Realizada:</span>
+                        <input class="form-control" type="text" name="TareaRealizada" id="TareaRealizada"
+                            placeholder="Ingrese ultima tarea realizada" aria-describedby="TareaRealizada">
+                    </div>
+                </div>
+                <div class="row pb-1">
+                    <div class="input-group-sm">
+                        <span class="">Proxima Tarea:</span>
+                        <input class="form-control" type="text" name="ProximaTarea" id="ProximaTarea"
+                            placeholder="Ingrese la proxima tarea" aria-describedby="ProximaTarea">
+                    </div>
+                </div>
+                <div class="row pb-1">
+                    <div class="input-group-sm">
+                        <span class="">Fecha Limite:</span>
+                        <input class="form-control" type="date" name="Fecha_limite" id="Fecha_limite"
+                            placeholder="Ingrese ultima tarea realizada" aria-describedby="Fecha_limite">
+
+                    </div>
+
+                </div>
+                <div class="row-p-1">
+                    <div class="input-group mt-1">
+                        <input type="file" class="form-control" placeholder="Archivo" aria-label="Archivo">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col border">
+                <div class="card-title "
+                    onclick="document.getElementById('CronogramaAmbientebody').style.display= 'block'">
+                    <label for="CronogramaAmbiente">Cronograma de ambiente</label>
+                    <div class="text-success col-3" id="Estado"> Estado de la tarea:
+                        <%=tareasporcarpeta.CronogramaAmbiente%>
+                    </div>
+                </div>
+                <div class="card-text" id="CronogramaAmbientebody" style="display: none;">
+                    <div class="input-group">
+                        <input hidden id="" class="input" type="radio" name="CronogramaAmbiente"
+                            onclick="llamarAFormularioEditarTareas('Cronogramaambiente');"
+                            value="<%=tareasporcarpeta.CronogramaAmbiente%>" checked>
+                        <div class="col-2.5 p-1">
+                            Sin Presentar<input id="" class="input" type="radio"
+                                onclick="llamarAFormularioEditarTareas('Cronogramaambiente');" name="CronogramaAmbiente"
+                                value="Sin presentar">
+
+                        </div>
+                        <div class="col-2.5 p-1">
+                            En Gestión<input id="" class="input" type="radio" name="CronogramaAmbiente"
+                                onclick="llamarAFormularioEditarTareas('Cronogramaambiente');" value="EnGestion">
+                        </div>
+                        <div class="col-2.5 p-1">
+                            Presentado<input id="" class="input" type="radio" name="CronogramaAmbiente"
+                                onclick="llamarAFormularioEditarTareas('Cronogramaambiente');" value="Presentado">
+                        </div>
+                        <div class="col-2.5 p-1">
+                            Observado<input id="" class="input" type="radio" name="CronogramaAmbiente"
+                                onclick="llamarAFormularioEditarTareas('Cronogramaambiente');" value="Observado">
+                        </div>
+                        <div class="col-2 p-1">
+                            Ok<input id="" class="input" type="radio" name="CronogramaAmbiente"
+                                onclick="llamarAFormularioEditarTareas('Cronogramaambiente');" value="Ok">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 border p-1 bg-dark text-white formularioEditarTareasALlenar" id="form1Cronogramaambiente"
+                style="display: none;">
+
+                <div class="row ">
+                    <div class="col">
+                        <span>
+                            Responsable de la Tarea:
+                        </span>
+                        <select name="ResponsableDeTarea" id="">
+                            <option value="" selected></option>
+                            <option value="Mauricio">Mauricio</option>
+                            <option value="Gustavo">Gustavo</option>
+                            <option value="Daiana">Daiana</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row pb-1 ">
+                    <div class="input-group-sm">
+                        <span class="">Tarea Realizada:</span>
+                        <input class="form-control" type="text" name="TareaRealizada" id="TareaRealizada"
+                            placeholder="Ingrese ultima tarea realizada" aria-describedby="TareaRealizada">
+                    </div>
+                </div>
+                <div class="row pb-1">
+                    <div class="input-group-sm">
+                        <span class="">Proxima Tarea:</span>
+                        <input class="form-control" type="text" name="ProximaTarea" id="ProximaTarea"
+                            placeholder="Ingrese la proxima tarea" aria-describedby="ProximaTarea">
+                    </div>
+                </div>
+                <div class="row pb-1">
+                    <div class="input-group-sm">
+                        <span class="">Fecha Limite:</span>
+                        <input class="form-control" type="date" name="Fecha_limite" id="Fecha_limite"
+                            placeholder="Ingrese ultima tarea realizada" aria-describedby="Fecha_limite">
+
+                    </div>
+
+                </div>
+                <div class="row-p-1">
+                    <div class="input-group mt-1">
+                        <input type="file" class="form-control" placeholder="Archivo" aria-label="Archivo">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col border">
+                <div class="card-title "
+                    onclick="document.getElementById('NotaCumplimentoNormativabody').style.display= 'block'">
+                    <label for="NotaCumplimentoNormativa">Nota de cumplimento con la normativa vigente</label>
+                    <div class="text-success col-3" id="Estado"> Estado de la tarea:
+                        <%=tareasporcarpeta.NotaCumplimentoNormativa%>
+                    </div>
+                </div>
+                <div class="card-text" id="NotaCumplimentoNormativabody" style="display: none;">
+                    <div class="input-group">
+                        <input hidden id="" class="input" type="radio" name="NotaCumplimentoNormativa"
+                            onclick="llamarAFormularioEditarTareas('NotaCumplimentoNormativa');"
+                            value="<%=tareasporcarpeta.NotaCumplimentoNormativa%>" checked>
+                        <div class="col-2.5 p-1">
+                            Sin Presentar<input id="" class="input" type="radio"
+                                onclick="llamarAFormularioEditarTareas('NotaCumplimentoNormativa');"
+                                name="NotaCumplimentoNormativa" value="Sin presentar">
+
+                        </div>
+                        <div class="col-2.5 p-1">
+                            En Gestión<input id="" class="input" type="radio" name="NotaCumplimentoNormativa"
+                                onclick="llamarAFormularioEditarTareas('NotaCumplimentoNormativa');" value="EnGestion">
+                        </div>
+                        <div class="col-2.5 p-1">
+                            Presentado<input id="" class="input" type="radio" name="NotaCumplimentoNormativa"
+                                onclick="llamarAFormularioEditarTareas('NotaCumplimentoNormativa');" value="Presentado">
+                        </div>
+                        <div class="col-2.5 p-1">
+                            Observado<input id="" class="input" type="radio" name="NotaCumplimentoNormativa"
+                                onclick="llamarAFormularioEditarTareas('NotaCumplimentoNormativa');" value="Observado">
+                        </div>
+                        <div class="col-2 p-1">
+                            Ok<input id="" class="input" type="radio" name="NotaCumplimentoNormativa"
+                                onclick="llamarAFormularioEditarTareas('NotaCumplimentoNormativa');" value="Ok">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 border p-1 bg-dark text-white formularioEditarTareasALlenar"
+                id="form1NotaCumplimentoNormativa" style="display: none;">
+
+                <div class="row ">
+                    <div class="col">
+                        <span>
+                            Responsable de la Tarea:
+                        </span>
+                        <select name="ResponsableDeTarea" id="">
+                            <option value="" selected></option>
+                            <option value="Mauricio">Mauricio</option>
+                            <option value="Gustavo">Gustavo</option>
+                            <option value="Daiana">Daiana</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row pb-1 ">
+                    <div class="input-group-sm">
+                        <span class="">Tarea Realizada:</span>
+                        <input class="form-control" type="text" name="TareaRealizada" id="TareaRealizada"
+                            placeholder="Ingrese ultima tarea realizada" aria-describedby="TareaRealizada">
+                    </div>
+                </div>
+                <div class="row pb-1">
+                    <div class="input-group-sm">
+                        <span class="">Proxima Tarea:</span>
+                        <input class="form-control" type="text" name="ProximaTarea" id="ProximaTarea"
+                            placeholder="Ingrese la proxima tarea" aria-describedby="ProximaTarea">
+                    </div>
+                </div>
+                <div class="row pb-1">
+                    <div class="input-group-sm">
+                        <span class="">Fecha Limite:</span>
+                        <input class="form-control" type="date" name="Fecha_limite" id="Fecha_limite"
+                            placeholder="Ingrese ultima tarea realizada" aria-describedby="Fecha_limite">
+
+                    </div>
+
+                </div>
+                <div class="row-p-1">
+                    <div class="input-group mt-1">
+                        <input type="file" class="form-control" placeholder="Archivo" aria-label="Archivo">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col border">
+                <div class="card-title " onclick="document.getElementById('DDJJNAG153body').style.display= 'block'">
+                    <label for="DDJJNAG153">DDJJ NAG 153</label>
+                    <div class="text-success col-3" id="Estado"> Estado de la tarea:
+                        <%=tareasporcarpeta.DDJJNAG153%>
+                    </div>
+                </div>
+                <div class="card-text" id="DDJJNAG153body" style="display: none;">
+                    <div class="input-group">
+                        <input hidden id="" class="input" type="radio" name="DDJJNAG153"
+                            onclick="llamarAFormularioEditarTareas('DDJJNAG153');"
+                            value="<%=tareasporcarpeta.DDJJNAG153%>" checked>
+                        <div class="col-2.5 p-1">
+                            Sin Presentar<input id="" class="input" type="radio"
+                                onclick="llamarAFormularioEditarTareas('DDJJNAG153');" name="DDJJNAG153"
+                                value="Sin presentar">
+
+                        </div>
+                        <div class="col-2.5 p-1">
+                            En Gestión<input id="" class="input" type="radio" name="DDJJNAG153"
+                                onclick="llamarAFormularioEditarTareas('DDJJNAG153');" value="EnGestion">
+                        </div>
+                        <div class="col-2.5 p-1">
+                            Presentado<input id="" class="input" type="radio" name="DDJJNAG153"
+                                onclick="llamarAFormularioEditarTareas('DDJJNAG153');" value="Presentado">
+                        </div>
+                        <div class="col-2.5 p-1">
+                            Observado<input id="" class="input" type="radio" name="DDJJNAG153"
+                                onclick="llamarAFormularioEditarTareas('DDJJNAG153');" value="Observado">
+                        </div>
+                        <div class="col-2 p-1">
+                            Ok<input id="" class="input" type="radio" name="DDJJNAG153"
+                                onclick="llamarAFormularioEditarTareas('DDJJNAG153');" value="Ok">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 border p-1 bg-dark text-white formularioEditarTareasALlenar" id="form1DDJJNAG153"
+                style="display: none;">
+
+                <div class="row ">
+                    <div class="col">
+                        <span>
+                            Responsable de la Tarea:
+                        </span>
+                        <select name="ResponsableDeTarea" id="">
+                            <option value="" selected></option>
+                            <option value="Mauricio">Mauricio</option>
+                            <option value="Gustavo">Gustavo</option>
+                            <option value="Daiana">Daiana</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row pb-1 ">
+                    <div class="input-group-sm">
+                        <span class="">Tarea Realizada:</span>
+                        <input class="form-control" type="text" name="TareaRealizada" id="TareaRealizada"
+                            placeholder="Ingrese ultima tarea realizada" aria-describedby="TareaRealizada">
+                    </div>
+                </div>
+                <div class="row pb-1">
+                    <div class="input-group-sm">
+                        <span class="">Proxima Tarea:</span>
+                        <input class="form-control" type="text" name="ProximaTarea" id="ProximaTarea"
+                            placeholder="Ingrese la proxima tarea" aria-describedby="ProximaTarea">
+                    </div>
+                </div>
+                <div class="row pb-1">
+                    <div class="input-group-sm">
+                        <span class="">Fecha Limite:</span>
+                        <input class="form-control" type="date" name="Fecha_limite" id="Fecha_limite"
+                            placeholder="Ingrese ultima tarea realizada" aria-describedby="Fecha_limite">
+
+                    </div>
+
+                </div>
+                <div class="row-p-1">
+                    <div class="input-group mt-1">
+                        <input type="file" class="form-control" placeholder="Archivo" aria-label="Archivo">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
     </div>
 </div>
 
+
+<!-- {{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}} -->
+<div class="card p-3 mt-3 border-secondary">
+
+    <div class="card-header bg-primary text-white">
+        <label for="Avisos">Avisos</label>
+
+    </div>
+    <div class="card-body">
+        <div class="row ">
+            <div class="col border">
+                <div class="card-title "
+                    onclick="document.getElementById('AvisoInicioObraARTbody').style.display= 'block'">
+                    <label for="AvisoInicioObraART">Aviso de inicio de obras ART</label>
+                    <div class="text-success col-3" id="Estado"> Estado de la tarea:
+                        <%=tareasporcarpeta.AvisoInicioObraART%>
+                    </div>
+                </div>
+                <div class="card-text" id="AvisoInicioObraARTbody" style="display: none;">
+                    <div class="input-group">
+                        <input hidden id="" class="input" type="radio" name="AvisoInicioObraART"
+                            onclick="llamarAFormularioEditarTareas('AvisoInicioObraART');"
+                            value="<%=tareasporcarpeta.AvisoInicioObraART%>" checked>
+                        <div class="col-2.5 p-1">
+                            Sin Presentar<input id="" class="input" type="radio"
+                                onclick="llamarAFormularioEditarTareas('AvisoInicioObraART');" name="AvisoInicioObraART"
+                                value="Sin presentar">
+
+                        </div>
+                        <div class="col-2.5 p-1">
+                            En Gestión<input id="" class="input" type="radio" name="AvisoInicioObraART"
+                                onclick="llamarAFormularioEditarTareas('AvisoInicioObraART');" value="EnGestion">
+                        </div>
+                        <div class="col-2.5 p-1">
+                            Presentado<input id="" class="input" type="radio" name="AvisoInicioObraART"
+                                onclick="llamarAFormularioEditarTareas('AvisoInicioObraART');" value="Presentado">
+                        </div>
+                        <div class="col-2.5 p-1">
+                            Observado<input id="" class="input" type="radio" name="AvisoInicioObraART"
+                                onclick="llamarAFormularioEditarTareas('AvisoInicioObraART');" value="Observado">
+                        </div>
+                        <div class="col-2 p-1">
+                            Ok<input id="" class="input" type="radio" name="AvisoInicioObraART"
+                                onclick="llamarAFormularioEditarTareas('AvisoInicioObraART'); $('#VencimientoAvisoObraArt').css('display' , 'block')"
+                                value="Ok">
+                        </div>
+
+                    </div>
+                    <div class="" id="VencimientoAvisoObraArt" style="display: none;">
+
+                        <label for="VencimientoAvisoObraArt"> Fecha de vencimiento aviso de ART:</label>
+                        <input type="date" name="VencimientoAvisoObraArt"
+                            value="<%=tareasporcarpeta.VencimientoAvisoObraArt%>">
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 border p-1 bg-dark text-white formularioEditarTareasALlenar" id="form1AvisoInicioObraART"
+                style="display: none;">
+
+                <div class="row ">
+                    <div class="col">
+                        <span>
+                            Responsable de la Tarea:
+                        </span>
+                        <select name="ResponsableDeTarea" id="">
+                            <option value="" selected></option>
+                            <option value="Mauricio">Mauricio</option>
+                            <option value="Gustavo">Gustavo</option>
+                            <option value="Daiana">Daiana</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row pb-1 ">
+                    <div class="input-group-sm">
+                        <span class="">Tarea Realizada:</span>
+                        <input class="form-control" type="text" name="TareaRealizada" id="TareaRealizada"
+                            placeholder="Ingrese ultima tarea realizada" aria-describedby="TareaRealizada">
+                    </div>
+                </div>
+                <div class="row pb-1">
+                    <div class="input-group-sm">
+                        <span class="">Proxima Tarea:</span>
+                        <input class="form-control" type="text" name="ProximaTarea" id="ProximaTarea"
+                            placeholder="Ingrese la proxima tarea" aria-describedby="ProximaTarea">
+                    </div>
+                </div>
+                <div class="row pb-1">
+                    <div class="input-group-sm">
+                        <span class="">Fecha Limite:</span>
+                        <input class="form-control" type="date" name="Fecha_limite" id="Fecha_limite"
+                            placeholder="Ingrese ultima tarea realizada" aria-describedby="Fecha_limite">
+
+                    </div>
+
+                </div>
+                <div class="row-p-1">
+                    <div class="input-group mt-1">
+                        <input type="file" class="form-control" placeholder="Archivo" aria-label="Archivo">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row ">
+            <div class="col border">
+                <div class="card-title "
+                    onclick="document.getElementById('AvisoInicioObraIERICbody').style.display= 'block'">
+                    <label for="AvisoInicioObraIERIC">Aviso de inicio de obras IERIC</label>
+                    <div class="text-success col-3" id="Estado"> Estado de la tarea:
+                        <%=tareasporcarpeta.AvisoInicioObraIERIC%>
+                    </div>
+                </div>
+                <div class="card-text" id="AvisoInicioObraIERICbody" style="display: none;">
+                    <div class="input-group">
+                        <input hidden id="" class="input" type="radio" name="AvisoInicioObraIERIC"
+                            onclick="llamarAFormularioEditarTareas('AvisoInicioObraIERIC');"
+                            value="<%=tareasporcarpeta.AvisoInicioObraIERIC%>" checked>
+                        <div class="col-2.5 p-1">
+                            Sin Presentar<input id="" class="input" type="radio"
+                                onclick="llamarAFormularioEditarTareas('AvisoInicioObraIERIC');" name="AvisoInicioObraIERIC"
+                                value="Sin presentar">
+
+                        </div>
+                        <div class="col-2.5 p-1">
+                            En Gestión<input id="" class="input" type="radio" name="AvisoInicioObraIERIC"
+                                onclick="llamarAFormularioEditarTareas('AvisoInicioObraIERIC');" value="EnGestion">
+                        </div>
+                        <div class="col-2.5 p-1">
+                            Presentado<input id="" class="input" type="radio" name="AvisoInicioObraIERIC"
+                                onclick="llamarAFormularioEditarTareas('AvisoInicioObraIERIC');" value="Presentado">
+                        </div>
+                        <div class="col-2.5 p-1">
+                            Observado<input id="" class="input" type="radio" name="AvisoInicioObraIERIC"
+                                onclick="llamarAFormularioEditarTareas('AvisoInicioObraIERIC');" value="Observado">
+                        </div>
+                        <div class="col-2 p-1">
+                            Ok<input id="" class="input" type="radio" name="AvisoInicioObraIERIC"
+                                onclick="llamarAFormularioEditarTareas('AvisoInicioObraIERIC'); $('#VencimientoAvisoObraIeric').css('display' , 'block')"
+                                value="Ok">
+                        </div>
+
+                    </div>
+                    <div class="" id="VencimientoAvisoObraIeric" style="display: none;">
+
+                        <label for="VencimientoAvisoObraIeric"> Fecha de vencimiento aviso de IERIC:</label>
+                        <input type="date" name="VencimientoAvisoObraIeric"
+                            value="<%=tareasporcarpeta.VencimientoAvisoObraIeric%>">
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 border p-1 bg-dark text-white formularioEditarTareasALlenar" id="form1AvisoInicioObraIERIC"
+                style="display: none;">
+
+                <div class="row ">
+                    <div class="col">
+                        <span>
+                            Responsable de la Tarea:
+                        </span>
+                        <select name="ResponsableDeTarea" id="">
+                            <option value="" selected></option>
+                            <option value="Mauricio">Mauricio</option>
+                            <option value="Gustavo">Gustavo</option>
+                            <option value="Daiana">Daiana</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row pb-1 ">
+                    <div class="input-group-sm">
+                        <span class="">Tarea Realizada:</span>
+                        <input class="form-control" type="text" name="TareaRealizada" id="TareaRealizada"
+                            placeholder="Ingrese ultima tarea realizada" aria-describedby="TareaRealizada">
+                    </div>
+                </div>
+                <div class="row pb-1">
+                    <div class="input-group-sm">
+                        <span class="">Proxima Tarea:</span>
+                        <input class="form-control" type="text" name="ProximaTarea" id="ProximaTarea"
+                            placeholder="Ingrese la proxima tarea" aria-describedby="ProximaTarea">
+                    </div>
+                </div>
+                <div class="row pb-1">
+                    <div class="input-group-sm">
+                        <span class="">Fecha Limite:</span>
+                        <input class="form-control" type="date" name="Fecha_limite" id="Fecha_limite"
+                            placeholder="Ingrese ultima tarea realizada" aria-describedby="Fecha_limite">
+
+                    </div>
+
+                </div>
+                <div class="row-p-1">
+                    <div class="input-group mt-1">
+                        <input type="file" class="form-control" placeholder="Archivo" aria-label="Archivo">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row ">
+            <div class="col border">
+                <div class="card-title "
+                    onclick="document.getElementById('ActaInicioEfectivobody').style.display= 'block'">
+                    <label for="ActaInicioEfectivo">Aviso de inicio de obras IERIC</label>
+                    <div class="text-success col-3" id="Estado"> Estado de la tarea:
+                        <%=tareasporcarpeta.ActaInicioEfectivo%>
+                    </div>
+                </div>
+                <div class="card-text" id="ActaInicioEfectivobody" style="display: none;">
+                    <div class="input-group">
+                        <input hidden id="" class="input" type="radio" name="ActaInicioEfectivo"
+                            onclick="llamarAFormularioEditarTareas('ActaInicioEfectivo');"
+                            value="<%=tareasporcarpeta.ActaInicioEfectivo%>" checked>
+                        <div class="col-2.5 p-1">
+                            Sin Presentar<input id="" class="input" type="radio"
+                                onclick="llamarAFormularioEditarTareas('ActaInicioEfectivo');" name="ActaInicioEfectivo"
+                                value="Sin presentar">
+
+                        </div>
+                        <div class="col-2.5 p-1">
+                            En Gestión<input id="" class="input" type="radio" name="ActaInicioEfectivo"
+                                onclick="llamarAFormularioEditarTareas('ActaInicioEfectivo');" value="EnGestion">
+                        </div>
+                      
+                        <div class="col-2 p-1">
+                            Ok<input id="" class="input" type="radio" name="ActaInicioEfectivo"
+                                onclick="llamarAFormularioEditarTareas('ActaInicioEfectivo'); "
+                                value="Ok">
+                        </div>
+
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- {{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}} -->
+
+
+</div>
+
+</div>
+</div>
 <div class="modal-footer ">
-<button type="button" class="btn btn-secondary "
-data-dismiss="modal"
-onclick="CerrarModal()">Cerrar</button>
-<button type="submit" class="btn btn-primary  position-fixed fixed-bottom "form="act2pCarpEcogas">Guardar Cambios</button>
+    <button type="button" class="btn btn-secondary " data-dismiss="modal" onclick="CerrarModal()">Cerrar</button>
+    <button type="submit" class="btn btn-primary fixed-bottom " form="act2pCarpEcogas">Guardar
+        Cambios</button>
+</div>
+</div>
 </div>
 
 
