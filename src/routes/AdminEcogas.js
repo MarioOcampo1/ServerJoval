@@ -751,7 +751,7 @@ connection.query(sql, [{EtapaTarea: EtapaTarea, TareaRealizada:TareaRealizada, F
         res.redirect('/historialcarpeta/' + Nombre);
     }
     else {
-        res.redirect(req.get('referer'));
+        res.redirect('/historialcarpeta/' + Nombre);
     }
 })
 router.post('/edit/delete/:id', (req, res) => {
