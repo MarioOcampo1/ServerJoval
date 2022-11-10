@@ -18,56 +18,52 @@
                     </button>
                 </div>
                 <div class="modal-body">
+                    <form action="/actualizarEtapas/<%= user.id%>" id="formPreliminar" method="post">
+                        <div class="container">
+                            <div class="card p-3 mt-3 border-secondary">
+                                <div class="col-12">
+                                    <div class="card-header bg-primary text-white">
+                                        <label for="DocumentacionDelTerreno">Documentación
+                                            del
+                                            terreno</label>
+                                        
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row ">
 
-                    <div class="container">
-                        <div class="card p-3 mt-3 border-secondary">
 
-                            <div class="card-header bg-primary text-white">
-                                <label for="DocumentacionDelTerreno">Documentación
-                                    del
-                                    terreno</label>
+                                            <div class="col-12 border">
 
-                            </div>
-                            <div class="card-body">
-                                <div class="row ">
-                                    <div class="col border">
-                                        <div class="card-title "
-                                            onclick="document.getElementById('MensuraBody').style.display= 'block'">
-                                            <label for="Mensura">Mensura</label>
-                                            <div class="text-primary col-3" id="Estado"> Estado de la tarea:
-                                                <%=tareasporcarpeta.Mensura%>
-                                            </div>
-                                        </div>
-
-                                        <div class="card-text" id="MensuraBody" style="display: none;">
-                                            <div class="input-group">
-                                                <input hidden id="" class="input" type="radio" name="Mensura"
-                                                    onclick="llamarAFormularioEditarTareas('Mensura');"
-                                                    value="<%=tareasporcarpeta.Mensura%>" checked>
-                                                <div class="col-2.5 p-1">
-                                                    Sin Presentar<input id="" class="input" type="radio"
-                                                        onclick="llamarAFormularioEditarTareas('Mensura');"
-                                                        name="Mensura" value="Sin presentar">
-
+                                                <div class="card-title ">
+                                                    <label for="Mensura">Mensura</label>
+                                                <div class="text-primary  col-3" id="Estado"> Estado de la tarea:<%=tareasporcarpeta.Mensura%></div>    
                                                 </div>
-                                                <div class="col-2.5 p-1">
-                                                    En Gestión<input id="" class="input" type="radio" name="Mensura"
-                                                        onclick="llamarAFormularioEditarTareas('Mensura');"
-                                                        value="EnGestion">
-                                                </div>
-                                                <div class="col-2.5 p-1">
-                                                    Presentado<input id="" class="input" type="radio" name="Mensura"
-                                                        onclick="llamarAFormularioEditarTareas('Mensura');"
-                                                        value="Presentado">
-                                                </div>
-                                                <div class="col-2.5 p-1">
-                                                    Observado<input id="" class="input" type="radio" name="Mensura"
-                                                        onclick="llamarAFormularioEditarTareas('Mensura');"
-                                                        value="Observado">
-                                                </div>
-                                                <div class="col-2 p-1">
-                                                    Ok<input id="" class="input" type="radio" name="Mensura"
-                                                        onclick="llamarAFormularioEditarTareas('Mensura');" value="Ok">
+                                                
+                                                <div class="card-text">
+                                                    <div class="input-group">
+                                                        <input id="" class="input" type="radio"name="Mensura" value="<%=tareasporcarpeta.Mensura%>" checked>
+                                                        <div class="col-2.5 p-1">
+                                                            Sin Presentar<input id="" class="input" type="radio"
+                                                                name="Mensura" value="Sin presentar">
+                                                        </div>
+                                                        <div class="col-2.5 p-1">
+                                                            En Gestión<input id="" class="input" type="radio"
+                                                                name="Mensura" value="EnGestion">
+                                                        </div>
+                                                        <div class="col-2.5 p-1">
+                                                            Presentado<input id="" class="input" type="radio"
+                                                                name="Mensura" value="Presentado">
+                                                        </div>
+                                                        <div class="col-2.5 p-1">
+                                                            Observado<input id="" class="input" type="radio"
+                                                                name="Mensura" value="Observado">
+                                                        </div>
+                                                        <div class="col-2 p-1">
+                                                            Ok<input id="" class="input" type="radio" name="Mensura"
+                                                                value="ok">
+                                                        </div>
+
+                                                    </div>
                                                 </div>
 
                                             </div>
@@ -78,102 +74,37 @@
                                         id="form1Mensura" style="display: none;">
 
                                         <div class="row ">
-                                            <div class="col">
-                                                <span>
-                                                    Responsable de la Tarea:
-                                                </span>
-                                                <select name="ResponsableDeTarea" id="">
-                                                    <option value="" selected></option>
-                                                    <option value="Mauricio">Mauricio</option>
-                                                    <option value="Gustavo">Gustavo</option>
-                                                    <option value="Daiana">Daiana</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="row pb-1 ">
-                                            <div class="input-group-sm">
-                                                <span class="">Tarea Realizada:</span>
-                                                <input class="form-control" type="text" name="TareaRealizada"
-                                                    id="TareaRealizada" placeholder="Ingrese ultima tarea realizada"
-                                                    aria-describedby="TareaRealizada">
-                                            </div>
-                                        </div>
-                                        <div class="row pb-1">
-                                            <div class="input-group-sm">
-                                                <span class="">Proxima Tarea:</span>
-                                                <input class="form-control" type="text" name="ProximaTarea"
-                                                    id="ProximaTarea" placeholder="Ingrese la proxima tarea"
-                                                    aria-describedby="ProximaTarea">
-                                            </div>
-                                        </div>
-                                        <div class="row pb-1">
-                                            <div class="input-group-sm">
-                                                <span class="">Fecha Limite:</span>
-                                                <input class="form-control" type="date" name="Fecha_limite"
-                                                    id="Fecha_limite" placeholder="Ingrese ultima tarea realizada"
-                                                    aria-describedby="Fecha_limite">
-
-                                            </div>
-
-                                        </div>
-                                        <div class="row-p-1">
-                                            <div class="input-group mt-1">
-                                                <input type="file" class="form-control" placeholder="Archivo"
-                                                    aria-label="Archivo">
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="input-group-sm pt-2">
-
-                                            </div>
-
-
-                                        </div>
-
-
-                                    </div>
-                                </div>
-
-                                <div class="row ">
-                                    <div class="col-6 border">
-                                        <div class="card-title "
-                                            onclick="document.getElementById('TituloPropiedadBody').style.display= 'block'">
-                                            <label for="TituloDePropiedad">Titulo de propiedad</label>
-                                            <div class="text-primary col-3" id="Estado"> Estado de la tarea:
-                                                <%=tareasporcarpeta.TituloDePropiedad%>
-                                            </div>
-                                        </div>
-
-                                        <div class="card-text" id="TituloPropiedadBody" style="display: none;">
-                                            <div class="input-group ">
-                                                <div class="col-2.5 p-1">
-                                                    <input hidden id="" class="input" type="radio"
-                                                        onclick="llamarAFormularioEditarTareas('TituloDePropiedad');"
-                                                        name="TituloDePropiedad"
-                                                        value="<%=tareasporcarpeta.TituloDePropiedad%>" checked>
-                                                    Sin Presentar<input id="" class="input" type="radio"
-                                                        onclick="llamarAFormularioEditarTareas('TituloDePropiedad');"
-                                                        name="TituloDePropiedad" value="Sin presentar">
+                                            <div class="col-12 border">
+                                                <div class="card-title ">
+                                                    <label for="TituloDePropiedad">Titulo de
+                                                        propiedad</label>
+                                                <div class="text-primary  col-3" id="Estado"> Estado de la tarea: <%=tareasporcarpeta.TituloDePropiedad%></div>    
                                                 </div>
-                                                <div class="col-2.5 p-1">
-                                                    En Gestión<input id="" class="input" type="radio"
-                                                        onclick="llamarAFormularioEditarTareas('TituloDePropiedad');"
-                                                        name="TituloDePropiedad" value="EnGestion">
-                                                </div>
-                                                <div class="col-2.5 p-1">
-                                                    Presentado<input id="" class="input" type="radio"
-                                                        onclick="llamarAFormularioEditarTareas('TituloDePropiedad');"
-                                                        name="TituloDePropiedad" value="Presentado">
-                                                </div>
-                                                <div class="col-2.5 p-1">
-                                                    Observado<input id="" class="input" type="radio"
-                                                        onclick="llamarAFormularioEditarTareas('TituloDePropiedad');"
-                                                        name="TituloDePropiedad" value="Observado">
-                                                </div>
-                                                <div class="col-2 p-1">
-                                                    Ok<input id="" class="input" type="radio"
-                                                        onclick="llamarAFormularioEditarTareas('TituloDePropiedad');"
-                                                        name="TituloDePropiedad" value="Ok">
+                                                
+                                                <div class="card-text">
+                                                    <div class="input-group ">
+                                                        <input id="" class="input" type="radio"name="TituloDePropiedad" value="<%=tareasporcarpeta.TituloDePropiedad%>" checked>
+                                                        <div class="col-2.5 p-1">
+                                                            Sin Presentar<input id="" class="input" type="radio"
+                                                                name="TituloDePropiedad" value="Sin presentar">
+                                                        </div>
+                                                        <div class="col-2.5 p-1">
+                                                            En Gestión<input id="" class="input" type="radio"
+                                                                name="TituloDePropiedad" value="EnGestion">
+                                                        </div>
+                                                        <div class="col-2.5 p-1">
+                                                            Presentado<input id="" class="input" type="radio"
+                                                                name="TituloDePropiedad" value="Presentado">
+                                                        </div>
+                                                        <div class="col-2.5 p-1">
+                                                            Observado<input id="" class="input" type="radio"
+                                                                name="TituloDePropiedad" value="Observado">
+                                                        </div>
+                                                        <div class="col-2 p-1">
+                                                            Ok<input id="" class="input" type="radio"
+                                                                name="TituloDePropiedad" value="ok">
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -258,24 +189,18 @@
                                             <div class="text-primary  col-3" id="Estado"> Estado de la tarea:
                                                 <%=tareasporcarpeta.ActaConstitutiva %>
                                             </div>
-                                        </div>
-                                        <div class="card-text" id="ActaConstitutivaBody" style="display: none;">
-                                            <div class="input-group "
-                                                onclick="document.getElementById('form1ActaConstitutiva').style.display= 'block';">
-                                                <div class="col-2.5 p-1">
-                                                    <input hidden id="" class="input" type="radio"
-                                                        onclick="llamarAFormularioEditarTareas('ActaConstitutiva');"
-                                                        name="ActaConstitutiva"
-                                                        value="<%=tareasporcarpeta.ActaConstitutiva%>" checked>
-                                                    Sin Presentar<input id="" class="input" type="radio"
-                                                        onclick="llamarAFormularioEditarTareas('ActaConstitutiva');"
-                                                        name="ActaConstitutiva" value="Sin presentar">
-                                                </div>
-                                                <div class="col-2.5 p-1">
-                                                    En Gestión<input id="" class="input" type="radio"
-                                                        onclick="llamarAFormularioEditarTareas('ActaConstitutiva');"
-                                                        name="ActaConstitutiva" value="EnGestion">
-                                                </div>
+                                            
+                                            <div class="card-text">
+                                                <div class="input-group ">
+                                                    <input id="" class="input" type="radio"name="ActaConstitutiva" value="<%=tareasporcarpeta.ActaConstitutiva%>" checked>
+                                                    <div class="col-2.5 p-1">
+                                                        Sin Presentar<input id="" class="input" type="radio"
+                                                            name="ActaConstitutiva" value="Sin presentar">
+                                                    </div>
+                                                    <div class="col-2.5 p-1">
+                                                        En Gestión<input id="" class="input" type="radio"
+                                                            name="ActaConstitutiva" value="EnGestion">
+                                                    </div>
 
                                                 <div class="col-2.5 p-1">
                                                     Observado<input id="" class="input" type="radio"
@@ -368,24 +293,18 @@
                                                 Estado de la tarea:
                                                 <%=tareasporcarpeta.ActaCargoVigente%>
                                             </div>
-                                        </div>
-
-                                        <div class="card-text" id="ActaCargoVigente" style="display: none;">
-                                            <div class="input-group ">
-                                                <div class="col-2.5 p-1">
-                                                    <input hidden id="" class="input" type="radio"
-                                                        onclick="llamarAFormularioEditarTareas('ActaCargoVigente');"
-                                                        name="ActaCargoVigente"
-                                                        value="<%=tareasporcarpeta.ActaCargoVigente%>" checked>
-                                                    Sin Presentar<input id="" class="input" type="radio"
-                                                        onclick="llamarAFormularioEditarTareas('ActaCargoVigente');"
-                                                        name="ActaCargoVigente" value="Sin presentar">
-                                                </div>
-                                                <div class="col-2.5 p-1">
-                                                    En Gestión<input id="" class="input" type="radio"
-                                                        onclick="llamarAFormularioEditarTareas('ActaCargoVigente');"
-                                                        name="ActaCargoVigente" value="EnGestion">
-                                                </div>
+                                            
+                                            <div class="card-text">
+                                                <div class="input-group ">
+                                                    <input id="" class="input" type="radio"name="ActaCargoVigente" value="<%=tareasporcarpeta.ActaCargoVigente%>" checked>
+                                                    <div class="col-2.5 p-1">
+                                                        Sin Presentar<input id="" class="input" type="radio"
+                                                            name="ActaCargoVigente" value="Sin presentar">
+                                                    </div>
+                                                    <div class="col-2.5 p-1">
+                                                        En Gestión<input id="" class="input" type="radio"
+                                                            name="ActaCargoVigente" value="EnGestion">
+                                                    </div>
 
                                                 <div class="col-2.5 p-1">
                                                     Observado<input id="" class="input" type="radio"
@@ -505,7 +424,7 @@
 
                                         <div class="card-body" id="Cotizacion" style="display: none;">
                                             <div class="input-group ">
-                                                <input id="" class="input" type="radio"name="Cotizacion" value="<%=tareasporcarpeta.Cotizacion%>" checked hidden>
+                                                <input id="" class="input" type="radio"name="Cotizacion" value="<%=tareasporcarpeta.Cotizacion%>" checked>
                                                 <div class="col-2.5 p-1">
                                                     <input hidden id="" class="input" type="radio" name="Cotizacion"
                                                         onclick="llamarAFormularioEditarTareas('Cotizacion');"
@@ -604,8 +523,8 @@
 
                                         <div class="card-body" id="ContratoPreliminar" style="display: none;">
                                             <div class="card-text">
-                                                <div class="input-group "
-                                                    onclick="document.getElementById('form1ContratoPreliminar').style.display= 'block';">
+                                                <div class="input-group ">
+                                                    <input id="" class="input" type="radio"name="ContratoPreliminar" value="<%=tareasporcarpeta.Contrato%>" checked>
                                                     <div class="col-2.5 p-1">
                                                         <input hidden id="" class="input" type="radio"
                                                             onclick="llamarAFormularioEditarTareas('ContratoPreliminar');"
