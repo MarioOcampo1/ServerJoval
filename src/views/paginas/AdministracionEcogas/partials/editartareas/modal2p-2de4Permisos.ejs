@@ -12,7 +12,8 @@
 
                 <div class="row">
                     <div class="col-6 border">
-                        <div class="card-title text-primary" onclick="document.getElementById('Hidraulicabody').style.display= 'block'">
+                        <div class="card-title text-primary"
+                            onclick="document.getElementById('Hidraulicabody').style.display= 'block'">
                             <label for="HIDRAULICA">HIDRAULICA</label>
                         </div>
                         <div class="text-success" id="EstadoTarea">
@@ -62,9 +63,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-6 border p-1 bg-dark text-white formularioEditarTareasALlenar" id="form1HIDRAULICA"
+                    <div class="col-6 border p-1 bg-dark text-white formularioEditarTareasALlenar"
+                     id="form1HIDRAULICA"
                         style="display:none;">
 
+                        <input type="checkbox" name="Tarea" value="HIDRAULICA" id="" checked hidden>
                         <div class="row ">
                             <div class="col">
                                 <span>
@@ -124,7 +127,8 @@
 
                             <div class="row">
                                 <div class="col-6 border">
-                                    <div class="card-title text-primary" onclick="document.getElementById('Ferrocarrilbody').style.display= 'block'">
+                                    <div class="card-title text-primary"
+                                        onclick="document.getElementById('Ferrocarrilbody').style.display= 'block'">
                                         <label for="FERROCARRIL">Ferrocarril</label>
                                     </div>
                                     <div class="text-success" id="EstadoTarea">
@@ -181,6 +185,7 @@
                                 <div class="col-6 border p-1 bg-dark text-white formularioEditarTareasALlenar"
                                     id="form1FERROCARRIL" style="display:none;">
 
+                                    <input type="checkbox" name="Tarea" value="FERROCARRIL" id="" checked hidden>
                                     <div class="row ">
                                         <div class="col">
                                             <span>
@@ -242,7 +247,8 @@
 
                                         <div class="row">
                                             <div class="col-6 border">
-                                                <div class="card-title text-primary" onclick="document.getElementById('PerMunicipalbody').style.display= 'block'">
+                                                <div class="card-title text-primary"
+                                                    onclick="document.getElementById('PerMunicipalbody').style.display= 'block'">
                                                     <label for="PerMunicipal">Municipal</label>
                                                 </div>
                                                 <div class="text-success" id="EstadoTarea">
@@ -304,6 +310,7 @@
                                             <div class="col-6 border p-1 bg-dark text-white formularioEditarTareasALlenar"
                                                 id="form1PerMunicipal" style="display:none;">
 
+                                                <input type="checkbox" name="Tarea" value="PerMunicipal" id="" checked hidden>
                                                 <div class="row ">
                                                     <div class="col">
                                                         <span>
@@ -368,7 +375,8 @@
 
                                                     <div class="row">
                                                         <div class="col-6 border">
-                                                            <div class="card-title text-primary" onclick="document.getElementById('Dnvbody').style.display= 'block'">
+                                                            <div class="card-title text-primary"
+                                                                onclick="document.getElementById('Dnvbody').style.display= 'block'">
                                                                 <label for="DNV">DNV</label>
                                                             </div>
                                                             <div class="text-success" id="EstadoTarea">
@@ -433,6 +441,7 @@
                                                         <div class="col-6 border p-1 bg-dark text-white formularioEditarTareasALlenar"
                                                             id="form1DNV" style="display:none;">
 
+                                                            <input type="checkbox" name="Tarea" value="DNV" id="" checked hidden>
                                                             <div class="row ">
                                                                 <div class="col">
                                                                     <span>
@@ -498,14 +507,16 @@
 
                                                                 <div class="row">
                                                                     <div class="col-6 border">
-                                                                        <div class="card-title text-primary" onclick="document.getElementById('DPVBODY').style.display= 'block'">
+                                                                        <div class="card-title text-primary"
+                                                                            onclick="document.getElementById('DPVBODY').style.display= 'block'">
                                                                             <label for="DPV">DPV</label>
                                                                         </div>
                                                                         <div class="text-success" id="EstadoTarea">
                                                                             Estado de la tarea:
                                                                             <%=interferenciasypermisos.DPV %>
                                                                         </div>
-                                                                        <div class="card-text" id="DPVBODY" style="display: none;">
+                                                                        <div class="card-text" id="DPVBODY"
+                                                                            style="display: none;">
                                                                             <div class="input-group ">
                                                                                 <div class=" p-1">
                                                                                     <input hidden id="" class=""
@@ -568,6 +579,7 @@
                                                                     <div class="col-6 border p-1 bg-dark text-white formularioEditarTareasALlenar"
                                                                         id="form1DPV " style="display:none;">
 
+                                                                        <input type="checkbox" name="Tarea" value="DPV" id="" checked hidden>
                                                                         <div class="row ">
                                                                             <div class="col">
                                                                                 <span>
@@ -641,8 +653,8 @@
 
                                                                             <div class="row">
                                                                                 <div class="col-6 border">
-                                                                                    <div
-                                                                                        class="card-title text-primary" onclick="document.getElementById('Irrigacionbody').style.display= 'block'">
+                                                                                    <div class="card-title text-primary"
+                                                                                        onclick="document.getElementById('Irrigacionbody').style.display= 'block'">
                                                                                         <label
                                                                                             for="Irrigacion">Irrigación</label>
                                                                                     </div>
@@ -652,7 +664,9 @@
                                                                                         <%=interferenciasypermisos.Irrigacion
                                                                                             %>
                                                                                     </div>
-                                                                                    <div class="card-text" id="Irrigacionbody" style="display: none;">
+                                                                                    <div class="card-text"
+                                                                                        id="Irrigacionbody"
+                                                                                        style="display: none;">
                                                                                         <div class="input-group ">
                                                                                             <div class=" p-1">
                                                                                                 <input hidden id=""
@@ -727,6 +741,7 @@
                                                                                     id="form1Irrigacion"
                                                                                     style="display:none;">
 
+                                                                                    <input type="checkbox" name="Tarea" value="Irrigacion" id="" checked hidden>
                                                                                     <div class="row ">
                                                                                         <div class="col">
                                                                                             <span>
@@ -813,10 +828,11 @@
 
                                                                                         <div class="row">
                                                                                             <div class="col-6 border">
-                                                                                                <div
-                                                                                                    class="card-title text-primary" onclick="document.getElementById('Otrospermisosbody').style.display= 'block'">
+                                                                                                <div class="card-title text-primary"
+                                                                                                    onclick="document.getElementById('Otrospermisosbody').style.display= 'block'">
                                                                                                     <label
-                                                                                                        for="Otrospermisos">Otros permisos</label>
+                                                                                                        for="Otrospermisos">Otros
+                                                                                                        permisos</label>
                                                                                                 </div>
                                                                                                 <div class="text-success"
                                                                                                     id="EstadoTarea">
@@ -824,7 +840,9 @@
                                                                                                     <%=interferenciasypermisos.Otrospermisos
                                                                                                         %>
                                                                                                 </div>
-                                                                                                <div class="card-text" id="Otrospermisosbody" style="display: none;">
+                                                                                                <div class="card-text"
+                                                                                                    id="Otrospermisosbody"
+                                                                                                    style="display: none;">
                                                                                                     <div
                                                                                                         class="input-group ">
                                                                                                         <div
@@ -918,6 +936,7 @@
                                                                                                 id="form1Otrospermisos"
                                                                                                 style="display:none;">
 
+                                                                                                <input type="checkbox" name="Tarea" value="Otrospermisos" id="" checked hidden>
                                                                                                 <div class="row ">
                                                                                                     <div class="col">
                                                                                                         <span>
