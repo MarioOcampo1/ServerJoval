@@ -21,9 +21,11 @@
     <%- include('./partials/menusuperior.ejs')%>
         <h1 class="text-center">Estado General</h1>
 <div class="row">
+    <div class="col-4">
     <div class="btn-group" role="group" aria-label="Basic example">
-    <button class="btn btn-outline-secondary" onclick="document.getElementById('ObrasFinalizadas').style.display = 'block' ; ">Ver finalizadas</button>
-    <button class="btn btn-outline-secondary" onclick="ImprimirEstado()"> Imprimir estado</button>
+    <button class="btn btn-outline-secondary" onclick="document.getElementById('ObrasFinalizadas').style.display = 'block' ; ">Finalizadas</button>
+    <button class="btn btn-outline-secondary bi bi-printer" onclick="ImprimirEstado()"></button>
+</div>
 </div>
 </div>
 <div class="modal" id="ObrasFinalizadas" tabindex="-1" style="display:none;">

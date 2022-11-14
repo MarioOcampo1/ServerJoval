@@ -19,40 +19,40 @@
 </head>
 <body>    
   <%- include('./partials/menusuperior.ejs')%>
-  <h1 class="text-center">Contactos</h1>
-  <div class="btn-group border-bottom">
 
-  <a href="/adminecogas">
-        <button class="btn btn-danger" onClick="history.go(-1);">Volver</button>
-      </a>
+  <h1 class="text-center">Contactos</h1>
+  <div class="container-fluid">
+  <div class="btn-group border-bottom mb-2">
       <a href="/nuevocontacto">
         <button class="btn btn-success">Nuevo Contacto</button>
       </a>
     </div>
   <br/>
+  
   <div class="table-responsive">
-<label for="buscador">Buscar:</label> <input type="text" id="buscador" value=""/>
-
+    <div class="form-inline">
+ <input class="form-control mr-sm-2" type="search" placeholder="Buscar información en contacto" aria-label="Buscar contacto" id="buscador" value=""/>
+</div>
     <table id="Contactos" class="table table-striped table-bordered table-sm table-hover " style="width: 100%">
         <thead>
             <tr>
                 <th>
-                    <h4>Nombre</h4>
+                    <h4 class="bi bi-person-vcard">Nombre</h4>
                 </th>
                 <th>
-                    <h4>Entidad</h4>
+                    <h4 class="bi bi-house">Entidad</h4>
                 </th>
                 <th>
                     <h4>Area</h4>
                 </th>
                 <th>
-                    <h4>Puesto</h4>
+                    <h4 class="bi bi-person-workspace">Puesto</h4>
                 </th>
                 <th>
-                    <h4>Teléfono</h4>
+                    <h4 class="bi bi-telephone">Teléfono  </h4>
                 </th>
                 <th>
-                    <h4>Correo</h4>
+                    <h4 class="bi bi-mailbox">Correo</h4>
                 </th>
               </tr>
         </thead>
@@ -87,6 +87,7 @@
   
     </table>
   </div>
+</div>
   </body>
   <script>
     jQuery("#buscador").keyup(function(){
