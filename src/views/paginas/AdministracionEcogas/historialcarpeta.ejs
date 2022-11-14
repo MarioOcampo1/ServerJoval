@@ -36,12 +36,15 @@
           <thead>
             <tr>
               <th>
-                <h4>Etapa de la tarea</h4>
+                <h4>Etapa</h4>
                 <!-- <Button>Pl</Button>
                 <button>1p</button> 
                 <button>2p</button> 
                 <button>O</button> 
                 <button>C</button>  -->
+              </th>
+              <th>
+                <h4>Tarea</h4>
               </th>
               <th>
                 <h4>Fecha de tarea realizada</h4>
@@ -60,7 +63,7 @@
               <th>
                 <h4>Responsable</h4>
               </th>
-              <th>Tarea realizada</th>
+              <th><h4>Opciones</h4></th>
           </thead>
           <tbody>
             </tr>
@@ -103,6 +106,16 @@
                                             <%=clientes.EtapaTarea_sub%>
                                           </th>
                                           <%}%>
+                                          <th>
+                                            <% if(clientes.Tarea!=null){%>
+                                              <%=clientes.Tarea%>
+                                              
+                                            <%}else{%>
+                                              <p>tarea no cargada </p>
+                                            
+                                             <%}%>
+                                            
+                                          </th>
                                             <th>
                                               <%=moment(clientes.Fecha_Tarea_sub).format('DD-MM-YYYY')%>
                                             </th>
@@ -153,6 +166,15 @@
                                             <%=clientes.EtapaTarea_sub%>
                                           </th>
                                           <%}%>
+                                          <th class="bg-warning">
+                                            <% if(clientes.Tarea!=null){%>
+                                              <%=clientes.Tarea%>
+                                              
+                                            <%}else{%>
+                                              <p>tarea no cargada </p>
+                                            
+                                             <%}%>
+                                          </th>
                                             <th class="bg-warning">
                                               <%=moment(clientes.Fecha_Tarea_sub).format('DD-MM-YYYY')%>
                                             </th>

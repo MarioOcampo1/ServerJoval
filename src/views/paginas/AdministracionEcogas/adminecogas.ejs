@@ -33,19 +33,17 @@
     <div class="col">
       <h3 class="fw-bold text-decoration-underline">Administración de obras de Gas</h3>
     </div>
-   <div class="col sm-2">
-    <div class="btn-group mr-2" role="group">
-      <a href="/">
-        <button class="btn btn-danger" onClick="history.go(-1);">Volver</button>
-      </a>
+   <div class="col sm-2" >
+    <div class="btn-group" role="group" >
+      
       <a href="/nuevocliente">
-        <button class="btn btn-success">Nuevo Cliente</button>
+        <button class="btn btn-success ">Nuevo Cliente</button>
       </a>
     </div>
    </div>
   </div>
   </div>
-<div id="Avisos" class="container">
+<div id="Avisos" class="container" style="display: none;">
 <button disabled class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#Interferencias" onclick="document.getElementById('interferencias').style.display='block'">Interferencias</button>
 <button disabled>Permisos</button>
 <button disabled>Documentación</button>
@@ -59,28 +57,29 @@
     <table id="comunicacionDiaria" class="table table-striped table-bordered table-hover " style="width:100%">
       <thead class="">
         <tr>
-          <th class="text-center">
-            <h6 title="Codigo designado para ubicar en las carpetas fisicas de la oficina.">C</h6>
+          <th class="text-center align-middle">
+            
+            <i class="bi bi-c-circle" style="font-size: 2rem;" title="Codigo designado para ubicar en las carpetas fisicas de la oficina."></i>
           </th>
-          <th class="text-center">
+          <th class="text-center align-middle">
             <h6>Nombre</h6>
           </th>
-          <th class="text-center">
+          <th class="text-center align-middle">
             <h6>N°</h6>
           </th>
-          <th class="text-center">
+          <th class="text-center align-middle">
             
             <button id="Mauricio"class=" btn btn-outline-primary btn-sm "> Mauricio</button>
             <button id="Gustavo"class="  btn btn-outline-primary btn-sm"> Gustavo</button>
             <button id="Daiana"class="  btn btn-outline-primary btn-sm"> Daiana</button>
 
           </th>
-          <th class="text-center">
+          <th class="text-center align-middle">
             <h6>Tarea realizada
               <button id="TablaGral"clicked class=" btn btn-outline-primary btn-sm">Quitar filtros</button>
             </h6>
           </th>
-          <th class="text-center">
+          <th class="text-center align-middle">
 <div class="btn-group btn-group-sm" role="group">
            <button class="btn btn-outline-primary btn-sm" id="Prel"> Prel</button>
            <button class="btn btn-outline-primary btn-sm" id="1ra"> 1P</button>
@@ -91,15 +90,18 @@
            <button class="btn btn-outline-primary btn-sm" id="Caos"> CAOS</button>
           </div>
 </th>
-          <th class="text-center">
+          <th class="text-center align-middle">
+            <h2 class="bi bi-calendar2-minus text-primary"></h2>
             <h6>Proxima tarea</h6>
           </th>
-          <th class="text-center">
+          <th class="text-center align-middle">
+            <h2 class="bi bi-calendar-x text-danger"></h2>
             <h6>Fecha Limite</h6>
+            
             <!-- <button id="VerUrgentes"class="   btn btn-outline-dark btn-sm"> Ver urgentes</button> -->
 
           </th>
-          <th class="text-center">
+          <th class="text-center align-middle">
             <h6>Estado</h6>
             </th>
             <th>
