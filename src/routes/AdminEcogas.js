@@ -1004,17 +1004,6 @@ router.post('/actPrelCarpEcogas/:id', (req, res) => {
     }, Nombre],
         (error, results) => {
 
-<<<<<<< HEAD
-            if (error) {
-                console.log(error);
-            }
-            else {
-                var user = {id:id, Nombre:Nombre, etapa:"Preliminar",
-                }
-                res.render('./paginas/AdministracionEcogas/actualizarProximasTareas.ejs', {user:user})
-                
-            }
-=======
                 //Seccion Actualizar Tareas
     
     let fecha = new Date();
@@ -1122,7 +1111,6 @@ var etapatarea= tarea[index];
   res.redirect('/historialcarpeta/' + Nombre);
            
  
->>>>>>> 2fb7c1dd706eb4ea575a60a03b3f14e751564cd9
 
         })
 })
