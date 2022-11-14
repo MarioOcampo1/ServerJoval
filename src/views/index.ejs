@@ -40,6 +40,66 @@
       </div>
 
     </div>
+    <div class="row">
+      <div class="list-group">
+      <div class="table-responsive">
+        <table class="table table-primary">
+          <thead>
+            <h1 class="text-center">Albacaución</h1>
+            <tr>
+              <th scope="col">Póliza N°</th>
+              <th scope="col">Descripción</th>
+              <th scope="col">Fecha de proximo vencimiento</th>
+              <th>Tipo</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+          <% albacaucion.forEach((polizaAlba)=>{%>
+            <tr class="">
+            <td><%=polizaAlba.NumeroPoliza%></td>
+            <td><%=polizaAlba.NombreAsegurado%></td>
+            <%polizaAlba.ProximaRefacturacion=moment(polizaAlba.ProximaRefacturacion).locale('es').format("DD-MM-YYYY");%>
+            <td><%=polizaAlba.ProximaRefacturacion%></td>
+            <td><%=polizaAlba.Riesgo%></td>
+          </tr>
+            <%})%>
+            
+
+              
+            
+          </tbody>
+        </table>
+      </div>
+      <!-- <div class="table-responsive"> -->
+        <table class="table table-primary">
+          <h1 class="text-center">Vencimientos</h1>
+          <thead>
+            <tr>
+              <th scope="col">Matricula de residuos peligrosos</th>
+              <th scope="col">Racop</th>
+              <th scope="col">Carnet de conducir</th>
+              <th scope="col">Carnet de conducir</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="">
+              <td scope="row">R1C1</td>
+              <td>R1C2</td>
+              <td>R1C3</td>
+            </tr>
+            <tr class="">
+              <td scope="row">Item</td>
+              <td>Item</td>
+              <td>Item</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+        
+      </div>
+    </div>
   </div>
 </body>
 <style>

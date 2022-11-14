@@ -60,6 +60,7 @@ app.use (express.static(path.join(__dirname, 'public')));//Esta linea de codigo 
 
 app.use(express.static('public'));
 //Routes
+app.use(require('./routes/Principal'));
 app.use(require('./routes/AdminEcogas')); //Usa el enrutador
 app.use(require('./routes/AdminGeneral'));
 app.use(require('./routes/Compra-Venta'));
