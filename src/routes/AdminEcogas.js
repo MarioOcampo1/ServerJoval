@@ -1078,7 +1078,7 @@ var etapatarea= tarea[index];
         if (element.fechalimite) {
             if(TareaRealizada!=null){
        sql='Update adminecogas_tareas_por_carpeta set? where id_obra=?';
-       connection.query(sql, [{EtapaTarea: element.etapatarea, TareaRealizada:element.tarearealizada, Fechalimite: element.fechalimite}, id], (error,results)=>{
+       connection.query(sql, [{EtapaTarea: element.EtapaTarea, TareaRealizada:element.tarearealizada, Fechalimite: element.fechalimite}, id], (error,results)=>{
           if (error) console.log(error);
        } )
               sql = 'Insert into historialdecambios set?';
