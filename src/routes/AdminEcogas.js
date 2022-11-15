@@ -739,10 +739,8 @@ connection.query(sql, [{EtapaTarea: EtapaTarea, TareaRealizada:TareaRealizada, F
         res.redirect('/historialcarpeta/' + Nombre);
     }
     else {
-        var user = {id:id, Nombre:Nombre, etapa:EtapaTarea,  
+        res.redirect('/historialcarpeta/' + Nombre);
     }
-    res.render('./paginas/AdministracionEcogas/actualizarProximasTareas.ejs', {user:user})
-}
 })
 router.post('/edit/delete/:id', (req, res) => {
     const id = req.body.id;
