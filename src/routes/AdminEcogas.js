@@ -739,7 +739,7 @@ connection.query(sql, [{EtapaTarea: EtapaTarea, TareaRealizada:TareaRealizada, F
         res.redirect('/historialcarpeta/' + Nombre);
     }
     else {
-        res.redirect('/historialcarpeta/' + Nombre);
+        res.redirect(req.get('referer'));
     }
 })
 router.post('/edit/delete/:id', (req, res) => {
