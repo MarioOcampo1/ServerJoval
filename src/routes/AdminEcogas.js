@@ -78,7 +78,19 @@ connection.connect(error => {
 //Settings
 //Fin de seteo de server original
 //Rutas Get
-
+router.get('/', (req, res) => {
+    res.render('login.ejs');
+})
+router.get('/index', (req, res, next) => {
+    if (req.isAuthenticated()) {
+        res.render('index.ejs');
+    }
+    else {
+        (req, res) => {
+            res.redirect('/');
+        }
+    }
+})
 router.post('/login', passport.authenticate('local', {
     successRedirect: "/index",
     failureRedirect: "/", failureMessage: true
