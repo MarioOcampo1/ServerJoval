@@ -1,105 +1,157 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <title>Seguros</title>
 </head>
+
 <body class=">
     <%- include('../menusuperior.ejs'); %>
     
-    <h1 class="text-center bg-warning">Actualizar póliza de Albacaución</h1>
+    <h1 class=" text-center bg-warning">Actualizar póliza de Albacaución</h1>
     <div class="btn-group m-1" role="group" aria-label="Botones">
-        <button type="button" class="btn btn-outline-secondary" onclick="javascript:history.back()">Volver atrás</button>
-        <form id="formularioBorrarBoton"action="/BorrarPoliza/<%=obras[0].ID_poliza%>" method="post" >
+        <button type="button" class="btn btn-outline-secondary" onclick="javascript:history.back()">Volver
+            atrás</button>
+        <form id="formularioBorrarBoton" action="/BorrarPoliza/<%=obras[0].ID_poliza%>" method="post">
             <button type="button" class="btn btn-outline-danger" onclick="mostrarAlerta()">Borrar póliza</button>
         </form>
 
-      </div>
+    </div>
     <form class="" action="/ActualizarPolizaAlbacaucion/<%=obras[0].ID_poliza%>" method="post">
-   
+
         <div class="form-group">
-          
-            <div id="ActualizarPoliza"class="container border border- danger md-center " style="display:block ;">
-               
-            <div class="row justify-content-md-center ">
-                <div class="col ">
-    
-                    <label class="fw-bold" for="Aseguradora">Aseguradora</label>
-                    <select name="Aseguradora" id="Aseguradora">Aseguradora
-                    <option class="m-1" value="Albacaucion">Albacaución</option>
-                    <option selected class="m-1"value="<%=obras[0].Aseguradora%>"><%=obras[0].Aseguradora%></option>
-                </select>
-                <br>
-                <input hidden type="text" name="ID" id="ID" value="<%=obras[0].ID_poliza%>">
-                    <label class="fw-bold" for="Obra">Obra a la que pertenece</label>
-                    <input value="<%=obras[0].Obra%>"  class="m-1" required type="text" name="Obra" id="Obra">
-                    <br>
-                    <label class="fw-bold" for="Asegurado">Asegurado</label>
-                    <input  class="m-1" required type="text" name="Asegurado" id="Asegurado">
-                    <br>
-                    <label class="fw-bold" for="NPoliza">Número de póliza</label>
-                    <input value="<%=obras[0].NumeroPoliza%>"  class="m-1" required type="number" name="NPoliza" id="NPoliza">
-                    <br>
-                    <label class="fw-bold" for="Fecha
-                    EmisionPoliza">Fecha de emisión actual: <%=moment(obras[0].FechaEmisionPoliza).format('DD/MM/YYYY')%></label>
-                    <input required type="date" value="<%=obras[0].FechaEmisionPoliza%>" class=" m-1" id="FechaEmisionPoliza" name="FechaEmisionPoliza"
-                      placeholder="Ingrese la fecha de emision ">
-            </div>
-                <div class="col ">
-                 
-                    <label class="fw-bold" for="DescripcionRiesgo">Descripción de riesgo</label>
-                    <select name="DescripcionRiesgo" id="DescripcionRiesgo">Seleccione el tipo de poliza
-                        <option selected value="<%=obras[0].Riesgo%>"><%=obras[0].Riesgo%></option>
-                        <option value="EjecucionContrato"> Ejecución de contrato</option>
-                        <option value="FondoReparo"> Fondo de reparo</option>
-                        <option value="GarantiaAnticipo"> Garantía de anticipo</option>
-                        <option value="GarantiaAcopio"> Garantía de acopio</option>
-                            <option value="MantenimientoOferta"> Mantenimiento de oferta</option>
-                </select>
-             
-                <br>
-               
-                      <label class="fw-bold" for="Valor">Valor a pagar</label>
-                      <input required type="number" class="m-1" id="Valor" name="Valor" value="<%=obras[0].Valor%>"
-                        placeholder="Ingrese el valor de la póliza ">
-                    <br>
-                    <label class="fw-bold" for="VigenciaPoliza">Vigencia de la poliza</label>
-                        <select name="VigenciaPoliza" id="VigenciaPoliza">Seleccione la vigencia de la poliza
-                            <option selected value="<%=obras[0].VigenciaPoliza%>"><%=obras[0].VigenciaPoliza%></option>
-                        <option value="Trimestral">Trimestral</option>
-                        <option value="Semestral">Semestral</option>
-                        <option value="Anual">Anual</option>
-                    </select>
-                    <br>
-                    <label class="fw-bold" for="MontoAsegurado">Monto Asegurado</label>
-                    <input required type="number" class="m-1" id="MontoAsegurado" name="MontoAsegurado" value="<%=obras[0].MontoAsegurado%>"
-                      placeholder="Ingrese el Monto Asegurado de la póliza "> 
+
+            <div id="ActualizarPoliza" class="container border border- danger md-center " style="display:block ;">
+
+                <div class="row justify-content-md-center ">
+                    <div class="col m-1">
+                        <div class="row">
+
+                            <label class="fw-bold" for="Aseguradora">Aseguradora</label>
+                            <select name="Aseguradora" id="Aseguradora">Aseguradora
+                                <option class="m-1" value="Albacaucion">Albacaución</option>
+                                <option selected class="m-1" value="<%=obras[0].Aseguradora%>">
+                                    <%=obras[0].Aseguradora%>
+                                </option>
+                            </select>
+
+                            <input hidden type="text" name="ID" id="ID" value="<%=obras[0].ID_poliza%>">
                         </div>
-                      
-           
-            </div>
-            <div class="row justify-content-md-center">
-              
+                        <div class="row">
+                            <label class="fw-bold" for="Obra">Obra a la que pertenece</label>
+                            <input type="text" class=" m-1" value="<%=obras[0].Obra%>" placeholder="<%=obras[0].Obra%>"
+                                name="Obra" id="Obra" aria-label="<%=obras[0].Obra%>" required>
+                        </div>
+                        <div class="row">
+
+
+                            <label class="fw-bold" for="Asegurado">Asegurado</label>
+                            <input class="m-1" value="<%=obras[0].NombreAsegurado%>"
+                                placeholder="<%=obras[0].NombreAsegurado%>" aria-label="<%=obras[0].NombreAsegurado%>"
+                                required type="text" name="Asegurado" id="Asegurado">
+                        </div>
+                        <div class="row">
+
+
+                            <label class="fw-bold" for="NPoliza">Número de póliza</label>
+                            <input value="<%=obras[0].NumeroPoliza%>" class="m-1" required type="number" name="NPoliza"
+                                id="NPoliza">
+                        </div>
+                        <div class="row">
+                            <label class="fw-bold" for="FechaEmisionPoliza">Fecha de emisión actual:
+                                <%=moment(obras[0].FechaEmisionPoliza).format('DD /MM/YYYY')%></label>
+                            <input  type="date" value="<%=obras[0].FechaEmisionPoliza%>" class=" m-1"
+                                id="FechaEmisionPoliza" name="FechaEmisionPoliza"
+                                placeholder="Ingrese la fecha de emision "
+                                aria-label="<%=obras[0].FechaEmisionPoliza%>" >
+                        </div>
+                    </div>
+                    <div class="col m-1">
+
+                        <div class="row ">
+
+                            <label class="fw-bold" for="DescripcionRiesgo">Descripción de riesgo</label>
+                            <select name="DescripcionRiesgo" id="DescripcionRiesgo">Seleccione el tipo de poliza
+                                <option selected value="<%=obras[0].Riesgo%>">
+                                    <%=obras[0].Riesgo%>
+                                </option>
+                                <option value="EjecucionContrato"> Ejecución de contrato</option>
+                                <option value="FondoReparo"> Fondo de reparo</option>
+                                <option value="GarantiaAnticipo"> Garantía de anticipo</option>
+                                <option value="GarantiaAcopio"> Garantía de acopio</option>
+                                <option value="MantenimientoOferta"> Mantenimiento de oferta</option>
+                            </select>
+                        </div>
+                        <div class="row">
+
+
+
+
+                            <label class="fw-bold" for="Valor">Valor a pagar</label>
+                            <input required type="number" class="m-1" id="Valor" name="Valor"
+                                value="<%=obras[0].Valor%>" placeholder="Ingrese el valor de la póliza "
+                                aria-label="<%=obras[0].Valor%>">
+                        </div>
+                        <div class="row">
+                            <label class="fw-bold" for="VigenciaPoliza">Vigencia de la poliza</label>
+                            <select name="VigenciaPoliza" id="VigenciaPoliza">Seleccione la vigencia de la poliza
+                                <option selected value="<%=obras[0].VigenciaPoliza%>">
+                                    <%=obras[0].VigenciaPoliza%>
+                                </option>
+                                <option value="Trimestral">Trimestral</option>
+                                <option value="Semestral">Semestral</option>
+                                <option value="Anual">Anual</option>
+                            </select>
+                        </div>
+                        <div class="row">
+                            <label class="fw-bold" for="MontoAsegurado">Monto Asegurado</label>
+                            <input  type="number" class="m-1" id="MontoAsegurado" name="MontoAsegurado"
+                                value="<%=obras[0].MontoAsegurado%>"
+                                placeholder="Ingrese el Monto Asegurado de la póliza "
+                                aria-label="<%=obras[0].MontoAsegurado%>">
+                        </div>
+                        <div class="row">
+                            <label class="fw-bold" for="Endoso">N° de endoso</label>
+                            <input  type="number" class="m-1" id="Endoso" name="Endoso"
+                                value="<%=obras[0].Endoso%>"
+                                placeholder="<%=obras[0].Endoso%>"
+                                aria-label="<%=obras[0].Endoso%>">
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="row justify-content-md-center">
+
                     <button class="btn btn-success" type="submit">Actualizar póliza</button>
                 </div>
             </div>
-          </div>
-          </div>
-        </form>
+        </div>
+        </div>
+    </form>
 
 </body>
 <script>
-    function mostrarAlerta(){
-    if(    window.confirm("ATENCIÓN. Esta por borrar una póliza del sistema.¿Desea continuar con el proceso?")){
-        window.alert("La poliza ha sido borrada");
-        document.getElementById('formularioBorrarBoton').submit();
+    function mostrarAlerta() {
+        if (window.confirm("ATENCIÓN. Esta por borrar una póliza del sistema.¿Desea continuar con el proceso?")) {
+            window.alert("La poliza ha sido borrada");
+            document.getElementById('formularioBorrarBoton').submit();
+        }
+        else {
+            window.alert("Operación cancelada.");
+        }
     }
-else {
-    window.alert("Operación cancelada.");
-} 
-    }
+    $(document).ready(function(){
+        
+        $('#FechaEmisionPoliza').attr('value', '<%=obras[0].FechaEmisionPoliza%>');
+        
+    })
+   
 </script>
+
 </html>
