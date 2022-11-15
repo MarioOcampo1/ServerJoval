@@ -30,21 +30,21 @@
                                 <br>
 
                                 <div class="col-md-auto ">
-                                    <i>
-                                    <a href="/historialcarpeta/<%= user.Nombre%>" class="btn btn-primary bi bi-list-task"></a></i>
+                                    <a href="/historialcarpeta/<%= user.Nombre%>" class="btn btn-primary ">Ver
+                                        Historial</a>
                                 </div>
                                 <div class="col-md-auto ">
-                                    <a href="/edit/<%= user.id%>" class="btn btn-primary bi bi-info-square"></a>
+                                    <a href="/edit/<%= user.id%>" class="btn btn-primary ">Mas información</a>
                                 </div>
                                 <div class="col-md-auto">
                                     <button class="btn btn-primary" id="CodigoCarpeta">
                                         <%if( CodigoEnUsoVigentes=="S" ){%>
-                                            Codigo: <%=CodigoVigentes%>
+                                            Codigo de la carpeta: <%=CodigoVigentes%>
                                                 <%}%>
                                                     <%if( CodigoEnUsoVigentes=="N" ){%>
-                                                        Codigo: <%"S /C"%>
+                                                        Codigo de la carpeta: <%"S /C"%>
                                                             <%}if(CodigoEnUsoVigentes=="F"){%>
-                                                                Codigo: FINALIZADA N°:
+                                                                Codigo de la carpeta: FINALIZADA N°:
                                                                 <%=CodigoFinalizadas%>
                                                                     <%}%>
                                     </button>
@@ -116,7 +116,7 @@
                             <tr class="table-active">
 
                                 <form action="/actPrelCarpEcogas/<%=user.id%>" id="actPrelCarpEcogas" method="post">
-                                    <input type="checkbox" value="Preliminar" checked hidden name="EtapaTarea">
+
                                     <input type="hidden" name="Nombre" id="Nombre" value="<%= user.Nombre%>">
                                     <input type="hidden" name="id" id="id" value="<%= user.id%>">
                                     <%- include('./partials/editartareas/modalpreliminar.ejs')%>
@@ -125,14 +125,12 @@
 
 
                                 <form action="/act1pCarpEcogas/<%=user.id%>" id="act1pCarpEcogas" method="post">
-                                    <input type="checkbox" value="1ra parte" checked hidden name="EtapaTarea">
                                     <input type="hidden" name="Nombre" id="Nombre" value="<%= user.Nombre%>">
                                     <input type="hidden" name="id" id="id" value="<%= user.id%>">
 
                                     <%- include('./partials/editartareas/modal1p.ejs')%>
                                 </form>
                                 <form action="/act2pCarpEcogas/<%=user.id%>" id="act2pCarpEcogas" method="post">
-                                    <input type="checkbox" value="2da parte" checked hidden name="EtapaTarea">
                                     <input type="hidden" name="Nombre" id="Nombre" value="<%= user.Nombre%>">
                                     <input type="hidden" name="id" id="id" value="<%= user.id%>">
                                     <%- include('./partials/editartareas/modal2p-1de4Inicio.ejs')%>
@@ -142,7 +140,6 @@
                                                 <%- include('./partials/editartareas/modal2p-4de4Final.ejs')%>
                                 </form>
                                 <form action="/actObrasCarpEcogas/<%=user.id%>" id="actObrasCarpEcogas" method="post">
-                                    <input type="checkbox" value="Obras" checked hidden name="EtapaTarea">
                                     <input type="hidden" name="id" id="id" value="<%= user.id%>">
                                     <input type="hidden" name="Nombre" id="Nombre" value="<%= user.Nombre%>">
                                     <input type="hidden" name="PCaprobado" id="PCaprobado"
@@ -225,8 +222,7 @@
                                                                     </div>
                                                                     <div class="col-6 p-1 bg-dark text-white formularioEditarTareasALlenar"
                                                                         id="form1Permisos" style="display: none;">
- <input type="hidden" name="Tarea" value="Permisos" checked hidden>
- 
+
                                                                         <div class="row ">
                                                                             <div class="col">
                                                                                 <span>
@@ -338,7 +334,7 @@
                                                                     </div>
                                                                     <div class="col-6 p-1 bg-dark text-white formularioEditarTareasALlenar"
                                                                         id="form1ActasDeInicio" style="display: none;">
- <input type="hidden" name="Tarea" value="Actas de inicio" checked hidden>
+
                                                                         <div class="row ">
                                                                             <div class="col">
                                                                                 <span>
@@ -450,7 +446,7 @@
                                                                     </div>
                                                                     <div class="col-6 p-1 bg-dark text-white formularioEditarTareasALlenar"
                                                                         id="form1Interferencias" style="display: none;">
- <input type="hidden" name="Tarea" value="Interferencias" checked hidden>
+
                                                                         <div class="row ">
                                                                             <div class="col">
                                                                                 <span>
@@ -562,8 +558,9 @@
 
                                                                     </div>
                                                                     <div class="col-6 p-1 bg-dark text-white formularioEditarTareasALlenar"
-                                                                        id="form1LibroOrdenesServicio"style="display: none;">
- <input type="hidden" name="Tarea" value="Libro de ordenes de servicio" checked hidden>
+                                                                        id="form1LibroOrdenesServicio"
+                                                                        style="display: none;">
+
                                                                         <div class="row ">
                                                                             <div class="col">
                                                                                 <span>
@@ -675,8 +672,9 @@
 
                                                                     </div>
                                                                     <div class="col-6 p-1 bg-dark text-white formularioEditarTareasALlenar"
-                                                                        id="form1LibroNotasPedido"style="display: none;">
- <input type="hidden" name="Tarea" value="Libro notas de pedido" checked hidden>
+                                                                        id="form1LibroNotasPedido"
+                                                                        style="display: none;">
+
                                                                         <div class="row ">
                                                                             <div class="col">
                                                                                 <span>
@@ -788,8 +786,9 @@
 
                                                                     </div>
                                                                     <div class="col-6 p-1 bg-dark text-white formularioEditarTareasALlenar"
-                                                                        id="form1PCEntregadoInspeccion"style="display: none;">
- <input type="hidden" name="Tarea" value="PC Entregado a Inspeccion" checked hidden>
+                                                                        id="form1PCEntregadoInspeccion"
+                                                                        style="display: none;">
+
                                                                         <div class="row ">
                                                                             <div class="col">
                                                                                 <span>
@@ -901,7 +900,7 @@
                                                                     </div>
                                                                     <div class="col-6 p-1 bg-dark text-white formularioEditarTareasALlenar"
                                                                         id="form1AvisosDeObra" style="display: none;">
- <input type="hidden" name="Tare a" valu e="Avisos De Obra" checked hidden>
+
                                                                         <div class="row ">
                                                                             <div class="col">
                                                                                 <span>
@@ -1014,8 +1013,9 @@
 
                                                                     </div>
                                                                     <div class="col-6 p-1 bg-dark text-white formularioEditarTareasALlenar"
-                                                                        id="form1CronogramaFirmadoComitente"style="display: none;">
- <input type="hidden" name="Tarea" value="Cronograma firmado por comitente" checked hidden>
+                                                                        id="form1CronogramaFirmadoComitente"
+                                                                        style="display: none;">
+
                                                                         <div class="row ">
                                                                             <div class="col">
                                                                                 <span>
@@ -1136,7 +1136,7 @@
                                                                     </div>
                                                                     <div class="col-6 p-1 bg-dark text-white formularioEditarTareasALlenar"
                                                                         id="form1OrdenServicio" style="display: none;">
- <input type="hidden" name="Tarea" value="Orden de servicio" checked hidden>
+
                                                                         <div class="row ">
                                                                             <div class="col">
                                                                                 <span>
@@ -1234,7 +1234,7 @@
                                                                     </div>
                                                                     <div class="col-6 p-1 bg-dark text-white formularioEditarTareasALlenar"
                                                                         id="form1FechaInicioTrabajos" style="display: none;">
- <input type="hidden" name="Tarea" value="Fecha de inicio de trabajos" checked hidden>
+
                                                                         <div class="row ">
                                                                             <div class="col">
                                                                                 <span>
@@ -1325,7 +1325,7 @@
                                                                     </div>
                                                                     <div class="col-6 p-1 bg-dark text-white formularioEditarTareasALlenar"
                                                                         id="form1FechaFindeobra" style="display: none;">
- <input type="hidden" name="Tarea" value="Fecha de fin de obra" checked hidden>
+
                                                                         <div class="row ">
                                                                             <div class="col">
                                                                                 <span>
@@ -1411,7 +1411,6 @@
                                     </th>
                                 </form>
                                 <form action=" /actCaosCarpEcogas/<%=user.id%>" id="actCaosCarpEcogas" method="post">
-                                    <input type="checkbox" value="Caos" checked hidden name="EtapaTarea">
                                     <input type="hidden" name="id" id="id" value="<%= user.id%>">
                                     <input type="hidden" name="Nombre" id="Nombre" value="<%= user.Nombre%>">
                                     <input type="hidden" name="PCaprobado" id="PCaprobado"
@@ -1557,7 +1556,7 @@
                                                             </div>
                                                             <div class="col-6 border p-1 bg-dark text-white formularioEditarTareasALlenar"
                                                             id="form1Caos" style="display: none;">
-                     <input type="hidden" name="Tareas" value="Tareas de CAOS" checked hidden>
+                    
                                                             <div class="row ">
                                                                 <div class="col">
                                                                     <span>
@@ -1671,7 +1670,6 @@
                                                 </option>
 =======
                                 <form action="/actFinalCarpEcogas/<%=user.id%>" id="actFinalCarpEcogas" method="post">
-                                    <input type="checkbox" value="Finalizada" checked hidden name="EtapaTarea">
                                     <input type="hidden" name="Nombre" id="Nombre" value="<%= user.Nombre%>">
                                     <input type="hidden" name="id" id="id" value="<%= user.id%>">
 >>>>>>> 2fb7c1dd706eb4ea575a60a03b3f14e751564cd9
@@ -1705,7 +1703,7 @@
 
                                         <!-- Modal -->
                                         <div class="modal fade" id="ModalFinalizacion" tabindex="-1" role="dialog"
-                                            aria-labelledby="Caos" aria-hidden=" true">
+                                            aria-labelledby="Caos aria-hidden=" true">
                                             <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -1762,7 +1760,7 @@
                                                                     </div>
                                                                     <div class="col-6 border p-1 bg-dark text-white formularioEditarTareasALlenar"
                                                                     id="form1Finalizacion" style="display: none;">
-                             <input type="hidden" name="Tareas" value="Finalización de carpeta" checked hidden>
+                            
                                                                     <div class="row ">
                                                                         <div class="col">
                                                                             <span>
