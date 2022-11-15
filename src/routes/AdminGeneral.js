@@ -109,6 +109,8 @@ router.post('/GuardarPolizaAlbacaucion',(req,res)=>{
          let ValorAPagar = req.body.Valor;
          let montoAsegurado = req.body.MontoAsegurado;
          let Asegurado = req.body.Asegurado;
+         if(NombreObra=""){}
+         else{
         var sql= 'Insert into admingeneral_seguros_albacaucion set?'
         connection.query(sql,{
 Aseguradora:Aseguradora, Obra:NombreObra, NumeroPoliza:NPoliza, FechaEmisionPoliza:FechaEmisionPoliza,
@@ -119,6 +121,7 @@ VigenciaPoliza:VigenciaPoliza,Riesgo:DescripcionRiesgo, Valor:ValorAPagar, Monto
                 res.redirect('/seguros/Albacaucion');   
             }
         })
+    }
     }
 
 })
