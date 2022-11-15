@@ -18,9 +18,39 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group">
-                        <div class="container">
 
+<<<<<<< HEAD
+                    <div class="row p-2 mb-2 mt-2">
+                        <div class="col-4 border border-secondary text-center"><label for="MailAutorizacion">Mail de
+                                autorización</label>
+                            <select class="form-control" id="MailAutorizacion" name="MailAutorizacion"
+                                value="<%= tareasporcarpeta.MailAutorizacion%>"
+                                placeholder="<%= tareasporcarpeta.MailAutorizacion%>">
+                                <option hidden value="<%=tareasporcarpeta.MailAutorizacion%>" selected>
+                                    <%=tareasporcarpeta.MailAutorizacion%>
+                                </option>
+                                <option value="No Recibido">
+                                    No Recibido</option>
+                                <option value="Recibido">Recibido</option>
+
+                            </select>
+
+                            <label for="PlanDeTrabajo">Plan de trabajo</label>
+                            <select class="form-control" id="PlanDeTrabajo" name="PlanDeTrabajo"
+                                value="<%= tareasporcarpeta.PlanDeTrabajo%>"
+                                placeholder="<%= tareasporcarpeta.PlanDeTrabajo%>">
+                                <option hidden value="<%=tareasporcarpeta.PlanDeTrabajo%>" selected>
+                                    <%=tareasporcarpeta.PlanDeTrabajo%>
+                                </option>
+                                <option value="Sin presentar">Sin presentar
+
+                                <option value="EnGestion">En
+                                    gestion</option>
+                                <option value="ok">ok
+                                </option>
+
+                            </select>
+=======
                             <div class="card mb-3 p-3 border-secondary">
                                 <div class="card-header bg-primary text-white">
                                     Comienzo gestión 2da Parte</div>
@@ -62,7 +92,7 @@
                                         </div>
                                         <div class="col-6 border p-1 bg-dark text-white formularioEditarTareasALlenar"
                                             id="form1MailAutorizacion" style="display: none;">
-<input type="checkbox" name="Tarea" value="Mail Autorizacion" id=""  checked hidden>
+<input type="checkbox" name="Tarea" value="MailAutorizacion" id=""  checked hidden>
                                             <div class="row ">
                                                 <div class="col">
                                                     <span>
@@ -162,7 +192,7 @@
                                         </div>
                                         <div class="col-6 border p-1 bg-dark text-white formularioEditarTareasALlenar"
                                             id="form1PlanDeTrabajo" style="display:none;">
-<input type="checkbox" name="Tarea" value="Plan De Trabajo" id=""  checked hidden>
+<input type="checkbox" name="Tarea" value="PlanDeTrabajo" id=""  checked hidden>
                                             <div class="row ">
                                                 <div class="col">
                                                     <span>
@@ -260,7 +290,7 @@
                                         </div>
                                         <div class="col-6 border p-1 bg-dark text-white formularioEditarTareasALlenar"
                                             id="form1SolicitudInicioObras" style="display: none;">
-<input type="checkbox" name="Tarea" value="Solicitud Inicio Obras" id=""  checked hidden>
+<input type="checkbox" name="Tarea" value="SolicitudInicioObras" id=""  checked hidden>
                                             <div class="row ">
                                                 <div class="col">
                                                     <span>
@@ -360,7 +390,7 @@
                                         </div>
                                         <div class="col-6 border p-1 bg-dark text-white formularioEditarTareasALlenar"
                                             id="form1CertificadoRT" style="display:none;">
-<input type="checkbox" name="Tarea" value="Certificado RT" id=""  checked hidden>
+<input type="checkbox" name="Tarea" value="CertificadoRT" id=""  checked hidden>
                                             <div class="row ">
                                                 <div class="col">
                                                     <span>
@@ -457,7 +487,7 @@
                                         </div>
                                         <div class="col-6 border p-1 bg-dark text-white formularioEditarTareasALlenar"
                                             id="form1Programadeseguridad" style="display: none;">
-<input type="checkbox" name="Tarea" value="Programa de seguridad" id=""  checked hidden>
+<input type="checkbox" name="Tarea" value="Programadeseguridad" id=""  checked hidden>
                                             <div class="row ">
                                                 <div class="col">
                                                     <span>
@@ -558,7 +588,7 @@
                                         </div>
                                         <div class="col-6 border p-1 bg-dark text-white formularioEditarTareasALlenar"
                                             id="form1CronogramaSyH" style="display:none;">
-<input type="checkbox" name="Tarea" value="Cronograma SyH" id=""  checked hidden>
+<input type="checkbox" name="Tarea" value="CronogramaSyH" id=""  checked hidden>
                                             <div class="row ">
                                                 <div class="col">
                                                     <span>
@@ -652,7 +682,7 @@
                                         </div>
                                         <div class="col-6 border p-1 bg-dark text-white formularioEditarTareasALlenar"
                                             id="form1SeguroRC" style="display:none;">
-<input type="checkbox" name="Tarea" value="Seguro RC" id=""  checked hidden>
+<input type="checkbox" name="Tarea" value="SeguroRC" id=""  checked hidden>
                                             <div class="row ">
                                                 <div class="col">
                                                     <span>
@@ -748,7 +778,7 @@
                                         </div>
                                         <div class="col-6 border p-1 bg-dark text-white formularioEditarTareasALlenar"
                                             id="form1Monotributos" style="display:none;">
-<input type="checkbox" name="Tarea" value="Monotributos" id=""  checked hidden>
+
                                             <div class="row ">
                                                 <div class="col">
                                                     <span>
@@ -847,7 +877,7 @@
                                         </div>
                                         <div class="col-6 border p-1 bg-dark text-white formularioEditarTareasALlenar"
                                             id="form1SeguroAccidentesPersonales" style="display:none;">
-<input type="checkbox" name="Tarea" value="Seguro Accidentes Personales" id=""  checked hidden>
+<input type="checkbox" name="Tarea" value="SeguroAccidentesPersonales" id=""  checked hidden>
                                             <div class="row ">
                                                 <div class="col">
                                                     <span>
@@ -903,7 +933,129 @@
                                 </div>
 
                             </div>
+>>>>>>> 2fb7c1dd706eb4ea575a60a03b3f14e751564cd9
+
+                        </div>
+                        <div class="col-4 border border-secondary  text-center">
+                            <h5 class="fw-bolder">Documentación de obras</h5>
+                            <label class="text-center" for="SolicitudInicioObras">Solicitud Inicio de obras</label>
+                            <select class="form-control" id="SolicitudInicioObras" name="SolicitudInicioObras"
+                                value="<%= tareasporcarpeta.SolicitudInicioObras%>"
+                                placeholder="<%= tareasporcarpeta.SolicitudInicioObras%>">
+                                <option hidden value="<%=tareasporcarpeta.SolicitudInicioObras%>" selected>
+                                    <%=tareasporcarpeta.SolicitudInicioObras%>
+                                </option>
+                                <option value="Sin presentar">Sin presentar
+
+                                <option value="EnGestion">En
+                                    gestion</option>
+                                <option value="ok">ok
+                                </option>
+
+                            </select>
+                            <label class="text-center" for="CertificadoRT">Certificado del RT</label>
+                            <select class="form-control" id="CertificadoRT" name="CertificadoRT"
+                                value="<%= tareasporcarpeta.CertificadoRT%>"
+                                placeholder="<%= tareasporcarpeta.CertificadoRT%>">
+                                <option hidden value="<%=tareasporcarpeta.CertificadoRT%>" selected>
+                                    <%=tareasporcarpeta.CertificadoRT%>
+                                </option>
+                                <option value="Sin presentar">
+                                    Sin presentar
+                                </option>
+                                <option value="EnGestion">En
+                                    gestion</option>
+                                <option value="ok">ok
+                                </option>
+
+                            </select>
+                        </div>
+
+
+                        <div class="col-4 pb-2 border border-secondary ">
+                            <h5 class="fw-bolder text-center">Seguridad</h5>
+                            <label class="text-center" for="Programadeseguridad">Programa de seguridad</label>
+                            <select class="form-control" id="Programadeseguridad" name="Programadeseguridad"
+                                value="<%= tareasporcarpeta.Programadeseguridad%>"
+                                placeholder="<%= tareasporcarpeta.Programadeseguridad%>">
+                                <option hidden value="<%=tareasporcarpeta.Programadeseguridad%>" selected>
+                                    <%=tareasporcarpeta.Programadeseguridad%>
+                                </option>
+                                <option value="Sin presentar">
+                                    Sin presentar
+                                </option>
+                                <option value="EnGestion">En
+                                    gestion</option>
+                                <option value="ok">ok
+                                </option>
+
+                            </select>
+                            <label class="text-center" for="CronogramaSyH">Cronograma de visitas SyH</label>
+                            <select class="form-control" id="CronogramaSyH" name="CronogramaSyH"
+                                value="<%= tareasporcarpeta.CronogramaSyH%>"
+                                placeholder="<%= tareasporcarpeta.CronogramaSyH%>">
+                                <option value="<%=tareasporcarpeta.CronogramaSyH%>" selected>
+                                    <%=tareasporcarpeta.CronogramaSyH%>
+                                </option>
+                                <option value="Sin presentar">
+                                    Sin presentar
+                                </option>
+                                <option value="EnGestion">En
+                                    gestion</option>
+                                <option value="ok">ok
+                                </option>
+
+                            </select>
+                            <label class="text-center" for="SeguroRC">Seguro
+                                responsabilidad civil</label>
+                            <select class="form-control" id="SeguroRC" name="SeguroRC"
+                                value="<%= tareasporcarpeta.SeguroRC%>" placeholder="<%= tareasporcarpeta.SeguroRC%>">
+                                <option value="<%=tareasporcarpeta.SeguroRC%>" selected>
+                                    <%=tareasporcarpeta.SeguroRC%>
+                                </option>
+                                <option value="Sin presentar">
+                                    Sin presentar
+                                </option>
+                                <option value="EnGestion">En
+                                    gestion</option>
+                                <option value="ok">ok
+                                </option>
+
+                            </select>
+                            <label class="text-center" for="Monotributos">Monotributos</label>
+                            <select class="form-control" id="Monotributos" name="Monotributos"
+                                value="<%= tareasporcarpeta.Monotributos%>"
+                                placeholder="<%= tareasporcarpeta.Monotributos%>">
+                                <option value="<%=tareasporcarpeta.Monotributos%>" selected>
+                                    <%=tareasporcarpeta.Monotributos%>
+                                </option>
+                                <option value="Sin presentar">
+                                    Sin presentar
+                                </option>
+                                <option value="EnGestion">En
+                                    gestion</option>
+                                <option value="ok">ok
+                                </option>
+
+                            </select>
+                            <label class="text-center" for="SeguroAccidentesPersonales">Seguro accidentes
+                                personales</label>
+                            <select class="form-control" id="SeguroAccidentesPersonales"
+                                name="SeguroAccidentesPersonales"
+                                value="<%= tareasporcarpeta.SeguroAccidentesPersonales%>"
+                                placeholder="<%= tareasporcarpeta.SeguroAccidentesPersonales%>">
+                                <option value="<%=tareasporcarpeta.SeguroAccidentesPersonales%>" selected>
+                                    <%=tareasporcarpeta.SeguroAccidentesPersonales%>
+                                </option>
+                                <option value="Sin presentar">
+                                    Sin presentar
+                                </option>
+                                <option value="EnGestion">En
+                                    gestion</option>
+                                <option value="ok">ok
+                                </option>
+
+                            </select>
 
                         </div>
                     </div>
-                    

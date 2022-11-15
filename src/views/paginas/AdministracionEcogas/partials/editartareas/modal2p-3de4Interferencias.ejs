@@ -1,15 +1,15 @@
-<div class="card border-success " >
-    <div class="card-header bg-primary text-white m-1" id="SeccionInterferencias">
+<div class="card  border-success text-center " >
+    <div class="card-header bg-black text-white m-1" id="SeccionInterferencias">
         Interferencias
     </div>
     <div class="row">
-        <div class="col text-center ">
+        <div class="col ">
 
     
     <div class="card-body">
-        <div class="card-title" onclick="document.getElementById('Telefonicabody').style.display= 'block'">Telefónica
+        <div class="card-title">Telefónica
         </div>
-        <div class="card-text" id="Telefonicabody" style="display: none;">
+        <div class="card-text">
             <form-check>
                 <%if (interferenciasypermisos.intTelefonica!="En gestion" && interferenciasypermisos.intTelefonica!="Pedida" && interferenciasypermisos.intTelefonica!="ok" ) {%>
                     <input type="radio" name="intTelefonica" id="intTelefonica" value="En gestion">
@@ -104,12 +104,12 @@
         </div>
     </div>
 </div>
-<div class="col text-center ">
+<div class="col ">
 
 
     <div class="card-body">
-        <div class="card-title"onclick="document.getElementById('Aguabody').style.display= 'block'">Agua</div>
-        <div class="card-text"id="Aguabody" style="display: none;" >
+        <div class="card-title">Agua</div>
+        <div class="card-text">
             <form-check>
                 <input hidden type="radio" name="intAgua" id="intAgua" value="<%=interferenciasypermisos.intAgua%>" checked>
                 <%if (interferenciasypermisos.intAgua!="En gestion" && interferenciasypermisos.intAgua!="Pedida" && interferenciasypermisos.intAgua!="ok" ) {%>
@@ -201,13 +201,17 @@
         </div>
     </div>
 </div>
-<div class="col text-center ">
+<div class="col ">
 
 
     <div class="card-body">
+<<<<<<< HEAD
+        <div class="card-title">Cloacas
+=======
         <div class="card-title" onclick="document.getElementById('Cloacasbody').style.display= 'block'">Cloacas
+>>>>>>> 2fb7c1dd706eb4ea575a60a03b3f14e751564cd9
         </div>
-        <div class="card-text" id="Cloacasbody" style="display: none;" id="Cloacasbody" style="display: none;">
+        <div class="card-text">
             <form-check>
                 <input hidden type="radio" name="intCloacas" id="intCloacas" value="<%=interferenciasypermisos.intCloacas%>" checked>
                 <%if (interferenciasypermisos.intCloaca!="En gestion" && interferenciasypermisos.intCloaca!="Pedida" && interferenciasypermisos.intCloaca!="ok" ) {%>
@@ -297,13 +301,13 @@
     </div>
 </div>
 
-    <div class="col text-center ">
+    <div class="col ">
 
     
     <div class="card-body">
-        <div class="card-title"onclick="document.getElementById('Electricidadbody').style.display= 'block'">Electricidad
+        <div class="card-title">Electricidad
         </div>
-        <div class="card-text" id="Electricidadbody" style="display: none;">
+        <div class="card-text">
             <form-check>
                 <input hidden type="radio" name="intElectricidad" id="intElectricidad" value="<%=interferenciasypermisos.intElectricidad%>"
                     checked>
@@ -406,13 +410,13 @@
 </div>
 </div>
 <div class="row">
-<div class="col text-center ">
+<div class="col ">
    
     <div class="card-body">
 
-        <div class="card-title" onclick="document.getElementById('Clarobody').style.display= 'block'">Claro
+        <div class="card-title">Claro
         </div>
-        <div class="card-text" id="Clarobody" style="display: none;">
+        <div class="card-text">
             <form-check>
                 <%if (interferenciasypermisos.intClaro!="En gestion" && interferenciasypermisos.intClaro!="Pedida" && interferenciasypermisos.intClaro!="ok" ) {%>
                     <input hidden type="radio" name="intClaro" id="intClaro" value="<%=interferenciasypermisos.intClaro%>" checked>
@@ -502,13 +506,13 @@
         </div>
     </div>
 </div>
-<div class="col text-center ">
+<div class="col ">
     
     <div class="card-body">
 
-        <div class="card-title"  onclick="document.getElementById('Arnetbody').style.display= 'block'">Arnet
+        <div class="card-title">Arnet
         </div>
-        <div class="card-text" id="Arnetbody" style="display: none;">
+        <div class="card-text">
             <form-check>
                 <%if (interferenciasypermisos.intArnet!="En gestion" && interferenciasypermisos.intArnet!="Pedida" && interferenciasypermisos.intArnet!="ok" ) {%>
                     <input hidden type="radio" name="intArnet" id="intArnet" value="<%=interferenciasypermisos.intArnet%>" checked>
@@ -595,13 +599,13 @@
         </div>
     </div>
 </div>
-<div class="col text-center ">
+<div class="col ">
     
     <div class="card-body">
 
-        <div class="card-title" onclick="document.getElementById('Arsatbody').style.display= 'block'">Arsat
+        <div class="card-title">Arsat
         </div>
-        <div class="card-text" id="Arsatbody" style="display: none;">
+        <div class="card-text">
             <form-check>
                 <%if (interferenciasypermisos.intArsat!="En gestion" && interferenciasypermisos.intArsat!="Pedida" && interferenciasypermisos.intArsat!="ok" ) {%>
                     <input hidden type="radio" name="intArsat" id="intArsat" value="<%=interferenciasypermisos.intArsat%>" checked>
@@ -687,13 +691,13 @@
         </div>
     </div>
 </div>
-<div class="col text-center ">
+<div class="col ">
     
     <div class="card-body">
 
-        <div class="card-title" onclick="document.getElementById('Telecombody').style.display= 'block'">Telecom
+        <div class="card-title">Telecom
         </div>
-        <div class="card-text" id="Telecombody" style="display: none;">
+        <div class="card-text">
             <form-check>
                 <%if (interferenciasypermisos.intTelecom!="En gestion" && interferenciasypermisos.intTelecom!="Pedida" && interferenciasypermisos.intTelecom!="ok" ) {%>
                     <input hidden type="radio" name="intTelecom" id="intTelecom" value="<%=interferenciasypermisos.intTelecom%>" checked>

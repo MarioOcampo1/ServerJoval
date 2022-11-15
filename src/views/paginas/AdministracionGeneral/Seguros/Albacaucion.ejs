@@ -36,9 +36,11 @@
   </tr>
 </thead>
 <%results.forEach((poliza)=>{%>
+    <%var Fecha = Date.now();%>
+   
 <tbody>
     <tr>
-   
+   <%if(poliza.Estado=='Dada de baja'){} else{    %>
         <td><%=poliza.NumeroPoliza%></td>
         <td><%=moment(poliza.FechaEmisionPoliza).format('DD/MM/YYYY')%> </td>
         <td><%=poliza.VigenciaPoliza%></td>
@@ -46,7 +48,11 @@
         <td><%=poliza.Valor%></td>
         <td><%=poliza.MontoAsegurado%></td>
         <td><%=poliza.Obra%></td>
-        <td><%=moment(poliza.ProximaRefacturacion).format('DD/MM/YYYY')%> </td>
+        <%if(((poliza.ProximaRefacturacion- Fecha)>30) && poliza.Estado!="Dada de baja"){%>
+        <td class="bg-danger text-white"><%=moment(poliza.ProximaRefacturacion).format('DD/MM/YYYY')%> </td>
+        <%}else{%>
+            <td ><%=moment(poliza.ProximaRefacturacion).format('DD/MM/YYYY')%> </td>
+            <%}%>
         <td><%=poliza.NombreAsegurado%></td>
         <td><%=poliza.Estado%>
             
@@ -54,7 +60,7 @@
         <button  class="btnEditar">Editar</button>
     </a>
         </td>
-
+<%}%>
         <%})%>
   </tr>
 </div>

@@ -152,16 +152,30 @@ router.post('/ActualizarPolizaAlbacaucion/:id', (req,res)=>{
          let ValorAPagar = req.body.Valor;
          let montoAsegurado = req.body.MontoAsegurado;
          let Asegurado = req.body.Asegurado;
+         let Endoso = req.body.Endoso;
         var sql= 'UPDATE admingeneral_seguros_albacaucion set? WHERE ID_poliza = ?'
-        connection.query(sql,[{
-Aseguradora:Aseguradora, NumeroPoliza:NPoliza, FechaEmisionPoliza:FechaEmisionPoliza, Obra:Obra,
-VigenciaPoliza:VigenciaPoliza,Riesgo:DescripcionRiesgo, Valor:ValorAPagar, MontoAsegurado: montoAsegurado, NombreAsegurado:Asegurado
-        }, id],(error,results)=>{
-            if (error) console.log(error);  
-            else{
-                res.redirect('/seguros/Albacaucion');   
-            }
-        })
+        if(FechaEmisionPoliza==""){
+            connection.query(sql,[{
+                Aseguradora:Aseguradora, NumeroPoliza:NPoliza, Obra:Obra,
+                VigenciaPoliza:VigenciaPoliza,Riesgo:DescripcionRiesgo, Valor:ValorAPagar, MontoAsegurado: montoAsegurado, NombreAsegurado:Asegurado, Endoso:Endoso
+                        }, id],(error,results)=>{
+                            if (error) console.log(error);  
+                            else{
+                                res.redirect('/seguros/Albacaucion');   
+                            }
+                        })
+        }else{
+            connection.query(sql,[{
+                Aseguradora:Aseguradora, NumeroPoliza:NPoliza, FechaEmisionPoliza:FechaEmisionPoliza, Obra:Obra,
+                VigenciaPoliza:VigenciaPoliza,Riesgo:DescripcionRiesgo, Valor:ValorAPagar, MontoAsegurado: montoAsegurado, NombreAsegurado:Asegurado, Endoso:Endoso
+                        }, id],(error,results)=>{
+                            if (error) console.log(error);  
+                            else{
+                                res.redirect('/seguros/Albacaucion');   
+                            }
+                        })
+        }
+     
     }
 })
 router.post('/BorrarPoliza/:id', (req,res)=>{

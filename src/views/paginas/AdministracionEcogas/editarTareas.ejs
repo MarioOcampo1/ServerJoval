@@ -9,12 +9,12 @@
     </title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="../css/editarTareas.css" rel="stylesheet" type="text/css">
     <script src="https://code.jquery.com/jquery-3.6.0.js"
         integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-
 </head>
 
-<body>
+<body class="body editarTareas">
 
     <%- include('./partials/menusuperior.ejs')%>
         <% if(user) { %>
@@ -30,21 +30,21 @@
                                 <br>
 
                                 <div class="col-md-auto ">
-                                    <i>
-                                    <a href="/historialcarpeta/<%= user.Nombre%>" class="btn btn-primary bi bi-list-task"></a></i>
+                                    <a href="/historialcarpeta/<%= user.Nombre%>" class="btn btn-primary ">Ver
+                                        Historial</a>
                                 </div>
                                 <div class="col-md-auto ">
-                                    <a href="/edit/<%= user.id%>" class="btn btn-primary bi bi-info-square"></a>
+                                    <a href="/edit/<%= user.id%>" class="btn btn-primary ">Mas información</a>
                                 </div>
                                 <div class="col-md-auto">
                                     <button class="btn btn-primary" id="CodigoCarpeta">
                                         <%if( CodigoEnUsoVigentes=="S" ){%>
-                                            Codigo: <%=CodigoVigentes%>
+                                            Codigo de la carpeta: <%=CodigoVigentes%>
                                                 <%}%>
                                                     <%if( CodigoEnUsoVigentes=="N" ){%>
-                                                        Codigo: <%"S /C"%>
+                                                        Codigo de la carpeta: <%"S /C"%>
                                                             <%}if(CodigoEnUsoVigentes=="F"){%>
-                                                                Codigo: FINALIZADA N°:
+                                                                Codigo de la carpeta: FINALIZADA N°:
                                                                 <%=CodigoFinalizadas%>
                                                                     <%}%>
                                     </button>
@@ -116,7 +116,7 @@
                             <tr class="table-active">
 
                                 <form action="/actPrelCarpEcogas/<%=user.id%>" id="actPrelCarpEcogas" method="post">
-                                    <input type="checkbox" value="Preliminar" checked hidden name="EtapaTarea">
+
                                     <input type="hidden" name="Nombre" id="Nombre" value="<%= user.Nombre%>">
                                     <input type="hidden" name="id" id="id" value="<%= user.id%>">
                                     <%- include('./partials/editartareas/modalpreliminar.ejs')%>
@@ -125,14 +125,12 @@
 
 
                                 <form action="/act1pCarpEcogas/<%=user.id%>" id="act1pCarpEcogas" method="post">
-                                    <input type="checkbox" value="1ra parte" checked hidden name="EtapaTarea">
                                     <input type="hidden" name="Nombre" id="Nombre" value="<%= user.Nombre%>">
                                     <input type="hidden" name="id" id="id" value="<%= user.id%>">
 
                                     <%- include('./partials/editartareas/modal1p.ejs')%>
                                 </form>
                                 <form action="/act2pCarpEcogas/<%=user.id%>" id="act2pCarpEcogas" method="post">
-                                    <input type="checkbox" value="2da parte" checked hidden name="EtapaTarea">
                                     <input type="hidden" name="Nombre" id="Nombre" value="<%= user.Nombre%>">
                                     <input type="hidden" name="id" id="id" value="<%= user.id%>">
                                     <%- include('./partials/editartareas/modal2p-1de4Inicio.ejs')%>
@@ -142,7 +140,6 @@
                                                 <%- include('./partials/editartareas/modal2p-4de4Final.ejs')%>
                                 </form>
                                 <form action="/actObrasCarpEcogas/<%=user.id%>" id="actObrasCarpEcogas" method="post">
-                                    <input type="checkbox" value="Obras" checked hidden name="EtapaTarea">
                                     <input type="hidden" name="id" id="id" value="<%= user.id%>">
                                     <input type="hidden" name="Nombre" id="Nombre" value="<%= user.Nombre%>">
                                     <input type="hidden" name="PCaprobado" id="PCaprobado"
@@ -225,8 +222,7 @@
                                                                     </div>
                                                                     <div class="col-6 p-1 bg-dark text-white formularioEditarTareasALlenar"
                                                                         id="form1Permisos" style="display: none;">
- <input type="hidden" name="Tarea" value="Permisos" checked hidden>
- 
+
                                                                         <div class="row ">
                                                                             <div class="col">
                                                                                 <span>
@@ -338,7 +334,7 @@
                                                                     </div>
                                                                     <div class="col-6 p-1 bg-dark text-white formularioEditarTareasALlenar"
                                                                         id="form1ActasDeInicio" style="display: none;">
- <input type="hidden" name="Tarea" value="Actas de inicio" checked hidden>
+
                                                                         <div class="row ">
                                                                             <div class="col">
                                                                                 <span>
@@ -450,7 +446,7 @@
                                                                     </div>
                                                                     <div class="col-6 p-1 bg-dark text-white formularioEditarTareasALlenar"
                                                                         id="form1Interferencias" style="display: none;">
- <input type="hidden" name="Tarea" value="Interferencias" checked hidden>
+
                                                                         <div class="row ">
                                                                             <div class="col">
                                                                                 <span>
@@ -562,8 +558,9 @@
 
                                                                     </div>
                                                                     <div class="col-6 p-1 bg-dark text-white formularioEditarTareasALlenar"
-                                                                        id="form1LibroOrdenesServicio"style="display: none;">
- <input type="hidden" name="Tarea" value="Libro de ordenes de servicio" checked hidden>
+                                                                        id="form1LibroOrdenesServicio"
+                                                                        style="display: none;">
+
                                                                         <div class="row ">
                                                                             <div class="col">
                                                                                 <span>
@@ -675,8 +672,9 @@
 
                                                                     </div>
                                                                     <div class="col-6 p-1 bg-dark text-white formularioEditarTareasALlenar"
-                                                                        id="form1LibroNotasPedido"style="display: none;">
- <input type="hidden" name="Tarea" value="Libro notas de pedido" checked hidden>
+                                                                        id="form1LibroNotasPedido"
+                                                                        style="display: none;">
+
                                                                         <div class="row ">
                                                                             <div class="col">
                                                                                 <span>
@@ -788,8 +786,9 @@
 
                                                                     </div>
                                                                     <div class="col-6 p-1 bg-dark text-white formularioEditarTareasALlenar"
-                                                                        id="form1PCEntregadoInspeccion"style="display: none;">
- <input type="hidden" name="Tarea" value="PC Entregado a Inspeccion" checked hidden>
+                                                                        id="form1PCEntregadoInspeccion"
+                                                                        style="display: none;">
+
                                                                         <div class="row ">
                                                                             <div class="col">
                                                                                 <span>
@@ -901,7 +900,7 @@
                                                                     </div>
                                                                     <div class="col-6 p-1 bg-dark text-white formularioEditarTareasALlenar"
                                                                         id="form1AvisosDeObra" style="display: none;">
- <input type="hidden" name="Tare a" valu e="Avisos De Obra" checked hidden>
+
                                                                         <div class="row ">
                                                                             <div class="col">
                                                                                 <span>
@@ -1014,8 +1013,9 @@
 
                                                                     </div>
                                                                     <div class="col-6 p-1 bg-dark text-white formularioEditarTareasALlenar"
-                                                                        id="form1CronogramaFirmadoComitente"style="display: none;">
- <input type="hidden" name="Tarea" value="Cronograma firmado por comitente" checked hidden>
+                                                                        id="form1CronogramaFirmadoComitente"
+                                                                        style="display: none;">
+
                                                                         <div class="row ">
                                                                             <div class="col">
                                                                                 <span>
@@ -1136,7 +1136,7 @@
                                                                     </div>
                                                                     <div class="col-6 p-1 bg-dark text-white formularioEditarTareasALlenar"
                                                                         id="form1OrdenServicio" style="display: none;">
- <input type="hidden" name="Tarea" value="Orden de servicio" checked hidden>
+
                                                                         <div class="row ">
                                                                             <div class="col">
                                                                                 <span>
@@ -1234,7 +1234,7 @@
                                                                     </div>
                                                                     <div class="col-6 p-1 bg-dark text-white formularioEditarTareasALlenar"
                                                                         id="form1FechaInicioTrabajos" style="display: none;">
- <input type="hidden" name="Tarea" value="Fecha de inicio de trabajos" checked hidden>
+
                                                                         <div class="row ">
                                                                             <div class="col">
                                                                                 <span>
@@ -1325,7 +1325,7 @@
                                                                     </div>
                                                                     <div class="col-6 p-1 bg-dark text-white formularioEditarTareasALlenar"
                                                                         id="form1FechaFindeobra" style="display: none;">
- <input type="hidden" name="Tarea" value="Fecha de fin de obra" checked hidden>
+
                                                                         <div class="row ">
                                                                             <div class="col">
                                                                                 <span>
@@ -1411,7 +1411,6 @@
                                     </th>
                                 </form>
                                 <form action=" /actCaosCarpEcogas/<%=user.id%>" id="actCaosCarpEcogas" method="post">
-                                    <input type="checkbox" value="Caos" checked hidden name="EtapaTarea">
                                     <input type="hidden" name="id" id="id" value="<%= user.id%>">
                                     <input type="hidden" name="Nombre" id="Nombre" value="<%= user.Nombre%>">
                                     <input type="hidden" name="PCaprobado" id="PCaprobado"
@@ -1425,73 +1424,67 @@
                                             Caos
                                         </button>
 
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="ModalCaos" tabindex="-1" role="dialog"
-                                            aria-labelledby="Caos" aria-hidden=" true">
-                                            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="Caos">
-                                                            CAOS
-                                                            (Conforme a obras)</h5>
-                                                        <button type="button" class="close" data-dismiss="modal"
-                                                            aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <div class="container">
-                                                            <div class="card p-3 border-secondary">
-                                                                <div class="row">
-                                                                <div class="col-6">
-                                                                    
-                                                                <div class="card-title">
-                                                                    Actas
-                                                                    finales de Ecogas</div>
-                                                                <select class="form-control" id="ActasFinales"
-                                                                    name="ActasFinales"
-                                                                    value="<%= tareasporcarpeta.ActasFinales%>"
-                                                                    placeholder="<%= tareasporcarpeta.ActasFinales%>"  >
-                                                                    <option hidden
-                                                                        value="<%=tareasporcarpeta.ActasFinales%>"
-                                                                        selected>
-                                                                        <%=tareasporcarpeta.ActasFinales%>
-                                                                    </option>
-                                                                    <option value="Sin recibir"onclick="llamarAFormularioEditarTareas('Caos');">
-                                                                        Sin recibir</option>
-                                                                    <option value="Recibidas"onclick="llamarAFormularioEditarTareas('Caos');">
-                                                                        Recibidas
-                                                                    </option>
-                                                                    <option value="Firmadas"onclick="llamarAFormularioEditarTareas('Caos');">
-                                                                        Firmadas</option>
-                                                                    <option value="ok"onclick="llamarAFormularioEditarTareas('Caos');">ok
-                                                                    </option>
-                                                                </select>
-                                                                <div class="card-title">
-                                                                    Planos y
-                                                                    croquis</div>
-                                                                <div class="card-text">
-                                                                    <select class="form-control" id="PlanosyCroquis"
-                                                                        name="PlanosyCroquis"
-                                                                        value="<%= tareasporcarpeta.PlanosyCroquis%>"
-                                                                        placeholder="<%= tareasporcarpeta.PlanosyCroquis%>">
-                                                                        <option hidden
-                                                                            value="<%=tareasporcarpeta.PlanosyCroquis%>"
-                                                                            selected>
-                                                                            <%=tareasporcarpeta.PlanosyCroquis%>
-                                                                        </option>
-                                                                        <option value="EnGestion" onclick="llamarAFormularioEditarTareas('Caos');">
-                                                                            En
-                                                                            gestion</option>
-                                                                        <option value="Presentado" onclick="llamarAFormularioEditarTareas('Caos');">
-                                                                            Presentado
-                                                                        <option value="Aprobado/Impreso" onclick="llamarAFormularioEditarTareas('Caos');">
-                                                                            Aprobado/Impreso
-                                                                        <option value="ok" onclick="llamarAFormularioEditarTareas('Caos');">
-                                                                            ok
-                                                                        </option>
+                    <!-- Modal -->
+                    <div class="modal fade" id="ModalCaos" tabindex="-1" role="dialog"
+                        aria-labelledby="Caos aria-hidden=" true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="Caos">
+                                        CAOS
+                                        (Conforme a obras)</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="container">
+                                        <div class="card p-3 border-secondary">
+                                            <div class="card-header">
+                                                Actas
+                                                finales de Ecogas</div>
+                                            <select class="form-control" id="ActasFinales" name="ActasFinales"
+                                                value="<%= tareasporcarpeta.ActasFinales%>"
+                                                placeholder="<%= tareasporcarpeta.ActasFinales%>">
+                                                <option hidden value="<%=tareasporcarpeta.ActasFinales%>" selected>
+                                                    <%=tareasporcarpeta.ActasFinales%>
+                                                </option>
+                                                <option value="Sin recibir">
+                                                    Sin recibir</option>
+                                                <option value="Recibidas">
+                                                    Recibidas
+                                                </option>
+                                                <option value="Firmadas">
+                                                    Firmadas</option>
+                                                <option value="ok">ok
+                                                </option>
+                                            </select>
+                                            <div class="card-header">
+                                                Planos y
+                                                croquis</div>
+                                            <div class="card-text">
+                                                <select class="form-control" id="PlanosyCroquis" name="PlanosyCroquis"
+                                                    value="<%= tareasporcarpeta.PlanosyCroquis%>"
+                                                    placeholder="<%= tareasporcarpeta.PlanosyCroquis%>">
+                                                    <option hidden value="<%=tareasporcarpeta.PlanosyCroquis%>"
+                                                        selected>
+                                                        <%=tareasporcarpeta.PlanosyCroquis%>
+                                                    </option>
+                                                    <option value="EnGestion">
+                                                        En
+                                                        gestion</option>
+                                                    <option value="Presentado">
+                                                        Presentado
+                                                    <option value="Aprobado/Impreso">
+                                                        Aprobado/Impreso
+                                                    <option value="ok">
+                                                        ok
+                                                    </option>
 
 
+<<<<<<< HEAD
+                                                </select>
+=======
                                                                     </select>
                                                                 </div>
 
@@ -1563,7 +1556,7 @@
                                                             </div>
                                                             <div class="col-6 border p-1 bg-dark text-white formularioEditarTareasALlenar"
                                                             id="form1Caos" style="display: none;">
-                     <input type="hidden" name="Tareas" value="Tareas de CAOS" checked hidden>
+                    
                                                             <div class="row ">
                                                                 <div class="col">
                                                                     <span>
@@ -1632,17 +1625,75 @@
                                                         </div>
                                                     </div>
                                                 </div>
+>>>>>>> 2fb7c1dd706eb4ea575a60a03b3f14e751564cd9
                                             </div>
-                                    </th>
 
-                                </form>
+                                            </select>
+                                            <div class="card-title">
+                                                Conformes de
+                                                Permisos</div>
+                                            <select class="form-control" id="ConformeDePermisos"
+                                                name="ConformeDePermisos"
+                                                value="<%= tareasporcarpeta.ConformeDePermisos%>"
+                                                placeholder="<%= tareasporcarpeta.ConformeDePermisos%>">
+                                                <option value="<%=tareasporcarpeta.ConformeDePermisos%>" selected>
+                                                    <%=tareasporcarpeta.ConformeDePermisos%>
+                                                </option>
+                                                <option value="Sin presentar">
+                                                    Sin presentar
+                                                </option>
+                                                <option value="Solicitado">
+                                                    Solicitado</option>
+                                                <option value="Entregado">
+                                                    Entregado</option>
+                                                <option value="ok">ok
+                                                </option>
 
+<<<<<<< HEAD
+                                            </select>
+                                            <div class="card-title">
+                                                Prueba de
+                                                hermeticidad</div>
+                                            <select class="form-control" id="PruebaHermeticidad"
+                                                name="PruebaHermeticidad"
+                                                value="<%= tareasporcarpeta.PruebaHermeticidad%>"
+                                                placeholder="<%= tareasporcarpeta.PruebaHermeticidad%>">
+                                                <option value="<%=tareasporcarpeta.PruebaHermeticidad%>" selected>
+                                                    <%=tareasporcarpeta.PruebaHermeticidad%>
+                                                </option>
+                                                <option value="Sin realizar">
+                                                    Sin realizar
+                                                </option>
+                                                <option value="Realizada">
+                                                    Realizada</option>
+                                                <option value="ok">ok
+                                                </option>
+=======
                                 <form action="/actFinalCarpEcogas/<%=user.id%>" id="actFinalCarpEcogas" method="post">
-                                    <input type="checkbox" value="Finalizada" checked hidden name="EtapaTarea">
                                     <input type="hidden" name="Nombre" id="Nombre" value="<%= user.Nombre%>">
                                     <input type="hidden" name="id" id="id" value="<%= user.id%>">
+>>>>>>> 2fb7c1dd706eb4ea575a60a03b3f14e751564cd9
 
+                                            </select>
+                                            <div class="card-title">
+                                                Informes
+                                                finales</div>
+                                            <select class="form-control" id="InformesFinales" name="InformesFinales"
+                                                value="<%= tareasporcarpeta.InformesFinales%>"
+                                                placeholder="<%= tareasporcarpeta.InformesFinales%>">
+                                                <option value="<%=tareasporcarpeta.InformesFinales%>" selected>
+                                                    <%=tareasporcarpeta.InformesFinales%>
+                                                </option>
+                                                <option value="EnGestion">En
+                                                    gestion</option>
+                                                <option value="Firmados">
+                                                    Firmados</option>
+                                                <option value="ok">ok
+                                                </option>
 
+<<<<<<< HEAD
+                                            </select>
+=======
                                     <!--Finalizada-->
                                     <th>
                                         <button type="button" class="btn btn-primary" data-toggle="modal"
@@ -1652,7 +1703,7 @@
 
                                         <!-- Modal -->
                                         <div class="modal fade" id="ModalFinalizacion" tabindex="-1" role="dialog"
-                                            aria-labelledby="Caos" aria-hidden=" true">
+                                            aria-labelledby="Caos aria-hidden=" true">
                                             <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -1709,7 +1760,7 @@
                                                                     </div>
                                                                     <div class="col-6 border p-1 bg-dark text-white formularioEditarTareasALlenar"
                                                                     id="form1Finalizacion" style="display: none;">
-                             <input type="hidden" name="Tareas" value="Finalización de carpeta" checked hidden>
+                            
                                                                     <div class="row ">
                                                                         <div class="col">
                                                                             <span>
@@ -1775,167 +1826,246 @@
                                                     </div>
                                                 </div>
                                             </div>
+>>>>>>> 2fb7c1dd706eb4ea575a60a03b3f14e751564cd9
                                         </div>
-                                    </th>
-                                </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                            onclick="CerrarModal()">
+                                            Cerrar</button>
+                                        <button type="submit" class="btn btn-primary fixed-bottom"
+                                            form="actCaosCarpEcogas">Guardar
+                                            Cambios</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </th>
 
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <!-- Ifs de las etapas de la carpeta, controlan la frase que se muestra al usuario debajo de cada etapa. -->
-                                <th class="table-primary">
-                                    <!-- Gestion de la primera parte, muestra en "Etapas de la carpeta", un resumen de como va cada area de la carpeta -->
-                                    <% if(tareasporcarpeta.Mensura=="ok" && tareasporcarpeta.TituloDePropiedad=="ok" &&
-                                        (tareasporcarpeta.DocumentaciónSociedad=="ok" ||
-                                        tareasporcarpeta.DocumentaciónSociedad=="NC" )&&
-                                        (tareasporcarpeta.ActaCargoVigente=="ok" ||
-                                        tareasporcarpeta.ActaCargoVigente=="NC" ) && tareasporcarpeta.Cotizacion=="ok"
-                                        && (tareasporcarpeta.Contrato=="ok" ||
-                                        tareasporcarpeta.Contrato=="Ok(Preliminar" )){%>
-                                        <p>Finalizada</p>
+            </form>
+
+            <form action="/actFinalCarpEcogas/<%=user.id%>" id="actFinalCarpEcogas" method="post">
+                <input type="hidden" name="Nombre" id="Nombre" value="<%= user.Nombre%>">
+                <input type="hidden" name="id" id="id" value="<%= user.id%>">
+
+
+                <!--Finalizada-->
+                <th>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalFinalizacion">
+                        Finalización
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="ModalFinalizacion" tabindex="-1" role="dialog"
+                        aria-labelledby="Caos aria-hidden=" true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="ModalFinalizacion">
+                                        Finalización</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="container">
+                                        <div class="card p-3 border-secondary">
+                                            <label for="PresentacionFinal">Presentacion
+                                                Final</label>
+                                            <select class="form-control" id="PresentacionFinal" name="PresentacionFinal"
+                                                value="<%= tareasporcarpeta.PresentacionFinal%>"
+                                                placeholder="<%= tareasporcarpeta.PresentacionFinal%>">
+                                                <option hidden value="<%=tareasporcarpeta.PresentacionFinal%>" selected>
+                                                    <%=tareasporcarpeta.PresentacionFinal%>
+                                                </option>
+                                                <option value="Sin presentar">
+                                                    Sin presentar
+                                                </option>
+                                                <option value="ok">ok
+                                                </option>
+                                            </select>
+                                            <label for="HabilitacionFinal">Habilitación
+                                                de
+                                                Obra</label>
+                                            <select class="form-control" id="HabilitacionFinal" name="HabilitacionFinal"
+                                                value="<%= tareasporcarpeta.HabilitacionFinal%>"
+                                                placeholder="<%= tareasporcarpeta.HabilitacionFinal%>">
+                                                <option hidden value="<%=tareasporcarpeta.HabilitacionFinal%>" selected>
+                                                    <%=tareasporcarpeta.HabilitacionFinal%>
+                                                </option>
+                                                <option value="No">No
+                                                    realizada
+                                                </option>
+                                                <option value="ok">Ok
+                                                </option>
+                                            </select>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                        onclick="CerrarModal()">Cerrar</button>
+                                    <button type="submit" class="btn btn-primary fixed-bottom"
+                                        form="actFinalCarpEcogas">Guardar
+                                        Cambios</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </th>
+            </form>
+            <form action=" /actualizarEtapas/<%=user.id%>" id="actPrelCarpEcogas" method="post">
+
+                </thead>
+                <tbody>
+                    <tr>
+                        <!-- Ifs de las etapas de la carpeta, controlan la frase que se muestra al usuario debajo de cada etapa. -->
+                        <th class="table-primary">
+                            <!-- Gestion de la primera parte, muestra en "Etapas de la carpeta", un resumen de como va cada area de la carpeta -->
+                            <% if(tareasporcarpeta.Mensura=="ok" && tareasporcarpeta.TituloDePropiedad=="ok" &&
+                                (tareasporcarpeta.DocumentaciónSociedad=="ok" ||
+                                tareasporcarpeta.DocumentaciónSociedad=="NC" )&&
+                                (tareasporcarpeta.ActaCargoVigente=="ok" || tareasporcarpeta.ActaCargoVigente=="NC" ) &&
+                                tareasporcarpeta.Cotizacion=="ok" && (tareasporcarpeta.Contrato=="ok" ||
+                                tareasporcarpeta.Contrato=="Ok(Preliminar" )){%>
+                                <p>Finalizada</p>
+                                <%}%>
+                                    <%if(tareasporcarpeta.Mensura=="EnGestion"||
+                                        tareasporcarpeta.TituloDePropiedad=="EnGestion" ||
+                                        tareasporcarpeta.DocumentaciónSociedad=="EnGestion" ||
+                                        tareasporcarpeta.ActaCargoVigente=="EnGestion" ||
+                                        tareasporcarpeta.Cotizacion=="EnGestion" ){%>
+                                        <p>Se encuentra en gestión </p>
                                         <%}%>
-                                            <%if(tareasporcarpeta.Mensura=="EnGestion"||
-                                                tareasporcarpeta.TituloDePropiedad=="EnGestion" ||
-                                                tareasporcarpeta.DocumentaciónSociedad=="EnGestion" ||
-                                                tareasporcarpeta.ActaCargoVigente=="EnGestion" ||
-                                                tareasporcarpeta.Cotizacion=="EnGestion" ){%>
-                                                <p>Se encuentra en gestión </p>
-                                                <%}%>
-                                </th>
-                                <th class="table-primary">
-                                    <!-- Configuracion de el cuadro de "Primera parte" -->
-                                    <%if(tareasporcarpeta.Contrato=="ok" && tareasporcarpeta.PCaprobado=="ok" &&
-                                        tareasporcarpeta.MailAutorizacion=="ok" ){%>
-                                        Finalizada
-                                        <%} if(tareasporcarpeta.Contrato=="EnGestion" ||
-                                            tareasporcarpeta.PCaprobado=="EnGestion" ){%>
-                                            <p>Se encuentra en gestión </p>
-                                            <%}%>
-                                </th>
-                                <th class="table-primary">
-                                    <!-- Configuracion cuadro "Segunda Parte" -->
-                                    <%if(tareasporcarpeta.AvisoInicioObras=="ok" && tareasporcarpeta.CertificadoRT=="ok"
-                                        && tareasporcarpeta.Interferencias=="ok" && tareasporcarpeta.Permisos=="ok" &&
-                                        tareasporcarpeta.Programadeseguridad=="ok" ){%>
-                                        Finalizada
+                        </th>
+                        <th class="table-primary">
+                            <!-- Configuracion de el cuadro de "Primera parte" -->
+                            <%if(tareasporcarpeta.Contrato=="ok" && tareasporcarpeta.PCaprobado=="ok" &&
+                                tareasporcarpeta.MailAutorizacion=="ok" ){%>
+                                Finalizada
+                                <%} if(tareasporcarpeta.Contrato=="EnGestion" ||
+                                    tareasporcarpeta.PCaprobado=="EnGestion" ){%>
+                                    <p>Se encuentra en gestión </p>
+                                    <%}%>
+                        </th>
+                        <th class="table-primary">
+                            <!-- Configuracion cuadro "Segunda Parte" -->
+                            <%if(tareasporcarpeta.AvisoInicioObras=="ok" && tareasporcarpeta.CertificadoRT=="ok" &&
+                                tareasporcarpeta.Interferencias=="ok" && tareasporcarpeta.Permisos=="ok" &&
+                                tareasporcarpeta.Programadeseguridad=="ok" ){%>
+                                Finalizada
+                                <%}%>
+                                    <%if(tareasporcarpeta.MailAutorizacion=="EnGestion" ||
+                                        tareasporcarpeta.CertificadoRT=="EnGestion" ||
+                                        tareasporcarpeta.Interferencias=="EnGestion" ||
+                                        tareasporcarpeta.Permisos=="EnGestion" ||
+                                        tareasporcarpeta.Programadeseguridad=="EnGestion" ){%>
+                                        En Gestion
                                         <%}%>
-                                            <%if(tareasporcarpeta.MailAutorizacion=="EnGestion" ||
-                                                tareasporcarpeta.CertificadoRT=="EnGestion" ||
-                                                tareasporcarpeta.Interferencias=="EnGestion" ||
-                                                tareasporcarpeta.Permisos=="EnGestion" ||
-                                                tareasporcarpeta.Programadeseguridad=="EnGestion" ){%>
-                                                En Gestion
-                                                <%}%>
-                                </th>
-                                <th class="table-primary">
+                        </th>
+                        <th class="table-primary">
 
-                                </th>
-                                <th class="table-primary">
-                                    <!-- Configuracion cuadro "Caos" -->
-                                    <%if(tareasporcarpeta.DocInspeccion=="ok"&& tareasporcarpeta.PlanosyCroquis=="ok" &&
-                                        tareasporcarpeta.ActasFinales=="ok" && tareasporcarpeta.InformesFinales=="ok" &&
-                                        tareasporcarpeta.ConformedePermisos=="ok"
-                                        &&tareasporcarpeta.PresentacionFinal=="ok" ){%>
-                                        Finalizada
+                        </th>
+                        <th class="table-primary">
+                            <!-- Configuracion cuadro "Caos" -->
+                            <%if(tareasporcarpeta.DocInspeccion=="ok"&& tareasporcarpeta.PlanosyCroquis=="ok" &&
+                                tareasporcarpeta.ActasFinales=="ok" && tareasporcarpeta.InformesFinales=="ok" &&
+                                tareasporcarpeta.ConformedePermisos=="ok" &&tareasporcarpeta.PresentacionFinal=="ok"
+                                ){%>
+                                Finalizada
+                                <%}%>
+                                    <%if(tareasporcarpeta.DocInspeccion=="EnGestion"||
+                                        tareasporcarpeta.PlanosyCroquis=="EnGestion"
+                                        ||tareasporcarpeta.ActasFinales=="EnGestion" ||
+                                        tareasporcarpeta.InformesFinales=="EnGestion"
+                                        ||tareasporcarpeta.ConformedePermisos=="EnGestion"
+                                        ||tareasporcarpeta.PresentacionFinal=="EnGestion" ){%>
+                                        En Gestion
                                         <%}%>
-                                            <%if(tareasporcarpeta.DocInspeccion=="EnGestion"||
-                                                tareasporcarpeta.PlanosyCroquis=="EnGestion"
-                                                ||tareasporcarpeta.ActasFinales=="EnGestion" ||
-                                                tareasporcarpeta.InformesFinales=="EnGestion"
-                                                ||tareasporcarpeta.ConformedePermisos=="EnGestion"
-                                                ||tareasporcarpeta.PresentacionFinal=="EnGestion" ){%>
-                                                En Gestion
-                                                <%}%>
-                                </th>
-                                <th class="table-primary">
-                                    <%if(tareasporcarpeta.PresentacionFinal=="ok"){%>
-                                        Finalizada
-                                        <%}%>
-                                </th>
+                        </th>
+                        <th class="table-primary">
+                            <%if(tareasporcarpeta.PresentacionFinal=="ok"){%>
+                                Finalizada
+                                <%}%>
+                        </th>
 
-                            </tr>
-                        </tbody>
+                    </tr>
+                </tbody>
+</form>
+            
+            
 
+            <% } %>
+        </body>         
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+                    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+                    crossorigin="anonymous"></script>
 
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+                    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+                    crossorigin="anonymous"></script>
+                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+                    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+                    crossorigin="anonymous"></script>
 
+                <script>
+                    function estadoInterferencia(nombrePedida, nombreObtenida, booleanIntPedida, boolRecibida) {
+                        if (booleanIntPedida) {
+                            elemento = document.getElementById(nombrePedida);
+                            elemento.style.display = "block";
+                        }
+                        else {
+                            elemento = document.getElementById(nombrePedida);
+                            elemento.style.display = "none";
+                        }
+                        if (boolRecibida) {
+                            elemento = document.getElementById(nombreObtenida);
+                            elemento.style.display = "block";
+                        }
+                        else {
+                            elemento = document.getElementById(nombreObtenida);
+                            elemento.style.display = "none";
+                        }
+                    }
+                    function FechaVencimientoPermiso(NombreCasilleroMostrar) {
+                        document.getElementById(NombreCasilleroMostrar).style.display = "block";
+                    }
+                </script>
+                
+                <script>
+                    function CerrarModal() {
+                        $('#ModalPreliminar').modal('hide');
+                        $('#PrimeraParte').modal('hide');
+                        $('#ModalSegundaParte').modal('hide');
+                        $('#ModalCaos').modal('hide');
 
-                        <% } %>
-                    </table>
-                </div>
-            </div>
-</body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-    crossorigin="anonymous"></script>
+                    }
+                    function MostrarFechaConMoment(Fecha) {
+                        moment.locale('es');
+                        FechaModificada = moment(Fecha).locale('es').format("DD-MM-YYYY");
+                        return FechaModificada;
+                    }
+                    $('#CodigoCarpeta').click(function () {
+                        $.ajax({
+                            url: '/CodigoCarpeta',
+                            method: "GET",
+                            success: function (data) {
+                                $('#tablaAjax').html(data);
+                            },
+                            error: function (error) {
+                                console.log('ERROR:' + error);
+                            },
+                        });
+                        $('#ModalCodigosCarpeta').modal('show');
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-    crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-    crossorigin="anonymous"></script>
+                    })
 
+                </script>
 <script>
-    function estadoInterferencia(nombrePedida, nombreObtenida, booleanIntPedida, boolRecibida) {
-        if (booleanIntPedida) {
-            elemento = document.getElementById(nombrePedida);
-            elemento.style.display = "block";
-        }
-        else {
-            elemento = document.getElementById(nombrePedida);
-            elemento.style.display = "none";
-        }
-        if (boolRecibida) {
-            elemento = document.getElementById(nombreObtenida);
-            elemento.style.display = "block";
-        }
-        else {
-            elemento = document.getElementById(nombreObtenida);
-            elemento.style.display = "none";
-        }
-    }
-    function FechaVencimientoPermiso(NombreCasilleroMostrar) {
-        document.getElementById(NombreCasilleroMostrar).style.display = "block";
-    }
-</script>
-
-<script>
-    function CerrarModal() {
-        $('#ModalPreliminar').modal('hide');
-        $('#PrimeraParte').modal('hide');
-        $('#ModalSegundaParte').modal('hide');
-        $('#ModalCaos').modal('hide');
-
-    }
-    function MostrarFechaConMoment(Fecha) {
-        moment.locale('es');
-        FechaModificada = moment(Fecha).locale('es').format("DD-MM-YYYY");
-        return FechaModificada;
-    }
-    $('#CodigoCarpeta').click(function () {
-        $.ajax({
-            url: '/CodigoCarpeta',
-            method: "GET",
-            success: function (data) {
-                $('#tablaAjax').html(data);
-            },
-            error: function (error) {
-                console.log('ERROR:' + error);
-            },
-        });
-        $('#ModalCodigosCarpeta').modal('show');
-
-    })
-
-
-    function llamarAFormularioEditarTareas(Tarea) {
-        var tarea = ('#form1' + Tarea);
-        $('.formularioEditarTareasALlenar').css('display', 'none');
-        $(tarea).css('display', 'block');
-    }
-
-
-</script>
+    
+    </script>
 
 
 </html>

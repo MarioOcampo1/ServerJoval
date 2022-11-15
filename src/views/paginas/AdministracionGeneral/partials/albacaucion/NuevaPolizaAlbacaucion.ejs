@@ -12,9 +12,10 @@
                 <option class="m-1" value="Albacaucion">Albacaución</option>
             </select>
             <br>
-            <p class="bg-warning ">ATENCION: SEGUN LAS CONDICIONES DEL SISTEMA ACTUAL, UNA VEZ ELEGIDA UNA OBRA, NO SE PUEDE CAMBIAR NUEVAMENTE</p>
-                <label class="fw-bold bg-warning" for="NombreObra">Obra a la que corresponde</label>
+            
+                <label class="fw-bold " for="NombreObra">Obra a la que corresponde</label>
                 <select class="m-1 " name="NombreObra" id="NombreObra">Seleccione la obra a la cual pertenece
+                    <option value=""selected hidden></option>
                 <%obras.forEach((obrasNombre)=>{%>
                     <option value="<%=obrasNombre.Nombre%>"> <%=obrasNombre.Nombre%></option>
                     <%})%>
