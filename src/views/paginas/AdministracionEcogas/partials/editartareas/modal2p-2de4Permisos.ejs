@@ -6,14 +6,6 @@
     <div class="row ">
         <div class="col ">
 
-<<<<<<< HEAD
-        
-    <%if (interferenciasypermisos.Hidraulica=="NC" ){%>
-        <form-check>
-            <input hidden checked type="radio" name="HIDRAULICA" id="HIDRAULICA" value="<%=interferenciasypermisos.Hidraulica%>">
-        </form-check>
-        <%}else{%>
-=======
                 <div class="row">
                     <div class="col-6 border">
                         <div class="card-title text-primary"
@@ -34,7 +26,6 @@
                                     En Gestión<input id="" class="" type="radio" name="HIDRAULICA" value="EnGestion"
                                         onclick="llamarAFormularioEditarTareas('HIDRAULICA');">
                                 </div>
->>>>>>> 2fb7c1dd706eb4ea575a60a03b3f14e751564cd9
 
             <div class="card-body">
                 <div class="card-title">Hidraúlica
@@ -68,21 +59,6 @@
                                                 name="VencimientoHidraulica" id="VencimientoHidraulica"
                                                 value="<%= interferenciasypermisos.VencimientoHidraulica%>" placeholder="<%= interferenciasypermisos.VencimientoHidraulica%>">
                                         </div>
-<<<<<<< HEAD
-                                        <%}else{%>
-                                            <input type="radio" name="HIDRAULICA" id="HIDRAULICA" value="ok"
-                                                onclick="FechaVencimientoPermiso('VencimientoHidraulica')"> Ok
-                                            <div id="VencimientoHidraulica" style="display:none;">
-                                                Fecha en la que se pidió
-                                                <input type="date" onfocus="(this.type='date')"
-                                                    onblur="(this.type='text')" name="VencimientoHidraulica"
-                                                    id="VencimientoHidraulica" value="<%= interferenciasypermisos.VencimientoHidraulica%>"
-                                                    placeholder="<%= interferenciasypermisos.VencimientoHidraulica%>">
-                                            </div>
-                                            <%}%>
-
-                    </form-check>
-=======
                                         <%}%>
                             </div>
                         </div>
@@ -138,7 +114,6 @@
                             </div>
                         </div>
                     </div>
->>>>>>> 2fb7c1dd706eb4ea575a60a03b3f14e751564cd9
                 </div>
             </div>
         </div>
@@ -154,31 +129,6 @@
                     </form-check>
                     <% }else{%>
 
-<<<<<<< HEAD
-                        <div class="card-body">
-                            <div class="card-title">Ferrocarril
-                            </div>
-                            <div class="card-text">
-                                <form-check>
-                                    <!-- <%if (interferenciasypermisos.Ferrocarriles=="Pedir"){%>
-                                                                                                <input checked type="radio"
-                                                                                                name="FERROCARRIL"
-                                                                                                id="FERROCARRIL"
-                                                                                                value="Pedir"> Pedir
-                                                                                             <%}else{%>
-                                                                                                <input type="radio"
-                                                                                                name="FERROCARRIL"
-                                                                                                id="FERROCARRIL"
-                                                                                                value="Pedir"> Pedir
-                                                                                            <%}%> -->
-                                    <%if (interferenciasypermisos.Ferrocarriles=="EnGestion" ){%>
-                                        <input checked type="radio" name="FERROCARRIL" id="FERROCARRIL"
-                                            value="EnGestion"> En gestion
-                                        <%}else{%>
-                                            <input type="radio" name="FERROCARRIL" id="FERROCARRIL" value="EnGestion">
-                                            En gestion
-                                            <%}%>
-=======
                             <div class="row">
                                 <div class="col-6 border">
                                     <div class="card-title text-primary"
@@ -200,7 +150,6 @@
                                                     value="EnGestion"
                                                     onclick="llamarAFormularioEditarTareas('FERROCARRIL');">
                                             </div>
->>>>>>> 2fb7c1dd706eb4ea575a60a03b3f14e751564cd9
 
                                                 <%if (interferenciasypermisos.Ferrocarriles=="ok" ){%>
                                                     <input checked type="radio" name="FERROCARRIL" id="FERROCARRIL"
@@ -240,9 +189,6 @@
                                                                                                 value="NC"> No corresponde
                                                                                             <%}%> -->
 
-<<<<<<< HEAD
-                                </form-check>
-=======
                                     <input type="checkbox" name="Tarea" value="FERROCARRIL" id="" checked hidden>
                                     <div class="row ">
                                         <div class="col">
@@ -291,7 +237,6 @@
                                     </div>
 
                                 </div>
->>>>>>> 2fb7c1dd706eb4ea575a60a03b3f14e751564cd9
                             </div>
                         </div>
                     </div>
@@ -309,31 +254,6 @@
 
                                     <% }else{%>
 
-<<<<<<< HEAD
-                                        <div class="card-body">
-                                            <div class="card-title">
-                                                Municipal </div>
-                                            <div class="card-text">
-                                                <form-check>
-                                                    <!-- <%if (interferenciasypermisos.PerMunicipal=="Pedir"){%>
-                                                                                                <input checked type="radio"
-                                                                                                name="PerMunicipal"
-                                                                                                id="PerMunicipal"
-                                                                                                value="Pedir"> Pedir
-                                                                                             <%}else{%>
-                                                                                                <input type="radio"
-                                                                                                name="PerMunicipal"
-                                                                                                id="PerMunicipal"
-                                                                                                value="Pedir"> Pedir
-                                                                                            <%}%> -->
-                                                    <%if (interferenciasypermisos.PerMunicipal=="EnGestion" ){%>
-                                                        <input checked type="radio" name="PerMunicipal"
-                                                            id="PerMunicipal" value="EnGestion"> En gestion
-                                                        <%}else{%>
-                                                            <input type="radio" name="PerMunicipal" id="PerMunicipal"
-                                                                value="EnGestion"> En gestion
-                                                            <%}%>
-=======
                                         <div class="row">
                                             <div class="col-6 border">
                                                 <div class="card-title text-primary"
@@ -357,7 +277,6 @@
                                                                 name="PerMunicipal" value="EnGestion"
                                                                 onclick="llamarAFormularioEditarTareas('PerMunicipal');">
                                                         </div>
->>>>>>> 2fb7c1dd706eb4ea575a60a03b3f14e751564cd9
 
                                                                 <%if (interferenciasypermisos.PerMunicipal=="ok" ){%>
                                                                     <input checked type="radio" name="PerMunicipal"
@@ -402,8 +321,6 @@
                                                                                             <%}%>
                                                                                             -->
 
-<<<<<<< HEAD
-=======
                                                     </div>
                                                     <div class="input-group">
                                                         <%if (interferenciasypermisos.PerMunicipal=="ok" ){%>
@@ -482,7 +399,6 @@
                                                             aria-label="Archivo">
                                                     </div>
                                                 </div>
->>>>>>> 2fb7c1dd706eb4ea575a60a03b3f14e751564cd9
 
                                                 </form-check>
                                             </div>
@@ -499,11 +415,6 @@
                                                 </form-check>
                                                 <% }else{%>
 
-<<<<<<< HEAD
-                                                    <div class="card-body">
-                                                        <div class="card-title">DNV</div>
-                                                        <div class="card-text">
-=======
                                                     <div class="row">
                                                         <div class="col-6 border">
                                                             <div class="card-title text-primary"
@@ -630,7 +541,6 @@
                                                         <!-- ((((((((((((((((((((((((((((())))))))))))))))))))))))))))) -->
                                                         <!-- {{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}} -->
                                                         <%if (interferenciasypermisos.DPV=="NC" ){%>
->>>>>>> 2fb7c1dd706eb4ea575a60a03b3f14e751564cd9
                                                             <form-check>
                                                                 <!-- <%if (interferenciasypermisos.DNV=="Pedir"){%>
                                                                                                 <input checked type="radio"
@@ -651,21 +561,6 @@
                                                                             value="EnGestion"> En gestion
                                                                         <%}%>
 
-<<<<<<< HEAD
-                                                                            <%if (interferenciasypermisos.DNV=="ok" ){%>
-                                                                                <input checked type="radio" name="DNV"
-                                                                                    id="DNV" value="ok"> Ok
-                                                                                    <div id="VencimientoDNV"
-                                                                                    style="display:block;">
-                                                                                    Fecha en la que se pidió
-                                                                                    <input type="date"
-                                                                                        onfocus="(this.type='date')"
-                                                                                        onblur="(this.type='text')"
-                                                                                        name="VencimientoDNV"
-                                                                                        id="VencimientoDNV"
-                                                                                        value="<%= interferenciasypermisos.VencimientoDNV%>"
-                                                                                        placeholder="<%= interferenciasypermisos.VencimientoDNV%>">
-=======
                                                                 <div class="row">
                                                                     <div class="col-6 border">
                                                                         <div class="card-title text-primary"
@@ -685,7 +580,6 @@
                                                                                         value="<%=interferenciasypermisos.DPV%>"
                                                                                         onclick="llamarAFormularioEditarTareas('DPV');"
                                                                                         checked>
->>>>>>> 2fb7c1dd706eb4ea575a60a03b3f14e751564cd9
                                                                                 </div>
                                                                                 <%}else{%>
                                                                                     <input type="radio" name="DNV"
@@ -703,20 +597,6 @@
                                                                                             value="<%= interferenciasypermisos.VencimientoDNV%>"
                                                                                             placeholder="<%= interferenciasypermisos.VencimientoDNV%>">
                                                                                     </div>
-<<<<<<< HEAD
-                                                                                    <%}%>
-                                                                                        <!-- <%if (interferenciasypermisos.DNV=="NC"){%>
-                                                                                                <input checked type="radio"
-                                                                                                name="DNV"
-                                                                                                id="DNV"
-                                                                                                value="NC"> No corresponde
-                                                                                             <%}else{%>
-                                                                                                <input type="radio"
-                                                                                                name="DNV"
-                                                                                                id="DNV"
-                                                                                                value="NC"> No corresponde
-                                                                                            <%}%> -->
-=======
                                                                                     <%}else{%>
                                                                                         <div id="VencimientoDPV"
                                                                                             style="display:none;">
@@ -795,7 +675,6 @@
 
                                                                     </div>
                                                                 </div>
->>>>>>> 2fb7c1dd706eb4ea575a60a03b3f14e751564cd9
 
 
                                                             </form-check>
@@ -968,9 +847,6 @@
                                                                                                             value="<%= interferenciasypermisos.VencimientoIrrigacion%>"
                                                                                                             placeholder="<%= interferenciasypermisos.VencimientoIrrigacion%>">
                                                                                                     </div>
-<<<<<<< HEAD
-                                                                                                        <%}else{%>
-=======
                                                                                                     <%}%>
                                                                                         </div>
                                                                                     </div>
@@ -1085,7 +961,6 @@
                                                                                                         class="input-group ">
                                                                                                         <div
                                                                                                             class=" p-1">
->>>>>>> 2fb7c1dd706eb4ea575a60a03b3f14e751564cd9
                                                                                                             <input
                                                                                                                 type="radio"
                                                                                                                 name="Irrigacion"
@@ -1197,45 +1072,6 @@
                                                                                                                         value="<%= interferenciasypermisos.VencimientoPrivado%>"
                                                                                                                         placeholder="<%= interferenciasypermisos.VencimientoPrivado%>">
                                                                                                                 </div>
-<<<<<<< HEAD
-                                                                                                                    <%}else{%>
-                                                                                                                        <input
-                                                                                                                            type="radio"
-                                                                                                                            name="PRIVADO"
-                                                                                                                            id="PRIVADO"
-                                                                                                                            value="ok"
-                                                                                                                            onclick="FechaVencimientoPermiso('VencimientoPrivado')">
-                                                                                                                        Ok
-                                                                                                                        <div id="VencimientoPrivado"
-                                                                                                                            style="display:none;">
-                                                                                                                            Fecha
-                                                                                                                            en
-                                                                                                                            la
-                                                                                                                            que
-                                                                                                                            se
-                                                                                                                            pidió
-                                                                                                                            <input
-                                                                                                                                type="date"
-                                                                                                                                onfocus="(this.type='date')"
-                                                                                                                                onblur="(this.type='text')"
-                                                                                                                                name="VencimientoPrivado"
-                                                                                                                                id="VencimientoPrivado"
-                                                                                                                                value="<%= interferenciasypermisos.VencimientoPrivado%>"
-                                                                                                                                placeholder="<%= interferenciasypermisos.VencimientoPrivado%>">
-                                                                                                                        </div>
-                                                                                                                        <%}%>
-                                                                                                                            <!-- <%if (interferenciasypermisos.Privado=="NC"){%>
-                                                                                                    <input checked type="radio"
-                                                                                                    name="PRIVADO"
-                                                                                                    id="PRIVADO"
-                                                                                                    value="NC"> No corresponde
-                                                                                                 <%}else{%>
-                                                                                                    <input type="radio"
-                                                                                                    name="PRIVADO"
-                                                                                                    id="PRIVADO"
-                                                                                                    value="NC"> No corresponde
-                                                                                                <%}%> -->
-=======
                                                                                                                 <%}%>
                                                                                                     </div>
                                                                                                 </div>
@@ -1330,7 +1166,6 @@
                                                                                                             aria-label="Archivo">
                                                                                                     </div>
                                                                                                 </div>
->>>>>>> 2fb7c1dd706eb4ea575a60a03b3f14e751564cd9
 
                                                                                                 </form-check>
                                                                                             </div>
@@ -1338,134 +1173,6 @@
                                                                                     </div>
                                                         </div>
                                                                                         <%}%>
-<<<<<<< HEAD
-
-                                                                                            <%if (interferenciasypermisos.Otrospermisos=="NC"
-                                                                                                ){%>
-                                                                                                <input hidden checked
-                                                                                                    type="radio"
-                                                                                                    name="Otrospermisos"
-                                                                                                    id="Otrospermisos"
-                                                                                                    value="<%=interferenciasypermisos.Otrospermisos%>">
-                                                                                                <%}else{%>
-
-                                                                                                    <div
-                                                                                                        class="card-body">
-                                                                                                        <div
-                                                                                                            class="card-title">
-                                                                                                            Otros
-                                                                                                            permisos
-                                                                                                        </div>
-                                                                                                        <div
-                                                                                                            class="card-text">
-                                                                                                            <form-check>
-                                                                                                                <!-- <%if (interferenciasypermisos.Otrospermisos=="pedir"){%>
-                                                                                                <input checked type="radio"
-                                                                                                name="Otrospermisos"
-                                                                                                id="Otrospermisos"
-                                                                                                value="pedir"> Pedir
-                                                                                             <%}else{%>
-                                                                                                <input type="radio"
-                                                                                                name="Otrospermisos"
-                                                                                                id="Otrospermisos"
-                                                                                                value="pedir"> Pedir
-                                                                                            <%}%> -->
-                                                                                                                <%if (interferenciasypermisos.Otrospermisos=="EnGestion"
-                                                                                                                    ){%>
-                                                                                                                    <input
-                                                                                                                        checked
-                                                                                                                        type="radio"
-                                                                                                                        name="Otrospermisos"
-                                                                                                                        id="Otrospermisos"
-                                                                                                                        value="EnGestion">
-                                                                                                                    En
-                                                                                                                    gestión
-                                                                                                                    <%}else{%>
-                                                                                                                        <input
-                                                                                                                            type="radio"
-                                                                                                                            name="Otrospermisos"
-                                                                                                                            id="Otrospermisos"
-                                                                                                                            value="EnGestion">
-                                                                                                                        En
-                                                                                                                        gestión
-                                                                                                                        <%}%>
-
-                                                                                                                            <%if (interferenciasypermisos.Otrospermisos=="ok"
-                                                                                                                                ){%>
-                                                                                                                                <input
-                                                                                                                                    checked
-                                                                                                                                    type="radio"
-                                                                                                                                    name="Otrospermisos"
-                                                                                                                                    id="Otrospermisos"
-                                                                                                                                    value="ok">
-                                                                                                                                Ok
-                                                                                                                                <div id="VencimientoOtrosPermisos"
-                                                                                                                                style="display:block;">
-                                                                                                                                Fecha
-                                                                                                                                en
-                                                                                                                                la
-                                                                                                                                que
-                                                                                                                                se
-                                                                                                                                pidió
-                                                                                                                                <input
-                                                                                                                                    type="date"
-                                                                                                                                    onfocus="(this.type='date')"
-                                                                                                                                    onblur="(this.type='text')"
-                                                                                                                                    name="VencimientoOtrosPermisos"
-                                                                                                                                    id="VencimientoOtrosPermisos"
-                                                                                                                                    value="<%= interferenciasypermisos.VencimientoOtrosPermisos%>"
-                                                                                                                                    placeholder="<%= interferenciasypermisos.VencimientoOtrosPermisos%>">
-                                                                                                                            </div>
-                                                                                                                                <%}else{%>
-                                                                                                                                    <input
-                                                                                                                                        type="radio"
-                                                                                                                                        name="Otrospermisos"
-                                                                                                                                        id="Otrospermisos"
-                                                                                                                                        value="ok"
-                                                                                                                                        onclick="FechaVencimientoPermiso('VencimientoOtrosPermisos')">
-                                                                                                                                    Ok
-                                                                                                                                    <div id="VencimientoOtrosPermisos"
-                                                                                                                                        style="display:none;">
-                                                                                                                                        Fecha
-                                                                                                                                        en
-                                                                                                                                        la
-                                                                                                                                        que
-                                                                                                                                        se
-                                                                                                                                        pidió
-                                                                                                                                        <input
-                                                                                                                                            type="date"
-                                                                                                                                            onfocus="(this.type='date')"
-                                                                                                                                            onblur="(this.type='text')"
-                                                                                                                                            name="VencimientoOtrosPermisos"
-                                                                                                                                            id="VencimientoOtrosPermisos"
-                                                                                                                                            value="<%= interferenciasypermisos.VencimientoOtrosPermisos%>"
-                                                                                                                                            placeholder="<%= interferenciasypermisos.VencimientoOtrosPermisos%>">
-                                                                                                                                    </div>
-                                                                                                                                    <%}%>
-                                                                                                                                        <!-- <%if (interferenciasypermisos.Otrospermisos=="NC"){%>
-                                                                                                <input checked type="radio"
-                                                                                                name="Otrospermisos"
-                                                                                                id="Otrospermisos"
-                                                                                                value="NC"> No corresponde
-                                                                                             <%}else{%>
-                                                                                                <input type="radio"
-                                                                                                name="Otrospermisos"
-                                                                                                id="Otrospermisos"
-                                                                                                value="NC"> No corresponde
-                                                                                            <%}%>
-                                                                                         -->
-
-                                                                                                            </form-check>
-                                                                                                        </div>
-
-
-                                                                                                    </div>
-                                                                                                    <%}%>
-</div>
-
-<br>
-=======
                                                                                             <!-- {{{{{{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}}}}}} -->
     </div>
 </div>
->>>>>>> 2fb7c1dd706eb4ea575a60a03b3f14e751564cd9
