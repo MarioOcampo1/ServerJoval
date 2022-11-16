@@ -78,13 +78,33 @@ router.get('/Finanzas', (req, res) => {
     }
 })
 router.get('/Finanzas_CajaChica',(req,res)=>{
-    var sql= 'SELECT * FROM finanzas_caja_chica';
+    var sql= 'SELECT * FROM finanzas_caja_chica ' ;
     connection.query(sql,(error,results)=>{
         if (error) console.log(error);
         else{
-            res.render('./paginas/Finanzas/Cajachica.ejs', {finanzas:results});
+            res.render('./paginas/Finanzas/Cajachica.ejs', {finanzas:results, moment:moment});
         }
     })
+})
+router.post('/Finanzas/IngresoCajaChica',(req,res)=>{
+
+    var sql = 'INSERT INTO finanzas_caja_chica set?';
+    connection.query(sql,{
+    IngresoDescripcion:req.body.IngresoDescripcion ,IngresoFecha:req.body.IngresoFecha , IngresoMonto: req.body.IngresoMonto
+    },(error,results)=>{
+    if (error) console.log(error);
+    res.redirect('/Finanzas_CajaChica');
+    })
+    })
+router.post('/Finanzas/EgresoCajaChica',(req,res)=>{
+
+var sql = 'INSERT INTO finanzas_caja_chica set?';
+connection.query(sql,{
+EgresoDescripcion:req.body.EgresoDescripcion, EgresoFecha:req.body.EgresoFecha,EgresoMonto:req.body.EgresoMonto,
+},(error,results)=>{
+if (error) console.log(error);
+res.redirect('/Finanzas_CajaChica');
+})
 })
 
 router.get('/Finanzas_Cobros', (req, res) => {

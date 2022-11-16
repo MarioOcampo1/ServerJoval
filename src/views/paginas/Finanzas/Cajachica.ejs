@@ -2,10 +2,12 @@
 <html lang="en">
 
 <head>
+    
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Caja chica</title>
+    
 </head>
 
 <body>
@@ -14,8 +16,8 @@
         <div class="container-fluid">
         <div class="btn-group " role="group">
             <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalId">Nuevo Ingreso</button>
-          
-            <button type="button" class="btn btn-danger">Nuevo Egreso</button>
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalEgreso">Nuevo Egreso</button>
+            
             
         </div>
         <div class="row mt-2">
@@ -60,13 +62,18 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="">
+                        
                             <%finanzas.forEach((Ingreso)=>{%>
-                                <td><%= Ingreso.IngresoFecha%></td>
+                                <tr class="">     
+                                    <%if(Ingreso.IngresoDescripcion==""|| Ingreso.IngresoDescripcion==null){%> 
+                                   
+                                    <%}else{%>
+                                <td><%= moment(Ingreso.IngresoFecha).locale('es').format("DD-MM-YYYY")%></td>
                                 <td><%= Ingreso.IngresoDescripcion%></td>
                                 <td><%= Ingreso.IngresoMonto%></td>
-                                <%})%>
-                        </tr>
+                            </tr>
+                                <%}})%>
+                        
                       
                     </tbody>
                 </table>
@@ -87,13 +94,18 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="">
+                       
                             <%finanzas.forEach((Egreso)=>{%>
-                                <td><%= Egreso.EgresoFecha%></td>
+                                <tr class="">
+                               <%if(Egreso.EgresoDescripcion==""|| Egreso.EgresoDescripcion==null){%> 
+                              
+                               <%}else{%>
+                                <td><%= moment(Egreso.EgresoFecha).locale('es').format("DD-MM-YYYY")%></td>
                                 <td><%= Egreso.EgresoDescripcion%></td>
                                 <td><%= Egreso.EgresoMonto%></td>
-                                <%})%>
-                        </tr>
+                            </tr>
+                                <%}})%>
+                      
                        
                     </tbody>
                 </table>
@@ -102,7 +114,7 @@
         </div>
     </div>
     <%- include('./partials/CajaChica/Ingreso.ejs'); %>   
-       
+    <%- include('./partials/CajaChica/Egreso.ejs'); %>     
     </div>
 
 </body>

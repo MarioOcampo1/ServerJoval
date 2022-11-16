@@ -2,30 +2,30 @@
 
 <!-- Modal Body -->
 <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
-<div class="modal fade" id="modalId" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+<div class="modal fade" id="modalEgreso" tabindex="-1"  role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal" role="document">
         <div class="modal-content ">
-            <div class="modal-header bg-success text-white">
-                <h5 class="modal-title " id="modalTitleId">Ingreso</h5>
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title " id="modalTitleId">Egreso</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                <div class="row">
-                <form action="/Finanzas/IngresoCajaChica" method="post">
+                <form action="/Finanzas/EgresoCajaChica" method="post">
                     <div class="input-group mb-3">
                         <span class="input-group-text " id="InputIngresoFecha">Fecha</span>
-                        <input type="date" class="form-control" name="IngresoFecha" placeholder="Fecha del ingreso" aria-label="Fecha del ingreso" aria-describedby="InputIngresoFecha" required>
+                        <input type="date" class="form-control" name="EgresoFecha" placeholder="Fecha del ingreso" aria-label="Fecha del ingreso" aria-describedby="InputIngresoFecha" required>
                                             </div>
                     <div class="input-group mb-3">
                                                <span class="input-group-text " id="InputDescripción">Descripción</span>
-                        <input type="text" class="form-control" name="IngresoDescripcion" placeholder="Descripción del ingreso" aria-label="Descripción del ingreso" aria-describedby="InputDescripción" required>
+                        <input type="text" class="form-control" name="EgresoDescripcion" placeholder="Descripción del ingreso" aria-label="Descripción del ingreso" aria-describedby="InputDescripción" required>
                        
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text " id="InputMonto">Monto</span>
-                        <input type="number" class="form-control" name="IngresoMonto" placeholder="Monto que ingresa a la caja" aria-label="Monto que ingresa a la caja" aria-describedby="InputMonto" required>  
+                        <input type="number" class="form-control" name="EgresoMonto" placeholder="Monto que ingresa a la caja" aria-label="Monto que ingresa a la caja" aria-describedby="InputMonto" required>  
                     </div>
-               
+                
                </div>
             </div>
             <div class="modal-footer">
