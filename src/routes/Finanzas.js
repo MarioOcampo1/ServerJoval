@@ -77,6 +77,16 @@ router.get('/Finanzas', (req, res) => {
         res.render('paginas/Finanzas/Home.ejs');
     }
 })
+router.get('/Finanzas_CajaChica',(req,res)=>{
+    var sql= 'SELECT * FROM finanzas_caja_chica';
+    connection.query(sql,(error,results)=>{
+        if (error) console.log(error);
+        else{
+            res.render('./paginas/Finanzas/Cajachica.ejs', {finanzas:results});
+        }
+    })
+})
+
 router.get('/Finanzas_Cobros', (req, res) => {
     if (req.isAuthenticated()) {
         res.render('paginas/Finanzas/Cobros.ejs');
@@ -195,7 +205,7 @@ router.get('/cobroDeObras', (req, res) => {
         if (error) console.log(error);
 
         if (clientes.length > 0) {
-            res.render('paginas/Finanzas/CobroObrasVistaPrincipal.ejs', { clientes: clientes, cobroObras: cobroObras, NombreObras: obras });
+            res.render('paginas/Finanzas/CobroObras.ejs', { clientes: clientes, cobroObras: cobroObras, NombreObras: obras });
             // res.send(clientes) ;
         }
         else {

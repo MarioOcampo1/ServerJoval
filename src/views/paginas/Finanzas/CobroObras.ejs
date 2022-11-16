@@ -34,7 +34,7 @@
             <th scope="col">Monto total contrato</th>
             <th scope="col">Monto pagado</th>
         </thead>
-        <tbody>
+        <tbody style="display: none;">
           <tr class="">
             <%  for (let index = 0; index < NombreObras.length; index++) {%>
               <%    const element = NombreObras[index];%>
@@ -86,21 +86,26 @@
                     <img src="../images/logo.png" alt="Joval S.A." id="LogoJoval">
                     <h1 class=" text-center" id="Encabezado">Comprobante de pago</h1>
                   </div>
+                  <div class="row">
+                    <div class="col-auto">
+                      <label class="form-label text-center" for="Obra">Obra </label>
+                      <input list="obras" type="text" name="Obra" id="Obra">
+                      <datalist id="obras">
+                        <%NombreObras.forEach((element)=>{%>
+                          <option id="opcionesObras" value="<%=element.Nombre%>"></option>
+                          <%})%>
 
+                      </datalist>
+
+                      <p class="form-text noImprimible">Seleccione la obra a la que corresponde el cliente</p>
+
+                    </div>
+                  </div>
+                  <div id="bodyInputs" style="display: none;">
                   <div class="form">
                     <div class="row">
-                      <div class="col-auto">
-                        <label class="form-label text-center" for="Obra">Obra </label>
-                        <input list="obras" type="text" name="Obra" id="Obra">
-                        <datalist id="obras">
-                          <%NombreObras.forEach((element)=>{%>
-                            <option value="<%=element.Nombre%>"></option>
-                            <%})%>
-                        </datalist>
-
-                        <p class="form-text noImprimible">Seleccione la obra a la que corresponde el cliente</p>
-
-                      </div>
+                     
+                     
                       <div class="col-auto">
                         <label class="form-label text-center" for="NombreCompleto">Nombre </label>
                         <select name="NombreCompleto" id="NombreCompleto">
@@ -170,16 +175,17 @@
                         <p class="form-text noImprimible noImprimible">En caso de que la persona pague con
                           transferencias, cheques, etc.</p>
                       </div>
-
+                    </div>
                     </div>
                   </div>
               </div>
             </div>
+            
             <div class="modal-footer noImprimible">
               <button class="btn noImprimible" onclick="window.print(); return false;">Imprimir comprobante</button>
               <button type="button " class="btn btn-secondary  noImprimible"
                 onclick="$('#ModalPrincipal').modal('hide');">Cerrar</button>
-              <button type="submit" class="btn btn-danger  noImprimible">Guardar</button>
+              <button type="submit"  id="btnGuardarCambios" class="btn btn-danger  noImprimible">Guardar</button>
               </form>
             </div>
           </div>
@@ -208,7 +214,7 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary"
               onclick="$('#modalclientes').modal('hide');">Cancelar</button>
-            <button type="button" class="btn btn-primary">Guardar Cambios</button>
+            <button type="button" class="btn btn-primary" >Guardar Cambios</button>
           </div>
         </div>
       </div>
@@ -220,6 +226,12 @@
   var ClienteSeleccionado;
   select.addEventListener('blur', function () {
     var NombreObra = this.value;
+    if (NombreObra==""){
+       $('#bodyInputs').css('display', 'none');
+       $('#btnGuardarCambios').prop('disabled', true);
+       
+    }
+    else{
     var url = ("/cobrodeobras/clientes/LocalizarClientes/" + NombreObra);
     $.get(url, function (data) {
       $("#NombreCompleto").empty();
@@ -250,7 +262,9 @@
     }
 
     )
-
+    $('#bodyInputs').css('display', 'block');
+    $('#btnGuardarCambios').prop('disabled', false);
+  }
   });
   function CargarPago(data) {
     $('#ModalPrincipal').modal("show");
@@ -274,12 +288,13 @@
 </script>
 <script>
     jQuery("#BuscadorObra").keyup(function () {
-    if (jQuery(this).val() != "0") {
+    if (jQuery(this).val() != "") {
+      $('#TablaPrincipal tbody').css('display', 'block');
       jQuery("#TablaPrincipal tbody>tr").hide();
-      jQuery("#TablaPrincipal td:contiene-palabra('" + jQuery(this).val() + "')").parent("tr").show();
+      jQuery("#TablaPrincipal td:contiene-palabra('" + jQuery(this).val() + "')").parent("tr").show("slow");
     }
     else {
-      jQuery("#TablaPrincipal tbody>tr").show();
+      jQuery('#TablaPrincipal tbody>tr').hide("slow");
     }
   })
 
@@ -289,6 +304,7 @@
         return (elem.textContent || elem.innerText || jQuery(elem).text() || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
       }
     });
+   
 </script>
 
 </html>

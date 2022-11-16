@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caja chica</title>
+</head>
+
+<body>
+    <%- include('./partials/menusuperior.ejs'); %>
+        <h1 class="text-center">Caja chica</h1>
+        <div class="container-fluid">
+        <div class="btn-group " role="group">
+            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalId">Nuevo Ingreso</button>
+          
+            <button type="button" class="btn btn-danger">Nuevo Egreso</button>
+            
+        </div>
+        <div class="row mt-2">
+           
+    <div class="col-4">
+            <input class="form-control" list="datalistOptions" id="DatalistMeses" placeholder="Búsqueda por mes específico">
+            <datalist id="datalistOptions">
+                <option value="Enero">
+                <option value="Febrero">
+                <option value="Marzo">
+                <option value="Abril">
+                <option value="Mayo">
+                <option value="Junio">
+                <option value="Julio">
+                <option value="Agosto">
+                <option value="Septiembre">
+                <option value="Octubre">
+                <option value="Noviembre">
+                <option value="Diciembre">
+            </datalist>
+        </div>
+        </div>
+        <div class="row">
+        <div class="col-6">
+            <div class="table-responsive">
+                <table class="table table-success">
+                    <thead>
+                       
+                        
+                        <tr>
+                            <th colspan="3" class="text-center">Ingreso</th>
+                         
+                            
+                        </tr>
+                        <tr>
+                            
+                            <th  scope="col">Fecha</th>
+                            <th  scope="col">Descripción</th>
+                            <th  scope="col">$</th>
+                        
+                          
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="">
+                            <%finanzas.forEach((Ingreso)=>{%>
+                                <td><%= Ingreso.IngresoFecha%></td>
+                                <td><%= Ingreso.IngresoDescripcion%></td>
+                                <td><%= Ingreso.IngresoMonto%></td>
+                                <%})%>
+                        </tr>
+                      
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="table-responsive">
+                <table class="table table-danger">
+                    <thead>
+                        <tr>
+                            <th colspan="3" class="text-center">Egreso</th>
+                        </tr>
+                        <tr>
+                            <th  scope="col">Fecha</th>
+                            <th  scope="col">Descripción</th>
+                            <th  scope="col">$</th>
+                        
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="">
+                            <%finanzas.forEach((Egreso)=>{%>
+                                <td><%= Egreso.EgresoFecha%></td>
+                                <td><%= Egreso.EgresoDescripcion%></td>
+                                <td><%= Egreso.EgresoMonto%></td>
+                                <%})%>
+                        </tr>
+                       
+                    </tbody>
+                </table>
+            </div>
+            
+        </div>
+    </div>
+    <%- include('./partials/CajaChica/Ingreso.ejs'); %>   
+       
+    </div>
+
+</body>
+
+</html>
