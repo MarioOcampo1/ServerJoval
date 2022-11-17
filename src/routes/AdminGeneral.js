@@ -85,7 +85,7 @@ router.get('/seguros/Albacaucion',(req,res)=>{
     if (req.isAuthenticated()) {
         var sql= 'Select Nombre from obras';
 connection.query(sql,(error,obras)=>{
-    var sql= 'Select * from admingeneral_seguros_albacaucion'
+    var sql= 'Select * from admingeneral_seguros_albacaucion WHERE Estado!="Dada de baja"';
         res.locals.moment = moment;
         connection.query(sql, (error, results) => {
             if (error) console.log(error);
@@ -129,7 +129,7 @@ router.get('/seguros/ActualizarPolizaAlbacaucion/:id', (req,res)=>{
     if (req.isAuthenticated()) {
         var id= req.params.id;
         console.log("El id seleccionado es:"+ id);
-        var sql= 'Select * from admingeneral_seguros_albacaucion WHERE ID_poliza = ?';
+        var sql= 'Select * from admingeneral_seguros_albacaucion WHERE ID_poliza = ? ';
         connection.query(sql,id,(error,results)=>{
             if (error) console.log(error);  
             else{
