@@ -1,0 +1,47 @@
+
+
+<!-- Modal Body -->
+<!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+<div class="modal fade" id="modalEditarRegistro" tabindex="-1" role="dialog" aria-labelledby="modalEditarRegistro" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal" role="document">
+        <div class="modal-content ">
+            <div class="modal-header bg-secondary text-white">
+                <h5 class="modal-title " id="modalTitleId">Editar Registro</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+               <div class="row">
+                <form action="/Finanzas/EditarRegistro" method="post">
+                    <input type="hidden" name="id" id="idEditarRegistro" value="">
+                    <input type="hidden" name="IngresoEgreso" id="IngresoEgreso" value="">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text " id="InputEdicionFecha">Fecha</span>
+                        <input type="date" class="form-control" name="EdicionFecha" id="EdicionFecha"  placeholder="Fecha del ingreso/egreso" aria-label="Fecha del ingreso/egreso" aria-describedby="InputIngresoFecha" required>
+                                            </div>
+                    <div class="input-group mb-3">
+                                               <span class="input-group-text " id="InputEdicionDescripción">Descripción</span>
+                        <input type="text" class="form-control" name="EdicionDescripcion" id="EdicionDescripcion" placeholder="Descripción del ingreso/egreso" aria-label="Descripción del ingreso" aria-describedby="InputDescripción" required>
+                       
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text " id="InputEdicionMonto">Monto</span>
+                        <input type="number" class="form-control" name="EdicionMonto" id="EdicionMonto" placeholder="Monto que ingresa/egresa a la caja" aria-label="Monto que ingresa a la caja" aria-describedby="InputMonto" required>  
+                    </div>
+               
+               </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="bi bi-x-circle btn btn-danger" data-bs-dismiss="modal"></button>
+                <button type="submit" class="bi bi-check-circle btn btn-success "></button>
+            </div>
+        </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- Optional: Place to the bottom of scripts -->
+<script>
+    const myModal = new bootstrap.Modal(document.getElementById('modalId'), options)
+
+</script>

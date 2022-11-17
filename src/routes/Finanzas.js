@@ -106,6 +106,28 @@ if (error) console.log(error);
 res.redirect('/Finanzas_CajaChica');
 })
 })
+router.post('/Finanzas/EditarRegistro',(req,res)=>{
+
+    var sql = 'UPDATE finanzas_caja_chica set? where id=?';
+    if(req.body.IngresoEgreso=="Ingreso"){
+        connection.query(sql,[{
+            IngresoDescripcion:req.body.EdicionDescripcion, IngresoFecha:req.body.EdicionFecha,IngresoMonto:req.body.EdicionMonto,
+            },req.body.id],(error,results)=>{
+            if (error) console.log(error);
+            res.redirect('/Finanzas_CajaChica');
+            })
+    }
+    if(req.body.IngresoEgreso=="Egreso"){
+        connection.query(sql,{
+            EgresoDescripcion:req.body.EdicionDescripcion, EgresoFecha:req.body.EdicionFecha,EgresoMonto:req.body.EdicionMonto,
+            },req.body.id,(error,results)=>{
+            if (error) console.log(error);
+            res.redirect('/Finanzas_CajaChica');
+            })
+    }
+
+   
+    })
 
 router.get('/Finanzas_Cobros', (req, res) => {
     if (req.isAuthenticated()) {
