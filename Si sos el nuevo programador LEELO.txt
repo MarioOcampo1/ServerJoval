@@ -1,0 +1,28 @@
+    Bienvenido a Joval S.A., el siguiente instructivo ha sido realizado con el objetivo de poder familiarizar al nuevo programador de una forma un poco más clara.
+    
+    El sistema se ha realizado usando como lenguaje principal a NodeJS, esta realizado la api Express. Entre otras tecnologías, puedo decirte que 
+    se ayuda con Jquery, Moment,Datatables, Bootstrap, Plantillas Ejs y javascript.
+    Passport
+    El sistema contiene un sistema de usuarios, que usa como el framework de javascript Passport. Actualmente usa la estrategia de usuarios locales.
+
+    Base de Datos
+    La base de datos elegida es MariaDB, la cual es una base OpenSurce basada en MySQL.
+    Backend
+    Podrás observar, que ha sido divido en distintas areas principales. Al momento de escribir esto, existen 5 areas: AdminEcogas, AdminGeneral, Compra-Venta, Finanzas y Principal.
+     Cada area contiene las rutas GET y POST que el servidor usa para comunicarse con el usuario. 
+      Esta organización, permite poder llevar un orden mas claro cuando se tiene que realizar el mantenimiento del backend.
+      Para las vistas del usuario, se encuentra la carpeta views, donde están las paginas que siguen la misma estructura para ser ordenadas.
+    Todos los días, cada 1 hora aproximadamente, se hace una copia de la base de datos y se guarda en la nube, asi tambien, del codigo fuente de este servidor. Los mismos estan en la cuenta de adobras.
+    Al mismo tiempo, yo tengo una copia del código en mi cuenta de GitHub.
+
+    Paginas 
+     Cada pagina contiene en su interior codigo html, javascript y css, para muchos plugins y vistas, tome la decision de incorporar bootstrap, jquery y otros plugins
+     a través de CDN. Tambien tome la decisión de armar javascript y estilos css por cada archivo.
+      ACLARACION:  En caso de que no logres encontrar los css de bootstrap en el codigo html de la pagina, puedes ver que he usado vistas parciales sobre todo, para mostrar el menu superior
+      Dicho Menu, contiene en su encabezado los codigos CDN.
+
+    Partials
+    Dentro de la carpeta views/paginas, podras observar que hay una carpeta llamada partials, ahi he guardado vistas parciales que son usadas con la plantilla EJS.
+
+
+    

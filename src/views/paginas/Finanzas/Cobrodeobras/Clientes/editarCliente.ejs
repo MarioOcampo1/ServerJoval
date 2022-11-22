@@ -111,6 +111,28 @@
                         <h3 class="text-center" title="Configura el valor predeterminado que se mostrará al momento de cargar un pago.">Montos que debe pagar el cliente</h3>
                     </tr>
                     <tr>
+                        <%if(pagosPredeterminados==undefined||pagosPredeterminados==null||pagosPredeterminados==""){ %>
+                            <th scope="col" id="AnticipoFinanciero" onclick="editarPago(this.id,'0')">Anticipo Financiero</th>
+                        <th scope="col" id="Cuota1" onclick="editarPago(this.id,'0')">Cuota 1</th>
+                        <th scope="col" id="Cuota2" onclick="editarPago(this.id,'0')">Cuota 2</th>
+                        <th scope="col" id="Cuota3" onclick="editarPago(this.id,'0')">Cuota 3</th>
+                        <th scope="col" id="Cuota4" onclick="editarPago(this.id,'0')">Cuota 4</th>
+                        <th scope="col" id="Cuota5" onclick="editarPago(this.id,'0')">Cuota 5</th>
+                        <th scope="col" id="Cuota6" onclick="editarPago(this.id,'0')">Cuota 6</th>
+                        <th scope="col" id="Cuota7" onclick="editarPago(this.id,'0')">Cuota 7</th>
+                        <th scope="col" id="Cuota8" onclick="editarPago(this.id,'0')">Cuota 8</th>
+                        <th scope="col" id="Cuota9" onclick="editarPago(this.id,'0')">Cuota 9</th>
+                        <th scope="col" id="Cuota10" onclick="editarPago(this.id,'0')">Cuota 10</th>
+                        <th scope="col" id="Cuota11" onclick="editarPago(this.id,'0')">Cuota 11</th>
+                        <th scope="col" id="Cuota12" onclick="editarPago(this.id,'0')">Cuota 12</th>
+                        <th scope="col" id="DNV" onclick="editarPago(this.id,'0')">Permiso DNV </th>
+                        <th scope="col" id="DPV" onclick="editarPago(this.id,'0')">Permiso DPV</th>
+                        <th scope="col" id="Hidraulica" onclick="editarPago(this.id,'0')">Permiso Hidraulica</th>
+                        <th scope="col" id="FFCC" onclick="editarPago(this.id,'0')">Permiso FFCC</th>
+                        <th scope="col" id="Privado" onclick="editarPago(this.id,'0')">Permiso Privado</th>
+                        <th scope="col" id="Municipal" onclick="editarPago(this.id,'0')">Permiso Municipal</th>
+                        <th scope="col" id="ServicioDomiciliario" onclick="editarPago(this.id,'0')">Servicio domiciliario </th> 
+                            <%}else{%>
                         <th scope="col">Anticipo Financiero</th>
                         <th scope="col">Cuota 1</th>
                         <th scope="col">Cuota 2</th>
@@ -131,12 +153,14 @@
                         <th scope="col">Permiso Privado</th>
                         <th scope="col">Permiso Municipal</th>
                         <th scope="col">Servicio domiciliario </th>
-
+<%}%>
                     </tr>
                 </thead>
                 <tbody>
                     <tr class="">
+                            
                         <%pagosPredeterminados.forEach((pago)=>{%>
+                           <%= pago%>
                             <td> <button class="btn btn-lg " id="AnticipoFinanciero" onclick="editarPago(this.id,'<%= pago.AnticipoFinanciero %>')">
                                     <%= pago.AnticipoFinanciero%>
                                 </button> </td>
@@ -194,25 +218,32 @@
                             <td> <button class="btn btn-lg " id="Municipal" onclick="editarPago(this.id,'<%= pago.Municipal%>')">
                                     <%= pago.Municipal%>
                                 </button> </td>
-                            <td> <button class="btn btn-lg " id="ServicioDomiciliario"onclick="editarPago(this.id,'<%= pago.ServicioDomiciliario%>')"><%= pago.ServicioDomiciliario%></button>
+                            <td> <button class="btn btn-lg " id="ServicioDomiciliario"onclick="editarPago(this.id,'<%= pago.ServicioDomiciliario%>')">
+                                <%= pago.ServicioDomiciliario%>
+                            </button>
                             </td>
                     </tr>
                     <%})%>
                 </tbody>
             </table>
         </div>
+        
         <script>
             const myModal = new bootstrap.Modal(document.getElementById('modalEditarPago'), options)
             function editarPago(id, valor) {
+                
                 $('#' + id).empty();
-
-                $('#' + id).parent().html(
-                    '<form id="formActualizarPagoPredeterminado" action="ActualizarPagoPredeterminado/<%=results[0].ID_cliente%>/' + id + '" method="post"><input name="valor" type="number">' +
-                    '<button class="btn btn-sm btn-success m-1 " type="submit" >Actualizar</button></form>'
+                $('#' + id).removeAttr("onclick")
+                $('#' + id).append(
+                    '<form id="formActualizarPagoPredeterminado" action="ActualizarPagoPredeterminado/<%=results[0].ID_cliente%>/' + id + '" method="post">'+
+                '<label for="Monto">Monto:</label><input id="Monto" name="valor" type="number">' +
+                    '<button class="btn btn-outline-success m-1" type="submit">Actualizar</button>'+
+                    '</form>'
                 );
-            }
+            
+        }
             function EnviarFormulario() {
-                $('#formActualizarPago').submit();
+                $('#formActualizarPagoPredeterminado').submit();
             }
         </script>
 
