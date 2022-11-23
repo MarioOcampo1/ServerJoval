@@ -533,14 +533,37 @@ router.post('/Finanzas/CobroDeObras/EditarCliente/ActualizarPagoPredeterminado/:
 var id = req.params.id;
 var keySQL= req.params.keyACambiar;
 var valor= req.body.valor
-var sql = 'UPDATE finanzas_clientes_predeterminados SET '+ keySQL+'='+valor+' WHERE id_cliente=?';
-
-connection.query(sql, id, (error, results) => {
+var sql = 'SELECT * FROM finanzas_clientes_predeterminados WHERE id_cliente =? ';
+connection.query(sql,id,(error,results)=>{
     if (error) console.log(error)
-    else {
-        res.redirect('/Finanzas/CobroDeObras/EditarCliente/'+id);
+    else{
+        if(results.length!=0){
+            sql = 'UPDATE finanzas_clientes_predeterminados SET '+ keySQL+'='+valor+' WHERE id_cliente=?';
+
+            connection.query(sql, id, (error, results) => {
+                if (error) console.log(error)
+                else {
+                    res.redirect('/Finanzas/CobroDeObras/EditarCliente/'+id);
+                }
+            })
+        }
+        else{
+            sql='SELECT id_Obra, NombreCliente from finanzas_clientes_por_obra WHERE ID_cliente =? ';
+            connection.query(sql,id,(error,finanzas_clientes_por_obra)=>{
+sql= 'Insert into finanzas_clientes_predeterminados set ?';
+connection.query(sql,{
+    id_obra: finanzas_clientes_por_obra[0].id_Obra, id_cliente: id, NombreCliente: finanzas_clientes_por_obra[0].NombreCliente,
+},(error,resultado)=>{
+if(error) console.log(error);
+else{
+    res.redirect('/Finanzas/CobroDeObras/EditarCliente/'+id);
+}
+})
+            })
+        }
     }
 })
+ 
 })
 //Vista general de la obra
 router.get('/Finanzas/cobrodeobras/VerObra/:NombreObra', (req, res) => {
@@ -586,7 +609,7 @@ resolve(Predeterminados)
             }
 
             else{
-                res.render('paginas/Finanzas/Cobrodeobras/Obras/Vistaobras.ejs', { Predeterminado: resolvePromise, Cobros: Cobros }); 
+              res.render('paginas/Finanzas/Cobrodeobras/Obras/Vistaobras.ejs', { Predeterminado: resolvePromise, Cobros: Cobros, NombreObra: NombreObra }); 
             }
         })
     }).catch( err=>{
@@ -606,12 +629,15 @@ resolve(Predeterminados)
   
 })
 //Actualizar configuracion de la obra
-router.post('/Finanzas/actualizarConfigObra/:id/:keyACambiar/:NombreObra',(req,res)=>{
+router.post('/Finanzas/actualizarPredeterminadosObraEntera/:id/:keyACambiar/:NombreObra',(req,res)=>{
     var idObra= req.params.id;
     var keyACambiar= req.params.keyACambiar;
     var ValorIngresado= req.body.valor;
     var NombreObra = req.params.NombreObra;
-   
+   if(keyACambiar==null|| keyACambiar==undefined){
+    res.redirect('/Finanzas/cobrodeobras/VerObra/'+NombreObra+'');
+   }
+   else{
 var sql='UPDATE finanzas_clientes_predeterminados set '+keyACambiar+' ='+ValorIngresado+' WHERE id_obra = '+idObra+' ;';
 connection.query(sql,(error,results)=>{
     if(error) console.log(error);
@@ -619,7 +645,8 @@ connection.query(sql,(error,results)=>{
         res.redirect('/Finanzas/cobrodeobras/VerObra/'+NombreObra+'');
     }
 
-})     
+})  
+}   
 })
 router.post('/Finanzas/cobrodeobras/VerObra/tiposDeCobros', (req, res) => {
     var NombreObra = req.body.NombreObra;

@@ -16,22 +16,19 @@
     <div class="VistaObra">
       <div class="Encabezado">
         <button class="btn btn-danger m-2" onclick="history.go(-1)">Atrás</button>
-        <h1 class="text-center"> Obra <%=Cobros[0].NombreObra%>
+        <h1 class="text-center"> Obra <%=NombreObra%>
         </h1>
       </div>
       <h2 class="text-center">Lista de clientes que contiene la obra</h2>
-      <div class="container VistaClientes">
+      <div class="container VistaClientes m-2">
 
         <label for="BuscadorCliente">Buscar cliente</label>
         <input class="border border-danger" type="text" name="BuscadorCliente" id="BuscadorCliente">
         <button class="btn btn-primary" onclick="ExportarAExcel();" disabled>Exportar planilla</button>
         <button class="btn btn-primary" data-bs-toggle="modal"
-          data-bs-target="#ModalConfiguracion">Configuración</button>
+          data-bs-target="#ModalConfiguracion">Configuraciones de la obra</button>
       </div>
-
-
-      <br>
-      <table id="TablaObras" class="table table-bordered table-inverse table-responsive"
+            <table id="TablaObras" class="table table-bordered table-inverse table-responsive"
         style="display: block; width:100%;">
         <thead class="thead-default">
           <tr>
@@ -43,13 +40,13 @@
             <th>Cuota4 </th>
             <th>Cuota5 </th>
             <th>Cuota6 </th>
-            <th>Cuota7 </th>
+          <th>Cuota7 </th>
             <th>Cuota8 </th>
             <th>Cuota9 </th>
             <th>Cuota10 </th>
             <th>Cuota11 </th>
             <th>Cuota12 </th>
-            <th>Permiso DNV </th>
+          <th>Permiso DNV </th>
             <th>Permiso DPV </th>
             <th>Permiso Hidraulica </th>
             <th>Permiso FFCC </th>
@@ -578,106 +575,121 @@
           <div class="modal-body">
 
             <div class="container">
-              <table class="table table table-bordered">
-                <thead>
-                  <tr>
-                    <h3 class="text-center"
-                      title="Configura el valor predeterminado que se mostrará al momento de cargar un pago.">Configurar
-                      montos que pagarán los clientes</h3>
-                  </tr>
-                  <tr>
-                    <th scope="col">Anticipo Financiero</th>
-                    <th scope="col">Cuota 1</th>
-                    <th scope="col">Cuota 2</th>
-                    <th scope="col">Cuota 3</th>
-                    <th scope="col">Cuota 4</th>
-                    <th scope="col">Cuota 5</th>
-                    <th scope="col">Cuota 6</th>
-                    <th scope="col">Cuota 7</th>
-                    <th scope="col">Cuota 8</th>
-                    <th scope="col">Cuota 9</th>
-                    <th scope="col">Cuota 10</th>
-                    <th scope="col">Cuota 11</th>
-                    <th scope="col">Cuota 12</th>
-                    <th scope="col">Permiso DNV </th>
-                    <th scope="col">Permiso DPV</th>
-                    <th scope="col">Permiso Hidraulica</th>
-                    <th scope="col">Permiso FFCC</th>
-                    <th scope="col">Permiso Privado</th>
-                    <th scope="col">Permiso Municipal</th>
-                    <th scope="col">Servicio domiciliario </th>
-
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr class="">
-
-                    <td> <button class="btn btn-lg " id="AnticipoFinanciero" onclick="editarPago(this.id)">
-                        configurar
-                      </button> </td>
-                    <td> <button class="btn btn-lg " id="Cuota1" onclick="editarPago(this.id)">
-                        configurar
-                      </button> </td>
-                    <td> <button class="btn btn-lg " id="Cuota2" onclick="editarPago(this.id)">
-                        configurar
-                      </button> </td>
-                    <td> <button class="btn btn-lg " id="Cuota3" onclick="editarPago(this.id)">
-                        configurar
-                      </button> </td>
-                    <td> <button class="btn btn-lg " id="Cuota4" onclick="editarPago(this.id)">
-                        configurar
-                      </button> </td>
-                    <td> <button class="btn btn-lg " id="Cuota5" onclick="editarPago(this.id)">
-                        configurar
-                      </button> </td>
-                    <td> <button class="btn btn-lg " id="Cuota6" onclick="editarPago(this.id)">
-                        configurar
-                      </button> </td>
-                    <td> <button class="btn btn-lg " id="Cuota7" onclick="editarPago(this.id)">
-                        configurar
-                      </button> </td>
-                    <td> <button class="btn btn-lg " id="Cuota8" onclick="editarPago(this.id)">
-                        configurar
-                      </button> </td>
-                    <td> <button class="btn btn-lg " id="Cuota9" onclick="editarPago(this.id)">
-                        configurar
-                      </button> </td>
-                    <td> <button class="btn btn-lg " id="Cuota10" onclick="editarPago(this.id)">
-                        configurar
-                      </button> </td>
-                    <td> <button class="btn btn-lg " id="Cuota11" onclick="editarPago(this.id)">
-                        configurar
-                      </button> </td>
-                    <td> <button class="btn btn-lg " id="Cuota12" onclick="editarPago(this.id)">
-                        configurar
-                      </button> </td>
-                    <td> <button class="btn btn-lg " id="DNV" onclick="editarPago(this.id)">
-                        configurar
-                      </button> </td>
-                    <td> <button class="btn btn-lg " id="DPV" onclick="editarPago(this.id)">
-                        configurar
-                      </button> </td>
-                    <td> <button class="btn btn-lg " id="Hidraulica" onclick="editarPago(this.id)">
-                        configurar
-                      </button> </td>
-                    <td> <button class="btn btn-lg " id="FFCC" onclick="editarPago(this.id)">
-                        configurar
-                      </button> </td>
-                    <td> <button class="btn btn-lg " id="Privado" onclick="editarPago(this.id)">
-                        configurar
-                      </button> </td>
-                    <td> <button class="btn btn-lg " id="Municipal" onclick="editarPago(this.id)">
-                        configurar
-                      </button> </td>
-                    <td> <button class="btn btn-lg " id="ServicioDomiciliario" onclick="editarPago(this.id)">
-                        configurar
-                      </button></td>
-                  </tr>
-
-                </tbody>
-              </table>
-
-            </div>
+              <div class="row">
+                <h3 class="text-center"
+                title="Configura el valor predeterminado que se mostrará al momento de cargar un pago.">Configurar
+                montos que pagarán los clientes</h3>
+              </div>
+              <div class="row">
+                <div class="col border border-secondary"> <label for="AnticipoFinanciero"> Anticipo Financiero</label>
+                  <button class="btn btn-outline-success p-1 bi bi-gear  " id="AnticipoFinanciero" onclick="editarPago(this.id)">
+                    
+                  </button> 
+                </div>
+                <div class="col border border-secondary"> <label for="Cuota1"> Cuota 1</label>
+                  <button class="btn btn-outline-success p-1 bi bi-gear  " id="Cuota1" onclick="editarPago(this.id)">
+                    
+                  </button> 
+                </div>
+                <div class="col border border-secondary"> <label for="Cuota2"> Cuota 2</label>
+                  <button class="btn btn-outline-success p-1 bi bi-gear  " id="Cuota2" onclick="editarPago(this.id)">
+                    
+                  </button> 
+                </div>
+                <div class="col border border-secondary"> <label for="Cuota3"> Cuota 3</label>
+               <button class="btn btn-outline-success p-1 bi bi-gear  " id="Cuota3" onclick="editarPago(this.id)">
+                
+              </button> 
+                </div>
+                <div class="col border border-secondary"> <label for="Cuota4"> Cuota 4</label>
+                  <button class="btn btn-outline-success p-1 bi bi-gear  " id="Cuota4" onclick="editarPago(this.id)">
+                    
+                  </button> 
+                </div>
+                <div class="col border border-secondary"> <label for="Cuota5"> Cuota 5</label>
+               <button class="btn btn-outline-success p-1 bi bi-gear  " id="Cuota5" onclick="editarPago(this.id)">
+                
+              </button> 
+                </div>
+              </div>
+                <div class="row">
+                <div class="col border border-secondary"> <label for="Cuota6"> Cuota 6</label>
+               <button class="btn btn-outline-success p-1 bi bi-gear  " id="Cuota6" onclick="editarPago(this.id)">
+                
+              </button> 
+                </div>
+                <div class="col border border-secondary"> <label for="Cuota7"> Cuota 7</label>
+                   
+                  <button class="btn btn-outline-success p-1 bi bi-gear  " id="Cuota7" onclick="editarPago(this.id)">
+                    
+                  </button> 
+                </div>
+                <div class="col border border-secondary"> <label for="Cuota8"> Cuota 8</label>
+                  <button class="btn btn-outline-success p-1 bi bi-gear  " id="Cuota8" onclick="editarPago(this.id)">
+                    
+                  </button> 
+                </div>
+                <div class="col border border-secondary"> <label for="Cuota9"> Cuota 9</label>
+                  <button class="btn btn-outline-success p-1 bi bi-gear  " id="Cuota9" onclick="editarPago(this.id)">
+                    
+                  </button> 
+                </div>
+                <div class="col border border-secondary"> <label for="Cuota10"> Cuota 10</label>
+                  <button class="btn btn-outline-success p-1 bi bi-gear  " id="Cuota10" onclick="editarPago(this.id)">
+                    
+                  </button> 
+                </div>
+                <div class="col border border-secondary"> <label for="Cuota11"> Cuota 11</label>
+                  <button class="btn btn-outline-success p-1 bi bi-gear  " id="Cuota11" onclick="editarPago(this.id)">
+                    
+                  </button> 
+                </div>
+              </div>                                  
+                 <div class="row">
+                   <div class="col border border-secondary"> <label for="Cuota12"> Cuota 12</label>
+               <button class="btn btn-outline-success p-1 bi bi-gear  " id="Cuota12" onclick="editarPago(this.id)">
+                
+              </button> 
+                  </div>
+                   <div class="col border border-secondary"> <label for="DNV"> Permiso DNV </label>
+                    <button class="btn btn-outline-success p-1 bi bi-gear  " id="DNV" onclick="editarPago(this.id)">
+                      
+                    </button> 
+                  </div>
+                   <div class="col border border-secondary"> <label for="DPV"> Permiso DPV</label>
+                    <button class="btn btn-outline-success p-1 bi bi-gear  " id="DPV" onclick="editarPago(this.id)">
+                      
+                    </button> 
+                  </div>
+                   <div class="col border border-secondary"> <label for="Hidraulica"> Permiso Hidraulica</label>
+                    <button class="btn btn-outline-success p-1 bi bi-gear  " id="Hidraulica" onclick="editarPago(this.id)">
+                      
+                    </button> 
+                  </div>
+                   <div class="col border border-secondary"> <label for="FFCC"> Permiso FFCC</label>
+                    <button class="btn btn-outline-success p-1 bi bi-gear  " id="FFCC" onclick="editarPago(this.id)">
+                      
+                    </button> 
+                  </div>
+                   <div class="col border border-secondary"> <label for="Privado"> Permiso Privado</label>
+                    <button class="btn btn-outline-success p-1 bi bi-gear  " id="Privado" onclick="editarPago(this.id)">
+                      
+                    </button> 
+                  </div>
+                
+                </div>
+                <div class="row">
+                  <div class="col border border-secondary"> <label for="Municipal"> Permiso Municipal</label>
+                    <button class="btn btn-outline-success p-1 bi bi-gear  " id="Municipal" onclick="editarPago(this.id)">
+                      
+                    </button> 
+                  </div>
+                   <div class="col border border-secondary"> <label for="ServicioDomiciliario"> Servicio domiciliario </label>
+                    <button class="btn btn-outline-success p-1 bi bi-gear  " id="ServicioDomiciliario" onclick="editarPago(this.id)">
+                      
+                    </button>
+                  </div>
+                </div>   
             <form action="actualizarConfigObra" method="post">
             </form>
           </div>
@@ -699,10 +711,13 @@
 <script>
   function editarPago(id, valor) {
     $('#' + id).empty();
-
-    $('#' + id).parent().html(
-      '<form  action="/Finanzas/actualizarConfigObra/<%=Cobros[0].id_Obra%>/' + id + '/<%=Predeterminado[0].NombreObra%>" method="post"><input name="valor" type="number">' +
-      '<button class="btn btn-sm btn-success bg-success m-1 " type="submit" >Actualizar</button></form>'
+    $('#' + id).removeAttr("onclick")
+    $('#' + id).parent().append(
+      '<form  action="/Finanzas/actualizarPredeterminadosObraEntera/<%=Cobros[0].id_Obra%>/' + id + '/<%=NombreObra%>" method="post">'+
+        '<div class="m-1 text-center">'+
+        '<input name="valor" type="number" placeholder="Ingrese el monto a editar">' +
+      '<button class="btn btn-sm btn-success m-1 " type="submit" >Actualizar</button></form>'+
+      '</div>'
     );
   }
   function EnviarFormulario() {

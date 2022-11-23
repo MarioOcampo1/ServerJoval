@@ -35,14 +35,14 @@
                         <div class="col">
                             <div class="form-group">
                                 <label for="Teléfono">Teléfono</label>
-                                <input value="<%=results[0].Telefono%>" required type="tel" class="form-control"
+                                <input value="<%=results[0].Telefono%>"  type="tel" class="form-control"
                                     id="Teléfono" name="Teléfono" placeholder="Teléfono">
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-group">
                                 <label for="Correo">Correo</label>
-                                <input value="<%=results[0].Correo%>" required type="email" class="form-control"
+                                <input value="<%=results[0].Correo%>"  type="email" class="form-control"
                                     id="Correo" name="Correo" placeholder="Correo">
                             </div>
                         </div>
@@ -236,7 +236,7 @@
                 $('#' + id).removeAttr("onclick")
                 $('#' + id).append(
                     '<form id="formActualizarPagoPredeterminado" action="ActualizarPagoPredeterminado/<%=results[0].ID_cliente%>/' + id + '" method="post">'+
-                '<label for="Monto">Monto:</label><input id="Monto" name="valor" type="number">' +
+                '<label for="Monto">Monto:</label><input id="Monto" name="valor" type="number" required>' +
                     '<button class="btn btn-outline-success m-1" type="submit">Actualizar</button>'+
                     '</form>'
                 );
