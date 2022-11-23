@@ -584,10 +584,9 @@ router.get('/Finanzas/cobrodeobras/VerObra/:NombreObra', (req, res) => {
     }
     })
 
-   })
-   promise1.then(resultado=>{  
-    sql = 'SELECT c.NombreCliente, c.AnticipoFinanciero as PredeterminadoAnticipoFinanciero, c.Cuota1 as PredeterminadoCuota1, c.Cuota2 as PredeterminadoCuota2, c.Cuota3 as PredeterminadoCuota3, c.Cuota4 as PredeterminadoCuota4, c.Cuota5 as PredeterminadoCuota5, c.Cuota6 as PredeterminadoCuota6, c.Cuota7 as PredeterminadoCuota7, c.Cuota8 as PredeterminadoCuota8, c.Cuota9 as PredeterminadoCuota9, c.Cuota10 as PredeterminadoCuota10, c.Cuota11 as PredeterminadoCuota11, c.Cuota12 as PredeterminadoCuota12, c.Irrigacion as PredeterminadoIrrigacion, c.DNV as PredeterminadoDNV, c.DPV as PredeterminadoDPV, c.Hidraulica as PredeterminadoHidraulica, c.FFCC as PredeterminadoFFCC, c.Privado as PredeterminadoPrivado, c.ServicioDomiciliario as PredeterminadoServicioDomiciliario,c.Municipal as PredeterminadoMunicipal, c.IngresoDocumentacion as PredeterminadoIngresoDocumentacion FROM finanzas_clientes_predeterminados c WHERE c.id_obra =?';       
+   }).then(resultado=>{  
     const promise2 = new Promise((resolve,reject)=>{
+        sql = 'SELECT c.NombreCliente, c.AnticipoFinanciero as PredeterminadoAnticipoFinanciero, c.Cuota1 as PredeterminadoCuota1, c.Cuota2 as PredeterminadoCuota2, c.Cuota3 as PredeterminadoCuota3, c.Cuota4 as PredeterminadoCuota4, c.Cuota5 as PredeterminadoCuota5, c.Cuota6 as PredeterminadoCuota6, c.Cuota7 as PredeterminadoCuota7, c.Cuota8 as PredeterminadoCuota8, c.Cuota9 as PredeterminadoCuota9, c.Cuota10 as PredeterminadoCuota10, c.Cuota11 as PredeterminadoCuota11, c.Cuota12 as PredeterminadoCuota12, c.Irrigacion as PredeterminadoIrrigacion, c.DNV as PredeterminadoDNV, c.DPV as PredeterminadoDPV, c.Hidraulica as PredeterminadoHidraulica, c.FFCC as PredeterminadoFFCC, c.Privado as PredeterminadoPrivado, c.ServicioDomiciliario as PredeterminadoServicioDomiciliario,c.Municipal as PredeterminadoMunicipal, c.IngresoDocumentacion as PredeterminadoIngresoDocumentacion FROM finanzas_clientes_predeterminados c WHERE c.id_obra =?';       
         connection.query(sql, resultado, (error, Predeterminados) => {
             if (error){ 
                 console.log(error);
@@ -597,11 +596,10 @@ router.get('/Finanzas/cobrodeobras/VerObra/:NombreObra', (req, res) => {
 resolve(Predeterminados)
             }
             else {
-                reject(error);
+                reject();
             }
         })
-    })
-    promise2.then(resolvePromise=>{
+    }).then(resolvePromise=>{
         sql = 'SELECT * from finanzas_clientes_por_obra_cobros WHERE id_Obra =?'
         connection.query(sql, id, (error, Cobros) => {
             if (error){ console.log(error);
@@ -612,13 +610,13 @@ resolve(Predeterminados)
               res.render('paginas/Finanzas/Cobrodeobras/Obras/Vistaobras.ejs', { Predeterminado: resolvePromise, Cobros: Cobros, NombreObra: NombreObra }); 
             }
         })
-    }).catch( err=>{
-        res.redirect(res.get("referer"));
+    }).catch( function(err){
+        res.redirect("/Finanzas/NuevoCliente");
     }
 
        )
-   }).catch( err=>{
-    res.redirect(res.get("referer"));
+   }).catch( function(err){
+    res.redirect("/cobroDeObras");
    }
 
    )
