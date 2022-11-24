@@ -24,8 +24,8 @@
             <label class="form-check-label" for="">Gas</label>
             </div>
             <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" name="Finanzas" id="InputCheckFinanzas" value="option2">
-            <label class="form-check-label" for="">Finanzas</label>
+            <!-- <input class="form-check-input" type="checkbox" name="Finanzas" id="InputCheckFinanzas" value="option2">
+            <label class="form-check-label" for="">Finanzas</label> -->
             </div>
             
           </div>    
@@ -72,7 +72,7 @@
         <div id="SectorGas" class="container-fluid m-2" style="display: block;">
           <div class="row bg-primary mb-3 ">
 
-            <h1 class="text-center" onclick="MostrarOcultar('SectorGas');">Sector Gas</h1>
+            <h1 class="text-center text-white" onclick="MostrarOcultar('SectorGas');">Sector Gas</h1>
     
           </div>
           <input type="hidden" id="GasSeleccionado" name="GasSeleccionado">
@@ -268,7 +268,7 @@
 
     </div>
     <div class="row">
-      <div class="col-6">
+      <div class="col-3">
 
         <label for="OpcionesDeCuotas" >Tipo de pago</label>
         <select class="form-select" name="" id="OpcionesDeCuotas">
@@ -276,10 +276,16 @@
           <option value="Certificado">Certificado</option>
         </select>
       </div>
+        <div class="col-3" id="CantidadCuotas"style="display: block;"> 
+          <label  for="CantidadCuotas" >Cantidad de cuotas</label>
+          <input type="number" class="form-control" name="CantidadCuotas" value="6">
+
+        </div>
+      
       <div class="col-6">
         <label for="cantidadVecinos">Cantidad de vecinos</label>
         <input type="number" class="form-control" id="cantidadVecinos" name="cantidadVecinos"
-          placeholder="Ingrese la cantidad de vecinos." required>
+          placeholder="Ingrese la cantidad de vecinos." value="0" required>
       </div>
     </div>
     <div class="row">
@@ -305,9 +311,10 @@
   </div>
 
   </div>
-</form>
+
   </div>
 </div>
+</form>
   <!-- <div class="button-group m-3 text-center" role="group">
     <button type="submit" class="btn btn-success text-center" onclick="RevisarDocumentacion()">Guardar</button>
     <a href="/adminecogas" class="btn btn-danger text-center">Cancelar</a>
@@ -342,7 +349,7 @@
           '<div class="col-3"><label for="DniVecino">Dni</label> ' +
           '<input type="number" minlength="8" maxlength="9" class="form-control" id="DniVecino" name="DniVecino' + index + '" placeholder="Dni." required> </div>' +
           '<div class="col-3"><label for="TeléfonoVecino">Teléfono</label>' +
-          '   <input type="text" class="form-control" id="TeléfonoVecino" name="TeléfonoVecino' + index + '"' +
+          '   <input type="text" class="form-control" id="TelefonoVecino" name="TelefonoVecino' + index + '"' +
           'placeholder="Teléfono."> </div>' +
           '<div class="row"> <div class="col-3"><label for="CorreoVecino">Correo</label>' +
           '<input type="email" class="form-control" id="CorreoVecino" name="CorreoVecino' + index + '"' +
@@ -362,9 +369,11 @@
         if(OpcionSeleccionada=="Cuotas")
         {
         $('#divPrecioDeCuota').css("visibility","visible");
+        $('#CantidadCuotas').css('display','block');
       }
       else{
         $('#divPrecioDeCuota').css("visibility","hidden");
+        $('#CantidadCuotas').css('display','none');
       }
     })
   $('#InputCheckGas').click(function(){
@@ -372,10 +381,14 @@
     var estado =   $('#InputCheckGas').prop('checked');
    if(estado){
     $('#SectorGas').css('display','block');
+    $('#SectorFinanzas').css('display','block');
     $('#GasSeleccionado').val("Seleccionado")
+    $('#FinanzasSeleccionado').val("Seleccionado");
   } else{
     $('#SectorGas').css('display','none');
     $('#GasSeleccionado').val("NoSeleccionado")
+    $('#SectorFinanzas').css('display','none');
+    $('#FinanzasSeleccionado').val("NoSeleccionado");
   }
   })
   $('#InputCheckFinanzas').click(function(){

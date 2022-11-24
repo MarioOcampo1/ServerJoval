@@ -165,8 +165,9 @@ router.post('/guardarNuevoCliente', (req, res) => {
     console.log("DATOS DEL CLIENTE QUE SE GUARDA");
     console.log('NOMBRE:' + Nombre + ', NCarpeta:' + NCarpeta);
 if(gasSeleccionado=="Seleccionado"){
-    
-}
+    const promise1 = new Promise((resolve, reject)=>{
+
+   
     sql = 'Insert into obras set ?';
     connection.query(sql, {
         Nombre: Nombre, NCarpeta: NCarpeta, Comitente: Comitente, Ubicacion: Departamento,
@@ -227,9 +228,71 @@ if(gasSeleccionado=="Seleccionado"){
     }], (error, results) => {
         if (error) console.log(error);
     })
-    //nuevocliente 2da parte
-    res.redirect('/index');
+    resolve();
+}).then(function(resultadopromise1){
+    var idObra;
+    sql='Select id from obras where Nombre =?';
+connection.query(sql,Nombre, (error,results)=>{
+    if(error) console.log(error);
+    else{
+       idObra= results[0].id;
+    }
+    
 })
+    const promise2 = new Promise((resolve,reject)=>{
+const cantidadVecinos= req.body.cantidadVecinos;
+const MontoContrato= req.body.MontoContrato;
+const PrecioDeCuota = req.body.PrecioDeCuota;
+const AnticipoFinanciero = req.body.AnticipoFinanciero;
+const CantidadCuotas = req.body.CantidadCuotas;
+if(cantidadVecinos!=0 || cantidadVecinos!=null || cantidadVecinos!=undefined){
+for (let index = 0; index < cantidadVecinos; index++) {
+    const element = [];
+    sql='Insert into finanzas_clientes_por_obra set?';
+    connection.query(sql,{
+    id_Obra:idObra,NombreObra:Nombre,NombreCliente: req.body.NombreVecino, DniCliente: req.body.DniVecino ,LocacionObra:Departamento , Telefono:req.body.TelefonoVecino ,Correo:req.body.CorreoVecino ,Direccion:req.body.LoteVecino ,
+    },(error,results)=>{
+    if(error) console.log(error);
+    else{
+        sql='Select id_cliente from finanzas_clientes_por_obra where NombreCliente =? and id_Obra =?';
+        connection.query(sql,[NombreCliente,idObra], (error,results)=>{
+            if(error) console.log(error);
+            else{
+                var id_cliente = results[0].id_cliente;
+            sql='Insert into finanzas_clientes_predeterminados set?';
+            connection.query(sql,{
+                id_obra: idObra, id_cliente: id_cliente, NombreCliente: NombreCliente, AnticipoFinanciero: AnticipoFinanciero
+            }, (error,results)=>{
+if(error)console.log(error);
+ 
+ for (let index = 1; index < CantidadCuotas; index++) {
+    var cuota="Cuota"+index;
+    sql='Update finanzas_clientes_predeterminados'+cuota+'='+PrecioDeCuota+' WHERE id_cliente=?';
+    connection.query(sql,id_cliente, (error,results)=>{
+if(error)console.log(error);
+    })  
+ }  
+})
+            }
+        })
+    }
+    })
+}
+} else{
+    
+}
+resolve();
+}).then(function(){
+ res.redirect('/index');
+})
+})
+
+}
+}
+    
+  
+  
+)
 router.post('/guardarNuevoContacto', (req, res) => {
     const Nombre = req.body.Nombre;
     const Entidad = req.body.Entidad;
