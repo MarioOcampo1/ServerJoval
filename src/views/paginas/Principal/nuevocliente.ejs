@@ -34,7 +34,7 @@
         <div class="col-4">
         <label for="Nombre">Nombre de carpeta</label>
         <input type="text" class="form-control" id="NombreCarpeta" name="NombreCarpeta"
-          placeholder="Nombre de carpeta">
+          placeholder="Nombre de carpeta" required>
         </div>
           <div class="col-4">
             <label for="Codigo">Codigo de carpeta</label><br>
@@ -254,10 +254,7 @@
   </div>
 </div>
   
-<div class="button-group m-3 text-center" role="group">
-  <button type="submit" class="btn btn-success text-center" onclick="RevisarDocumentacion()">Guardar</button>
-  <a href="/adminecogas" class="btn btn-danger text-center">Cancelar</a>
-</div>
+
 
 
   <div id="SectorFinanzas"class="container-fluid" style="display: block;">
@@ -285,7 +282,7 @@
       <div class="col-6">
         <label for="cantidadVecinos">Cantidad de vecinos</label>
         <input type="number" class="form-control" id="cantidadVecinos" name="cantidadVecinos"
-          placeholder="Ingrese la cantidad de vecinos." value="0" required>
+          placeholder="Ingrese la cantidad de vecinos." required>
       </div>
     </div>
     <div class="row">
@@ -311,7 +308,10 @@
   </div>
 
   </div>
-
+  <div class="button-group m-3 text-center" role="group">
+    <button type="submit" class="btn btn-success text-center" onclick="RevisarDocumentacion()">Guardar</button>
+    <a href="/adminecogas" class="btn btn-danger text-center">Cancelar</a>
+  </div>
   </div>
 </div>
 </form>
@@ -403,7 +403,6 @@
     $('#FinanzasSeleccionado').val("NoSeleccionado");
   }
   })
-  
   </script>
 </body>
 
