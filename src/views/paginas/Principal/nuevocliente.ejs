@@ -17,7 +17,18 @@
 <body>
         <h1 class="text-center">Nueva obra
         </h1>
-         
+        <div class="container-fluid" style="background: #b5b5b5 ;">
+          Seleccione la información que desea cargar
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" name="Gas" id="InputCheckGas" >
+            <label class="form-check-label" for="">Gas</label>
+            </div>
+            <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" name="Finanzas" id="InputCheckFinanzas" value="option2">
+            <label class="form-check-label" for="">Finanzas</label>
+            </div>
+            
+          </div>    
       <form action="/guardarNuevoCliente" method="post">
         <div class="row m-3">
         <div class="col-4">
@@ -58,10 +69,10 @@
             </div>
           </div>
         </div>
-        <div id="SectorGas" class="container-fluid m-2" style="display: none;">
+        <div id="SectorGas" class="container-fluid m-2" style="display: block;">
           <div class="row bg-primary mb-3 ">
 
-            <h1 class="text-center">Sector Gas</h1>
+            <h1 class="text-center" onclick="MostrarOcultar('SectorGas');">Sector Gas</h1>
     
           </div>
       
@@ -249,7 +260,7 @@
 </div>
 
 </form>
-  <div id="SectorFinanzas"class="container-fluid" style="display: none;">
+  <div id="SectorFinanzas"class="container-fluid" style="display: block;">
   <div class="container-fluid ">
     <div class="row bg-danger">
       <h1 class="text-center">Sector Finanzas</h1>
