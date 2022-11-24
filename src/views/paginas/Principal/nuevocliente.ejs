@@ -75,7 +75,7 @@
             <h1 class="text-center" onclick="MostrarOcultar('SectorGas');">Sector Gas</h1>
     
           </div>
-      
+          <input type="hidden" id="GasSeleccionado" name="GasSeleccionado">
         <div class="form-group">
           <div class="row m-2">
             <div class="col-3">
@@ -259,8 +259,9 @@
   <a href="/adminecogas" class="btn btn-danger text-center">Cancelar</a>
 </div>
 
-</form>
+
   <div id="SectorFinanzas"class="container-fluid" style="display: block;">
+    <input type="hidden" id="FinanzasSeleccionado" name="FinanzasSeleccionado">
   <div class="container-fluid ">
     <div class="row bg-danger">
       <h1 class="text-center">Sector Finanzas</h1>
@@ -304,6 +305,7 @@
   </div>
 
   </div>
+</form>
   </div>
 </div>
   <!-- <div class="button-group m-3 text-center" role="group">
@@ -370,8 +372,10 @@
     var estado =   $('#InputCheckGas').prop('checked');
    if(estado){
     $('#SectorGas').css('display','block');
+    $('#GasSeleccionado').val("Seleccionado")
   } else{
     $('#SectorGas').css('display','none');
+    $('#GasSeleccionado').val("NoSeleccionado")
   }
   })
   $('#InputCheckFinanzas').click(function(){
@@ -379,8 +383,11 @@
     var estado =   $('#InputCheckFinanzas').prop('checked');
    if(estado){
     $('#SectorFinanzas').css('display','block');
+    $('#FinanzasSeleccionado').val("Seleccionado");
+    
   } else{
     $('#SectorFinanzas').css('display','none');
+    $('#FinanzasSeleccionado').val("NoSeleccionado");
   }
   })
   

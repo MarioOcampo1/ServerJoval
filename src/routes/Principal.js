@@ -126,6 +126,8 @@ router.post('/editarContacto/delete/Contacto/:id', (req, res) => {
     })
 })
 router.post('/guardarNuevoCliente', (req, res) => {
+    const gasSeleccionado = req.body.GasSeleccionado;
+    const finanzasSeleccionado = req.body.FinanzasSeleccionado;
     const fechaActual = new Date();
     const Codigo = req.body.Codigo;
     const Nombre = req.body.NombreCarpeta;
@@ -158,10 +160,13 @@ router.post('/guardarNuevoCliente', (req, res) => {
             var Permisos = "Sin presentar";
         }
     }
-    console.log("ATENCION: SE PROCEDE A GUARDAR NUEVO CLIENTE DE GAS");
+    
+    console.log("ATENCION: SE PROCEDE A GUARDAR NUEVO CLIENTE");
     console.log("DATOS DEL CLIENTE QUE SE GUARDA");
     console.log('NOMBRE:' + Nombre + ', NCarpeta:' + NCarpeta);
-
+if(gasSeleccionado=="Seleccionado"){
+    
+}
     sql = 'Insert into obras set ?';
     connection.query(sql, {
         Nombre: Nombre, NCarpeta: NCarpeta, Comitente: Comitente, Ubicacion: Departamento,
