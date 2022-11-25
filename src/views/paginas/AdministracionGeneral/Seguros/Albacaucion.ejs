@@ -13,11 +13,13 @@
     <h1 class="text-center">Albacaución</h1>
     <%- include('../partials/albacaucion/NuevaPolizaAlbacaucion.ejs'); %> <!-- Opcion para cargar la nueva póliza de albacaución -->
     <div class="btn-group m-1" role="group" aria-label="Botones">
-        <button type="button" class="btn btn-danger" onclick="document.getElementById('nuevaPoliza').style.display='block';">Nueva póliza</button>
+        
     </div>    
     <div class="div p-1">
         <label for="Buscador">Buscador de tabla</label>
         <input type="text" name="Buscador" id="BuscadorTabla">
+        <button type="button" class="btn btn-danger" onclick="document.getElementById('nuevaPoliza').style.display='block';">Nueva póliza</button>
+        <button type="button" class="btn btn-info" onclick="MostrarTodasLasPolizas();"> Mostrar todas las pólizas</button>
     </div>
     <div class="table-bordered p-1 text-center">
        <table id="tablaAlbacaucion" class="table-bordered p-1 text-center">
@@ -25,6 +27,7 @@
             <tr>
     <th scope="col">N° póliza</th>
     <th scope="col">Emisión</th>
+    <th scope="col">Endoso</th>
     <th scope="col">Vigencia</th>
     <th scope="col">Riesgo</th>
     <th scope="col">Valor a pagar</th>
@@ -41,17 +44,27 @@
    
         <td><%=poliza.NumeroPoliza%></td>
         <td><%=moment(poliza.FechaEmisionPoliza).format('DD/MM/YYYY')%> </td>
+        <td><%=poliza.Endoso%></td>
         <td><%=poliza.VigenciaPoliza%></td>
         <td><%=poliza.Riesgo%></td>
-        <td><%=poliza.Valor%></td>
-        <td><%=poliza.MontoAsegurado%></td>
+        <td>$ <%=poliza.Valor%></td>
+        <td>$ <%=poliza.MontoAsegurado%></td>
         <td><%=poliza.Obra%></td>
-        <td><%=moment(poliza.ProximaRefacturacion).format('DD/MM/YYYY')%> </td>
+        <%if(fechaAComparar<moment(poliza.ProximaRefacturacion).format('DD/MM/YYYY')){%>
+            <td class="bg-danger text-white"><%=moment(poliza.ProximaRefacturacion).format('DD/MM/YYYY')%> </td>
+            <%}%>
+            <%if(fechaAComparar==moment(poliza.ProximaRefacturacion).format('DD/MM/YYYY')){%>
+            <td class="bg-warning text-dark"><%=moment(poliza.ProximaRefacturacion).format('DD/MM/YYYY')%> </td>
+                <%}%>
+                <%if(fechaAComparar>moment(poliza.ProximaRefacturacion).format('DD/MM/YYYY')){%>
+                    <td class=""><%=moment(poliza.ProximaRefacturacion).format('DD/MM/YYYY')%> </td>
+                        <%}%>
+       
         <td><%=poliza.NombreAsegurado%></td>
         <td><%=poliza.Estado%>
             
             <a href="ActualizarPolizaAlbacaucion/<%=poliza.ID_poliza%>">
-        <button  class="btnEditar">Editar</button>
+        <button  class="btn-sm btn-outline-primary btnEditar">Editar</button>
     </a>
         </td>
 
@@ -66,6 +79,7 @@
     if( jQuery(this).val() != "0"){
         jQuery("#tablaAlbacaucion tbody>tr").hide();
         jQuery("#tablaAlbacaucion td:contiene-palabra('" + jQuery(this).val() + "')").parent("tr").show();
+        jQuery("#tablaAlbacaucion td:contiene-palabra('Dada de baja')").parent("tr").hide();
     }
     else{
         jQuery("#tablaAlbacaucion tbody>tr").show();
@@ -78,6 +92,13 @@ jQuery.extend(jQuery.expr[":"],
         return (elem.textContent || elem.innerText || jQuery(elem).text() || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
     }
 });
+$(document).ready(function(){
+    
+    jQuery("#tablaAlbacaucion td:contiene-palabra('Dada de baja')").parent("tr").hide();
 
+})
+function MostrarTodasLasPolizas(){
+    jQuery("#tablaAlbacaucion tbody>tr").show();
+}
 </script>
 </html>

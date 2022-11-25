@@ -14,11 +14,11 @@
     <%- include('../menusuperior.ejs'); %>
     
     <h1 class=" text-center bg-warning">Actualizar póliza de Albacaución</h1>
-    <div class="btn-group m-1" role="group" aria-label="Botones">
+    <div class="btn-group pr-1" role="group" aria-label="Botones">
         <button type="button" class="btn btn-outline-secondary" onclick="javascript:history.back()">Volver
             atrás</button>
-        <form id="formularioBorrarBoton" action="/BorrarPoliza/<%=obras[0].ID_poliza%>" method="post">
-            <button type="button" class="btn btn-outline-danger" onclick="mostrarAlerta()">Borrar póliza</button>
+        <form id="formularioBorrarBoton" action="/DarBajaPolizaAlbacaucion/<%=obras[0].ID_poliza%>" method="post">
+            <button type="button" class="btn btn-outline-danger" onclick="mostrarAlerta()">Dar de baja la póliza</button>
         </form>
 
     </div>
@@ -80,11 +80,11 @@
                                 <option selected value="<%=obras[0].Riesgo%>">
                                     <%=obras[0].Riesgo%>
                                 </option>
-                                <option value="EjecucionContrato"> Ejecución de contrato</option>
-                                <option value="FondoReparo"> Fondo de reparo</option>
-                                <option value="GarantiaAnticipo"> Garantía de anticipo</option>
-                                <option value="GarantiaAcopio"> Garantía de acopio</option>
-                                <option value="MantenimientoOferta"> Mantenimiento de oferta</option>
+                                <option value="Ejecucion de Contrato"> Ejecución de contrato</option>
+                                <option value="Fondo de reparo"> Fondo de reparo</option>
+                                <option value="Garantia de anticipo"> Garantía de anticipo</option>
+                                <option value="Garantia de acopio"> Garantía de acopio</option>
+                                <option value="Mantenimiento de oferta"> Mantenimiento de oferta</option>
                             </select>
                         </div>
                         <div class="row">
@@ -110,7 +110,7 @@
                         </div>
                         <div class="row">
                             <label class="fw-bold" for="MontoAsegurado">Monto Asegurado</label>
-                            <input  type="number" class="m-1" id="MontoAsegurado" name="MontoAsegurado"
+                            <input  required type="number" class="m-1" id="MontoAsegurado" name="MontoAsegurado"
                                 value="<%=obras[0].MontoAsegurado%>"
                                 placeholder="Ingrese el Monto Asegurado de la póliza "
                                 aria-label="<%=obras[0].MontoAsegurado%>">
@@ -124,6 +124,33 @@
                         </div>
 
 
+                    </div>
+                    <div class="col m-1">
+                        <div class="row">
+                            <label class="fw-bold" for="Estado">Estado</label>
+                            <select name="Estado" id="Estado">Seleccione el estado
+                                
+                                <%if(obras[0].Estado=="Vigente"){%>
+                                    <option value="Dada de baja">Dada de baja</option>
+                                    <option selected value="<%=obras[0].Estado%>" hi>
+                                        <%=obras[0].Estado%>
+                                    </option>
+                                    <%} if(obras[0].Estado=="Dada de baja"){%>%>
+                                        <option value="Vigente">Vigente</option> 
+                                        <option selected value="<%=obras[0].Estado%>">
+                                            <%=obras[0].Estado%>
+                                        </option>
+                                        <%}%>
+                               
+                                
+                            </select>
+                        </div>
+                        <div class="row">
+                            <label class="fw-bold" for="ProximaRefacturacion">Proxima refacturación: <%=moment(obras[0].ProximaRefacturacion).format('DD/MM/YYYY')%></label>
+                           <input type="date" name="ProximaRefacturacion" id="ProximaRefacturacion" value=""</label>
+                                
+                       
+                        </div>
                     </div>
                 </div>
                 <div class="row justify-content-md-center">
@@ -147,8 +174,8 @@
         }
     }
     $(document).ready(function(){
+        $('#ProximaRefacturacion').val('<%=obras[0].ProximaRefacturacion%>');
         
-        $('#FechaEmisionPoliza').attr('value', '<%=obras[0].FechaEmisionPoliza%>');
         
     })
    

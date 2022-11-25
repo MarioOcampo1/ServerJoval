@@ -289,7 +289,7 @@
       <div class="col-4">
         <label for="MontoContrato">Monto del contrato</label>
         <input type="number" class="form-control" id="MontoContrato" name="MontoContrato"
-          placeholder="Ingrese el monto de la cuota." required>
+          placeholder="Ingrese el monto total del contrato." required>
       </div>
       <div id="divPrecioDeCuota" class="col-4">
         <label for="PrecioDeCuota">Precio de la cuota por vecino</label>
@@ -343,19 +343,19 @@
       for (let index = 1; index <= (cantidadVecinos); index++) {
         var text = '<br> <h4 class="bg-info">Datos del vecino N°: ' + index + '</h4>' +
           ' <div class="row"><div class="col-3"> <label for="NombreVecino">Nombre</label>' +
-          '<input type="text" class="form-control" id="NombreVecino" name="NombreVecino' + index + '"placeholder="Nombre." required></div>' +
+          '<input type="text" class="form-control" id="NombreVecino" name="NombreVecino"placeholder="Nombre." required></div>' +
           '<div class="col-3"><label for="ApellidoVecino">Apellido</label> ' +
-          ' <input type="text" class="form-control" id="ApellidoVecino" name="ApellidoVecino' + index + '" placeholder="Apellido." required> </div>' +
+          ' <input type="text" class="form-control" id="ApellidoVecino" name="ApellidoVecino" placeholder="Apellido." required> </div>' +
           '<div class="col-3"><label for="DniVecino">Dni</label> ' +
-          '<input type="number" minlength="8" maxlength="9" class="form-control" id="DniVecino" name="DniVecino' + index + '" placeholder="Dni." required> </div>' +
+          '<input type="number" minlength="8" maxlength="9" class="form-control" id="DniVecino" name="DniVecino" placeholder="Dni." required> </div>' +
           '<div class="col-3"><label for="TeléfonoVecino">Teléfono</label>' +
-          '   <input type="text" class="form-control" id="TelefonoVecino" name="TelefonoVecino' + index + '"' +
+          '   <input type="text" class="form-control" id="TelefonoVecino" name="TelefonoVecino"' +
           'placeholder="Teléfono."> </div>' +
           '<div class="row"> <div class="col-3"><label for="CorreoVecino">Correo</label>' +
-          '<input type="email" class="form-control" id="CorreoVecino" name="CorreoVecino' + index + '"' +
+          '<input type="email" class="form-control" id="CorreoVecino" name="CorreoVecino"' +
           'placeholder="Correo."></div>' +
           '<div class="col-3"><label for="LoteVecino">Manzana y lote</label>' +
-          '<input type="text" class="form-control" id="LoteVecino" name="LoteVecino' + index + '"' +
+          '<input type="text" class="form-control" id="LoteVecino" name="LoteVecino"' +
           'placeholder="Lote."></div></div>' +
           '<br>'
         $('#infoVecinos').append(text);

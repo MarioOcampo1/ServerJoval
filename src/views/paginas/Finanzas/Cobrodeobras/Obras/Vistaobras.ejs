@@ -713,7 +713,7 @@
     $('#' + id).empty();
     $('#' + id).removeAttr("onclick")
     $('#' + id).parent().append(
-      '<form  action="/Finanzas/actualizarPredeterminadosObraEntera/<%=Cobros[0].id_Obra%>/' + id + '/<%=NombreObra%>" method="post">'+
+      '<form  action="/Finanzas/actualizarPredeterminadosObraEntera/<%=id_Obra%>/' + id + '/<%=NombreObra%>" method="post">'+
         '<div class="m-1 text-center">'+
         '<input name="valor" type="number" placeholder="Ingrese el monto a editar">' +
       '<button class="btn btn-sm btn-success m-1 " type="submit" >Actualizar</button></form>'+

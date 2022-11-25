@@ -18,15 +18,15 @@ router.use(cookieParser('Mi ultra secreto'));
 router.use(passport.initialize());
 router.use(passport.session());
 passport.use(new PassportLocal(function (username, password, done) {
-connection.query('Select * from usuariosregistrados',(error,results)=>{
-    if(error) console.log(error);
-for (let index = 0; index < results.length; index++) {
-    const element = results[index];
-    if (username == element.Usuario && password == element.Password) {
-        return done(null, { id: element.id, name: element.Usuario });
-    }
-}    
-})
+    connection.query('Select * from usuariosregistrados', (error, results) => {
+        if (error) console.log(error);
+        for (let index = 0; index < results.length; index++) {
+            const element = results[index];
+            if (username == element.Usuario && password == element.Password) {
+                return done(null, { id: element.id, name: element.Usuario });
+            }
+        }
+    })
 
     if (username == "mocampo" && password == "asd") {
         return done(null, { id: 1, name: "Mario" });
@@ -37,11 +37,11 @@ for (let index = 0; index < results.length; index++) {
     if (username == "mpereyra" && password == "theboss") {
         return done(null, { id: 3, name: "Mauricio" });
     }
-    if(username=="Daiana" && password == "Drodriguez"){
-        return done(null,{id: 4, name: "Daiana"});
-        }
-        if(err){return done(err);}
-console.log("Ningun usuario encontrado");
+    if (username == "Daiana" && password == "Drodriguez") {
+        return done(null, { id: 4, name: "Daiana" });
+    }
+    if (err) { return done(err); }
+    console.log("Ningun usuario encontrado");
     done(null, false); // Esta linea define a traves del null, que no hubo ningun error, pero el al mismo tiempo, a traves del false, indica que el usuario no se ha encontrado.
     // Cuando el sistema, quiere guardar que el usuario 1 ingreso al sistema, a esa llamada se le llama Serialización.
 }))
@@ -49,7 +49,7 @@ passport.serializeUser(function (user, done) {
     done(null, user.id);
 })
 passport.deserializeUser(function (id, done) {
-   if (id == 1) {
+    if (id == 1) {
         done(null, { id: 1 });
     }
     if (id == 2) {
@@ -82,16 +82,16 @@ router.get('/', (req, res) => {
 router.get('/index', (req, res, next) => {
     if (req.isAuthenticated()) {
         var fecha = new Date();
-        var sql='Select * from admingeneral_seguros_albacaucion where ProximaRefacturacion BETWEEN (NOW() - Interval 1 Month) AND (NOW() + Interval 6 Month)  AND Estado != "Dada de baja"';
-        connection.query(sql, (error,results)=>{
-            if(error)console.log(error);
-            else{
-                
-                res.render('./paginas/Principal/index.ejs',{ albacaucion:results, moment: moment});
+        var sql = 'Select * from admingeneral_seguros_albacaucion where ProximaRefacturacion BETWEEN (NOW() - Interval 1 Month) AND (NOW() + Interval 6 Month)  AND Estado != "Dada de baja"';
+        connection.query(sql, (error, results) => {
+            if (error) console.log(error);
+            else {
+
+                res.render('./paginas/Principal/index.ejs', { albacaucion: results, moment: moment });
             }
-            
+
         })
-        
+
     }
     else {
         (req, res) => {
@@ -160,138 +160,147 @@ router.post('/guardarNuevoCliente', (req, res) => {
             var Permisos = "Sin presentar";
         }
     }
-    
+
     console.log("ATENCION: SE PROCEDE A GUARDAR NUEVO CLIENTE");
     console.log("DATOS DEL CLIENTE QUE SE GUARDA");
     console.log('NOMBRE:' + Nombre + ', NCarpeta:' + NCarpeta);
-if(gasSeleccionado=="Seleccionado"){
-    const promise1 = new Promise((resolve, reject)=>{
-
-   
-    sql = 'Insert into obras set ?';
-    connection.query(sql, {
-        Nombre: Nombre, NCarpeta: NCarpeta, Comitente: Comitente, Ubicacion: Departamento,
-    }, (error, results) => {
-        if (error) console.log(error);
-    })
-    sql = 'Insert into adminecogas_tareas_por_carpeta set ?';
-    connection.query(sql, {
-        Nombre: Nombre, NCarpeta: NCarpeta, TipoDeRed: TipoDeRed
-    }, (error, results) => {
-        if (error) console.log(error);
-    })
-    var sql = 'Insert into adgastareas set ?';
-    connection.query(sql, {
-        Nombre: Nombre
-    }, (error, results) => {
-        if (error) console.log(error);
-    })
-    sql = 'Insert into historialdecambios set ?';
-    connection.query(sql, {
-        Nombre_sub: Nombre, Tarea_Realizada_sub: "Se crea nuevo cliente", Proxima_Tarea_sub: "Actualizar estado de carpeta", Si_NO_TareaRealizada: "N", Fecha_Tarea_sub: fechaActual
-    }, (error, results) => {
-        if (error) console.log(error);
-    })
-    sql = 'Insert into obras_tareasgenerales set ?';
-    connection.query(sql, {
-        Nombre: Nombre, PermisosEspeciales: PermisosEspeciales, Permisos: Permisos
-    }, (error, results) => {
-        if (error) console.log(error);
-    })
-    sql = 'Insert into codificacioncarpetas Set?';
-    connection.query(sql, [{
-        Nombre: Nombre, CodigoVigentes: Codigo, CodigoEnUsoVigentes: "S",
-    },], (error, results) => {
-        if (error) console.log(error);
-
-    })
-//La siguiente sentencia, elimina la carpeta de la BD donde el codigo de la carpeta se encuentre en "E" de "Eliminado". Tarea necesaria
-// para que no figura el codigo como disponible.
-    sql = "Delete from codificacioncarpetas where CodigoEnUsoVigentes= 'E' and CodigoVigentes=?"
-    connection.query(sql, [Codigo], (error) => {
-        if (error) console.log(error);
-    })
-    //En caso de que el codigo no provenga de la carpeta eliminada, sino de una finalizada, se procede
-    //a dejar la carpeta finalizada sin "CodigoVigentes". 
-    //Esto es con motivo de que deje de figurar como que el codigo esta disponible.
-    sql = 'Update codificacioncarpetas set? where CodigoEnUsoVigentes="F" and CodigoVigentes=?';
-    connection.query(sql, [{
-        CodigoVigentes: null
-    }, Codigo], (error) => {
-        if (error) console.log(error);
-    })
-    sql = 'Insert into adminecogas_interferencias_y_permisos Set?';
-    connection.query(sql, [{
-        Nombre: Nombre,
-        DNV: DNV, DPV: DPV, Irrigacion: IRRIGACION,
-        Hidraulica: HIDRAULICA, PerMunicipal: PerMunicipal, Ferrocarriles: FERROCARRIL, Privado: Privado, OtrosPermisos: OTROSPERMISOS
-    }], (error, results) => {
-        if (error) console.log(error);
-    })
-    resolve();
-}).then(function(resultadopromise1){
+    //Variables de las promesas
     var idObra;
-    sql='Select id from obras where Nombre =?';
-connection.query(sql,Nombre, (error,results)=>{
-    if(error) console.log(error);
-    else{
-       idObra= results[0].id;
-    }
-    
-})
-    const promise2 = new Promise((resolve,reject)=>{
-const cantidadVecinos= req.body.cantidadVecinos;
-const MontoContrato= req.body.MontoContrato;
-const PrecioDeCuota = req.body.PrecioDeCuota;
-const AnticipoFinanciero = req.body.AnticipoFinanciero;
-const CantidadCuotas = req.body.CantidadCuotas;
-if(cantidadVecinos!=0 || cantidadVecinos!=null || cantidadVecinos!=undefined){
-for (let index = 0; index < cantidadVecinos; index++) {
-    const element = [];
-    sql='Insert into finanzas_clientes_por_obra set?';
-    connection.query(sql,{
-    id_Obra:idObra,NombreObra:Nombre,NombreCliente: req.body.NombreVecino, DniCliente: req.body.DniVecino ,LocacionObra:Departamento , Telefono:req.body.TelefonoVecino ,Correo:req.body.CorreoVecino ,Direccion:req.body.LoteVecino ,
-    },(error,results)=>{
-    if(error) console.log(error);
-    else{
-        sql='Select id_cliente from finanzas_clientes_por_obra where NombreCliente =? and id_Obra =?';
-        connection.query(sql,[NombreCliente,idObra], (error,results)=>{
-            if(error) console.log(error);
-            else{
-                var id_cliente = results[0].id_cliente;
-            sql='Insert into finanzas_clientes_predeterminados set?';
-            connection.query(sql,{
-                id_obra: idObra, id_cliente: id_cliente, NombreCliente: NombreCliente, AnticipoFinanciero: AnticipoFinanciero
-            }, (error,results)=>{
-if(error)console.log(error);
- 
- for (let index = 1; index < CantidadCuotas; index++) {
-    var cuota="Cuota"+index;
-    sql='Update finanzas_clientes_predeterminados'+cuota+'='+PrecioDeCuota+' WHERE id_cliente=?';
-    connection.query(sql,id_cliente, (error,results)=>{
-if(error)console.log(error);
-    })  
- }  
-})
-            }
-        })
-    }
-    })
-}
-} else{
-    
-}
-resolve();
-}).then(function(){
- res.redirect('/index');
-})
-})
+    const promise1 = new Promise((resolve, reject) => {
 
+
+        sql = 'Insert into obras set ?';
+        connection.query(sql, {
+            Nombre: Nombre, NCarpeta: NCarpeta, Comitente: Comitente, Ubicacion: Departamento,
+        }, (error, results) => {
+            if (error) console.log(error);
+        })
+        sql = 'Insert into adminecogas_tareas_por_carpeta set ?';
+        connection.query(sql, {
+            Nombre: Nombre, NCarpeta: NCarpeta, TipoDeRed: TipoDeRed
+        }, (error, results) => {
+            if (error) console.log(error);
+        })
+        sql = 'Insert into adgastareas set ?';
+        connection.query(sql, {
+            Nombre: Nombre
+        }, (error, results) => {
+            if (error) console.log(error);
+        })
+        sql = 'Insert into historialdecambios set ?';
+        connection.query(sql, {
+            Nombre_sub: Nombre, Tarea_Realizada_sub: "Se crea nuevo cliente", Proxima_Tarea_sub: "Actualizar estado de carpeta", Si_NO_TareaRealizada: "N", Fecha_Tarea_sub: fechaActual
+        }, (error, results) => {
+            if (error) console.log(error);
+        })
+        sql = 'Insert into obras_tareasgenerales set ?';
+        connection.query(sql, {
+            Nombre: Nombre, PermisosEspeciales: PermisosEspeciales, Permisos: Permisos
+        }, (error, results) => {
+            if (error) console.log(error);
+        })
+        sql = 'Insert into codificacioncarpetas Set?';
+        connection.query(sql, [{
+            Nombre: Nombre, CodigoVigentes: Codigo, CodigoEnUsoVigentes: "S",
+        },], (error, results) => {
+            if (error) console.log(error);
+
+        })
+        //La siguiente sentencia, elimina la carpeta de la BD donde el codigo de la carpeta se encuentre en "E" de "Eliminado". Tarea necesaria
+        // para que no figura el codigo como disponible.
+        sql = "Delete from codificacioncarpetas where CodigoEnUsoVigentes= 'E' and CodigoVigentes=?"
+        connection.query(sql, [Codigo], (error) => {
+            if (error) console.log(error);
+        })
+        //En caso de que el codigo no provenga de la carpeta eliminada, sino de una finalizada, se procede
+        //a dejar la carpeta finalizada sin "CodigoVigentes". 
+        //Esto es con motivo de que deje de figurar como que el codigo esta disponible.
+        sql = 'Update codificacioncarpetas set? where CodigoEnUsoVigentes="F" and CodigoVigentes=?';
+        connection.query(sql, [{
+            CodigoVigentes: null
+        }, Codigo], (error) => {
+            if (error) console.log(error);
+        })
+        sql = 'Insert into adminecogas_interferencias_y_permisos Set?';
+        connection.query(sql, [{
+            Nombre: Nombre,
+            DNV: DNV, DPV: DPV, Irrigacion: IRRIGACION,
+            Hidraulica: HIDRAULICA, PerMunicipal: PerMunicipal, Ferrocarriles: FERROCARRIL, Privado: Privado, OtrosPermisos: OTROSPERMISOS
+        }], (error, results) => {
+            if (error) console.log(error);
+        })
+        resolve();
+    }).then(function (resultadopromise1) {
+        new Promise((resolve, reject) => {
+
+            sql = 'Select id from obras where Nombre =?';
+            connection.query(sql, Nombre, (error, results) => {
+                if (error) console.log(error);
+                else {
+                    idObra = results[0].id;
+                    resolve();
+                }
+
+            })
+
+        }).then(function (resultado) {
+            const promise2 = new Promise((resolve, reject) => {
+                const cantidadVecinos = req.body.cantidadVecinos;
+                const MontoContrato = req.body.MontoContrato;
+                const PrecioDeCuota = req.body.PrecioDeCuota;
+                const AnticipoFinanciero = req.body.AnticipoFinanciero;
+                const CantidadCuotas = req.body.CantidadCuotas;
+                var ArregloVecinos = [];
+                var NombreVecino = req.body.NombreVecino;
+                var DniVecino = req.body.DniVecino;
+                var TelefonoVecino = req.body.TelefonoVecino;
+                var CorreoVecino = req.body.CorreoVecino;
+                var LoteVecino = req.body.LoteVecino;
+                if (cantidadVecinos != 0 || cantidadVecinos != null || cantidadVecinos != undefined) {
+                    for (let index = 0; index < cantidadVecinos; index++) {
+                        sql = 'Insert into finanzas_clientes_por_obra set?';
+                        var NombreVecino = req.body.NombreVecino;
+                        connection.query(sql, {
+                            id_Obra: idObra, NombreObra: Nombre, NombreCliente: NombreVecino[index], DniCliente: DniVecino[index], LocacionObra: Departamento, Telefono: TelefonoVecino[index], Correo: CorreoVecino[index], Direccion: LoteVecino[index],
+                        }, (error, results) => {
+                            if (error) console.log(error);
+                            else {
+                                sql = 'Select id_cliente from finanzas_clientes_por_obra where NombreCliente =? and id_Obra =?';
+                                connection.query(sql, [NombreVecino[index], idObra], (error, results) => {
+                                    if (error) console.log(error);
+                                    else {
+                                        var id_cliente = results[0].id_cliente;
+                                        sql = 'Insert into finanzas_clientes_predeterminados set?';
+                                        connection.query(sql, {
+                                            id_obra: idObra, id_cliente: id_cliente, NombreCliente: NombreVecino[index], AnticipoFinanciero: AnticipoFinanciero
+                                        }, (error, results) => {
+                                            if (error) console.log(error);
+                                            for (let j = 1; j < CantidadCuotas; j++) {
+                                                var cuota = "Cuota" + j;
+                                                sql = 'UPDATE finanzas_clientes_predeterminados SET ' + cuota + ' = ' + PrecioDeCuota + ' WHERE id_cliente=?';
+                                                connection.query(sql, id_cliente, (error, results) => {
+                                                    if (error) console.log(error.sqlMessage);
+                                                })
+                                            }
+                                        })
+                                        sql = 'INSERT into finanzas_clientes_por_obra_cobros set?';
+                                        connection.query(sql, {
+                                            id_obra: idObra, ID_cliente: id_cliente, NombreCliente: NombreVecino[index],
+                                        }, (error, results) => {
+                                            if (error) console.log(error);
+                                        })
+                                    }
+                                })
+                            }
+                        })
+                    }
+                    resolve();
+                }
+            })
+        })
+    })
+    res.redirect('/index');
 }
-}
-    
-  
-  
 )
 router.post('/guardarNuevoContacto', (req, res) => {
     const Nombre = req.body.Nombre;

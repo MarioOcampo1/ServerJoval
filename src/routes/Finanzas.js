@@ -607,7 +607,7 @@ resolve(Predeterminados)
             }
 
             else{
-              res.render('paginas/Finanzas/Cobrodeobras/Obras/Vistaobras.ejs', { Predeterminado: resolvePromise, Cobros: Cobros, NombreObra: NombreObra }); 
+              res.render('paginas/Finanzas/Cobrodeobras/Obras/Vistaobras.ejs', { Predeterminado: resolvePromise, Cobros: Cobros, id_Obra: id, NombreObra: NombreObra }); 
             }
         })
     }).catch( function(err){
