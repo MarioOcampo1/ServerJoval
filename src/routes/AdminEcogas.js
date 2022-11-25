@@ -212,23 +212,7 @@ router.get('/estadogeneral', (req, res) => {
     }
 })
 
-router.get('/contactos', (req, res) => {
-    if (req.isAuthenticated()) {
-        res.locals.moment = moment;
-        const sql = 'SELECT * FROM contactos';
-        connection.query(sql, (error, results) => {
-            if (error) console.log(error);
 
-            if (results.length > 0) {
-                res.render('paginas/AdministracionEcogas/contactos.ejs', { results: results }); //en {results:results} lo que hago es guardar los resultados que envia la bd, en la variable results
-                // res.send(results);
-            }
-            else {
-                res.render('paginas/AdministracionEcogas/nuevocontacto.ejs');
-            }
-        })
-    } else { res.redirect('/'); }
-})
 //Editar Tareas
 router.get('/editarContacto/:id', (req, res) => {
     if (req.isAuthenticated()) {
