@@ -143,10 +143,8 @@ resolve();
                     var anio = fechaActual.getFullYear();
                     var mes= fechaActual.getMonth();
                     var dia = fechaActual.getDate();
-mes= mes+2;
+mes= mes+3;
                     var fechaAComparar = new Date(anio,mes,dia);
-                    console.log(fechaAComparar);
-                     fechaAComparar = moment(fechaActual).format('DD/MM/YYYY')
                     res.render('paginas/AdministracionGeneral/Seguros/Albacaucion.ejs', { results: results, moment: moment, obras: obras, fechaAComparar }); //en {results:results} lo que hago es guardar los resultados que envia la bd, en la variable results
                 })
             })
