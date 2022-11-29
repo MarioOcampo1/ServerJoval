@@ -22,12 +22,11 @@
                 <div class="card-body ">
                     <div class="card-title text-center">
                         <div class="container-fluid">
-                            <div class="row justify-content-md-center  ">
+                            <div class="row justify-content-md-center mb-2 ">
                                 <h1 class="text-uppercase ">
                                     <%= user.Nombre%>
                                         <%= user.NCarpeta%>
                                 </h1>
-                                <br>
 
                                 <div class="col-md-auto ">
                                     <i>
@@ -49,6 +48,7 @@
                                                                     <%}%>
                                     </button>
                                 </div>
+                            </div>
                                 <div class="modal" id="ModalCodigosCarpeta" tabindex="-1" role="dialog">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
@@ -78,9 +78,10 @@
                                 <form action="/ActualizarEstadoCarpeta/<%= user.id%>" method="POST">
                                     <input type="hidden" name="id" id="id" value="<%= user.id%>">
                                     <input type="hidden" name="Nombre" id="Nombre" value="<%= user.Nombre%>">
+ <div class="row justify-content-md-center">
 
+ 
                                     <div class="col-md-auto EstadoCarpeta">
-                                        <br>
                                         Estado de la carpeta:
                                         <select class="btn btn-outline-primary" id="Estado" name="Estado"
                                             value="<%= user.Estado%>" placeholder="<%= user.Estado%>">
@@ -96,8 +97,12 @@
                                         </select>
                                         <button type="submit" class="btn btn-primary text-center">Actualizar
                                             Estado</button>
+                                        <button type="button" class="btn btn-success text-center">Checkear estado para presentación</button> 
 
                                     </div>
+                                    
+                                    
+                                </div>
                                 </form>
                             </div>
                         </div>
@@ -110,28 +115,22 @@
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered table-sm table-hover " style="width: 100%">
                         <thead>
-
-
                             <h3 class="text-center">Etapas de la carpeta</h3>
                             <tr class="table-active">
-
-                                <form action="/actPrelCarpEcogas/<%=user.id%>" id="actPrelCarpEcogas" method="post">
+                                <form action="/actPrelCarpEcogas/<%=user.id%>" id="actPrelCarpEcogas" method="post" enctype="multipart/form-data">
                                     <input type="checkbox" value="Preliminar" checked hidden name="EtapaTarea">
                                     <input type="hidden" name="Nombre" id="Nombre" value="<%= user.Nombre%>">
                                     <input type="hidden" name="id" id="id" value="<%= user.id%>">
                                     <%- include('./partials/editartareas/modalpreliminar.ejs')%>
-
                                 </form> <!-- Fin formulario actPrel -->
-
-
-                                <form action="/act1pCarpEcogas/<%=user.id%>" id="act1pCarpEcogas" method="post">
+                                <form action="/act1pCarpEcogas/<%=user.id%>" id="act1pCarpEcogas" method="post" enctype="multipart/form-data">
                                     <input type="checkbox" value="1ra parte" checked hidden name="EtapaTarea">
                                     <input type="hidden" name="Nombre" id="Nombre" value="<%= user.Nombre%>">
                                     <input type="hidden" name="id" id="id" value="<%= user.id%>">
 
                                     <%- include('./partials/editartareas/modal1p.ejs')%>
                                 </form>
-                                <form action="/act2pCarpEcogas/<%=user.id%>" id="act2pCarpEcogas" method="post">
+                                <form action="/act2pCarpEcogas/<%=user.id%>" id="act2pCarpEcogas" method="post" enctype="multipart/form-data">
                                     <input type="checkbox" value="2da parte" checked hidden name="EtapaTarea">
                                     <input type="hidden" name="Nombre" id="Nombre" value="<%= user.Nombre%>">
                                     <input type="hidden" name="id" id="id" value="<%= user.id%>">
@@ -141,7 +140,7 @@
 
                                                 <%- include('./partials/editartareas/modal2p-4de4Final.ejs')%>
                                 </form>
-                                <form action="/actObrasCarpEcogas/<%=user.id%>" id="actObrasCarpEcogas" method="post">
+                                <form action="/actObrasCarpEcogas/<%=user.id%>" id="actObrasCarpEcogas" method="post" enctype="multipart/form-data">
                                     <input type="checkbox" value="Obras" checked hidden name="EtapaTarea">
                                     <input type="hidden" name="id" id="id" value="<%= user.id%>">
                                     <input type="hidden" name="Nombre" id="Nombre" value="<%= user.Nombre%>">
@@ -1928,10 +1927,13 @@
     })
 
 
-    function llamarAFormularioEditarTareas(Tarea) {
+    function llamarAFormularioEditarTareas(Tarea, estado) {
         var tarea = ('#form1' + Tarea);
         $('.formularioEditarTareasALlenar').css('display', 'none');
         $(tarea).css('display', 'block');
+        if(estado=="EnGestion"){
+            
+        }
     }
 
 

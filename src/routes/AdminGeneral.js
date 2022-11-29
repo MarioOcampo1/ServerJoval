@@ -55,6 +55,7 @@ passport.deserializeUser(function (id, done) {
 //Seteo server original
 const mysql = require('mysql');
 const { NULL } = require('mysql/lib/protocol/constants/types');
+const { now } = require('moment');
 const connection = mysql.createConnection({
     host: '127.0.0.1',
     user: 'root',
@@ -85,10 +86,13 @@ router.get('/seguros/Albacaucion', (req, res) => {
     new Promise((resolve, reject) => {
         var sql = 'Select * from admingeneral_seguros_albacaucion WHERE  Estado !="Dada de baja" ';
         res.locals.moment = moment;
+        
+        
         connection.query(sql, (error, results) => {
             if(error)console.log(error);
             var fechaActual = new Date();
             var fechaProximaRefacturacion;
+            
             results.forEach(element => {
                 if (element.ProximaRefacturacion < fechaActual) {
                     sql = 'Update admingeneral_seguros_albacaucion set? WHERE ID_poliza=?';
@@ -97,7 +101,7 @@ router.get('/seguros/Albacaucion', (req, res) => {
                         Endoso = 0;
                     }
                     Endoso = Endoso + 1; //Si endoso esta cargado, continuo con lo que quiero que haga el codigo, que aumente el endoso en 1 si la fecha esta vencida.                    
-                    if (element.VigenciaPoliza == "anual") {
+                    if (element.VigenciaPoliza == "anual" && element.Riesgo!="Mantenimiento de oferta") {
                         var añoPoliza = new Date(element.ProximaRefacturacion).getFullYear();
                         var mesPoliza = new Date(element.ProximaRefacturacion).getMonth();
                         var diaPoliza = new Date(element.ProximaRefacturacion).getDate();
@@ -107,7 +111,7 @@ router.get('/seguros/Albacaucion', (req, res) => {
                             if (error) console.log(error);
                         })
                     }
-                    if (element.VigenciaPoliza == "semestral") {
+                    if (element.VigenciaPoliza == "semestral" && element.Riesgo!="Mantenimiento de oferta") {
                         var añoPoliza = new Date(element.ProximaRefacturacion).getFullYear();
                         var mesPoliza = new Date(element.ProximaRefacturacion).getMonth();
                         var diaPoliza = new Date(element.ProximaRefacturacion).getDate();
@@ -117,7 +121,7 @@ router.get('/seguros/Albacaucion', (req, res) => {
                             if (error) console.log(error);
                         })
                     }
-                    if (element.VigenciaPoliza == "trimestral") {
+                    if (element.VigenciaPoliza == "trimestral" && element.Riesgo!="Mantenimiento de oferta") {
                         var añoPoliza = new Date(element.ProximaRefacturacion).getFullYear();
                         var mesPoliza = new Date(element.ProximaRefacturacion).getMonth();
                         var diaPoliza = new Date(element.ProximaRefacturacion).getDate();
@@ -127,12 +131,31 @@ router.get('/seguros/Albacaucion', (req, res) => {
                             if (error) console.log(error);
                         })
                     }
-                }
-            });
+                    if(element.Riesgo=="Mantenimiento de oferta"){
+                        var añoPoliza = new Date(element.FechaEmisionPoliza).getFullYear();
+                        var mesPoliza = new Date(element.FechaEmisionPoliza).getMonth();
+                        var diaPoliza = new Date(element.FechaEmisionPoliza).getDate();
+                        mesPoliza = mesPoliza + 1;
+ var fechaVencimientoPoliza  = new Date(añoPoliza, mesPoliza, diaPoliza);
+ if(fechaVencimientoPoliza< fechaActual){
+    connection.query(sql, [{Estado:"Dada de baja"  }, element.ID_poliza], (error) => {
+        if (error) console.log(error);
+    })
+ }
+                    }
+                
+            };
         });
+    })
 resolve();
     }).then(function () {
         if (req.isAuthenticated()) {
+            var cantidadPolizasVigentes;
+            sql='Select * from admingeneral_seguros_albacaucion where Estado !="Dada de baja"';
+            connection.query(sql, (error, polizasvigentes) => {
+            cantidadPolizasVigentes = polizasvigentes.length;
+            })
+            console.log(cantidadPolizasVigentes);
              sql = 'Select Nombre from obras';
             connection.query(sql, (error, obras) => {
                  sql = 'Select * from admingeneral_seguros_albacaucion ';
@@ -145,7 +168,8 @@ resolve();
                     var dia = fechaActual.getDate();
 mes= mes+3;
                     var fechaAComparar = new Date(anio,mes,dia);
-                    res.render('paginas/AdministracionGeneral/Seguros/Albacaucion.ejs', { results: results, moment: moment, obras: obras, fechaAComparar }); //en {results:results} lo que hago es guardar los resultados que envia la bd, en la variable results
+                    
+                    res.render('paginas/AdministracionGeneral/Seguros/Albacaucion.ejs', { results: results, moment: moment, obras: obras, fechaAComparar, cantidadPolizasVigentes }); //en {results:results} lo que hago es guardar los resultados que envia la bd, en la variable results
                 })
             })
         }

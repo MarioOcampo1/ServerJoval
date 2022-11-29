@@ -13,11 +13,17 @@
     <h1 class="text-center">Albacaución</h1>
     <%- include('../partials/albacaucion/NuevaPolizaAlbacaucion.ejs'); %> <!-- Opcion para cargar la nueva póliza de albacaución -->
     
-    <div class="div p-1" style="position: sticky; top:0;">
-        <label for="Buscador" >Buscador en tabla</label>
-        <input type="text" name="Buscador" id="BuscadorTabla" >
+    <div class="div p-1 bg-light"  style="position: sticky; top:0;">
+        <label for="Buscador" class="bg-light" >Buscador en tabla</label>
+        <input type="text" name="Buscador" id="BuscadorTabla" class="" >
         <button type="button" class="btn btn-danger" onclick="document.getElementById('nuevaPoliza').style.display='block';">Nueva póliza</button>
         <button type="button" class="btn btn-info" onclick="MostrarTodasLasPolizas();"> Mostrar todas las pólizas</button>
+       <span>Cantidad de pólizas vigentes: <%=cantidadPolizasVigentes%>
+
+       </span>
+    </div>
+    <div class="inline-block">
+        <p id="CantidadPolizasVigentes">Polizas vigentes: </p>
     </div>
     <div class="table-bordered p-1 text-center">
        <table id="tablaAlbacaucion" class="table-bordered p-1 text-center">
@@ -31,6 +37,7 @@
     <th scope="col">Valor a pagar</th>
     <th scope="col">Monto asegurado</th>
     <th scope="col">Proxima refacturación</th>
+    <th scope="col">Asegurado</th>
     <th scope="col">Descripción</th>
     <th scope="col">Estado</th>
   </tr>
@@ -56,6 +63,7 @@
                     <td class=""><%=moment(poliza.ProximaRefacturacion).format('DD/MM/YYYY')%> </td>
                         <%}%>
         <td><%=poliza.NombreAsegurado%></td>
+        <td><%=poliza.Descripcion%></td>
         <td><%=poliza.Estado%>
             <a href="ActualizarPolizaAlbacaucion/<%=poliza.ID_poliza%>">
         <button  class="btn-sm btn-outline-primary btnEditar">Editar</button>
@@ -70,9 +78,10 @@
 <script>
    jQuery("#BuscadorTabla").keyup(function(){
     if( jQuery(this).val() != "0"){
+     
         jQuery("#tablaAlbacaucion tbody>tr").hide();
         jQuery("#tablaAlbacaucion td:contiene-palabra('" + jQuery(this).val() + "')").parent("tr").show();
-        jQuery("#tablaAlbacaucion td:contiene-palabra('Dada de baja')").parent("tr").hide();
+       
     }
     else{
         jQuery("#tablaAlbacaucion tbody>tr").show();
@@ -86,7 +95,6 @@ jQuery.extend(jQuery.expr[":"],
 });
 $(document).ready(function(){
     jQuery("#tablaAlbacaucion td:contiene-palabra('Dada de baja')").parent("tr").hide(); //Esconde las dadas de baja
-    
 })
 function MostrarTodasLasPolizas(){
     jQuery("#tablaAlbacaucion tbody>tr").show();

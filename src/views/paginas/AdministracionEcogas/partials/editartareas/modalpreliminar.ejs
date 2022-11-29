@@ -18,15 +18,10 @@
                     </button>
                 </div>
                 <div class="modal-body">
-
                     <div class="container">
                         <div class="card p-3 mt-3 border-secondary">
-
                             <div class="card-header bg-primary text-white">
-                                <label for="DocumentacionDelTerreno">Documentación
-                                    del
-                                    terreno</label>
-
+                                <label for="DocumentacionDelTerreno">Documentación del terreno</label>
                             </div>
                             <div class="card-body">
                                 <div class="row ">
@@ -38,7 +33,6 @@
                                                 <%=tareasporcarpeta.Mensura%>
                                             </div>
                                         </div>
-
                                         <div class="card-text" id="MensuraBody" style="display: none;">
                                             <div class="input-group">
                                                 <input hidden id="" class="input" type="radio" name="Mensura"
@@ -48,11 +42,10 @@
                                                     Sin Presentar<input id="" class="input" type="radio"
                                                         onclick="llamarAFormularioEditarTareas('Mensura');"
                                                         name="Mensura" value="Sin presentar">
-
                                                 </div>
                                                 <div class="col-2.5 p-1">
                                                     En Gestión<input id="" class="input" type="radio" name="Mensura"
-                                                        onclick="llamarAFormularioEditarTareas('Mensura');"
+                                                        onclick="llamarAFormularioEditarTareas('Mensura','EnGestion');"
                                                         value="EnGestion">
                                                 </div>
                                                 <div class="col-2.5 p-1">
@@ -67,17 +60,14 @@
                                                 </div>
                                                 <div class="col-2 p-1">
                                                     Ok<input id="" class="input" type="radio" name="Mensura"
-                                                        onclick="llamarAFormularioEditarTareas('Mensura');" value="Ok">
+                                                        onclick="llamarAFormularioEditarTareas('Mensura','Ok');" value="Ok">
                                                 </div>
-
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="col-6 border p-1 bg-dark text-white formularioEditarTareasALlenar"
                                         id="form1Mensura" style="display: none;">
                                         <input type="checkbox" value="Mensura" checked hidden name="Tarea">
-
                                         <div class="row ">
                                             <div class="col">
                                                 <span>
@@ -113,9 +103,7 @@
                                                 <input class="form-control" type="date" name="Fecha_limite"
                                                     id="Fecha_limite" placeholder="Ingrese ultima tarea realizada"
                                                     aria-describedby="Fecha_limite">
-
                                             </div>
-
                                         </div>
                                         <div class="row-p-1">
                                             <div class="input-group mt-1">
@@ -125,16 +113,10 @@
                                         </div>
                                         <div class="row">
                                             <div class="input-group-sm pt-2">
-
                                             </div>
-
-
                                         </div>
-
-
                                     </div>
                                 </div>
-
                                 <div class="row ">
                                     <div class="col-6 border">
                                         <div class="card-title "
@@ -158,7 +140,7 @@
                                                 </div>
                                                 <div class="col-2.5 p-1">
                                                     En Gestión<input id="" class="input" type="radio"
-                                                        onclick="llamarAFormularioEditarTareas('TituloDePropiedad');"
+                                                        onclick="llamarAFormularioEditarTareas('TituloDePropiedad','EnGestion');"
                                                         name="TituloDePropiedad" value="EnGestion">
                                                 </div>
                                                 <div class="col-2.5 p-1">
@@ -173,7 +155,7 @@
                                                 </div>
                                                 <div class="col-2 p-1">
                                                     Ok<input id="" class="input" type="radio"
-                                                        onclick="llamarAFormularioEditarTareas('TituloDePropiedad');"
+                                                        onclick="llamarAFormularioEditarTareas('TituloDePropiedad', 'Ok');"
                                                         name="TituloDePropiedad" value="Ok">
                                                 </div>
                                             </div>
@@ -275,7 +257,7 @@
                                                 </div>
                                                 <div class="col-2.5 p-1">
                                                     En Gestión<input id="" class="input" type="radio"
-                                                        onclick="llamarAFormularioEditarTareas('ActaConstitutiva');"
+                                                        onclick="llamarAFormularioEditarTareas('ActaConstitutiva','EnGestion');"
                                                         name="ActaConstitutiva" value="EnGestion">
                                                 </div>
 
@@ -286,7 +268,7 @@
                                                 </div>
                                                 <div class="col-2.5 p-1">
                                                     Ok<input id="" class="input" type="radio"
-                                                        onclick="llamarAFormularioEditarTareas('ActaConstitutiva');"
+                                                        onclick="llamarAFormularioEditarTareas('ActaConstitutiva' , 'Ok');"
                                                         name="ActaConstitutiva" value="ok">
                                                 </div>
                                                 <div class="col-2 p-1">
@@ -386,7 +368,7 @@
                                                 </div>
                                                 <div class="col-2.5 p-1">
                                                     En Gestión<input id="" class="input" type="radio"
-                                                        onclick="llamarAFormularioEditarTareas('ActaCargoVigente');"
+                                                        onclick="llamarAFormularioEditarTareas('ActaCargoVigente','EnGestion');"
                                                         name="ActaCargoVigente" value="EnGestion">
                                                 </div>
 
@@ -397,7 +379,7 @@
                                                 </div>
                                                 <div class="col-2.5 p-1">
                                                     Ok<input id="" class="input" type="radio"
-                                                        onclick="llamarAFormularioEditarTareas('ActaCargoVigente');"
+                                                        onclick="llamarAFormularioEditarTareas('ActaCargoVigente' ,'Ok');"
                                                         name="ActaCargoVigente" value="ok">
                                                 </div>
                                                 <div class="col-2 p-1">
@@ -520,13 +502,13 @@
                                                 </div>
                                                 <div class="col-2.5 p-1">
                                                     En Gestión<input id="" class="input" type="radio"
-                                                        onclick="llamarAFormularioEditarTareas('Cotizacion');"
+                                                        onclick="llamarAFormularioEditarTareas('Cotizacion','EnGestion');"
                                                         name="Cotizacion" value="EnGestion">
                                                 </div>
 
                                                 <div class="col-2 p-1">
                                                     Ok<input id="" class="input" type="radio" name="Cotizacion"
-                                                        onclick="llamarAFormularioEditarTareas('Cotizacion');"
+                                                        onclick="llamarAFormularioEditarTareas('Cotizacion' ,'Ok');"
                                                         value="ok">
                                                 </div>
 
@@ -622,14 +604,14 @@
                                                     </div>
                                                     <div class="col-2.5 p-1">
                                                         En Gestión<input id="" class="input" type="radio"
-                                                            onclick="llamarAFormularioEditarTareas('ContratoPreliminar');"
+                                                            onclick="llamarAFormularioEditarTareas('ContratoPreliminar','EnGestion');"
                                                             name="ContratoPreliminar" value="EnGestion(Preliminar)">
                                                     </div>
 
 
                                                     <div class="col-2 p-1">
                                                         Ok<input id="" class="input" type="radio"
-                                                            onclick="llamarAFormularioEditarTareas('ContratoPreliminar');"
+                                                            onclick="llamarAFormularioEditarTareas('ContratoPreliminar' ,'Ok');"
                                                             name="ContratoPreliminar" value="ok(Preliminar)">
                                                     </div>
 

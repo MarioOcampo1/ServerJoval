@@ -184,7 +184,6 @@ router.get('/adminecogas/TablaGeneral', (req, res) => {
     })
 
 })
-
 router.get('/estadogeneral', (req, res) => {
     if (req.isAuthenticated()) {
         res.locals.moment = moment;
@@ -211,8 +210,6 @@ router.get('/estadogeneral', (req, res) => {
         res.redirect('/');
     }
 })
-
-
 //Editar Tareas
 router.get('/editarContacto/:id', (req, res) => {
     if (req.isAuthenticated()) {
