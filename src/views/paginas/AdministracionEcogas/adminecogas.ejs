@@ -136,17 +136,23 @@
               return ('<div class="text-light bg-success " title="Carpeta Finalizada. Codigo fisico.">'+row.CodigoFinalizadas+'</div>' );
             }
             else{
-            var fecha = new Date().toLocaleDateString();
+            var fecha = new Date(); 
             if(row.Estado=="2da parte"){
               var a=0;
               if(row.Interferencias=="Pedir"){
                 a=1;
                 if((row.Permisos=="Sin Presentar")||( row.Permisos==null) ){
               a=2;
+              if(row.intTelefonicaObtenida<fecha){
+                return '<div title="Codigo designado para ubicar en las carpetas fisicas de la oficina.">'+row.CodigoVigentes+'</div>'+
+              '<div title="PERMISO VENCIDO" class="btn m-1 btn-danger bt-sm"> P </div>'+
+              '<div class="btn m-1 btn-danger bt-sm" TITLE="Interferencia de Teléfonica vencida"> I </div>';
+              }else{
+
+              }
                 return '<div title="Codigo designado para ubicar en las carpetas fisicas de la oficina.">'+row.CodigoVigentes+'</div>'+
               '<div title="PERMISO VENCIDO" class="btn m-1 btn-danger bt-sm"> P </div>'+
               '<div class="btn m-1 btn-danger bt-sm" TITLE="INTERFERENCIAS VENCIDAS"> I </div>';
-              
               }
               if(row.Permisos=="EnGestion"){
                 a=2;

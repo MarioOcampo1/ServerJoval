@@ -1,4 +1,6 @@
 const { render } = require('ejs');
+const multer = require('multer');
+const upload = multer({dest: 'src/uploads'});
 const { Router } = require('express');
 const cookieParser = require('cookie-parser')
 const session = require('express-session')
@@ -134,16 +136,8 @@ connection.query(sql, (error, results) => {
        interferenciasypermisos= results;
         }
     })
-    setTimeout(() => {
-        RevisarVencimientos();
-    }, 2000);
-    async function RevisarVencimientos(){
-        var fechaActual = new Date().toUTCString();
-        console.log(fechaActual);
-        interferenciasypermisos.forEach(element => {
-            if (element.intTelefonicaObtenida){}
-        });
-    }
+    
+    
    
         // FIN INTERFERENCIAS
         sql = 'SELECT c.id, c.Nombre, c.NCarpeta, b.TareaRealizada, b.ProximaTarea, b.EtapaTarea, b.FechaLimite FROM obras c , adminecogas_tareas_por_carpeta b  ';
@@ -152,7 +146,7 @@ connection.query(sql, (error, results) => {
             if (error) console.log(error);
 
             if (results.length > 0) {
-                res.render('paginas/AdministracionEcogas/adminecogas.ejs', { results: results, interferenciasypermisos: interferenciasypermisos }); //en {results:results} lo que hago es guardar los resultados que envia la bd, en la variable results
+                res.render('paginas/AdministracionEcogas/adminecogas.ejs', { results: results, interferenciasypermisos: interferenciasypermisos, }); //en {results:results} lo que hago es guardar los resultados que envia la bd, en la variable results
 
             }
             else {
@@ -720,7 +714,7 @@ router.post('/edit/delete/:id', (req, res) => {
     })
 
 })
-router.post('/actPrelCarpEcogas/:id', (req, res) => {
+router.post('/actPrelCarpEcogas/:id',upload.none(), function (req, res)  {
     var id = req.body.id;
     var Nombre = req.body.Nombre;
     var sql = "";
@@ -897,7 +891,7 @@ var etapatarea= tarea[index];
  
 
 })
-router.post('/act1pCarpEcogas/:id', (req, res) => {
+router.post('/act1pCarpEcogas/:id', upload.none(), function (req, res) {
     var id = req.body.id;
     var Nombre = req.body.Nombre;
     var sql = "";
@@ -1133,7 +1127,7 @@ PermisosEspeciales="Presentado";
      res.redirect('/historialcarpeta/' + Nombre);
 }
 )
-router.post('/act2pCarpEcogas/:id', (req, res) => {
+router.post('/act2pCarpEcogas/:id', upload.none(), function (req, res) {
     var id = req.body.id;
     var Nombre = req.body.Nombre;
     var sql = "";
@@ -1379,7 +1373,7 @@ router.post('/act2pCarpEcogas/:id', (req, res) => {
         //Seccion Actualizar Tareas
     
         let fecha = new Date();
-        Nombre = req.body.Nombre;
+       
         TareaRealizada = req.body.TareaRealizada;
         ProximaTarea = req.body.ProximaTarea;
         Fecha_limite = req.body.Fecha_limite;
@@ -1547,7 +1541,7 @@ router.post('/act2pCarpEcogas/:id', (req, res) => {
     }
       res.redirect('/historialcarpeta/' + Nombre);
 })
-router.post('/actObrasCarpEcogas/:id', (req, res) => {
+router.post('/actObrasCarpEcogas/:id',upload.none(), function (req, res)  {
     var id = req.body.id;
     var Nombre = req.body.Nombre;
     var sql = "";
@@ -1827,7 +1821,7 @@ router.post('/actObrasCarpEcogas/:id', (req, res) => {
 }
     res.redirect('/historialcarpeta/' + Nombre);
 })
-router.post('/actCaosCarpEcogas/:id', (req, res) => {
+router.post('/actCaosCarpEcogas/:id',upload.none(), function (req, res)  {
     var id = req.body.id;
     var Nombre = req.body.Nombre;
     var sql = "";
@@ -2035,7 +2029,7 @@ router.post('/actCaosCarpEcogas/:id', (req, res) => {
     }
       res.redirect('/historialcarpeta/' + Nombre);
 })
-router.post('/actFinalCarpEcogas/:id', (req, res) => {
+router.post('/actFinalCarpEcogas/:id',upload.none(), function (req, res)  {
     var id = req.body.id;
     var Nombre = req.body.Nombre;
     var sql = "";

@@ -117,36 +117,36 @@
                         <thead>
                             <h3 class="text-center">Etapas de la carpeta</h3>
                             <tr class="table-active">
-                                <form action="/actPrelCarpEcogas/<%=user.id%>" id="actPrelCarpEcogas" method="post" enctype="multipart/form-data">
+                                <form action="/actPrelCarpEcogas/<%=user.id%>" id="actPrelCarpEcogas" method="POST" enctype="multipart/form-data">
                                     <input type="checkbox" value="Preliminar" checked hidden name="EtapaTarea">
-                                    <input type="hidden" name="Nombre" id="Nombre" value="<%= user.Nombre%>">
-                                    <input type="hidden" name="id" id="id" value="<%= user.id%>">
+                                    <input type="text" hidden name="Nombre" id="Nombre" value="<%= user.Nombre%>">
+                                    <input type="text" hidden name="id" id="id" value="<%= user.id%>">
                                     <%- include('./partials/editartareas/modalpreliminar.ejs')%>
                                 </form> <!-- Fin formulario actPrel -->
-                                <form action="/act1pCarpEcogas/<%=user.id%>" id="act1pCarpEcogas" method="post" enctype="multipart/form-data">
-                                    <input type="checkbox" value="1ra parte" checked hidden name="EtapaTarea">
-                                    <input type="hidden" name="Nombre" id="Nombre" value="<%= user.Nombre%>">
-                                    <input type="hidden" name="id" id="id" value="<%= user.id%>">
+                                <form action="/act1pCarpEcogas/<%=user.id%>" id="act1pCarpEcogas" method="POST" enctype="multipart/form-data">
+                                    <input type="text" value="1ra parte" checked hidden name="EtapaTarea">
+                                    <input type="text" hidden name="Nombre" id="Nombre" value="<%= user.Nombre%>">
+                                    <input type="text" hidden name="id" id="id" value="<%= user.id%>">
 
                                     <%- include('./partials/editartareas/modal1p.ejs')%>
                                 </form>
-                                <form action="/act2pCarpEcogas/<%=user.id%>" id="act2pCarpEcogas" method="post" enctype="multipart/form-data">
+                                <form action="/act2pCarpEcogas/<%=user.id%>" id="act2pCarpEcogas" method="POST" enctype="multipart/form-data">
                                     <input type="checkbox" value="2da parte" checked hidden name="EtapaTarea">
-                                    <input type="hidden" name="Nombre" id="Nombre" value="<%= user.Nombre%>">
-                                    <input type="hidden" name="id" id="id" value="<%= user.id%>">
+                                    <input type="text" hidden name="Nombre" id="Nombre" value="<%= user.Nombre%>">
+                                    <input type="text" hidden name="id" id="id" value="<%= user.id%>">
                                     <%- include('./partials/editartareas/modal2p-1de4Inicio.ejs')%>
                                         <%- include('./partials/editartareas/modal2p-2de4Permisos.ejs')%>
                                             <%- include('./partials/editartareas/modal2p-3de4Interferencias.ejs')%>
 
                                                 <%- include('./partials/editartareas/modal2p-4de4Final.ejs')%>
                                 </form>
-                                <form action="/actObrasCarpEcogas/<%=user.id%>" id="actObrasCarpEcogas" method="post" enctype="multipart/form-data">
+                                <form action="/actObrasCarpEcogas/<%=user.id%>" id="actObrasCarpEcogas" method="POST" enctype="multipart/form-data">
                                     <input type="checkbox" value="Obras" checked hidden name="EtapaTarea">
-                                    <input type="hidden" name="id" id="id" value="<%= user.id%>">
-                                    <input type="hidden" name="Nombre" id="Nombre" value="<%= user.Nombre%>">
-                                    <input type="hidden" name="PCaprobado" id="PCaprobado"
+                                    <input type="text" hidden name="id" id="id" value="<%= user.id%>">
+                                    <input type="text" hidden name="Nombre" id="Nombre" value="<%= user.Nombre%>">
+                                    <input type="text" hidden name="PCaprobado" id="PCaprobado"
                                         value="<%= tareasporcarpeta.PCaprobado%>">
-                                    <input type="hidden" name="Avisos" id="Avisos"
+                                    <input type="text" hidden name="Avisos" id="Avisos"
                                         value="<%= tareasporcarpeta.Avisos%>">
 
                                     <!-- Obras -->
