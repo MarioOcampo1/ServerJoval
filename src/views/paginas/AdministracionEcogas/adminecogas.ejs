@@ -136,53 +136,77 @@
               return ('<div class="text-light bg-success " title="Carpeta Finalizada. Codigo fisico.">'+row.CodigoFinalizadas+'</div>' );
             }
             else{
-            var fecha = new Date(); 
+            var fechaActual = new Date(); 
+            let quincediasEnMilisegundos = 1000 * 60 * 60 * 24 *15 ; 
+            var restaDeDias = (fechaActual.getTime() - quincediasEnMilisegundos);
+            fecha = new Date(restaDeDias).toISOString();
             if(row.Estado=="2da parte"){
-              var a=0;
-              if(row.Interferencias=="Pedir"){
-                a=1;
-                if((row.Permisos=="Sin Presentar")||( row.Permisos==null) ){
-              a=2;
-              if(row.intTelefonicaObtenida<fecha){
-                return '<div title="Codigo designado para ubicar en las carpetas fisicas de la oficina.">'+row.CodigoVigentes+'</div>'+
-              '<div title="PERMISO VENCIDO" class="btn m-1 btn-danger bt-sm"> P </div>'+
-              '<div class="btn m-1 btn-danger bt-sm" TITLE="Interferencia de Teléfonica vencida"> I </div>';
-              }else{
+              var Codigo='<div title="Codigo designado para ubicar en las carpetas fisicas de la oficina.">'+row.CodigoVigentes+'</div>'; ;
+              var Permiso=[];
+var Interferencia = [];
+// Interferencias
+              if(row.intTelefonicaObtenida<fecha && row.intTelefonicaObtenida!='0000-00-00' ){
+           Interferencia.push('<div class="btn m-1 btn-danger bt-sm" TITLE="Interferencia de Teléfonica vencida"> TFA </div>');
+              }
+              if(row.intAguaObtenida<fecha && row.intAguaObtenida!='0000-00-00'){
+           Interferencia.push('<div class="btn m-1 btn-danger bt-sm" TITLE="Interferencia de Agua vencida"> AG </div>');
+              }
+              if(row.intClaroObtenida<fecha && row.intClaroObtenida!='0000-00-00'){
+           Interferencia.push('<div class="btn m-1 btn-danger bt-sm" TITLE="Interferencia de Claro vencida"> CL </div>');
+              }
+              if(row.intElectricidadObtenida<fecha && row.intElectricidadObtenida!='0000-00-00'){
+           Interferencia.push('<div class="btn m-1 btn-danger bt-sm" TITLE="Interferencia de Electricidad vencida"> E </div>');
+              }
+              if(row.intArnetObtenida<fecha && row.intArnetObtenida!='0000-00-00'){
+           Interferencia.push('<div class="btn m-1 btn-danger bt-sm" TITLE="Interferencia de Arnet vencida"> AR </div>');
+              }
+              if(row.intCloacasObtenida<fecha && row.intCloacasObtenida!='0000-00-00'){
+           Interferencia.push('<div class="btn m-1 btn-danger bt-sm" TITLE="Interferencia de Cloacas vencida"> CC </div>');
+              }
+              if(row.intTelecomObtenida<fecha && row.intTelecomObtenida!='0000-00-00'){
+           Interferencia.push('<div class="btn m-1 btn-danger bt-sm" TITLE="Interferencia de Telecom vencida"> TCM </div>');
+              }
+              // Fin interferencias
+              // Permisos
+              if(row.VencimientoDNV<fecha && row.VencimientoDNV!='0000-00-00'){
+Permiso.push('<div title="Permiso DNV Vencido" class="btn m-1 btn-danger bt-sm"> P </div>');
+              }
+              if(row.VencimientoDPV<fecha && row.VencimientoDPV!='0000-00-00'){
+Permiso.push('<div title="Permiso DPV Vencido" class="btn m-1 btn-danger bt-sm"> P </div>');
+              }
+              if(row.VencimientoFerrocarril<fecha && row.VencimientoFerrocarril!='0000-00-00'){
+Permiso.push('<div title="Permiso Ferrocarril Vencido" class="btn m-1 btn-danger bt-sm"> P </div>');
+              }
+              if(row.VencimientoHidraulica<fecha && row.VencimientoHidraulica!='0000-00-00'){
+Permiso.push('<div title="Permiso Hidraulica Vencido" class="btn m-1 btn-danger bt-sm"> P </div>');
+              }
+              if(row.VencimientoIrrigacion<fecha && row.VencimientoIrrigacion!='0000-00-00'){
+Permiso.push('<div title="Permiso Irrigacion Vencido" class="btn m-1 btn-danger bt-sm"> P </div>');
+              }
+              if(row.VencimientoMunicipal<fecha && row.VencimientoMunicipal!='0000-00-00'){
+Permiso.push('<div title="Permiso Municipal Vencido" class="btn m-1 btn-danger bt-sm"> P </div>');
+              }
+              if(row.VencimientoOtrosPermisos<fecha && row.VencimientoOtrosPermisos!='0000-00-00'){
+Permiso.push('<div title="Permiso OtrosPermisos Vencido" class="btn m-1 btn-danger bt-sm"> P </div>');
+              }
+              if(row.VencimientoPrivado<fecha && row.VencimientoPrivado!='0000-00-00'){
+Permiso.push('<div title="Permiso Privado Vencido" class="btn m-1 btn-danger bt-sm"> P </div>');
+              }
+              var stringPermiso ="";
+              var stringInterferencia="";
+              Permiso.forEach(element => {
+                stringPermiso= stringPermiso + element
+              });
+Interferencia.forEach(element => {
+  stringInterferencia = stringInterferencia + element
+});
 
-              }
-                return '<div title="Codigo designado para ubicar en las carpetas fisicas de la oficina.">'+row.CodigoVigentes+'</div>'+
-              '<div title="PERMISO VENCIDO" class="btn m-1 btn-danger bt-sm"> P </div>'+
-              '<div class="btn m-1 btn-danger bt-sm" TITLE="INTERFERENCIAS VENCIDAS"> I </div>';
-              }
-              if(row.Permisos=="EnGestion"){
-                a=2;
-                return '<div title="Codigo designado para ubicar en las carpetas fisicas de la oficina.">'+row.CodigoVigentes+'</div>'+
-              '<div title="PERMISO EN GESTION" class="btn m-1 btn-warning bt-sm"> P </div>';
-              +  '<div class="btn m-1 btn-danger bt-sm" TITLE="INTERFERENCIAS VENCIDAS"> I </div>';
-              }
-if(a=1){
-                return '<div title="Codigo designado para ubicar en las carpetas fisicas de la oficina.">'+row.CodigoVigentes+'</div>'+
-              '<div class="btn m-1 btn-danger bt-sm" TITLE="INTERFERENCIAS VENCIDAS"> I </div>';
-}
-              }
-            if((row.Permisos=="Sin Presentar")||( row.Permisos==null) ){
-              a=2;
-                return '<div title="Codigo designado para ubicar en las carpetas fisicas de la oficina.">'+row.CodigoVigentes+'</div>'+
-              '<div title="PERMISO VENCIDO" class="btn m-1 btn-danger bt-sm"> P </div>';
-              }
-              if(row.Permisos=="EnGestion"){
-                a=2;
-                return '<div title="Codigo designado para ubicar en las carpetas fisicas de la oficina.">'+row.CodigoVigentes+'</div>'+
-              '<div title="PERMISO EN GESTION" class="btn m-1 btn-warning bt-sm"> P </div>';
-              }
-              if(a==0){
-              return '<div title="Codigo designado para ubicar en las carpetas fisicas de la oficina.">'+row.CodigoVigentes+'</div>' 
-              }
+var stringFinal = Codigo + stringPermiso+ stringInterferencia;
+return stringFinal;
             }
             else{
               return '<div title="Codigo designado para ubicar en las carpetas fisicas de la oficina.">'+row.CodigoVigentes+'</div>'
             }
-           
             }
           }},
           {"width": "1%","data": "Nombre_sub", render: function(data,type,row){

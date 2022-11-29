@@ -140,11 +140,12 @@ connection.query(sql, (error, results) => {
     
    
         // FIN INTERFERENCIAS
-        sql = 'SELECT c.id, c.Nombre, c.NCarpeta, b.TareaRealizada, b.ProximaTarea, b.EtapaTarea, b.FechaLimite FROM obras c , adminecogas_tareas_por_carpeta b  ';
+        sql = 'SELECT a.id, a.Nombre, a.NCarpeta,b.TareaRealizada, b.ProximaTarea, b.EtapaTarea, b.FechaLimite,c.* '+
+        'FROM obras a INNER JOIN adminecogas_tareas_por_carpeta b ON a.id = b.id_obra '+
+        'INNER JOIN adminecogas_interferencias_y_permisos c ON c.NCarpeta = b.NCarpeta';
         res.locals.moment = moment;
         connection.query(sql, (error, results) => {
             if (error) console.log(error);
-
             if (results.length > 0) {
                 res.render('paginas/AdministracionEcogas/adminecogas.ejs', { results: results, interferenciasypermisos: interferenciasypermisos, }); //en {results:results} lo que hago es guardar los resultados que envia la bd, en la variable results
 
@@ -161,16 +162,16 @@ connection.query(sql, (error, results) => {
 })
 router.get('/adminecogas/TablaGeneral', (req, res) => {
     // const sql = 'SELECT c.id, c.Nombre, c.NCarpeta,a.ResponsableDeTarea, c.TareaRealizada, c.ProximaTarea,c.EtapaTarea, c.FechaLimite, c.Estado FROM obras c, historialdecambios a where c.Nombre = a.Nombre_sub'; //SQL ORIGINAL
-    var sql = 'Select a.NCarpeta,a.Estado,a.id, b.CodigoVigentes,b.CodigoEnUsoVigentes,b.CodigoFinalizadas, c.Nombre_sub,c.ResponsableDeTarea,c.Tarea_Realizada_sub, c.Proxima_Tarea_sub, c.Fecha_Proxima_Tarea_sub, c.EtapaTarea_sub, d.Interferencias, d.Permisos from obras a, codificacioncarpetas b, historialdecambios c, obras_tareasgenerales d  where a.Nombre = c.Nombre_sub AND a.Nombre = b.Nombre and d.Nombre = a.Nombre and c.Si_NO_TareaRealizada != "S"'; 
+    var sql = 'Select a.NCarpeta,a.Estado,a.id, b.CodigoVigentes,b.CodigoEnUsoVigentes,b.CodigoFinalizadas, c.Nombre_sub,c.ResponsableDeTarea,c.Tarea_Realizada_sub, c.Proxima_Tarea_sub, c.Fecha_Proxima_Tarea_sub, c.EtapaTarea_sub, d.Interferencias, d.Permisos, e.* FROM obras a INNER JOIN codificacioncarpetas b ON a.Nombre = b.Nombre'+
+    ' INNER JOIN historialdecambios c ON a.Nombre = c.Nombre_sub'+
+    ' INNER JOIN obras_tareasgenerales d ON a.Nombre = d.Nombre '+
+    ' INNER JOIN adminecogas_interferencias_y_permisos e ON e.NCarpeta = a.NCarpeta WHERE c.Si_NO_TareaRealizada != "S"'; 
     res.locals.moment = moment;
     connection.query(sql, (error, results) => {
         if (error) console.log(error);
 
         if (results.length > 0) {
-
-
             res.send(results); //en {results:results} lo que hago es guardar los resultados que envia la bd, en la variable results
-
         }
         else {
             res.send('Ningun resultado encontrado');
