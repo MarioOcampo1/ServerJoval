@@ -1,4 +1,6 @@
 const express = require('express');
+const multer = require('multer');
+const upload = multer({dest: 'src/uploads'});
 const passport = require('passport');
 const excel= require('xlsx');
 const PassportLocal = require('passport-local').Strategy;
