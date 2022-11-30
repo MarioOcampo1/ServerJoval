@@ -196,11 +196,9 @@
                                         <%=clientes.Nombre%>
                                     </a>
                                 </td>
-                               
-                                <td >
+                                <td>
                                     <a href="/historialcarpeta/<%=clientes.Nombre%>">
                                     <%=clientes.Estado%>
-
                                     </a>
                                         <%if(clientes.Estado=="Sin presentar" ){%>
                                             <progress max="6" value="0"></progress>
@@ -211,7 +209,6 @@
                                                 <%if(clientes.Estado=="1ra parte"){%>
                                                     <progress max="6" value="2"></progress>
                                                     <%}%>
-
                                                         <%if(clientes.Estado=="2da parte"){%>
                                                             <progress max="6" value="3"></progress>
                                                             <%}%>
@@ -221,7 +218,6 @@
                                                                 <%if(clientes.Estado=="CAOS" || clientes.Estado=="Caos"){%>
                                                                     <progress max="6" value="5"></progress>
                                                                     <%}%>
-
                                                                         <%if(clientes.Estado=="Finalizada"){%>
                                                                             <progress max="6" value="6"></progress>
                                                                             <%}%>
@@ -233,10 +229,6 @@
                                                                                         class="text-center">
                                                                                     <%}%>
                                 </td>
-                                <td >
-                                    <%= moment(clientes.Fechafirmacontrato).format('DD-MM-YYYY')%>
-                                </td>
-
                                 <!-- Documentacion Terreno -->
                                 <%if(clientes.DocumentacionTerreno=="ok"){%>
                                     <td id="EncabezadoPreliminar" class="text-light bg-success">
