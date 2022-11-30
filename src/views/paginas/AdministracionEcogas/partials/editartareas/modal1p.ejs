@@ -26,18 +26,16 @@
                                     Documentación
                                     del
                                     terreno</div>
-
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-6 border">
-                                            <div class="card-title text-primary">
-
+                                            <div class="card-title text-primary" onclick="document.getElementById('Mensurabody').style.display= 'block'">
                                                 <label for="Mensura">Mensura</label>
                                             </div>
                                             <div class="text-success" id="EstadoTarea">
                                                 Estado de la tarea: <%=tareasporcarpeta.Mensura%>
                                             </div>
-                                            <div class="card-text">
+                                            <div class="card-text" id="Mensurabody" style="display: none;">
                                                 <div class="input-group ">
                                                     <input hidden id="" class="input" type="radio" name="Mensura"
                                                         onclick="llamarAFormularioEditarTareas('Mensura');"
@@ -117,20 +115,11 @@
                                                         aria-label="Archivo">
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                                <div class="input-group-sm pt-2">
-
-                                                </div>
-
-
-                                            </div>
-
-
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6 border">
-                                            <div class="card-title text-primary">
+                                            <div class="card-title text-primary" onclick="document.getElementById('TituloDePropiedadbody').style.display= 'block'">
                                                 <label for="TituloDePropiedad">Titulo
                                                     de
                                                     propiedad</label>
@@ -138,7 +127,7 @@
                                             <div class="text-success" id="EstadoTarea">
                                                 Estado de la tarea: <%=tareasporcarpeta.TituloDePropiedad %>
                                             </div>
-                                            <div class="card-text">
+                                            <div class="card-text" id="TituloDePropiedadbody" style="display: none;">
                                                 <div class="input-group ">
                                                     <input hidden id="" class="input" type="radio"
                                                         name="TituloDePropiedad"
@@ -154,7 +143,6 @@
                                                             name="TituloDePropiedad" value="EnGestion"
                                                             onclick="llamarAFormularioEditarTareas('TituloPropiedad');">
                                                     </div>
-
                                                     <div class=" p-1">
                                                         Observado<input id="" class="" type="radio"
                                                             name="TituloDePropiedad" value="Observado"
@@ -212,9 +200,7 @@
                                                     <input class="form-control" type="date" name="Fecha_limite"
                                                         id="Fecha_limite" placeholder="Ingrese ultima tarea realizada"
                                                         aria-describedby="Fecha_limite">
-
                                                 </div>
-
                                             </div>
                                             <div class="row-p-1">
                                                 <div class="input-group mt-1">
@@ -229,24 +215,19 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
-
-
                             <div class="card p-3 mb-4 border-secondary">
                                 <div class="card-header bg-primary text-white">
                                     Comercial</div>
                                 <div class="card-body">
-
                                     <div class="row">
-
                                         <div class="col-6 border">
-                                            <div class="card-title text-primary">Contrato
+                                            <div class="card-title text-primary" onclick="document.getElementById('Contratobody').style.display= 'block'">Contrato
                                             </div>
                                             <div class="text-success" id="EstadoTarea">
                                                 Estado de la tarea: <%=tareasporcarpeta.Contrato %>
                                             </div>
-                                            <div class="card-text">
+                                            <div class="card-text" id="Contratobody" style="display: none;">
                                                 <div class="input-group ">
                                                     <input hidden id="" class="input" type="radio" name="Contrato"
                                                         onclick="llamarAFormularioEditarTareas('Contrato');"
@@ -261,7 +242,6 @@
                                                             value="EnGestion"
                                                             onclick="llamarAFormularioEditarTareas('Contrato');">
                                                     </div>
-
                                                     <div class="col-2.5 p-1">
                                                         Observado<input id="" class="" type="radio" name="Contrato"
                                                             value="Observado"
@@ -332,39 +312,26 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-12 border">
-                                                <div class="card-title text-primary">Fecha de firma del contrato
+                                            <div class="col-6 border">
+                                                <div class="card-title text-primary" onclick="document.getElementById('FechaFirmaContratobody').style.display= 'block'">Fecha de firma del contrato
                                                 </div>
                                                 <div class="text-success" id="EstadoTarea">
-                                                    Estado de la tarea: <%=tareasporcarpeta.Fechafirmacontrato %>
+                                                    Estado de la tarea: <%=moment(tareasporcarpeta.Fechafirmacontrato).locale('es').format("DD-MM-YYYY") %>
                                                 </div>
-                                                <div class="card-text">
-                                                    <%if(tareasporcarpeta.Fechafirmacontrato){%>
-                                                        <%=tareasporcarpeta.Fechafirmacontrato%>
-                                                            <%}%>
-                                                                <input type="date" name="FechaFirmaContrato"
-                                                                    id="FechaFirmaContrato"
-                                                                    placeholder="<%= tareasporcarpeta.Fechafirmacontrato%>">
-                                                                <script>
-                                                                    var fecha = "<%=tareasporcarpeta.Fechafirmacontrato%>";
-                                                                    console.log("la fecha es : " + fecha);
-                                                                    var FechaModificada = moment(Fecha, "MM/DD/YYYY");
-                                                                    console.log("La fecha modificada es: " + FechaModificada);
-                                                                    document.write(FechaModificada);
-
-                                                                </script>
-
+                                                <div class="card-text" id="FechaFirmaContratobody" style="display: none;">
+                                                   <input type="date" name="FechaFirmaContrato" id="FechaFirmaContrato" placeholder="<%= tareasporcarpeta.Fechafirmacontrato%>" value="<%= tareasporcarpeta.Fechafirmacontrato%>">
+                                                               
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-6 border">
-                                                <div class="card-title text-primary">
+                                                <div class="card-title text-primary" onclick="document.getElementById('PresupuestoDetalladobody').style.display= 'block'">
                                                     Presupuesto detallado</div>
                                                 <div class="text-success" id="EstadoTarea">
                                                     Estado de la tarea: <%=tareasporcarpeta.Presupuesto %>
                                                 </div>
-                                                <div class="card-text">
+                                                <div class="card-text" id="PresupuestoDetalladobody" style="display: none;">
                                                     <div class="input-group ">
                                                         <input hidden id="" class="input" type="radio"
                                                             name="Presupuesto"
@@ -380,7 +347,6 @@
                                                                 name="Presupuesto" value="EnGestion"
                                                                 onclick="llamarAFormularioEditarTareas('Presupuesto');">
                                                         </div>
-
                                                         <div class="col-2.5 p-1">
                                                             Observado<input id="" class="" type="radio"
                                                                 name="Presupuesto" value="Observado"
@@ -397,7 +363,6 @@
                                                                 onclick="llamarAFormularioEditarTareas('Presupuesto');">
                                                         </div>
                                                     </div>
-
                                                 </div>
                                             </div>
                                             <div class="col-6 border p-1 bg-dark text-white formularioEditarTareasALlenar"
@@ -459,12 +424,12 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-6 border">
-                                                <div class="card-title text-primary">Sucedáneo
+                                                <div class="card-title text-primary" onclick="document.getElementById('Sucedaneobody').style.display= 'block'">Sucedáneo
                                                 </div>
                                                 <div class="text-success" id="EstadoTarea">
                                                     Estado de la tarea: <%=tareasporcarpeta.Sucedaneo %>
                                                 </div>
-                                                <div class="card-text">
+                                                <div class="card-text" id="Sucedaneobody" style="display: none;">
                                                     <div class="input-group ">
                                                         <input hidden id="" class="input" type="radio" name="Sucedaneo"
                                                             onclick="llamarAFormularioEditarTareas('Sucedaneo');"
@@ -557,12 +522,12 @@
                                             </div>
                                         </div>
                                         <div class="col-6 border border">
-                                            <div class="card-title text-primary">Nota De
+                                            <div class="card-title text-primary" onclick="document.getElementById('NotaDeExcepcionbody').style.display= 'block'">Nota De
                                                 Excepción</div>
                                             <div class="text-success" id="EstadoTarea">
                                                 Estado de la tarea: <%=tareasporcarpeta.NotaDeExcepcion %>
                                             </div>
-                                            <div class="card-text">
+                                            <div class="card-text" id="NotaDeExcepcionbody" style="display: none;">
                                                 <div class="input-group ">
                                                     <input hidden id="" class="input" type="radio"
                                                         name="NotaDeExcepcion"
@@ -661,12 +626,12 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-6 border">
-                                            <div class="card-title text-primary">PC
+                                            <div class="card-title text-primary" onclick="document.getElementById('PCaprobadobody').style.display= 'block'">PC
                                             </div>
                                             <div class="text-success" id="EstadoTarea">
                                                 Estado de la tarea: <%=tareasporcarpeta.PCaprobado %>
                                             </div>
-                                            <div class="card-text">
+                                            <div class="card-text" id="PCaprobadobody" style="display: none;">
                                                 <div class="input-group ">
                                                     <div class="col-2.5 p-1">
                                                         <input hidden id="" class="input" type="radio" name="PCaprobado"
@@ -757,7 +722,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-6 border">
-                                            <div class="card-title text-primary">
+                                            <div class="card-title text-primary" onclick="document.getElementById('PlanoTipobody').style.display= 'block'">
 
                                                 <label for="PlanoTipo">Plano
                                                     tipo</label>
@@ -765,7 +730,7 @@
                                             <div class="text-success" id="EstadoTarea">
                                                 Estado de la tarea: <%=tareasporcarpeta.PlanoTipo %>
                                             </div>
-                                            <div class="card-text">
+                                            <div class="card-text" id="PlanoTipobody" style="display: none;">
                                                 <div class="input-group ">
                                                     <input hidden id="" class="input" type="radio" name="PlanoTipo"
                                                         onclick="llamarAFormularioEditarTareas('PlanoTipo');"
@@ -861,21 +826,18 @@
 
                                     <div class="row">
                                         <div class="col-6 border">
-
                                             <%if (interferenciasypermisos.Privado=="NC" ){%>
-
                                                 <form-check>
                                                     <input hidden checked type="radio" name="CartaOferta"
                                                         id="CartaOferta" value="NC">
-
                                                 </form-check>
                                                 <% }else{%>
-                                                    <div class="card-title text-primary">Carta
+                                                    <div class="card-title text-primary" onclick="document.getElementById('CartaOfertabody').style.display= 'block'">Carta
                                                         oferta</div>
                                                     <div class="text-success" id="EstadoTarea">
                                                         Estado de la tarea: <%=tareasporcarpeta.CartaOferta %>
                                                     </div>
-                                                    <div class="card-text">
+                                                    <div class="card-text" id="CartaOfertabody" style="display: none;">
                                                         <div class="input-group ">
                                                             <input hidden id="" class="input" type="radio"
                                                                 name="CartaOferta"
@@ -978,12 +940,12 @@
                                                 </form-check>
                                                 <% }else{%>
 
-                                                    <div class="card-title text-primary">Plano
+                                                    <div class="card-title text-primary" onclick="document.getElementById('PlanoAnexobody').style.display= 'block'">Plano
                                                         anexo</div>
                                                     <div class="text-success" id="EstadoTarea">
                                                         Estado de la tarea: <%=tareasporcarpeta.PlanoAnexo %>
                                                     </div>
-                                                    <div class="card-text">
+                                                    <div class="card-text" id="PlanoAnexobody" style="display: none;">
                                                         <div class="input-group ">
                                                             <input hidden id="" class="input" type="radio"
                                                                 name="PlanoAnexo"
@@ -1084,12 +1046,12 @@
                                                 </form-check>
                                                 <%}else{%>
 
-                                                    <div class="card-title text-primary">
+                                                    <div class="card-title text-primary" onclick="document.getElementById('Hidraulica1body').style.display= 'block'">
                                                         Hidraúlica </div>
                                                     <div class="text-success" id="EstadoTarea">
                                                         Estado de la tarea: <%=tareasporcarpeta.HIDRAULICA1 %>
                                                     </div>
-                                                    <div class="card-text">
+                                                    <div class="card-text" id="Hidraulica1body" style="display: none;">
                                                         <div class="input-group ">
                                                             <input hidden id="" class="input" type="radio"
                                                                 name="HIDRAULICA1"
@@ -1188,12 +1150,12 @@
                                                     value="NC">
                                                 <%}else{%>
 
-                                                    <div class="card-title text-primary">
+                                                    <div class="card-title text-primary" onclick="document.getElementById('Ferrocarril1body').style.display= 'block'">
                                                         Ferrocarriles</div>
                                                     <div class="text-success" id="EstadoTarea">
                                                         Estado de la tarea: <%=tareasporcarpeta.FERROCARRIL1 %>
                                                     </div>
-                                                    <div class="card-text">
+                                                    <div class="card-text" id="Ferrocarril1body" style="display: none;">
                                                         <div class="input-group ">
                                                             <input hidden id="" class="input" type="radio"
                                                                 name="FERROCARRIL1"
@@ -1292,12 +1254,12 @@
                                                 <input hidden checked type="radio" name="DNV1" id="DNV1" value="NC">
                                                 <%}else{%>
 
-                                                    <div class="card-title text-primary">DNV
+                                                    <div class="card-title text-primary" onclick="document.getElementById('DNV1body').style.display= 'block'">DNV
                                                     </div>
                                                     <div class="text-success" id="EstadoTarea">
                                                         Estado de la tarea: <%=tareasporcarpeta.DNV1 %>
                                                     </div>
-                                                    <div class="card-text">
+                                                    <div class="card-text" id="DNV1body" style="display: none;">
                                                         <div class="input-group ">
                                                             <input hidden id="" class="input" type="radio" name="DNV1"
                                                                 onclick="llamarAFormularioEditarTareas('DNV1');"
@@ -1388,12 +1350,8 @@
                                         </div>
                                     </div>
                                 </div>
-
-
                             </div>
-
                         </div>
-
                         <div class="card p-3 mb-4 border-secondary">
                             <div class="card-header bg-primary text-white">
                                 Documentacion Ambiente
@@ -1401,13 +1359,13 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-6 border">
-                                        <div class="card-title text-primary">Cuestionario de relevamiento ambiental
+                                        <div class="card-title text-primary" onclick="document.getElementById('CuestionarioRelevamientoAmbientebody').style.display= 'block'">Cuestionario de relevamiento ambiental
                                         </div>
                                         <div class="text-success" id="EstadoTarea">
                                             Estado de la tarea:
                                             <%=tareasporcarpeta.CuestionarioRelevamientoAmbiental %>
                                         </div>
-                                        <div class="card-text">
+                                        <div class="card-text" id="CuestionarioRelevamientoAmbientebody" style="display: none;">
                                             <div class="input-group ">
                                                 <input hidden id="" class="input" type="radio"
                                                     name="CuestionarioRelevamientoAmbiental"
@@ -1497,13 +1455,13 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-6 border">
-                                        <div class="card-title text-primary">
+                                        <div class="card-title text-primary" onclick="document.getElementById('DDJJInicialAmbientalbody').style.display= 'block'">
                                             DDJJ inicial ambiental
                                         </div>
                                         <div class="text-success" id="EstadoTarea">
                                             Estado de la tarea: <%=tareasporcarpeta.DDJJInicialAmbiental %>
                                         </div>
-                                        <div class="card-text">
+                                        <div class="card-text" id="DDJJInicialAmbientalbody" style="display: none;">
                                             <div class="input-group ">
                                                 <input hidden id="" class="input" type="radio"
                                                     name="DDJJInicialAmbiental"
@@ -1592,13 +1550,13 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-6 border">
-                                        <div class="card-title text-primary">
+                                        <div class="card-title text-primary" onclick="document.getElementById('ListaVerificacionAmbientalbody').style.display= 'block'">
                                             Lista de verificacion ambiental
                                         </div>
                                         <div class="text-success" id="EstadoTarea">
                                             Estado de la tarea: <%=tareasporcarpeta.ListaVerificacionAmbiental %>
                                         </div>
-                                        <div class="card-text">
+                                        <div class="card-text" id="ListaVerificacionAmbientalbody" style="display: none;">
                                             <div class="input-group ">
                                                 <div class="col-2.5 p-1">
                                                     <input hidden id="" class="input" type="radio"

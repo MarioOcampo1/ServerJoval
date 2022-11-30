@@ -1010,7 +1010,7 @@ PermisosEspeciales="Presentado";
     sql = 'Update adminecogas_tareas_por_carpeta Set ? where Nombre=?';
     connection.query(sql, [{
         Mensura:Mensura,TituloDePropiedad:TituloDePropiedad,
-        Contrato: Contrato, Presupuesto: Presupuesto, Sucedaneo: Sucedaneo, NotaDeExcepcion: NotaDeExcepcion, PCaprobado: Pcaprobado,
+        Contrato: Contrato, Presupuesto: Presupuesto, Sucedaneo: Sucedaneo, NotaDeExcepcion: NotaDeExcepcion, PCaprobado: Pcaprobado,FechaFirmaContrato: FechaFirmaContrato,
         PlanoTipo: PlanoTipo, CartaOferta: CartaOferta, PlanoAnexo: PlanoAnexo, CuestionarioRelevamientoAmbiental: CuestionarioRelevamientoAmbiental, DDJJInicialAmbiental: DDJJInicialAmbiental, ListaVerificacionAmbiental: ListaVerificacionAmbiental
     }, Nombre],
         (error, results) => {
