@@ -136,19 +136,16 @@ connection.query(sql, (error, results) => {
        interferenciasypermisos= results;
         }
     })
-    
-    
-   
         // FIN INTERFERENCIAS
+       
         sql = 'SELECT a.id, a.Nombre, a.NCarpeta,b.TareaRealizada, b.ProximaTarea, b.EtapaTarea, b.FechaLimite,c.* '+
         'FROM obras a INNER JOIN adminecogas_tareas_por_carpeta b ON a.id = b.id_obra '+
-        'INNER JOIN adminecogas_interferencias_y_permisos c ON c.NCarpeta = b.NCarpeta';
+        'INNER JOIN adminecogas_interferencias_y_permisos c ON c.NCarpeta = b.NCarpeta';  
         res.locals.moment = moment;
         connection.query(sql, (error, results) => {
             if (error) console.log(error);
             if (results.length > 0) {
                 res.render('paginas/AdministracionEcogas/adminecogas.ejs', { results: results, interferenciasypermisos: interferenciasypermisos, }); //en {results:results} lo que hago es guardar los resultados que envia la bd, en la variable results
-
             }
             else {
                 res.render('paginas/AdministracionEcogas/nuevocliente.ejs');
@@ -162,14 +159,15 @@ connection.query(sql, (error, results) => {
 })
 router.get('/adminecogas/TablaGeneral', (req, res) => {
     // const sql = 'SELECT c.id, c.Nombre, c.NCarpeta,a.ResponsableDeTarea, c.TareaRealizada, c.ProximaTarea,c.EtapaTarea, c.FechaLimite, c.Estado FROM obras c, historialdecambios a where c.Nombre = a.Nombre_sub'; //SQL ORIGINAL
-    var sql = 'Select a.NCarpeta,a.Estado,a.id, b.CodigoVigentes,b.CodigoEnUsoVigentes,b.CodigoFinalizadas, c.Nombre_sub,c.ResponsableDeTarea,c.Tarea_Realizada_sub, c.Proxima_Tarea_sub, c.Fecha_Proxima_Tarea_sub, c.EtapaTarea_sub, d.Interferencias, d.Permisos, e.* FROM obras a INNER JOIN codificacioncarpetas b ON a.Nombre = b.Nombre'+
-    ' INNER JOIN historialdecambios c ON a.Nombre = c.Nombre_sub'+
-    ' INNER JOIN obras_tareasgenerales d ON a.Nombre = d.Nombre '+
-    ' INNER JOIN adminecogas_interferencias_y_permisos e ON e.NCarpeta = a.NCarpeta WHERE c.Si_NO_TareaRealizada != "S"'; 
+    var sql = 'SELECT a.NCarpeta,a.Estado,a.id,b.CodigoVigentes,b.CodigoFinalizadas, c.Nombre_sub,c.ResponsableDeTarea,c.Tarea_Realizada_sub, c.Proxima_Tarea_sub, c.Fecha_Proxima_Tarea_sub, c.EtapaTarea_sub, d.Interferencias, d.Permisos, e.intTelefonicaObtenida,e.intAguaObtenida, e.intCloacasObtenida, e.intElectricidadObtenida, e.intClaroObtenida, e.intArnetObtenida, e.intArsatObtenida, e.intTelecomObtenida '+
+    ' FROM historialdecambios c'+
+    ' INNER JOIN obras a ON  c.Nombre_sub = a.Nombre'+
+    ' INNER JOIN codificacioncarpetas b ON c.Nombre_sub = b.Nombre'+
+    ' INNER JOIN obras_tareasgenerales d ON c.Nombre_sub = d.Nombre'+
+    ' INNER JOIN adminecogas_interferencias_y_permisos e ON c.Nombre_sub = e.Nombre  WHERE c.Si_NO_TareaRealizada != "S"'; 
     res.locals.moment = moment;
     connection.query(sql, (error, results) => {
         if (error) console.log(error);
-
         if (results.length > 0) {
             res.send(results); //en {results:results} lo que hago es guardar los resultados que envia la bd, en la variable results
         }
@@ -465,6 +463,7 @@ router.get('/historialcarpeta/:Nombre', (req, res) => {
         connection.query(sql, [Nombre], (error, results) => {
             if (error) console.log(error);
             if (results.length > 0) {
+               
                 res.render('paginas/AdministracionEcogas/historialcarpeta.ejs', { results: results, id: id, Nombre: Nombre }); //en {results:results} lo que hago es guardar los resultados que envia la bd, en la variable results
 
             }
@@ -546,29 +545,22 @@ router.post('/actualizarcontacto/:id', (req, res) => {
         })
 })
 router.post('/TareaOk/:Nombre', (req, res) => {
-    const Nombre = req.params.Nombre;
+    var Nombre = req.params.Nombre;
     const TareaOk = req.body.TareaOK;
     const id = req.body.id;
 
-    const sql = 'Update historialdecambios Set ? where Nombre_sub =? and id =?';
+    var sql = 'Update historialdecambios Set ? where Nombre_sub =? and id =?';
     connection.query(sql, [{
         Si_NO_TareaRealizada: TareaOk,
-    }, Nombre, id]
-        , (error, results) => {
+    }, Nombre, id], (error, results) => {
             if (error) console.log(error);
-
             if (results.length > 0) {
-                console.log("Intentando actualizar el estado de la tarea");
-                console.log("La tarea realizada tendra el estado: " + TareaOk);
-                console.log("El id de la tarea es: " + id);
                 res.redirect(req.get('referer'));
             }
             else {
-                console.log("Intentando actualizar el estado de la tarea");
-                console.log("La tarea realizada tendra el estado: " + TareaOk);
-                console.log("El id de la tarea es: " + id);
-            } res.redirect(req.get('referer'));
-        })
+                res.redirect(req.get('referer'));                 
+        }
+})
 })
 router.post('/update/:id', (req, res) => {
     res.locals.moment = moment;

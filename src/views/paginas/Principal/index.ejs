@@ -58,7 +58,7 @@
           <% albacaucion.forEach((polizaAlba)=>{%>
             <tr class="">
             <td><%=polizaAlba.NumeroPoliza%></td>
-            <td><%=polizaAlba.NombreAsegurado%></td>
+            <td><%=polizaAlba.Descripcion%></td>
             <%polizaAlba.ProximaRefacturacion=moment(polizaAlba.ProximaRefacturacion).locale('es').format("DD-MM-YYYY");%>
             <td><%=polizaAlba.ProximaRefacturacion%></td>
             <td><%=polizaAlba.Riesgo%></td>
