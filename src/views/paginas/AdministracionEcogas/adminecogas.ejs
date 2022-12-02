@@ -138,25 +138,25 @@
               var Permiso=[];
 var Interferencia = [];
 // Interferencias
-              if(row.intTelefonicaObtenida<fecha && row.intTelefonicaObtenida!='0000-00-00' ){
+              if(row.intTelefonicaObtenida<fecha && row.intTelefonicaObtenida!='0000-00-00' && row.intTelefonicaObtenida!='' ){
            Interferencia.push('<div class="btn m-1 btn-danger bt-sm" TITLE="Interferencia de Teléfonica vencida"> TFA </div>');
               }
-              if(row.intAguaObtenida<fecha && row.intAguaObtenida!='0000-00-00'){
+              if(row.intAguaObtenida<fecha && row.intAguaObtenida!='0000-00-00' && row.intAguaObtenida!=''){
            Interferencia.push('<div class="btn m-1 btn-danger bt-sm" TITLE="Interferencia de Agua vencida"> AG </div>');
               }
-              if(row.intClaroObtenida<fecha && row.intClaroObtenida!='0000-00-00'){
+              if(row.intClaroObtenida<fecha && row.intClaroObtenida!='0000-00-00' && row.intClaroObtenida!=''){
            Interferencia.push('<div class="btn m-1 btn-danger bt-sm" TITLE="Interferencia de Claro vencida"> CL </div>');
               }
-              if(row.intElectricidadObtenida<fecha && row.intElectricidadObtenida!='0000-00-00'){
+              if(row.intElectricidadObtenida<fecha && row.intElectricidadObtenida!='0000-00-00' && row.intElectricidadObtenida!=''){
            Interferencia.push('<div class="btn m-1 btn-danger bt-sm" TITLE="Interferencia de Electricidad vencida"> E </div>');
               }
-              if(row.intArnetObtenida<fecha && row.intArnetObtenida!='0000-00-00'){
+              if(row.intArnetObtenida<fecha && row.intArnetObtenida!='0000-00-00' && row.intArnetObtenida!=''){
            Interferencia.push('<div class="btn m-1 btn-danger bt-sm" TITLE="Interferencia de Arnet vencida"> AR </div>');
               }
-              if(row.intCloacasObtenida<fecha && row.intCloacasObtenida!='0000-00-00'){
+              if(row.intCloacasObtenida<fecha && row.intCloacasObtenida!='0000-00-00' && row.intCloacasObtenida!=''){
            Interferencia.push('<div class="btn m-1 btn-danger bt-sm" TITLE="Interferencia de Cloacas vencida"> CC </div>');
               }
-              if(row.intTelecomObtenida<fecha && row.intTelecomObtenida!='0000-00-00'){
+              if(row.intTelecomObtenida<fecha && row.intTelecomObtenida!='0000-00-00' && row.intTelecomObtenida!=''){
            Interferencia.push('<div class="btn m-1 btn-danger bt-sm" TITLE="Interferencia de Telecom vencida"> TCM </div>');
               }
               // Fin interferencias

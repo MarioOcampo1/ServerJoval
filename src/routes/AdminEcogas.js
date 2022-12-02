@@ -159,7 +159,7 @@ connection.query(sql, (error, results) => {
 })
 router.get('/adminecogas/TablaGeneral', (req, res) => {
 
-    var sql = 'SELECT a.NCarpeta,a.Estado,a.id,b.CodigoVigentes,b.CodigoFinalizadas, c.Nombre_sub,c.ResponsableDeTarea,c.Tarea_Realizada_sub, c.Proxima_Tarea_sub, c.Fecha_Proxima_Tarea_sub, c.EtapaTarea_sub, d.Interferencias, d.Permisos, e.intTelefonicaObtenida,e.intAguaObtenida, e.intCloacasObtenida, e.intElectricidadObtenida, e.intClaroObtenida, e.intArnetObtenida, e.intArsatObtenida, e.intTelecomObtenida '+
+    var sql = 'SELECT a.NCarpeta,a.Estado,a.id,b.CodigoVigentes,b.CodigoFinalizadas, c.Nombre_sub,c.ResponsableDeTarea,c.Tarea_Realizada_sub, c.Proxima_Tarea_sub, c.Fecha_Proxima_Tarea_sub, c.EtapaTarea_sub, d.Interferencias, d.Permisos, e.intTelefonicaObtenida,e.intAguaObtenida, e.intCloacasObtenida, e.intElectricidadObtenida, e.intClaroObtenida, e.intArnetObtenida, e.intArsatObtenida, e.intTelecomObtenida, e.VencimientoFerrocarril, e.VencimientoHidraulica, e.VencimientoMunicipal, e.VencimientoDNV, e.VencimientoDPV, e.VencimientoIrrigacion, e.VencimientoPrivado, e.VencimientoOtrosPermisos, e.VencimientoAvisoObraIeric, e.VencimientoAvisoObraArt '+
     ' FROM historialdecambios c'+
     ' INNER JOIN obras a ON  c.Nombre_sub = a.Nombre'+
     ' INNER JOIN codificacioncarpetas b ON c.Nombre_sub = b.Nombre'+
@@ -225,7 +225,6 @@ router.get('/editarContacto/:id', (req, res) => {
 })
 router.get('/editarTareas/:id', (req, res) => {
     if (req.isAuthenticated()) {
-        res.locals.moment = moment;
         const id = req.params.id;
         var Nombre = '';
         var sql = 'Select Nombre from obras where id=?';
@@ -280,7 +279,7 @@ router.get('/editarTareas/:id', (req, res) => {
                             if (error) console.log(error);
                             if (results.length > 0) {
                                 //Se procede a enviar al front, los resultados de las consultas sql, prestar atencion que para que ejs pueda resolver el contenido de las sentencias hay que tratar las mismas como un arreglo [0], sino no funciona.
-                                res.render('paginas/AdministracionEcogas/editarTareas', { user: results[0], interferenciasypermisos: interferenciasypermisos[0], tareasporcarpeta: tareasporcarpeta[0], CodigoVigentes: CodigoVigentes, CodigoEnUsoVigentes: CodigoEnUsoVigentes, CodigoFinalizadas: CodigoFinalizadas });
+                                res.render('paginas/AdministracionEcogas/editarTareas', { user: results[0], interferenciasypermisos: interferenciasypermisos[0], tareasporcarpeta: tareasporcarpeta[0], CodigoVigentes: CodigoVigentes, CodigoEnUsoVigentes: CodigoEnUsoVigentes, CodigoFinalizadas: CodigoFinalizadas, moment: moment });
                            
                             }
                             else {
