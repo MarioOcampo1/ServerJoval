@@ -162,28 +162,28 @@ var Interferencia = [];
               // Fin interferencias
               // Permisos
               if(row.VencimientoDNV<fecha && row.VencimientoDNV!='0000-00-00'){
-Permiso.push('<div title="Permiso DNV Vencido" class="btn m-1 btn-danger bt-sm"> P </div>');
+Permiso.push('<div title="Permiso DNV Vencido" class="btn m-1 btn-warning bt-sm"> DNV </div>');
               }
               if(row.VencimientoDPV<fecha && row.VencimientoDPV!='0000-00-00'){
-Permiso.push('<div title="Permiso DPV Vencido" class="btn m-1 btn-danger bt-sm"> P </div>');
+Permiso.push('<div title="Permiso DPV Vencido" class="btn m-1 btn-warning bt-sm"> DPV </div>');
               }
               if(row.VencimientoFerrocarril<fecha && row.VencimientoFerrocarril!='0000-00-00'){
-Permiso.push('<div title="Permiso Ferrocarril Vencido" class="btn m-1 btn-danger bt-sm"> P </div>');
+Permiso.push('<div title="Permiso Ferrocarril Vencido" class="btn m-1 btn-warning bt-sm"> FFCC </div>');
               }
               if(row.VencimientoHidraulica<fecha && row.VencimientoHidraulica!='0000-00-00'){
-Permiso.push('<div title="Permiso Hidraulica Vencido" class="btn m-1 btn-danger bt-sm"> P </div>');
+Permiso.push('<div title="Permiso Hidraulica Vencido" class="btn m-1 btn-warning bt-sm"> H </div>');
               }
               if(row.VencimientoIrrigacion<fecha && row.VencimientoIrrigacion!='0000-00-00'){
-Permiso.push('<div title="Permiso Irrigacion Vencido" class="btn m-1 btn-danger bt-sm"> P </div>');
+Permiso.push('<div title="Permiso Irrigacion Vencido" class="btn m-1 btn-warning bt-sm"> IRR </div>');
               }
               if(row.VencimientoMunicipal<fecha && row.VencimientoMunicipal!='0000-00-00'){
-Permiso.push('<div title="Permiso Municipal Vencido" class="btn m-1 btn-danger bt-sm"> P </div>');
+Permiso.push('<div title="Permiso Municipal Vencido" class="btn m-1 btn-warning bt-sm"> PM </div>');
               }
               if(row.VencimientoOtrosPermisos<fecha && row.VencimientoOtrosPermisos!='0000-00-00'){
-Permiso.push('<div title="Permiso OtrosPermisos Vencido" class="btn m-1 btn-danger bt-sm"> P </div>');
+Permiso.push('<div title="Permiso OtrosPermisos Vencido" class="btn m-1 btn-warning bt-sm"> Op </div>');
               }
               if(row.VencimientoPrivado<fecha && row.VencimientoPrivado!='0000-00-00'){
-Permiso.push('<div title="Permiso Privado Vencido" class="btn m-1 btn-danger bt-sm"> P </div>');
+Permiso.push('<div title="Permiso Privado Vencido" class="btn m-1 btn-warning bt-sm"> P </div>');
               }
               var stringPermiso ="";
               var stringInterferencia="";
