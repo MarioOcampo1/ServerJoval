@@ -1557,10 +1557,10 @@ router.post('/actObrasCarpEcogas/:id',upload.none(), function (req, res)  {
     // Variables generales 
     var Permisos = req.body.Permisos;
     var Interferencias = req.body.Interferencias;
-
-    var DocumentacionInspeccion, ComunicacionObras;
+var DocumentacionInspeccion
+var ComunicacionObras;
     // DocumentacionInspeccion
-    if (ActaDeInicio == "Presentado" && Permisos == "Presentados" && Interferencias == "Presentado" && LibroOrdenesServicio == "Presentado" && LibroNotasPedido == "Presentado" && PCEntregadoInspeccion == "Presentado" && AvisosDeObra == "Presentado" && CronogramaFirmadoComitente == "Presentado") {
+    if ( (ActaDeInicio == "Presentado" || ActaDeInicio == "Ok" ) &&  (Permisos == "Presentado" || Permisos == "Ok" ) &&  (Interferencias == "Presentado" || Interferencias == "Ok" ) &&  (LibroOrdenesServicio == "Presentado" || LibroOrdenesServicio == "Ok" ) &&  (LibroNotasPedido == "Presentado" || LibroNotasPedido == "Ok" ) &&  (PCEntregadoInspeccion == "Presentado" || PCEntregadoInspeccion == "Ok" ) &&  (AvisosDeObra == "Presentado" || AvisosDeObra == "Ok" ) &&  (CronogramaFirmadoComitente == "Presentado" || CronogramaFirmadoComitente == "Ok" ) ) {
         DocumentacionInspeccion = "ok";
     }
     if (ActaDeInicio == "Sin presentar" || Permisos == "Sin presentar" || Interferencias == "Sin presentar" || LibroOrdenesServicio == "Sin presentar" || LibroNotasPedido == "Sin presentar" || PCEntregadoInspeccion == "Sin presentar" || AvisosDeObra == "Sin presentar" || CronogramaFirmadoComitente == "Sin presentar") {
