@@ -7,11 +7,12 @@
 
     
     <div class="card-body">
-        <div class="card-title" onclick="document.getElementById('Telefonicabody').style.display= 'block'">Telefónica
-        </div>
-        <div class="card-text" id="Telefonicabody" style="display: none;">
+        
             <form-check>
                 <%if (interferenciasypermisos.intTelefonica!="En gestion" && interferenciasypermisos.intTelefonica!="Pedida" && interferenciasypermisos.intTelefonica!="ok" ) {%>
+                    <div class="card-title" onclick="document.getElementById('Telefonicabody').style.display= 'block'">Telefónica.
+                    </div>
+                    <div class="card-text" id="Telefonicabody" style="display: none;">
                     <input type="radio" name="intTelefonica" id="intTelefonica" value="En gestion">
                     En
                     gestión
@@ -23,17 +24,20 @@
                     Ok
                     <div id="intTelefonicaPedida" style="display: none;">
                         Fecha en la que se pidió:
-                        <input type="date" name="intTelefonicaPedida" value="<%= interferenciasypermisos.intTelefonicaPedida%>"
+                        <input type="date" name="intTelefonicaPedida" value="<%= moment(interferenciasypermisos.intTelefonicaPedida).format('YYYY-MM-DD') %>"
                             id="intTelefonicaPedida" placeholder="<%= interferenciasypermisos.intTelefonicaPedida %>">
                     </div>
                     <div id="intTelefonicaObtenida" style="display: none;">
                         Fecha en la que se vence:
 
                         <input type="date" name="intTelefonicaObtenida" id="intTelefonicaObtenida"
-                            value="<%= interferenciasypermisos.intTelefonicaObtenida%>">
+                            value="<%= moment(interferenciasypermisos.intTelefonicaObtenida).format('YYYY-MM-DD') %>">
                     </div>
                     <%}%>
                         <%if (interferenciasypermisos.intTelefonica=="En gestion" ) {%>
+                            <div class="card-title" onclick="document.getElementById('Telefonicabody').style.display= 'block'">Telefónica
+                            </div>
+                            <div class="card-text" id="Telefonicabody" style="display: none;">
                             <input checked type="radio" name="intTelefonica" id="intTelefonica" value="En gestion">
                             En
                             gestión
@@ -45,17 +49,20 @@
                             Ok
                             <div id="intTelefonicaPedida" style="display: none;">
                                 Fecha en la que se pidió:
-                                <input type="date" name="intTelefonicaPedida" value="<%= interferenciasypermisos.intTelefonicaPedida%>"
+                                <input type="date" name="intTelefonicaPedida" value="<%= moment(interferenciasypermisos.intTelefonicaPedida).format('YYYY-MM-DD') %>"
                                     id="intTelefonicaPedida" placeholder="<%= interferenciasypermisos.intTelefonicaPedida %>">
                             </div>
                             <div id="intTelefonicaObtenida" style="display: none;">
                                 Fecha en la que se vence:
         
                                 <input type="date" name="intTelefonicaObtenida" id="intTelefonicaObtenida"
-                                    value="<%= interferenciasypermisos.intTelefonicaObtenida%>">
+                                    value="<%= moment(interferenciasypermisos.intTelefonicaObtenida).format('YYYY-MM-DD') %>">
                             </div>
                             <%}%>
                                 <%if (interferenciasypermisos.intTelefonica=="Pedida" ) {%>
+                                    <div class="card-title" onclick="document.getElementById('Telefonicabody').style.display= 'block'">Telefónica <br> <p class="text-primary">Pedida el: <%= moment(interferenciasypermisos.intTelefonicaPedida).locale('es').format("DD-MM-YYYY")%></p>
+                                    </div>
+                                    <div class="card-text" id="Telefonicabody" style="display: none;">
                                     <input  type="radio" name="intTelefonica" id="intTelefonica" value="En gestion">
                                     En
                                     gestión
@@ -67,17 +74,20 @@
                                     Ok
                                     <div id="intTelefonicaPedida" style="display: block;">
                                         Fecha en la que se pidió:
-                                        <input type="date" name="intTelefonicaPedida" value="<%= interferenciasypermisos.intTelefonicaPedida%>"
+                                        <input type="date" name="intTelefonicaPedida" value="<%= moment(interferenciasypermisos.intTelefonicaPedida).format('YYYY-MM-DD') %>"
                                             id="intTelefonicaPedida" placeholder="<%= interferenciasypermisos.intTelefonicaPedida %>">
                                     </div>
                                     <div id="intTelefonicaObtenida" style="display: none;">
                                         Fecha en la que se vence:
                 
                                         <input type="date" name="intTelefonicaObtenida" id="intTelefonicaObtenida"
-                                            value="<%= interferenciasypermisos.intTelefonicaObtenida%>">
+                                            value="<%= moment(interferenciasypermisos.intTelefonicaObtenida).format('YYYY-MM-DD') %>">
                                     </div>
                                     <%}%>
                                         <%if (interferenciasypermisos.intTelefonica=="ok" ) { %>
+                                            <div class="card-title" onclick="document.getElementById('Telefonicabody').style.display= 'block'">Telefónica <br> <p class="text-danger">Vencimiento: <%= moment(interferenciasypermisos.intTelefonicaObtenida).locale('es').format("DD-MM-YYYY")%></p>
+                                            </div>
+                                            <div class="card-text" id="Telefonicabody" style="display: none;">
                                             <input  type="radio" name="intTelefonica" id="intTelefonica" value="En gestion">
                                             En
                                             gestión
@@ -89,14 +99,12 @@
                                             Ok
                                             <div id="intTelefonicaPedida" style="display: none;">
                                                 Fecha en la que se pidió:
-                                                <input type="date" name="intTelefonicaPedida" value="<%= interferenciasypermisos.intTelefonicaPedida%>"
-                                                    id="intTelefonicaPedida" placeholder="<%= interferenciasypermisos.intTelefonicaPedida %>">
+                                                <input type="date" name="intTelefonicaPedida" value="<%= moment(interferenciasypermisos.intTelefonicaPedida).format('YYYY-MM-DD') %>"
+                                                    id="intTelefonicaPedida" >
                                             </div>
                                             <div id="intTelefonicaObtenida" style="display: block;">
-                                                Fecha en la que se vence:
-                        
                                                 <input type="date" name="intTelefonicaObtenida" id="intTelefonicaObtenida"
-                                                    value="<%= interferenciasypermisos.intTelefonicaObtenida%>">
+                                                    value="<%=moment(interferenciasypermisos.intTelefonicaObtenida).format('YYYY-MM-DD')%>">
                                             </div>
                                             <%}%>
             </form-check>
@@ -104,14 +112,14 @@
     </div>
 </div>
 <div class="col text-center ">
-
-
     <div class="card-body">
-        <div class="card-title"onclick="document.getElementById('Aguabody').style.display= 'block'">Agua</div>
-        <div class="card-text"id="Aguabody" style="display: none;" >
-            <form-check>
-                <input hidden type="radio" name="intAgua" id="intAgua" value="<%=interferenciasypermisos.intAgua%>" checked>
+        <div class="card-title"onclick="document.getElementById('Aguabody').style.display= 'block'">Agua
+       
                 <%if (interferenciasypermisos.intAgua!="En gestion" && interferenciasypermisos.intAgua!="Pedida" && interferenciasypermisos.intAgua!="ok" ) {%>
+                </div>
+                <div class="card-text"id="Aguabody" style="display: none;" >
+                    <form-check>
+                        <input hidden type="radio" name="intAgua" id="intAgua" value="<%=interferenciasypermisos.intAgua%>" checked>
                     <input type="radio" name="intAgua" id="intAgua" value="En gestion">
                     En gestión
                     <input type="radio" name="intAgua" id="intAgua" value="Pedida"
@@ -121,15 +129,19 @@
                         onclick="estadoInterferencia('intAguaPedida', 'intAguaObtenida',false,true);">Ok
                     <div id="intAguaPedida" style="display: none;">
                         Fecha en la que se pidió
-                        <input type="date" name="intAguaPedida" id="intAguaPedida" value="<%= interferenciasypermisos.intAguaPedida%>">
+                        <input type="date" name="intAguaPedida" id="intAguaPedida" value="<%= moment(interferenciasypermisos.intAguaPedida).format('YYYY-MM-DD') %>">
                     </div>
                     <div id="intAguaObtenida" style="display: none;">
                         Fecha en la que se vence
                         <input type="date" name="intAguaObtenida" id="intAguaObtenida"
-                            value="<%= interferenciasypermisos.intAguaObtenida%>">
+                            value="<%= moment(interferenciasypermisos.intAguaObtenida).format('YYYY-MM-DD') %>">
                     </div>
                     <%}%>
                         <%if(interferenciasypermisos.intAgua=="En gestion"){%>
+                        </div>
+                        <div class="card-text"id="Aguabody" style="display: none;" >
+                            <form-check>
+                                <input hidden type="radio" name="intAgua" id="intAgua" value="<%=interferenciasypermisos.intAgua%>" checked>
                             <input checked type="radio" name="intAgua" id="intAgua" value="En gestion">
                             En gestión
                             <input type="radio" name="intAgua" id="intAgua" value="Pedida"
@@ -140,15 +152,20 @@
                             <div id="intAguaPedida" style="display: none;">
                                 Fecha en la que se pidió
                                 <input type="date" name="intAguaPedida" id="intAguaPedida"
-                                    value="<%= interferenciasypermisos.intAguaPedida%>">
+                                    value="<%= moment(interferenciasypermisos.intAguaPedida).format('YYYY-MM-DD') %>">
                             </div>
                             <div id="intAguaObtenida" style="display: none;">
                                 Fecha en la que se vence
                                 <input type="date" name="intAguaObtenida" id="intAguaObtenida"
-                                    value="<%= interferenciasypermisos.intAguaObtenida%>">
+                                    value="<%= moment(interferenciasypermisos.intAguaObtenida).format('YYYY-MM-DD') %>">
                             </div>
                             <%}%>
                                 <%if (interferenciasypermisos.intAgua=="Pedida" ){%>
+                                    <br> <p class="text-primary"> Pedida el: <%=  moment(interferenciasypermisos.intAguaPedida).locale('es').format("DD-MM-YYYY")%> </p>
+                                </div>
+                                <div class="card-text"id="Aguabody" style="display: none;" >
+                                    <form-check>
+                                        <input hidden type="radio" name="intAgua" id="intAgua" value="<%=interferenciasypermisos.intAgua%>" checked>
                                     <input type="radio" name="intAgua" id="intAgua" value="En gestion"> En gestión
                                     <input checked type="radio" name="intAgua" id="intAgua" value="Pedida"
                                         onclick="estadoInterferencia('intAguaPedida', 'intAguaObtenida',true,false);">
@@ -164,10 +181,15 @@
                                     <div id="intAguaObtenida" style="display: none;">
                                         Fecha en la que se vence
                                         <input type="date" name="intAguaObtenida" id="intAguaObtenida"
-                                            value="<%= interferenciasypermisos.intAguaObtenida%>">
+                                            value="<%= moment(interferenciasypermisos.intAguaObtenida).format('YYYY-MM-DD')%>">
                                     </div>
                                     <%}%>
                                         <%if (interferenciasypermisos.intAgua=="ok" ){%>
+                                            <br> <p class="text-danger"> Vencimiento: <%=  moment(interferenciasypermisos.intAguaObtenida).locale('es').format("DD-MM-YYYY")%> </p>
+                                        </div>
+                                        <div class="card-text"id="Aguabody" style="display: none;" >
+                                            <form-check>
+                                                <input hidden type="radio" name="intAgua" id="intAgua" value="<%=interferenciasypermisos.intAgua%>" checked>
                                             <input type="radio" name="intAgua" id="intAgua" value="En gestion"> En
                                             gestión
                                             <input type="radio" name="intAgua" id="intAgua" value="Pedida"
@@ -184,7 +206,7 @@
                                             <div id="intAguaObtenida" style="display: block;">
                                                 Fecha en la que se vence
                                                 <input type="date" name="intAguaObtenida" id="intAguaObtenida"
-                                                    value="<%= interferenciasypermisos.intAguaObtenida%>">
+                                                    value="<%= moment(interferenciasypermisos.intAguaObtenida).format('YYYY-MM-DD')%>">
                                             </div>
                                             <%}%>
 
@@ -204,12 +226,13 @@
 
 
     <div class="card-body">
-        <div class="card-title" onclick="document.getElementById('Cloacasbody').style.display= 'block'">Cloacas
-        </div>
-        <div class="card-text" id="Cloacasbody" style="display: none;" id="Cloacasbody" style="display: none;">
-            <form-check>
-                <input hidden type="radio" name="intCloacas" id="intCloacas" value="<%=interferenciasypermisos.intCloacas%>" checked>
+      
                 <%if (interferenciasypermisos.intCloaca!="En gestion" && interferenciasypermisos.intCloaca!="Pedida" && interferenciasypermisos.intCloaca!="ok" ) {%>
+                    <div class="card-title" onclick="document.getElementById('Cloacasbody').style.display= 'block'">Cloacas
+                    </div>
+                    <div class="card-text" id="Cloacasbody" style="display: none;" id="Cloacasbody" style="display: none;">
+                        <form-check>
+                            <input hidden type="radio" name="intCloacas" id="intCloacas" value="<%=interferenciasypermisos.intCloacas%>" checked>
                     <input type="radio" name="intCloacas" id="intCloacas" value="En gestion"> En
                     gestión
                     <input type="radio" name="intCloacas" id="intCloacas" value="Pedida"
@@ -221,15 +244,20 @@
                     <div id="intCloacasPedida" style="display: none;">
                         Fecha en la que se pidió
                         <input type="date" name="intCloacasPedida" id="intCloacasPedida"
-                            value="<%= interferenciasypermisos.intCloacasPedida%>">
+                            value="<%= moment(interferenciasypermisos.intCloacasPedida).format('YYYY-MM-DD')%>">
                     </div>
                     <div id="intCloacasObtenida" style="display: none;">
                         Fecha en la que se vence
                         <input type="date" name="intCloacasObtenida" id="intCloacasObtenida"
-                            value="<%= interferenciasypermisos.intCloacasObtenida%>">
+                            value="<%= moment(interferenciasypermisos.intCloacasObtenida).format('YYYY-MM-DD')%>">
                     </div>
                     <%}%>
                         <%if(interferenciasypermisos.intCloaca=="En gestion"){%>
+                            <div class="card-title" onclick="document.getElementById('Cloacasbody').style.display= 'block'">Cloacas
+                            </div>
+                            <div class="card-text" id="Cloacasbody" style="display: none;" id="Cloacasbody" style="display: none;">
+                                <form-check>
+                                    <input hidden type="radio" name="intCloacas" id="intCloacas" value="<%=interferenciasypermisos.intCloacas%>" checked>
                             <input checked type="radio" name="intCloacas" id="intCloacas" value="En gestion"> En
                             gestión
                             <input type="radio" name="intCloacas" id="intCloacas" value="Pedida"
@@ -241,15 +269,25 @@
                             <div id="intCloacasPedida" style="display: none;">
                                 Fecha en la que se pidió
                                 <input type="date" name="intCloacasPedida" id="intCloacasPedida"
-                                    value="<%= interferenciasypermisos.intCloacasPedida%>">
+                                    value="<%= moment(interferenciasypermisos.intCloacasPedida).format('YYYY-MM-DD')%>">
                             </div>
                             <div id="intCloacasObtenida" style="display: none;">
                                 Fecha en la que se vence
                                 <input type="date" name="intCloacasObtenida" id="intCloacasObtenida"
-                                    value="<%= interferenciasypermisos.intCloacasObtenida%>">
+                                    value="<%= moment(interferenciasypermisos.intCloacasObtenida).format('YYYY-MM-DD')%>">
                             </div>
                             <%}%>
                                 <%if( interferenciasypermisos.intCloaca=="Pedida" ){%>
+                                    <div class="card-title" onclick="document.getElementById('Cloacasbody').style.display= 'block'">Cloacas
+                                        <p class="text-primary ">
+                                        Pedida el:
+                                        <%= moment(interferenciasypermisos.intCloacasPedida).format('DD-MM-YYYY')%>
+                                        </p>
+                                    </div>
+                                    <div class="card-text" id="Cloacasbody" style="display: none;" id="Cloacasbody" style="display: none;">
+                                        <form-check>
+                                            <input hidden type="radio" name="intCloacas" id="intCloacas" value="<%=interferenciasypermisos.intCloacas%>" checked>
+                             
                                     <input type="radio" name="intCloacas" id="intCloacas" value="En gestion"> En
                                     gestión
                                     <input checked type="radio" name="intCloacas" id="intCloacas" value="Pedida"
@@ -259,17 +297,23 @@
                                         onclick="estadoInterferencia('intCloacasPedida', 'intCloacasObtenida',false,true);">
                                     Ok
                                     <div id="intCloacasPedida" style="display: block;">
-                                        Fecha en la que se pidió
+                                        Fecha en la que se pidió:
                                         <input type="date" name="intCloacasPedida" id="intCloacasPedida"
-                                            value="<%= interferenciasypermisos.intCloacasPedida%>">
+                                            value="<%= moment(interferenciasypermisos.intCloacasPedida).format('YYYY-MM-DD')%>">
                                     </div>
                                     <div id="intCloacasObtenida" style="display: none;">
                                         Fecha en la que se vence
                                         <input type="date" name="intCloacasObtenida" id="intCloacasObtenida"
-                                            value="<%= interferenciasypermisos.intCloacasObtenida%>">
+                                            value="<%= moment(interferenciasypermisos.intCloacasObtenida).format('YYYY-MM-DD')%>">
                                     </div>
                                     <%}%>
                                         <%if( interferenciasypermisos.intCloaca=="ok" ){%>
+                                            <div class="card-title" onclick="document.getElementById('Cloacasbody').style.display= 'block'">Cloacas
+                                            </div>
+                                            <div class="card-text" id="Cloacasbody" style="display: none;" id="Cloacasbody" style="display: none;">
+                                                <form-check>
+                                                    <input hidden type="radio" name="intCloacas" id="intCloacas" value="<%=interferenciasypermisos.intCloacas%>" checked>
+
                                             <input type="radio" name="intCloacas" id="intCloacas" value="En gestion"> En
                                             gestión
                                             <input type="radio" name="intCloacas" id="intCloacas" value="Pedida"
@@ -281,12 +325,12 @@
                                             <div id="intCloacasPedida" style="display: none;">
                                                 Fecha en la que se pidió
                                                 <input type="date" name="intCloacasPedida" id="intCloacasPedida"
-                                                    value="<%= interferenciasypermisos.intCloacasPedida%>">
+                                                    value="<%= moment(interferenciasypermisos.intCloacasPedida).format('YYYY-MM-DD')%>">
                                             </div>
                                             <div id="intCloacasObtenida" style="display: block;">
                                                 Fecha en la que se vence
                                                 <input type="date" name="intCloacasObtenida" id="intCloacasObtenida"
-                                                    value="<%= interferenciasypermisos.intCloacasObtenida%>">
+                                                    value="<%= moment(interferenciasypermisos.intCloacasObtenida).format('YYYY-MM-DD')%>">
                                             </div>
                                             <%}%>
 
@@ -300,14 +344,15 @@
 
     
     <div class="card-body">
-        <div class="card-title"onclick="document.getElementById('Electricidadbody').style.display= 'block'">Electricidad
+       
+                <%if (interferenciasypermisos.intElectricidad!="En gestion" && interferenciasypermisos.intElectricidad!="Pedida" && interferenciasypermisos.intElectricidad!="ok"
+                    ) {%>
+                        <div class="card-title"onclick="document.getElementById('Electricidadbody').style.display= 'block'">Electricidad
         </div>
         <div class="card-text" id="Electricidadbody" style="display: none;">
             <form-check>
                 <input hidden type="radio" name="intElectricidad" id="intElectricidad" value="<%=interferenciasypermisos.intElectricidad%>"
                     checked>
-                <%if (interferenciasypermisos.intElectricidad!="En gestion" && interferenciasypermisos.intElectricidad!="Pedida" && interferenciasypermisos.intElectricidad!="ok"
-                    ) {%>
 
                     <input type="radio" name="intElectricidad" id="intElectricidad" value="En gestion"> En
                     gestión
@@ -320,15 +365,22 @@
                     <div id="intElectricidadPedida" style="display: none;">
                         Fecha en la que se pidió
                         <input type="date" name="intElectricidadPedida" id="intElectricidadPedida"
-                            value="<%= interferenciasypermisos.intElectricidadPedida%>">
+                            value="<%= moment(interferenciasypermisos.intElectricidadPedida).format('YYYY-MM-DD')%>">
                     </div>
                     <div id="intElectricidadObtenida" style="display: none;">
                         Fecha en la que se vence
                         <input type="date" name="intElectricidadObtenida" id="intElectricidadObtenida"
-                            value="<%= interferenciasypermisos.intElectricidadObtenida%>">
+                            value="<%= moment(interferenciasypermisos.intElectricidadObtenida).format('YYYY-MM-DD')%>">
                     </div>
                     <%}%>
                         <%if(interferenciasypermisos.intElectricidad=="En gestion"){%>
+                            <div class="card-title"onclick="document.getElementById('Electricidadbody').style.display= 'block'">Electricidad
+        </div>
+        <div class="card-text" id="Electricidadbody" style="display: none;">
+            <form-check>
+                <input hidden type="radio" name="intElectricidad" id="intElectricidad" value="<%=interferenciasypermisos.intElectricidad%>"
+                    checked>
+
                             <input checked type="radio" name="intElectricidad" id="intElectricidad" value="En gestion">
                             En
                             gestión
@@ -341,16 +393,24 @@
                             <div id="intElectricidadPedida" style="display: none;">
                                 Fecha en la que se pidió
                                 <input type="date" name="intElectricidadPedida" id="intElectricidadPedida"
-                                    value="<%= interferenciasypermisos.intElectricidadPedida%>">
+                                    value="<%= moment(interferenciasypermisos.intElectricidadPedida).format('YYYY-MM-DD')%>">
                             </div>
                             <div id="intElectricidadObtenida" style="display: none;">
                                 Fecha en la que se vence
                                 <input type="date" name="intElectricidadObtenida" id="intElectricidadObtenida"
-                                    value="<%= interferenciasypermisos.intElectricidadObtenida%>">
+                                    value="<%= moment(interferenciasypermisos.intElectricidadObtenida).format('YYYY-MM-DD')%>">
                             </div>
 
                             <%}%>
                                 <%if(interferenciasypermisos.intElectricidad=="Pedida"){%>
+                                    <div class="card-title"onclick="document.getElementById('Electricidadbody').style.display= 'block'">Electricidad
+                                        <p class="text-primary">Pedida el: <%=moment(interferenciasypermisos.intElectricidadPedida).format('DD-MM-YYYY')%></p>
+        </div>
+        <div class="card-text" id="Electricidadbody" style="display: none;">
+            <form-check>
+                <input hidden type="radio" name="intElectricidad" id="intElectricidad" value="<%=interferenciasypermisos.intElectricidad%>"
+                    checked>
+
                                     <input type="radio" name="intElectricidad" id="intElectricidad" value="En gestion">
                                     En
                                     gestión
@@ -365,16 +425,24 @@
                                     <div id="intElectricidadPedida" style="display: block;">
                                         Fecha en la que se pidió
                                         <input type="date" name="intElectricidadPedida" id="intElectricidadPedida"
-                                            value="<%= interferenciasypermisos.intElectricidadPedida%>">
+                                            value="<%= moment(interferenciasypermisos.intElectricidadPedida).format('YYYY-MM-DD')%>">
                                     </div>
                                     <div id="intElectricidadObtenida" style="display: none;">
                                         Fecha en la que se vence
                                         <input type="date" name="intElectricidadObtenida" id="intElectricidadObtenida"
-                                            value="<%= interferenciasypermisos.intElectricidadObtenida%>">
+                                            value="<%= moment(interferenciasypermisos.intElectricidadObtenida).format('YYYY-MM-DD')%>">
                                     </div>
 
                                     <%}%>
                                         <%if(interferenciasypermisos.intElectricidad=="ok"){%>
+                                            <div class="card-title"onclick="document.getElementById('Electricidadbody').style.display= 'block'">Electricidad
+                                                <br> <p class="text-danger">Vencimiento: <%= moment(interferenciasypermisos.intElectricidadObtenida).format('DD-MM-YYYY')%></p>
+        </div>
+        <div class="card-text" id="Electricidadbody" style="display: none;">
+            <form-check>
+                <input hidden type="radio" name="intElectricidad" id="intElectricidad" value="<%=interferenciasypermisos.intElectricidad%>"
+                    checked>
+
                                             <input type="radio" name="intElectricidad" id="intElectricidad"
                                                 value="En gestion"> En
                                             gestión
@@ -389,13 +457,13 @@
                                             <div id="intElectricidadPedida" style="display: none;">
                                                 Fecha en la que se pidió
                                                 <input type="date" name="intElectricidadPedida"
-                                                    id="intElectricidadPedida" value="<%= interferenciasypermisos.intElectricidadPedida%>">
+                                                    id="intElectricidadPedida" value="<%= moment(interferenciasypermisos.intElectricidadPedida).format('YYYY-MM-DD')%>">
                                             </div>
                                             <div id="intElectricidadObtenida" style="display: block;">
                                                 Fecha en la que se vence
                                                 <input type="date" name="intElectricidadObtenida"
                                                     id="intElectricidadObtenida"
-                                                    value="<%= interferenciasypermisos.intElectricidadObtenida%>">
+                                                    value="<%= moment(interferenciasypermisos.intElectricidadObtenida).format('YYYY-MM-DD')%>">
                                             </div>
 
                                             <%}%>
@@ -409,11 +477,13 @@
    
     <div class="card-body">
 
-        <div class="card-title" onclick="document.getElementById('Clarobody').style.display= 'block'">Claro
-        </div>
-        <div class="card-text" id="Clarobody" style="display: none;">
+      
             <form-check>
                 <%if (interferenciasypermisos.intClaro!="En gestion" && interferenciasypermisos.intClaro!="Pedida" && interferenciasypermisos.intClaro!="ok" ) {%>
+                    <div class="card-title" onclick="document.getElementById('Clarobody').style.display= 'block'">Claro
+        </div>
+        <div class="card-text" id="Clarobody" style="display: none;">
+      
                     <input hidden type="radio" name="intClaro" id="intClaro" value="<%=interferenciasypermisos.intClaro%>" checked>
 
                     <input type="radio" name="intClaro" id="intClaro" value="En gestion"> En
@@ -426,15 +496,18 @@
                     Ok
                     <div id="intClaroPedida" style="display: none;">
                         Fecha en la que se pidió
-                        <input type="date" name="intClaroPedida" id="intClaroPedida" value="<%= interferenciasypermisos.intClaroPedida%>">
+                        <input type="date" name="intClaroPedida" id="intClaroPedida" value="<%= moment(interferenciasypermisos.intClaroPedida).format('YYYY-MM-DD')%>">
                     </div>
                     <div id="intClaroObtenida" style="display: none;">
                         Fecha en la que se vence
                         <input type="date" name="intClaroObtenida" id="intClaroObtenida"
-                            value="<%= interferenciasypermisos.intClaroObtenida%>">
+                            value="<%= moment(interferenciasypermisos.intClaroObtenida).format('YYYY-MM-DD')%>">
                     </div>
                     <%}%>
                         <%if (interferenciasypermisos.intClaro=="En gestion" ){%>
+                            <div class="card-title" onclick="document.getElementById('Clarobody').style.display= 'block'">Claro
+        </div>
+        <div class="card-text" id="Clarobody" style="display: none;">
 
                             <input checked type="radio" name="intClaro" id="intClaro" value="En gestion"> En
                             gestión
@@ -447,15 +520,20 @@
                             <div id="intClaroPedida" style="display: none;">
                                 Fecha en la que se pidió
                                 <input type="date" name="intClaroPedida" id="intClaroPedida"
-                                    value="<%= interferenciasypermisos.intClaroPedida%>">
+                                    value="<%= moment(interferenciasypermisos.intClaroPedida).format('YYYY-MM-DD')%>">
                             </div>
                             <div id="intClaroObtenida" style="display: none;">
                                 Fecha en la que se vence
                                 <input type="date" name="intClaroObtenida" id="intClaroObtenida"
-                                    value="<%= interferenciasypermisos.intClaroObtenida%>">
+                                    value="<%= moment(interferenciasypermisos.intClaroObtenida).format('YYYY-MM-DD')%>">
                             </div>
                             <%}%>
                                 <%if (interferenciasypermisos.intClaro=="Pedida" ){%>
+                                    <div class="card-title" onclick="document.getElementById('Clarobody').style.display= 'block'">Claro
+                                        <p class="text-primary"> Pedida el: <%= moment(interferenciasypermisos.intClaroPedida).format('DD-MM-YYYY')%>
+                                            </p>
+        </div>
+        <div class="card-text" id="Clarobody" style="display: none;">
 
                                     <input type="radio" name="intClaro" id="intClaro" value="En gestion"> En
                                     gestión
@@ -468,15 +546,19 @@
                                     <div id="intClaroPedida" style="display: block;">
                                         Fecha en la que se pidió
                                         <input type="date" name="intClaroPedida" id="intClaroPedida"
-                                            value="<%= interferenciasypermisos.intClaroPedida%>">
+                                            value="<%= moment(interferenciasypermisos.intClaroPedida).format('YYYY-MM-DD')%>">
                                     </div>
                                     <div id="intClaroObtenida" style="display: none;">
                                         Fecha en la que se vence
                                         <input type="date" name="intClaroObtenida" id="intClaroObtenida"
-                                            value="<%= interferenciasypermisos.intClaroObtenida%>">
+                                            value="<%= moment(interferenciasypermisos.intClaroObtenida).format('YYYY-MM-DD')%>">
                                     </div>
                                     <%}%>
                                         <%if (interferenciasypermisos.intClaro=="ok" ){%>
+                                            <div class="card-title" onclick="document.getElementById('Clarobody').style.display= 'block'">Claro
+                                                <p class="text-danger">Vencimiento: <%= moment(interferenciasypermisos.intClaroObtenida).format('DD-MM-YYYY')%> </p>
+        </div>
+        <div class="card-text" id="Clarobody" style="display: none;">
 
                                             <input type="radio" name="intClaro" id="intClaro" value="En gestion"> En
                                             gestión
@@ -489,12 +571,12 @@
                                             <div id="intClaroPedida" style="display: none;">
                                                 Fecha en la que se pidió
                                                 <input type="date" name="intClaroPedida" id="intClaroPedida"
-                                                    value="<%= interferenciasypermisos.intClaroPedida%>">
+                                                    value="<%= moment(interferenciasypermisos.intClaroPedida).format('YYYY-MM-DD')%>">
                                             </div>
                                             <div id="intClaroObtenida" style="display: block;">
                                                 Fecha en la que se vence
                                                 <input type="date" name="intClaroObtenida" id="intClaroObtenida"
-                                                    value="<%= interferenciasypermisos.intClaroObtenida%>">
+                                                    value="<%= moment(interferenciasypermisos.intClaroObtenida).format('YYYY-MM-DD')%>">
                                             </div>
                                             <%}%>
             </form-check>
@@ -505,11 +587,12 @@
     
     <div class="card-body">
 
-        <div class="card-title"  onclick="document.getElementById('Arnetbody').style.display= 'block'">Arnet
+      
+                <%if (interferenciasypermisos.intArnet!="En gestion" && interferenciasypermisos.intArnet!="Pedida" && interferenciasypermisos.intArnet!="ok" ) {%>
+                    <div class="card-title"  onclick="document.getElementById('Arnetbody').style.display= 'block'">Arnet
         </div>
         <div class="card-text" id="Arnetbody" style="display: none;">
             <form-check>
-                <%if (interferenciasypermisos.intArnet!="En gestion" && interferenciasypermisos.intArnet!="Pedida" && interferenciasypermisos.intArnet!="ok" ) {%>
                     <input hidden type="radio" name="intArnet" id="intArnet" value="<%=interferenciasypermisos.intArnet%>" checked>
                     <input type="radio" name="intArnet" id="intArnet" value="En gestion"> En
                     gestión
@@ -521,15 +604,19 @@
                     Ok
                     <div id="intArnetPedida" style="display: none;">
                         Fecha en la que se pidió
-                        <input type="date" name="intArnetPedida" id="intArnetPedida" value="<%= interferenciasypermisos.intArnetPedida%>">
+                        <input type="date" name="intArnetPedida" id="intArnetPedida" value="<%= moment(interferenciasypermisos.intArnetPedida).format('YYYY-MM-DD')%>">
                     </div>
                     <div id="intArnetObtenida" style="display: none;">
                         Fecha en la que se vence
                         <input type="date" name="intArnetObtenida" id="intArnetObtenida"
-                            value="<%= interferenciasypermisos.intArnetObtenida%>">
+                            value="<%= moment(interferenciasypermisos.intArnetObtenida).format('YYYY-MM-DD')%>">
                     </div>
                     <%}%>
                         <%if (interferenciasypermisos.intArnet=="EnGestion" ){%>
+                            <div class="card-title"  onclick="document.getElementById('Arnetbody').style.display= 'block'">Arnet
+        </div>
+        <div class="card-text" id="Arnetbody" style="display: none;">
+            <form-check>
                             <input checked type="radio" name="intArnet" id="intArnet" value="En gestion"> En
                             gestión
                             <input type="radio" name="intArnet" id="intArnet" value="Pedida"
@@ -541,15 +628,21 @@
                             <div id="intArnetPedida" style="display: none;">
                                 Fecha en la que se pidió
                                 <input type="date" name="intArnetPedida" id="intArnetPedida"
-                                    value="<%= interferenciasypermisos.intArnetPedida%>">
+                                    value="<%= moment(interferenciasypermisos.intArnetPedida).format('YYYY-MM-DD')%>">
                             </div>
                             <div id="intArnetObtenida" style="display: none;">
                                 Fecha en la que se vence
                                 <input type="date" name="intArnetObtenida" id="intArnetObtenida"
-                                    value="<%= interferenciasypermisos.intArnetObtenida%>">
+                                    value="<%= moment(interferenciasypermisos.intArnetObtenida).format('YYYY-MM-DD')%>">
                             </div>
                             <%}%>
                                 <%if (interferenciasypermisos.intArnet=="Pedida" ){%>
+                                    <div class="card-title"  onclick="document.getElementById('Arnetbody').style.display= 'block'">Arnet
+                                        <p class="text-primary"> Pedida el: <%= moment(interferenciasypermisos.intArnetPedida).format('DD-MM-YYYY')%>
+                                            </p>
+        </div>
+        <div class="card-text" id="Arnetbody" style="display: none;">
+            <form-check>
                                     <input type="radio" name="intArnet" id="intArnet" value="En gestion"> En
                                     gestión
                                     <input checked type="radio" name="intArnet" id="intArnet" value="Pedida"
@@ -561,16 +654,21 @@
                                     <div id="intArnetPedida" style="display: block;">
                                         Fecha en la que se pidió
                                         <input type="date" name="intArnetPedida" id="intArnetPedida"
-                                            value="<%= interferenciasypermisos.intArnetPedida%>">
+                                            value="<%= moment(interferenciasypermisos.intArnetPedida).format('YYYY-MM-DD')%>">
                                     </div>
                                     <div id="intArnetObtenida" style="display: none;">
                                         Fecha en la que se vence
                                         <input type="date" name="intArnetObtenida" id="intArnetObtenida"
-                                            value="<%= interferenciasypermisos.intArnetObtenida%>">
+                                            value="<%= moment(interferenciasypermisos.intArnetObtenida).format('YYYY-MM-DD')%>">
                                     </div>
                                     <%}%>
 
                                         <%if (interferenciasypermisos.intArnet=="ok" ){%>
+                                            <div class="card-title"  onclick="document.getElementById('Arnetbody').style.display= 'block'">Arnet
+                                                <p class="text-danger">Vencimiento: <%= moment(interferenciasypermisos.intArnetObtenida).format('DD-MM-YYYY')%> </p>
+        </div>
+        <div class="card-text" id="Arnetbody" style="display: none;">
+            <form-check>
                                             <input type="radio" name="intArnet" id="intArnet" value="En gestion"> En
                                             gestión
                                             <input type="radio" name="intArnet" id="intArnet" value="Pedida"
@@ -582,12 +680,12 @@
                                             <div id="intArnetPedida" style="display: none;">
                                                 Fecha en la que se pidió
                                                 <input type="date" name="intArnetPedida" id="intArnetPedida"
-                                                    value="<%= interferenciasypermisos.intArnetPedida%>">
+                                                    value="<%= moment(interferenciasypermisos.intArnetPedida).format('YYYY-MM-DD')%>">
                                             </div>
                                             <div id="intArnetObtenida" style="display: block;">
                                                 Fecha en la que se vence
                                                 <input type="date" name="intArnetObtenida" id="intArnetObtenida"
-                                                    value="<%= interferenciasypermisos.intArnetObtenida%>">
+                                                    value="<%= moment(interferenciasypermisos.intArnetObtenida).format('YYYY-MM-DD')%>">
                                             </div>
                                             <%}%>
             </form-check>
@@ -598,11 +696,12 @@
     
     <div class="card-body">
 
-        <div class="card-title" onclick="document.getElementById('Arsatbody').style.display= 'block'">Arsat
+       
+                <%if (interferenciasypermisos.intArsat!="En gestion" && interferenciasypermisos.intArsat!="Pedida" && interferenciasypermisos.intArsat!="ok" ) {%>
+                    <div class="card-title" onclick="document.getElementById('Arsatbody').style.display= 'block'">Arsat
         </div>
         <div class="card-text" id="Arsatbody" style="display: none;">
             <form-check>
-                <%if (interferenciasypermisos.intArsat!="En gestion" && interferenciasypermisos.intArsat!="Pedida" && interferenciasypermisos.intArsat!="ok" ) {%>
                     <input hidden type="radio" name="intArsat" id="intArsat" value="<%=interferenciasypermisos.intArsat%>" checked>
                     <input type="radio" name="intArsat" id="intArsat" value="En gestion"> En
                     gestión
@@ -614,35 +713,45 @@
                     Ok
                     <div id="intArsatPedida" style="display: none;">
                         Fecha en la que se pidió
-                        <input type="date" name="intArsatPedida" id="intArsatPedida" value="<%= interferenciasypermisos.intArsatPedida%>">
+                        <input type="date" name="intArsatPedida" id="intArsatPedida" value="<%= moment(interferenciasypermisos.intArsatPedida).format('YYYY-MM-DD')%>">
                     </div>
                     <div id="intArsatObtenida" style="display: none;">
                         Fecha en la que se vence
                         <input type="date" name="intArsatObtenida" id="intArsatObtenida"
-                            value="<%= interferenciasypermisos.intArsatObtenida%>">
+                            value="<%= moment(interferenciasypermisos.intArsatObtenida).format('YYYY-MM-DD')%>">
                     </div>
                     <%}%>
                         <%if(interferenciasypermisos.intArsat=="En gestion"){%>
+                            <div class="card-title" onclick="document.getElementById('Arsatbody').style.display= 'block'">Arsat
+        </div>
+        <div class="card-text" id="Arsatbody" style="display: none;">
+            <form-check>
                             <input checked type="radio" name="intArsat" id="intArsat" value="En gestion"> En
                             gestión
                             <input type="radio" name="intArsat" id="intArsat" value="Pedida"
                                 onclick="estadoInterferencia('intArsatPedida', 'intArsatObtenida',true,false);">
                             Pedida
-                            <input type="radio" name="intArsat" id="intArsat value="ok"
+                            <input type="radio" name="intArsat" id="intArsat" value="ok"
                                 onclick="estadoInterferencia('intArsatPedida', 'intArsatObtenida',false,true);">
                             Ok
                             <div id="intArsatPedida" style="display: none;">
                                 Fecha en la que se pidió
                                 <input type="date" name="intArsatPedida" id="intArsatPedida"
-                                    value="<%= interferenciasypermisos.intArsatPedida%>">
+                                    value="<%= moment(interferenciasypermisos.intArsatPedida).format('YYYY-MM-DD')%>">
                             </div>
                             <div id="intArsatObtenida" style="display: none;">
                                 Fecha en la que se vence
                                 <input type="date" name="intArsatObtenida" id="intArsatObtenida"
-                                    value="<%= interferenciasypermisos.intArsatObtenida%>">
+                                    value="<%= moment(interferenciasypermisos.intArsatObtenida).format('YYYY-MM-DD')%>">
                             </div>
                             <%}%>
                                 <%if(interferenciasypermisos.intArsat=="Pedida"){%>
+                                    <div class="card-title" onclick="document.getElementById('Arsatbody').style.display= 'block'">Arsat
+                                        <p class="text-primary"> Pedida el: <%= moment(interferenciasypermisos.intArsatPedida).format('DD-MM-YYYY')%>
+                                            </p>
+        </div>
+        <div class="card-text" id="Arsatbody" style="display: none;">
+            <form-check>
                                     <input type="radio" name="intArsat" id="intArsat" value="En gestion"> En
                                     gestión
                                     <input checked type="radio" name="intArsat" id="intArsat" value="Pedida"
@@ -654,15 +763,21 @@
                                     <div id="intArsatPedida" style="display: block;">
                                         Fecha en la que se pidió
                                         <input type="date" name="intArsatPedida" id="intArsatPedida"
-                                            value="<%= interferenciasypermisos.intArsatPedida%>">
+                                            value="<%= moment(interferenciasypermisos.intArsatPedida).format('YYYY-MM-DD')%>">
                                     </div>
                                     <div id="intArsatObtenida" style="display: none;">
                                         Fecha en la que se vence
                                         <input type="date" name="intArsatObtenida" id="intArsatObtenida"
-                                            value="<%= interferenciasypermisos.intArsatObtenida%>">
+                                            value="<%= moment(interferenciasypermisos.intArsatObtenida).format('YYYY-MM-DD')%>">
                                     </div>
                                     <%}%>
                                         <%if(interferenciasypermisos.intArsat=="ok"){%>
+                                            <div class="card-title" onclick="document.getElementById('Arsatbody').style.display= 'block'">Arsat
+                                                <p class="text-danger">Vencimiento: <%= moment(interferenciasypermisos.intArsatObtenida).format('DD-MM-YYYY')%> </p>
+
+        </div>
+        <div class="card-text" id="Arsatbody" style="display: none;">
+            <form-check>
                                             <input type="radio" name="intArsat" id="intArsat" value="En gestion"> En
                                             gestión
                                             <input type="radio" name="intArsat" id="intArsat" value="Pedida"
@@ -674,12 +789,12 @@
                                             <div id="intArsatPedida" style="display: none;">
                                                 Fecha en la que se pidió
                                                 <input type="date" name="intArsatPedida" id="intArsatPedida"
-                                                    value="<%= interferenciasypermisos.intArsatPedida%>">
+                                                    value="<%= moment(interferenciasypermisos.intArsatPedida).format('YYYY-MM-DD')%>">
                                             </div>
                                             <div id="intArsatObtenida" style="display: block;">
                                                 Fecha en la que se vence
                                                 <input type="date" name="intArsatObtenida" id="intArsatObtenida"
-                                                    value="<%= interferenciasypermisos.intArsatObtenida%>">
+                                                    value="<%= moment(interferenciasypermisos.intArsatObtenida).format('YYYY-MM-DD')%>">
                                             </div>
                                             <%}%>
             </form-check>
@@ -690,11 +805,12 @@
     
     <div class="card-body">
 
-        <div class="card-title" onclick="document.getElementById('Telecombody').style.display= 'block'">Telecom
+      
+                <%if (interferenciasypermisos.intTelecom!="En gestion" && interferenciasypermisos.intTelecom!="Pedida" && interferenciasypermisos.intTelecom!="ok" ) {%>
+                    <div class="card-title" onclick="document.getElementById('Telecombody').style.display= 'block'">Telecom
         </div>
         <div class="card-text" id="Telecombody" style="display: none;">
             <form-check>
-                <%if (interferenciasypermisos.intTelecom!="En gestion" && interferenciasypermisos.intTelecom!="Pedida" && interferenciasypermisos.intTelecom!="ok" ) {%>
                     <input hidden type="radio" name="intTelecom" id="intTelecom" value="<%=interferenciasypermisos.intTelecom%>" checked>
                     <input type="radio" name="intTelecom" id="intTelecom" value="En gestion"> En
                     gestión
@@ -707,15 +823,19 @@
                     <div id="intTelecomPedida" style="display: none;">
                         Fecha en la que se pidió
                         <input type="date" name="intTelecomPedida" id="intTelecomPedida"
-                            value="<%= interferenciasypermisos.intTelecomPedida%>">
+                            value="<%= moment(interferenciasypermisos.intTelecomPedida).format('YYYY-MM-DD')%>">
                     </div>
                     <div id="intTelecomObtenida" style="display: none;">
                         Fecha en la que se vence
                         <input type="date" name="intTelecomObtenida" id="intTelecomObtenida"
-                            value="<%= interferenciasypermisos.intTelecomObtenida%>">
+                            value="<%= moment(interferenciasypermisos.intTelecomObtenida).format('YYYY-MM-DD')%>">
                     </div>
                     <%}%>
                         <%if(interferenciasypermisos.intTelecom=="En gestion"){%>
+                            <div class="card-title" onclick="document.getElementById('Telecombody').style.display= 'block'">Telecom
+        </div>
+        <div class="card-text" id="Telecombody" style="display: none;">
+            <form-check>
                             <input checked type="radio" name="intTelecom" id="intTelecom" value="En gestion"> En
                             gestión
                             <input type="radio" name="intTelecom" id="intTelecom" value="Pedida"
@@ -727,16 +847,21 @@
                             <div id="intTelecomPedida" style="display: none;">
                                 Fecha en la que se pidió
                                 <input type="date" name="intTelecomPedida" id="intTelecomPedida"
-                                    value="<%= interferenciasypermisos.intTelecomPedida%>">
+                                    value="<%= moment(interferenciasypermisos.intTelecomPedida).format('YYYY-MM-DD')%>">
                             </div>
                             <div id="intTelecomObtenida" style="display:none;">
                                 Fecha en la que se vence
                                 <input type="date" name="intTelecomObtenida" id="intTelecomObtenida"
-                                    value="<%= interferenciasypermisos.intTelecomObtenida%>">
+                                    value="<%= moment(interferenciasypermisos.intTelecomObtenida).format('YYYY-MM-DD')%>">
                             </div>
                             <%}%>
 
                                 <%if(interferenciasypermisos.intTelecom=="Pedida"){%>
+                                    <div class="card-title" onclick="document.getElementById('Telecombody').style.display= 'block'">Telecom
+                                        <p class="text-primary"> Pedida el: <%= moment(interferenciasypermisos.intTelecomPedida).format('DD-MM-YYYY')%></p>
+        </div>
+        <div class="card-text" id="Telecombody" style="display: none;">
+            <form-check>
                                     <input type="radio" name="intTelecom" id="intTelecom" value="En gestion"> En
                                     gestión
                                     <input checked type="radio" name="intTelecom" id="intTelecom" value="Pedida"
@@ -748,15 +873,20 @@
                                     <div id="intTelecomPedida" style="display:block;">
                                         Fecha en la que se pidió
                                         <input type="date" name="intTelecomPedida" id="intTelecomPedida"
-                                            value="<%= interferenciasypermisos.intTelecomPedida%>">
+                                            value="<%= moment(interferenciasypermisos.intTelecomPedida).format('YYYY-MM-DD')%>">
                                     </div>
                                     <div id="intTelecomObtenida" style="display:none;">
                                         Fecha en la que se vence
                                         <input type="date" name="intTelecomObtenida" id="intTelecomObtenida"
-                                            value="<%= interferenciasypermisos.intTelecomObtenida%>">
+                                            value="<%= moment(interferenciasypermisos.intTelecomObtenida).format('YYYY-MM-DD')%>">
                                     </div>
                                     <%}%>
                                         <%if(interferenciasypermisos.intTelecom=="ok"){%>
+                                            <div class="card-title" onclick="document.getElementById('Telecombody').style.display= 'block'">Telecom
+                                                <p class="text-danger">Vencimiento: <%= moment(interferenciasypermisos.intTelecomObtenida).format('DD-MM-YYYY')%> </p>
+        </div>
+        <div class="card-text" id="Telecombody" style="display: none;">
+            <form-check>
                                             <input type="radio" name="intTelecom" id="intTelecom" value="En gestion">
                                             En
                                             gestión
@@ -770,12 +900,12 @@
                                             <div id="intTelecomPedida" style="display:none;">
                                                 Fecha en la que se pidió
                                                 <input type="date" name="intTelecomPedida" id="intTelecomPedida"
-                                                    value="<%= interferenciasypermisos.intTelecomPedida%>">
+                                                    value="<%= moment(interferenciasypermisos.intTelecomPedida).format('YYYY-MM-DD')%>">
                                             </div>
                                             <div id="intTelecomObtenida" style="display: block;">
                                                 Fecha en la que se vence
                                                 <input type="date" name="intTelecomObtenida" id="intTelecomObtenida"
-                                                    value="<%= interferenciasypermisos.intTelecomObtenida%>">
+                                                    value="<%= moment(interferenciasypermisos.intTelecomObtenida).format('YYYY-MM-DD')%>">
                                                 <%}%>
             </form-check>
         </div>
