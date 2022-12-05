@@ -27,18 +27,22 @@
 <body>
    <%- include('./partials/menusuperior.ejs');%>
    <%if(results){%>
-   <div class="container text-center">
-     <div class="row p-1">
-    <div class="col">
+   <div class="container-fluid text-center">
+     <div class="row">
       <h1 class="fw-bold text-decoration-underline">Administración de obras</h1>
     </div>
-   <div class="col sm-2" >
-    <div class="btn-group" role="group" >
-      <a href="/nuevaObra">
-        <button class="btn btn-success ">Nueva Obra</button>
-      </a>
+    <div class="row">
+      <div class="col-2" >
+        <a href="/nuevaObra">
+          <button class="btn btn-success ">Nueva Obra</button>
+        </a>
+     </div>
+      <div class="col-10">
+          <input class="form-control text-primary"type="text" name="" id="buscador" placeholder="Buscar en tabla">
+      </div>
+    
     </div>
-   </div>
+   
   </div>
   </div>
 <div id="Avisos" class="container" style="display: none;">
@@ -114,7 +118,8 @@
       "paging": false,
       "ordering": true,
       "scrollX": true,
-      "destroy":true,    
+      "destroy":true, 
+      "searching":false,   
       // columnDefs: [ { type: 'date', targets: [6],  } ], //Al activar este filtro, no permite que se puedan ordenar las fechas.
       "order":[[6,'desc']],
         "language": { url: "//cdn.datatables.net/plug-ins/1.11.3/i18n/es_es.json" },
@@ -348,7 +353,22 @@ console.log("response date tiene:" + responseDate);
     return(new Date(datePieces[2], (datePieces[1] - 1), datePieces[0],
                          timePieces[0], timePieces[1], timePieces[2]))
 }
+  jQuery("#buscador").keyup(function(){
+    if( jQuery(this).val() != "0"){
+        jQuery("#comunicacionDiaria tbody>tr").hide();
+        jQuery("#comunicacionDiaria td:contiene-palabra('" + jQuery(this).val() + "')").parent("tr").show();
+    }
+    else{
+        jQuery("#comunicacionDiaria tbody>tr").show();
+    }
+});
 
+jQuery.extend(jQuery.expr[":"], 
+{
+    "contiene-palabra": function(elem, i, match, array) {
+        return (elem.textContent || elem.innerText || jQuery(elem).text() || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
+    }
+});
      </script>
 <%}%>
 
