@@ -820,6 +820,7 @@ router.post('/act1pCarpEcogas/:id', upload.none(), function (req, res) {
     var DocumentacionAmbiente = "Sin Presentar";
     var TituloDePropiedad = req.body.TituloDePropiedad;
     var Mensura = req.body.Mensura;
+    var EstudioImpactoAmbientalPrevio = req.body.EstudioImpactoAmbientalPrevio;
     // Variables Generales
     var Comercial;
     var Tecnica, PermisosEspeciales;
@@ -887,12 +888,13 @@ router.post('/act1pCarpEcogas/:id', upload.none(), function (req, res) {
         PermisosEspeciales = "Sin presentar";
     }
     //Documentacion Ambiental
-    if (CuestionarioRelevamientoAmbiental == "ok" && DDJJInicialAmbiental == "ok" && (ListaVerificacionAmbiental == "ok" || ListaVerificacionAmbiental == "NC")) {
+    if (CuestionarioRelevamientoAmbiental == "ok"  && (EstudioImpactoAmbientalPrevio == "ok"|| EstudioImpactoAmbientalPrevio == "NC" || EstudioImpactoAmbientalPrevio == "ok(Previo" || EstudioImpactoAmbientalPrevio == "NC(Previo)") &&  DDJJInicialAmbiental == "ok" && (ListaVerificacionAmbiental == "ok" || ListaVerificacionAmbiental == "NC")) {
         DocumentacionAmbiente = "ok";
     }
-    if (CuestionarioRelevamientoAmbiental == "EnGestion" || DDJJInicialAmbiental == "EnGestion" || ListaVerificacionAmbiental == "EnGestion") { DocumentacionAmbiente = "EnGestion"; }
-    if (CuestionarioRelevamientoAmbiental == "Presentado" || DDJJInicialAmbiental == "Presentado" || ListaVerificacionAmbiental == "Presentado") { DocumentacionAmbiente = "Presentado"; }
-    if (CuestionarioRelevamientoAmbiental == "Observado" || DDJJInicialAmbiental == "Observado" || ListaVerificacionAmbiental == "Observado") { DocumentacionAmbiente = "Observado"; }
+     
+    if (CuestionarioRelevamientoAmbiental == "EnGestion"  || EstudioImpactoAmbientalPrevio == "EnGestion" ||  DDJJInicialAmbiental == "EnGestion" || ListaVerificacionAmbiental == "EnGestion") { DocumentacionAmbiente = "EnGestion"; }
+    if (CuestionarioRelevamientoAmbiental == "Presentado"  || EstudioImpactoAmbientalPrevio == "Presentado" ||  DDJJInicialAmbiental == "Presentado" || ListaVerificacionAmbiental == "Presentado") { DocumentacionAmbiente = "Presentado"; }
+    if (CuestionarioRelevamientoAmbiental == "Observado"  || EstudioImpactoAmbientalPrevio == "Observado" ||  DDJJInicialAmbiental == "Observado" || ListaVerificacionAmbiental == "Observado") { DocumentacionAmbiente = "Observado"; }
     sql = 'Update obras_tareasgenerales Set ? where Nombre=?';
     connection.query(sql, [{ DocumentacionTerreno: DocumentacionTerreno, Comercial: Comercial, Tecnica: Tecnica, PermisosEspeciales: PermisosEspeciales, DocumentacionAmbiental: DocumentacionAmbiente }, Nombre],
         (error, results) => {
@@ -915,7 +917,7 @@ router.post('/act1pCarpEcogas/:id', upload.none(), function (req, res) {
         })
     sql = 'Update adminecogas_tareas_por_carpeta Set ? where Nombre=?';
     connection.query(sql, [{
-        Mensura: Mensura, TituloDePropiedad: TituloDePropiedad,
+        Mensura: Mensura, TituloDePropiedad: TituloDePropiedad, EstudioImpactoAmbiental: (EstudioImpactoAmbientalPrevio+'(Previo)'),
         Contrato: Contrato, Presupuesto: Presupuesto, Sucedaneo: Sucedaneo, NotaDeExcepcion: NotaDeExcepcion, PCaprobado: Pcaprobado, FechaFirmaContrato: FechaFirmaContrato,
         PlanoTipo: PlanoTipo, CartaOferta: CartaOferta, PlanoAnexo: PlanoAnexo, CuestionarioRelevamientoAmbiental: CuestionarioRelevamientoAmbiental, DDJJInicialAmbiental: DDJJInicialAmbiental, ListaVerificacionAmbiental: ListaVerificacionAmbiental
     }, Nombre],
