@@ -16,51 +16,36 @@ router.use(session({
 
 router.use(cookieParser('Mi ultra secreto'));
 router.use(passport.initialize());
-router.use(passport.session());
+router.use(passport.session({
+    secret: 'Mi ultra secreto',
+    resave: true,
+saveUninitialized:true,
+}
+));
 passport.use(new PassportLocal(function (username, password, done) {
-    connection.query('Select * from usuariosregistrados', (error, results) => {
-        if (error) console.log(error);
-        for (let index = 0; index < results.length; index++) {
-            const element = results[index];
-            if (username == element.Usuario && password == element.Password) {
-                return done(null, { id: element.id, name: element.Usuario });
+    connection.query('Select id,rol from usuariosregistrados where usuario='+username+' AND password ='+password+' ;', (errorquery, results) => {
+        if (errorquery){
+            console.log(errorquery);
+            return done('No se ha encontrado el usuario y/o contraseña indicado', false);
+        } 
+       if(results){
+        return done(null, { id: results[0].id, rol: results[0].rol });
+       }
             }
-        }
-    })
-
-    if (username == "mocampo" && password == "asd") {
-        return done(null, { id: 1, name: "Mario" });
-    }
-    if (username == "gmaceira" && password == "January2072") {
-        return done(null, { id: 2, name: "Gustavo" });
-    }
-    if (username == "mpereyra" && password == "theboss") {
-        return done(null, { id: 3, name: "Mauricio" });
-    }
-    if (username == "Daiana" && password == "Drodriguez") {
-        return done(null, { id: 4, name: "Daiana" });
-    }
-    if (err) { return done(err); }
-    console.log("Ningun usuario encontrado");
+    )
     done(null, false); // Esta linea define a traves del null, que no hubo ningun error, pero el al mismo tiempo, a traves del false, indica que el usuario no se ha encontrado.
-    // Cuando el sistema, quiere guardar que el usuario 1 ingreso al sistema, a esa llamada se le llama Serialización.
-}))
+    // Continuamos en serializacion
+    
+}));
 passport.serializeUser(function (user, done) {
+    
     done(null, user.id);
 })
 passport.deserializeUser(function (id, done) {
-    if (id == 1) {
-        done(null, { id: 1 });
-    }
-    if (id == 2) {
-        done(null, { id: 2 });
-    }
-    if (id == 3) {
-        done(null, { id: 3 });
-    }
-    if (id == 4) {
-        done(null, { id: 4 });
-    }
+   var sql='Select rol from usuariosregistrados where id ='+id+' ;';
+    connection.query(sql,(error,results)=>{
+        done(null,{rol: results[0].rol});
+    })
 })
 //Seteo server original
 const mysql = require('mysql');
@@ -99,6 +84,10 @@ router.get('/index', (req, res, next) => {
         }
     }
 })
+router.post('/login', passport.authenticate('local', {
+    successRedirect: "/index",
+    failureRedirect: "/", failureMessage: true
+}))
 router.get('/nuevocontacto', (req, res) => {
     if (req.isAuthenticated()) {
         res.render('paginas/Principal/nuevocontacto.ejs');

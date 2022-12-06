@@ -17,18 +17,17 @@
 <body>
         <h1 class="text-center">Nueva obra
         </h1>
-        <div class="container-fluid" style="background: #b5b5b5 ;">
+        <!-- <div class="container-fluid" style="background: #b5b5b5 ;">
           Seleccione la información que desea cargar
           <div class="form-check form-check-inline">
             <input class="form-check-input" type="checkbox" name="Gas" id="InputCheckGas" >
             <label class="form-check-label" for="">Gas</label>
             </div>
             <div class="form-check form-check-inline">
-            <!-- <input class="form-check-input" type="checkbox" name="Finanzas" id="InputCheckFinanzas" value="option2">
-            <label class="form-check-label" for="">Finanzas</label> -->
+            <input class="form-check-input" type="checkbox" name="Finanzas" id="InputCheckFinanzas" value="option2">
+            <label class="form-check-label" for="">Finanzas</label>
             </div>
-            
-          </div>    
+          </div>     -->
       <form action="/guardarNuevoCliente" method="post">
         <div class="row m-3">
         <div class="col-4">
@@ -43,7 +42,6 @@
               Codigos de carpeta
             </button>
             <div class="form-group">
-              
               <div class="modal" id="ModalCodigosCarpeta" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
@@ -71,9 +69,7 @@
         </div>
         <div id="SectorGas" class="container-fluid m-2" style="display: block;">
           <div class="row bg-primary mb-3 ">
-
             <h1 class="text-center text-white" onclick="MostrarOcultar('SectorGas');">Sector Gas</h1>
-    
           </div>
           <input type="hidden" id="GasSeleccionado" name="GasSeleccionado">
         <div class="form-group">
@@ -85,7 +81,6 @@
               <option value="Acero">Acero</option>
               <option value="Gasoducto">Gasoducto</option>
               <option value="Red interna">Interna</option>
-  
             </select>
             </div>
             <div class="col-3">
@@ -118,155 +113,124 @@
                 <option value="Junin">Junín</option>
                 <option value="San Rafael">San Rafael</option>
                 <option value="FueraDeMendoza">Fuera de Mendoza</option>
-    
               </select>
             </div>
           </div>
-       
         </div>
-      
-       
-  <div class="container-fluid ">
-    <div class="card ">
-      <div class="card-body border border-success ">
-        <table class="text-center">
-          <tr>
-            <h5 class="text-center ">Jurisdicciones</h5>
-
-          </tr>
-          <tr>
-
-            <td class="border border-secondary">
-              <div class="form-check-inline ">
-                <label class="form-check-label text-center" for="defaultCheck1">
-                  Hidraúlica
-                </label><br>
-                <input class="form-check-input text-center m-1" type="radio" value="pedir" id="HIDRAULICA"
-                  name="HIDRAULICA"> Pedir
-
-                <input class="form-check-input text-center m-1" checked type="radio" value="NC" id="HIDRAULICA"
-                  name="HIDRAULICA"> No
-
-              </div>
-            </td>
-            <td class="border border-secondary">
-              <div class="form-check-inline ">
-                <label class="form-check-label text-center" for="defaultCheck2">
-                  Ferrocarriles Argentinos
-                </label><br>
-                <input class="form-check-input text-center m-1" type="radio" value="pedir" id="FERROCARRIL"
-                  name="FERROCARRIL">Pedir
-                <input class="form-check-input text-center m-1" checked type="radio" value="NC" id="FERROCARRIL"
-                  name="FERROCARRIL"> No
-
-              </div>
-            </td>
-            <td class="border border-secondary">
-              <div class="form-check-inline ">
-                <label class="form-check-label text-center" for="defaultCheck3">
-                  Dirección Nacional de Vialidad
-                </label><br>
+  <div class="container-fluid">
+        <div class="row ">
+          <h5 class="text-center">Permisos de la obra</h5>
+        </div>
+        <div class="row text-center">
+          <div class="form-group col-2 border">
+<label class="" for="HIDRAULICA">
+                Hidraúlica
+              </label>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" value="pedir" id="HIDRAULICA"
+                name="HIDRAULICA"> Pedir
+            </div> <div class="form-check">
+              <input class="form-check-input" checked type="radio" value="NC" id="HIDRAULICA"
+                name="HIDRAULICA"> No
+            </div>
+          </div>
+          <div class="form-group col-2 border">
+<label class="" for="FERROCARRIL">
+                  FFCC
                 </label>
-                <input class="form-check-input text-center m-1" type="radio" value="pedir" id="DNV" name="DNV">Pedir
-                <input class="form-check-input text-center m-1" checked type="radio" value="NC" id="DNV" name="DNV"> No
-
-
+            <div class="form-check">
+                
+                <input class="form-check-input" type="radio" value="pedir" id="FERROCARRIL"
+                  name="FERROCARRIL">Pedir
+                  </div> <div class="form-check">
+                <input class="form-check-input" checked type="radio" value="NC" id="FERROCARRIL"
+                  name="FERROCARRIL"> No
               </div>
-
-            </td>
-            <td class="border border-secondary">
-
-              <div class="form-check-inline ">
-                <label class="form-check-label text-center" for="defaultCheck4">
-                  Dirección Provincial de Vialidad
-                </label><br>
-                <input class="form-check-input text-center m-1" type="radio" value="pedir" id="DPV" name="DPV">Pedir
-                <input class="form-check-input text-center m-1" checked type="radio" value="NC" id="DPV" name="DPV"> No
-
-
-              </div>
-            </td>
-
-            <td class="border border-secondary">
-
-              <div class="form-check-inline ">
-                <label class="form-check-label text-center" for="defaultCheck5">
-                  Irrigación
-                </label><br>
-                <input class="form-check-input text-center m-1" type="radio" value="pedir" id="IRRIGACION"
-                  name="IRRIGACION">Pedir
-                <input class="form-check-input text-center m-1" checked type="radio" value="NC" id="IRRIGACION"
-                  name="IRRIGACION"> No
-
-              </div>
-            </td>
-
-            <td class="border border-secondary">
-
-
-              <div class="form-check-inline ">
-                <label class="form-check-label text-center" for="defaultCheck6">
-                  Municipal
-                </label><br>
-                <input class="form-check-input text-center m-1" type="radio" value="pedir" id="PerMunicipal"
-                  name="PerMunicipal">Pedir
-                <input class="form-check-input text-center m-1" checked type="radio" value="NC" id="PerMunicipal"
-                  name="PerMunicipal"> No
-
-
-              </div>
-            </td>
-          <tr></tr>
-          <td class="border border-secondary">
-
-            <div class="form-check-inline ">
-              <label class="form-check-label text-center" for="defaultCheck7">
-                Privado
-              </label><br>
-              <input class="form-check-input text-center m-1" type="radio" value="pedir" id="PRIVADO" name="PRIVADO">Pedir
-              <input class="form-check-input text-center m-1" checked type="radio" value="NC" id="PRIVADO" name="PRIVADO">
-              No
-
             </div>
-          </td>
-          <td class="border border-secondary">
-
-
-            <div class="form-check-inline ">
-              <label class="form-check-label text-center" for="defaultCheck8">
-                Otros permisos
-              </label><br>
-              <input class="form-check-input text-center m-1" type="radio" value="pedir" id="OTROSPERMISOS"
-                name="OTROSPERMISOS">Pedir
-              <input class="form-check-input text-center m-1" checked type="radio" value="NC" id="OTROSPERMISOS"
-                name="OTROSPERMISOS"> No
-
-            </div>
-          </td>
-
-          </tr>
-        </table>
-
-
-      </div>
-    </div>
-  </div>
+              <div class="form-group col-2 border">
+<label class="" for="DNV">
+                   DNV
+                  </label>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" value="pedir" id="DNV" name="DNV">Pedir
+                  </div> <div class="form-check">
+                  <input class="form-check-input" checked type="radio" value="NC" id="DNV" name="DNV"> No
+                </div>
+              </div>
+                <div class="form-group col-2 border">
+<label class="" for="DPV">
+                      DPV
+                    </label>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" value="pedir" id="DPV" name="DPV">Pedir
+                    </div><div class="form-check">
+                    <input class="form-check-input" checked type="radio" value="NC" id="DPV" name="DPV"> No
+                  </div>
+                </div>
+                <div class="form-group col-2 border">
+<label class="" for="IRRIGACION">
+                      Irrigación
+                    </label>
+                  <div class="form-check">
+                    
+                    <input class="form-check-input" type="radio" value="pedir" id="IRRIGACION"
+                      name="IRRIGACION">Pedir
+                      </div><div class="form-check">
+                    <input class="form-check-input" checked type="radio" value="NC" id="IRRIGACION"
+                      name="IRRIGACION"> No
+                  </div>
+                </div>
+                <div class="form-group col-2 border">
+<label class="" for="PerMunicipal">
+                      Municipal
+                    </label>
+                  <div class="form-check">
+                    
+                    <input class="form-check-input" type="radio" value="pedir" id="PerMunicipal"
+                      name="PerMunicipal">Pedir
+                      </div><div class="form-check">
+                    <input class="form-check-input" checked type="radio" value="NC" id="PerMunicipal"
+                      name="PerMunicipal"> No
+                  </div>
+                </div>
+                <div class="form-group col-2 border">
+<label class="" for="PRIVADO">
+                      Privado
+                    </label>
+                  <div class="form-check">
+                    
+                    <input class="form-check-input" type="radio" value="pedir" id="PRIVADO" name="PRIVADO">Pedir
+                    </div><div class="form-check">
+                    <input class="form-check-input" checked type="radio" value="NC" id="PRIVADO" name="PRIVADO">
+                    No
+                  </div>
+                </div>
+                <div class="form-group col-2 border">
+<label class="" for="OTROSPERMISOS">
+                      Otros:
+                    </label>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" value="pedir" id="OTROSPERMISOS1"
+                      name="OTROSPERMISOS">
+                      <label for="OTROSPERMISOS1">Pedir</label> 
+                      </div><div class="form-check">
+                    <input class="form-check-input" checked type="radio" value="NC" id="OTROSPERMISOS2"
+                      name="OTROSPERMISOS">
+                      <label for="OTROSPERMISOS2">No</label> 
+                    </div>
+                </div>
+        </div>             
   </div>
 </div>
-  
-
-
-
+<!-- SECTOR FINANZAS -->
   <div id="SectorFinanzas"class="container-fluid" style="display: block;">
     <input type="hidden" id="FinanzasSeleccionado" name="FinanzasSeleccionado">
   <div class="container-fluid ">
     <div class="row bg-danger">
       <h1 class="text-center">Sector Finanzas</h1>
-
     </div>
     <div class="row">
       <div class="col-3">
-
         <label for="OpcionesDeCuotas" >Tipo de pago</label>
         <select class="form-select" name="" id="OpcionesDeCuotas">
           <option value="Cuotas" selected>Cuotas </option>
@@ -276,9 +240,7 @@
         <div class="col-3" id="CantidadCuotas"style="display: block;"> 
           <label  for="CantidadCuotas" >Cantidad de cuotas</label>
           <input type="number" class="form-control" name="CantidadCuotas" value="6">
-
         </div>
-      
       <div class="col-6">
         <label for="cantidadVecinos">Cantidad de vecinos</label>
         <input type="number" class="form-control" id="cantidadVecinos" name="cantidadVecinos"
