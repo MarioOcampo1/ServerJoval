@@ -114,11 +114,10 @@
       
     var tabla= $('#comunicacionDiaria').DataTable({
         "orderCellsTop": true,
-        "fixedHeader": true,
-      "paging": false,
-      "ordering": true,
+        "fixedHeader": true, //Deja fijo el header, para q cuando el usuario deslice la tabla hacia abajo, el header se siga viendo
+      "paging": false, //Permite la paginacion de la tabla, si esta desactivado, traera todos los resultados en una sola vista.
+      
       "scrollX": true,
-      "destroy":true, 
       "searching":false,   
       // columnDefs: [ { type: 'date', targets: [6],  } ], //Al activar este filtro, no permite que se puedan ordenar las fechas.
       "order":[[6,'desc']],
@@ -126,8 +125,7 @@
         "ajax": {
           "url": url,
           "dataSrc": "",
-        }, 
-               
+        },    
         "columns": [
           {"width": "5%","data": "CodigoVigentes", render: function(data,type,row){
             if(row.CodigoVigentes==null || row.CodigoEnUsoVigentes=="F"){
@@ -207,14 +205,14 @@ return stringFinal;
             }
             }
           }},
-          {"width": "1%","data": "Nombre_sub", render: function(data,type,row){
+          {"width": "1%","data": "Nombre_sub",  render: function(data,type,row){
             return '<a href="/editarTareas/' + row.id + '" class=" text-center btn btn-outline-primary btn-sm" title="Nombre de la carpeta">'+row.Nombre_sub+' - '+row.NCarpeta+'</a>'
           } },
-          {"width": "1%","data": "ResponsableDeTarea" },
-          {"width": "50%","data": "Tarea_Realizada_sub", "searchable":false, }, 
-          {"width": "1%","data": "EtapaTarea_sub", render: function(data,type,row){
+          {"width": "1%","data": "ResponsableDeTarea", "orderable": false,  },
+          {"width": "50%","data": "Tarea_Realizada_sub", "searchable":false, "orderable": false, }, 
+          {"width": "1%","data": "EtapaTarea_sub", "orderable": false, render: function(data,type,row){
   return '<a href="/historialcarpeta/' + row.Nombre_sub + '" class="text-center">'+row.EtapaTarea_sub+'</a>'} }, 
-          {"width": "44%","data": "Proxima_Tarea_sub",   "searchable":false, },
+          {"width": "44%","data": "Proxima_Tarea_sub","orderable": false,"searchable":false, },
           {"width": "1%","data": "Fecha_Proxima_Tarea_sub", render:function(data,type,row){
             moment.locale('es');
             data= new Date(data);
@@ -259,100 +257,46 @@ return stringFinal;
     }}
    
            }},      
-          {"width": "1%","data": "Estado"},
-          // { render: function(data,row,type){
-          //   return ""}}
+          // {"width": "1%","data": "Estado"},
+          { render: function(data,row,type){
+            return ""}}
             // return '<div> <img src=".././images/SimboloInterferencias.png" alt="Interferencias">  </div>';}}
         ],
       });
-     
-
-//Buscadores con botones.
-   $('#Mauricio').on('click', function() {
-    tabla
-    .columns()
-    .search('')
-    .column(2)
-    .search('Mauricio')
-    .search('M')
-    .draw();
+      //Buscadores con botones.
+ $('#Mauricio').click(function() {
+        jQuery("#comunicacionDiaria tbody>tr").hide();
+        jQuery("#comunicacionDiaria td:contiene-palabra('Mauricio')").parent("tr").show();
   });
-    $('#Gustavo').on('click', function() {
-    tabla
-    .columns()
-    .search('')
-    .column(2)
-    .search('Gustavo')
-    .search('G')
-
-    .draw();
-    
+    $('#Gustavo').click(function() {
+      jQuery("#comunicacionDiaria tbody>tr").hide();
+        jQuery("#comunicacionDiaria td:contiene-palabra('Gustavo')").parent("tr").show();
 });
-$('#Daiana').on('click', function() {
-    tabla
-    .columns()
-    .search('')
-    .column(2)
-    .search('Daiana')
-    .search('D')
-.draw();
-    
+$('#Daiana').click(function() {
+      jQuery("#comunicacionDiaria tbody>tr").hide();
+        jQuery("#comunicacionDiaria td:contiene-palabra('Daiana')").parent("tr").show();
 });
-$('#TablaGral').on('click', function() {
-    tabla
-    .columns()
-    .search('')
-    .draw();
+$('#TablaGral').click(function() {
+  jQuery("#comunicacionDiaria tbody>tr").show();
 });
-$('#Prel').on('click', function() {
-    tabla
-    .columns()
-    .search('')
-    .column(4)
-    .search('Preliminar')
-    .draw();
-});  $('#1ra').on('click', function() {
-    tabla
-    .columns()
-    .search('')
-    .column(4)
-    .search('1ra parte')
-    .draw();
-});  $('#2da').on('click', function() {
-    tabla
-    .columns()
-    .search('')
-    .column(4)
-    .search('2da parte')
-    .draw();
-});  $('#Obras').on('click', function() {
-    tabla
-    .columns()
-    .search('')
-    .column(4)
-    .search('Obras')
-    .draw();
+$('#Prel').click(function() {
+  jQuery("#comunicacionDiaria tbody>tr").hide();
+        jQuery("#comunicacionDiaria td:contiene-palabra('Preliminar')").parent("tr").show();
+});  $('#1ra').click(function() {
+  jQuery("#comunicacionDiaria tbody>tr").hide();
+        jQuery("#comunicacionDiaria td:contiene-palabra('1ra')").parent("tr").show();
+});  $('#2da').click(function() {
+  jQuery("#comunicacionDiaria tbody>tr").hide();
+        jQuery("#comunicacionDiaria td:contiene-palabra('2da')").parent("tr").show();
+});  $('#Obras').click(function() {
+  jQuery("#comunicacionDiaria tbody>tr").hide();
+        jQuery("#comunicacionDiaria td:contiene-palabra('Obras')").parent("tr").show();
 });
-$('#Caos').on('click', function() {
-    tabla
-    .columns()
-    .search('')
-    .column(4)
-    .search('Caos')
-    .draw();
+$('#Caos').click(function() {
+  jQuery("#comunicacionDiaria tbody>tr").hide();
+        jQuery("#comunicacionDiaria td:contiene-palabra('Caos')").parent("tr").show();
 });
-  })
-  function convertFromStringToDate(responseDate) {
-console.log("response date tiene:" + responseDate);              
-    let dateComponents = responseDate.split('T');
-    let datePieces = dateComponents[0].split("-");
-    let timePieces = dateComponents[1].split(":");
-    var NuevaFecha = new Date(datePieces[2], (datePieces[1] - 1), datePieces[0],
-                         timePieces[0], timePieces[1], timePieces[2]);
-
-    return(new Date(datePieces[2], (datePieces[1] - 1), datePieces[0],
-                         timePieces[0], timePieces[1], timePieces[2]))
-}
+  });
   jQuery("#buscador").keyup(function(){
     if( jQuery(this).val() != "0"){
         jQuery("#comunicacionDiaria tbody>tr").hide();
