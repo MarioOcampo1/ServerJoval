@@ -22,18 +22,33 @@ router.use(passport.session({
 saveUninitialized:true,
 }
 ));
+
+//Seteo server original
+const mysql = require('mysql');
+const { NULL } = require('mysql/lib/protocol/constants/types');
+const connection = mysql.createConnection({
+    host: '127.0.0.1',
+    user: 'root',
+    password: 'Thinker95',
+    database: 'joval'
+});
+
+//check de conexion a la base de datos
+connection.connect(error => {
+    if (error) console.log(error);
+})
 passport.use(new PassportLocal(function (username, password, done) {
-    connection.query('Select id,rol from usuariosregistrados where usuario='+username+' AND password ='+password+' ;', (errorquery, results) => {
+    connection.query('Select id,rol FROM usuariosregistrados WHERE usuario="'+username+'" AND password ="'+password+'" ;', (errorquery, results) => {
         if (errorquery){
             console.log(errorquery);
             return done('No se ha encontrado el usuario y/o contraseña indicado', false);
         } 
        if(results){
-        return done(null, { id: results[0].id, rol: results[0].rol });
+        return done(null, { id: 1, rol: "admin" });
        }
             }
     )
-    done(null, false); // Esta linea define a traves del null, que no hubo ningun error, pero el al mismo tiempo, a traves del false, indica que el usuario no se ha encontrado.
+    // done(null, false); // Esta linea define a traves del null, que no hubo ningun error, pero el al mismo tiempo, a traves del false, indica que el usuario no se ha encontrado.
     // Continuamos en serializacion
     
 }));
@@ -46,19 +61,6 @@ passport.deserializeUser(function (id, done) {
     connection.query(sql,(error,results)=>{
         done(null,{rol: results[0].rol});
     })
-})
-//Seteo server original
-const mysql = require('mysql');
-const { NULL } = require('mysql/lib/protocol/constants/types');
-const connection = mysql.createConnection({
-    host: '127.0.0.1',
-    user: 'root',
-    password: 'Thinker95',
-    database: 'joval'
-});
-//check de conexion a la base de datos
-connection.connect(error => {
-    if (error) console.log(error);
 })
 router.get('/', (req, res) => {
     res.render('login.ejs');

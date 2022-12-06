@@ -24,31 +24,6 @@ app.use(session({
     resave:true,
     saveUninitialized: true
 }))
-passport.use(new PassportLocal(function (username, password, done) {
-
-    if (username == "mocampo" && password == "asd") {
-        return done(null, { id: 1, name: "Mario" });
-    }
-    if (username == "gmaceira" && password == "January2072") {
-        return done(null, { id: 2, name: "Gustavo" });
-    }
-    if (username == "mpereyra" && password == "theboss") {
-        return done(null, { id: 3, name: "Mauricio" });
-    }
-    if(username=="sebas" && password == "4321"){
-        return done(null,{id: 4, name: "Sebas"});
-        }
-        if(err){return done(err);}
-console.log("Ningun usuario encontrado");
-    done(null, false); 
-    
-}))
-passport.serializeUser(function(user,done){
-    done(null,user.id);
-})
-passport.deserializeUser(function(id,done){
-done(null,)
-})
 //Settings
 app.set('port', 3000); //configura port, con el valor 3000, en app
 app.set('public', path.join(__dirname,'public' ));
