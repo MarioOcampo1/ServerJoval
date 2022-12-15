@@ -53,58 +53,80 @@
 <div id=interferencias class=""style="display: none ;">
   <%- include('./interferencias.ejs')%>
 </div>
+<div class="row">
+  <div class="col-12">
     <div class="table-responsive " style="width:100%">
-    <table id="comunicacionDiaria" class="table table-striped table-bordered table-hover compact  " style="width:100%">
-      <thead class="">
-        <tr>
-          <th class="text-center align-middle">
-            <i class="bi bi-c-circle" style="font-size: 2rem;" title="Codigo designado para ubicar en las carpetas fisicas de la oficina."></i>
-          </th>
-          <th class="text-center align-middle">
-            <h6>Nombre - N°</h6>
-          </th>
-          <th class="text-center align-middle">
-            <button id="Mauricio"class=" btn btn-outline-primary btn-sm ">M</button>
-            <button id="Gustavo"class="  btn btn-outline-primary btn-sm">G</button>
-            <button id="Daiana"class="  btn btn-outline-primary btn-sm">D</button>
-          </th>
-          <th class="text-center align-middle">
-            <h6>Tarea realizada
-              <button id="TablaGral"clicked class=" btn btn-outline-primary btn-sm">Quitar filtros</button>
-            </h6>
-          </th>
-          <th class="text-center align-middle">
-<div class="btn-group btn-group-sm" role="group">
-           <button class="btn btn-outline-primary btn-sm" id="Prel"> Prel</button>
-           <button class="btn btn-outline-primary btn-sm" id="1ra"> 1P</button>
-           <button class="btn btn-outline-primary btn-sm" id="2da"> 2P</button>
-          </div>
-           <div class="btn-group btn-group-sm" role="group">
-           <button class="btn btn-outline-primary btn-sm" id="Obras"> Obras</button>
-           <button class="btn btn-outline-primary btn-sm" id="Caos"> CAOS</button>
-          </div>
-</th>
-          <th class="text-center align-middle">
-            <h2 class="bi bi-calendar2-minus text-primary"></h2>
-            <h6>Proxima tarea</h6>
-          </th>
-          <th class="text-center align-middle">
-            <h2 class="bi bi-calendar-x text-danger"></h2>
-            <h6>Fecha Limite</h6>
-            
-            <!-- <button id="VerUrgentes"class="   btn btn-outline-dark btn-sm"> Ver urgentes</button> -->
-
-          </th>
-          <th class="text-center align-middle">
-            <h6>Estado</h6>
+      <table id="comunicacionDiaria" class="table table-striped table-bordered table-hover compact  " style="width:100%">
+        <thead class="">
+          <tr>
+            <th class="text-center align-middle">
+              <i class="bi bi-c-circle" style="font-size: 2rem;" title="Codigo designado para ubicar en las carpetas fisicas de la oficina."></i>
             </th>
-            
-        </tr>
-      </thead>
-      <tbody class="text-center">
-      </tbody>
-    </table>
+            <th class="text-center align-middle">
+              <h6>Nombre - N°</h6>
+            </th>
+            <th class="text-center align-middle">
+              <button id="Mauricio"class=" btn btn-outline-primary btn-sm ">M</button>
+              <button id="Gustavo"class="  btn btn-outline-primary btn-sm">G</button>
+              <button id="Daiana"class="  btn btn-outline-primary btn-sm">D</button>
+            </th>
+            <th class="text-center align-middle">
+              <h6>Tarea realizada
+                <button id="TablaGral"clicked class=" btn btn-outline-primary btn-sm">Quitar filtros</button>
+              </h6>
+            </th>
+            <th class="text-center align-middle">
+  <div class="btn-group btn-group-sm" role="group">
+             <button class="btn btn-outline-primary btn-sm" id="Prel"> Prel</button>
+             <button class="btn btn-outline-primary btn-sm" id="1ra"> 1P</button>
+             <button class="btn btn-outline-primary btn-sm" id="2da"> 2P</button>
+            </div>
+             <div class="btn-group btn-group-sm" role="group">
+             <button class="btn btn-outline-primary btn-sm" id="Obras"> Obras</button>
+             <button class="btn btn-outline-primary btn-sm" id="Caos"> CAOS</button>
+            </div>
+  </th>
+            <th class="text-center align-middle">
+              <h2 class="bi bi-calendar2-minus text-primary"></h2>
+              <h6>Proxima tarea</h6>
+            </th>
+            <th class="text-center align-middle">
+              <h2 class="bi bi-calendar-x text-danger"></h2>
+              <h6>Fecha Limite</h6>
+              
+              <!-- <button id="VerUrgentes"class="   btn btn-outline-dark btn-sm"> Ver urgentes</button> -->
+  
+            </th>
+           
+          </tr>
+        </thead>
+        <tbody class="text-center">
+        </tbody>
+      </table>
+    </div>
   </div>
+  <!-- <div class="col-2 border">
+    <div class="wrapper">
+      <div class="menu">
+        <p class="header">Notificaciones del sistema</p>
+        <p class="body">
+          <div class="row">
+            <div class="col-8" >Tarea</div>
+            <div class="col-2">Check</div>
+          </div><div class="row">
+            <div class="bodytareas">
+
+            </div>
+            <div class="col">
+
+            </div>
+          </div>
+        </p>
+      </div>
+    </div>
+  </div> -->
+</div>
+ 
   <script>  
     $("#comunicacionDiaria").css("width","100%")
 
@@ -255,12 +277,7 @@ return stringFinal;
       fecha = moment(fecha).locale('es').format("DD-MM-YYYY");
        return '<div style="display:none">'+ data+'</div> <br>  <div  class="bg-success text-light">'+ fecha+' </div>';
     }}
-   
            }},      
-          // {"width": "1%","data": "Estado"},
-          { render: function(data,row,type){
-            return ""}}
-            // return '<div> <img src=".././images/SimboloInterferencias.png" alt="Interferencias">  </div>';}}
         ],
       });
       //Buscadores con botones.
@@ -313,6 +330,19 @@ jQuery.extend(jQuery.expr[":"],
         return (elem.textContent || elem.innerText || jQuery(elem).text() || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
     }
 });
+$('#btnNotificaciones').click(function(){
+    Notification.requestPermission().then(function(results){
+  console.log(results);
+  if(results==="denied"||results==="default"){
+console.log("Notificaciones denegadas");
+  }
+  if(results==="granted")
+  {
+    console.log("Notificaciones aceptadas");
+    var nuevaNotification = new Notification('Bienvenido al sistema de Joval S.A.',{body: 'Bienvenido al sistema de Joval S.A.',tag:'Soyunanotificacion'});
+  }
+  })
+})
      </script>
 <%}%>
 
