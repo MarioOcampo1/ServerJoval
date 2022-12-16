@@ -73,12 +73,9 @@ router.get('/index', (req, res, next) => {
         connection.query(sql, (error, results) => {
             if (error) console.log(error);
             else {
-
                 res.render('./paginas/Principal/index.ejs', { albacaucion: results, moment: moment });
             }
-
         })
-
     }
     else {
         (req, res) => {
@@ -151,15 +148,12 @@ router.post('/guardarNuevoCliente', (req, res) => {
             var Permisos = "Sin presentar";
         }
     }
-
     console.log("ATENCION: SE PROCEDE A GUARDAR NUEVO CLIENTE");
     console.log("DATOS DEL CLIENTE QUE SE GUARDA");
     console.log('NOMBRE:' + Nombre + ', NCarpeta:' + NCarpeta);
     //Variables de las promesas
     var idObra;
     const promise1 = new Promise((resolve, reject) => {
-
-
         sql = 'Insert into obras set ?';
         connection.query(sql, {
             Nombre: Nombre, NCarpeta: NCarpeta, Comitente: Comitente, Ubicacion: Departamento,
@@ -223,7 +217,6 @@ router.post('/guardarNuevoCliente', (req, res) => {
         resolve();
     }).then(function (resultadopromise1) {
         new Promise((resolve, reject) => {
-
             sql = 'Select id from obras where Nombre =?';
             connection.query(sql, Nombre, (error, results) => {
                 if (error) console.log(error);
@@ -231,9 +224,7 @@ router.post('/guardarNuevoCliente', (req, res) => {
                     idObra = results[0].id;
                     resolve();
                 }
-
             })
-
         }).then(function (resultado) {
             const promise2 = new Promise((resolve, reject) => {
                 const cantidadVecinos = req.body.cantidadVecinos;

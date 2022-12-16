@@ -72,7 +72,7 @@ router.get('/interferencias/info', (req, res) => {
 //Administracion Ecogas
 router.get('/adminecogas', (req, res) => {
     if (req.isAuthenticated()) {
-        let sql;
+           let sql;
         // INTERFERENCIAS
         var interferenciasypermisos;
         sql = 'Select * from adminecogas_interferencias_y_permisos';

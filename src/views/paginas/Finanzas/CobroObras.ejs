@@ -25,23 +25,31 @@
       <label for="BuscadorObra">Buscar obra</label>
       <input class="border border-danger" type="text" name="BuscadorObra" id="BuscadorObra">
     </div>
-      <table class="table" id="TablaPrincipal">
+    <div class="col-8">
+      <table class="table table-sm table-bordered" id="TablaPrincipal">
         <thead>
           <tr>
-            <th scope="col">Obra</th>
-            <th scope="col">N°</th>
-            <th scope="col">Cantidad de vecinos</th>
-            <th scope="col">Monto total contrato</th>
-            <th scope="col">Monto pagado</th>
+            <th>Obra</th>
+            <th>N°</th>
+            <th>Cantidad de vecinos</th>
+            <th>Estado</th>
+            </tr>
         </thead>
-        <tbody style="display: none;">
-          <tr class="">
+        <tbody>
             <%  for (let index = 0; index < NombreObras.length; index++) {%>
               <%    const element = NombreObras[index];%>
               <%var contador=0;%>
-              <td>
-                <a class="btn btn-sm" href="Finanzas/cobrodeobras/VerObra/<%= element.Nombre%>"><%= element.Nombre%></a
-              </td>
+              <%if(element.Estado=="Finalizada"){ %>
+              <tr class="bg-danger text-light">
+                <%}%>
+                <%if(element.Estado=="ELIMINADO"){%>
+                  <tr class="bg-warning">
+                  <%}if(element.Estado!="Finalizada"&&element.Estado!="ELIMINADO" ){%>
+                  <tr class="">
+                    <%}%>
+                    <td>
+                      <a class="btn btn-sm" href="Finanzas/cobrodeobras/VerObra/<%= element.Nombre%>"><%= element.Nombre%></a
+                    </td>
               <td>
                 <%=element.NCarpeta%>
               </td>
@@ -53,14 +61,14 @@
                 <%})%>
                 <%=contador%>
               </td>
-             
-              <td></td>
-              <td></td>
+              <td>
+                <%=element.Estado%>
+              </td>
           </tr>
                 <%}%>
         </tbody>
       </table>
-    
+    </div>
     <!-- Modal para cargar pago de cliente -->
 
     <div class="container-fluid">
@@ -289,7 +297,6 @@
 <script>
     jQuery("#BuscadorObra").keyup(function () {
     if (jQuery(this).val() != "") {
-      $('#TablaPrincipal tbody').css('display', 'block');
       jQuery("#TablaPrincipal tbody>tr").hide();
       jQuery("#TablaPrincipal td:contiene-palabra('" + jQuery(this).val() + "')").parent("tr").show("slow");
     }

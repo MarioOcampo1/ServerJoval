@@ -20,6 +20,9 @@
         </h1>
       </div>
       <h2 class="text-center">Lista de clientes que contiene la obra</h2>
+      <div class="container border border-danger">
+        <p class="fw-bold">En caso de no encontrar el cliente deseado, es debido a que no se registran pagos del mismo y/o no se han cargado en el sistema los correspondientes cargos a pagar. Deberá de dirigirse a la ventana anterior y cargarlo.</p>
+      </div>
       <div class="container VistaClientes m-2">
 
         <label for="BuscadorCliente">Buscar cliente</label>
@@ -40,12 +43,40 @@
             <th>Cuota4 </th>
             <th>Cuota5 </th>
             <th>Cuota6 </th>
-          <th>Cuota7 </th>
-            <th>Cuota8 </th>
-            <th>Cuota9 </th>
-            <th>Cuota10 </th>
-            <th>Cuota11 </th>
-            <th>Cuota12 </th>
+            <%var cuota7 = true;%>
+            <%var cuota8 = true;%>
+            <%var cuota9 = true;%>
+            <%var cuota10 = true;%>
+            <%var cuota11 = true;%>
+            <%var cuota12 = true;%>
+           <%PredeterminadosyCobros.forEach((cobros)=>{%>
+            <%if((cobros.Cuota7!=null && cobros.Cuota7!=0 && cobros.Cuota7!=0000 && cobros.PredeterminadoCuota7!=null && cobros.PredeterminadoCuota7!=0 && cobros.PredeterminadoCuota7!=0000)){}else{cuota7=false;}%>
+            <%if((cobros.Cuota8!=null && cobros.Cuota8!=0 && cobros.Cuota8!=0000 && cobros.PredeterminadoCuota8!=null && cobros.PredeterminadoCuota8!=0 && cobros.PredeterminadoCuota8!=0000)){}else{cuota8=false;}%>
+            <%if((cobros.Cuota9!=null && cobros.Cuota9!=0 && cobros.Cuota9!=0000 && cobros.PredeterminadoCuota9!=null && cobros.PredeterminadoCuota9!=0 && cobros.PredeterminadoCuota9!=0000)){}else{cuota9=false;}%>
+            <%if((cobros.Cuota10!=null && cobros.Cuota10!=0 && cobros.Cuota10!=0000 && cobros.PredeterminadoCuota10!=null && cobros.PredeterminadoCuota10!=0 && cobros.PredeterminadoCuota10!=0000)){}else{ cuota10=false;}%>
+            <%if((cobros.Cuota11!=null && cobros.Cuota11!=0 && cobros.Cuota11!=0000 && cobros.PredeterminadoCuota11!=null && cobros.PredeterminadoCuota11!=0 && cobros.PredeterminadoCuota11!=0000)){}else{ cuota11=false;}%>
+            <%if((cobros.Cuota12!=null && cobros.Cuota12!=0 && cobros.Cuota12!=0000 && cobros.PredeterminadoCuota12!=null && cobros.PredeterminadoCuota12!=0 && cobros.PredeterminadoCuota12!=0000)){}else{ cuota12=false;}%>
+           <%})%>
+          
+<%if(cuota7){%>
+  <th>Cuota7 </th>
+  <%}%>
+<%if(cuota8){%>
+  <th>Cuota8 </th>
+  <%}%>
+<%if(cuota9){%>
+  <th>Cuota9 </th>
+  <%}%>
+<%if(cuota10){%>
+  <th>Cuota10 </th>
+  <%}%>
+<%if(cuota11){%>
+  <th>Cuota11 </th>
+  <%}%>
+<%if(cuota12){%>
+  <th>Cuota12 </th>
+  <%}%>
+
           <th>Permiso DNV </th>
             <th>Permiso DPV </th>
             <th>Permiso Hidraulica </th>
@@ -59,7 +90,7 @@
           </tr>
         </thead>
         <tbody>
-          <% Cobros.forEach((cliente)=>{ %>
+          <% PredeterminadosyCobros.forEach((cliente)=>{ %>
           <tr>
             
               <td class="text-center">
@@ -69,21 +100,21 @@
               </td>
               <%if(cliente.AnticipoFinanciero==null || cliente.AnticipoFinanciero=='0000'){%>
                 <td class="text-center text-muted">
-                  <%=Predeterminado[0].PredeterminadoAnticipoFinanciero%>
+                  <%=cliente.PredeterminadoAnticipoFinanciero%>
                 </td>
                 <%}else{%>
-                  <%if(cliente.AnticipoFinanciero>Predeterminado[0].PredeterminadoAnticipoFinanciero ){%>
+                  <%if(cliente.AnticipoFinanciero>cliente.PredeterminadoAnticipoFinanciero ){%>
                     <td class="text-center text-warning">
                       <%=cliente.AnticipoFinanciero %>
                     </td>
                     <%}%>
-                      <%if(cliente.AnticipoFinanciero<Predeterminado[0].PredeterminadoAnticipoFinanciero){%>
+                      <%if(cliente.AnticipoFinanciero<cliente.PredeterminadoAnticipoFinanciero){%>
                         <td class="text-center text-danger">
                           <%=cliente.AnticipoFinanciero %>
                         </td>
                         <%}%>
 
-                          <%if(cliente.AnticipoFinanciero==Predeterminado[0].PredeterminadoAnticipoFinanciero){%>
+                          <%if(cliente.AnticipoFinanciero==cliente.PredeterminadoAnticipoFinanciero){%>
 
                             <td class="text-center text-success ">
                               <%=cliente.AnticipoFinanciero%>
@@ -93,21 +124,21 @@
                             <%}%>
                               <%if(cliente.Cuota1==null ||cliente.Cuota1=='0000'){%>
                                 <td class="text-center text-muted">
-                                  <%=Predeterminado[0].PredeterminadoCuota1%>
+                                  <%=cliente.PredeterminadoCuota1%>
                                 </td>
                                 <%}else{%>
-                                  <%if(cliente.Cuota1>Predeterminado[0].PredeterminadoCuota1 ){%>
+                                  <%if(cliente.Cuota1>cliente.PredeterminadoCuota1 ){%>
                                     <td class="text-center text-warning">
                                       <%=cliente.Cuota1 %>
                                     </td>
                                     <%}%>
-                                      <%if(cliente.Cuota1<Predeterminado[0].PredeterminadoCuota1){%>
+                                      <%if(cliente.Cuota1<cliente.PredeterminadoCuota1){%>
                                         <td class="text-center text-danger">
                                           <%=cliente.Cuota1 %>
                                         </td>
                                         <%}%>
 
-                                          <%if(cliente.Cuota1==Predeterminado[0].PredeterminadoCuota1){%>
+                                          <%if(cliente.Cuota1==cliente.PredeterminadoCuota1){%>
                                             <td class="text-center text-success ">
                                               <%=cliente.Cuota1%>
                                             </td>
@@ -115,21 +146,21 @@
 <%}%>
 <%if(cliente.Cuota2==null || cliente.Cuota2=='0000'){%>
   <td class="text-center text-muted">
-    <%=Predeterminado[0].PredeterminadoCuota2%>
+    <%=cliente.PredeterminadoCuota2%>
   </td>
   <%}else{%>
-    <%if(cliente.Cuota2>Predeterminado[0].PredeterminadoCuota2 ){%>
+    <%if(cliente.Cuota2>cliente.PredeterminadoCuota2 ){%>
       <td class="text-center text-warning">
         <%=cliente.Cuota2 %>
       </td>
       <%}%>
-        <%if(cliente.Cuota2<Predeterminado[0].PredeterminadoCuota2){%>
+        <%if(cliente.Cuota2<cliente.PredeterminadoCuota2){%>
           <td class="text-center text-danger">
             <%=cliente.Cuota2 %>
           </td>
           <%}%>
 
-            <%if(cliente.Cuota2==Predeterminado[0].PredeterminadoCuota2){%>
+            <%if(cliente.Cuota2==cliente.PredeterminadoCuota2){%>
               <td class="text-center text-success ">
                 <%=cliente.Cuota2%>
               </td>
@@ -137,21 +168,21 @@
 <%}%>
 <%if(cliente.Cuota3==null || cliente.Cuota3=='0000'){%>
   <td class="text-center text-muted">
-    <%=Predeterminado[0].PredeterminadoCuota3%>
+    <%=cliente.PredeterminadoCuota3%>
   </td>
   <%}else{%>
-    <%if(cliente.Cuota3>Predeterminado[0].PredeterminadoCuota3 ){%>
+    <%if(cliente.Cuota3>cliente.PredeterminadoCuota3 ){%>
       <td class="text-center text-warning">
         <%=cliente.Cuota3 %>
       </td>
       <%}%>
-        <%if(cliente.Cuota3<Predeterminado[0].PredeterminadoCuota3){%>
+        <%if(cliente.Cuota3<cliente.PredeterminadoCuota3){%>
           <td class="text-center text-danger">
             <%=cliente.Cuota3 %>
           </td>
           <%}%>
 
-            <%if(cliente.Cuota3==Predeterminado[0].PredeterminadoCuota3){%>
+            <%if(cliente.Cuota3==cliente.PredeterminadoCuota3){%>
               <td class="text-center text-success ">
                 <%=cliente.Cuota3%>
               </td>
@@ -159,21 +190,21 @@
 <%}%>
 <%if(cliente.Cuota4==null || cliente.Cuota4=='0000'){%>
   <td class="text-center text-muted">
-    <%=Predeterminado[0].PredeterminadoCuota4%>
+    <%=cliente.PredeterminadoCuota4%>
   </td>
   <%}else{%>
-    <%if(cliente.Cuota4>Predeterminado[0].PredeterminadoCuota4 ){%>
+    <%if(cliente.Cuota4>cliente.PredeterminadoCuota4 ){%>
       <td class="text-center text-warning">
         <%=cliente.Cuota4 %>
       </td>
       <%}%>
-        <%if(cliente.Cuota4<Predeterminado[0].PredeterminadoCuota4){%>
+        <%if(cliente.Cuota4<cliente.PredeterminadoCuota4){%>
           <td class="text-center text-danger">
             <%=cliente.Cuota4 %>
           </td>
           <%}%>
 
-            <%if(cliente.Cuota4==Predeterminado[0].PredeterminadoCuota4){%>
+            <%if(cliente.Cuota4==cliente.PredeterminadoCuota4){%>
               <td class="text-center text-success ">
                 <%=cliente.Cuota4%>
               </td>
@@ -181,21 +212,21 @@
 <%}%>
 <%if(cliente.Cuota5==null || cliente.Cuota5=='0000'){%>
   <td class="text-center text-muted">
-    <%=Predeterminado[0].PredeterminadoCuota5%>
+    <%=cliente.PredeterminadoCuota5%>
   </td>
   <%}else{%>
-    <%if(cliente.Cuota5>Predeterminado[0].PredeterminadoCuota5 ){%>
+    <%if(cliente.Cuota5>cliente.PredeterminadoCuota5 ){%>
       <td class="text-center text-warning">
         <%=cliente.Cuota5 %>
       </td>
       <%}%>
-        <%if(cliente.Cuota5<Predeterminado[0].PredeterminadoCuota5){%>
+        <%if(cliente.Cuota5<cliente.PredeterminadoCuota5){%>
           <td class="text-center text-danger">
             <%=cliente.Cuota5 %>
           </td>
           <%}%>
 
-            <%if(cliente.Cuota5==Predeterminado[0].PredeterminadoCuota5){%>
+            <%if(cliente.Cuota5==cliente.PredeterminadoCuota5){%>
               <td class="text-center text-success ">
                 <%=cliente.Cuota5%>
               </td>
@@ -203,153 +234,164 @@
 <%}%>
 <%if(cliente.Cuota6==null || cliente.Cuota6=='0000'){%>
   <td class="text-center text-muted">
-    <%=Predeterminado[0].PredeterminadoCuota6%>
+    <%=cliente.PredeterminadoCuota6%>
   </td>
   <%}else{%>
-    <%if(cliente.Cuota6>Predeterminado[0].PredeterminadoCuota6 ){%>
+    <%if(cliente.Cuota6>cliente.PredeterminadoCuota6 ){%>
       <td class="text-center text-warning">
         <%=cliente.Cuota6 %>
       </td>
       <%}%>
-        <%if(cliente.Cuota6<Predeterminado[0].PredeterminadoCuota6){%>
+        <%if(cliente.Cuota6<cliente.PredeterminadoCuota6){%>
           <td class="text-center text-danger">
             <%=cliente.Cuota6 %>
           </td>
           <%}%>
 
-            <%if(cliente.Cuota6==Predeterminado[0].PredeterminadoCuota6){%>
+            <%if(cliente.Cuota6==cliente.PredeterminadoCuota6){%>
               <td class="text-center text-success ">
                 <%=cliente.Cuota6%>
               </td>
               <%}%>
-<%}%>
+              <%}%>
 <%if(cliente.Cuota7==null || cliente.Cuota7=='0000'){%>
+  <%if(cliente.PredeterminadoCuota7==null || cliente.PredeterminadoCuota7==0000 || cliente.PredeterminadoCuota7==0){}else{%>
   <td class="text-center text-muted">
-    <%=Predeterminado[0].PredeterminadoCuota7%>
+    <%=cliente.PredeterminadoCuota7%>
   </td>
-  <%}else{%>
-    <%if(cliente.Cuota7>Predeterminado[0].PredeterminadoCuota7 ){%>
+  <%}}else{%>
+    <%if(cliente.Cuota7>cliente.PredeterminadoCuota7 ){%>
       <td class="text-center text-warning">
         <%=cliente.Cuota7 %>
       </td>
       <%}%>
-        <%if(cliente.Cuota7<Predeterminado[0].PredeterminadoCuota7){%>
+        <%if(cliente.Cuota7<cliente.PredeterminadoCuota7){%>
           <td class="text-center text-danger">
             <%=cliente.Cuota7 %>
           </td>
           <%}%>
 
-            <%if(cliente.Cuota7==Predeterminado[0].PredeterminadoCuota7){%>
+            <%if(cliente.Cuota7==cliente.PredeterminadoCuota7){%>
               <td class="text-center text-success ">
                 <%=cliente.Cuota7%>
               </td>
               <%}%>
 <%}%>
+
 <%if(cliente.Cuota8==null || cliente.Cuota8=='0000'){%>
+  <%if(cliente.PredeterminadoCuota8==null || cliente.PredeterminadoCuota8==0000 || cliente.PredeterminadoCuota8==0){}else{%>
   <td class="text-center text-muted">
-    <%=Predeterminado[0].PredeterminadoCuota8%>
+    <%=cliente.PredeterminadoCuota8%>
   </td>
-  <%}else{%>
-    <%if(cliente.Cuota8>Predeterminado[0].PredeterminadoCuota8 ){%>
+  <%}}else{%>
+    <%if(cliente.Cuota8>cliente.PredeterminadoCuota8 ){%>
       <td class="text-center text-warning">
         <%=cliente.Cuota8 %>
       </td>
       <%}%>
-        <%if(cliente.Cuota8<Predeterminado[0].PredeterminadoCuota8){%>
+        <%if(cliente.Cuota8<cliente.PredeterminadoCuota8){%>
           <td class="text-center text-danger">
             <%=cliente.Cuota8 %>
           </td>
           <%}%>
 
-            <%if(cliente.Cuota8==Predeterminado[0].PredeterminadoCuota8){%>
+            <%if(cliente.Cuota8==cliente.PredeterminadoCuota8){%>
               <td class="text-center text-success ">
                 <%=cliente.Cuota8%>
               </td>
               <%}%>
 <%}%>
+
 <%if(cliente.Cuota9==null || cliente.Cuota9=='0000'){%>
+  <%if(cliente.PredeterminadoCuota9==null || cliente.PredeterminadoCuota9==0000 || cliente.PredeterminadoCuota9==0){}else{%>
   <td class="text-center text-muted">
-    <%=Predeterminado[0].PredeterminadoCuota9%>
+    <%=cliente.PredeterminadoCuota9%>
   </td>
-  <%}else{%>
-    <%if(cliente.Cuota9>Predeterminado[0].PredeterminadoCuota9 ){%>
+  <%}}else{%>
+    <%if(cliente.Cuota9>cliente.PredeterminadoCuota9 ){%>
       <td class="text-center text-warning">
         <%=cliente.Cuota9 %>
       </td>
       <%}%>
-        <%if(cliente.Cuota9<Predeterminado[0].PredeterminadoCuota9){%>
+        <%if(cliente.Cuota9<cliente.PredeterminadoCuota9){%>
           <td class="text-center text-danger">
             <%=cliente.Cuota9 %>
           </td>
           <%}%>
 
-            <%if(cliente.Cuota9==Predeterminado[0].PredeterminadoCuota9){%>
+            <%if(cliente.Cuota9==cliente.PredeterminadoCuota9){%>
               <td class="text-center text-success ">
                 <%=cliente.Cuota9%>
               </td>
               <%}%>
 <%}%>
+
 <%if(cliente.Cuota10==null || cliente.Cuota10=='0000'){%>
+  <%if(cliente.PredeterminadoCuota10==null || cliente.PredeterminadoCuota10==0000 || cliente.PredeterminadoCuota10==0){}else{%>
   <td class="text-center text-muted">
-    <%=Predeterminado[0].PredeterminadoCuota10%>
+    <%=cliente.PredeterminadoCuota10%>
   </td>
-  <%}else{%>
-    <%if(cliente.Cuota10>Predeterminado[0].PredeterminadoCuota10 ){%>
+  <%}}else{%>
+    <%if(cliente.Cuota10>cliente.PredeterminadoCuota10 ){%>
       <td class="text-center text-warning">
         <%=cliente.Cuota10 %>
       </td>
       <%}%>
-        <%if(cliente.Cuota10<Predeterminado[0].PredeterminadoCuota10){%>
+        <%if(cliente.Cuota10<cliente.PredeterminadoCuota10){%>
           <td class="text-center text-danger">
             <%=cliente.Cuota10 %>
           </td>
           <%}%>
 
-            <%if(cliente.Cuota10==Predeterminado[0].PredeterminadoCuota10){%>
+            <%if(cliente.Cuota10==cliente.PredeterminadoCuota10){%>
               <td class="text-center text-success ">
                 <%=cliente.Cuota10%>
               </td>
               <%}%>
 <%}%>
+
 <%if(cliente.Cuota11==null || cliente.Cuota11=='0000'){%>
+  <%if(cliente.PredeterminadoCuota11==null || cliente.PredeterminadoCuota11==0000 || cliente.PredeterminadoCuota11==0){}else{%>
   <td class="text-center text-muted">
-    <%=Predeterminado[0].PredeterminadoCuota11%>
+    <%=cliente.PredeterminadoCuota11%>
   </td>
-  <%}else{%>
-    <%if(cliente.Cuota11>Predeterminado[0].PredeterminadoCuota11 ){%>
+  <%}}else{%>
+    <%if(cliente.Cuota11>cliente.PredeterminadoCuota11 ){%>
       <td class="text-center text-warning">
         <%=cliente.Cuota11 %>
       </td>
       <%}%>
-        <%if(cliente.Cuota11<Predeterminado[0].PredeterminadoCuota11){%>
+        <%if(cliente.Cuota11<cliente.PredeterminadoCuota11){%>
           <td class="text-center text-danger">
             <%=cliente.Cuota11 %>
           </td>
           <%}%>
 
-            <%if(cliente.Cuota11==Predeterminado[0].PredeterminadoCuota11){%>
+            <%if(cliente.Cuota11==cliente.PredeterminadoCuota11){%>
               <td class="text-center text-success ">
                 <%=cliente.Cuota11%>
               </td>
               <%}%>
 <%}%>
+
 <%if(cliente.Cuota12==null || cliente.Cuota12=='0000'){%>
+  <%if(cliente.PredeterminadoCuota12==null || cliente.PredeterminadoCuota12==0000 || cliente.PredeterminadoCuota12==0){}else{%>
   <td class="text-center text-muted">
-    <%=Predeterminado[0].PredeterminadoCuota12%>
+    <%=cliente.PredeterminadoCuota12%>
   </td>
-  <%}else{%>
-    <%if(cliente.Cuota12>Predeterminado[0].PredeterminadoCuota12 ){%>
+  <%}}else{%>
+    <%if(cliente.Cuota12>cliente.PredeterminadoCuota12 ){%>
       <td class="text-center text-warning">
         <%=cliente.Cuota12 %>
       </td>
       <%}%>
-        <%if(cliente.Cuota12<Predeterminado[0].PredeterminadoCuota12){%>
+        <%if(cliente.Cuota12<cliente.PredeterminadoCuota12){%>
           <td class="text-center text-danger">
             <%=cliente.Cuota12 %>
           </td>
           <%}%>
 
-            <%if(cliente.Cuota12==Predeterminado[0].PredeterminadoCuota12){%>
+            <%if(cliente.Cuota12==cliente.PredeterminadoCuota12){%>
               <td class="text-center text-success ">
                 <%=cliente.Cuota12%>
               </td>
@@ -358,21 +400,21 @@
 
 <%if(cliente.DNV==null){%>
   <td class="text-center text-muted">
-    <%=Predeterminado[0].PredeterminadoDNV%>
+    <%=cliente.PredeterminadoDNV%>
   </td>
   <%}else{%>
-    <%if(cliente.DNV>Predeterminado[0].PredeterminadoDNV ){%>
+    <%if(cliente.DNV>cliente.PredeterminadoDNV ){%>
       <td class="text-center text-warning">
         <%=cliente.DNV %>
       </td>
       <%}%>
-        <%if(cliente.DNV<Predeterminado[0].PredeterminadoDNV){%>
+        <%if(cliente.DNV<cliente.PredeterminadoDNV){%>
           <td class="text-center text-danger">
             <%=cliente.DNV %>
           </td>
           <%}%>
 
-            <%if(cliente.DNV==Predeterminado[0].PredeterminadoDNV){%>
+            <%if(cliente.DNV==cliente.PredeterminadoDNV){%>
               <td class="text-center text-success ">
                 <%=cliente.DNV%>
               </td>
@@ -380,21 +422,21 @@
 <%}%>
 <%if(cliente.DPV==null){%>
   <td class="text-center text-muted">
-    <%=Predeterminado[0].PredeterminadoDPV%>
+    <%=cliente.PredeterminadoDPV%>
   </td>
   <%}else{%>
-    <%if(cliente.DPV>Predeterminado[0].PredeterminadoDPV ){%>
+    <%if(cliente.DPV>cliente.PredeterminadoDPV ){%>
       <td class="text-center text-warning">
         <%=cliente.DPV %>
       </td>
       <%}%>
-        <%if(cliente.DPV<Predeterminado[0].PredeterminadoDPV){%>
+        <%if(cliente.DPV<cliente.PredeterminadoDPV){%>
           <td class="text-center text-danger">
             <%=cliente.DPV %>
           </td>
           <%}%>
 
-            <%if(cliente.DPV==Predeterminado[0].PredeterminadoDPV){%>
+            <%if(cliente.DPV==cliente.PredeterminadoDPV){%>
               <td class="text-center text-success ">
                 <%=cliente.DPV%>
               </td>
@@ -402,21 +444,21 @@
 <%}%>
 <%if(cliente.Hidraulica==null){%>
   <td class="text-center text-muted">
-    <%=Predeterminado[0].PredeterminadoHidraulica%>
+    <%=cliente.PredeterminadoHidraulica%>
   </td>
   <%}else{%>
-    <%if(cliente.Hidraulica>Predeterminado[0].PredeterminadoHidraulica ){%>
+    <%if(cliente.Hidraulica>cliente.PredeterminadoHidraulica ){%>
       <td class="text-center text-warning">
         <%=cliente.Hidraulica %>
       </td>
       <%}%>
-        <%if(cliente.Hidraulica<Predeterminado[0].PredeterminadoHidraulica){%>
+        <%if(cliente.Hidraulica<cliente.PredeterminadoHidraulica){%>
           <td class="text-center text-danger">
             <%=cliente.Hidraulica %>
           </td>
           <%}%>
 
-            <%if(cliente.Hidraulica==Predeterminado[0].PredeterminadoHidraulica){%>
+            <%if(cliente.Hidraulica==cliente.PredeterminadoHidraulica){%>
               <td class="text-center text-success ">
                 <%=cliente.Hidraulica%>
               </td>
@@ -424,21 +466,21 @@
 <%}%>
 <%if(cliente.FFCC==null){%>
   <td class="text-center text-muted">
-    <%=Predeterminado[0].PredeterminadoFFCC%>
+    <%=cliente.PredeterminadoFFCC%>
   </td>
   <%}else{%>
-    <%if(cliente.FFCC>Predeterminado[0].PredeterminadoFFCC ){%>
+    <%if(cliente.FFCC>cliente.PredeterminadoFFCC ){%>
       <td class="text-center text-warning">
         <%=cliente.FFCC %>
       </td>
       <%}%>
-        <%if(cliente.FFCC<Predeterminado[0].PredeterminadoFFCC){%>
+        <%if(cliente.FFCC<cliente.PredeterminadoFFCC){%>
           <td class="text-center text-danger">
             <%=cliente.FFCC %>
           </td>
           <%}%>
 
-            <%if(cliente.FFCC==Predeterminado[0].PredeterminadoFFCC){%>
+            <%if(cliente.FFCC==cliente.PredeterminadoFFCC){%>
               <td class="text-center text-success ">
                 <%=cliente.FFCC%>
               </td>
@@ -446,21 +488,21 @@
 <%}%>
 <%if(cliente.Privado==null){%>
   <td class="text-center text-muted">
-    <%=Predeterminado[0].PredeterminadoPrivado%>
+    <%=cliente.PredeterminadoPrivado%>
   </td>
   <%}else{%>
-    <%if(cliente.Privado>Predeterminado[0].PredeterminadoPrivado ){%>
+    <%if(cliente.Privado>cliente.PredeterminadoPrivado ){%>
       <td class="text-center text-warning">
         <%=cliente.Privado %>
       </td>
       <%}%>
-        <%if(cliente.Privado<Predeterminado[0].PredeterminadoPrivado){%>
+        <%if(cliente.Privado<cliente.PredeterminadoPrivado){%>
           <td class="text-center text-danger">
             <%=cliente.Privado %>
           </td>
           <%}%>
 
-            <%if(cliente.Privado==Predeterminado[0].PredeterminadoPrivado){%>
+            <%if(cliente.Privado==cliente.PredeterminadoPrivado){%>
               <td class="text-center text-success ">
                 <%=cliente.Privado%>
               </td>
@@ -468,21 +510,21 @@
 <%}%>
 <%if(cliente.Municipal==null){%>
   <td class="text-center text-muted">
-    <%=Predeterminado[0].PredeterminadoMunicipal%>
+    <%=cliente.PredeterminadoMunicipal%>
   </td>
   <%}else{%>
-    <%if(cliente.Municipal>Predeterminado[0].PredeterminadoMunicipal ){%>
+    <%if(cliente.Municipal>cliente.PredeterminadoMunicipal ){%>
       <td class="text-center text-warning">
         <%=cliente.Municipal %>
       </td>
       <%}%>
-        <%if(cliente.Municipal<Predeterminado[0].PredeterminadoMunicipal){%>
+        <%if(cliente.Municipal<cliente.PredeterminadoMunicipal){%>
           <td class="text-center text-danger">
             <%=cliente.Municipal %>
           </td>
           <%}%>
 
-            <%if(cliente.Municipal==Predeterminado[0].PredeterminadoMunicipal){%>
+            <%if(cliente.Municipal==cliente.PredeterminadoMunicipal){%>
               <td class="text-center text-success ">
                 <%=cliente.Municipal%>
               </td>
@@ -490,21 +532,21 @@
 <%}%>
 <%if(cliente.ServicioDomiciliario==null){%>
   <td class="text-center text-muted">
-    <%=Predeterminado[0].PredeterminadoServicioDomiciliario%>
+    <%=cliente.PredeterminadoServicioDomiciliario%>
   </td>
   <%}else{%>
-    <%if(cliente.ServicioDomiciliario>Predeterminado[0].PredeterminadoServicioDomiciliario ){%>
+    <%if(cliente.ServicioDomiciliario>cliente.PredeterminadoServicioDomiciliario ){%>
       <td class="text-center text-warning">
         <%=cliente.ServicioDomiciliario %>
       </td>
       <%}%>
-        <%if(cliente.ServicioDomiciliario<Predeterminado[0].PredeterminadoServicioDomiciliario){%>
+        <%if(cliente.ServicioDomiciliario<cliente.PredeterminadoServicioDomiciliario){%>
           <td class="text-center text-danger">
             <%=cliente.ServicioDomiciliario %>
           </td>
           <%}%>
 
-            <%if(cliente.ServicioDomiciliario==Predeterminado[0].PredeterminadoServicioDomiciliario){%>
+            <%if(cliente.ServicioDomiciliario==cliente.PredeterminadoServicioDomiciliario){%>
               <td class="text-center text-success ">
                 <%=cliente.ServicioDomiciliario%>
               </td>
@@ -512,21 +554,21 @@
 <%}%>
 <%if(cliente.IngresoDocumentacion==null){%>
   <td class="text-center text-muted">
-    <%=Predeterminado[0].PredeterminadoIngresoDocumentacion%>
+    <%=cliente.PredeterminadoIngresoDocumentacion%>
   </td>
   <%}else{%>
-    <%if(cliente.IngresoDocumentacion>Predeterminado[0].PredeterminadoIngresoDocumentacion ){%>
+    <%if(cliente.IngresoDocumentacion>cliente.PredeterminadoIngresoDocumentacion ){%>
       <td class="text-center text-warning">
         <%=cliente.IngresoDocumentacion %>
       </td>
       <%}%>
-        <%if(cliente.IngresoDocumentacion<Predeterminado[0].PredeterminadoIngresoDocumentacion){%>
+        <%if(cliente.IngresoDocumentacion<cliente.PredeterminadoIngresoDocumentacion){%>
           <td class="text-center text-danger">
             <%=cliente.IngresoDocumentacion %>
           </td>
           <%}%>
 
-            <%if(cliente.IngresoDocumentacion==Predeterminado[0].PredeterminadoIngresoDocumentacion){%>
+            <%if(cliente.IngresoDocumentacion==cliente.PredeterminadoIngresoDocumentacion){%>
               <td class="text-center text-success ">
                 <%=cliente.IngresoDocumentacion%>
               </td>
@@ -534,21 +576,21 @@
 <%}%>
 <%if(cliente.Irrigacion==null){%>
   <td class="text-center text-muted">
-    <%=Predeterminado[0].PredeterminadoIrrigacion%>
+    <%=cliente.PredeterminadoIrrigacion%>
   </td>
   <%}else{%>
-    <%if(cliente.Irrigacion>Predeterminado[0].PredeterminadoIrrigacion ){%>
+    <%if(cliente.Irrigacion>cliente.PredeterminadoIrrigacion ){%>
       <td class="text-center text-warning">
         <%=cliente.Irrigacion %>
       </td>
       <%}%>
-        <%if(cliente.Irrigacion<Predeterminado[0].PredeterminadoIrrigacion){%>
+        <%if(cliente.Irrigacion<cliente.PredeterminadoIrrigacion){%>
           <td class="text-center text-danger">
             <%=cliente.Irrigacion %>
           </td>
           <%}%>
 
-            <%if(cliente.Irrigacion==Predeterminado[0].PredeterminadoIrrigacion){%>
+            <%if(cliente.Irrigacion==cliente.PredeterminadoIrrigacion){%>
               <td class="text-center text-success ">
                 <%=cliente.Irrigacion%>
               </td>
