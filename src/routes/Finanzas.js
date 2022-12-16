@@ -200,7 +200,7 @@ router.get('/cobroDeObras', (req, res) => {
         cobroObras = resultados;
     })
     var obras;
-    sql = 'Select * From obras ORDER BY Nombre';
+    sql = 'Select * From obras';
     connection.query(sql, (error, resultado) => {
         obras = resultado;
     })
@@ -271,150 +271,6 @@ router.get('/cobrodeobras/clientes/:Nombre/VerClientes', (req, res) => {
         }
 
     })
-})
-// EDITAR CLIENTE
-router.get('/Finanzas/CobroDeObras/EditarCliente/:id', (req, res) => {
-    var id = req.params.id;
-    var pagos;
-    const promise1 = new Promise((success,reject)=>{
-        var sql = 'Select * from obras';
-        connection.query(sql, (error, results) => {
-            if (error){
-                 console.log(error);
-            reject(error);
-            }
-            else {        
-success(results);
-            }
-        })
-    })
-    promise1.then(obras=>{
-        const promise2 = new Promise((success,reject)=>{
-            sql= 'SELECT * from finanzas_clientes_predeterminados WHERE id_cliente =?';
-            connection.query(sql,[id], (error, predeterminados) => {
-                if (error) {console.log(error);
-                reject(error);
-                }
-                else {
-                    var resultados = [predeterminados,obras]
-                    success(resultados);
-                }
-            })
-        })
-        promise2.then(resultados=>{
-            sql = 'SELECT * FROM finanzas_clientes_por_obra WHERE ID_cliente =?';
-            connection.query(sql, [id], (error, results) => {
-                if (error) console.log(error);
-                else {
-                     res.render("paginas/Finanzas/Cobrodeobras/Clientes/editarCliente.ejs", { results: results, obras: resultados[1], pagosPredeterminados:resultados[0] }) }
-            })
-        })
-    }).catch(error=>{
-res.redirect(req.get('referer'));
-    })
-    
-})
-router.post('/Finanzas/CobroDeObras/EditarCliente/:id', (req, res) => {
-    var id = req.params.id;
-    var sql = 'Update finanzas_clientes_por_obra set ? where ID_cliente =?';
-    var Nombre = req.body.Nombre;
-    var DNI = req.body.DNI;
-    var Teléfono = req.body.Teléfono;
-    var Correo = req.body.Correo;
-    var Direccion = req.body.Direccion;
-    console.log(Direccion);
-    var Obra = req.body.Obra;
-
-    connection.query(sql, [{
-        NombreCliente: Nombre, NombreObra: Obra, DNICliente: DNI, Telefono: Teléfono, Correo: Correo, Direccion: Direccion
-    }, id], (error, results) => {
-        if (error) console.log(error)
-        else {
-            res.redirect("/cobroDeObras");
-        }
-    })
-
-})
-router.post('/Finanzas/CobroDeObras/EditarCliente/ActualizarPagoPredeterminado/:id/:keyACambiar', (req,res)=>{
-var id = req.params.id;
-var keySQL= req.params.keyACambiar;
-var valor= req.body.valor
-var sql = 'SELECT * FROM finanzas_clientes_predeterminados WHERE id_cliente =? ';
-connection.query(sql,id,(error,results)=>{
-    if (error) console.log(error)
-    else{
-        if(results.length!=0){
-            sql = 'UPDATE finanzas_clientes_predeterminados SET '+ keySQL+'='+valor+' WHERE id_cliente=?';
-
-            connection.query(sql, id, (error, results) => {
-                if (error) console.log(error)
-                else {
-                    res.redirect('/Finanzas/CobroDeObras/EditarCliente/'+id);
-                }
-            })
-        }
-        else{
-            sql='SELECT id_Obra, NombreCliente from finanzas_clientes_por_obra WHERE ID_cliente =? ';
-            connection.query(sql,id,(error,finanzas_clientes_por_obra)=>{
-sql= 'Insert into finanzas_clientes_predeterminados set ?';
-connection.query(sql,{
-    id_obra: finanzas_clientes_por_obra[0].id_Obra, id_cliente: id, NombreCliente: finanzas_clientes_por_obra[0].NombreCliente,
-},(error,resultado)=>{
-if(error) console.log(error);
-else{
-    res.redirect('/Finanzas/CobroDeObras/EditarCliente/'+id);
-}
-})
-            })
-        }
-    }
-})
- 
-})
-//Vista general de la obra
-router.get('/Finanzas/cobrodeobras/VerObra/:NombreObra', (req, res) => {
-    var NombreObra = req.params.NombreObra;
-    var id;
-    var cobrosXobra;
-    var clientesObra;
-    var tiposDeCobros;
-   const promise1 = new Promise((resolve,reject)=>{
-    var sql = 'SELECT id FROM obras WHERE Nombre =?';
-    connection.query(sql, [NombreObra], (error, results) => {
-        if (error){ console.log(error);
-            reject(error);
-        }
-        else{
-        id = results[0].id;
-        resolve(id);
-    }
-    })
-
-   }).then(resultado=>{  
-    const promise2 = new Promise((resolve,reject)=>{
-        sql = 'SELECT a.*, c.NombreCliente, c.AnticipoFinanciero as PredeterminadoAnticipoFinanciero, c.Cuota1 as PredeterminadoCuota1, c.Cuota2 as PredeterminadoCuota2, c.Cuota3 as PredeterminadoCuota3, c.Cuota4 as PredeterminadoCuota4, c.Cuota5 as PredeterminadoCuota5, c.Cuota6 as PredeterminadoCuota6, c.Cuota7 as PredeterminadoCuota7, c.Cuota8 as PredeterminadoCuota8, c.Cuota9 as PredeterminadoCuota9, c.Cuota10 as PredeterminadoCuota10, c.Cuota11 as PredeterminadoCuota11, c.Cuota12 as PredeterminadoCuota12, c.Irrigacion as PredeterminadoIrrigacion, c.DNV as PredeterminadoDNV, c.DPV as PredeterminadoDPV, c.Hidraulica as PredeterminadoHidraulica, c.FFCC as PredeterminadoFFCC, c.Privado as PredeterminadoPrivado, c.ServicioDomiciliario as PredeterminadoServicioDomiciliario,c.Municipal as PredeterminadoMunicipal, c.IngresoDocumentacion as PredeterminadoIngresoDocumentacion FROM finanzas_clientes_predeterminados c RIGHT JOIN finanzas_clientes_por_obra_cobros a ON a.id_obra =c.id_Obra AND a.id_cliente=c.ID_cliente WHERE c.id_obra =? ORDER BY c.NombreCliente';       
-        connection.query(sql, resultado, (error, PredeterminadosyCobros) => {
-            if (error){ 
-                console.log(error);
-                reject(error);
-            }
-            if (PredeterminadosyCobros.length>0) {
-resolve(PredeterminadosyCobros);
-            }
-            else {
-                reject();
-            }
-        })
-    }).then(PredeterminadosyCobros=>{
-                console.log(PredeterminadosyCobros.length);
-                res.render('paginas/Finanzas/Cobrodeobras/Obras/Vistaobras.ejs', { PredeterminadosyCobros: PredeterminadosyCobros, id_Obra: id, NombreObra: NombreObra }); 
-            
-        })
-   
-   }).catch( function(err){
-    res.redirect("/cobroDeObras");
-   }
-   )
 })
 
 router.post('/cobrodeobras/clientes/cargarArchivoConClientes', (req, res) => {
@@ -572,7 +428,156 @@ id_Cobro=results[0].id_Cobro
 
 
 })
+// EDITAR CLIENTE
+router.get('/Finanzas/CobroDeObras/EditarCliente/:id', (req, res) => {
+    var id = req.params.id;
+    var pagos;
+    const promise1 = new Promise((success,reject)=>{
+        var sql = 'Select * from obras';
+        connection.query(sql, (error, results) => {
+            if (error){
+                 console.log(error);
+            reject(error);
+            }
+            else {        
+success(results);
+            }
+        })
+    })
+    promise1.then(obras=>{
+        const promise2 = new Promise((success,reject)=>{
+            sql= 'SELECT * from finanzas_clientes_predeterminados WHERE id_cliente =?';
+            connection.query(sql,[id], (error, predeterminados) => {
+                if (error) {console.log(error);
+                reject(error);
+                }
+                else {
+                    var resultados = [predeterminados,obras]
+                    success(resultados);
+                }
+            })
+        })
+        promise2.then(resultados=>{
+            sql = 'SELECT * FROM finanzas_clientes_por_obra WHERE ID_cliente =?';
+            connection.query(sql, [id], (error, results) => {
+                if (error) console.log(error);
+                else {
+                     res.render("paginas/Finanzas/Cobrodeobras/Clientes/editarCliente.ejs", { results: results, obras: resultados[1], pagosPredeterminados:resultados[0] }) }
+            })
+        })
+    }).catch(error=>{
+res.redirect(req.get('referer'));
+    })
+    
+})
+router.post('/Finanzas/CobroDeObras/EditarCliente/:id', (req, res) => {
+    var id = req.params.id;
+    var sql = 'Update finanzas_clientes_por_obra set ? where ID_cliente =?';
+    var Nombre = req.body.Nombre;
+    var DNI = req.body.DNI;
+    var Teléfono = req.body.Teléfono;
+    var Correo = req.body.Correo;
+    var Direccion = req.body.Direccion;
+    console.log(Direccion);
+    var Obra = req.body.Obra;
 
+    connection.query(sql, [{
+        NombreCliente: Nombre, NombreObra: Obra, DNICliente: DNI, Telefono: Teléfono, Correo: Correo, Direccion: Direccion
+    }, id], (error, results) => {
+        if (error) console.log(error)
+        else {
+            res.redirect("/cobroDeObras");
+        }
+    })
+
+})
+router.post('/Finanzas/CobroDeObras/EditarCliente/ActualizarPagoPredeterminado/:id/:keyACambiar', (req,res)=>{
+var id = req.params.id;
+var keySQL= req.params.keyACambiar;
+var valor= req.body.valor
+var sql = 'SELECT * FROM finanzas_clientes_predeterminados WHERE id_cliente =? ';
+connection.query(sql,id,(error,results)=>{
+    if (error) console.log(error)
+    else{
+        if(results.length!=0){
+            sql = 'UPDATE finanzas_clientes_predeterminados SET '+ keySQL+'='+valor+' WHERE id_cliente=?';
+
+            connection.query(sql, id, (error, results) => {
+                if (error) console.log(error)
+                else {
+                    res.redirect('/Finanzas/CobroDeObras/EditarCliente/'+id);
+                }
+            })
+        }
+        else{
+            sql='SELECT id_Obra, NombreCliente from finanzas_clientes_por_obra WHERE ID_cliente =? ';
+            connection.query(sql,id,(error,finanzas_clientes_por_obra)=>{
+sql= 'Insert into finanzas_clientes_predeterminados set ?';
+connection.query(sql,{
+    id_obra: finanzas_clientes_por_obra[0].id_Obra, id_cliente: id, NombreCliente: finanzas_clientes_por_obra[0].NombreCliente,
+},(error,resultado)=>{
+if(error) console.log(error);
+else{
+    res.redirect('/Finanzas/CobroDeObras/EditarCliente/'+id);
+}
+})
+            })
+        }
+    }
+})
+ 
+})
+//Vista general de la obra
+router.get('/Finanzas/cobrodeobras/VerObra/:NombreObra', (req, res) => {
+    var NombreObra = req.params.NombreObra;
+    var id;
+    var cobrosXobra;
+    var clientesObra;
+    var tiposDeCobros;
+   const promise1 = new Promise((resolve,reject)=>{
+    var sql = 'SELECT id FROM obras WHERE Nombre =?';
+    connection.query(sql, [NombreObra], (error, results) => {
+        if (error){ console.log(error);
+            reject(error);
+        }
+        else{
+        id = results[0].id;
+        resolve(id);
+    }
+    })
+
+   }).then(idObra=>{  
+    const promise2 = new Promise((resolve,reject)=>{
+                sql = 'SELECT b.NombreCliente,b.ID_cliente,a.*, b.id_Obra, c.AnticipoFinanciero as PredeterminadoAnticipoFinanciero, c.Cuota1 as PredeterminadoCuota1, c.Cuota2 as PredeterminadoCuota2, c.Cuota3 as PredeterminadoCuota3, c.Cuota4 as PredeterminadoCuota4, c.Cuota5 as PredeterminadoCuota5, c.Cuota6 as PredeterminadoCuota6, c.Cuota7 as PredeterminadoCuota7, c.Cuota8 as PredeterminadoCuota8, c.Cuota9 as PredeterminadoCuota9, c.Cuota10 as PredeterminadoCuota10, c.Cuota11 as PredeterminadoCuota11, c.Cuota12 as PredeterminadoCuota12, c.Irrigacion as PredeterminadoIrrigacion, c.DNV as PredeterminadoDNV, c.DPV as PredeterminadoDPV, c.Hidraulica as PredeterminadoHidraulica, c.FFCC as PredeterminadoFFCC, c.Privado as PredeterminadoPrivado, c.ServicioDomiciliario as PredeterminadoServicioDomiciliario,c.Municipal as PredeterminadoMunicipal, c.IngresoDocumentacion as PredeterminadoIngresoDocumentacion FROM finanzas_clientes_por_obra b LEFT JOIN finanzas_clientes_predeterminados c ON b.ID_cliente=c.id_cliente LEFT JOIN finanzas_clientes_por_obra_cobros a ON b.ID_cliente=a.id_cliente WHERE b.id_Obra =?';
+         connection.query(sql,idObra, (error, PredeterminadosyCobros) => {
+            if (error){ 
+                console.log(error);
+                reject(error);
+            }
+           
+            if (PredeterminadosyCobros.length>0) {
+    
+resolve(PredeterminadosyCobros);
+            }
+            else {
+                reject();
+            }
+        })
+    }).then(PredeterminadosyCobros=>{
+        for (let index = 0; index < 2; index++) {
+            const element = PredeterminadosyCobros[index];
+console.log(PredeterminadosyCobros[0]);
+        }
+            
+                res.render('paginas/Finanzas/Cobrodeobras/Obras/Vistaobras.ejs', { PredeterminadosyCobros: PredeterminadosyCobros, id_Obra: id, NombreObra: NombreObra }); 
+            
+        })
+   
+   }).catch( function(err){
+    res.redirect("/cobroDeObras");
+   }
+   )
+})
 //Actualizar configuracion de la obra
 router.post('/Finanzas/actualizarPredeterminadosObraEntera/:id/:keyACambiar/:NombreObra',(req,res)=>{
     var idObra= req.params.id;
