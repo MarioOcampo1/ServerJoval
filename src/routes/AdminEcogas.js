@@ -760,6 +760,9 @@ router.post('/act1pCarpEcogas/:id', upload.none(), function (req, res) {
     var DNVVisacion = req.body.DNV1;
     var FerrocarrilesVisacion = req.body.FERROCARRIL1;
     var FechaFirmaContrato = req.body.FechaFirmaContrato;
+    if( FechaFirmaContrato==''){
+        FechaFirmaContrato=null;
+    }
     var CuestionarioRelevamientoAmbiental = req.body.CuestionarioRelevamientoAmbiental;
     var DDJJInicialAmbiental = req.body.DDJJInicialAmbiental;
     var ListaVerificacionAmbiental = req.body.ListaVerificacionAmbiental;

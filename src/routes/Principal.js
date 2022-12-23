@@ -328,3 +328,7 @@ router.get('/contactos', (req, res) => {
         })
     } else { res.redirect('/'); }
 })
+//Logo
+router.get('/logo',(req,res)=>{
+    res.sendFile('logo.png',{root: 'src/public/images'});
+})

@@ -24,12 +24,10 @@
         <p class="fw-bold">En caso de no encontrar el cliente deseado, es debido a que no se registran pagos del mismo y/o no se han cargado en el sistema los correspondientes cargos a pagar. Deberá de dirigirse a la ventana anterior y cargarlo.</p>
       </div>
       <div class="container VistaClientes m-2">
-
         <label for="BuscadorCliente">Buscar cliente</label>
         <input class="border border-danger" type="text" name="BuscadorCliente" id="BuscadorCliente">
         <button class="btn btn-primary" onclick="ExportarAExcel();" disabled>Exportar planilla</button>
-        <button class="btn btn-primary" data-bs-toggle="modal"
-          data-bs-target="#ModalConfiguracion">Configuraciones de la obra</button>
+        <button class="btn btn-primary" data-bs-toggle="modal"data-bs-target="#ModalConfiguracion">Configuraciones de la obra</button>
       </div>
             <table id="TablaObras" class="table table-bordered table-inverse table-responsive"
         style="display: block; width:100%;">
@@ -86,17 +84,15 @@
             <th>Servicio Domiciliario </th>
             <th>Ingreso documentación por comienzo tramite </th>
             <th>Permiso Irrigación </th>
-
           </tr>
         </thead>
         <tbody>
           <% PredeterminadosyCobros.forEach((cliente)=>{ %>
           <tr>
-            
               <td class="text-center">
-                <a href="/Finanzas/CobroDeObras/EditarCliente/<%=cliente.ID_cliente%>">
+                <button class="btn" href="/Finanzas/CobroDeObras/EditarCliente/<%=cliente.ID_cliente%>" onclick="CargarPago('<%=cliente.ID_cliente%>','<%=cliente.NombreCliente%>');">
                   <%= cliente.NombreCliente%>
-                </a>
+                </button>
               </td>
               <%if(cliente.AnticipoFinanciero==null || cliente.AnticipoFinanciero=='0000'){%>
                 <td class="text-center text-muted">
@@ -182,7 +178,7 @@
           </td>
           <%}%>
 
-            <%if(cliente.Cuota3==cliente.PredeterminadoCuota3){%>
+0            <%if(cliente.Cuota3==cliente.PredeterminadoCuota3){%>
               <td class="text-center text-success ">
                 <%=cliente.Cuota3%>
               </td>
@@ -598,13 +594,128 @@
 <%}%>
 </tr>
           <% })%>
-
         </tbody>
-
       </table>
-
     </div>
+    <div class="container-fluid">
+      <div class="modal fade" id="ModalPrincipal" tabindex="-1" role="dialog" aria-labelledby="ModalPrincipalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="TituloModal"></h5>
+              <button class="noImprimible btn" type="submit" id="BotonConNombreDeCarpeta" onclick="VerCLientes()">Cargar
+                clientes por lotes</button>
+                <button class="noImprimible btn">Ver comprobantes registrados</button>
+              <button type="button" class="close noImprimible" onclick="$('#ModalPrincipal').modal('hide');"
+                aria-label="Cerrar">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div id="printsection" class="printsection">
+              <div id="editarCliente">
 
+              </div>
+              
+              <div class="modal-body bordeExterno">
+                <form action="/ImprimirComprobante" method="post">
+                  <input type="number" name="IDCliente" id="IDCliente" hidden>
+                  <div class="Imprimible">
+                    <div class="img m-1 text-center">
+                    <img src="/logo" alt="Joval S.A." id="LogoJoval" width="20%" class="" >
+                  </div>
+                  </div>
+                  <div class="container">
+                  <div class="row border">
+                  
+                    <div class="col">
+                      <label class="form-label text-center" for="Obra">Obra: <%=NombreObra%> </label>
+                      <input type="text" name="Obra" id="Obra" value="<%=NombreObra%>" hidden>
+                  </div>
+                  <div class="col">
+                    <label id="textoNombreCliente" class="form-label text-center" for="NombreCompleto"></label>
+                    <input id="inputNombreCliente" type="hidden" name="NombreCompleto" value=""> 
+                  </div>
+                  <div class="col">
+                    <label id="labelDomicilio" class="form-label text-center" for="InputDomicilio"></label>
+                    <input type="hidden" id="inputDomicilio" name="Domiciliio">
+                  </div>
+                   </div>
+                  </div>
+                    <div class="row">
+                      <div class="col ">
+                        <label class="form-label text-center" for="ValorIngresado">Importe</label>
+                        <input required class="form-control" type="number" step="0.01" name="ValorIngresado"
+                          id="ValorIngresado">
+
+                      </div>
+                      <div class="col ">
+                        <label class="form-label text-center" for="Concepto">Concepto</label>
+                        <select name="Concepto" id="Concepto">
+                          <!-- <input required list="ConceptosDePago"  class="form-control" type="text" name="Concepto" id="Concepto"> -->
+                          <!-- <datalist id="ConceptosDePago"> -->
+                          <option value="AnticipoFinanciero">Anticipo Financiero</option>
+                          <option value="Cuota1">Cuota 1</option>
+                          <option value="Cuota2">Cuota 2</option>
+                          <option value="Cuota3">Cuota 3</option>
+                          <option value="Cuota4">Cuota 4</option>
+                          <option value="Cuota5">Cuota 5</option>
+                          <option value="Cuota6">Cuota 6</option>
+                          <option value="Cuota7">Cuota 7</option>
+                          <option value="Cuota8">Cuota 8</option>
+                          <option value="Cuota9">Cuota 9</option>
+                          <option value="Cuota10">Cuota 10</option>
+                          <option value="Cuota11">Cuota 11</option>
+                          <option value="Cuota12">Cuota 12</option>
+                          <option value="DNV">Permiso DNV</option>
+                          <option value="DPV">Permiso DPV</option>
+                          <option value="Hidraulica">Permiso Hidraulica</option>
+                          <option value="FFCC">Permiso FFCC</option>
+                          <option value="Privado">Permiso Privado</option>
+                          <option value="Municipal">Permiso Municipal</option>
+                          <option value="ServicioDomiciliario">Servicio Domiciliario</option>
+                          <option value="IngresoDocumentacion">Ingreso de documentacion comienzo tramite</option>
+                          <option value="Irrigacion">Permiso Irrigacion</option>
+                          <!-- </datalist> -->
+                        </select>
+                      </div>
+
+                      <div class="col">
+                        <label class="form-label text-center" for="FechaPago"> Fecha de pago</label>
+
+                        <input required class="form-control" type="date" name="FechaPago" id="FechaPago">
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col">
+                        <label class="form-label text-center" for="ObservacionesDelPago">Observaciones</label>
+                        <input class="form-control" type="text" name="ObservacionesDelPago" id="ObservacionesDelPago">
+
+                        <label class="form-label text-center noImprimible" for="ComprobantePago"> Cargar comprobante de
+                          pago </label>
+                        <div class="noImprimible">
+                          <input class="form-control " type="file" name="ComprobantePago" id="ComprobantePago">
+                        </div>
+                        <p class="form-text noImprimible noImprimible">En caso de que la persona pague con
+                          transferencias, cheques, etc.</p>
+                      </div>
+                    </div>
+                    </div>
+                  
+              </div>
+            </div>
+            
+            <div class="modal-footer noImprimible">
+              <button class="btn noImprimible" onclick="window.print(); return false;">Imprimir comprobante</button>
+              <button type="button " class="btn btn-secondary  noImprimible"
+                onclick="$('#ModalPrincipal').modal('hide');">Cerrar</button>
+              <button type="submit"  id="btnGuardarCambios" class="btn btn-danger  noImprimible">Guardar</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- Modal Body -->
     <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
     <div class="modal fade" id="ModalConfiguracion" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
@@ -789,6 +900,27 @@
       name: "file.xlsx"
     });
 
+  }
+  function CargarPago(idcliente) {
+    $.ajax({
+      url:'/BuscarDatosClienteQuePaga/'+idcliente,
+    }).done(function(results){
+      $('#ModalPrincipal').modal("show");
+    $('#editarCliente').empty();
+    $('#inputNombreCliente').val(results[0].NombreCliente);
+$('#textoNombreCliente').html('Nombre del cliente: '+results[0].NombreCliente);
+$('#labelDomicilio').html('Domicilio: '+results[0].Direccion);
+$('#inputDomicilio').val(results[0].Direccion);
+
+    });
+   
+
+    
+    
+    
+    
+    $('#editarCliente').html('<a href="/Finanzas/CobroDeObras/EditarCliente/'+idcliente+'"><button class="btn btn-info"> Editar cliente</button></a>');
+  
   }
 </script>
 
