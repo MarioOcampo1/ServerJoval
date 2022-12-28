@@ -281,7 +281,6 @@ router.post('/guardarNuevoCliente', (req, res) => {
                 }
             })
         }).then(function(){
-           
                 res.redirect('/editarTareas/'+idObra);
            resolve();
            
