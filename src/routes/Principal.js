@@ -114,6 +114,7 @@ router.post('/editarContacto/delete/Contacto/:id', (req, res) => {
     })
 })
 router.post('/guardarNuevoCliente', (req, res) => {
+    var sql="";
     const gasSeleccionado = req.body.GasSeleccionado;
     const finanzasSeleccionado = req.body.FinanzasSeleccionado;
     const fechaActual = new Date();
@@ -279,9 +280,14 @@ router.post('/guardarNuevoCliente', (req, res) => {
                     resolve();
                 }
             })
+        }).then(function(){
+           
+                res.redirect('/editarTareas/'+idObra);
+           resolve();
+           
         })
     })
-    res.redirect('/index');
+   
 }
 )
 router.post('/guardarNuevoContacto', (req, res) => {
