@@ -320,12 +320,13 @@ router.post('/Finanzas/guardarCliente', (req, res) => {
     }, 2000);
 
 })
-router.post('/GenerarComprobante', (req, res) => {
+router.post('/GenerarComprobante', (req, res,next) => {
     let sql = '';
     var ID = req.body.IDCliente;
     var Nombre = req.body.NombreCompleto;
     var Domicilio = req.body.Domicilio;
     var ValorIngresado = parseInt(req.body.ValorIngresado);
+    var sumaDeTotalesPorConcepto;
     var Concepto = req.body.Concepto;
     var FechaPago = req.body.FechaPago;
     var ObservacionesDelPago = req.body.ObservacionesDelPago;
@@ -356,9 +357,9 @@ router.post('/GenerarComprobante', (req, res) => {
             if (a == null) {
             } else {
               
-                ValorIngresado =ValorIngresado + a;
+                sumaDeTotalesPorConcepto =ValorIngresado + a;
             }
-            sql = 'UPDATE finanzas_clientes_por_obra_cobros set ' + Concepto + ' = ' + ValorIngresado + ' WHERE ID_cliente = ' + ID + ' and id_Obra = ' + id_Obra + '';
+            sql = 'UPDATE finanzas_clientes_por_obra_cobros set ' + Concepto + ' = ' + sumaDeTotalesPorConcepto + ' WHERE ID_cliente = ' + ID + ' and id_Obra = ' + id_Obra + '';
             connection.query(sql, (error, results) => {
                 if (error) console.log(error);
             })
@@ -391,7 +392,7 @@ router.post('/GenerarComprobante', (req, res) => {
                 if (error) console.log(error);
             })
             console.log("El cliente se ha cargado en el sistema, cargando el concepto de pago junto con su valor....");
-            sql = 'Update finanzas_clientes_por_obra_cobros set ' + Concepto + '= ' + ValorIngresado + ' WHERE ID_cliente =' + ID + ' and id_Obra=' + id_Obra + '';
+            sql = 'Update finanzas_clientes_por_obra_cobros set ' + Concepto + '= ' + sumaDeTotalesPorConcepto + ' WHERE ID_cliente =' + ID + ' and id_Obra=' + id_Obra + '';
             connection.query(sql, (error, results) => {
                 if (error) console.log(error);
             })
@@ -555,7 +556,7 @@ function Millones(num) {
     cientos = Math.floor(num / divisor)
     resto = num - (cientos * divisor)
 
-    strMillones = Seccion(num, divisor, 'UN MILLON DE', 'MILLONES DE');
+    strMillones = Seccion(num, divisor, 'UN MILLON ', 'MILLONES ');
     strMiles = Miles(resto);
 
     if(strMillones == '')
@@ -593,7 +594,8 @@ function NumeroALetras(num) {
     else
         return Millones(data.enteros) + ' ' + data.letrasMonedaPlural + ' ' + data.letrasCentavos;
 }
-var numeroEnLetras= NumeroALetras(ValorIngresado);
+var numeroEnLetras= NumeroALetras(ValorIngresado); //Se pasa el numero a LETRAS
+//Se comienza a modificar las celdas del Excel
  workbook.sheet("Hoja1").cell("Q3").value(nDeComprobante);
  workbook.sheet("Hoja1").cell("L7").value(Nombre);
  workbook.sheet("Hoja1").cell("L9").value(Domicilio);
@@ -608,9 +610,11 @@ return workbook.outputAsync();
     let nombreDelArchivo= nDeComprobante+'-'+Obra+'-'+Concepto+'-'+ Nombre + '.xlsx'; 
 res.attachment(nombreDelArchivo);
 res.send(data);
+res.redirect('/Finanzas/cobrodeobras/VerObra/'+Obra);
 })
 },1000)
-})
+}
+)
 // EDITAR CLIENTE
 router.get('/Finanzas/CobroDeObras/EditarCliente/:id', (req, res) => {
     var id = req.params.id;
