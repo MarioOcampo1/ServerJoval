@@ -569,10 +569,8 @@ router.post('/actPrelCarpEcogas/:id', upload.none(), function (req, res) {
     var id = req.body.id;
     var Nombre = req.body.Nombre;
     var sql = "";
-   var idObra;
-    connection.query(sql,Nombre,(error,results)=>{
-idObra=results[0].id;
-    })
+   var idObra= id;
+   
     //Tareas generales
     var DocumentacionTerreno;
     //    Preliminar
@@ -752,10 +750,7 @@ router.post('/act1pCarpEcogas/:id', upload.none(), function (req, res) {
     var id = req.body.id;
     var Nombre = req.body.Nombre;
     var sql = "";
-   var idObra;
-    connection.query(sql,Nombre,(error,results)=>{
-idObra=results[0].id;
-    })
+   var idObra=id;
     var Contrato = req.body.Contrato;
     var Presupuesto = req.body.Presupuesto;
     var Sucedaneo = req.body.Sucedaneo;
@@ -1001,10 +996,8 @@ router.post('/act2pCarpEcogas/:id', upload.none(), function (req, res) {
     var sql = "";
     var FechaDiaActual = new Date()
     sql = 'SELECT id FROM obras WHERE Nombre =?';
-   var idObra;
-    connection.query(sql,Nombre,(error,results)=>{
-idObra=results[0].id;
-    })
+   var idObra=id;
+    
 
     // Primera seccion 
     var MailAutorizacion = req.body.MailAutorizacion;
@@ -1452,10 +1445,8 @@ router.post('/actObrasCarpEcogas/:id', upload.none(), function (req, res) {
     var id = req.body.id;
     var Nombre = req.body.Nombre;
     var sql = "";
-   var idObra;
-    connection.query(sql,Nombre,(error,results)=>{
-idObra=results[0].id;
-    })
+   var idObra=id;
+   
     var ActaDeInicio = req.body.ActasDeInicio;
     var LibroOrdenesServicio = req.body.LibroOrdenesServicio;
     var LibroNotasPedido = req.body.LibroNotasPedido;
@@ -1740,10 +1731,8 @@ router.post('/actCaosCarpEcogas/:id', upload.none(), function (req, res) {
     var id = req.body.id;
     var Nombre = req.body.Nombre;
     var sql = "";
-   var idObra;
-    connection.query(sql,Nombre,(error,results)=>{
-idObra=results[0].id;
-    })
+   var idObra=id;
+    
     var ActasFinales = req.body.ActasFinales;
     var PlanosyCroquis = req.body.PlanosyCroquis;
     var ConformeDePermisos = req.body.ConformeDePermisos;
@@ -1956,10 +1945,8 @@ router.post('/actFinalCarpEcogas/:id', upload.none(), function (req, res) {
     var id = req.body.id;
     var Nombre = req.body.Nombre;
     var sql = "";
-   var idObra;
-    connection.query(sql,Nombre,(error,results)=>{
-idObra=results[0].id;
-    })
+   var idObra=id;
+    
     var PresentacionFinal = req.body.PresentacionFinal;
     var HabilitacionObra = req.body.HabilitacionFinal;
     var HabilitacionFinal = req.body.HabilitacionFinal;
