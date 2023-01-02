@@ -9,9 +9,10 @@
     class="text-center">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.css">
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
 
-  <script type="text/javascript" charset="utf8"
-    src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.js"></script>
   </title>
 
 </head>
@@ -118,7 +119,7 @@
                                           </th>
                                             <th>
                                               <%=moment(clientes.Fecha_Tarea_sub).format('DD-MM-YYYY')%>
-                                            </th>
+                                            </th> 
                                             <th>
                                               <%=clientes.Tarea_Realizada_sub%>
                                             </th>
@@ -126,7 +127,16 @@
                                               <%=clientes.Proxima_Tarea_sub%>
                                             </th>
                                             <th>
-                                              <%=clientes.ResponsableDeTarea%>
+                                              <form action="/historialcarpeta/CambiarResponsableDeTarea" method="post">
+                                                <input type="hidden" name="idEntradaEnHistorial" value="<%=clientes.id%>">  
+                                              <select name="ResponsableDeTarea" id="ResponsableDeTarea" onchange="this.form.submit()">
+                                                <option value="<%=clientes.ResponsableDeTarea%>"selected><%=clientes.ResponsableDeTarea%></option>
+<option value="Mauricio">Mauricio</option>
+<option value="Gustavo">Gustavo</option>
+<option value="Mariana">Mariana</option>
+                                              </select>
+                                            </form>
+                                              
                                             </th>
               <%}else{%>
               <tr>
@@ -184,7 +194,15 @@
                                               <%=clientes.Proxima_Tarea_sub%>
                                             </th>
                                             <th class="bg-warning">
-                                              <%=clientes.ResponsableDeTarea%>
+                                              <form action="/historialcarpeta/CambiarResponsableDeTarea" method="post">
+                                                <input type="hidden" name="idEntradaEnHistorial" value="<%=clientes.id%>">  
+                                              <select name="ResponsableDeTarea" id="ResponsableDeTarea" onchange="this.form.submit()">
+                                                <option value="<%=clientes.ResponsableDeTarea%>" selected><%=clientes.ResponsableDeTarea%></option>
+<option value="Mauricio">Mauricio</option>
+<option value="Gustavo">Gustavo</option>
+<option value="Mariana">Mariana</option>
+                                              </select>
+                                            </form>
                                             </th>
                                               <%}%>
                                             <th>
@@ -241,10 +259,9 @@
       .appendTo('#comunicacionDiaria thead');
 
     var url = '/historialcarpeta/:' + id;
-
-    $('#TablaHistorial').DataTable();
-
-  });
+   
+  })
+  
 </script>
 <%}%>
 

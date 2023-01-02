@@ -316,7 +316,7 @@ router.get('/historialcarpeta/:Nombre', (req, res) => {
             }
         })
 
-        sql = 'SELECT c.* FROM historialdecambios c WHERE Nombre_sub =?';
+        sql = 'SELECT c.* FROM historialdecambios c WHERE Nombre_sub =? ORDER BY id DESC';
         res.locals.moment = moment;
         connection.query(sql, [Nombre], (error, results) => {
             if (error) console.log(error);
@@ -331,6 +331,28 @@ router.get('/historialcarpeta/:Nombre', (req, res) => {
         })
 
     } else { res.redirect('/'); }
+})
+router.post('/historialcarpeta/CambiarResponsableDeTarea', (req,res)=>{
+    // if (req.isAuthenticated()) {
+        var idEntradaHistorial= req.body.idEntradaEnHistorial;
+var ResponsableDeTarea = req.body.ResponsableDeTarea;
+        var sql= 'UPDATE historialdecambios SET? WHERE id =?'
+        connection.query(sql,[{ResponsableDeTarea: ResponsableDeTarea}, idEntradaHistorial], (error,results)=>{
+if(error) console.log(error);
+else{}
+})
+    sql='SELECT Nombre_sub FROM  historialdecambios WHERE id=?';
+    connection.query(sql, idEntradaHistorial,(error,results2)=>{
+        if(error) console.log(error);
+        else{
+            var NombreObra = results2[0].Nombre_sub;
+            res.redirect('/historialcarpeta/'+NombreObra);
+        }
+    })
+
+        
+    // }
+    // else {res.redirect('/'); }
 })
 router.get('/ComunicacionAlSistema', (req, res) => {
     if (req.isAuthenticated()) {
