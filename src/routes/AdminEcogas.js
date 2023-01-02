@@ -569,7 +569,7 @@ router.post('/actPrelCarpEcogas/:id', upload.none(), function (req, res) {
     var id = req.body.id;
     var Nombre = req.body.Nombre;
     var sql = "";
-    idObra;
+   var idObra;
     connection.query(sql,Nombre,(error,results)=>{
 idObra=results[0].id;
     })
@@ -681,7 +681,7 @@ idObra=results[0].id;
                             if (error) console.log(error);
                         })
                         sql = 'Insert into historialdecambios set?';
-                        connection.query(sql, [{ EtapaTarea_sub: EtapaTarea, idObra:id_obra, Tarea: element.etapatarea, ResponsableDeTarea: element.responsabletarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: element.tarearealizada, Proxima_Tarea_sub: element.proximatarea, Fecha_Proxima_Tarea_sub: element.fechalimite, Fecha_Tarea_sub: element.fechatarea }], (error, results) => {
+                        connection.query(sql, [{ EtapaTarea_sub: EtapaTarea, id_obra:idObra, ResponsableDeTarea: element.responsabletarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: element.tarearealizada, Proxima_Tarea_sub: element.proximatarea, Fecha_Proxima_Tarea_sub: element.fechalimite, Fecha_Tarea_sub: element.fechatarea }], (error, results) => {
                             if (error) console.log(error);
 
 
@@ -696,7 +696,7 @@ idObra=results[0].id;
                             if (error) console.log(error);
                         })
                         sql = 'Insert into historialdecambios set?';
-                        connection.query(sql, [{ EtapaTarea_sub: EtapaTarea, idObra:id_obra, Tarea: element.etapatarea, ResponsableDeTarea: element.responsabletarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: element.tarearealizada, Proxima_Tarea_sub: element.proximatarea, Fecha_Tarea_sub: element.fechatarea }], (error, results) => {
+                        connection.query(sql, [{ EtapaTarea_sub: EtapaTarea, id_obra:idObra, ResponsableDeTarea: element.responsabletarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: element.tarearealizada, Proxima_Tarea_sub: element.proximatarea, Fecha_Tarea_sub: element.fechatarea }], (error, results) => {
                             if (error) console.log(error);
 
 
@@ -716,7 +716,7 @@ idObra=results[0].id;
                         if (error) console.log(error);
                     })
                     sql = 'Insert into historialdecambios set?';
-                    connection.query(sql, [{ EtapaTarea_sub: EtapaTarea,idObra:id_obra, Tarea: element.etapatarea, ResponsableDeTarea: element.responsabletarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: element.tarearealizada, Proxima_Tarea_sub: element.proximatarea, Fecha_Proxima_Tarea_sub: element.fechalimite, Fecha_Tarea_sub: element.fechatarea }], (error, results) => {
+                    connection.query(sql, [{ EtapaTarea_sub: EtapaTarea,id_obra:idObra, ResponsableDeTarea: element.responsabletarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: element.tarearealizada, Proxima_Tarea_sub: element.proximatarea, Fecha_Proxima_Tarea_sub: element.fechalimite, Fecha_Tarea_sub: element.fechatarea }], (error, results) => {
                         if (error) console.log(error);
 
 
@@ -731,7 +731,7 @@ idObra=results[0].id;
                         if (error) console.log(error);
                     })
                     sql = 'Insert into historialdecambios set?';
-                    connection.query(sql, [{ EtapaTarea_sub: EtapaTarea, idObra:id_obra, Tarea: element.etapatarea, ResponsableDeTarea: element.responsabletarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: element.tarearealizada, Proxima_Tarea_sub: element.proximatarea, Fecha_Tarea_sub: element.fechatarea }], (error, results) => {
+                    connection.query(sql, [{ EtapaTarea_sub: EtapaTarea, id_obra:idObra, ResponsableDeTarea: element.responsabletarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: element.tarearealizada, Proxima_Tarea_sub: element.proximatarea, Fecha_Tarea_sub: element.fechatarea }], (error, results) => {
                         if (error) console.log(error);
 
 
@@ -752,7 +752,7 @@ router.post('/act1pCarpEcogas/:id', upload.none(), function (req, res) {
     var id = req.body.id;
     var Nombre = req.body.Nombre;
     var sql = "";
-    idObra;
+   var idObra;
     connection.query(sql,Nombre,(error,results)=>{
 idObra=results[0].id;
     })
@@ -931,7 +931,7 @@ idObra=results[0].id;
                             if (error) console.log(error);
                         })
                         sql = 'Insert into historialdecambios set?';
-                        connection.query(sql, [{ EtapaTarea_sub: element.etapatarea, idObra:id_obra, ResponsableDeTarea: element.responsabletarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: element.tarearealizada, Proxima_Tarea_sub: element.proximatarea, Fecha_Proxima_Tarea_sub: element.fechalimite, Fecha_Tarea_sub: element.fechatarea }], (error, results) => {
+                        connection.query(sql, [{ EtapaTarea_sub: element.etapatarea, id_obra:idObra, ResponsableDeTarea: element.responsabletarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: element.tarearealizada, Proxima_Tarea_sub: element.proximatarea, Fecha_Proxima_Tarea_sub: element.fechalimite, Fecha_Tarea_sub: element.fechatarea }], (error, results) => {
                             if (error) console.log(error);
 
 
@@ -946,7 +946,7 @@ idObra=results[0].id;
                             if (error) console.log(error);
                         })
                         sql = 'Insert into historialdecambios set?';
-                        connection.query(sql, [{ EtapaTarea_sub: EtapaTarea,idObra:id_obra, Tarea: element.etapatarea, ResponsableDeTarea: element.responsabletarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: element.tarearealizada, Proxima_Tarea_sub: element.proximatarea, Fecha_Tarea_sub: element.fechatarea }], (error, results) => {
+                        connection.query(sql, [{ EtapaTarea_sub: EtapaTarea,id_obra:idObra, ResponsableDeTarea: element.responsabletarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: element.tarearealizada, Proxima_Tarea_sub: element.proximatarea, Fecha_Tarea_sub: element.fechatarea }], (error, results) => {
                             if (error) console.log(error);
 
 
@@ -966,7 +966,7 @@ idObra=results[0].id;
                         if (error) console.log(error);
                     })
                     sql = 'Insert into historialdecambios set?';
-                    connection.query(sql, [{ EtapaTarea_sub: EtapaTarea,idObra:id_obra, Tarea: element.etapatarea, ResponsableDeTarea: element.responsabletarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: element.tarearealizada, Proxima_Tarea_sub: element.proximatarea, Fecha_Proxima_Tarea_sub: element.fechalimite, Fecha_Tarea_sub: element.fechatarea }], (error, results) => {
+                    connection.query(sql, [{ EtapaTarea_sub: EtapaTarea,id_obra:idObra, ResponsableDeTarea: element.responsabletarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: element.tarearealizada, Proxima_Tarea_sub: element.proximatarea, Fecha_Proxima_Tarea_sub: element.fechalimite, Fecha_Tarea_sub: element.fechatarea }], (error, results) => {
                         if (error) console.log(error);
 
 
@@ -981,7 +981,7 @@ idObra=results[0].id;
                         if (error) console.log(error);
                     })
                     sql = 'Insert into historialdecambios set?';
-                    connection.query(sql, [{ EtapaTarea_sub: EtapaTarea,idObra:id_obra, Tarea: element.etapatarea, ResponsableDeTarea: element.responsabletarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: element.tarearealizada, Proxima_Tarea_sub: element.proximatarea, Fecha_Tarea_sub: element.fechatarea }], (error, results) => {
+                    connection.query(sql, [{ EtapaTarea_sub: EtapaTarea,id_obra:idObra, ResponsableDeTarea: element.responsabletarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: element.tarearealizada, Proxima_Tarea_sub: element.proximatarea, Fecha_Tarea_sub: element.fechatarea }], (error, results) => {
                         if (error) console.log(error);
 
 
@@ -1001,10 +1001,11 @@ router.post('/act2pCarpEcogas/:id', upload.none(), function (req, res) {
     var sql = "";
     var FechaDiaActual = new Date()
     sql = 'SELECT id FROM obras WHERE Nombre =?';
-    idObra;
+   var idObra;
     connection.query(sql,Nombre,(error,results)=>{
 idObra=results[0].id;
     })
+
     // Primera seccion 
     var MailAutorizacion = req.body.MailAutorizacion;
     var PlanDeTrabajo = req.body.PlanDeTrabajo
@@ -1302,7 +1303,7 @@ idObra=results[0].id;
                             if (error) console.log(error);
                         })
                         sql = 'Insert into historialdecambios set?';
-                        connection.query(sql, [{ EtapaTarea_sub: EtapaTarea, idObra:id_obra, ResponsableDeTarea: responsabletarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: tarearealizada, Proxima_Tarea_sub: proximatarea, Fecha_Proxima_Tarea_sub: fechalimite, Fecha_Tarea_sub: fechatarea }], (error, results) => {
+                        connection.query(sql, [{ EtapaTarea_sub: EtapaTarea, id_obra:idObra, ResponsableDeTarea: responsabletarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: tarearealizada, Proxima_Tarea_sub: proximatarea, Fecha_Proxima_Tarea_sub: fechalimite, Fecha_Tarea_sub: fechatarea }], (error, results) => {
                             if (error) console.log(error);
 
 
@@ -1317,7 +1318,7 @@ idObra=results[0].id;
                             if (error) console.log(error);
                         })
                         sql = 'Insert into historialdecambios set?';
-                        connection.query(sql, [{ EtapaTarea_sub: EtapaTarea,idObra:id_obra, ResponsableDeTarea: responsabletarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: tarearealizada, Proxima_Tarea_sub: proximatarea, Fecha_Tarea_sub: fechatarea }], (error, results) => {
+                        connection.query(sql, [{ EtapaTarea_sub: EtapaTarea,id_obra:idObra, ResponsableDeTarea: responsabletarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: tarearealizada, Proxima_Tarea_sub: proximatarea, Fecha_Tarea_sub: fechatarea }], (error, results) => {
                             if (error) console.log(error);
 
 
@@ -1339,7 +1340,7 @@ idObra=results[0].id;
                         if (error) console.log(error);
                     })
                     sql = 'Insert into historialdecambios set?';
-                    connection.query(sql, [{ EtapaTarea_sub: EtapaTarea,idObra:id_obra, ResponsableDeTarea: responsabletarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: tarearealizada, Proxima_Tarea_sub: proximatarea, Fecha_Proxima_Tarea_sub: fechalimite, Fecha_Tarea_sub: fechatarea }], (error, results) => {
+                    connection.query(sql, [{ EtapaTarea_sub: EtapaTarea,id_obra:idObra, ResponsableDeTarea: responsabletarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: tarearealizada, Proxima_Tarea_sub: proximatarea, Fecha_Proxima_Tarea_sub: fechalimite, Fecha_Tarea_sub: fechatarea }], (error, results) => {
                         if (error) console.log(error);
 
 
@@ -1354,7 +1355,7 @@ idObra=results[0].id;
                         if (error) console.log(error);
                     })
                     sql = 'Insert into historialdecambios set?';
-                    connection.query(sql, [{ EtapaTarea_sub: EtapaTarea,idObra:id_obra, ResponsableDeTarea: responsabletarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: tarearealizada, Proxima_Tarea_sub: proximatarea, Fecha_Tarea_sub: fechatarea }], (error, results) => {
+                    connection.query(sql, [{ EtapaTarea_sub: EtapaTarea,id_obra:idObra, ResponsableDeTarea: responsabletarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: tarearealizada, Proxima_Tarea_sub: proximatarea, Fecha_Tarea_sub: fechatarea }], (error, results) => {
                         if (error) console.log(error);
 
 
@@ -1396,7 +1397,7 @@ idObra=results[0].id;
                                 if (error) console.log(error);
                             })
                             sql = 'Insert into historialdecambios set?';
-                            connection.query(sql, [{ EtapaTarea_sub: EtapaTarea,idObra:id_obra, Tarea: element.etapatarea, ResponsableDeTarea: element.responsabletarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: element.tarearealizada, Proxima_Tarea_sub: element.proximatarea, Fecha_Proxima_Tarea_sub: element.fechalimite, Fecha_Tarea_sub: element.fechatarea }], (error, results) => {
+                            connection.query(sql, [{ EtapaTarea_sub: EtapaTarea,id_obra:idObra, ResponsableDeTarea: element.responsabletarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: element.tarearealizada, Proxima_Tarea_sub: element.proximatarea, Fecha_Proxima_Tarea_sub: element.fechalimite, Fecha_Tarea_sub: element.fechatarea }], (error, results) => {
                                 if (error) console.log(error);
 
 
@@ -1411,7 +1412,7 @@ idObra=results[0].id;
                                 if (error) console.log(error);
                             })
                             sql = 'Insert into historialdecambios set?';
-                            connection.query(sql, [{ EtapaTarea_sub: EtapaTarea,idObra:id_obra, Tarea: element.etapatarea, ResponsableDeTarea: element.responsabletarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: element.tarearealizada, Proxima_Tarea_sub: element.proximatarea, Fecha_Tarea_sub: element.fechatarea }], (error, results) => {
+                            connection.query(sql, [{ EtapaTarea_sub: EtapaTarea,id_obra:idObra, ResponsableDeTarea: element.responsabletarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: element.tarearealizada, Proxima_Tarea_sub: element.proximatarea, Fecha_Tarea_sub: element.fechatarea }], (error, results) => {
                                 if (error) console.log(error);
 
 
@@ -1431,7 +1432,7 @@ idObra=results[0].id;
                             if (error) console.log(error);
                         })
                         sql = 'Insert into historialdecambios set?';
-                        connection.query(sql, [{ EtapaTarea_sub: EtapaTarea,idObra:id_obra, Tarea: element.etapatarea, ResponsableDeTarea: element.responsabletarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: element.tarearealizada, Proxima_Tarea_sub: element.proximatarea, Fecha_Proxima_Tarea_sub: element.fechalimite, Fecha_Tarea_sub: element.fechatarea }], (error, results) => {
+                        connection.query(sql, [{ EtapaTarea_sub: EtapaTarea,id_obra:idObra, ResponsableDeTarea: element.responsabletarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: element.tarearealizada, Proxima_Tarea_sub: element.proximatarea, Fecha_Proxima_Tarea_sub: element.fechalimite, Fecha_Tarea_sub: element.fechatarea }], (error, results) => {
                             if (error) console.log(error);
 
 
@@ -1451,7 +1452,7 @@ router.post('/actObrasCarpEcogas/:id', upload.none(), function (req, res) {
     var id = req.body.id;
     var Nombre = req.body.Nombre;
     var sql = "";
-    idObra;
+   var idObra;
     connection.query(sql,Nombre,(error,results)=>{
 idObra=results[0].id;
     })
@@ -1578,7 +1579,7 @@ idObra=results[0].id;
                             if (error) console.log(error);
                         })
                         sql = 'Insert into historialdecambios set?';
-                        connection.query(sql, [{ EtapaTarea_sub: EtapaTarea,idObra:id_obra, ResponsableDeTarea: responsabletarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: tarearealizada, Proxima_Tarea_sub: proximatarea, Fecha_Proxima_Tarea_sub: fechalimite, Fecha_Tarea_sub: fechatarea }], (error, results) => {
+                        connection.query(sql, [{ EtapaTarea_sub: EtapaTarea,id_obra:idObra, ResponsableDeTarea: responsabletarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: tarearealizada, Proxima_Tarea_sub: proximatarea, Fecha_Proxima_Tarea_sub: fechalimite, Fecha_Tarea_sub: fechatarea }], (error, results) => {
                             if (error) console.log(error);
 
 
@@ -1593,7 +1594,7 @@ idObra=results[0].id;
                             if (error) console.log(error);
                         })
                         sql = 'Insert into historialdecambios set?';
-                        connection.query(sql, [{ EtapaTarea_sub: EtapaTarea,idObra:id_obra, ResponsableDeTarea: responsabletarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: tarearealizada, Proxima_Tarea_sub: proximatarea, Fecha_Tarea_sub: fechatarea }], (error, results) => {
+                        connection.query(sql, [{ EtapaTarea_sub: EtapaTarea,id_obra:idObra, ResponsableDeTarea: responsabletarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: tarearealizada, Proxima_Tarea_sub: proximatarea, Fecha_Tarea_sub: fechatarea }], (error, results) => {
                             if (error) console.log(error);
 
 
@@ -1615,7 +1616,7 @@ idObra=results[0].id;
                         if (error) console.log(error);
                     })
                     sql = 'Insert into historialdecambios set?';
-                    connection.query(sql, [{ EtapaTarea_sub: EtapaTarea,idObra:id_obra, ResponsableDeTarea: responsabletarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: tarearealizada, Proxima_Tarea_sub: proximatarea, Fecha_Proxima_Tarea_sub: fechalimite, Fecha_Tarea_sub: fechatarea }], (error, results) => {
+                    connection.query(sql, [{ EtapaTarea_sub: EtapaTarea,id_obra:idObra, ResponsableDeTarea: responsabletarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: tarearealizada, Proxima_Tarea_sub: proximatarea, Fecha_Proxima_Tarea_sub: fechalimite, Fecha_Tarea_sub: fechatarea }], (error, results) => {
                         if (error) console.log(error);
 
 
@@ -1630,7 +1631,7 @@ idObra=results[0].id;
                         if (error) console.log(error);
                     })
                     sql = 'Insert into historialdecambios set?';
-                    connection.query(sql, [{ EtapaTarea_sub: EtapaTarea,idObra:id_obra, ResponsableDeTarea: responsabletarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: tarearealizada, Proxima_Tarea_sub: proximatarea, Fecha_Tarea_sub: fechatarea }], (error, results) => {
+                    connection.query(sql, [{ EtapaTarea_sub: EtapaTarea,id_obra:idObra, ResponsableDeTarea: responsabletarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: tarearealizada, Proxima_Tarea_sub: proximatarea, Fecha_Tarea_sub: fechatarea }], (error, results) => {
                         if (error) console.log(error);
 
 
@@ -1671,7 +1672,7 @@ idObra=results[0].id;
                                 if (error) console.log(error);
                             })
                             sql = 'Insert into historialdecambios set?';
-                            connection.query(sql, [{ EtapaTarea_sub: element.etapatarea,idObra:id_obra, ResponsableDeTarea: element.responsabletarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: element.tarearealizada, Proxima_Tarea_sub: element.proximatarea, Fecha_Proxima_Tarea_sub: element.fechalimite, Fecha_Tarea_sub: element.fechatarea }], (error, results) => {
+                            connection.query(sql, [{ EtapaTarea_sub: element.etapatarea,id_obra:idObra, ResponsableDeTarea: element.responsabletarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: element.tarearealizada, Proxima_Tarea_sub: element.proximatarea, Fecha_Proxima_Tarea_sub: element.fechalimite, Fecha_Tarea_sub: element.fechatarea }], (error, results) => {
                                 if (error) console.log(error);
 
 
@@ -1686,7 +1687,7 @@ idObra=results[0].id;
                                 if (error) console.log(error);
                             })
                             sql = 'Insert into historialdecambios set?';
-                            connection.query(sql, [{ EtapaTarea_sub: element.etapatarea,idObra:id_obra, ResponsableDeTarea: element.responsabletarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: element.tarearealizada, Proxima_Tarea_sub: element.proximatarea, Fecha_Tarea_sub: element.fechatarea }], (error, results) => {
+                            connection.query(sql, [{ EtapaTarea_sub: element.etapatarea,id_obra:idObra, ResponsableDeTarea: element.responsabletarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: element.tarearealizada, Proxima_Tarea_sub: element.proximatarea, Fecha_Tarea_sub: element.fechatarea }], (error, results) => {
                                 if (error) console.log(error);
 
 
@@ -1706,7 +1707,7 @@ idObra=results[0].id;
                             if (error) console.log(error);
                         })
                         sql = 'Insert into historialdecambios set?';
-                        connection.query(sql, [{ EtapaTarea_sub: element.etapatarea,idObra:id_obra, ResponsableDeTarea: element.responsabletarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: element.tarearealizada, Proxima_Tarea_sub: element.proximatarea, Fecha_Proxima_Tarea_sub: element.fechalimite, Fecha_Tarea_sub: element.fechatarea }], (error, results) => {
+                        connection.query(sql, [{ EtapaTarea_sub: element.etapatarea,id_obra:idObra, ResponsableDeTarea: element.responsabletarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: element.tarearealizada, Proxima_Tarea_sub: element.proximatarea, Fecha_Proxima_Tarea_sub: element.fechalimite, Fecha_Tarea_sub: element.fechatarea }], (error, results) => {
                             if (error) console.log(error);
 
 
@@ -1721,7 +1722,7 @@ idObra=results[0].id;
                             if (error) console.log(error);
                         })
                         sql = 'Insert into historialdecambios set?';
-                        connection.query(sql, [{ EtapaTarea_sub: element.etapatarea,idObra:id_obra, ResponsableDeTarea: element.responsabletarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: element.tarearealizada, Proxima_Tarea_sub: element.proximatarea, Fecha_Tarea_sub: element.fechatarea }], (error, results) => {
+                        connection.query(sql, [{ EtapaTarea_sub: element.etapatarea,id_obra:idObra, ResponsableDeTarea: element.responsabletarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: element.tarearealizada, Proxima_Tarea_sub: element.proximatarea, Fecha_Tarea_sub: element.fechatarea }], (error, results) => {
                             if (error) console.log(error);
 
 
@@ -1739,7 +1740,7 @@ router.post('/actCaosCarpEcogas/:id', upload.none(), function (req, res) {
     var id = req.body.id;
     var Nombre = req.body.Nombre;
     var sql = "";
-    idObra;
+   var idObra;
     connection.query(sql,Nombre,(error,results)=>{
 idObra=results[0].id;
     })
@@ -1799,7 +1800,7 @@ idObra=results[0].id;
                             if (error) console.log(error);
                         })
                         sql = 'Insert into historialdecambios set?';
-                        connection.query(sql, [{ EtapaTarea_sub: EtapaTarea, Tarea: EtapaTarea,idObra:id_obra, ResponsableDeTarea: responsabletarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: tarearealizada, Proxima_Tarea_sub: proximatarea, Fecha_Proxima_Tarea_sub: fechalimite, Fecha_Tarea_sub: fechatarea }], (error, results) => {
+                        connection.query(sql, [{ EtapaTarea_sub: EtapaTarea, Tarea: EtapaTarea,id_obra:idObra, ResponsableDeTarea: responsabletarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: tarearealizada, Proxima_Tarea_sub: proximatarea, Fecha_Proxima_Tarea_sub: fechalimite, Fecha_Tarea_sub: fechatarea }], (error, results) => {
                             if (error) console.log(error);
 
 
@@ -1814,7 +1815,7 @@ idObra=results[0].id;
                             if (error) console.log(error);
                         })
                         sql = 'Insert into historialdecambios set?';
-                        connection.query(sql, [{ EtapaTarea_sub: EtapaTarea,idObra:id_obra, Tarea: EtapaTarea, ResponsableDeTarea: responsabletarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: tarearealizada, Proxima_Tarea_sub: proximatarea, Fecha_Tarea_sub: fechatarea }], (error, results) => {
+                        connection.query(sql, [{ EtapaTarea_sub: EtapaTarea,id_obra:idObra, Tarea: EtapaTarea, ResponsableDeTarea: responsabletarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: tarearealizada, Proxima_Tarea_sub: proximatarea, Fecha_Tarea_sub: fechatarea }], (error, results) => {
                             if (error) console.log(error);
 
 
@@ -1888,7 +1889,7 @@ idObra=results[0].id;
                                 if (error) console.log(error);
                             })
                             sql = 'Insert into historialdecambios set?';
-                            connection.query(sql, [{ EtapaTarea_sub: EtapaTarea, Tarea: element.etapatarea, ResponsableDeTarea: element.responsabletarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: element.tarearealizada, Proxima_Tarea_sub: element.proximatarea, Fecha_Proxima_Tarea_sub: element.fechalimite, Fecha_Tarea_sub: element.fechatarea }], (error, results) => {
+                            connection.query(sql, [{ EtapaTarea_sub: EtapaTarea, ResponsableDeTarea: element.responsabletarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: element.tarearealizada, Proxima_Tarea_sub: element.proximatarea, Fecha_Proxima_Tarea_sub: element.fechalimite, Fecha_Tarea_sub: element.fechatarea }], (error, results) => {
                                 if (error) console.log(error);
 
 
@@ -1955,7 +1956,7 @@ router.post('/actFinalCarpEcogas/:id', upload.none(), function (req, res) {
     var id = req.body.id;
     var Nombre = req.body.Nombre;
     var sql = "";
-    idObra;
+   var idObra;
     connection.query(sql,Nombre,(error,results)=>{
 idObra=results[0].id;
     })
@@ -2107,7 +2108,7 @@ idObra=results[0].id;
                                 if (error) console.log(error);
                             })
                             sql = 'Insert into historialdecambios set?';
-                            connection.query(sql, [{ EtapaTarea_sub: EtapaTarea, Tarea: element.etapatarea, ResponsableDeTarea: element.responsabletarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: element.tarearealizada, Proxima_Tarea_sub: element.proximatarea, Fecha_Proxima_Tarea_sub: element.fechalimite, Fecha_Tarea_sub: element.fechatarea }], (error, results) => {
+                            connection.query(sql, [{ EtapaTarea_sub: EtapaTarea, ResponsableDeTarea: element.responsabletarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: element.tarearealizada, Proxima_Tarea_sub: element.proximatarea, Fecha_Proxima_Tarea_sub: element.fechalimite, Fecha_Tarea_sub: element.fechatarea }], (error, results) => {
                                 if (error) console.log(error);
 
 
@@ -2122,7 +2123,7 @@ idObra=results[0].id;
                                 if (error) console.log(error);
                             })
                             sql = 'Insert into historialdecambios set?';
-                            connection.query(sql, [{ EtapaTarea_sub: EtapaTarea, Tarea: element.etapatarea, ResponsableDeTarea: element.responsabletarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: element.tarearealizada, Proxima_Tarea_sub: element.proximatarea, Fecha_Tarea_sub: element.fechatarea }], (error, results) => {
+                            connection.query(sql, [{ EtapaTarea_sub: EtapaTarea, ResponsableDeTarea: element.responsabletarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: element.tarearealizada, Proxima_Tarea_sub: element.proximatarea, Fecha_Tarea_sub: element.fechatarea }], (error, results) => {
                                 if (error) console.log(error);
 
 
@@ -2142,7 +2143,7 @@ idObra=results[0].id;
                             if (error) console.log(error);
                         })
                         sql = 'Insert into historialdecambios set?';
-                        connection.query(sql, [{ EtapaTarea_sub: EtapaTarea, Tarea: element.etapatarea, ResponsableDeTarea: element.responsabletarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: element.tarearealizada, Proxima_Tarea_sub: element.proximatarea, Fecha_Proxima_Tarea_sub: element.fechalimite, Fecha_Tarea_sub: element.fechatarea }], (error, results) => {
+                        connection.query(sql, [{ EtapaTarea_sub: EtapaTarea, ResponsableDeTarea: element.responsabletarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: element.tarearealizada, Proxima_Tarea_sub: element.proximatarea, Fecha_Proxima_Tarea_sub: element.fechalimite, Fecha_Tarea_sub: element.fechatarea }], (error, results) => {
                             if (error) console.log(error);
 
 
@@ -2157,7 +2158,7 @@ idObra=results[0].id;
                             if (error) console.log(error);
                         })
                         sql = 'Insert into historialdecambios set?';
-                        connection.query(sql, [{ EtapaTarea_sub: EtapaTarea, Tarea: element.etapatarea, ResponsableDeTarea: element.responsabletarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: element.tarearealizada, Proxima_Tarea_sub: element.proximatarea, Fecha_Tarea_sub: element.fechatarea }], (error, results) => {
+                        connection.query(sql, [{ EtapaTarea_sub: EtapaTarea, ResponsableDeTarea: element.responsabletarea, Si_NO_TareaRealizada: "N", Nombre_sub: Nombre, Tarea_Realizada_sub: element.tarearealizada, Proxima_Tarea_sub: element.proximatarea, Fecha_Tarea_sub: element.fechatarea }], (error, results) => {
                             if (error) console.log(error);
 
 
