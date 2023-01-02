@@ -65,6 +65,8 @@
               <button id="Mauricio"class=" btn btn-outline-primary btn-sm ">M</button>
               <button id="Gustavo"class="  btn btn-outline-primary btn-sm">G</button>
               <button id="Daiana"class="  btn btn-outline-primary btn-sm">D</button>
+              <button id="MarianaPirani"class="  btn btn-outline-primary btn-sm">MP</button>
+
             </th>
             <th class="text-center align-middle">
               <h6>Tarea realizada
@@ -288,6 +290,10 @@ return stringFinal;
 $('#Daiana').click(function() {
       jQuery("#comunicacionDiaria tbody>tr").hide();
         jQuery("#comunicacionDiaria td:contiene-palabra('Daiana')").parent("tr").show();
+});
+$('#MarianaPirani').click(function() {
+      jQuery("#comunicacionDiaria tbody>tr").hide();
+        jQuery("#comunicacionDiaria td:contiene-palabra('Mariana')").parent("tr").show();
 });
 $('#TablaGral').click(function() {
   jQuery("#comunicacionDiaria tbody>tr").show();
