@@ -305,6 +305,8 @@ router.get('/edit/:id', (req, res) => {
 })
 router.get('/historialcarpeta/:Nombre', (req, res) => {
     if (req.isAuthenticated()) {
+        console.log(req.session.passport.user);
+        
         var id;
         const Nombre = req.params.Nombre;
         var sql = 'SELECT id FROM obras WHERE Nombre =?';

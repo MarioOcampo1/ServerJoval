@@ -1,9 +1,8 @@
 <form action="/GuardarPolizaAlbacaucion" method="post">
-    <div class="form-group">
+    <div class="form-group mb-6 p-2">
       
         <div id="nuevaPoliza"class="container border md-center " style="display:none ;">
-        <h2 class="text-center">Nueva póliza</h2>
-           
+        <h2 class="text-center">Nueva póliza</h2>          
         <div class="row justify-content-md-center ">
             <div class="col ">
 
@@ -36,17 +35,16 @@
         </div>
             <div class="col ">
              
-                <label class="fw-bold" for="DescripcionRiesgo">Descripción de riesgo</label>
+                <label class="fw-bold" for="DescripcionRiesgo">Tipo de riesgo</label>
                 <select name="DescripcionRiesgo" id="DescripcionRiesgo">Seleccione el tipo de poliza
                     <option value="EjecucionContrato"> Ejecución de contrato</option>
                     <option value="FondoReparo"> Fondo de reparo</option>
                     <option value="GarantiaAnticipo"> Garantía de anticipo</option>
                     <option value="GarantiaAcopio"> Garantía de acopio</option>
                         <option value="MantenimientoOferta"> Mantenimiento de oferta</option>
-            </select>
-         
-            <br>
-           
+
+            </select>         
+            <br>          
                   <label class="fw-bold" for="Valor">Valor a pagar</label>
                   <input required type="number" class="m-1" id="Valor" name="Valor"
                     placeholder="Ingrese el valor de la póliza ">
@@ -62,12 +60,16 @@
                 <input required type="number" class="m-1" id="MontoAsegurado" name="MontoAsegurado"
                   placeholder="Ingrese el MontoAsegurado de la póliza "> 
                     </div>
-                  
+                  <label class="fw-bold" for="DescripcionRiesgo">Descripción del riesgo</label>
+                  <input required type="text" class="m-1 input-control" id="Descripción del riesgo" name="Descripción del riesgo"
+                  placeholder="Ingrese una breve descripción del riesgo de la póliza "> 
        
         </div>
-        <div class="row justify-content-md-center">
-          
-                <button class="btn btn-danger" type="submit">Guardar póliza</button>
+        <div class="text-center">
+                <button class="btn btn-success" type="submit">Guardar póliza</button>
+                <button class="btn btn-danger text-light bi bi-arrow-left-square" onclick="document.getElementById('nuevaPoliza').style.display='none';">
+                    X
+                </button>
             </div>
         </div>
       </div>
