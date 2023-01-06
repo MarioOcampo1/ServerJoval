@@ -154,11 +154,12 @@ router.post('/GuardarPolizaAlbacaucion', (req, res) => {
         let ValorAPagar = req.body.Valor;
         let montoAsegurado = req.body.MontoAsegurado;
         let Asegurado = req.body.Asegurado;
+        let Descripcion = req.body.Descripcion;
         if (NombreObra = "") { }
         else {
             var sql = 'Insert into admingeneral_seguros_albacaucion set?'
             connection.query(sql, {
-                Aseguradora: Aseguradora, Obra: NombreObra, NumeroPoliza: NPoliza, FechaEmisionPoliza: FechaEmisionPoliza,
+                Aseguradora: Aseguradora, Obra: NombreObra, NumeroPoliza: NPoliza, FechaEmisionPoliza: FechaEmisionPoliza, Descripcion:Descripcion,
                 VigenciaPoliza: VigenciaPoliza, Riesgo: DescripcionRiesgo, Valor: ValorAPagar, MontoAsegurado: montoAsegurado, NombreAsegurado: Asegurado
             }, (error, results) => {
                 if (error) console.log(error);
@@ -199,13 +200,14 @@ router.post('/ActualizarPolizaAlbacaucion/:id', (req, res) => {
         let Asegurado = req.body.Asegurado;
         let Endoso = req.body.Endoso;
         var ProximaRefacturacion = req.body.ProximaRefacturacion;
+        let Descripcion = req.body.Descripcion
         var sql = 'UPDATE admingeneral_seguros_albacaucion set? WHERE ID_poliza = ?'
         if (FechaEmisionPoliza == "" || FechaEmisionPoliza == null ||FechaEmisionPoliza == undefined ) {
             if(ProximaRefacturacion == null || ProximaRefacturacion == undefined || ProximaRefacturacion == ""){
                 connection.query(sql, [{
                     Aseguradora: Aseguradora, NumeroPoliza: NPoliza, Obra: Obra,
                     VigenciaPoliza: VigenciaPoliza, Riesgo: DescripcionRiesgo, Valor: ValorAPagar, MontoAsegurado: montoAsegurado,
-                     NombreAsegurado: Asegurado, Endoso: Endoso
+                     NombreAsegurado: Asegurado, Endoso: Endoso, Descripcion: Descripcion,
                 }, id], (error, results) => {
                     if (error) console.log(error);
                     else {

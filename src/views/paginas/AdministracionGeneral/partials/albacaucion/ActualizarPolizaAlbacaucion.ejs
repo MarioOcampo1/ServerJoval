@@ -75,7 +75,7 @@
 
                         <div class="row ">
 
-                            <label class="fw-bold" for="DescripcionRiesgo">Descripción de riesgo</label>
+                            <label class="fw-bold" for="DescripcionRiesgo">Tipo de riesgo</label>
                             <select name="DescripcionRiesgo" id="DescripcionRiesgo">Seleccione el tipo de poliza
                                 <option selected value="<%=obras[0].Riesgo%>">
                                     <%=obras[0].Riesgo%>
@@ -147,9 +147,11 @@
                         </div>
                         <div class="row">
                             <label class="fw-bold" for="ProximaRefacturacion">Proxima refacturación: <%=moment(obras[0].ProximaRefacturacion).format('DD/MM/YYYY')%></label>
-                           <input type="date" name="ProximaRefacturacion" id="ProximaRefacturacion" value=""</label>
-                                
-                       
+                           <input type="date" name="ProximaRefacturacion" id="ProximaRefacturacion" value="">
+                        </div>
+                        <div class="row">
+                            <label class="fw-bold" for="Descripcion">Descripción</label>
+                            <textarea type="textarea" name="Descripcion" id="Descripcion" rows="7" cols="5" placeholder="<%=obras[0].Descripcion%>"> <%=obras[0].Descripcion%></textarea>
                         </div>
                     </div>
                 </div>
@@ -175,8 +177,7 @@
     }
     $(document).ready(function(){
         $('#ProximaRefacturacion').val('<%=obras[0].ProximaRefacturacion%>');
-        
-        
+        $('#Descripcion').html('<%=obras[0].Descripcion%>');
     })
    
 </script>
