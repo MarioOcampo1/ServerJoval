@@ -6,13 +6,12 @@
            
         <div class="row justify-content-md-center ">
             <div class="col ">
-
+                
                 <label class="fw-bold" for="Aseguradora">Aseguradora</label>
                 <select name="Aseguradora" id="Aseguradora">Aseguradora
                 <option class="m-1" value="Albacaucion">Albacaución</option>
             </select>
             <br>
-            <p class="bg-warning ">ATENCION: SEGUN LAS CONDICIONES DEL SISTEMA ACTUAL, UNA VEZ ELEGIDA UNA OBRA, NO SE PUEDE CAMBIAR NUEVAMENTE</p>
                 <label class="fw-bold bg-warning" for="NombreObra">Obra a la que corresponde</label>
                 <select class="m-1 " name="NombreObra" id="NombreObra">Seleccione la obra a la cual pertenece
                 <%obras.forEach((obrasNombre)=>{%>
@@ -35,7 +34,7 @@
                   placeholder="Ingrese la fecha de emision ">
         </div>
             <div class="col ">
-             
+             <div class="row">
                 <label class="fw-bold" for="DescripcionRiesgo">Descripción de riesgo</label>
                 <select name="DescripcionRiesgo" id="DescripcionRiesgo">Seleccione el tipo de poliza
                     <option value="EjecucionContrato"> Ejecución de contrato</option>
@@ -44,30 +43,38 @@
                     <option value="GarantiaAcopio"> Garantía de acopio</option>
                         <option value="MantenimientoOferta"> Mantenimiento de oferta</option>
             </select>
-         
-            <br>
-           
+        </div>
+        <div class="row">
+
+
                   <label class="fw-bold" for="Valor">Valor a pagar</label>
                   <input required type="number" class="m-1" id="Valor" name="Valor"
                     placeholder="Ingrese el valor de la póliza ">
-                <br>
-                <label class="fw-bold" for="VigenciaPoliza">Vigencia de la poliza</label>
+                </div>
+                <div class="row">
+                    <label class="fw-bold" for="VigenciaPoliza">Vigencia de la poliza</label>
                     <select name="VigenciaPoliza" id="VigenciaPoliza">Seleccione la vigencia de la poliza
                     <option value="Trimestral">Trimestral</option>
                     <option value="Semestral">Semestral</option>
                     <option value="Anual">Anual</option>
                 </select>
-                <br>
+                </div>
+              <div class="row">
                 <label class="fw-bold" for="MontoAsegurado">Monto Asegurado</label>
                 <input required type="number" class="m-1" id="MontoAsegurado" name="MontoAsegurado"
                   placeholder="Ingrese el MontoAsegurado de la póliza "> 
+              </div>
+              <div class="row">
+                <label class="fw-bold" for="Descripcion">Descripción</label>
+                <textarea type="textarea" name="Descripcion" id="Descripcion" rows="7" cols="5" placeholder="Ingrese una breve descripción del riesgo"> </textarea>
+              </div>
                     </div>
-                  
-       
         </div>
-        <div class="row justify-content-md-center">
-          
-                <button class="btn btn-danger" type="submit">Guardar póliza</button>
+        <div class="row-6 text-center mt-1">
+            <div class="btn-group">
+                <button class="btn btn-success" type="submit">Guardar póliza</button>
+                <button class="btn btn-danger">Cancelar</button>
+            </div>
             </div>
         </div>
       </div>
