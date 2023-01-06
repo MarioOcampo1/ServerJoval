@@ -129,19 +129,17 @@
                         <div class="row">
                             <label class="fw-bold" for="Estado">Estado</label>
                             <select name="Estado" id="Estado">Seleccione el estado
-                                
                                 <%if(obras[0].Estado=="Vigente"){%>
-                                    <option value="Dada de baja">Dada de baja</option>
-                                    <option selected value="<%=obras[0].Estado%>" hi>
+                                    <option selected value="<%=obras[0].Estado%>">
                                         <%=obras[0].Estado%>
                                     </option>
-                                    <%} if(obras[0].Estado=="Dada de baja"){%>%>
-                                        <option value="Vigente">Vigente</option> 
-                                        <option selected value="<%=obras[0].Estado%>">
+                                    <%} if(obras[0].Estado=="Dada de baja"){%>
+                                    <option selected value="<%=obras[0].Estado%>">
                                             <%=obras[0].Estado%>
                                         </option>
                                         <%}%>
-                               
+                                        <option value="Dada de baja">Dada de baja</option>
+                                        <option value="Vigente">Vigente</option>
                                 
                             </select>
                         </div>
