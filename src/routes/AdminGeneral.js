@@ -144,6 +144,7 @@ router.post('/GuardarPolizaAlbacaucion', (req, res) => {
         let Aseguradora = req.body.Aseguradora;
         let NombreObra = req.body.NombreObra;
         let NPoliza = req.body.NPoliza;
+        let EstadoPoliza = req.body.Estado;
         var FechaEmisionPoliza = req.body.FechaEmisionPoliza;
         let VigenciaPoliza = req.body.VigenciaPoliza;
         var EndosoPagado= req.body.EndosoPagado;
