@@ -49,13 +49,10 @@ router.get('/seguros/Albacaucion', (req, res) => {
     new Promise((resolve, reject) => {
         var sql = 'Select * from admingeneral_seguros_albacaucion WHERE  Estado !="Dada de baja" ';
         res.locals.moment = moment;
-        
-        
         connection.query(sql, (error, results) => {
             if(error)console.log(error);
             var fechaActual = new Date();
             var fechaProximaRefacturacion;
-            
             results.forEach(element => {
                 if (element.ProximaRefacturacion < fechaActual) {
                     sql = 'Update admingeneral_seguros_albacaucion set? WHERE ID_poliza=?';
@@ -70,7 +67,7 @@ router.get('/seguros/Albacaucion', (req, res) => {
                         var diaPoliza = new Date(element.ProximaRefacturacion).getDate();
                         añoPoliza = añoPoliza + 1; //Se adiciona el año que requiere el if
                         fechaProximaRefacturacion = new Date(añoPoliza, mesPoliza, diaPoliza);
-                        connection.query(sql, [{ ProximaRefacturacion: fechaProximaRefacturacion, Endoso }, element.ID_poliza], (error) => {
+                        connection.query(sql, [{ ProximaRefacturacion: fechaProximaRefacturacion, Endoso:Endoso, EndosoPagado:"N" }, element.ID_poliza], (error) => {
                             if (error) console.log(error);
                         })
                     }
@@ -80,7 +77,7 @@ router.get('/seguros/Albacaucion', (req, res) => {
                         var diaPoliza = new Date(element.ProximaRefacturacion).getDate();
                         mesPoliza = mesPoliza + 6; //Se adiciona el año que requiere el if
                         fechaProximaRefacturacion = new Date(añoPoliza, mesPoliza, diaPoliza);
-                        connection.query(sql, [{ ProximaRefacturacion: fechaProximaRefacturacion, Endoso }, element.ID_poliza], (error) => {
+                        connection.query(sql, [{ ProximaRefacturacion: fechaProximaRefacturacion, Endoso:Endoso, EndosoPagado:"N" }, element.ID_poliza], (error) => {
                             if (error) console.log(error);
                         })
                     }
@@ -90,7 +87,7 @@ router.get('/seguros/Albacaucion', (req, res) => {
                         var diaPoliza = new Date(element.ProximaRefacturacion).getDate();
                         mesPoliza = mesPoliza + 3; //Se adiciona el año que requiere el if
                         fechaProximaRefacturacion = new Date(añoPoliza, mesPoliza, diaPoliza);
-                        connection.query(sql, [{ ProximaRefacturacion: fechaProximaRefacturacion, Endoso }, element.ID_poliza], (error) => {
+                        connection.query(sql, [{ ProximaRefacturacion: fechaProximaRefacturacion, Endoso:Endoso, EndosoPagado:"N" }, element.ID_poliza], (error) => {
                             if (error) console.log(error);
                         })
                     }
@@ -101,12 +98,11 @@ router.get('/seguros/Albacaucion', (req, res) => {
                         mesPoliza = mesPoliza + 1;
  var fechaVencimientoPoliza  = new Date(añoPoliza, mesPoliza, diaPoliza);
  if(fechaVencimientoPoliza< fechaActual){
-    connection.query(sql, [{Estado:"Dada de baja"  }, element.ID_poliza], (error) => {
+    connection.query(sql, [{Estado:"Dada de baja"}, element.ID_poliza], (error) => {
         if (error) console.log(error);
     })
  }
                     }
-                
             };
         });
     })
@@ -148,8 +144,84 @@ router.post('/GuardarPolizaAlbacaucion', (req, res) => {
         let Aseguradora = req.body.Aseguradora;
         let NombreObra = req.body.NombreObra;
         let NPoliza = req.body.NPoliza;
-        let FechaEmisionPoliza = req.body.FechaEmisionPoliza;
+        var FechaEmisionPoliza = req.body.FechaEmisionPoliza;
         let VigenciaPoliza = req.body.VigenciaPoliza;
+        var EndosoPagado= req.body.EndosoPagado;
+        var day= FechaEmisionPoliza.getDay();
+        var mes = FechaEmisionPoliza.getMonth();
+        var anio = FechaEmisionPoliza.getFullYear();
+        var ProximaRefacturacion;
+        if(VigenciaPoliza=="Trimestral"){
+            switch (mes) {
+                case 10:
+                    mes=1;
+                    anio=anio+1;
+                    break;
+                    case 11:
+                        mes=2;
+                        anio=anio+1;
+                        break;
+                        case 12:
+                    mes=3;
+                    anio=anio+1;
+                    break;
+                default:
+                    mes= mes+3;
+                    break;
+            }
+        if(day>28){
+            if(mes==2){
+                day=28;
+            }
+        }
+        }
+        if(VigenciaPoliza=="Semestral"){
+            switch (mes) {
+                case 7:
+                    mes=1;
+                    anio=anio+1;
+                    break;
+                case 8:
+                    mes=2;
+                    anio=anio+1;
+                    break;
+                case 9:
+                    mes=3;
+                    anio=anio+1;
+                    break;
+                case 10:
+                    mes=4;
+                    anio=anio+1;
+                    break;
+                case 11:
+                        mes=5;
+                        anio=anio+1;
+                        break;
+                case 12:
+                    mes=6;
+                    anio=anio+1;
+                    break;
+                default:
+                    mes= mes+6;
+                    break;
+            }
+            if(day>28){
+                if(mes==2){
+                    day=28;
+                }
+            }
+        }
+        
+        if(VigenciaPoliza=="Anual"){
+            anio=anio+1;
+
+            if(day>28){
+                if(mes==2){
+                    day=28;
+                }
+            }
+        }
+        ProximaRefacturacion = new Date(anio,mes,day);
         let DescripcionRiesgo = req.body.DescripcionRiesgo;
         let ValorAPagar = req.body.Valor;
         let montoAsegurado = req.body.MontoAsegurado;
@@ -159,7 +231,8 @@ router.post('/GuardarPolizaAlbacaucion', (req, res) => {
         else {
             var sql = 'Insert into admingeneral_seguros_albacaucion set?'
             connection.query(sql, {
-                Aseguradora: Aseguradora, Obra: NombreObra, NumeroPoliza: NPoliza, FechaEmisionPoliza: FechaEmisionPoliza, Descripcion:Descripcion,
+                Aseguradora: Aseguradora, ProximaRefacturacion:ProximaRefacturacion, Obra: NombreObra, NumeroPoliza: NPoliza,
+                 FechaEmisionPoliza: FechaEmisionPoliza, Descripcion:Descripcion, Endoso:0,EndosoPagado:EndosoPagado, Estado:EstadoPoliza,
                 VigenciaPoliza: VigenciaPoliza, Riesgo: DescripcionRiesgo, Valor: ValorAPagar, MontoAsegurado: montoAsegurado, NombreAsegurado: Asegurado
             }, (error, results) => {
                 if (error) console.log(error);
@@ -174,13 +247,18 @@ router.post('/GuardarPolizaAlbacaucion', (req, res) => {
 router.get('/seguros/ActualizarPolizaAlbacaucion/:id', (req, res) => {
     if (req.isAuthenticated()) {
         var id = req.params.id;
+        var listadoObras;
         console.log("El id seleccionado es:" + id);
-        var sql = 'Select * from admingeneral_seguros_albacaucion WHERE ID_poliza = ? ';
+        var sql= 'Select id, Nombre from obras;';
+        connection.query(sql,(error,results)=>{
+listadoObras = results;
+        })
+         sql = 'Select * from admingeneral_seguros_albacaucion WHERE ID_poliza = ? ';
         connection.query(sql, id, (error, results) => {
             if (error) console.log(error);
             else {
                 // res.send(results);
-                res.render('paginas/AdministracionGeneral/partials/albacaucion/ActualizarPolizaAlbacaucion.ejs', { obras: results, moment: moment });
+                res.render('paginas/AdministracionGeneral/partials/albacaucion/ActualizarPolizaAlbacaucion.ejs', { obras: results,listadoObras, moment: moment });
             }
         })
 
@@ -191,6 +269,7 @@ router.post('/ActualizarPolizaAlbacaucion/:id', (req, res) => {
         let id = req.params.id;
         let Aseguradora = req.body.Aseguradora;
         let Obra = req.body.Obra;
+        let EstadoPoliza = req.body.Estado;
         let NPoliza = req.body.NPoliza;
         let FechaEmisionPoliza = req.body.FechaEmisionPoliza;
         let VigenciaPoliza = req.body.VigenciaPoliza;
@@ -201,13 +280,14 @@ router.post('/ActualizarPolizaAlbacaucion/:id', (req, res) => {
         let Endoso = req.body.Endoso;
         var ProximaRefacturacion = req.body.ProximaRefacturacion;
         let Descripcion = req.body.Descripcion
+        var EndosoPagado = req.body.EndosoPagado;
         var sql = 'UPDATE admingeneral_seguros_albacaucion set? WHERE ID_poliza = ?'
         if (FechaEmisionPoliza == "" || FechaEmisionPoliza == null ||FechaEmisionPoliza == undefined ) {
             if(ProximaRefacturacion == null || ProximaRefacturacion == undefined || ProximaRefacturacion == ""){
                 connection.query(sql, [{
                     Aseguradora: Aseguradora, NumeroPoliza: NPoliza, Obra: Obra,
                     VigenciaPoliza: VigenciaPoliza, Riesgo: DescripcionRiesgo, Valor: ValorAPagar, MontoAsegurado: montoAsegurado,
-                     NombreAsegurado: Asegurado, Endoso: Endoso, Descripcion: Descripcion,
+                     NombreAsegurado: Asegurado, Endoso: Endoso,EndosoPagado:EndosoPagado, Estado:EstadoPoliza, Descripcion: Descripcion,
                 }, id], (error, results) => {
                     if (error) console.log(error);
                     else {
@@ -219,7 +299,7 @@ router.post('/ActualizarPolizaAlbacaucion/:id', (req, res) => {
                 connection.query(sql, [{
                     Aseguradora: Aseguradora, NumeroPoliza: NPoliza, Obra: Obra,
                     VigenciaPoliza: VigenciaPoliza, Riesgo: DescripcionRiesgo, Valor: ValorAPagar, MontoAsegurado: montoAsegurado,
-                     NombreAsegurado: Asegurado, Endoso: Endoso, ProximaRefacturacion:ProximaRefacturacion
+                     NombreAsegurado: Asegurado, Endoso: Endoso,EndosoPagado:EndosoPagado, Estado:EstadoPoliza, ProximaRefacturacion:ProximaRefacturacion
                 }, id], (error, results) => {
                     if (error) console.log(error);
                     else {
@@ -233,6 +313,7 @@ router.post('/ActualizarPolizaAlbacaucion/:id', (req, res) => {
             connection.query(sql, [{
                 Aseguradora: Aseguradora, NumeroPoliza: NPoliza, FechaEmisionPoliza: FechaEmisionPoliza, Obra: Obra,
                 VigenciaPoliza: VigenciaPoliza, Riesgo: DescripcionRiesgo, Valor: ValorAPagar, MontoAsegurado: montoAsegurado, NombreAsegurado: Asegurado, Endoso: Endoso,
+                EndosoPagado:EndosoPagado, Estado:EstadoPoliza,
                 
             }, id], (error, results) => {
                 if (error) console.log(error);
@@ -244,7 +325,7 @@ router.post('/ActualizarPolizaAlbacaucion/:id', (req, res) => {
             connection.query(sql, [{
                 Aseguradora: Aseguradora, NumeroPoliza: NPoliza, FechaEmisionPoliza: FechaEmisionPoliza, Obra: Obra,
                 VigenciaPoliza: VigenciaPoliza, Riesgo: DescripcionRiesgo, Valor: ValorAPagar, MontoAsegurado: montoAsegurado, NombreAsegurado: Asegurado, Endoso: Endoso,
-                ProximaRefacturacion:ProximaRefacturacion,
+                ProximaRefacturacion:ProximaRefacturacion, EndosoPagado:EndosoPagado, Estado:EstadoPoliza,
             }, id], (error, results) => {
                 if (error) console.log(error);
                 else {

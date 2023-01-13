@@ -22,9 +22,6 @@
 
        </span>
     </div>
-    <div class="inline-block">
-        <p id="CantidadPolizasVigentes">Polizas vigentes: </p>
-    </div>
     <div class="table-bordered p-1 text-center">
        <table id="tablaAlbacaucion" class="table-bordered p-1 text-center">
         <thead>
@@ -39,7 +36,8 @@
     <th scope="col">Proxima refacturación</th>
     <th scope="col">Asegurado</th>
     <th scope="col">Descripción</th>
-    <th scope="col">Estado</th>
+    <th scope="col">Endoso pagado</th>
+<th scope="col">Estado</th>
   </tr>
 </thead>
 <%results.forEach((poliza)=>{%>
@@ -64,6 +62,13 @@
                         <%}%>
         <td><%=poliza.NombreAsegurado%></td>
         <td><%=poliza.Descripcion%></td>
+        <%if(poliza.EndosoPagado=="N"){%>
+        <td class="bg-danger text-white" id="EndosoPagadoAviso"><%=poliza.EndosoPagado%></td>
+            
+            <%}else{%>
+        <td><%=poliza.EndosoPagado%></td>
+
+                <%}%>
         <td><%=poliza.Estado%>
             <a href="ActualizarPolizaAlbacaucion/<%=poliza.ID_poliza%>">
         <button  class="btn-sm btn-outline-primary btnEditar">Editar</button>
@@ -99,5 +104,11 @@ $(document).ready(function(){
 function MostrarTodasLasPolizas(){
     jQuery("#tablaAlbacaucion tbody>tr").show();
 }
-</script>
+animacion = function(){
+    $('#EndosoPagadoAviso').fadeToggle('slow','linear');
+    console.log("deberia de parpadear");
+}
+    setInterval(animacion,500);
+ </script>
+ 
 </html>

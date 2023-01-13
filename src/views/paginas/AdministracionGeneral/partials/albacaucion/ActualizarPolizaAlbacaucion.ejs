@@ -13,21 +13,21 @@
 <body class=">
     <%- include('../menusuperior.ejs'); %>
     
-    <h1 class=" text-center bg-warning">Actualizar póliza de Albacaución</h1>
-    <div class="btn-group pr-1" role="group" aria-label="Botones">
-        <button type="button" class="btn btn-outline-secondary" onclick="javascript:history.back()">Volver
-            atrás</button>
-        <form id="formularioBorrarBoton" action="/DarBajaPolizaAlbacaucion/<%=obras[0].ID_poliza%>" method="post">
-            <button type="button" class="btn btn-outline-danger" onclick="mostrarAlerta()">Dar de baja la póliza</button>
-        </form>
-
-    </div>
-    <form class="" action="/ActualizarPolizaAlbacaucion/<%=obras[0].ID_poliza%>" method="post">
+    <h2 class="text-center bg-warning">Actualizar póliza de Albacaución</h2>
+   
 
         <div class="form-group">
 
             <div id="ActualizarPoliza" class="container border border- danger md-center " style="display:block ;">
-
+                <div class="btn-group pe-1 mt-1" role="group" aria-label="Botones">
+                    <button type="button" class="btn btn-outline-secondary mb-1" onclick="javascript:history.back()">Volver
+                        atrás</button>
+                    <form id="formularioBorrarBoton" action="/DarBajaPolizaAlbacaucion/<%=obras[0].ID_poliza%>" method="post">
+                        <button type="button" class="btn btn-outline-danger ms-1 mb-1" onclick="mostrarAlerta()">Dar de baja la póliza</button>
+                    </form>
+            
+                </div>
+                <form class="" action="/ActualizarPolizaAlbacaucion/<%=obras[0].ID_poliza%>" method="post">
                 <div class="row justify-content-md-center ">
                     <div class="col m-1">
                         <div class="row">
@@ -44,8 +44,15 @@
                         </div>
                         <div class="row">
                             <label class="fw-bold" for="Obra">Obra a la que pertenece</label>
-                            <input type="text" class=" m-1" value="<%=obras[0].Obra%>" placeholder="<%=obras[0].Obra%>"
-                                name="Obra" id="Obra" aria-label="<%=obras[0].Obra%>" required>
+                            <select name="Obra" id="">
+                                <%listadoObras.forEach((listadoObra)=>{%>
+                                    <%if(listadoObra.Nombre==obras[0].Obra){%>
+                                        <option value="<%=listadoObra.Nombre%>" selected><%=listadoObra.Nombre%></option>    
+                                        <%}else{%>
+                                            <option value="<%=listadoObra.Nombre%>"><%=listadoObra.Nombre%></option>        
+                                            <%}%>
+                                    <%})%>
+                            </select>
                         </div>
                         <div class="row">
 
@@ -138,14 +145,24 @@
                                             <%=obras[0].Estado%>
                                         </option>
                                         <%}%>
-                                        <option value="Dada de baja">Dada de baja</option>
                                         <option value="Vigente">Vigente</option>
+                                        <option value="Dada de baja">Dada de baja</option>
                                 
                             </select>
                         </div>
                         <div class="row">
-                            <label class="fw-bold" for="ProximaRefacturacion">Proxima refacturación: <%=moment(obras[0].ProximaRefacturacion).format('DD/MM/YYYY')%></label>
+                            <label class="fw-bold mt-1" for="ProximaRefacturacion">Proxima refacturación: <%=moment(obras[0].ProximaRefacturacion).format('DD/MM/YYYY')%></label>
                            <input type="date" name="ProximaRefacturacion" id="ProximaRefacturacion" value="">
+                        </div>
+                        <div class="row bg-info mt-2">
+                            <label class="fw-bold bg-info" for="Descripcion">Endoso Pagado</label>
+                            <select class="bg-info" name="EndosoPagado" id="">
+                                <option value="<%=obras[0].EndosoPagado%>" selected hidden> <%=obras[0].EndosoPagado%></option>
+                                
+                                <option value="S">Si</option>
+                                <option value="N">No</option>
+
+                            </select>
                         </div>
                         <div class="row">
                             <label class="fw-bold" for="Descripcion">Descripción</label>
