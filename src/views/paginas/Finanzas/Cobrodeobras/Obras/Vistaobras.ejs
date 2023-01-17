@@ -14,23 +14,22 @@
   <%- include('../../partials/menusuperior.ejs'); %>
 
     <div class="VistaObra">
-      <div class="Encabezado">
-        <button class="btn btn-danger m-2" onclick="history.go(-1)">Atrás</button>
-        <h1 class="text-center"> Obra <%=NombreObra%>
+      <div class="Encabezado mt-2 ms-1">
+        <button class="btn btn-sm btn-danger bi bi-arrow-bar-left" onclick="history.go(-1)" title="Ir a pagína anterior"></button>
+        <a href="/Finanzas/NuevoCliente/<%=NombreObra%>"><button class="btn btn-sm btn-success">NuevoCliente</button></a>
+        <button class="btn btn-sm btn-primary" onclick="ExportarAExcel();" disabled>Exportar planilla</button>
+        <button class="btn btn-sm btn-primary bi bi-gear" data-bs-toggle="modal" data-bs-target="#ModalConfiguracion"> Configuraciones de
+          la obra</button>
+        <h1 class="text-center"><%=NombreObra%>- lista de clientes
         </h1>
       </div>
-      <h2 class="text-center">Lista de clientes que contiene la obra</h2>
-      <div class="container border border-danger">
-        <p class="fw-bold">En caso de no encontrar el cliente deseado, es debido a que no se registran pagos del mismo
-          y/o no se han cargado en el sistema los correspondientes cargos a pagar. Deberá de dirigirse a la ventana
-          anterior y cargarlo.</p>
+      <div class="container ">
+        <p class="text-center">En caso de no encontrar el vecino, debera de cargarlo en el sistema.</p>
       </div>
       <div class="container VistaClientes m-2">
         <label for="BuscadorCliente">Buscar cliente</label>
         <input class="border border-danger" type="text" name="BuscadorCliente" id="BuscadorCliente">
-        <button class="btn btn-primary" onclick="ExportarAExcel();" disabled>Exportar planilla</button>
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalConfiguracion">Configuraciones de
-          la obra</button>
+        
       </div>
       <table id="TablaObras" class="table table-bordered table-inverse table-responsive"
         style="display: block; width:100%;">
