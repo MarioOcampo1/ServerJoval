@@ -223,7 +223,10 @@ router.post('/GuardarPolizaAlbacaucion', (req, res) => {
             }
         }
         ProximaRefacturacion = new Date(anio,mes,day);
-        let DescripcionRiesgo = req.body.DescripcionRiesgo;
+        let TipoRiesgo = req.body.TipoRiesgo;
+        if(TipoRiesgo=="Mantenimiento de oferta"){
+            ProximaRefacturacion="";
+        }
         let ValorAPagar = req.body.Valor;
         let montoAsegurado = req.body.MontoAsegurado;
         let Asegurado = req.body.Asegurado;
@@ -234,7 +237,7 @@ router.post('/GuardarPolizaAlbacaucion', (req, res) => {
             connection.query(sql, {
                 Aseguradora: Aseguradora, ProximaRefacturacion:ProximaRefacturacion, Obra: NombreObra, NumeroPoliza: NPoliza,
                  FechaEmisionPoliza: FechaEmisionPoliza, Descripcion:Descripcion, Endoso:0,EndosoPagado:EndosoPagado, Estado:EstadoPoliza,
-                VigenciaPoliza: VigenciaPoliza, Riesgo: DescripcionRiesgo, Valor: ValorAPagar, MontoAsegurado: montoAsegurado, NombreAsegurado: Asegurado
+                VigenciaPoliza: VigenciaPoliza, Riesgo: TipoRiesgo, Valor: ValorAPagar, MontoAsegurado: montoAsegurado, NombreAsegurado: Asegurado
             }, (error, results) => {
                 if (error) console.log(error);
                 else {
@@ -249,7 +252,6 @@ router.get('/seguros/ActualizarPolizaAlbacaucion/:id', (req, res) => {
     if (req.isAuthenticated()) {
         var id = req.params.id;
         var listadoObras;
-        console.log("El id seleccionado es:" + id);
         var sql= 'Select id, Nombre from obras;';
         connection.query(sql,(error,results)=>{
 listadoObras = results;
@@ -311,6 +313,8 @@ router.post('/ActualizarPolizaAlbacaucion/:id', (req, res) => {
            
         } else {
             if(ProximaRefacturacion == null || ProximaRefacturacion == undefined || ProximaRefacturacion == ""){
+               
+               
             connection.query(sql, [{
                 Aseguradora: Aseguradora, NumeroPoliza: NPoliza, FechaEmisionPoliza: FechaEmisionPoliza, Obra: Obra,
                 VigenciaPoliza: VigenciaPoliza, Riesgo: DescripcionRiesgo, Valor: ValorAPagar, MontoAsegurado: montoAsegurado, NombreAsegurado: Asegurado, Endoso: Endoso,

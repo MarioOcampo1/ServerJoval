@@ -16,9 +16,7 @@
       <h1 class="text-center "><u>
           Cobro de obras</u></h1>
       <button class="btn btn-success" onclick="CargarPago();">Nuevo pago</button>
-      <a class="btn btn-success" href="Finanzas/NuevoCliente">
-        Nuevo cliente
-      </a>
+    
     </div>
     <div class="m-2 VistaClientes">
     
@@ -88,7 +86,6 @@
             <div id="printsection" class="printsection">
 
               <div class="modal-body bordeExterno">
-                <form action="/ImprimirComprobante" method="post">
                   <input type="number" name="IDCliente" id="IDCliente" hidden>
                   <div class="Imprimible">
                     <img src="../images/logo.png" alt="Joval S.A." id="LogoJoval">
@@ -102,38 +99,39 @@
                         <%NombreObras.forEach((element)=>{%>
                           <option id="opcionesObras" value="<%=element.Nombre%>"></option>
                           <%})%>
-
                       </datalist>
-
                       <p class="form-text noImprimible">Seleccione la obra a la que corresponde el cliente</p>
-
                     </div>
+                    <div id="NombreVecino" class="col-auto" style="display: none;">
+                      <label class="form-label text-center" for="NombreCompleto">Nombre </label>
+                      <select name="NombreCompleto" id="NombreCompleto">
+                        '<option type="radio" value="" selected> </option>'
+                      </select>
+                    </div>
+                    <div class="col-auto">
+                      <button id="btnNuevoCliente" class="btn btn-sm btn-success"  style="display: none;">
+                        Nuevo cliente
+                      </button>
+                    </div>
+                    
                   </div>
                   <div id="bodyInputs" style="display: none;">
                   <div class="form">
                     <div class="row">
                      
-                     
-                      <div class="col-auto">
-                        <label class="form-label text-center" for="NombreCompleto">Nombre </label>
-                        <select name="NombreCompleto" id="NombreCompleto">
-                          '<option type="radio" value="" selected> </option>'
-                        </select>
-                      </div>
-                      <div class="form-row">
-                        <label class="form-label col-sm-2 col-form-label" for="InputDomicilio">Domicilio</label>
+                      <div class="col-sm">
+                        <label class="form-label" for="InputDomicilio">Domicilio</label>
                         <input required class="form-control" type="text" name="Domicilio" id="InputDomicilio"
                           placeholder="Domicilio">
                       </div>
-                    </div>
-                    <div class="row">
-                      <div class="col ">
+                    
+                      <div class="col-sm ">
                         <label class="form-label text-center" for="ValorIngresado">Importe</label>
                         <input required class="form-control" type="number" step="0.01" name="ValorIngresado"
                           id="ValorIngresado">
 
                       </div>
-                      <div class="col ">
+                      <div class="col-sm ">
                         <label class="form-label text-center" for="Concepto">Concepto</label>
                         <select name="Concepto" id="Concepto">
                           <!-- <input required list="ConceptosDePago"  class="form-control" type="text" name="Concepto" id="Concepto"> -->
@@ -174,14 +172,6 @@
                       <div class="col">
                         <label class="form-label text-center" for="ObservacionesDelPago">Observaciones</label>
                         <input class="form-control" type="text" name="ObservacionesDelPago" id="ObservacionesDelPago">
-
-                        <label class="form-label text-center noImprimible" for="ComprobantePago"> Cargar comprobante de
-                          pago </label>
-                        <div class="noImprimible">
-                          <input class="form-control " type="file" name="ComprobantePago" id="ComprobantePago">
-                        </div>
-                        <p class="form-text noImprimible noImprimible">En caso de que la persona pague con
-                          transferencias, cheques, etc.</p>
                       </div>
                     </div>
                     </div>
@@ -190,11 +180,9 @@
             </div>
             
             <div class="modal-footer noImprimible">
-              <button class="btn noImprimible" onclick="window.print(); return false;">Imprimir comprobante</button>
               <button type="button " class="btn btn-secondary  noImprimible"
                 onclick="$('#ModalPrincipal').modal('hide');">Cerrar</button>
               <button type="submit"  id="btnGuardarCambios" class="btn btn-danger  noImprimible">Guardar</button>
-              </form>
             </div>
           </div>
         </div>
@@ -232,12 +220,14 @@
 
   var select = document.getElementById("Obra");
   var ClienteSeleccionado;
+  var NombreObra;
   select.addEventListener('blur', function () {
-    var NombreObra = this.value;
+     NombreObra = this.value;
     if (NombreObra==""){
        $('#bodyInputs').css('display', 'none');
        $('#btnGuardarCambios').prop('disabled', true);
-       
+       $('#NombreVecino').css('display', 'none');
+       $('#btnNuevoCliente').css('display', 'none');
     }
     else{
     var url = ("/cobrodeobras/clientes/LocalizarClientes/" + NombreObra);
@@ -252,8 +242,6 @@
         $("#NombreCompleto").append(
           '<option type="radio" value="' + Element.NombreCliente + '">' + Element.NombreCliente + '</option>'
         )
-
-        console.log(Element.ID_cliente);
       });
       $("#NombreCompleto").change(function () {
         let nombreCliente = $('#NombreCompleto option:selected').text(); //Trae solo el nombre del cliente que ha sido seleccionado.
@@ -266,14 +254,22 @@
         $('#IDCliente').val(
           cliente.ID_cliente
         )
+        $('#bodyInputs').css('display', 'block');
+       
       })
     }
 
     )
-    $('#bodyInputs').css('display', 'block');
+    $('#btnNuevoCliente').css('display', 'block');
+    $('#NombreVecino').css('display', 'block');
     $('#btnGuardarCambios').prop('disabled', false);
+    $('#btnNuevoCliente').click(function(){
+     var url="/Finanzas/NuevoCliente/"+NombreObra;
+      window.location.href= url;
+    }) 
   }
-  });
+  }
+  );
   function CargarPago(data) {
     $('#ModalPrincipal').modal("show");
   }

@@ -75,7 +75,7 @@
                             <input  type="date" value="<%=obras[0].FechaEmisionPoliza%>" class=" m-1"
                                 id="FechaEmisionPoliza" name="FechaEmisionPoliza"
                                 placeholder="Ingrese la fecha de emision "
-                                aria-label="<%=obras[0].FechaEmisionPoliza%>" >
+                                aria-label="<%=obras[0].FechaEmisionPoliza%>">
                         </div>
                     </div>
                     <div class="col m-1">
@@ -193,6 +193,7 @@
     $(document).ready(function(){
         $('#ProximaRefacturacion').val('<%=obras[0].ProximaRefacturacion%>');
         $('#Descripcion').html('<%=obras[0].Descripcion%>');
+        $('#FechaEmisionPoliza').val('<%=obras[0].FechaEmisionPoliza%>');
     })
    
 </script>

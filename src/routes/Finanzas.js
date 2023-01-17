@@ -95,12 +95,14 @@ router.get('/Finanzas_Cobros', (req, res) => {
         res.render('paginas/Finanzas/Cobros.ejs');
     }
 })
-router.get('/Finanzas/NuevoCliente', (req, res) => {
+router.get('/Finanzas/NuevoCliente/:NombreObra', (req, res) => {
     var sql = 'Select Nombre from obras';
+    var NombreObra= req.params.NombreObra;
+    console.log(NombreObra);
     connection.query(sql, (error, results) => {
         if (error) console.log(error);
         else {
-            res.render('paginas/Finanzas/Cobrodeobras/Clientes/nuevocliente.ejs', { nombreObra: results });
+            res.render('paginas/Finanzas/Cobrodeobras/Clientes/nuevocliente.ejs', { NombreObra,ListadoObras: results });
 
         }
     })

@@ -17,7 +17,7 @@
         <label for="Buscador" class="bg-light" >Buscador en tabla</label>
         <input type="text" name="Buscador" id="BuscadorTabla" class="" >
         <button type="button" class="btn btn-danger" onclick="document.getElementById('nuevaPoliza').style.display='block';">Nueva póliza</button>
-        <button type="button" class="btn btn-info" onclick="MostrarTodasLasPolizas();"> Mostrar todas las pólizas</button>
+        <button type="button" class="btn btn-info" onclick="MostrarTodasLasPolizas();"> Mostrar pólizas dadas de baja</button>
        <span>Cantidad de pólizas vigentes: <%=cantidadPolizasVigentes%>
 
        </span>
@@ -63,7 +63,7 @@
         <td><%=poliza.NombreAsegurado%></td>
         <td><%=poliza.Descripcion%></td>
         <%if(poliza.EndosoPagado=="N"){%>
-        <td class="bg-danger text-white" id="EndosoPagadoAviso"><%=poliza.EndosoPagado%></td>
+        <td class="bg-danger text-white EndosoPagadoAviso"><%=poliza.EndosoPagado%></td>
             
             <%}else{%>
         <td><%=poliza.EndosoPagado%></td>
@@ -81,6 +81,7 @@
 </table>
 </body>
 <script>
+    var mostrandoDadasDeBaja= false;
    jQuery("#BuscadorTabla").keyup(function(){
     if( jQuery(this).val() != "0"){
      
@@ -99,14 +100,20 @@ jQuery.extend(jQuery.expr[":"],
     }
 });
 $(document).ready(function(){
+    mostrandoDadasDeBaja= false;
     jQuery("#tablaAlbacaucion td:contiene-palabra('Dada de baja')").parent("tr").hide(); //Esconde las dadas de baja
 })
 function MostrarTodasLasPolizas(){
-    jQuery("#tablaAlbacaucion tbody>tr").show();
+    if(!mostrandoDadasDeBaja){
+        jQuery("#tablaAlbacaucion tbody>tr").show();
+        mostrandoDadasDeBaja=true;
+    } else{
+    jQuery("#tablaAlbacaucion td:contiene-palabra('Dada de baja')").parent("tr").hide(); //Esconde las dadas de baja
+mostrandoDadasDeBaja=false;
+    }
 }
 animacion = function(){
-    $('#EndosoPagadoAviso').fadeToggle('slow','linear');
-    console.log("deberia de parpadear");
+    $('EndosoPagadoAviso').fadeToggle('slow','linear');
 }
     setInterval(animacion,500);
  </script>

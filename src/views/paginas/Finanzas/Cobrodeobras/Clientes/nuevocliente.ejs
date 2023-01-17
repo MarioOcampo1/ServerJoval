@@ -10,9 +10,12 @@
     <%- include('../../partials/menusuperior.ejs'); %>
     <div class="container">
     <h1 class="text-center">Nuevo cliente</h1>
-    <button onclick="CargarClientesPorlote()">Cargar clientes por lote</button>
+   
     </div>
+    <button class="btn bi bi-arrow-bar-left bg-danger text-light" onclick="history.go(-1);" title="Ir a pagína anterior"></button>
+    <button class="btn btn-primary" onclick="CargarClientesPorlote()">Cargar clientes por lote</button>
     <form action="guardarCliente" method="post">
+        <div class="container-fluid border mt-2">
     <div class="form-group">
         
         <div class="row p-3">
@@ -55,9 +58,11 @@
         <div class="row m-2 ">
             <div class="col">Seleccione la obra a la cúal pertenece
                 <select name="Obra" id="Obra">
-                    <%nombreObra.forEach((obra)=>{ %>
-                       <option value="<%=obra.Nombre%>"><%=obra.Nombre%></option> 
-                        <%})%>
+<option value="<%=NombreObra%>" selected> <%=NombreObra%> </option>
+                    <%ListadoObras.forEach((ListaObras)=>{ %>
+<%if(ListaObras.Nombre==NombreObra){}else{%>
+                       <option value="<%=ListaObras.Nombre%>"><%=ListaObras.Nombre%></option> 
+                        <%}})%>
                 </select>
             </div>
             
@@ -89,7 +94,9 @@
 
     </div>
     </div>
-        <button class="btn btn-danger" type="submit">Guardar cliente</button>
+    <button class="btn btn-success text-center" type="submit">Guardar cliente</button>
+
+</div>
     </form>
     <form action="/Finanzas/NuevoCliente/cargarLote" method="post" id="CargarclientesporlotePOST"></form>
     <form action="/Finanzas/NuevoCliente/cargarLote" method="get" id="CargarclientesporloteGET"></form>
