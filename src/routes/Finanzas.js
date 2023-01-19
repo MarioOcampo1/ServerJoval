@@ -209,7 +209,7 @@ router.get('/cobroDeObras', (req, res) => {
         if (error) console.log(error);
 
         if (clientes.length > 0) {
-            res.render('paginas/Finanzas/CobroObras.ejs', { clientes: clientes, cobroObras: cobroObras, NombreObras: obras });
+            res.render('paginas/Finanzas/ListadoObras.ejs', { clientes: clientes, cobroObras: cobroObras, NombreObras: obras });
             // res.send(clientes) ;
         }
         else {
@@ -762,7 +762,7 @@ router.get('/Finanzas/cobrodeobras/VerObra/:NombreObra', (req, res) => {
             })
         }).then(PredeterminadosyCobros => {
 
-            res.render('paginas/Finanzas/Cobrodeobras/Obras/Vistaobras.ejs', { PredeterminadosyCobros: PredeterminadosyCobros, id_Obra: id, NombreObra: NombreObra, obras });
+            res.render('paginas/Finanzas/VistaDeLaObra.ejs', { PredeterminadosyCobros: PredeterminadosyCobros, id_Obra: id, NombreObra: NombreObra, obras });
         })
     }).catch(function (err) {
         res.redirect("/cobroDeObras");
