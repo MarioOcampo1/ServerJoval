@@ -22,10 +22,15 @@
                         <div class="container">
 
                             <div class="card mb-3 p-3 border-secondary">
-                                <div class="card-header bg-primary text-white">
-                                    Comienzo gestión 2da Parte</div>
-
-                                <div class="card-body">
+                                <%if(tareasporcarpeta.MailAutorizacion=="Recibido"||tareasporcarpeta.MailAutorizacion=="Ok"){%>
+                                    <div class="card-header bg-success text-white">
+                                        <%} else{%>  
+                                    <div class="card-header bg-primary text-white">
+                                            <%}%>
+                                            <label for="Comienzogestion2daparte" class="mx-auto" onclick="$('#Comienzogestion2daparteBody').css('display','block')">
+                                                Comienzo gestión 2da parte</label>
+                                        </div>
+                                        <div id="Comienzogestion2daparteBody" class="card-body" style="display: none;">
                                     <div class="row">
                                         <div class="col-6 border">
                                             <div class="card-title text-primary" onclick="document.getElementById('Mailautorizacionbody').style.display= 'block'">
@@ -219,9 +224,15 @@
                             </div>
 
                             <div class="card mb-3 p-3 border-secondary">
-                                <div class="card-header bg-primary text-white">
-                                    Documentación de obras</div>
-                                <div class="card-body">
+                                <%if(tareasgenerales.DocumentacionObra=="ok"||tareasgenerales.DocumentacionObra=="Ok"){%>
+                                    <div class="card-header bg-success text-white">
+                                        <%} else{%>  
+                                    <div class="card-header bg-primary text-white">
+                                            <%}%>
+                                            <label for="DocumentacionObras" class="mx-auto" onclick="$('#DocumentacionObrasBody').css('display','block')">
+                                                Documentacion de obras</label>
+                                        </div>
+                                        <div id="DocumentacionObrasBody" class="card-body" style="display: none;">
                                     <div class="row">
                                         <div class="col-6 border">
                                             <div class="card-title text-primary" onclick="document.getElementById('SolicitudInicioObrasbody').style.display= 'block'">
@@ -416,9 +427,15 @@
 
                             </div>
                             <div class="card mb-3 p-3 border-secondary">
-                                <div class="card-header bg-primary text-white">
-                                    Seguridad</div>
-                                <div class="card-body">
+                                <%if(tareasgenerales.Seguridad=="ok"||tareasgenerales.Seguridad=="Ok"){%>
+                                    <div class="card-header bg-success text-white">
+                                        <%} else{%>  
+                                    <div class="card-header bg-primary text-white">
+                                            <%}%>
+                                            <label for="Seguridad" class="mx-auto" onclick="$('#SeguridadBody').css('display','block')">
+                                                Seguridad</label>
+                                        </div>
+                                        <div id="SeguridadBody" class="card-body" style="display: none;">
                                     <div class="row">
                                         <div class="col-6 border">
                                             <div class="card-title text-primary" onclick="document.getElementById('Programadeseguridadbody').style.display= 'block'">

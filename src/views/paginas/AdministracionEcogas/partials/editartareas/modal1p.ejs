@@ -20,13 +20,16 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <div class="container">
-
                             <div class="card mb-3 p-3 border-secondary">
+                                   <%if(tareasgenerales.DocumentacionTerreno=="ok"||tareasgenerales.DocumentacionTerreno=="Ok"){%>
+                                <div class="card-header bg-success text-white">
+                                    <%} else{%>  
                                 <div class="card-header bg-primary text-white">
-                                    Documentación
-                                    del
-                                    terreno</div>
-                                <div class="card-body">
+                                        <%}%>
+                                        <label for="DocumentacionTerreno" class="mx-auto" onclick="$('#DocumentacionTerrenoBody').css('display','block')">
+                                            Documentación del terreno</label>
+                                    </div>
+                                    <div id="DocumentacionTerrenoBody" class="card-body" style="display: none;">
                                     <div class="row">
                                         <div class="col-6 border">
                                             <div class="card-title text-primary" onclick="document.getElementById('Mensurabody').style.display= 'block'">
@@ -217,9 +220,15 @@
                                 </div>
                             </div>
                             <div class="card p-3 mb-4 border-secondary">
-                                <div class="card-header bg-primary text-white">
-                                    Comercial</div>
-                                <div class="card-body">
+                                <%if(tareasgenerales.Comercial=="ok"||tareasgenerales.Comercial=="Ok"){%>
+                                    <div class="card-header bg-success text-white">
+                                        <%} else{%>  
+                                    <div class="card-header bg-primary text-white">
+                                            <%}%>
+                                            <label for="Comercial" class="mx-auto" onclick="$('#ComercialBody').css('display','block')">
+                                                Comercial</label>
+                                        </div>
+                                        <div id="ComercialBody" class="card-body" style="display: none;">
                                     <div class="row">
                                         <div class="col-6 border">
                                             <div class="card-title text-primary" onclick="document.getElementById('Contratobody').style.display= 'block'">Contrato
@@ -453,7 +462,7 @@
                                                         <div class="col-2.5 p-1">
                                                             Ok<input id="" class="" type="radio" name="Sucedaneo"
                                                                 onclick="llamarAFormularioEditarTareas('Sucedaneo');"
-                                                                value="ok">
+                                                                value="oko>
                                                         </div>
                                                         <div class="col-2 p-1">
                                                             NC<input id="" class="" type="radio" name="Sucedaneo"
@@ -621,9 +630,15 @@
                                 </div>
                             </div>
                             <div class="card p-3 mb-4 border-secondary">
-                                <div class="card-header bg-primary text-white">Tecnica
-                                </div>
-                                <div class="card-body">
+                                <%if(tareasgenerales.Tecnica=="ok"||tareasgenerales.Tecnica=="Ok"){%>
+                                    <div class="card-header bg-success text-white">
+                                        <%} else{%>  
+                                    <div class="card-header bg-primary text-white">
+                                            <%}%>
+                                            <label for="Tecnica" class="mx-auto" onclick="$('#TecnicaBody').css('display','block')">
+                                                Tecnica</label>
+                                        </div>
+                                        <div id="TecnicaBody" class="card-body" style="display: none;">
                                     <div class="row">
                                         <div class="col-6 border">
                                             <div class="card-title text-primary" onclick="document.getElementById('PCaprobadobody').style.display= 'block'">PC
@@ -811,19 +826,21 @@
                                                         aria-label="Archivo">
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                                <div class="input-group-sm pt-2">
-                                                </div>
-                                            </div>
+                                          
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="card p-3 mb-4 border-secondary">
-                                <div class="card-header bg-primary text-white">
-                                    Permisos especiales</div>
-                                <div class="card-body">
-
+                                <%if(tareasgenerales.PermisosEspeciales=="ok"||tareasgenerales.PermisosEspeciales=="Ok"){%>
+                                    <div class="card-header bg-success text-white">
+                                        <%} else{%>  
+                                    <div class="card-header bg-primary text-white">
+                                            <%}%>
+                                            <label for="PermisosEspeciales" class="mx-auto" onclick="$('#PermisosEspecialesBody').css('display','block')">
+                                                Permisos especiales</label>
+                                        </div>
+                                        <div id="PermisosEspecialesBody" class="card-body" style="display: none;">
                                     <div class="row">
                                         <div class="col-6 border">
                                             <%if (interferenciasypermisos.Privado=="NC" ){%>
@@ -1353,10 +1370,15 @@
                             </div>
                         </div>
                         <div class="card p-3 mb-4 border-secondary">
-                            <div class="card-header bg-primary text-white">
-                                Documentacion Ambiente
-                            </div>
-                            <div class="card-body">
+                            <%if(tareasgenerales.DocumentacionAmbiente=="ok"||tareasgenerales.DocumentacionAmbiente=="Ok"){%>
+                                <div class="card-header bg-success text-white">
+                                    <%} else{%>  
+                                <div class="card-header bg-primary text-white">
+                                        <%}%>
+                                        <label for="DocumentacionAmbiente" class="mx-auto" onclick="$('#DocumentacionAmbienteBody').css('display','block')">
+                                            Documentacion de ambiente</label>
+                                    </div>
+                                    <div id="DocumentacionAmbienteBody" class="card-body" style="display: none;">
                                 <div class="row">
                                     <div class="col-6 border">
                                         <div class="card-title text-primary" onclick="document.getElementById('CuestionarioRelevamientoAmbientebody').style.display= 'block'">Cuestionario de relevamiento ambiental

@@ -1,8 +1,13 @@
 <div class="card mt-2 mb-4 p-1 border-primary ">
-    <div class="card-header bg-primary text-white" id="SeccionPermisos">
-        Permisos
-    </div>
-    <div class="card-body">
+    <%if(tareasgenerales.Permisos=="ok"||tareasgenerales.Permisos=="Ok"|| tareasgenerales.Permisos=="NC"){%>
+        <div class="card-header bg-success text-white">
+            <%} else{%>  
+        <div class="card-header bg-primary text-white">
+                <%}%>
+                <label for="Permisos" class="mx-auto" onclick="$('#PermisosBody').css('display','block')">
+                    Permisos</label>
+            </div>
+            <div id="PermisosBody" class="card-body" style="display: none;">
         <%if (interferenciasypermisos.Hidraulica=="NC" ){%>
             <form-check>
                 <input hidden checked type="radio" name="HIDRAULICA" id="HIDRAULICA"

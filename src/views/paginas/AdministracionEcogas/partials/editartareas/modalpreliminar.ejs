@@ -20,10 +20,14 @@
                 <div class="modal-body">
                     <div class="container">
                         <div class="card p-3 mt-3 border-secondary">
+                            <%if(tareasgenerales.DocumentacionTerreno=="ok"||tareasgenerales.DocumentacionTerreno=="Ok"){%>
+                            <div class="card-header bg-success text-white">
+                                <%} else{%>  
                             <div class="card-header bg-primary text-white">
-                                <label for="DocumentacionDelTerreno">Documentación del terreno</label>
+                                    <%}%>
+                                <label for="DocumentacionDelTerreno" onclick="$('#DocumentacionDelTerrenoBody').css('display','block')">Documentación del terreno </label>
                             </div>
-                            <div class="card-body">
+                            <div id="DocumentacionDelTerrenoBody" class="card-body" style="display: none;">
                                 <div class="row ">
                                     <div class="col border">
                                         <div class="card-title "
@@ -60,7 +64,7 @@
                                                 </div>
                                                 <div class="col-2 p-1">
                                                     Ok<input id="" class="input" type="radio" name="Mensura"
-                                                        onclick="llamarAFormularioEditarTareas('Mensura','Ok');" value="Ok">
+                                                        onclick="llamarAFormularioEditarTareas('Mensura','Ok');" value="ok">
                                                 </div>
                                             </div>
                                         </div>
@@ -157,7 +161,7 @@
                                                 <div class="col-2 p-1">
                                                     Ok<input id="" class="input" type="radio"
                                                         onclick="llamarAFormularioEditarTareas('TituloDePropiedad', 'Ok');"
-                                                        name="TituloDePropiedad" value="Ok">
+                                                        name="TituloDePropiedad" value="ok">
                                                 </div>
                                             </div>
                                         </div>
@@ -230,11 +234,15 @@
                             </div>
                         </div>
                         <div class="card p-3 mt-3 border-secondary">
-                            <div class="card-header bg-primary text-white">
-                                <label for="DocumentacionSociedad" class="mx-auto">
+                            <%if(tareasgenerales.DocumentacionSociedad=="ok"||tareasgenerales.DocumentacionSociedad=="Ok"){%>
+                                <div class="card-header bg-success text-white">
+                                    <%} else{%>  
+                                <div class="card-header bg-primary text-white">
+                                        <%}%>
+                                <label for="DocumentacionSociedad" class="mx-auto" onclick="$('#DocumentacionSociedadBody').css('display','block')">
                                     Documentación de la Sociedad</label>
                             </div>
-                            <div class="card-body">
+                            <div id="DocumentacionSociedadBody" class="card-body" style="display: none;">
                                 <div class="row ">
                                     <div class="col-6 border">
                                         <div class="card-title "
@@ -480,9 +488,15 @@
 
                             </div>
                             <div class="card p-3 mt-3 border-secondary">
-                                <div class="card-header bg-primary text-white">
-                                    Documentación Contractual
-                                </div>
+                                <%if(tareasgenerales.DocumentacionContractual=="ok"||tareasgenerales.DocumentacionContractual=="Ok"){%>
+                                    <div class="card-header bg-success text-white">
+                                        <%} else{%>  
+                                    <div class="card-header bg-primary text-white">
+                                            <%}%>
+                                            <label for="DocumentacionContractual" class="mx-auto" onclick="$('#DocumentacionContractualBody').css('display','block')">
+                                                Documentación Contractual</label>
+                                        </div>
+                                        <div id="DocumentacionContractualBody" class="card-body" style="display: none;">
                                 <div class="row ">
                                     <div class="col-6 border">
                                         <div class="card-title "
@@ -492,7 +506,8 @@
                                                 <%=tareasporcarpeta.Cotizacion%>
                                             </div>
                                         </div>
-
+                                       
+                                       
                                         <div class="card-body" id="Cotizacion" style="display: none;">
                                             <div class="input-group ">
                                                 <input id="" class="input" type="radio"name="Cotizacion" value="<%=tareasporcarpeta.Cotizacion%>" checked hidden>
@@ -686,6 +701,7 @@
 
                                     </div>
                                 </div>
+                            </div>
                             </div>
 
                         </div>

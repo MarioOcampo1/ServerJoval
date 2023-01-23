@@ -1,10 +1,14 @@
 <div class="card p-3 mt-3 border-secondary">
 
-    <div class="card-header bg-primary text-white">
-        <label for="DocumentacionDelTerreno">Matriculas</label>
-
-    </div>
-    <div class="card-body">
+     <%if(tareasgenerales.Matriculas=="ok"||tareasgenerales.Matriculas=="Ok"){%>
+                                    <div class="card-header bg-success text-white">
+                                        <%} else{%>  
+                                    <div class="card-header bg-primary text-white">
+                                            <%}%>
+                                            <label for="Matriculas" class="mx-auto" onclick="$('#MatriculasBody').css('display','block')">
+                                                Matriculas</label>
+                                        </div>
+                                        <div id="MatriculasBody" class="card-body" style="display: none;">
         <div class="row ">
             <div class="col border">
                 <div class="card-title " onclick="document.getElementById('Fusionistabody').style.display= 'block'">
@@ -38,7 +42,7 @@
                         </div>
                         <div class="col-2 p-1">
                             Ok<input id="" class="input" type="radio" name="MatriculaFusionista"
-                                onclick="llamarAFormularioEditarTareas('MatriculaFusionista');" value="Ok">
+                                onclick="llamarAFormularioEditarTareas('MatriculaFusionista');" value="ok">
                         </div>
 
                     </div>
@@ -125,7 +129,7 @@
                         </div>
                         <div class="col-2 p-1">
                             Ok<input id="" class="input" type="radio" name="MatriculaSoldador"
-                                onclick="llamarAFormularioEditarTareas('MatriculaSoldador');" value="Ok">
+                                onclick="llamarAFormularioEditarTareas('MatriculaSoldador');" value="ok">
                         </div>
 
                     </div>
@@ -184,11 +188,15 @@
 <!-- {{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}} -->
 <div class="card p-3 mt-3 border-secondary">
 
-    <div class="card-header bg-primary text-white">
-        <label for="DocumentacionDelTerreno">Ambiente</label>
-
-    </div>
-    <div class="card-body">
+    <%if(tareasgenerales.Ambiente=="ok"||tareasgenerales.Ambiente=="Ok"){%>
+        <div class="card-header bg-success text-white">
+            <%} else{%>  
+        <div class="card-header bg-primary text-white">
+                <%}%>
+                <label for="Ambiente" class="mx-auto" onclick="$('#AmbienteBody').css('display','block')">
+                    Ambiente</label>
+            </div>
+            <div id="AmbienteBody" class="card-body" style="display: none;">
         <div class="row ">
             <div class="col border">
                 <div class="card-title "
@@ -223,7 +231,7 @@
                         </div>
                         <div class="col-2 p-1">
                             Ok<input id="" class="input" type="radio" name="EstudioImpactoAmbiental"
-                                onclick="llamarAFormularioEditarTareas('EstudioImpactoAmbiental');" value="Ok">
+                                onclick="llamarAFormularioEditarTareas('EstudioImpactoAmbiental');" value="ok">
                         </div>
 
                     </div>
@@ -311,7 +319,7 @@
                         </div>
                         <div class="col-2 p-1">
                             Ok<input id="" class="input" type="radio" name="CronogramaAmbiente"
-                                onclick="llamarAFormularioEditarTareas('Cronogramaambiente');" value="Ok">
+                                onclick="llamarAFormularioEditarTareas('Cronogramaambiente');" value="ok">
                         </div>
 
                     </div>
@@ -399,7 +407,7 @@
                         </div>
                         <div class="col-2 p-1">
                             Ok<input id="" class="input" type="radio" name="NotaCumplimentoNormativa"
-                                onclick="llamarAFormularioEditarTareas('NotaCumplimentoNormativa');" value="Ok">
+                                onclick="llamarAFormularioEditarTareas('NotaCumplimentoNormativa');" value="ok">
                         </div>
 
                     </div>
@@ -486,7 +494,7 @@
                         </div>
                         <div class="col-2 p-1">
                             Ok<input id="" class="input" type="radio" name="DDJJNAG153"
-                                onclick="llamarAFormularioEditarTareas('DDJJNAG153');" value="Ok">
+                                onclick="llamarAFormularioEditarTareas('DDJJNAG153');" value="ok">
                         </div>
 
                     </div>
@@ -549,11 +557,15 @@
 <!-- {{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}} -->
 <div class="card p-3 mt-3 border-secondary">
 
-    <div class="card-header bg-primary text-white">
-        <label for="Avisos">Avisos</label>
-
-    </div>
-    <div class="card-body">
+    <%if(tareasgenerales.Avisos=="ok"||tareasgenerales.Avisos=="Ok"){%>
+        <div class="card-header bg-success text-white">
+            <%} else{%>  
+        <div class="card-header bg-primary text-white">
+                <%}%>
+                <label for="Avisos" class="mx-auto" onclick="$('#AvisosBody').css('display','block')">
+                    Avisos</label>
+            </div>
+            <div id="AvisosBody" class="card-body" style="display: none;">
         <div class="row ">
             <div class="col border">
                 <div class="card-title "
@@ -589,7 +601,7 @@
                         <div class="col-2 p-1">
                             Ok<input id="" class="input" type="radio" name="AvisoInicioObraART"
                                 onclick="llamarAFormularioEditarTareas('AvisoInicioObraART'); $('#VencimientoAvisoObraArt').css('display' , 'block')"
-                                value="Ok">
+                                value="ok">
                         </div>
 
                     </div>
@@ -684,7 +696,7 @@
                         <div class="col-2 p-1">
                             Ok<input id="" class="input" type="radio" name="AvisoInicioObraIERIC"
                                 onclick="llamarAFormularioEditarTareas('AvisoInicioObraIERIC'); $('#VencimientoAvisoObraIeric').css('display' , 'block')"
-                                value="Ok">
+                                value="ok">
                         </div>
 
                     </div>
@@ -771,7 +783,7 @@
 
                         <div class="col-2 p-1">
                             Ok<input id="" class="input" type="radio" name="ActaInicioEfectivo"
-                                onclick="llamarAFormularioEditarTareas('ActaInicioEfectivo'); " value="Ok">
+                                onclick="llamarAFormularioEditarTareas('ActaInicioEfectivo'); " value="ok">
                         </div>
 
                     </div>

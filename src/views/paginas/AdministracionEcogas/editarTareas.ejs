@@ -166,10 +166,15 @@
                                                     <div class="modal-body">
                                                         <div class="container">
                                                             <div class="card p-3 border-secondary">
-                                                                <div class="card-header bg-primary text-white ">
-                                                                    Documentación presentada
-                                                                    a
-                                                                    inspección</div>
+                                                                <%if(tareasgenerales.DocumentacionPresentadaInspeccion=="ok"||tareasgenerales.DocumentacionPresentadaInspeccion=="Ok"){%>
+                                                                    <div class="card-header bg-success text-white">
+                                                                        <%} else{%>  
+                                                                    <div class="card-header bg-primary text-white">
+                                                                            <%}%>
+                                                                            <label for="DocumentacionPresentadaInspeccion" class="mx-auto" onclick="$('#DocumentacionPresentadaInspeccionBody').css('display','block')">
+                                                                                Documentación presentada a inspección</label>
+                                                                        </div>
+                                                                        <div id="DocumentacionPresentadaInspeccionBody" class="card-body" style="display: none;">
                                                                 <div class="row ">
                                                                     <div class="col-6 border">
                                                                         <div class="card-title "
@@ -1079,8 +1084,15 @@
                                                                 </div>
                                                             </div>
                                                             <div class="card p-3 mt-4 mb-2 border-secondary">
-                                                                <div class="card-header bg-primary text-white ">
-                                                                  Comunicación de obras</div>
+                                                                <%if(tareasgenerales.ComunicacionObras=="ok"||tareasgenerales.ComunicacionObras=="Ok"){%>
+                                                                    <div class="card-header bg-success text-white">
+                                                                        <%} else{%>  
+                                                                    <div class="card-header bg-primary text-white">
+                                                                            <%}%>
+                                                                            <label for="ComunicacionObras" class="mx-auto" onclick="$('#ComunicacionObrasBody').css('display','block')">
+                                                                                ComunicacionObras</label>
+                                                                        </div>
+                                                                        <div id="ComunicacionObrasBody" class="card-body" style="display: none;">
                                                                 <div class="row ">
                                                                     <div class="col-6 border">
                                                                         <div class="card-title "
@@ -1435,6 +1447,15 @@
                                                     <div class="modal-body">
                                                         <div class="container">
                                                             <div class="card p-3 border-secondary">
+                                                                <%if(tareasgenerales.CAOS=="ok"||tareasgenerales.CAOS=="Ok"){%>
+                                                                    <div class="card-header bg-success text-white">
+                                                                        <%} else{%>  
+                                                                    <div class="card-header bg-primary text-white">
+                                                                            <%}%>
+                                                                            <label for="CAOS" class="mx-auto" onclick="$('#CAOSBody').css('display','block')">
+                                                                                CAOS</label>
+                                                                        </div>
+                                                                        <div id="CAOSBody" class="card-body" style="display: none;">
                                                                 <div class="row">
                                                                 <div class="col-6">
                                                                     
@@ -1609,7 +1630,7 @@
                     
                     
                                                             </div>
-                    
+                    </div>
                     
                                                         </div>
                                                     </div>
@@ -1659,12 +1680,18 @@
                                                     <div class="modal-body">
                                                         <div class="container">
                                                             <div class="card p-3 border-secondary">
-                                                                <div class="modal-header bg-primary text-white">
-                                                                    Fin de obra
-                                                                </div>
+                                                                <%if(tareasgenerales.FinObra=="ok"||tareasgenerales.FinObra=="Ok"){%>
+                                                                    <div class="card-header bg-success text-white">
+                                                                        <%} else{%>  
+                                                                    <div class="card-header bg-primary text-white">
+                                                                            <%}%>
+                                                                            <label for="FinObra" class="mx-auto" onclick="$('#FinObraBody').css('display','block')">
+                                                                                Fin de obra</label>
+                                                                        </div>
+                                                                        <div id="FinObraBody" class="card-body" style="display: none;">
                                                                 <div class="row">
                                                                     <div class="col-6">
-                                                                        <label for="PresentacionFinal">Presentacion
+                                                                        <label for="PresentacionFinal">Presentación
                                                                             Final</label>
                                                                         <select class="form-control" id="PresentacionFinal"
                                                                             name="PresentacionFinal"
@@ -1756,7 +1783,7 @@
                                                                
 
                                                             </div>
-
+                                                                    </div>
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">

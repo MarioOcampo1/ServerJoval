@@ -1,6 +1,7 @@
 const { render } = require('ejs');
 const { Router } = require('express');
 const cookieParser = require('cookie-parser')
+const files = require('express-fileupload');
 const session = require('express-session')
 const passport = require('passport');
 const PassportLocal = require('passport-local').Strategy;
@@ -285,6 +286,7 @@ router.post('/guardarNuevoCliente', (req, res) => {
                 }
             })
         }).then(function(){
+            
                 res.redirect('/editarTareas/'+idObra);
            resolve();
            

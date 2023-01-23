@@ -1,13 +1,16 @@
 <div class="card border-success " >
-    <div class="card-header bg-primary text-white m-1" id="SeccionInterferencias">
-        Interferencias
-    </div>
+    <%if(tareasgenerales.Interferencias=="ok"||tareasgenerales.Interferencias=="Ok"|| tareasgenerales.Interferencias=="NC"){%>
+        <div class="card-header bg-success text-white">
+            <%} else{%>  
+        <div class="card-header bg-primary text-white">
+                <%}%>
+                <label for="Interferencias" class="mx-auto" onclick="$('#InterferenciasBody').css('display','block')">
+                    Interferencias</label>
+            </div>
+           
     <div class="row">
         <div class="col text-center ">
-
-    
-    <div class="card-body">
-        
+            <div class="card-body" >
             <form-check>
                 <%if (interferenciasypermisos.intTelefonica!="En gestion" && interferenciasypermisos.intTelefonica!="Pedida" && interferenciasypermisos.intTelefonica!="ok" ) {%>
                     <div class="card-title" onclick="document.getElementById('Telefonicabody').style.display= 'block'">Telefónica.
