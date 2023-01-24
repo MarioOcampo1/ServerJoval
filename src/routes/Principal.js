@@ -33,7 +33,6 @@ const connection = mysql.createConnection({
     password: 'Thinker95',
     database: 'joval'
 });
-
 //check de conexion a la base de datos
 connection.connect(error => {
     if (error) console.log(error);
@@ -66,19 +65,18 @@ passport.deserializeUser(function (id, done) {
     })
 })
 router.get('/', (req, res) => {
+
     res.render('login.ejs');
 })
 
 router.get('/index', (req, res, next) => {
-console.log(req.user.rol);
-    
     if (req.isAuthenticated()) {
         var fecha = new Date();
         var sql = 'Select * from admingeneral_seguros_albacaucion where ProximaRefacturacion BETWEEN (NOW() - Interval 1 Month) AND (NOW() + Interval 6 Month)  AND Estado != "Dada de baja"';
         connection.query(sql, (error, results) => {
             if (error) console.log(error);
             else {
-                res.render('./paginas/Principal/index.ejs', { albacaucion: results, moment: moment });
+                res.render('./paginas/Principal/index.ejs', { albacaucion: results, moment: moment, rol:req.user.rol });
             }
         })
     }
@@ -342,4 +340,20 @@ router.get('/contactos', (req, res) => {
 //Logo
 router.get('/logo',(req,res)=>{
     res.sendFile('logo.png',{root: 'src/public/images'});
+})
+router.post('/NuevoEmpleado',(req,res)=>{
+    var sql = 'INSERT INTO usuariosregistrados set?';
+    connection.query(sql,{Nombre:req.body.Nombre,usuario:req.body.Usuario,password:req.body.Contraseña,rol:req.body.rol},(error,results)=>{
+        if(error) console.log(error);
+        else{
+            res.redirect('/index');
+        }
+    })
+})
+router.get('/editarEmpleado',(req,res)=>{
+    var sql= 'Select * from usuariosregistrados ';
+connection.query(sql,(error,results)=>{
+    if(error)console.log(error);
+    else{res.send(results);};
+})
 })

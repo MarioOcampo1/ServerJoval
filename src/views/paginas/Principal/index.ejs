@@ -11,6 +11,17 @@
 </head>
 
 <body class="">
+  <%if(rol=="admin"|| rol=="Supervisor"){%>
+  <nav class="navbar navbar-expand navbar-light bg-light">
+    <div class="nav navbar-nav">
+      <button class="nav-item nav-link active btn" href="#" aria-current="page" data-bs-toggle="modal" data-bs-target="#modalNuevoEmpleado">Nuevo empleado <span class="visually-hidden">(current)</span></button>
+        <button type="button" class="btn nav-item nav-link" data-bs-toggle="modal" data-bs-target="#ModalEditarEmpleado" onclick="editarEmpleado()">
+          Editar empleado
+        </button>
+    </div>
+  </nav>
+
+  <%}%>
   <div class="container ">
     <div class="row ">
       <img id="LogoJoval" class="img-fluid w-25 mx-auto text-center" src="http://jovalsa.com/wp-content/uploads/2020/08/cropped-Joval-Web.png"alt="logo">
@@ -56,28 +67,99 @@
           <tbody>
             
           <% albacaucion.forEach((polizaAlba)=>{%>
-            <tr class="">
-            <td><%=polizaAlba.NumeroPoliza%></td>
-            <td><%=polizaAlba.Descripcion%></td>
-            <%polizaAlba.ProximaRefacturacion=moment(polizaAlba.ProximaRefacturacion).locale('es').format("DD-MM-YYYY");%>
-            <td><%=polizaAlba.ProximaRefacturacion%></td>
-            <td><%=polizaAlba.Riesgo%></td>
-          </tr>
-            <%})%>
-            
+  <tr class="">
+    <td><%=polizaAlba.NumeroPoliza%></td>
+    <td><%=polizaAlba.Descripcion%></td>
+    <%polizaAlba.ProximaRefacturacion=moment(polizaAlba.ProximaRefacturacion).locale('es').format("DD-MM-YYYY");%>
+    <td><%=polizaAlba.ProximaRefacturacion%></td>
+    <td><%=polizaAlba.Riesgo%></td>
+  </tr>
+  <%})%>
 
-              
-            
-          </tbody>
-        </table>
-      </div>
-      
-      </div>
-      
-        
+
+
+
+  </tbody>
+  </table>
+  </div>
+
+  </div>
+
+
+  </div>
+  </div>
+  </div>
+  <%if(rol=="admin"|| rol=="Supervisor"){%>
+  <!-- Modal trigger button -->
+  <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#modalNuevoEmpleado">
+    Launch
+  </button>
+
+  <!-- Modal Body -->
+  <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+  <div class="modal fade" id="modalNuevoEmpleado" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalTitleId">Nuevo empleado</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form action="/NuevoEmpleado" method="post">
+          <div class="modal-body justify-center">
+            <div class="input-group mb-2">
+              <label class="input-group-text" for="NombreEmpleado">Nombre</label><input class="input-control" type="text" name="Nombre" id="NombreEmpleado">
+            </div>
+            <div class="input-group mb-2">
+
+              <label class="input-group-text" for="Usuario">Usuario</label><input class="input-control" type="text" name="Usuario" id="Usuario">
+            </div>
+            <div class="input-group mb-2">
+              <label class="input-group-text" for="Contraseña">Contraseña</label><input class="input-control" type="text" name="Contraseña" id="Contraseña">
+            </div>
+            <div class="input-group mb-2">
+              <div class="input-group-text">Rol en el sistema</div>
+              <select class="form-select" name="rol" id="">
+                <option value="admin">Administrador</option>
+                <option value="Supervisor">Supervisor</option>
+                <option value="empleado">Empleado</option>
+
+              </select>
+            </div>
+
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-success">Guardar</button>
+        </form>
       </div>
     </div>
   </div>
+  </div>
+<!-- Modal trigger button -->
+
+
+<!-- Modal Body -->
+<!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+<div class="modal fade" id="ModalEditarEmpleado" tabindex="-1"  role="dialog" aria-labelledby="ModalEditarEmpleado" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalEditarEmpleado">Edición de empleado</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="bodyModalEditarEmpleado"> 
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <%}%>
 </body>
 <style>
   #LogoJoval:hover {
@@ -90,4 +172,15 @@
   transform-style: preserve-3d;}  
   
   </style>
+  <script>
+    function editarEmpleado(){
+$.ajax({
+      url:"/editarEmpleado",
+      success: function(data){
+        console.log(data);
+      }
+    })
+  }    
+   
+  </script>
 </html>

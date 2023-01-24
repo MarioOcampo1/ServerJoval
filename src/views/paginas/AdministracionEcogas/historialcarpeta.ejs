@@ -9,6 +9,7 @@
     class="text-center">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.css">
+  <link rel="stylesheet" type="text/css" href="\css\historialCarpetaPrint.css" media="print"/>
   <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
@@ -18,15 +19,17 @@
 </head>
 
 <body>
+  <div class="noImprimible">
   <%- include('./partials/menusuperior.ejs');%>
-    <% if(results){%>
+</div>
+  <% if(results){%>
       <div class="container">
         <div class="row">
           <h1 class="text-center">Historial de tareas de la carpeta <%=Nombre%></h1>
           
         </div>
       </div>
-      <div class="container text-center">
+      <div class="container text-center noImprimible">
         <div class="btn-group border-bottom ">
           <a href="/editarTareas/<%= id %>" class="btn btn-danger btn-sm">Atras </a>
         </div>
@@ -36,7 +39,7 @@
         <table class="table  table-bordered table-sm table-hover " id="TablaHistorial" style="width: 100%">
           <thead>
             <tr>
-              <th>
+              <th class="noImprimible">
                 <h4>Etapa</h4>
                 <!-- <Button>Pl</Button>
                 <button>1p</button> 
@@ -44,27 +47,27 @@
                 <button>O</button> 
                 <button>C</button>  -->
               </th>
-              <th>
+              <th class="noImprimible">
                 <h4>Tarea</h4>
               </th>
-              <th>
+              <th class="">
                 <h4>Fecha de tarea realizada</h4>
 
               </th>
 
-              <th>
+              <th class="">
                 <h4>Tarea realizada</h4>
 
 
               </th>
-              <th>
+              <th class="noImprimible">
                 <h4>Proxima tarea</h4>
 
               </th>
-              <th>
+              <th class="noImprimible">
                 <h4>Responsable</h4>
               </th>
-              <th><h4>Opciones</h4></th>
+              <th class="noImprimible"><h4>Opciones</h4></th>
           </thead>
           <tbody>
             </tr>
@@ -73,41 +76,41 @@
 
               <tr>
                 <%if (clientes.EtapaTarea_sub=="1ra parte" ){%>
-                  <th class="bg-secondary text-light">
+                  <th class="bg-secondary text-light noImprimible">
                     <%=clientes.EtapaTarea_sub%>
                   </th>
                   <%}%>
                     <%if (clientes.EtapaTarea_sub=="Sin Presentar" || clientes.EtapaTarea_sub=="Preliminar"  ){%>
-                      <th class="bg-light text-black">
+                      <th class="bg-light text-black noImprimible">
                         <%=clientes.EtapaTarea_sub%>
                       </th>
                       <%}%>
                         <%if (clientes.EtapaTarea_sub=="2da parte" ){%>
-                          <th class="bg-info">
+                          <th class="bg-info noImprimible">
                             <%=clientes.EtapaTarea_sub%>
                           </th>
                           <%}%>
                             <%if (clientes.EtapaTarea_sub==null ||  clientes.EtapaTarea_sub==""){%>
-                              <th class="bg-dark">
+                              <th class="bg-dark noImprimible">
                                 <%=clientes.EtapaTarea_sub%>
                               </th>
                               <%}%>
                                 <%if (clientes.EtapaTarea_sub=="Caos" ){%>
-                                  <th class="bg-warning">
+                                  <th class="noImprimible bg-warning">
                                     <%=clientes.EtapaTarea_sub%>
                                   </th>
                                   <%}%>
                                     <%if (clientes.EtapaTarea_sub=="Obras" ){%>
-                                      <th class="bg-success text-light">
+                                      <th class="noImprimible bg-success text-light">
                                         <%=clientes.EtapaTarea_sub%>
                                       </th>
                                       <%}%>
                                         <%if (clientes.EtapaTarea_sub=="Finalizada" ){%>
-                                          <th class="bg-danger text-light">
+                                          <th class="noImprimible bg-danger text-light">
                                             <%=clientes.EtapaTarea_sub%>
                                           </th>
                                           <%}%>
-                                          <th>
+                                          <th class="noImprimible">
                                             <% if(clientes.Tarea!=null){%>
                                               <%=clientes.Tarea%>
                                               
@@ -117,16 +120,16 @@
                                              <%}%>
                                             
                                           </th>
-                                            <th>
+                                            <th class="">
                                               <%=moment(clientes.Fecha_Tarea_sub).format('DD-MM-YYYY')%>
                                             </th> 
-                                            <th>
+                                            <th class="">
                                               <%=clientes.Tarea_Realizada_sub%>
                                             </th>
-                                            <th>
+                                            <th class="noImprimible">
                                               <%=clientes.Proxima_Tarea_sub%>
                                             </th>
-                                            <th>
+                                            <th class="noImprimible">
                                               <form action="/historialcarpeta/CambiarResponsableDeTarea" method="post">
                                                 <input type="hidden" name="idEntradaEnHistorial" value="<%=clientes.id%>">  
                                               <select name="ResponsableDeTarea" id="ResponsableDeTarea" onchange="this.form.submit()">
@@ -141,41 +144,41 @@
               <%}else{%>
               <tr>
                 <%if (clientes.EtapaTarea_sub=="1ra parte" ){%>
-                  <th class="bg-secondary text-light">
+                  <th class="noImprimible bg-secondary text-light">
                     <%=clientes.EtapaTarea_sub%>
                   </th>
                   <%}%>
                     <%if (clientes.EtapaTarea_sub=="Sin Presentar" || clientes.EtapaTarea_sub=="Preliminar" ){%>
-                      <th class="bg-light text-black">
+                      <th class="noImprimible bg-light text-black">
                         <%=clientes.EtapaTarea_sub%>
                       </th>
                       <%}%>
                         <%if (clientes.EtapaTarea_sub=="2da parte" ){%>
-                          <th class="bg-info">
+                          <th class="noImprimible bg-info">
                             <%=clientes.EtapaTarea_sub%>
                           </th>
                           <%}%>
                             <%if (clientes.EtapaTarea_sub==null){%>
-                              <th class="bg-dark">
+                              <th class="noImprimible bg-dark">
                                 <%=clientes.EtapaTarea_sub%>
                               </th>
                               <%}%>
                                 <%if (clientes.EtapaTarea_sub=="Caos" ){%>
-                                  <th class="bg-warning">
+                                  <th class="noImprimible bg-warning">
                                     <%=clientes.EtapaTarea_sub%>
                                   </th>
                                   <%}%>
                                     <%if (clientes.EtapaTarea_sub=="Obras" ){%>
-                                      <th class="bg-success text-light">
+                                      <th class="noImprimible bg-success text-light">
                                         <%=clientes.EtapaTarea_sub%>
                                       </th>
                                       <%}%>
                                         <%if (clientes.EtapaTarea_sub=="Finalizada" ){%>
-                                          <th class="bg-danger text-light">
+                                          <th class="noImprimible bg-danger text-light">
                                             <%=clientes.EtapaTarea_sub%>
                                           </th>
                                           <%}%>
-                                          <th class="bg-warning">
+                                          <th class="noImprimible bg-warning">
                                             <% if(clientes.Tarea!=null){%>
                                               <%=clientes.Tarea%>
                                               
@@ -190,10 +193,10 @@
                                             <th class="bg-warning">
                                               <%=clientes.Tarea_Realizada_sub%>
                                             </th>
-                                            <th class="bg-warning">
+                                            <th class="bg-warning noImprimible">
                                               <%=clientes.Proxima_Tarea_sub%>
                                             </th>
-                                            <th class="bg-warning">
+                                            <th class="bg-warning noImprimible">
                                               <form action="/historialcarpeta/CambiarResponsableDeTarea" method="post">
                                                 <input type="hidden" name="idEntradaEnHistorial" value="<%=clientes.id%>">  
                                               <select name="ResponsableDeTarea" id="ResponsableDeTarea" onchange="this.form.submit()">
@@ -205,7 +208,7 @@
                                             </form>
                                             </th>
                                               <%}%>
-                                            <th>
+                                            <th class="noImprimible">
                                               <%if(clientes.Si_NO_TareaRealizada=='S'){%>
                                                 <form action=" /TareaOk/<%=clientes.Nombre_sub%>" method="post">
                                                     Si<input class="btn btn-primary" checked type="radio" name="TareaOK" id="TareaOK"
