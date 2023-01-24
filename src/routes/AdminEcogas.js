@@ -333,20 +333,18 @@ router.get("/edit/:id", (req, res) => {
 });
 router.get("/historialcarpeta/:Nombre", (req, res) => {
   if (req.isAuthenticated()) {
-    console.log(req.session.passport.user);
-
-    var id;
+    var id,NCarpeta;
     const Nombre = req.params.Nombre;
-    var sql = "SELECT id FROM obras WHERE Nombre =?";
+
+    var sql = "SELECT id,NCarpeta FROM obras WHERE Nombre =?";
     connection.query(sql, [Nombre], (error, results) => {
       if (error) console.log(error);
       if (results.length > 0) {
-        id = Object.values(results[0]);
+        id = results[0].id;
+        NCarpeta = results[0].NCarpeta;
       }
     });
-
-    sql =
-      "SELECT c.* FROM historialdecambios c WHERE Nombre_sub =? ORDER BY id DESC";
+    sql="SELECT c.* FROM historialdecambios c WHERE Nombre_sub =? ORDER BY id DESC";
     res.locals.moment = moment;
     connection.query(sql, [Nombre], (error, results) => {
       if (error) console.log(error);
@@ -355,6 +353,7 @@ router.get("/historialcarpeta/:Nombre", (req, res) => {
           results: results,
           id: id,
           Nombre: Nombre,
+          NCarpeta,
         }); //en {results:results} lo que hago es guardar los resultados que envia la bd, en la variable results
       } else {
         res.render("paginas/AdministracionEcogas/historialcarpeta.ejs", {

@@ -2,8 +2,15 @@
 @media print {
     body {
         visibility: block;
+        border-style: solid;
+        border-width: 1ch;
     }
-
+#LogoPrint{
+    margin-left: auto;
+    margin-right: auto;
+    width:25%;
+    height: auto;
+}
     .Imprimible {
         display: block;
         visibility: visible;
@@ -13,45 +20,14 @@
         display: none;
         visibility: hidden;
     }
-
-    #printsection,
-    #printsection * {
-
-        orientation: landscape;
-        visibility: visible;
-        margin: 0;
-
-    }
-
-    #printsection {
-        background: red;
-        background-color: red;
-
-    }
-
-    .bordeExterno {
-        border-style: solid;
-    }
-   
-    #LogoJoval{
-        display: inline;
-        max-width: 15%;
-        height: auto;
-        margin-bottom: 5%;
-    }
-    #Encabezado{
-        display: inline;
-        text-align: center;
-        margin-left: 15%;
-    }
 }
-@media screen {
+@media screen{
     .Imprimible{
         display: none;
-        background-color: red;
-    }
-    #LogoJoval{
-        display: none;
-    }
-  
+        visibility: hidden;
+        
+}
+#LogoPrint{
+    display: none;
+}
 }

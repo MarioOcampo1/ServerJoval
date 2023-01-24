@@ -9,7 +9,7 @@
     class="text-center">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.css">
-  <link rel="stylesheet" type="text/css" href="\css\historialCarpetaPrint.css" media="print"/>
+  <link rel="stylesheet" type="text/css" href="\css\historialCarpetaPrint.css" />
   <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
@@ -24,9 +24,12 @@
 </div>
   <% if(results){%>
       <div class="container">
-        <div class="row">
+        <div class="row noImprimible">
           <h1 class="text-center">Historial de tareas de la carpeta <%=Nombre%></h1>
-          
+        </div>
+        <div class="row Imprimible">
+          <img src="\images\logo.png" alt="logoJoval" id="LogoPrint" >
+          <h1 class="text-center">Historial de tareas de la carpeta N°<%=NCarpeta%></h1>
         </div>
       </div>
       <div class="container text-center noImprimible">
