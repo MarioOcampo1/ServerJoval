@@ -279,12 +279,13 @@ var textoOriginalTareaRealizada=$('#TareaRealizada'+id).text();
 $('#TareaRealizada'+id).html(
   '<form action="/actualizarTareaRealizada/'+id+'" method="post">'+
     '<input type="hidden" name="NombreCarpeta" value="<%=Nombre%>">'+
-'  <textarea type="text" name="TareaRealizada" id="" ">'+textoOriginalTareaRealizada+'</textarea>'+
+' <p><textarea name="TareaRealizada" cols="80" rows="3">'+textoOriginalTareaRealizada+'</textarea></p>'+
 '<button class="btn bi bi-check btn-outline-success" type="submit"></button>'+
 '</form>'
 )
   })
 </script>
 <%}%>
+
 
 </html>
