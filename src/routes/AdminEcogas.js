@@ -333,6 +333,7 @@ router.get("/edit/:id", (req, res) => {
 });
 router.get("/historialcarpeta/:Nombre", (req, res) => {
   if (req.isAuthenticated()) {
+    var rol= req.user.rol;
     var id,NCarpeta;
     const Nombre = req.params.Nombre;
 
@@ -353,12 +354,14 @@ router.get("/historialcarpeta/:Nombre", (req, res) => {
           results: results,
           id: id,
           Nombre: Nombre,
-          NCarpeta,
+          NCarpeta, rol,
         }); //en {results:results} lo que hago es guardar los resultados que envia la bd, en la variable results
       } else {
+        console.log(rol);
         res.render("paginas/AdministracionEcogas/historialcarpeta.ejs", {
           results: results,
           id: id,
+          rol,
         });
       }
     });
@@ -3750,3 +3753,15 @@ router.get("ObtenerInformesObras", (req, res) => {
   });
   setTimeout(() => {}, 2000);
 });
+router.post('/actualizarTareaRealizada/:id',(req,res)=>{
+  var id= req.params.id;
+  var NombreCarpeta= req.body.NombreCarpeta;
+  var TareaRealizada= req.body.TareaRealizada;
+  sql='UPDATE historialdecambios set? WHERE id=?';
+  connection.query(sql,[{Tarea_Realizada_sub:TareaRealizada},id],(error,result)=>{
+    if(error)console.log(error);
+    else(
+      res.redirect("/historialcarpeta/"+NombreCarpeta)
+    )
+  })
+})

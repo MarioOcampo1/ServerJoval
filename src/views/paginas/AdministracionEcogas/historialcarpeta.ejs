@@ -31,15 +31,13 @@
           <img src="\images\logo.png" alt="logoJoval" id="LogoPrint" >
           <h1 class="text-center Imprimible">Historial de tareas de la carpeta N°<%=NCarpeta%></h1>
         </div>
-        
-        
       </div>
-      <div class="container text-center noImprimible">
+      <div class="container-fluid noImprimible">
         <div class="btn-group border-bottom ">
-          <a href="/editarTareas/<%= id %>" class="btn btn-danger btn-sm">Atras </a>
+          <a href="/editarTareas/<%= id %>" class="btn btn-danger btn-sm">Atrás </a>
         </div>
+        <span class=" text-center">Recordar guardar la formalidad en el ingreso de las tareas realizadas. </span>
       </div>
-      <br>
       <div class="table-responsive">
         <table class="table  table-bordered table-sm table-hover " id="TablaHistorial" style="width: 100%">
           <thead>
@@ -129,7 +127,7 @@
                                               <%=moment(clientes.Fecha_Tarea_sub).format('DD-MM-YYYY')%>
                                             </th> 
                                             <th class="">
-                                              <%=clientes.Tarea_Realizada_sub%>
+                                              <p id="TareaRealizada<%=clientes.id%>"><%=clientes.Tarea_Realizada_sub%></p> 
                                             </th>
                                             <th class="noImprimible">
                                               <%=clientes.Proxima_Tarea_sub%>
@@ -196,26 +194,31 @@
                                               <%=moment(clientes.Fecha_Tarea_sub).format('DD-MM-YYYY')%>
                                             </th>
                                             <th class="bg-warning">
-                                              <%=clientes.Tarea_Realizada_sub%>
+                                             <p id="TareaRealizada<%=clientes.id%>"><%=clientes.Tarea_Realizada_sub%></p> 
                                             </th>
                                             <th class="bg-warning noImprimible">
-                                              <%=clientes.Proxima_Tarea_sub%>
+                                                <%=clientes.Proxima_Tarea_sub%>
                                             </th>
                                             <th class="bg-warning noImprimible">
+                                                <%if(rol=="Supervisor"|| rol=="admin"){%>
                                               <form action="/historialcarpeta/CambiarResponsableDeTarea" method="post">
                                                 <input type="hidden" name="idEntradaEnHistorial" value="<%=clientes.id%>">  
-                                              <select name="ResponsableDeTarea" id="ResponsableDeTarea" onchange="this.form.submit()">
-                                                <option value="<%=clientes.ResponsableDeTarea%>" selected><%=clientes.ResponsableDeTarea%></option>
-<option value="Mauricio">Mauricio</option>
-<option value="Gustavo">Gustavo</option>
-<option value="Mariana">Mariana</option>
-                                              </select>
-                                            </form>
+                                                  <select name="ResponsableDeTarea" id="ResponsableDeTarea" onchange="this.form.submit()">
+                                                    <option value="<%=clientes.ResponsableDeTarea%>" selected><%=clientes.ResponsableDeTarea%></option>
+    <option value="Mauricio">Mauricio</option>
+    <option value="Gustavo">Gustavo</option>
+    <option value="Mariana">Mariana</option>
+  </select>
+</form>
+                                                  <%}else{%>
+                                                    <%=clientes.ResponsableDeTarea%>
+                                                    <%}%>
                                             </th>
                                               <%}%>
                                             <th class="noImprimible">
                                               <%if(clientes.Si_NO_TareaRealizada=='S'){%>
-                                                <form action=" /TareaOk/<%=clientes.Nombre_sub%>" method="post">
+
+                                                <form action="/TareaOk/<%=clientes.Nombre_sub%>" method="post">
                                                     Si<input class="btn btn-primary" checked type="radio" name="TareaOK" id="TareaOK"
                                                       value="S">
                                                     <input class="btn btn-primary" hidden type="text" name="id" id="id"
@@ -223,14 +226,14 @@
                                                     <input class="btn btn-primary" hidden type="text" name="Nombre" id="Nombre"
                                                       value="<%=clientes.Nombre_sub%>">
                                                 </form>
-                                                <form action=" /TareaOk/<%=clientes.Nombre_sub%>" method="post">
+                                                <form action="/TareaOk/<%=clientes.Nombre_sub%>" method="post">
                                                     No<input class="btn btn-primary" type="radio" onchange="this.form.submit()" name="TareaOK" id="TareaOK" value="N">
                                                   <input class="btn btn-primary" hidden type="text" name="id" id="id" value="<%=clientes.id%>">
                                                   <input class="btn btn-primary" hidden type="text" name="Nombre" id="Nombre"
                                                     value="<%=clientes.Nombre_sub%>">
                                                 </form>
                                                 <%}else{%>
-                                                  <form action=" /TareaOk/<%=clientes.Nombre_sub%>" method="post">
+                                                  <form action="/TareaOk/<%=clientes.Nombre_sub%>" method="post">
                                                     Si  <input class="btn btn-primary" type="radio" onchange="this.form.submit()" name="TareaOK" id="TareaOK" value="S">
                                                       <input class="btn btn-primary" hidden type="text" name="id" id="id"
                                                         value="<%=clientes.id%>">
@@ -238,7 +241,7 @@
                                                         value="<%=clientes.Nombre_sub%>">
 
                                                   </form>
-                                                  <form action=" /TareaOk/<%=clientes.Nombre_sub%>" method="post">
+                                                  <form action="/TareaOk/<%=clientes.Nombre_sub%>" method="post">
 
                                                       No<input class="btn btn-primary" checked type="radio" name="TareaOK" id="TareaOK"
                                                         value="N">
@@ -250,11 +253,12 @@
 
                                                   </form>
                                                   <%}%>
+                                                  <%if(rol=="Supervisor"|| rol=="admin"){%>
+                                                    <button class="bi bi-gear" id="btnEditarEntradaRegistro" value="<%=clientes.id%>"></button>
+                                                    <%}%>
                                             </th>
                                             <% })%>
           </tbody>
-
-
         </table>
       </div>
 
@@ -265,11 +269,21 @@
       .clone(true)
       .addClass('filters')
       .appendTo('#comunicacionDiaria thead');
-
     var url = '/historialcarpeta/:' + id;
-   
   })
-  
+  $('body').on('click', '#btnEditarEntradaRegistro', function(){
+    console.log("Se detecto click en el boton configuracion");
+    var id = $(this).val();
+    console.log(id);
+var textoOriginalTareaRealizada=$('#TareaRealizada'+id).text();
+$('#TareaRealizada'+id).html(
+  '<form action="/actualizarTareaRealizada/'+id+'" method="post">'+
+    '<input type="hidden" name="NombreCarpeta" value="<%=Nombre%>">'+
+'  <input type="text" name="TareaRealizada" id="" placeholder="'+textoOriginalTareaRealizada+'">'+
+'<button class="btn bi bi-check btn-outline-success" type="submit"></button>'+
+'</form>'
+)
+  })
 </script>
 <%}%>
 
