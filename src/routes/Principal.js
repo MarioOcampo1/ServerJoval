@@ -357,3 +357,24 @@ connection.query(sql,(error,results)=>{
     else{res.send(results);};
 })
 })
+router.post('/editarEmpleado',(req,res)=>{
+    var sql= 'UPDATE usuariosregistrados set? WHERE id =?';
+    connection.query(sql,[{
+        Nombre:req.body.Nombre, usuario:req.body.Usuario,password:req.body.Contraseña,rol:req.body.rol
+    },req.body.id],(error,results)=>{
+        if(error)console.log(error);
+        else{
+            res.redirect('/index');
+        }
+    })
+})
+router.post('/eliminarEmpleado/:id',(req,res)=>{
+    var id= req.params.id;
+var sql='DELETE from usuariosregistrados WHERE ID=?';
+connection.query(sql,id,(error,results)=>{
+    if(error)console.log(error);
+    else{
+        res.send("Empleado eliminado");
+    }
+})
+})

@@ -5,8 +5,12 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.css">
-  <script src="../bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.css">
+<link rel="stylesheet" href="\bootstrap-icons-1.10.3\bootstrap-icons-1.10.3\bootstrap-icons.css">
+<script src="/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="/Jquery 3.6.3/jquery-3.6.3.js"></script>
+  <script src="\bootstrap-icons-1.10.3\bootstrap-icons-1.10.3\bootstrap-icons.json"></script>
+
   <title>Joval Administración</title>
 </head>
 
@@ -15,7 +19,7 @@
   <nav class="navbar navbar-expand navbar-light bg-light">
     <div class="nav navbar-nav">
       <button class="nav-item nav-link active btn" href="#" aria-current="page" data-bs-toggle="modal" data-bs-target="#modalNuevoEmpleado">Nuevo empleado <span class="visually-hidden">(current)</span></button>
-        <button type="button" class="btn nav-item nav-link" data-bs-toggle="modal" data-bs-target="#ModalEditarEmpleado" onclick="editarEmpleado()">
+        <button type="button" class="btn nav-item nav-link" data-bs-toggle="modal" data-bs-target="#modalVistaEmpleados" onclick="editarEmpleado()">
           Editar empleado
         </button>
     </div>
@@ -141,19 +145,79 @@
 
 <!-- Modal Body -->
 <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
-<div class="modal fade" id="ModalEditarEmpleado" tabindex="-1"  role="dialog" aria-labelledby="ModalEditarEmpleado" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+<div class="modal fade" id="modalVistaEmpleados" tabindex="-1"  role="dialog" aria-labelledby="modalVistaEmpleados" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="ModalEditarEmpleado">Edición de empleado</h5>
+        <h5 class="modal-title" id="modalVistaEmpleados">Empleados</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body" id="bodyModalEditarEmpleado"> 
+      <div class="modal-body" id="bodymodalVistaEmpleados"> 
+        <div class="table-responsive">
+          <table class="table table-light">
+            <thead>
+              <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Usuario</th>
+                <th scope="col">Rol</th>
+                <th scope="col">Editar</th>
+
+              </tr>
+            </thead>
+            <tbody id="tbodyEditarEmpleado">
+             
+              
+            </tbody>
+          </table>
+        </div>
         
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Body -->
+
+<div class="modal fade" id="ModalEditarEmpleado" tabindex="-1"  role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalTitleId">Editar empleado</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="/editarEmpleado" method="post">
+          <div class="modal-body justify-center">
+            <input type="hidden" name="id" id="EditarIDEmpleado">
+            <div class="input-group mb-2">
+              <label class="input-group-text" for="NombreEmpleado">Nombre</label><input class="input-control" type="text" name="Nombre" id="EditarNombreEmpleado">
+            </div>
+            <div class="input-group mb-2">
+
+              <label class="input-group-text" for="Usuario">Usuario</label><input class="input-control" type="text" name="Usuario" id="EditarUsuario">
+            </div>
+            <div class="input-group mb-2">
+              <label class="input-group-text" for="Contraseña">Contraseña</label><input class="input-control" type="text" name="Contraseña" id="EditarContraseña">
+            </div>
+            <div class="input-group mb-2">
+              <div class="input-group-text">Rol en el sistema</div>
+              <select class="form-select" name="rol" id="">
+                <option value="admin">Administrador</option>
+                <option value="Supervisor">Supervisor</option>
+                <option value="empleado">Empleado</option>
+
+              </select>
+            </div>
+
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-success">Guardar</button>
+        </form>
       </div>
     </div>
   </div>
@@ -173,14 +237,85 @@
   
   </style>
   <script>
+    function editarempleadoPOST(id){
+      $.ajax({
+      url:"/editarEmpleado",
+    }).done(function(data){
+data.forEach((element)=>{
+  if(element.id==id){
+    $("#EditarNombreEmpleado").val("");
+$("#EditarUsuario").val("");
+$("#EditarContraseña").val("");
+$("#EditarNombreEmpleado").attr("placeholder","");
+$("#EditarUsuario").attr("placeholder","");
+$("#EditarContraseña").attr("placeholder","");
+$('#EditarIDEmpleado').val("");
+$('#EditarIDEmpleado').attr("placeholder","");
+
+
+$('#EditarIDEmpleado').val(element.id);
+$("#EditarNombreEmpleado").val(element.Nombre);
+$("#EditarUsuario").val(element.usuario);
+$("#EditarContraseña").val(element.password);
+$("#EditarNombreEmpleado").attr("placeholder",element.Nombre);
+$("#EditarUsuario").attr("placeholder",element.usuario);
+$("#EditarContraseña").attr("placeholder",element.password);
+$('#EditarIDEmpleado').attr("placeholder",element.id);
+$('#modalVistaEmpleados').modal('hide');
+$('#ModalEditarEmpleado').modal('show');
+
+  }
+})
+    })
+}
     function editarEmpleado(){
 $.ajax({
       url:"/editarEmpleado",
-      success: function(data){
-        console.log(data);
-      }
+     
+    }).done(function(data){
+      $('#tbodyEditarEmpleado').empty();
+      data.forEach(element => {
+      $('#tbodyEditarEmpleado').append(
+        '<tr class="">'+
+        '<td scope="row" >'+element.Nombre+'</td>'+
+        '<td  >'+element.usuario+'</td>'+
+        '<td  >'+element.rol+'</td>'+
+        '<td>'+
+        '<button class="btn btn-outline-dark bi bi-gear me-2" id="btnEditarEmpleado" value="'+element.id+'"></button>'+
+        '<button class="btn bi bi-trash btn-outline-danger" id="btnElminarEmpleado" value="'+element.id+'"></button>'+
+        '</td>'+
+     ' </tr>'
+        
+        );  
+      });
+      
     })
+    
   }    
+
+  $('body').on('click', '#btnEditarEmpleado', function(){
+    // el método .click de jQuery solo funciona con elementos que ya están en el DOM cuando el documento se carga. Para vincular eventos a elementos agregados al DOM de forma dinámica, usa el método .on sobre un elemento contenedor y filtra por el selector del elemento de interés.
+     var id= $(this).val();
+      editarempleadoPOST(id);
+      
+    })
+    $('body').on('click', '#btnElminarEmpleado', function(){
+    // el método .click de jQuery solo funciona con elementos que ya están en el DOM cuando el documento se carga. Para vincular eventos a elementos agregados al DOM de forma dinámica, usa el método .on sobre un elemento contenedor y filtra por el selector del elemento de interés.
+     var id= $(this).val();
+     if(window.confirm("¿Esta seguro que desea eliminar el empleado?")){
+      
+      $.ajax({
+        type:"POST",
+        url:'/eliminarEmpleado/'+id}
+      ).done(function(data){
+        $('#modalVistaEmpleados').modal('hide');
+        $('#ModalEditarEmpleado').modal('hide');
+        window.alert(data)
+      })
+
+     }
+      
+    })
    
   </script>
 </html>
