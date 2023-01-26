@@ -150,7 +150,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="modalVistaEmpleados">Empleados</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close" aria-label="Close" onclick="$('#modalVistaEmpleados').modal('hide')"></button>
       </div>
       <div class="modal-body" id="bodymodalVistaEmpleados"> 
         <div class="table-responsive">
@@ -173,12 +173,11 @@
         
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-secondary" onclick="$('#modalVistaEmpleados').modal('hide')">Cerrar</button>
       </div>
     </div>
   </div>
 </div>
-
 <!-- Modal Body -->
 
 <div class="modal fade" id="ModalEditarEmpleado" tabindex="-1"  role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
@@ -186,7 +185,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="modalTitleId">Editar empleado</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close" onclick="$('#ModalEditarEmpleado').modal('hide')" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <form action="/editarEmpleado" method="post">
@@ -215,7 +214,7 @@
 
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-danger" onclick="$('#ModalEditarEmpleado').modal('hide')">Cancelar</button>
             <button type="submit" class="btn btn-success">Guardar</button>
         </form>
       </div>
