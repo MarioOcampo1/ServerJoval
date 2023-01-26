@@ -41,15 +41,23 @@ passport.use(new PassportLocal(function (username, password, done) {
     let user = username;
     let pass = password;
     var sql= 'SELECT * FROM usuariosregistrados WHERE usuario = "'+user+'" AND password = "'+pass+'" ;'; 
-    connection.query(sql,(errorquery, results) => {
-        if (errorquery){
-            console.log(errorquery);
+    try { connection.query(sql,(error, results) => {
+        if (error){
+            console.log(error);
             return done('No se ha encontrado el usuario y/o contraseña indicado', false);
         } 
-       if(results){
+       if(results>0){
            return done(null, { id: results[0].id, rol: results[0].rol, username: results[0].usuario });
        }
+       else{
+        return done(error);
+       }
             });
+        
+    } catch (error) {
+        return done('No se ha encontrado el usuario y/o contraseña indicado', false);
+    }
+   
     // done(null, false); // Esta linea define a traves del null, que no hubo ningun error, pero el al mismo tiempo, a traves del false, indica que el usuario no se ha encontrado.
     // Continuamos en serializacion
     
