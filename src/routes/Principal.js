@@ -46,7 +46,7 @@ passport.use(new PassportLocal(function (username, password, done) {
             console.log(error);
             return done('No se ha encontrado el usuario y/o contraseña indicado', false);
         } 
-       if(results>0){
+       if(results.length>0){
            return done(null, { id: results[0].id, rol: results[0].rol, username: results[0].usuario });
        }
        else{
