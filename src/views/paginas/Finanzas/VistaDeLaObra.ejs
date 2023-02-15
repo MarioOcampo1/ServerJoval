@@ -29,10 +29,12 @@
       <div class="container ">
         <p class="text-center">En caso de no encontrar el vecino, debera de cargarlo en el sistema.</p>
       </div>
+      <%if(PredeterminadosyCobros){%>
       <div class="container VistaClientes m-2">
         <label for="BuscadorCliente">Buscar cliente</label>
         <input class="border border-danger" type="text" name="BuscadorCliente" id="BuscadorCliente">
       </div>
+    
       <table id="TablaObras" class="table table-bordered table-inverse table-responsive"
         style="display: block; width:100%;">
         <thead class="thead-default">
@@ -917,6 +919,9 @@
         </tbody>
       </table>
     </div>
+    <%}else{%>
+<p class="text-center">No se encuentran vecinos cargados en esta carpeta, proceda a cargarlos. </p>
+    <%}%>
     <%- include('./partials/NuevoPagoObras.ejs')%>
       <div class="container-fluid">
         <!-- Modal Body -->

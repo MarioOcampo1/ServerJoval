@@ -40,10 +40,10 @@
               <%    const element = NombreObras[index];%>
               <%var contador=0;%>
               <%if(element.Estado=="Finalizada"){ %>
-              <tr class="bg-danger text-light">
+              <tr id="trOculto" class="bg-danger text-light" style="display: none;">
                 <%}%>
                 <%if(element.Estado=="ELIMINADO"){%>
-                  <tr class="bg-warning">
+                  <tr id="trOculto" class="bg-warning" style="display: none;">
                   <%}if(element.Estado!="Finalizada"&&element.Estado!="ELIMINADO" ){%>
                   <tr class="">
                     <%}%>
@@ -299,7 +299,7 @@
       jQuery("#TablaPrincipal td:contiene-palabra('" + jQuery(this).val() + "')").parent("tr").show("slow");
     }
     else {
-      jQuery('#TablaPrincipal tbody>tr').hide("slow");
+      jQuery('#TablaPrincipal tbody>tr').show("slow");
     }
   })
 

@@ -148,7 +148,7 @@ router.post('/guardarNuevoCliente', (req, res) => {
     if (PerMunicipal == null) { PerMunicipal = "NC"; }
     if (Privado == null) { Privado = "NC"; }
     if (DPV == null) { DPV = "NC"; }
-    if (IRRIGACION == null) { IRRIGACION = "NC"; }
+    if (IRRIGACION == null) { IRRIGACION = "NC"; }Nuevo
     if (HIDRAULICA == null) { HIDRAULICA = "NC"; }
     if (FERROCARRIL == null) { FERROCARRIL = "NC"; }
     if (OTROSPERMISOS == null) { OTROSPERMISOS = "NC"; }

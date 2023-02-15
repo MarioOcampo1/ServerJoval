@@ -753,11 +753,12 @@ router.get('/Finanzas/cobrodeobras/VerObra/:NombreObra', (req, res) => {
                     console.log(error);
                     reject(error);
                 }
-                if (PredeterminadosyCobros.length > 0) {
+                if(PredeterminadosyCobros.length>0){
                     resolve(PredeterminadosyCobros);
                 }
-                else {
-                    reject();
+              else {
+              PredeterminadosyCobros=null;
+              resolve(PredeterminadosyCobros);
                 }
             })
         }).then(PredeterminadosyCobros => {
