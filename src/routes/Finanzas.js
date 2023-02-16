@@ -335,6 +335,7 @@ router.post('/GenerarComprobante', (req, res,next) => {
     var Obra = req.body.Obra;
     var id_Obra;
     var FormaDePago = req.body.FormaDePago;
+    var id_Cobro;
     sql = 'Select id from obras where Nombre =?';
     connection.query(sql, [Obra], (error, results) => {
         if (error) console.log(error);
@@ -343,86 +344,95 @@ router.post('/GenerarComprobante', (req, res,next) => {
             id_Obra = results[0].id;
         }
     })
-    sql = 'Select ' + Concepto + ' FROM finanzas_clientes_por_obra_cobros WHERE ID_cliente =?'
-  
+    sql = 'SELECT ' + Concepto + ' FROM finanzas_clientes_por_obra_cobros WHERE ID_cliente =?'
+    var promise1 = new Promise(function(resolve,reject){
     connection.query(sql, [ID], (error, results) => {
-        if (error) console.log(error);
+        if (error){ console.log(error);
+        reject();
+        }
         if (results.length > 0) {
-            var a ;
-            JSON.parse((JSON.stringify(results)), function (k, v) {
-                if (k == Concepto) {
-                    a = parseInt(v);
+            
+                var a ;
+                JSON.parse((JSON.stringify(results)), function (k, v) {
+                    if (k == Concepto) {
+                        a = parseInt(v);
+                    }
+    
+                });
+                console.log("El cliente seleccionado tiene pagos existentes. Actualizando pagos.")
+                if (a == null) {
+                } else {
+                  
+                    sumaDeTotalesPorConcepto =ValorIngresado + a;
                 }
-
-            });
-            console.log("El cliente seleccionado tiene pagos existentes. Actualizando pagos.")
-            if (a == null) {
-            } else {
-              
-                sumaDeTotalesPorConcepto =ValorIngresado + a;
-            }
-            sql = 'UPDATE finanzas_clientes_por_obra_cobros set ' + Concepto + ' = ' + sumaDeTotalesPorConcepto + ' WHERE ID_cliente = ' + ID + ' and id_Obra = ' + id_Obra + '';
-            connection.query(sql, (error, results) => {
-                if (error) console.log(error);
-            })
-            sql = 'Select MAX(id_cobro) from finanzas_clientes_por_obra_cobros WHERE id_Obra=' + id_Obra + '';
-            var id_Cobro;
-            connection.query(sql, (error, results) => {
-                if (error) console.log(error);
-                id_Cobro = results[0].id_Cobro
-            })
-            if (ObservacionesDelPago == null) {
-                sql = 'Insert into finanzas_clientes_por_obra_cobros_observaciones set?'
-                connection.query(sql, { id_cobro: id_Cobro, Observacion: "Sin observaciones" }, (error, results) => {
+                sql = 'UPDATE finanzas_clientes_por_obra_cobros set ' + Concepto + ' = ' + sumaDeTotalesPorConcepto + ' WHERE ID_cliente = ' + ID + ' and id_Obra = ' + id_Obra + '';
+                connection.query(sql, (error, results) => {
                     if (error) console.log(error);
                 })
-            }
-            else {
-                sql = 'Insert into finanzas_clientes_por_obra_cobros_observaciones set?'
-                connection.query(sql, { id_cobro: id_Cobro, Observacion: ObservacionesDelPago }, (error, results) => {
+                sql = 'Select MAX(id_cobro) as id_Cobro from finanzas_clientes_por_obra_cobros WHERE id_Obra=' + id_Obra + '';
+               
+                connection.query(sql, (error, results) => {
                     if (error) console.log(error);
-                })
+                    id_Cobro = results[0].id_Cobro
+                })         
+                    if (ObservacionesDelPago == null || ObservacionesDelPago == '') {
+                        sql = 'Insert into finanzas_clientes_por_obra_cobros_observaciones set?'
+                        connection.query(sql, { id_cobro: id_Cobro, Observacion: "Sin observaciones" }, (error, results) => {
+                            if (error) console.log(error);
+                        })
+                    }
+                    else {
+                        sql = 'Insert into finanzas_clientes_por_obra_cobros_observaciones set?'
+                        connection.query(sql, { id_cobro: id_Cobro, Observacion: ObservacionesDelPago }, (error, results) => {
+                            if (error) console.log(error);
+                        })
+                    }
+                    resolve();
+                
+               
             }
-        }
+        
         if (results.length == null || results.length == 0) {
-            console.log("No existen pagos ingresados de el cliente seleccionado")
-            console.log("Intentando cargar nuevo pago");
-            sql = 'INSERT INTO finanzas_clientes_por_obra_cobros SET?'
-            connection.query(sql, {
-                ID_cliente: ID, id_Obra: id_Obra,
-            }, (error, results) => {
-                if (error) console.log(error);
-            })
-            console.log("El cliente se ha cargado en el sistema, cargando el concepto de pago junto con su valor....");
-            sql = 'Update finanzas_clientes_por_obra_cobros set ' + Concepto + '= ' + sumaDeTotalesPorConcepto + ' WHERE ID_cliente =' + ID + ' and id_Obra=' + id_Obra + '';
-            connection.query(sql, (error, results) => {
-                if (error) console.log(error);
-            })
-            sql = 'Select MAX(id_cobro) from finanzas_clientes_por_obra_cobros where id_Obra=' + id_Obra + '';
-            var id_Cobro;
-            connection.query(sql, (error, results) => {
-                if (error) console.log(error);
-                id_Cobro = results[0].id_Cobro
-            })
-            if (ObservacionesDelPago == null) {
-                sql = 'Insert into finanzas_clientes_por_obra_cobros_observaciones set?'
-                connection.query(sql, { id_cobro: id_Cobro, Observacion: "Sin observaciones" }, (error, results) => {
+            
+                console.log("No existen pagos ingresados de el cliente seleccionado")
+                console.log("Intentando cargar nuevo pago");
+                sql = 'INSERT INTO finanzas_clientes_por_obra_cobros SET?'
+                connection.query(sql, {
+                    ID_cliente: ID, id_Obra: id_Obra,
+                }, (error, results) => {
                     if (error) console.log(error);
-
                 })
-            }
-            else {
-                sql = 'Insert into finanzas_clientes_por_obra_cobros_observaciones set?'
-                connection.query(sql, { id_cobro: id_Cobro, Observacion: ObservacionesDelPago }, (error, results) => {
+                console.log("El cliente se ha cargado en el sistema, cargando el concepto de pago junto con su valor....");
+                sql = 'Update finanzas_clientes_por_obra_cobros set ' + Concepto + '= ' + sumaDeTotalesPorConcepto + ' WHERE ID_cliente =' + ID + ' and id_Obra=' + id_Obra + '';
+                connection.query(sql, (error, results) => {
                     if (error) console.log(error);
-
                 })
-            }
+                sql = 'Select MAX(id_cobro) from finanzas_clientes_por_obra_cobros where id_Obra=' + id_Obra + '';
+                var id_Cobro;
+                connection.query(sql, (error, results) => {
+                    if (error) console.log(error);
+                    id_Cobro = results[0].id_Cobro
+                })
+                if (ObservacionesDelPago == null) {
+                    sql = 'Insert into finanzas_clientes_por_obra_cobros_observaciones set?'
+                    connection.query(sql, { id_cobro: id_Cobro, Observacion: "Sin observaciones" }, (error, results) => {
+                        if (error) console.log(error);
+    
+                    })
+                }
+                else {
+                    sql = 'Insert into finanzas_clientes_por_obra_cobros_observaciones set?'
+                    connection.query(sql, { id_cobro: id_Cobro, Observacion: ObservacionesDelPago }, (error, results) => {
+                        if (error) console.log(error);
+    
+                    })
+                }
+                resolve();
         }
-   })
-   
-   setTimeout(() => {
-    //Generación del comprobante en archivo Excel
+    })
+    })
+        promise1.then((resolve)=>{
+ //Generación del comprobante en archivo Excel
 //  Se utiliza como herramienta el xlsx-populate: https://www.npmjs.com/package/xlsx-populate#serving-from-express
 // La plantilla del comprobante es: src\public\plantillas\ReciboDePago.xlsx
 // Datos que se cargan en la misma: Nombre, Domicilio, ValorIngresado, Concepto, FechaPago, ObservacionesDelPago, Obra.
@@ -614,9 +624,12 @@ res.attachment(nombreDelArchivo);
 res.send(data);
 res.redirect('/Finanzas/cobrodeobras/VerObra/'+Obra);
 })
-},1000)
-}
-)
+.catch(function(){
+    res.send("No se ha podido generar el comprobante de pago");
+res.redirect('/Finanzas/cobrodeobras/VerObra/'+Obra);
+})
+        });
+   })
 // EDITAR CLIENTE
 router.get('/Finanzas/CobroDeObras/EditarCliente/:id', (req, res) => {
     var id = req.params.id;
