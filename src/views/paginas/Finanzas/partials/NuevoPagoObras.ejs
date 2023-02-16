@@ -4,7 +4,7 @@
       <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="TituloModal"></h5>
+            <h5 class="modal-title" id="TituloModal">Nuevo pago</h5>
             <button class="btn btn-primary" type="submit" id="BotonConNombreDeCarpeta" onclick="VerCLientes()">Cargar
               clientes por lotes</button>
             <button class="btn btn-secondary">Ver comprobantes registrados</button>
@@ -39,11 +39,7 @@
                     <label id="labelDomicilio" class="form-label text-center" for="InputDomicilio">Domicilio</label>
                     <input type="text" id="inputDomicilio" name="Domicilio">
                   </div>
-                  <div class="col ">
-                    <label class="form-label text-center" for="ValorIngresado">Importe</label>
-                    <input required class="form-control" value="0" type="number" name="ValorIngresado"
-                      id="ValorIngresado">
-                  </div>
+                 
                   <div class="col ">
                     <label class="form-label text-center" for="Concepto">Concepto</label>
                     <select name="Concepto" id="Concepto">
@@ -73,6 +69,11 @@
                       <option value="Irrigacion">Permiso Irrigacion</option>
                       <!-- </datalist> -->
                     </select>
+                  </div>
+                  <div class="col" id="divImporte" style="display: none;">
+                    <label class="form-label text-center" for="ImporteIngresado">Importe</label>
+                    <input required class="form-control" value="0" type="number" name="ValorIngresado"
+                      id="ImporteIngresado">
                   </div>
                   <div class="col">
                     <label class="form-label text-center" for="FechaPago"> Fecha de pago</label>

@@ -773,14 +773,27 @@ router.get('/Finanzas/cobrodeobras/VerObra/:NombreObra', (req, res) => {
 //Cargar comprobante de pago con los datos del cliente
 router.get('/BuscarDatosClienteQuePaga/:idCliente', (req, res) => {
     var idCliente = req.params.idCliente;
+    var sql;
     sql = 'Select * from finanzas_clientes_por_obra WHERE ID_cliente = ? ';
-    connection.query(sql, idCliente, (error, results) => {
-        if (error) console.log(error);
-        else {
-
-            res.send(results);
-        }
+    var promise1=new Promise(function(resolve,reject){
+        connection.query(sql, idCliente, (error, results) => {
+            if (error) console.log(error);
+            else {
+            }
+            resolve(results);
     })
+   
+    })
+    promise1.then(function(results){
+        sql='SELECT AnticipoFinanciero,Cuota1,Cuota2,Cuota3,Cuota4,Cuota5,Cuota6,Cuota7,Cuota8,Cuota9,Cuota10,Cuota11,Cuota12,Municipal,Irrigacion,DNV,DPV,Hidraulica,FFCC,Privado,ServicioDomiciliario FROM finanzas_clientes_predeterminados WHERE id_cliente = ? ';
+        connection.query(sql, idCliente, (error,montosCuota)=>{
+           if (error) console.log(error);
+           else{
+            
+            res.send({results,montosCuota});
+           }
+        })
+   })
 })
 //Actualizar configuracion de la obra
 router.post('/Finanzas/actualizarPredeterminadosObraEntera/:id/:keyACambiar/:NombreObra', (req, res) => {
