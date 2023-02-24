@@ -452,10 +452,6 @@ router.post('/Finanzas/NuevoCliente/guardarCliente', (req, res) => {
   promise1.then(function(success,reject){
     res.redirect('/Finanzas/cobrodeobras/VerObra/'+Obra);  
   }) 
-      
-
-         
-     
 
 })
 router.post('/GenerarComprobante', (req, res,next) => {
@@ -938,7 +934,6 @@ router.get('/BuscarDatosClienteQuePaga/:idCliente', (req, res) => {
         connection.query(sql, idCliente, (error,montosCuota)=>{
            if (error) console.log(error);
            else{
-            
             res.send({results,montosCuota});
            }
         })

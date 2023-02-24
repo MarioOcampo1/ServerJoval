@@ -36,7 +36,7 @@ connection.connect((error) => {
 
 router.get("/vencimientos", (req, res) => {
   // if(req.isAuthenticated()){
-  const sql =
+  var sql =
     "SELECT c.Nombre, c.NCarpeta, c.intTelefonica, c.intTelefonicaPedida, c.intTelefonicaObtenida, c.intAgua, c.intAguaPedida, c.intAguaObtenida, c.intCloaca,c.intCloacasPedida, c.intCloacasObtenida, c.intClaro, c.intClaroPedida, c.intClaroObtenida, c.intElectricidad, c.intElectricidadPedida, c.intElectricidadObtenida, c.intArnet ,  c.intArnetPedida, c.intArnetObtenida,c.intArsat, c.intArsatPedida, c.intArsatObtenida, c.intTelecomPedida, c.intTelecomObtenida, c.intTelecom FROM adminecogas_interferencias_y_permisos c";
   res.locals.moment = moment;
   connection.query(sql, (error, results) => {
@@ -77,6 +77,7 @@ router.get("/adminecogas", (req, res) => {
     let sql;
     // INTERFERENCIAS
     var interferenciasypermisos;
+    var usuariosregistrados;
     sql = "Select * from adminecogas_interferencias_y_permisos";
     connection.query(sql, (error, results) => {
       if (error) console.log(error);
@@ -85,18 +86,26 @@ router.get("/adminecogas", (req, res) => {
         interferenciasypermisos = results;
       }
     });
+    sql="SELECT * FROM usuariosregistrados;";
+    connection.query(sql,(error,respuesta)=>{
+      if(error)console.log(error);
+      else{
+usuariosregistrados=respuesta;
+console.log(usuariosregistrados);
+}
+    })
     // FIN INTERFERENCIAS
-    sql =
-      "SELECT a.id, a.Nombre, a.NCarpeta,b.TareaRealizada, b.ProximaTarea, b.EtapaTarea, b.FechaLimite,c.* " +
+    sql ="SELECT a.id, a.Nombre, a.NCarpeta,b.TareaRealizada, b.ProximaTarea, b.EtapaTarea, b.FechaLimite,c.*" +
       "FROM obras a INNER JOIN adminecogas_tareas_por_carpeta b ON a.id = b.id_obra " +
-      "INNER JOIN adminecogas_interferencias_y_permisos c ON c.NCarpeta = b.NCarpeta";
+      "INNER JOIN adminecogas_interferencias_y_permisos c ON c.NCarpeta = b.NCarpeta ";
+      
     res.locals.moment = moment;
     connection.query(sql, (error, results) => {
       if (error) console.log(error);
       if (results.length > 0) {
         res.render("paginas/AdministracionEcogas/adminecogas.ejs", {
           results: results,
-          interferenciasypermisos: interferenciasypermisos,
+          interferenciasypermisos: interferenciasypermisos, usuariosregistrados,
         }); //en {results:results} lo que hago es guardar los resultados que envia la bd, en la variable results
       } else {
         res.render("paginas/AdministracionEcogas/nuevocliente.ejs");

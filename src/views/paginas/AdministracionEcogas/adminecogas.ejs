@@ -50,10 +50,11 @@
             <th class="text-center align-middle">
               <div class="btn-toolbar" role="toolbar">
                 <div class="btn-group" role="group">
-              <button id="Mauricio"class="btn btn-outline-primary btn-sm ">M</button>
-              <button id="Gustavo"class="btn btn-outline-primary btn-sm">G</button>
-              <button id="Daiana"class="btn btn-outline-primary btn-sm">D</button>
-              <button id="MarianaPirani"class="btn btn-outline-primary btn-sm">MP</button>
+                  <% usuariosregistrados.forEach(usuarios => { %>
+                    <button id="<%=usuarios.Nombre%>"class="btn btn-outline-primary btn-sm "><%=usuarios.Nombre%></button>
+                   
+                  <% }) %>
+              
             </div>
             </div>
             </th>
@@ -268,22 +269,25 @@ return stringFinal;
         ],
       });
       //Buscadores con botones.
- $('#Mauricio').click(function() {
+    '<%usuariosregistrados.forEach(usuarios => {%>'
+    $('#<%= usuarios.Nombre%>').click(function() {
         jQuery("#comunicacionDiaria tbody>tr").hide();
-        jQuery("#comunicacionDiaria td:contiene-palabra('Mauricio')").parent("tr").show();
-  });
-    $('#Gustavo').click(function() {
-      jQuery("#comunicacionDiaria tbody>tr").hide();
-        jQuery("#comunicacionDiaria td:contiene-palabra('Gustavo')").parent("tr").show();
-});
-$('#Daiana').click(function() {
-      jQuery("#comunicacionDiaria tbody>tr").hide();
-        jQuery("#comunicacionDiaria td:contiene-palabra('Daiana')").parent("tr").show();
-});
-$('#MarianaPirani').click(function() {
-      jQuery("#comunicacionDiaria tbody>tr").hide();
-        jQuery("#comunicacionDiaria td:contiene-palabra('Mariana')").parent("tr").show();
-});
+        jQuery("#comunicacionDiaria td:contiene-palabra('<%=usuarios.Nombre%>')").parent("tr").show();
+  });     
+    '<%});%>'
+ 
+//     $('#Gustavo').click(function() {
+//       jQuery("#comunicacionDiaria tbody>tr").hide();
+//         jQuery("#comunicacionDiaria td:contiene-palabra('Gustavo')").parent("tr").show();
+// });
+// $('#Daiana').click(function() {
+//       jQuery("#comunicacionDiaria tbody>tr").hide();
+//         jQuery("#comunicacionDiaria td:contiene-palabra('Daiana')").parent("tr").show();
+// });
+// $('#MarianaPirani').click(function() {
+//       jQuery("#comunicacionDiaria tbody>tr").hide();
+//         jQuery("#comunicacionDiaria td:contiene-palabra('Mariana')").parent("tr").show();
+// });
 $('#TablaGral').click(function() {
   jQuery("#comunicacionDiaria tbody>tr").show();
 });
