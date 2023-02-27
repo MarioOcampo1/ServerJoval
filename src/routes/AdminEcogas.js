@@ -188,7 +188,17 @@ router.get("/editarTareas/:id", (req, res) => {
     var CodigoFinalizadas = 0;
     var CodigoVigentes = 0;
     var interferenciasypermisos, tareasporcarpeta, tareasgenerales;
+    var usuariosregistrados;
+   
     var promise1 = new Promise(function (resolve, reject) {
+      sql="SELECT * FROM usuariosregistrados;";
+      connection.query(sql,(error,respuesta)=>{
+        if(error)console.log(error);
+        else{
+  usuariosregistrados=respuesta;
+  }
+      })
+    sql = "Select Nombre from obras where id=?";
       connection.query(sql, [id], (error, results) => {
         if (error) console.log(error);
         if (results.length > 0) {
@@ -198,79 +208,72 @@ router.get("/editarTareas/:id", (req, res) => {
               contador = contador + 1;
               Nombre = v;
             }
-            resolve(Nombre);
+            return(Nombre);
           });
+          resolve(Nombre);
         }
       });
-    })
-      .then(function (Nombre) {
-        sql = "Select * from codificacioncarpetas Where Nombre=?";
-
-        connection.query(sql, [Nombre], (error, results) => {
-          if (error) console.log(error);
-          var contador = 0;
-          JSON.parse(JSON.stringify(results), function (k, v) {
-            if (contador == 1) {
-              CodigoVigentes = v;
-            }
-            if (contador == 2) {
-              CodigoEnUsoVigentes = v;
-            }
-            if (contador == 3) {
-              CodigoFinalizadas = v;
-            }
-            contador = contador + 1;
-          });
-        });
-        return Nombre;
-      })
-      .then(function (Nombre) {
-        sql =
-          "Select * from adminecogas_interferencias_y_permisos Where Nombre=?";
-        connection.query(sql, [Nombre], (error, results) => {
-          if (error) console.log(error);
-          interferenciasypermisos = results[0];
-        });
-        return Nombre;
-      })
-      .then(function (Nombre) {
-        sql = "Select * from adminecogas_tareas_por_carpeta Where Nombre=?";
-        connection.query(sql, [Nombre], (error, results) => {
-          if (error) console.log(error);
-          tareasporcarpeta = results[0];
-        });
-        return Nombre;
-      })
-      .then(function (Nombre) {
-        sql = "Select * from obras_tareasgenerales WHERE Nombre=?";
-        connection.query(sql, [Nombre], (error, results) => {
-          if (error) console.log(error);
-          tareasgenerales = results[0];
-        });
-        return Nombre;
-      })
-      .then(function (Nombre) {
-        sql = "Select * from obras where id=?";
-        connection.query(sql, [id], (error, results) => {
-          if (error) console.log(error);
-          if (results.length > 0) {
-            console.log(tareasporcarpeta);
-            //Se procede a enviar al front, los resultados de las consultas sql, prestar atencion que para que ejs pueda resolver el contenido de las sentencias hay que tratar las mismas como un arreglo [0], sino no funciona.
-            res.render("paginas/AdministracionEcogas/editarTareas", {
-              user: results[0],
-              interferenciasypermisos,
-              tareasporcarpeta,
-              tareasgenerales,
-              CodigoVigentes,
-              CodigoEnUsoVigentes,
-              CodigoFinalizadas,
-              moment: moment,
-            });
-          } else {
-            res.redirect("/adminecogas");
+    }).then(function(Nombre){
+      sql = "Select * from codificacioncarpetas Where Nombre=?";
+      connection.query(sql, [Nombre], (error, results) => {
+        if (error) console.log(error);
+        var contador = 0;
+        JSON.parse(JSON.stringify(results), function (k, v) {
+          if (contador == 1) {
+            CodigoVigentes = v;
           }
+          if (contador == 2) {
+            CodigoEnUsoVigentes = v;
+          }
+          if (contador == 3) {
+            CodigoFinalizadas = v;
+          }
+          contador = contador + 1;
         });
       });
+      sql =
+      "Select * from adminecogas_interferencias_y_permisos Where Nombre=?";
+    connection.query(sql, [Nombre], (error, results) => {
+      if (error) console.log(error);
+      interferenciasypermisos = results[0];
+      sql = "Select * from adminecogas_tareas_por_carpeta Where Nombre=?";
+      connection.query(sql, [Nombre], (error2, results2) => {
+        if (error2) console.log(error2);
+        tareasporcarpeta = results2[0];
+        sql = "Select * from obras_tareasgenerales WHERE Nombre=?";
+        connection.query(sql, [Nombre], (error3, results3) => {
+          if (error3) console.log(error3);
+          tareasgenerales = results3[0];
+          sql = "Select * from obras where id=?";
+          connection.query(sql, [id], (error, results) => {
+            if (error) console.log(error);
+            if (results.length > 0) {
+              console.log(tareasporcarpeta);
+              //Se procede a enviar al front, los resultados de las consultas sql, prestar atencion que para que ejs pueda resolver el contenido de las sentencias hay que tratar las mismas como un arreglo [0], sino no funciona.
+              res.render("paginas/AdministracionEcogas/editarTareas", {
+                user: results[0],
+                interferenciasypermisos,
+                tareasporcarpeta,
+                tareasgenerales,
+                CodigoVigentes,
+                CodigoEnUsoVigentes,
+                CodigoFinalizadas,
+                moment: moment,
+                usuariosregistrados,
+              });
+            } else {
+              res.redirect("/adminecogas");
+            }
+          });
+        });
+        
+      
+      });
+    });
+    })
+   
+       
+      
   }
 });
 
