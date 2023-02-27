@@ -136,10 +136,10 @@
                                               <form action="/historialcarpeta/CambiarResponsableDeTarea" method="post">
                                                 <input type="hidden" name="idEntradaEnHistorial" value="<%=clientes.id%>">  
                                               <select name="ResponsableDeTarea" id="ResponsableDeTarea" onchange="this.form.submit()">
-                                                <option value="<%=clientes.ResponsableDeTarea%>"selected><%=clientes.ResponsableDeTarea%></option>
-<option value="Mauricio">Mauricio</option>
-<option value="Gustavo">Gustavo</option>
-<option value="Mariana">Mariana</option>
+                                                <option class="text-success" value="<%=clientes.ResponsableDeTarea%>"selected><%=clientes.ResponsableDeTarea%></option>
+                                                <%usuariosregistrados.forEach((usuarios)=>{%>
+                                                  <option value="<%=usuarios.Nombre%>"><%=usuarios.Nombre%></option>                                                  
+                                                  <%})%>
                                               </select>
                                             </form>
                                               
@@ -204,11 +204,10 @@
                                               <form action="/historialcarpeta/CambiarResponsableDeTarea" method="post">
                                                 <input type="hidden" name="idEntradaEnHistorial" value="<%=clientes.id%>">  
                                                   <select name="ResponsableDeTarea" id="ResponsableDeTarea" onchange="this.form.submit()">
-                                                    <option value="<%=clientes.ResponsableDeTarea%>" selected><%=clientes.ResponsableDeTarea%></option>
-    <option value="Mauricio">Mauricio</option>
-    <option value="Gustavo">Gustavo</option>
-    <option value="Mariana">Mariana</option>
-  </select>
+                                                    <option value="<%=clientes.ResponsableDeTarea%>"selected hidden><%=clientes.ResponsableDeTarea%></option>
+                                                    <%usuariosregistrados.forEach((usuarios)=>{%>
+                                                      <option value="<%=usuarios.Nombre%>"><%=usuarios.Nombre%></option>                                                  
+                                                      <%})%>
 </form>
                                                   <%}else{%>
                                                     <%=clientes.ResponsableDeTarea%>

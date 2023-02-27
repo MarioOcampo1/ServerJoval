@@ -91,7 +91,6 @@ router.get("/adminecogas", (req, res) => {
       if(error)console.log(error);
       else{
 usuariosregistrados=respuesta;
-console.log(usuariosregistrados);
 }
     })
     // FIN INTERFERENCIAS
@@ -348,7 +347,7 @@ router.get("/historialcarpeta/:Nombre", (req, res) => {
     var rol= req.user.rol;
     var id,NCarpeta;
     const Nombre = req.params.Nombre;
-
+var usuariosregistrados;
     var sql = "SELECT id,NCarpeta FROM obras WHERE Nombre =?";
     connection.query(sql, [Nombre], (error, results) => {
       if (error) console.log(error);
@@ -357,6 +356,13 @@ router.get("/historialcarpeta/:Nombre", (req, res) => {
         NCarpeta = results[0].NCarpeta;
       }
     });
+    sql="SELECT * FROM usuariosregistrados;";
+    connection.query(sql,(error,respuesta)=>{
+      if(error)console.log(error);
+      else{
+usuariosregistrados=respuesta;
+}
+})
     sql="SELECT c.* FROM historialdecambios c WHERE Nombre_sub =? ORDER BY id DESC";
     res.locals.moment = moment;
     connection.query(sql, [Nombre], (error, results) => {
@@ -366,14 +372,14 @@ router.get("/historialcarpeta/:Nombre", (req, res) => {
           results: results,
           id: id,
           Nombre: Nombre,
-          NCarpeta, rol,
+          NCarpeta, rol, usuariosregistrados,
         }); //en {results:results} lo que hago es guardar los resultados que envia la bd, en la variable results
       } else {
         console.log(rol);
         res.render("paginas/AdministracionEcogas/historialcarpeta.ejs", {
           results: results,
           id: id,
-          rol,
+          rol, usuariosregistrados,
         });
       }
     });
