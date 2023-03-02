@@ -22,7 +22,7 @@
   <div class="noImprimible">
   <%- include('./partials/menusuperior.ejs');%>
 </div>
-  <% if(results){%>
+  <% if(results){%>    
       <div class="container">
         <div class="row noImprimible">
           <h1 class="text-center">Historial de tareas de la carpeta <%=Nombre%> PDT°<%=NCarpeta%></h1>
@@ -141,6 +141,7 @@
                                                       <%usuariosregistrados.forEach((usuarios)=>{%>
                                                         <option value="<%=usuarios.Nombre%>"><%=usuarios.Nombre%></option>                                                  
                                                         <%})%>
+                                                    </select>
                                                 </form>
                                                
                                                     <%}else{%>
