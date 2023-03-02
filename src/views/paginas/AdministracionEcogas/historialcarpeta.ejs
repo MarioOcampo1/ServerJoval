@@ -133,15 +133,19 @@
                                               <%=clientes.Proxima_Tarea_sub%>
                                             </th>
                                             <th class="noImprimible">
-                                              <form action="/historialcarpeta/CambiarResponsableDeTarea" method="post">
-                                                <input type="hidden" name="idEntradaEnHistorial" value="<%=clientes.id%>">  
-                                              <select name="ResponsableDeTarea" id="ResponsableDeTarea" onchange="this.form.submit()">
-                                                <option class="text-success" value="<%=clientes.ResponsableDeTarea%>"selected><%=clientes.ResponsableDeTarea%></option>
-                                                <%usuariosregistrados.forEach((usuarios)=>{%>
-                                                  <option value="<%=usuarios.Nombre%>"><%=usuarios.Nombre%></option>                                                  
-                                                  <%})%>
-                                              </select>
-                                            </form>
+                                              <%if(rol=="Supervisor"|| rol=="admin"){%>
+                                                <form action="/historialcarpeta/CambiarResponsableDeTarea" method="post">
+                                                  <input type="hidden" name="idEntradaEnHistorial" value="<%=clientes.id%>">  
+                                                    <select name="ResponsableDeTarea" id="ResponsableDeTarea" onchange="this.form.submit()">
+                                                      <option value="<%=clientes.ResponsableDeTarea%>"selected hidden><%=clientes.ResponsableDeTarea%></option>
+                                                      <%usuariosregistrados.forEach((usuarios)=>{%>
+                                                        <option value="<%=usuarios.Nombre%>"><%=usuarios.Nombre%></option>                                                  
+                                                        <%})%>
+                                                </form>
+                                               
+                                                    <%}else{%>
+                                                      <%=clientes.ResponsableDeTarea%>
+                                                      <%}%>
                                               
                                             </th>
               <%}else{%>
@@ -201,14 +205,16 @@
                                             </th>
                                             <th class="bg-warning noImprimible">
                                                 <%if(rol=="Supervisor"|| rol=="admin"){%>
-                                              <form action="/historialcarpeta/CambiarResponsableDeTarea" method="post">
-                                                <input type="hidden" name="idEntradaEnHistorial" value="<%=clientes.id%>">  
-                                                  <select name="ResponsableDeTarea" id="ResponsableDeTarea" onchange="this.form.submit()">
-                                                    <option value="<%=clientes.ResponsableDeTarea%>"selected hidden><%=clientes.ResponsableDeTarea%></option>
-                                                    <%usuariosregistrados.forEach((usuarios)=>{%>
-                                                      <option value="<%=usuarios.Nombre%>"><%=usuarios.Nombre%></option>                                                  
-                                                      <%})%>
-</form>
+                                                  <form action="/historialcarpeta/CambiarResponsableDeTarea" method="post">
+                                                    <input type="hidden" name="idEntradaEnHistorial" value="<%=clientes.id%>">  
+                                                    <select name="ResponsableDeTarea" id="ResponsableDeTarea" onchange="this.form.submit()">
+                                                      <option value="<%=clientes.ResponsableDeTarea%>"selected hidden><%=clientes.ResponsableDeTarea%></option>
+                                                      <%usuariosregistrados.forEach((usuarios)=>{%>
+                                                        <option value="<%=usuarios.Nombre%>"><%=usuarios.Nombre%></option>                                                  
+                                                        <%})%>
+                                                    </select>
+                                                      </form>
+                                             
                                                   <%}else{%>
                                                     <%=clientes.ResponsableDeTarea%>
                                                     <%}%>
@@ -216,7 +222,6 @@
                                               <%}%>
                                             <th class="noImprimible">
                                               <%if(clientes.Si_NO_TareaRealizada=='S'){%>
-
                                                 <form action="/TareaOk/<%=clientes.Nombre_sub%>" method="post">
                                                     Si<input class="btn btn-primary" checked type="radio" name="TareaOK" id="TareaOK"
                                                       value="S">
@@ -238,18 +243,14 @@
                                                         value="<%=clientes.id%>">
                                                       <input class="btn btn-primary" hidden type="text" name="Nombre" id="Nombre"
                                                         value="<%=clientes.Nombre_sub%>">
-
                                                   </form>
                                                   <form action="/TareaOk/<%=clientes.Nombre_sub%>" method="post">
-
                                                       No<input class="btn btn-primary" checked type="radio" name="TareaOK" id="TareaOK"
                                                         value="N">
                                                     <input class="btn btn-primary" hidden type="text" name="id" id="id"
                                                       value="<%=clientes.id%>">
                                                     <input class="btn btn-primary" hidden type="text" name="Nombre" id="Nombre"
                                                       value="<%=clientes.Nombre_sub%>">
-
-
                                                   </form>
                                                   <%}%>
                                                   <%if(rol=="Supervisor"|| rol=="admin"){%>
@@ -271,9 +272,7 @@
     var url = '/historialcarpeta/:' + id;
   })
   $('body').on('click', '#btnEditarEntradaRegistro', function(){
-    console.log("Se detecto click en el boton configuracion");
     var id = $(this).val();
-    console.log(id);
 var textoOriginalTareaRealizada=$('#TareaRealizada'+id).text();
 $('#TareaRealizada'+id).html(
   '<form action="/actualizarTareaRealizada/'+id+'" method="post">'+
