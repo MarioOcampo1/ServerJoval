@@ -6,11 +6,11 @@
                 <%}%>
                 <label for="Interferencias" class="mx-auto" onclick="$('#InterferenciasBody').css('display','block')">
                     Interferencias</label>
-            </div>
-           
+            </div>   
     <div class="row">
         <div class="col text-center ">
             <div class="card-body" >
+                
             <form-check>
                 <%if (interferenciasypermisos.intTelefonica!="En gestion" && interferenciasypermisos.intTelefonica!="Pedida" && interferenciasypermisos.intTelefonica!="ok" ) {%>
                     <div class="card-title" onclick="document.getElementById('Telefonicabody').style.display= 'block'">Telefónica.
@@ -36,6 +36,7 @@
                         <input type="date" name="intTelefonicaObtenida" id="intTelefonicaObtenida"
                             value="<%= moment(interferenciasypermisos.intTelefonicaObtenida).format('YYYY-MM-DD') %>">
                     </div>
+                    
                     <%}%>
                         <%if (interferenciasypermisos.intTelefonica=="En gestion" ) {%>
                             <div class="card-title" onclick="document.getElementById('Telefonicabody').style.display= 'block'">Telefónica
@@ -111,8 +112,11 @@
                                             </div>
                                             <%}%>
             </form-check>
+           
         </div>
+        
     </div>
+    
 </div>
 <div class="col text-center ">
     <div class="card-body">
@@ -387,11 +391,9 @@
                             <input checked type="radio" name="intElectricidad" id="intElectricidad" value="En gestion">
                             En
                             gestión
-                            <input type="radio" name="intElectricidad" id="intElectricidad" value="Pedida" value="ok"
-                                onclick="estadoInterferencia('intElectricidadPedida', 'intElectricidadObtenida',true,false);">
+                            <input type="radio" name="intElectricidad" id="intElectricidad" value="Pedida" value="ok"onclick="estadoInterferencia('intElectricidadPedida', 'intElectricidadObtenida',true,false);">
                             Pedida
-                            <input type="radio" name="intElectricidad" id="intElectricidad" value="ok" value="ok"
-                                onclick="estadoInterferencia('intElectricidadPedida', 'intElectricidadObtenida',false,true);">
+                            <input type="radio" name="intElectricidad" id="intElectricidad" value="ok" value="ok"onclick="estadoInterferencia('intElectricidadPedida', 'intElectricidadObtenida',false,true);">
                             Ok
                             <div id="intElectricidadPedida" style="display: none;">
                                 Fecha en la que se pidió
@@ -915,6 +917,60 @@
     </div>
 </div>
 </div>
+</div>
+<div class="col-12 border p-1 bg-dark text-white formularioEditarTareasALlenar"
+    id="form1Interferencias" style="display:none;">
+
+    <input type="checkbox" name="Tarea" value="Interferencias" id="" checked hidden>
+    <div class="row ">
+        <div class="col">
+            <span>
+                Responsable de la Tarea:
+            </span>
+            <select name="ResponsableDeTarea" id="">
+                 <option value="" selected></option>
+        <%usuariosregistrados.forEach((usuario)=>{%>
+            <option value="<%=usuario.Nombre%>"><%=usuario.Nombre%></option>
+            <%})%>
+                
+            </select>
+        </div>
+    </div>
+    <div class="row pb-1 ">
+        <div class="input-group-sm">
+            <span class="">Tarea Realizada:</span>
+            <input class="form-control" type="text" name="TareaRealizada"
+                id="TareaRealizada"
+                placeholder="Ingrese ultima tarea realizada"
+                aria-describedby="TareaRealizada">
+        </div>
+    </div>
+    <div class="row pb-1">
+        <div class="input-group-sm">
+            <span class="">Proxima Tarea:</span>
+            <input class="form-control" type="text" name="ProximaTarea"
+                id="ProximaTarea" placeholder="Ingrese la proxima tarea"
+                aria-describedby="ProximaTarea">
+        </div>
+    </div>
+    <div class="row pb-1">
+        <div class="input-group-sm">
+            <span class="">Fecha Limite:</span>
+            <input class="form-control" type="date" name="Fecha_limite"
+                id="Fecha_limite"
+                placeholder="Ingrese ultima tarea realizada"
+                aria-describedby="Fecha_limite">
+
+        </div>
+
+    </div>
+    <div class="row-p-1">
+        <div class="input-group mt-1">
+            <input type="file" class="form-control" placeholder="Archivo"
+                aria-label="Archivo">
+        </div>
+    </div>
+
 </div>
 </div>
 <br>

@@ -254,37 +254,34 @@
                                         <div class="card-text" id="ActaConstitutivaBody" style="display: none;">
                                             <div class="input-group "
                                                 onclick="document.getElementById('form1ActaConstitutiva').style.display= 'block';">
-                                                <div class="col-2.5 p-1">
-                                                    <input hidden id="" class="input" type="radio"
+                                                <div class="form-check form-check-inline" >
+
+                                               
+                                                    <input hidden id="" class="input-check-input" type="radio"
                                                         onclick="llamarAFormularioEditarTareas('ActaConstitutiva');"
                                                         name="ActaConstitutiva"
                                                         value="<%=tareasporcarpeta.ActaConstitutiva%>" checked>
                                                     Sin Presentar<input id="" class="input" type="radio"
                                                         onclick="llamarAFormularioEditarTareas('ActaConstitutiva');"
                                                         name="ActaConstitutiva" value="Sin presentar">
-                                                </div>
-                                                <div class="col-2.5 p-1">
-                                                    En Gestión<input id="" class="input" type="radio"
+                                                    En Gestión<input id="" class="input-check-input" type="radio"
                                                         onclick="llamarAFormularioEditarTareas('ActaConstitutiva','EnGestion');"
                                                         name="ActaConstitutiva" value="EnGestion">
-                                                </div>
+                                                    Presentado<input id="" class="input-check-input" type="radio"
+                                                        onclick="llamarAFormularioEditarTareas('ActaConstitutiva');"
+                                                        name="ActaConstitutiva" value="Presentado">
 
-                                                <div class="col-2.5 p-1">
-                                                    Observado<input id="" class="input" type="radio"
+                                                    Observado<input id="" class="input-check-input" type="radio"
                                                         onclick="llamarAFormularioEditarTareas('ActaConstitutiva');"
                                                         name="ActaConstitutiva" value="Observado">
-                                                </div>
-                                                <div class="col-2.5 p-1">
-                                                    Ok<input id="" class="input" type="radio"
+                                                    Ok<input id="" class="input-check-input" type="radio"
                                                         onclick="llamarAFormularioEditarTareas('ActaConstitutiva' , 'Ok');"
                                                         name="ActaConstitutiva" value="ok">
-                                                </div>
-                                                <div class="col-2 p-1">
-                                                    NC<input id="" class="input" type="radio"
+                                                    NC<input id="" class="input-check-input" type="radio"
                                                         onclick="llamarAFormularioEditarTareas('ActaConstitutiva');"
                                                         name="ActaConstitutiva" value="NC">
-                                                </div>
                                             </div>
+                                                    </div>
 
                                         </div>
                                     </div>
@@ -379,7 +376,11 @@
                                                         onclick="llamarAFormularioEditarTareas('ActaCargoVigente','EnGestion');"
                                                         name="ActaCargoVigente" value="EnGestion">
                                                 </div>
-
+ <div class="col-2.5 p-1">
+                                                    Presentado<input id="" class="input" type="radio"
+                                                        onclick="llamarAFormularioEditarTareas('ActaCargoVigente');"
+                                                        name="ActaCargoVigente" value="Presentado">
+                                                </div>
                                                 <div class="col-2.5 p-1">
                                                     Observado<input id="" class="input" type="radio"
                                                         onclick="llamarAFormularioEditarTareas('ActaCargoVigente');"

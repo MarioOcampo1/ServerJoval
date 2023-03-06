@@ -161,7 +161,6 @@ router.get("/editarContacto/:id", (req, res) => {
   if (req.isAuthenticated()) {
     res.locals.moment = moment;
     const id = req.params.id;
-    console.log("id es:" + id);
     const sql = "SELECT * FROM contactos where id =?";
     connection.query(sql, [id], (error, results) => {
       if (error) console.log(error);
@@ -247,7 +246,6 @@ router.get("/editarTareas/:id", (req, res) => {
           connection.query(sql, [id], (error, results) => {
             if (error) console.log(error);
             if (results.length > 0) {
-              console.log(tareasporcarpeta);
               //Se procede a enviar al front, los resultados de las consultas sql, prestar atencion que para que ejs pueda resolver el contenido de las sentencias hay que tratar las mismas como un arreglo [0], sino no funciona.
               res.render("paginas/AdministracionEcogas/editarTareas", {
                 user: results[0],
@@ -323,7 +321,6 @@ router.get("/edit/:id", (req, res) => {
             connection.query(sql, [id], (error, results) => {
               if (error) console.log(error);
               if (results.length > 0) {
-                console.log(interferenciasypermisos2);
                 res.render("paginas/AdministracionEcogas/edit", {
                   user: results[0],
                   TipoDeRed: TipoDeRed,
@@ -375,7 +372,6 @@ usuariosregistrados=respuesta;
           NCarpeta, rol, usuariosregistrados,
         }); //en {results:results} lo que hago es guardar los resultados que envia la bd, en la variable results
       } else {
-        console.log(rol);
         res.render("paginas/AdministracionEcogas/historialcarpeta.ejs", {
           results: results,
           id: id,
