@@ -80,11 +80,11 @@ router.get('/', (req, res) => {
 router.get('/index', (req, res, next) => {
     if (req.isAuthenticated()) {
         var fecha = new Date();
-        var sql = 'Select * from admingeneral_seguros_albacaucion where ProximaRefacturacion BETWEEN (NOW() - Interval 1 Month) AND (NOW() + Interval 6 Month)  AND Estado != "Dada de baja"';
+        var sql = 'Select * from admingeneral_seguros_albacaucion WHERE ProximaRefacturacion BETWEEN (NOW() - Interval 1 Month) AND (NOW() + Interval 2 Month)  AND Estado != "Dada de baja"';
         connection.query(sql, (error, results) => {
             if (error) console.log(error);
             else {
-                res.render('./paginas/Principal/index.ejs', { albacaucion: results, moment: moment, rol:req.user.rol });
+                res.render('./paginas/Principal/index.ejs', { albacaucion: results, moment: moment, rol:req.user.rol,fecha });
             }
         })
     }
