@@ -15,13 +15,18 @@
     <%- include('./partials/menusuperior.ejs'); %>
         <h1 class="text-center">Bienvenido a Finanzas</h1>
 <div class="container">
-    <ul class="list-group col-4">
-            <a class="list-group-item list-group-item-action" href="/cobroDeObras">Cobro de obras de gas</a>
-      </ul>
+    <div class="btn-group" role="group" aria-label="Basic outlined example">
+        <a href="/cobroDeObras">
+            <button type="button" class="btn btn-outline-primary">Ver obras</button>
+        </a>
+         <button type class="btn btn-outline-success" onclick=" NuevoPagoObras(); ">Nuevo pago de obras</button>
+  
 </div>
-      
-     
+<%- include('./partials/NuevoPagoHome.ejs')%>
 
 </body>
+
+
+
 
 </html>

@@ -38,8 +38,47 @@
           <a class="nav-link text-white " href="/Finanzas_CajaChica">Caja chica</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="/Finanzas_Clientes">Clientes</a>
+          <!-- <a class="nav-link text-white " href="/Finanzas_Clientes">Clientes</a> -->
         </li>
+        
+      </ul>
+      <ul class="navbar-nav mb-2 mb-lg-0 ms-auto ">
+        se encuentra en "partials/menusuperior"  <li class="nav-item ms-5"><button class="btn btn-outline-light" id="liveToastBtn"><i class="bi bi-bell-fill"></i></button></li>
       </ul>
     </div>
   </nav>
+  
+  <div  class="toast-container position-absolute p-2 bottom-0 end-0">
+    <div  class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+        <i class="bi bi-square-fill text-primary pe-1"></i>
+        <strong class="me-auto">Bootstrap</strong>
+        <small class="text-muted">justo ahora</small>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body">
+        ¿Ves? Justo como esto
+      </div>
+    </div>
+  
+    <div   class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+        <i class="bi bi-square-fill text-primary"></i>
+        <strong class="me-auto">Bootstrap</strong>
+        <small class="text-muted">2 seconds ago</small>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body">
+        Atención, los toasts se apilarán automáticamente
+      </div>
+    </div>
+  </div>
+  <script>
+    var toastTrigger = document.getElementById('liveToastBtn')
+if (toastTrigger) {
+  toastTrigger.addEventListener('click', function () {
+    $('.toast').show();
+  })
+}
+
+  </script>

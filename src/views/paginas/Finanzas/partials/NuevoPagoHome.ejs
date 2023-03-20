@@ -1,0 +1,410 @@
+<div class="modal fade" id="ModalNuevoPagoObras" tabindex="-1" role="dialog" aria-labelledby="ModalNuevoPagoObrasLabel"
+aria-hidden="true">
+<div class="modal-dialog modal-xl" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="TituloModal">Nuevo pago</h5>
+      <button class="btn btn-outline-secondary" id="btnNuevoCliente" onclick="Nuevocliente();" disabled >Nuevo cliente</button>
+      <button class="btn btn-primary" type="submit" id="BotonConNombreDeCarpeta" onclick="VerCLientes()" disabled>Cargar
+        clientes por lotes</button>
+      <button class="btn btn-secondary" disabled>Ver comprobantes registrados</button>
+      <button type="btn-close" class="close" onclick="$('#ModalNuevoPagoObras').modal('hide');" aria-label="Cerrar">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div id="printsection" class="printsection">
+      <div id="editarCliente">
+
+      </div>
+
+      <div class="modal-body bordeExterno">
+        <form action="/GenerarComprobante" method="post">
+          <input type="number" name="IDCliente" id="IDCliente" value="" hidden>
+          <div class="Imprimible">
+          </div>
+          <div class="container">
+            <div class="row">
+              <div class="col">
+                <label class="form-label text-center" for="Obra">Obra: </label>
+                <select name="Obra" id="SelectObra">
+<option value="" selected></option>
+                </select>
+                
+              </div>
+              <div class="col">
+                <label id="textoNombreCliente" class="form-label text-center" for="NombreCompleto">Cliente:</label>
+                <select name="inputNombreCliente" id="SelectNombreCliente"></select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label id="labelDomicilio" class="form-label text-center" for="InputDomicilio">Domicilio</label>
+              <input type="text" id="inputDomicilio" name="Domicilio">
+            </div>
+           
+            <div class="col ">
+              <label class="form-label text-center" for="Concepto">Concepto</label>
+              <select name="Concepto" id="SelectConcepto">
+                <!-- <input required list="ConceptosDePago"  class="form-control" type="text" name="Concepto" id="Concepto"> -->
+                <!-- <datalist id="ConceptosDePago"> -->
+                <option value="AnticipoFinanciero">Anticipo Financiero</option>
+                <option value="Cuota1">Cuota 1</option>
+                <option value="Cuota2">Cuota 2</option>
+                <option value="Cuota3">Cuota 3</option>
+                <option value="Cuota4">Cuota 4</option>
+                <option value="Cuota5">Cuota 5</option>
+                <option value="Cuota6">Cuota 6</option>
+                <option value="Cuota7">Cuota 7</option>
+                <option value="Cuota8">Cuota 8</option>
+                <option value="Cuota9">Cuota 9</option>
+                <option value="Cuota10">Cuota 10</option>
+                <option value="Cuota11">Cuota 11</option>
+                <option value="Cuota12">Cuota 12</option>
+                <option value="DNV">Permiso DNV</option>
+                <option value="DPV">Permiso DPV</option>
+                <option value="Hidraulica">Permiso Hidraulica</option>
+                <option value="FFCC">Permiso FFCC</option>
+                <option value="Privado">Permiso Privado</option>
+                <option value="Municipal">Permiso Municipal</option>
+                <option value="ServicioDomiciliario">Servicio Domiciliario</option>
+                <option value="IngresoDocumentacion">Ingreso de documentacion comienzo tramite</option>
+                <option value="Irrigacion">Permiso Irrigacion</option>
+                <!-- </datalist> -->
+              </select>
+            </div>
+            <div class="col" id="divImporte" style="display: none;">
+              <label class="form-label text-center" for="ImporteIngresado">Importe</label>
+              <input required class="form-control" value="0" type="number" name="ValorIngresado"
+                id="ImporteIngresado">
+            </div>
+            <div class="col">
+              <label class="form-label text-center" for="FechaPago"> Fecha de pago</label>
+              <input required class="form-control" type="date" name="FechaPago" autocomplete="on" id="FechaPago">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label class="form-label text-center" for="ObservacionesDelPago">Observaciones</label>
+              <input class="form-control" type="text" name="ObservacionesDelPago" id="ObservacionesDelPago">
+            </div>
+
+            <div class="col">
+              <label class="form-label text-center" for="FormaDePago">Forma de pago</label>
+              <select class="form-select" name="FormaDePago" id="">
+                <option value="Efectivo" selected>Efectivo</option>
+                <option value="Transferencia bancaria">Transferencia bancaria</option>
+                <option value="Cheque">Cheque</option>
+                <option value="Mercado Pago">Mercado Pago</option>
+              </select>
+            </div>
+          </div>
+      </div>
+      <div class="modal-footer noImprimible">
+        <button type="button " class="btn btn-secondary  noImprimible"
+          onclick="$('#ModalNuevoPagoObras').modal('hide');">Cerrar</button>
+        <button type="submit" id="btnGuardarCambios" class="btn btn-danger  noImprimible">Guardar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</div>   
+<script>
+  function NuevoPagoObras(){
+  $.ajax({
+    url: '/BuscarDatosClienteQuePaga2'
+  }).done(function (data) {
+  //   var montoAPagarPredeterminado = clientes.montosCuota;
+ data.obras.forEach(obra=>{
+$('#SelectObra').append(
+  '<option value="'+obra.Nombre+'" >'+obra.Nombre+'</option>' 
+)
+})
+$('#SelectObra').change(function(){
+  $('#btnNuevoCliente').prop('disabled', false);
+$('#SelectNombreCliente').empty();
+$('#SelectNombreCliente').append(
+'<option value="" selected></option>' 
+)
+  var opcionSeleccionada = $('#SelectObra').val();
+  var idDeLaObra;
+  function cargarclientes(){
+    return new Promise((resolve,reject)=>{
+      data.obras.forEach(obra=>{
+    if(opcionSeleccionada==obra.Nombre)
+    { 
+      idDeLaObra=obra.id;
+      
+      }
+  })
+  resolve(idDeLaObra);
+    })
+ }
+  cargarclientes().then(idDeLaObra=>{
+    data.clientes.forEach(cliente=>{
+      
+        if(cliente.id_obra==idDeLaObra){
+$('#SelectNombreCliente').append(
+'<option value="'+cliente.NombreCliente+'" >'+cliente.NombreCliente+'</option>' 
+)
+        }
+      })
+      
+  })
+
+
+    });
+  $('#SelectNombreCliente').change(function(){
+    var opcionSeleccionada = $('#SelectNombreCliente').val();
+    data.clientes.forEach(cliente=>{
+      if(cliente.NombreCliente==opcionSeleccionada)
+      {
+        $('#SelectConcepto').empty();
+        $('#SelectConcepto').append(
+            '<option value="" selected></option>'
+          )
+        $('#inputDomicilio').val(cliente.Direccion);
+        $('#inputDomicilio').text(cliente.Direccion);
+        $('#IDCliente').val(cliente.id_cliente);
+        document.getElementById('FechaPago').valueAsDate = new Date();
+        if(cliente.AnticipoFinanciero>0)
+        {
+          $('#SelectConcepto').append(
+            '<option value="AnticipoFinanciero">Anticipo Financiero</option>'
+          )
+        }
+        if(cliente.Cuota1>0)
+        {
+          $('#SelectConcepto').append(
+            '<option value="Cuota1">Cuota 1 </option>'
+          )
+        }
+        if(cliente.Cuota2>0)
+        {
+          $('#SelectConcepto').append(
+            '<option value="Cuota2">Cuota 2 </option>'
+          )
+        }
+        if(cliente.Cuota3>0)
+        {
+          $('#SelectConcepto').append(
+            '<option value="Cuota3">Cuota 3 </option>'
+          )
+        }
+        if(cliente.Cuota4>0)
+        {
+          $('#SelectConcepto').append(
+            '<option value="Cuota4">Cuota 4 </option>'
+          )
+        }
+        if(cliente.Cuota5>0)
+        {
+          $('#SelectConcepto').append(
+            '<option value="Cuota5">Cuota 5 </option>'
+          )
+        }
+        if(cliente.Cuota6>0)
+        {
+          $('#SelectConcepto').append(
+            '<option value="Cuota6">Cuota 6 </option>'
+          )
+        }
+        if(cliente.Cuota7>0)
+        {
+          $('#SelectConcepto').append(
+            '<option value="Cuota7">Cuota 7 </option>'
+          )
+        }
+        if(cliente.Cuota8>0)
+        {
+          $('#SelectConcepto').append(
+            '<option value="Cuota8">Cuota 8 </option>'
+          )
+        }
+        if(cliente.Cuota9>0)
+        {
+          $('#SelectConcepto').append(
+            '<option value="Cuota9">Cuota 9 </option>'
+          )
+        }
+        if(cliente.Cuota10>0)
+        {
+          $('#SelectConcepto').append(
+            '<option value="Cuota10">Cuota 10 </option>'
+          )
+        }
+        if(cliente.Cuota11>0)
+        {
+          $('#SelectConcepto').append(
+            '<option value="Cuota11">Cuota 11 </option>'
+          )
+        }
+        if(cliente.Cuota12>0)
+        {
+          $('#SelectConcepto').append(
+            '<option value="Cuota12">Cuota 12 </option>'
+          )
+        }
+        if(cliente.DPV>0)
+        {
+          $('#SelectConcepto').append(
+            '<option value="DPV">Pago Permiso DPV</option>'
+          )
+        }
+        if(cliente.Hidraulica>0)
+        {
+          $('#SelectConcepto').append(
+            '<option value="Hidraulica">Pago Permiso Hidraúlica</option>'
+          )
+        }
+        if(cliente.Municipal>0)
+        {
+          $('#SelectConcepto').append(
+            '<option value="Municipal">Pago Permiso Municipal</option>'
+          )
+        }
+        if(cliente.Irrigacion>0)
+        {
+          $('#SelectConcepto').append(
+            '<option value="Irrigacion">Pago Permiso Irrigación</option>'
+          )
+        }
+        if(cliente.FFCC>0)
+        {
+          $('#SelectConcepto').append(
+            '<option value="FFCC">Pago Permiso Ferrocarril</option>'
+          )
+        }
+        if(cliente.Privado>0)
+        {
+          $('#SelectConcepto').append(
+            '<option value="Privado">Pago Permiso Privado</option>'
+          )
+        }
+        if(cliente.ServicioDomiciliario>0)
+        {
+          $('#SelectConcepto').append(
+            '<option value="ServicioDomiciliario">Pago Servicio Domiciliario</option>'
+          )
+        }
+        if(cliente.IngresoDocumentacion>0)
+        {
+          $('#SelectConcepto').append(
+            '<option value="IngresoDocumentacion">Ingreso de documentacion comienzo trámite</option>'
+          )
+        }
+
+        $('#divImporte').css("display","block");
+        
+      }
+    })
+  })
+  
+
+$('#SelectConcepto').change(function(){
+  var opcionSeleccionada =  $('#SelectConcepto').val();
+  var clienteSeleccionado =  $('#SelectNombreCliente').val();
+  data.clientes.forEach(cliente=>{
+      if(cliente.NombreCliente==clienteSeleccionado)
+      { 
+if(opcionSeleccionada=='AnticipoFinanciero'){$('#ImporteIngresado').val(cliente.AnticipoFinanciero)
+$('#ImporteIngresado').text(cliente.AnticipoFinanciero);
+
+}
+if(opcionSeleccionada=='Cuota1'){$('#ImporteIngresado').val(cliente.Cuota1)
+$('#ImporteIngresado').text(cliente.Cuota1);
+
+}
+if(opcionSeleccionada=='Cuota2'){$('#ImporteIngresado').val(cliente.Cuota2)
+$('#ImporteIngresado').text(cliente.Cuota2);
+
+}
+if(opcionSeleccionada=='Cuota3'){$('#ImporteIngresado').val(cliente.Cuota3)
+$('#ImporteIngresado').text(cliente.Cuota3);
+
+}
+if(opcionSeleccionada=='Cuota4'){$('#ImporteIngresado').val(cliente.Cuota4)
+$('#ImporteIngresado').text(cliente.Cuota4);
+
+}
+if(opcionSeleccionada=='Cuota5'){$('#ImporteIngresado').val(cliente.Cuota5)
+$('#ImporteIngresado').text(cliente.Cuota5);
+
+}
+if(opcionSeleccionada=='Cuota6'){$('#ImporteIngresado').val(cliente.Cuota6)
+$('#ImporteIngresado').text(cliente.Cuota6);
+
+}
+if(opcionSeleccionada=='Cuota7'){$('#ImporteIngresado').val(cliente.Cuota7)
+$('#ImporteIngresado').text(cliente.Cuota7);
+
+}
+if(opcionSeleccionada=='Cuota8'){$('#ImporteIngresado').val(cliente.Cuota8)
+$('#ImporteIngresado').text(cliente.Cuota8);
+
+}
+if(opcionSeleccionada=='Cuota9'){$('#ImporteIngresado').val(cliente.Cuota9)
+$('#ImporteIngresado').text(cliente.Cuota9);
+
+}
+if(opcionSeleccionada=='Cuota10'){$('#ImporteIngresado').val(cliente.Cuota10)
+$('#ImporteIngresado').text(cliente.Cuota10);
+
+}
+if(opcionSeleccionada=='Cuota11'){$('#ImporteIngresado').val(cliente.Cuota11)
+$('#ImporteIngresado').text(cliente.Cuota11);
+
+}
+if(opcionSeleccionada=='Cuota12'){$('#ImporteIngresado').val(cliente.Cuota12)
+$('#ImporteIngresado').text(cliente.Cuota12);
+
+}
+if(opcionSeleccionada=='DPV'){$('#ImporteIngresado').val(cliente.DPV)
+$('#ImporteIngresado').text(cliente.DPV);
+
+}
+if(opcionSeleccionada=='Hidraulica'){$('#ImporteIngresado').val(cliente.Hidraulica)
+$('#ImporteIngresado').text(cliente.Hidraulica);
+
+}
+if(opcionSeleccionada=='Municipal'){$('#ImporteIngresado').val(cliente.Municipal)
+$('#ImporteIngresado').text(cliente.Municipal);
+
+}
+if(opcionSeleccionada=='Irrigacion'){$('#ImporteIngresado').val(cliente.Irrigacion)
+$('#ImporteIngresado').text(cliente.Irrigacion);
+
+}
+if(opcionSeleccionada=='FFCC'){$('#ImporteIngresado').val(cliente.FFCC)
+$('#ImporteIngresado').text(cliente.FFCC);
+
+}
+if(opcionSeleccionada=='Privado'){$('#ImporteIngresado').val(cliente.Privado)
+$('#ImporteIngresado').text(cliente.Privado);
+
+}
+if(opcionSeleccionada=='ServicioDomiciliario'){$('#ImporteIngresado').val(cliente.ServicioDomiciliario)
+$('#ImporteIngresado').text(cliente.ServicioDomiciliario);
+
+}
+if(opcionSeleccionada=='IngresoDocumentacion'){$('#ImporteIngresado').val(cliente.IngresoDocumentacion)
+$('#ImporteIngresado').text(cliente.IngresoDocumentacion);
+
+}
+
+      }
+    })
+})
+  $('#ModalNuevoPagoObras').modal('show');
+})
+}
+$('#btnGuardarCambios').click(function(){
+  $('#ModalNuevoPagoObras').modal('hide');
+} );
+function Nuevocliente(params) {
+  var obra = $('#SelectObra').val();
+  var url= "/Finanzas/NuevoCliente/"+obra+""
+  window.open(url);
+}
+</script>

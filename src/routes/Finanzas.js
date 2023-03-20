@@ -939,6 +939,20 @@ router.get('/BuscarDatosClienteQuePaga/:idCliente', (req, res) => {
         })
    })
 })
+router.get('/BuscarDatosClienteQuePaga2',(req,res)=>{
+    var sql = 'SELECT a.* , b.* FROM finanzas_clientes_predeterminados a INNER JOIN finanzas_clientes_por_obra b ON a.id_cliente = b.ID_cliente ; ';
+    var clientes;
+    connection.query(sql, (error, resultados) => {
+        clientes = resultados;
+        var obras;
+    sql = 'SELECT * FROM obras ORDER BY Nombre';
+    connection.query(sql, (error, resultado) => {
+        if (error) console.log(error);
+        obras = resultado;
+res.send({clientes,obras});
+    })
+    })  
+})
 //Actualizar configuracion de la obra
 router.post('/Finanzas/actualizarPredeterminadosObraEntera/:id/:keyACambiar/:NombreObra', (req, res) => {
     var idObra = req.params.id;
@@ -972,4 +986,8 @@ router.post('/Finanzas/cobrodeobras/VerObra/tiposDeCobros', (req, res) => {
     connection.query(sql, [{}, id_obra], (error, results) => {
 
     })
+})
+//Llamados React
+router.get('/Finanzas/ReactHome',(req,res)=>{
+    var sql= 'SELECT * FROM obras '
 })
