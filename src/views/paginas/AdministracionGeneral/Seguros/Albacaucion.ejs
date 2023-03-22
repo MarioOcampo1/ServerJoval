@@ -36,7 +36,8 @@
     <th scope="col">Proxima refacturación</th>
     <th scope="col">Asegurado</th>
     <th scope="col">Descripción</th>
-    <th scope="col">Endoso pagado</th>
+    <th scope="col">Obra</th>
+<th scope="col">Endoso pagado</th>
 <th scope="col">Estado</th>
   </tr>
 </thead>
@@ -62,6 +63,7 @@
                         <%}%>
         <td><%=poliza.NombreAsegurado%></td>
         <td><%=poliza.Descripcion%></td>
+        <td><%=poliza.Obra%></td>
         <%if(poliza.EndosoPagado=="N"){%>
         <td class="bg-danger text-white EndosoPagadoAviso"><%=poliza.EndosoPagado%></td>
             
