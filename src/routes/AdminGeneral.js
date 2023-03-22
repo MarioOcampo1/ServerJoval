@@ -140,24 +140,8 @@ mes= mes+3;
 
 })
 router.post('/GuardarPolizaAlbacaucion', (req, res) => {
-    if (req.isAuthenticated()) {
         let Aseguradora = req.body.Aseguradora;
         let NombreObra = req.body.NombreObra;
-        var sql = 'SELECT id FROM obras WHERE Nombre ="'+NombreObra+'";';
-        var idObra;
-        var promise1 = new promise((resolve,reject)=>{
-            connection.query(sql,(error,results)=>{
-                if(error){
-                    console.log(error);
-                    reject();
-                } 
-                else{
-                    idObra=results[0].id;
-                    resolve(idObra);
-                }
-            })
-        })
-      
         let NPoliza = req.body.NPoliza;
         let EstadoPoliza = req.body.Estado;
         var FechaEmisionPoliza = new Date(req.body.FechaEmisionPoliza);
@@ -246,25 +230,32 @@ router.post('/GuardarPolizaAlbacaucion', (req, res) => {
         let montoAsegurado = req.body.MontoAsegurado;
         let Asegurado = req.body.Asegurado;
         let Descripcion = req.body.Descripcion;
-        if (NombreObra = "") { }
+        if (NombreObra == '') { }
         else {
-        promise1.then(function(){
-            sql = 'Insert into admingeneral_seguros_albacaucion set?'
-            connection.query(sql, {
-                Aseguradora: Aseguradora, ProximaRefacturacion:ProximaRefacturacion, Obra: NombreObra, NumeroPoliza: NPoliza,
-                 FechaEmisionPoliza: FechaEmisionPoliza, Descripcion:Descripcion, Endoso:0,EndosoPagado:EndosoPagado, Estado:EstadoPoliza,
-                VigenciaPoliza: VigenciaPoliza, Riesgo: TipoRiesgo, Valor: ValorAPagar, MontoAsegurado: montoAsegurado, NombreAsegurado: Asegurado
-            }, (error, results) => {
-                if (error) console.log(error);
-                else {
-                    res.redirect('/seguros/Albacaucion');
-                }
-            })
-        })
-            
-                  
+            var sql = 'SELECT id FROM obras WHERE Nombre = "'+NombreObra+'";';
+            var idObra;
+                connection.query(sql,(error,results)=>{
+                    if(error){
+                        console.log(error);
+                    } 
+                    else{
+                        idObra=results[0].id;
+                        sql = 'Insert into admingeneral_seguros_albacaucion set?'
+                        connection.query(sql, {
+                            Aseguradora: Aseguradora, ProximaRefacturacion:ProximaRefacturacion, Obra: NombreObra, NumeroPoliza: NPoliza,
+                             FechaEmisionPoliza: FechaEmisionPoliza, Descripcion:Descripcion, Endoso:0,EndosoPagado:EndosoPagado, Estado:EstadoPoliza,
+                            VigenciaPoliza: VigenciaPoliza, Riesgo: TipoRiesgo, Valor: ValorAPagar, MontoAsegurado: montoAsegurado, NombreAsegurado: Asegurado
+                        }, (error, results) => {
+                            if (error) console.log(error);
+                            else {
+                                res.redirect('/seguros/Albacaucion');
+                            }
+                        })
+                    }
+                })
+           
         }
-    }
+    
 
 })
 router.get('/seguros/ActualizarPolizaAlbacaucion/:id', (req, res) => {
