@@ -13,24 +13,17 @@
    
     </div>
     <button class="btn bi bi-arrow-bar-left bg-danger text-light" onclick="history.go(-1);" title="Ir a pagína anterior"></button>
-    <a href="/Finanzas/NuevoCliente/cargarLote">
-        <button class="btn btn-primary" >Cargar clientes por lote</button>
-    </a>
     <form action="guardarCliente" method="post">
         <div class="container-fluid border mt-2">
     <div class="form-group">
         
         <div class="row p-3">
             <div class="col">
-                <label for="Nombre">Nombre</label>
+                <label for="Nombre">Nombre y Apellido</label>
                 <input type="text" class="form-control" id="Nombre" name="Nombre"
                   placeholder="Ingrese el nombre ">
             </div>
-            <div class="col">
-                <label for="Apellido">Apellido</label>
-                <input type="text" class="form-control" id="Apellido" name="Apellido"
-                  placeholder="Ingrese el apellido ">
-            </div>
+            
             <div class="col">
                 <div class="form-group">
                     <label for="DNI">DNI</label>

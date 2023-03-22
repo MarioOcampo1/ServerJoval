@@ -334,7 +334,13 @@ router.post('/Finanzas/NuevoCliente/guardarCliente', (req, res) => {
                         if(error) console.log(error);
                         else{
                             idCliente=results[0].ID_cliente;
-                            sql='INSERT INTO finanzas_clientes_predeterminados set?;'
+                            sql='INSERT INTO finanzas_clientes_por_obra_cobros set?;'
+                            connection.query(sql,{
+                            id_Obra:id_Obra,ID_cliente:idCliente,NombreCliente:Nombre,AnticipoFinanciero:0,Cuota1:0,Cuota2:0,Cuota3:0,Cuota4:0,Cuota5:0,Cuota6:0,Cuota7:0,Cuota8:0,Cuota9:0,Cuota10:0,Cuota11:0,Cuota12:0,IngresoDocumentacion:0,Municipal:0,Irrigacion:0,DNV:0,DPV:0,Hidraulica:0,FFCC:0,Privado:0,ServicioDomiciliario:0,
+                            },(error,results)=>{
+                                if(error)console.log(error);
+                                else{
+                                    sql='INSERT INTO finanzas_clientes_predeterminados set?;'
                             switch (cuotasQuePaga) {
                                 case'1':
                                     connection.query(sql,{
@@ -342,6 +348,7 @@ router.post('/Finanzas/NuevoCliente/guardarCliente', (req, res) => {
                                     },(error,results)=>{
                                         if(error) console.log(error);
                                     })     
+                                    resolve();
                                     break;
                                     case'2':
                                         connection.query(sql,{
@@ -349,7 +356,8 @@ router.post('/Finanzas/NuevoCliente/guardarCliente', (req, res) => {
                                         },(error,results)=>{
                                             if(error) console.log(error);
                                         })     
-                                    break;
+                                    resolve();
+                                        break;
                                     case'3':
                                         connection.query(sql,{
                                             id_obra:id_Obra,id_cliente:idCliente,NombreCliente:Nombre,AnticipoFinanciero: req.body.ImporteAnticipoFinanciero,Cuota1:req.body.ImporteCuota,Cuota2:req.body.ImporteCuota,Cuota3:req.body.ImporteCuota
@@ -357,83 +365,90 @@ router.post('/Finanzas/NuevoCliente/guardarCliente', (req, res) => {
                                             if(error) console.log(error);
                                         })     
                                     
-                                    break;
+                                    resolve();
+                                        break;
                                     case'4':
                                         connection.query(sql,{
                                             id_obra:id_Obra,id_cliente:idCliente,NombreCliente:Nombre,AnticipoFinanciero: req.body.ImporteAnticipoFinanciero,Cuota1:req.body.ImporteCuota,Cuota2:req.body.ImporteCuota,Cuota3:req.body.ImporteCuota, Cuota4:req.body.ImporteCuota,
                                         },(error,results)=>{
                                             if(error) console.log(error);
                                         })     
-                                    break;
+                                    resolve();
+                                        break;
                                     case'5':
                                         connection.query(sql,{
                                             id_obra:id_Obra,id_cliente:idCliente,NombreCliente:Nombre,AnticipoFinanciero: req.body.ImporteAnticipoFinanciero,Cuota1:req.body.ImporteCuota,Cuota2:req.body.ImporteCuota,Cuota3:req.body.ImporteCuota, Cuota4:req.body.ImporteCuota,Cuota5:req.body.ImporteCuota
                                         },(error,results)=>{
                                             if(error) console.log(error);
                                         })     
-                                    break;
+                                    resolve();
+                                        break;
                                     case'6':
                                         connection.query(sql,{
                                             id_obra:id_Obra,id_cliente:idCliente,NombreCliente:Nombre,AnticipoFinanciero: req.body.ImporteAnticipoFinanciero,Cuota1:req.body.ImporteCuota,Cuota2:req.body.ImporteCuota,Cuota3:req.body.ImporteCuota, Cuota4:req.body.ImporteCuota,Cuota5:req.body.ImporteCuota,Cuota6:req.body.ImporteCuota,
                                         },(error,results)=>{
                                             if(error) console.log(error);
                                         })     
-                                    break;
+                                    resolve();
+                                        break;
                                     case'7':
                                         connection.query(sql,{
                                             id_obra:id_Obra,id_cliente:idCliente,NombreCliente:Nombre,AnticipoFinanciero: req.body.ImporteAnticipoFinanciero,Cuota1:req.body.ImporteCuota,Cuota2:req.body.ImporteCuota,Cuota3:req.body.ImporteCuota, Cuota4:req.body.ImporteCuota,Cuota5:req.body.ImporteCuota,Cuota6:req.body.ImporteCuota,Cuota7:req.body.ImporteCuota,Cuota8:req.body.ImporteCuota,
                                         },(error,results)=>{
                                             if(error) console.log(error);
                                         })     
-                                    break;
+                                    resolve();
+                                        break;
                                     case'8':
                                         connection.query(sql,{
                                             id_obra:id_Obra,id_cliente:idCliente,NombreCliente:Nombre,AnticipoFinanciero: req.body.ImporteAnticipoFinanciero,Cuota1:req.body.ImporteCuota,Cuota2:req.body.ImporteCuota,Cuota3:req.body.ImporteCuota, Cuota4:req.body.ImporteCuota,Cuota5:req.body.ImporteCuota,Cuota6:req.body.ImporteCuota,Cuota7:req.body.ImporteCuota,Cuota8:req.body.ImporteCuota,
                                         },(error,results)=>{
                                             if(error) console.log(error);
                                         })     
-                                    break;
+                                    resolve();
+                                        break;
                                     case'9':
                                         connection.query(sql,{
                                             id_obra:id_Obra,id_cliente:idCliente,NombreCliente:Nombre,AnticipoFinanciero: req.body.ImporteAnticipoFinanciero,Cuota1:req.body.ImporteCuota,Cuota2:req.body.ImporteCuota,Cuota3:req.body.ImporteCuota, Cuota4:req.body.ImporteCuota,Cuota5:req.body.ImporteCuota,Cuota6:req.body.ImporteCuota,Cuota7:req.body.ImporteCuota,Cuota8:req.body.ImporteCuota,Cuota9:req.body.ImporteCuota
                                         },(error,results)=>{
                                             if(error) console.log(error);
                                         })     
-                                    break;
+                                    resolve();
+                                        break;
                                     case '10':
                                         connection.query(sql,{
                                             id_obra:id_Obra,id_cliente:idCliente,NombreCliente:Nombre,AnticipoFinanciero: req.body.ImporteAnticipoFinanciero,Cuota1:req.body.ImporteCuota,Cuota2:req.body.ImporteCuota,Cuota3:req.body.ImporteCuota, Cuota4:req.body.ImporteCuota,Cuota5:req.body.ImporteCuota,Cuota6:req.body.ImporteCuota,Cuota7:req.body.ImporteCuota,Cuota8:req.body.ImporteCuota,Cuota9:req.body.ImporteCuota,Cuota10:req.body.ImporteCuota
                                         },(error,results)=>{
                                             if(error) console.log(error);
                                         })     
-                                    break;
+                                    resolve();
+                                        break;
                                     case '11':
                                         connection.query(sql,{
                                             id_obra:id_Obra,id_cliente:idCliente,NombreCliente:Nombre,AnticipoFinanciero: req.body.ImporteAnticipoFinanciero,Cuota1:req.body.ImporteCuota,Cuota2:req.body.ImporteCuota,Cuota3:req.body.ImporteCuota, Cuota4:req.body.ImporteCuota,Cuota5:req.body.ImporteCuota,Cuota6:req.body.ImporteCuota,Cuota7:req.body.ImporteCuota,Cuota8:req.body.ImporteCuota,Cuota9:req.body.ImporteCuota,Cuota10:req.body.ImporteCuota,Cuota11:req.body.ImporteCuota
                                         },(error,results)=>{
                                             if(error) console.log(error);
                                         })     
-                                    break;
+                                    resolve();
+                                        break;
                                     case '12':
                                         connection.query(sql,{
                                             id_obra:id_Obra,id_cliente:idCliente,NombreCliente:Nombre,AnticipoFinanciero: req.body.ImporteAnticipoFinanciero,Cuota1:req.body.ImporteCuota,Cuota2:req.body.ImporteCuota,Cuota3:req.body.ImporteCuota, Cuota4:req.body.ImporteCuota,Cuota5:req.body.ImporteCuota,Cuota6:req.body.ImporteCuota,Cuota7:req.body.ImporteCuota,Cuota8:req.body.ImporteCuota,Cuota9:req.body.ImporteCuota,Cuota10:req.body.ImporteCuota,Cuota11:req.body.ImporteCuota,Cuota12:req.body.ImporteCuota
                                         },(error,results)=>{
                                             if(error) console.log(error);
                                         })     
-                                    break;
+                                    resolve();
+                                        break;
                             
                                 default:
-                                    break;
-                            }
-                            sql='INSERT INTO finanzas_clientes_por_obra_cobros set?;'
-                            connection.query(sql,{
-                            id_Obra:id_Obra,ID_cliente:idCliente,NombreCliente:Nombre,AnticipoFinanciero:0,Cuota1:0,Cuota2:0,Cuota3:0,Cuota4:0,Cuota5:0,Cuota6:0,Cuota7:0,Cuota8:0,Cuota9:0,Cuota10:0,Cuota11:0,Cuota12:0,IngresoDocumentacion:0,Municipal:0,Irrigacion:0,DNV:0,DPV:0,Hidraulica:0,FFCC:0,Privado:0,ServicioDomiciliario:0,
-                            },(error,results)=>{
-                                if(error)console.log(error);
-                                else{
                                     resolve();
+                                    break;
+                            }  
                                 }
                             })
+                            
+                          
+                          
                         }
                        
                    
@@ -462,7 +477,12 @@ router.post('/GenerarComprobante', (req, res,next) => {
     var ValorIngresado = parseInt(req.body.ValorIngresado);
     var sumaDeTotalesPorConcepto;
     var Concepto = req.body.Concepto;
-    var FechaPago = req.body.FechaPago;
+    var fecha=new Date(req.body.FechaPago);
+    var anio,mes,dia;
+    anio = fecha.getFullYear();
+    mes= fecha.getMonth();
+    dia= fecha.getDate();
+    let FechaPago = (dia+'/'+mes+'/'+anio);
     var ObservacionesDelPago = req.body.ObservacionesDelPago;
     var Obra = req.body.Obra;
     var id_Obra;
@@ -497,7 +517,7 @@ router.post('/GenerarComprobante', (req, res,next) => {
                   
                     sumaDeTotalesPorConcepto =ValorIngresado + a;
                 }
-                sql = 'UPDATE finanzas_clientes_por_obra_cobros set ' + Concepto + ' = ' + sumaDeTotalesPorConcepto + ' WHERE ID_cliente = ' + ID + ' and id_Obra = ' + id_Obra + '';
+                sql = 'UPDATE finanzas_clientes_por_obra_cobros SET ' + Concepto + ' = ' + sumaDeTotalesPorConcepto + ', FechaPago'+Concepto+' = "'+FechaPago+'" WHERE ID_cliente = ' + ID + ' ;';
                 connection.query(sql, (error, results) => {
                     if (error) console.log(error);
                 })

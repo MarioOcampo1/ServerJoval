@@ -145,10 +145,10 @@ router.post('/GuardarPolizaAlbacaucion', (req, res) => {
         let NombreObra = req.body.NombreObra;
         let NPoliza = req.body.NPoliza;
         let EstadoPoliza = req.body.Estado;
-        var FechaEmisionPoliza = req.body.FechaEmisionPoliza;
+        var FechaEmisionPoliza = new Date(req.body.FechaEmisionPoliza);
         let VigenciaPoliza = req.body.VigenciaPoliza;
         var EndosoPagado= req.body.EndosoPagado;
-        var day= FechaEmisionPoliza.getDay();
+        var day= FechaEmisionPoliza.getDate();
         var mes = FechaEmisionPoliza.getMonth();
         var anio = FechaEmisionPoliza.getFullYear();
         var ProximaRefacturacion;
