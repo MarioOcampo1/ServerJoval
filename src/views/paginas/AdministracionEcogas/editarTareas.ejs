@@ -96,6 +96,7 @@
                                         <button type="submit" class="btn btn-primary text-center">Actualizar
                                             Estado</button>
                                         </div>
+                                        <div class="container" id="InformeFinanciero"></div>
                                 </div>
                                 </form>
                             </div>
@@ -1958,7 +1959,21 @@
             
         }
     }
+$(document).ready(function(){
+    if(($('#Estado').val())=="2da parte"){
+        var url= "/BuscarEstadoFinanciero/"+'<%user.id%>';
+        $.ajax( {
+            url:url,
+            success: function(data){
 
+            }
+
+        })
+        $('#InformeFinanciero').html(
+"Hola Juan Carlos"
+        );
+    }
+});
 
 </script>
 

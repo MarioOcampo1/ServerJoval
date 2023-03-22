@@ -34,9 +34,32 @@ const connection = mysql.createConnection({
     database: 'joval'
 });
 //check de conexion a la base de datos
-connection.connect(error => {
-    if (error) console.log(error);
+try {connection.connect(error => {
+    while (error) {
+        if (error) console.log(error);  
+        setTimeout(() => {
+            connection.connect(error=>{
+                if (error) console.log(error);  
+                else{ error=false;}
+            })
+        }, 3000);  
+    }
 })
+} catch (error) {
+    while(error)
+    {
+        connection.connect(error => {
+                if (error) console.log(error);  
+                setTimeout(() => {
+                    connection.connect(error=>{
+                        if (error) console.log(error);  
+                        else{ error=false;}
+                    })
+                }, 3000);  
+    })
+}
+}
+
 passport.use(new PassportLocal(function (username, password, done) {
     let user = username;
     let pass = password;
@@ -44,13 +67,14 @@ passport.use(new PassportLocal(function (username, password, done) {
     try { connection.query(sql,(error, results) => {
         if (error){
             console.log(error);
-            return done('No se ha encontrado el usuario y/o contraseña indicado', false);
+            return done('Error de sistema, reintente más tarde', false);
+            
         } 
        if(results.length>0){
            return done(null, { id: results[0].id, rol: results[0].rol, username: results[0].usuario });
        }
        else{
-        return done(error);
+        return done('No se ha encontrado el usuario y/o contraseña indicado', false);
        }
             });
         
@@ -168,7 +192,7 @@ router.post('/guardarNuevoCliente', (req, res) => {
     const promise1 = new Promise((resolve, reject) => {
         sql = 'Insert into obras set ?';
         connection.query(sql, {
-            Nombre: Nombre, NCarpeta: NCarpeta, Comitente: Comitente, Ubicacion: Departamento,
+            Nombre: Nombre, NCarpeta: NCarpeta, Comitente: Comitente, Ubicacion: Departamento, nuevaObra:"S"
         }, (error, results) => {
             if (error) console.log(error);
         })

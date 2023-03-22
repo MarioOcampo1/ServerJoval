@@ -3779,3 +3779,7 @@ router.post('/actualizarTareaRealizada/:id',(req,res)=>{
     )
   })
 })
+//AJAX
+router.get("/BuscarEstadoFinanciero/:idObra",(req,res)=>{
+
+});

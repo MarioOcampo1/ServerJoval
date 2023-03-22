@@ -11,13 +11,20 @@
    <%- include('./partials/menusuperior.ejs');%>
    <%if(results){%>
    <div class="container-fluid text-center">
-     <div class="row list-inline">
-      <h1 class="fw-bold text-decoration-underline">
-          <a href="/nuevaObra" class="me-2">
-          <button class="btn btn-success ">Nueva Obra</button>
+    <h1 class="fw-bold text-decoration-underline ">
+      Administración obras de gas</h1>
+      <div class="col-md-12 d-flex mb-2">
+        <a href="/nuevaObra" class="me-2">
+          <button class="btn btn-success ml-auto ">Nueva Obra</button>
         </a>
-        Administración de obras</h1>
-    </div>
+        <div class="me-2">
+        <button class=" btn btn-success ml-auto" disabled>Nueva tarea</button>
+      </div>
+        
+
+      </div>
+        
+       
     <div class="row">
       <div class="col-12">
           <input class="form-control text-primary"type="text" name="" id="buscador" placeholder="Buscar en tabla">
@@ -114,7 +121,35 @@
     </div>
   </div> -->
 </div>
+ <!-- Modal Body -->
+ <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+ <div class="modal fade" id="modaltareasRapidas" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalTitleId">Tarea rapida</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="btn-group" role="group" aria-label="Basic example">
+          <button type="button" class="btn btn-secondary">EditarTareas</button>
+          
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save</button>
+      </div>
+    </div>
+  </div>
+ </div>
  
+ 
+ <!-- Optional: Place to the bottom of scripts -->
+ <script>
+  const myModal = new bootstrap.Modal(document.getElementById('modalId'), options)
+ 
+ </script>
   <script>  
     $("#comunicacionDiaria").css("width","100%")
 
@@ -338,6 +373,9 @@ console.log("Notificaciones denegadas");
   }
   })
 })
+function llamarAModal(id){
+  $('#modaltareasRapidas').modal('show');
+}
      </script>
 <%}%>
 
