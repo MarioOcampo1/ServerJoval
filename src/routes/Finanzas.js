@@ -927,7 +927,7 @@ router.get('/Finanzas/cobrodeobras/VerObra/:NombreObra', (req, res) => {
                 }
             })
         }).then(PredeterminadosyCobros => {
-
+            console.log(PredeterminadosyCobros[0]);
             res.render('paginas/Finanzas/VistaDeLaObra.ejs', { PredeterminadosyCobros: PredeterminadosyCobros, id_Obra: id, NombreObra: NombreObra, obras });
         })
     }).catch(function (err) {
