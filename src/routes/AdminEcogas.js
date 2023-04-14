@@ -782,10 +782,10 @@ router.post("/actPrelCarpEcogas/:id", upload.none(), function (req, res) {
   }
   //Documentacion Sociedad
   if (
-    (ActaConstitutiva == "ok" ||
+    (ActaConstitutiva == "Ok" ||
       ActaConstitutiva == "ok" ||
       ActaConstitutiva == "NC") &&
-    (ActaCargoVigente == "ok" || ActaCargoVigente == "NC")
+    (ActaCargoVigente == "ok" || ActaCargoVigente == "Ok" || ActaCargoVigente == "NC")
   ) {
     DocumentacionSociedad = "ok";
   }
@@ -800,9 +800,9 @@ router.post("/actPrelCarpEcogas/:id", upload.none(), function (req, res) {
   }
   //Documentacion Contractual
   if (
-    (Cotizacion == "ok" || Cotizacion == "NC") &&
-    (Contrato == "Ok(Preliminar)" ||
-      Contrato == "ok" ||
+    (Cotizacion == "ok" ||Cotizacion == "Ok" || Cotizacion == "NC") &&
+    (Contrato == "Ok(Preliminar)" || Contrato == "ok(Preliminar)"||
+      Contrato == "ok" || Contrato == "Ok" ||
       Contrato == "NC(Preliminar)" ||
       Contrato == "NC")
   ) {
@@ -1087,8 +1087,8 @@ router.post("/act1pCarpEcogas/:id", upload.none(), function (req, res) {
   var DocumentacionTerreno;
   //Documentacion del terreno
   if (
-    (Mensura == "ok" || Mensura == "NC") &&
-    (TituloDePropiedad == "ok" || TituloDePropiedad == "NC")
+    (Mensura == "ok" || Mensura == "Ok" || Mensura == "NC") &&
+    (TituloDePropiedad == "ok" || TituloDePropiedad == "Ok" || TituloDePropiedad == "NC")
   ) {
     DocumentacionTerreno = "ok";
   }
@@ -1100,23 +1100,31 @@ router.post("/act1pCarpEcogas/:id", upload.none(), function (req, res) {
   }
   // Comercial
   if (
-    (Contrato == "ok" || Contrato == "Ok(Preliminar)") &&
-    Presupuesto == "ok" &&
-    Sucedaneo == "ok" &&
-    (NotaDeExcepcion == "ok" || NotaDeExcepcion == "NC")
+    (Contrato == "ok" || Contrato == "Ok" || Contrato == "Ok(Preliminar)") &&
+    (Presupuesto == "ok" || Presupuesto == "Ok") &&
+    (Sucedaneo == "ok"|| Sucedaneo == "Ok") &&
+    (NotaDeExcepcion == "ok" || NotaDeExcepcion == "Ok" || NotaDeExcepcion == "NC")
   ) {
     Comercial = "ok";
+  }
+   if (
+    Contrato == "Presentado" ||
+    Presupuesto == "Presentado" ||
+    Sucedaneo == "Presentado" ||
+    NotaDeExcepcion == "Presentado"
+  ) {
+    Comercial = "Presentado";
   }
   if (
     Contrato == "EnGestion" ||
     Presupuesto == "EnGestion" ||
     Sucedaneo == "EnGestion" ||
-    Sucedaneo == "Presentado" ||
-    NotaDeExcepcion == "EnGestion" ||
-    NotaDeExcepcion == "Presentado"
+    NotaDeExcepcion == "EnGestion"
   ) {
     Comercial = "EnGestion";
   }
+  
+ 
   if (
     Contrato == "Observado" ||
     Presupuesto == "Observado" ||
@@ -1125,16 +1133,8 @@ router.post("/act1pCarpEcogas/:id", upload.none(), function (req, res) {
   ) {
     Comercial = "Observado";
   }
-  if (
-    Contrato == "Presentado" ||
-    Presupuesto == "Presentado" ||
-    Sucedaneo == "Presentado" ||
-    NotaDeExcepcion == "Presentado"
-  ) {
-    Comercial = "Presentado";
-  }
   //Tecnica
-  if (Pcaprobado == "ok" && (PlanoTipo == "ok" || PlanoTipo == "NC")) {
+  if ((Pcaprobado == "ok"||Pcaprobado == "Ok") && (PlanoTipo == "ok"||PlanoTipo == "Ok" || PlanoTipo == "NC")) {
     Tecnica = "ok";
     console.log("1La variable Tecnica va tener el valor: " + Tecnica);
   }
@@ -1156,17 +1156,16 @@ router.post("/act1pCarpEcogas/:id", upload.none(), function (req, res) {
   }
   //Permisos Especiales
   if (
-    (CartaOferta == "ok" || CartaOferta == "NC" || CartaOferta == "") &&
-    (PlanoAnexo == "ok" || PlanoAnexo == "NC" || PlanoAnexo == "") &&
-    (DNVVisacion == "Visado" || DNVVisacion == "NC" || DNVVisacion == "") &&
-    (HidraulicaVisacion == "Visado" ||
+    (CartaOferta == "ok" || CartaOferta == "Ok" || CartaOferta == "NC" || CartaOferta == "") &&
+    (PlanoAnexo == "ok"|| PlanoAnexo == "Ok" || PlanoAnexo == "NC" || PlanoAnexo == "") &&
+    (DNVVisacion == "Visado" || DNVVisacion == "No corresponde" ||  DNVVisacion == "NC" || DNVVisacion == "") &&
+    (HidraulicaVisacion == "Visado" || HidraulicaVisacion == "No corresponde" ||
       HidraulicaVisacion == "NC" ||
       HidraulicaVisacion == "") &&
-    (FerrocarrilesVisacion == "Visado" ||
+    (FerrocarrilesVisacion == "Visado" || FerrocarrilesVisacion == "No corresponde" ||
       FerrocarrilesVisacion == "NC" ||
       FerrocarrilesVisacion == "")
   ) {
-    console.log("Permisos especiales sera cambiado a ok...");
     PermisosEspeciales = "ok";
   }
   if (
@@ -1197,28 +1196,23 @@ router.post("/act1pCarpEcogas/:id", upload.none(), function (req, res) {
     PermisosEspeciales = "Observado";
   }
   if (
-    CartaOferta == "Sin presentar" ||
-    PlanoAnexo == "Sin presentar" ||
-    DNVVisacion == "Sin presentar" ||
-    HidraulicaVisacion == "Sin presentar" ||
-    FerrocarrilesVisacion == "Sin presentar" ||
-    CartaOferta == "Pedir" ||
-    PlanoAnexo == "Pedir" ||
-    DNVVisacion == "Pedir" ||
-    HidraulicaVisacion == "Pedir" ||
-    FerrocarrilesVisacion == "Pedir"
+    (CartaOferta == "Sin presentar" || CartaOferta == "Pedir") ||
+    (PlanoAnexo == "Sin presentar" ||PlanoAnexo == "Pedir")||
+(DNVVisacion == "Sin presentar"||DNVVisacion == "Pedir" )||
+    (HidraulicaVisacion == "Sin presentar"|| HidraulicaVisacion == "Pedir") ||
+    (FerrocarrilesVisacion == "Sin presentar" ||FerrocarrilesVisacion == "Pedir")
   ) {
     PermisosEspeciales = "Sin presentar";
   }
   //Documentacion Ambiental
   if (
-    CuestionarioRelevamientoAmbiental == "ok" &&
-    (EstudioImpactoAmbientalPrevio == "ok" ||
+    (CuestionarioRelevamientoAmbiental == "ok"|| CuestionarioRelevamientoAmbiental == "Ok") &&
+    (EstudioImpactoAmbientalPrevio == "ok" || EstudioImpactoAmbientalPrevio == "Ok"||
       EstudioImpactoAmbientalPrevio == "NC" ||
       EstudioImpactoAmbientalPrevio == "ok(Previo" ||
-      EstudioImpactoAmbientalPrevio == "NC(Previo)") &&
-    DDJJInicialAmbiental == "ok" &&
-    (ListaVerificacionAmbiental == "ok" || ListaVerificacionAmbiental == "NC")
+      EstudioImpactoAmbientalPrevio == "NC(Previo)" || EstudioImpactoAmbientalPrevio == "NC") &&
+    (DDJJInicialAmbiental == "ok"|| DDJJInicialAmbiental == "Ok") &&
+    (ListaVerificacionAmbiental == "ok"||ListaVerificacionAmbiental == "Ok" || ListaVerificacionAmbiental == "NC")
   ) {
     DocumentacionAmbiente = "ok";
   }
@@ -1636,7 +1630,7 @@ router.post("/act2pCarpEcogas/:id", upload.none(), function (req, res) {
     PermisosEspeciales;
 
   //Documentación de obra
-  if (SolicitudInicioObras == "ok" && CertificadoRT == "ok") {
+  if ((SolicitudInicioObras == "ok" || SolicitudInicioObras == "Ok") && (CertificadoRT == "ok" || CertificadoRT == "Ok")) {
     DocumentacionObra = "ok";
   }
   if (SolicitudInicioObras == "Presentado" || CertificadoRT == "EnGestion") {
@@ -1650,11 +1644,11 @@ router.post("/act2pCarpEcogas/:id", upload.none(), function (req, res) {
   }
   //Seguridad
   if (
-    Programadeseguridad == "ok" &&
-    CronogramaSyH == "ok" &&
-    SeguroRC == "ok" &&
-    (Monotributos == "ok" || Monotributos == "NC") &&
-    (SeguroAccidentesPersonales == "ok" || SeguroAccidentesPersonales == "NC")
+    (Programadeseguridad == "ok"||Programadeseguridad == "Ok" )&&
+    (CronogramaSyH == "ok"||CronogramaSyH == "Ok" )&&
+    (SeguroRC == "ok"||SeguroRC == "Ok" )&&
+    (Monotributos == "ok"||Monotributos == "Ok" || Monotributos == "NC") &&
+    (SeguroAccidentesPersonales == "ok"||SeguroAccidentesPersonales == "Ok" || SeguroAccidentesPersonales == "NC")
   ) {
     Seguridad = "ok";
   }
@@ -1679,14 +1673,14 @@ router.post("/act2pCarpEcogas/:id", upload.none(), function (req, res) {
 
   //Interferencias
   if (
-    intAgua == "ok" ||
-    (intAgua == "NC" && intCloacas == "ok") ||
-    (intCloacas == "NC" && intElectricidad == "ok") ||
-    (intElectricidad == "NC" && intArsat == "ok") ||
-    (intArsat == "NC" && intClaro == "ok") ||
-    (intClaro == "NC" && intTelefonica == "ok") ||
-    (intTelefonica == "NC" && intArnet == "ok") ||
-    (intArnet == "NC" && intTelecom == "ok") ||
+    (intAgua == "ok" ||     intAgua == "Ok") ||
+    (intAgua == "NC" &&( intCloacas == "ok" || intCloacas == "Ok") )||
+    (intCloacas == "NC" &&( intElectricidad == "ok" || intElectricidad == "Ok") )||
+    (intElectricidad == "NC" &&( intArsat == "ok" || intArsat == "Ok") )||
+    (intArsat == "NC" &&( intClaro == "ok" || intClaro == "Ok") )||
+    (intClaro == "NC" &&( intTelefonica == "ok" || intTelefonica == "Ok") )||
+    (intTelefonica == "NC" &&( intArnet == "ok" || intArnet == "Ok") )||
+    (intArnet == "NC" &&( intTelecom == "ok" || intTelecom == "Ok") )||
     intTelecom == "NC"
   ) {
     Interferencias = "ok";
@@ -1748,12 +1742,12 @@ router.post("/act2pCarpEcogas/:id", upload.none(), function (req, res) {
     Permisos = "Pedir";
   }
   if (
-    (PerMunicipal == "ok" || PerMunicipal == "NC") &&
-    (Irrigacion == "ok" || Irrigacion == "NC") &&
-    (DPV == "ok" || DPV == "NC") &&
-    (DNV == "ok" || DNV == "NC") &&
-    (FERROCARRIL == "ok" || FERROCARRIL == "NC") &&
-    (HIDRAULICA == "ok" || HIDRAULICA == "NC")
+    ((PerMunicipal == "ok" || PerMunicipal == "Ok") || PerMunicipal == "NC") &&
+    ((Irrigacion == "ok" || Irrigacion == "Ok") || Irrigacion == "NC") &&
+    ((DPV == "ok" || DPV == "Ok") || DPV == "NC") &&
+    ((DNV == "ok" || DNV == "Ok") || DNV == "NC") &&
+    ((FERROCARRIL == "ok" || FERROCARRIL == "Ok") || FERROCARRIL == "NC") &&
+    ((HIDRAULICA == "ok" || HIDRAULICA == "Ok") || HIDRAULICA == "NC")
   ) {
     Permisos = "ok";
   }
@@ -1805,8 +1799,8 @@ router.post("/act2pCarpEcogas/:id", upload.none(), function (req, res) {
   }
   // Matriculas
   if (
-    (MatriculaFusionista == "ok" || MatriculaFusionista == "NC") &&
-    (MatriculaSoldador == "ok" || MatriculaSoldador == "NC")
+    (MatriculaFusionista == "ok" || MatriculaFusionista == "Ok" || MatriculaFusionista == "NC") &&
+    (MatriculaSoldador == "ok" || MatriculaSoldador == "Ok" || MatriculaSoldador == "NC")
   ) {
     Matriculas = "ok";
   }
@@ -1826,8 +1820,8 @@ router.post("/act2pCarpEcogas/:id", upload.none(), function (req, res) {
   }
   //Ambiente
   if (
-    (EstudioImpactoAmbiental == "ok" || EstudioImpactoAmbiental == "NC") &&
-    (CronogramaAmbiente == "ok" || CronogramaAmbiente == "NC")
+    (EstudioImpactoAmbiental == "ok" || EstudioImpactoAmbiental == "Ok" || EstudioImpactoAmbiental == "NC") &&
+    (CronogramaAmbiente == "ok" || CronogramaAmbiente == "Ok" || CronogramaAmbiente == "NC")
   ) {
     Ambiente = "ok";
   }
@@ -1842,9 +1836,9 @@ router.post("/act2pCarpEcogas/:id", upload.none(), function (req, res) {
   }
   // Avisos
   if (
-    AvisoInicioObraART == "ok" &&
-    AvisoInicioObraIERIC == "ok" &&
-    ActaInicioEfectivo == "ok"
+    (AvisoInicioObraART == "ok" || AvisoInicioObraART == "Ok") &&
+    (AvisoInicioObraIERIC == "ok" || AvisoInicioObraIERIC == "Ok") &&
+    (ActaInicioEfectivo == "ok" || ActaInicioEfectivo == "Ok")
   ) {
     Avisos = "ok";
   }
