@@ -161,18 +161,22 @@ Avisos de la obra (ART,IERIC)
 if(row.Interferencias=="EnGestion"){
   return '<div class="bg-warning  text-center">Interferencias pedidas y/o en gestion </div> ';
 }
+if(row.Interferencias=="Presentado"){
+  return '<div class="bg-info  text-center">Presentado </div> ';
+}
 if((row.Interferencias == "ok"|| row.Interferencias == "Ok")){
   return '<div class="bg-success  text-light text-center">Interferencias Ok </div> '
 }
+
 if((row.Interferencias==null || row.Interferencias=="")){
-  return '<div class="text-center">!</div> ';
+  return '<div class="text-center">Sin cargar</div> ';
 }
               }
             },
             {
               render: function(data,type,row){
-              //  if(((row.PerMunicipal=="pedir")||(row.PerMunicipal=="Sin presentar"))|| ((row.DPV=="pedir")||(row.DPV=="Sin presentar"))|| ((row.DNV=="pedir")||(row.DNV=="Sin presentar"))|| ((row.Hidraulica=="pedir")||(row.Hidraulica=="Sin presentar"))|| ((row.Ferrocarriles=="pedir")||(row.Ferrocarriles=="Sin presentar"))||((row.YPF=="pedir")||(row.YPF=="Sin presentar"))|| ((row.Privado=="pedir")||(row.Privado=="Sin presentar")))
-              if(row.Permisos=="Sin presentar" || row.Permisos=="Pedir")
+
+              if(row.Permisos=="Sin presentar" ||row.Permisos=="Sin Presentar" || row.Permisos=="Pedir")
               {
 return '<div class="bg-danger text-light text-center"> Hay permisos por pedir </div> ';
                } 
@@ -180,17 +184,20 @@ return '<div class="bg-danger text-light text-center"> Hay permisos por pedir </
               {
 return '<div class="bg-warning text-center">En gestión </div> ';
                } 
+               if(row.Permisos=="Presentado"){
+  return '<div class="bg-info  text-center">Presentado </div> ';
+}
                if(row.Permisos=="NC" || row.Permisos=="ok"|| row.Permisos=="Ok")
               {
 return '<div class="bg-success text-light text-center">Ok</div> ';
                } 
                if((row.Permisos==null || row.Permisos=="")){
-  return '<div class="text-center">!</div> ';
+  return '<div class="text-center">Sin cargar</div> ';
 }
               }
             },
             {render: function(data,type,row){
-if(row.Avisos=="Pedir" || (row.Avisos=="Renovar") || (row.Avisos=="Sin Presentar"))
+if(row.Avisos=="Pedir" || row.Avisos=="Renovar" || row.Avisos=="Sin Presentar" ||row.Avisos=="Sin presentar")
 {
   return '<div class="bg-danger text-light text-center">Aviso sin pedir</div> ';
 }
@@ -202,15 +209,18 @@ if(row.Avisos=="EnGestion"|| row.Avisos=="EnGestion")
 {
   return '<div class="bg-warning text-center">En gestión</div> ';
 }
-if((row.Avisos==null || row.Avisos=="")){
-  return '<div class="text-center">!</div> ';
+if(row.Avisos=="Presentado"){
+  return '<div class="bg-info  text-center">Presentado </div> ';
+}
+if(row.Avisos==null || row.Avisos==""){
+  return '<div class="text-center">Sin cargar</div> ';
 }
 
             }
           },
           {
             render:function(data,type,row){
-              if(row.Seguridad=="Pedir" || (row.Seguridad=="Renovar") || (row.Seguridad=="Sin Presentar") || (row.Seguridad=="Sin presentar"))
+              if(row.Seguridad=="Pedir" || row.Seguridad=="Renovar" || row.Seguridad=="Sin Presentar" ||row.Seguridad=="Sin presentar")
 {
   return '<div class="bg-danger text-light text-center">Sin Presentar y/o Renovar</div> ';
 }
@@ -222,8 +232,11 @@ if(row.Seguridad=="EnGestion"|| row.Seguridad=="EnGestion")
 {
   return '<div class="bg-warning text-center">En gestión</div> ';
 }
-if((row.Seguridad==null || row.Seguridad=="")){
-  return '<div class="text-center">!</div> ';
+if(row.Seguridad=="Presentado"){
+  return '<div class="bg-info  text-center">Presentado </div> ';
+}
+if(row.Seguridad==null || row.Seguridad==""){
+  return '<div class="text-center">Sin cargar</div> ';
 }
             }
           },
