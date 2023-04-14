@@ -1,0 +1,108 @@
+<div class="modal fade" id="modalClientesPorLote" tabindex="-1" role="dialog" aria-labelledby="modalTitleId"aria-hidden="true">
+  <div class="modal-lg modal-dialog modal-dialog-scrollable modal-dialog-centered " role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalTitleId">Carga de clientes por lote</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="/Finanzas/NuevoCliente/cargarLote" method="post">
+          <input type="hidden" name="idObra" value="<%=id_Obra%>">
+          <label class="form-label" for="Obra">Obra: <%=NombreObra%> </label>
+          <input type="text" class="form-control" name="Obra" id="Obra" value="<%=NombreObra%>" hidden>
+          <div class="row g-5">
+            <div class="col-md">
+              <div class="form-floating mb-3">
+                <input type="number" class="form-control" name="CantidadCuotas" id="CantidadCuotas" min="1"
+                  aria-describedby="ingrese la cantidad de clientes a agregar" placeholder="">
+                <label for="CantidadCuotas"> Cantidad de cuotas</label>
+              </div>
+            </div>
+            <div class="col-md">
+              <div class="form-floating mb-3">
+                <input type="number" class="form-control" name="MontoCuota" id="MontoCuota" min="1"
+                  aria-describedby="ingrese la cantidad de clientes a agregar" placeholder="">
+                <label for="MontoCuota"> Valor Cuota</label>
+              </div>
+            </div>
+          </div>
+          <div class="row g-5">
+            <div class="col-md">
+              <div class="form-floating mb-3">
+                <input type="number" class="form-control" name="MontoAnticipoFinanciero" id="MontoAnticipoFinanciero"
+                  min="1" aria-describedby="ingrese la cantidad de clientes a agregar" placeholder="">
+                <label for="MontoAnticipoFinanciero"> Valor Anticipo Financiero</label>
+              </div>
+            </div>
+            <div class="col-md">
+              <div class="form-floating mb-3">
+                <input type="number" class="form-control" name="clientesAAgregar" id="clientesAAgregar" min="1"
+                  aria-describedby="ingrese la cantidad de clientes a agregar" placeholder="">
+                <label for="clientesAAgregar"> Clientes a agregar</label>
+              </div>
+            </div>
+          </div>
+          <hr class="bg-danger border-2 border-top border-danger">
+          <div class="container">
+            <div id="DatosClientemodalClientesPorLote">
+            </div>
+          </div>
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="submit" class="btn btn-success">Guardar</button>
+        </div>
+    </form>
+
+    </div>
+  </div>
+</div>
+<script>
+  function cargarClientesPorLote(NombreObra) {
+    $('#modalClientesPorLote').modal('show');
+  }
+  $('#clientesAAgregar').change(function () {
+    $('#DatosClientemodalClientesPorLote').empty();
+    var cantidadClientes = $('#clientesAAgregar').val();
+    if (cantidadClientes < 2) {
+      Swal.fire({ icon: 'error', title: 'ERROR', text: 'Esta herramienta ha sido diseñada para agregar varios clientes a la vez. Si ud esta intentando agregar menos de 2 clientes, utilice la opcion "NuevoCliente".' },)
+    }
+    else {
+      for (let index = 1; index <= cantidadClientes; index++) {
+        $('#DatosClientemodalClientesPorLote').append(
+          '<div class="row g-2">' +
+          ' <div class="col-md">' +
+          '  <div class="form-floating mb-3">' +
+          '   <input class="form-control" id="inputNombreCliente" type="text" name="NombreCompleto" value="" required>' +
+          '   <label id="textoNombreCliente" for="NombreCompleto">Apellido y Nombre. N°:' + index + '</label>' +
+          '  </div>' +
+          ' </div>' +
+          ' <div class="col-md">' +
+          '  <div class="form-floating mb-3">' +
+          '   <input class="form-control" id="inputDNICliente" type="text" name="DNI" value="" >' +
+          '   <label id="textoDNICliente" for="DNI">DNI. N°:' + index + '</label>' +
+          '  </div>' +
+          ' </div>' +
+          ' <div class="col-md">' +
+          '  <div class="form-floating mb-3">' +
+          '   <input class="form-control" type="text" id="Domicilio" name="Domicilio" required>' +
+          '   <label id="labelDomicilio" for="Domicilio">Manzana y Lote. N°:' + index + '</label>' +
+          '  </div>' +
+          ' </div>' +
+          ' </div>' +
+          '<div class="row g-2">' +
+          ' <div class="col-md">' +
+          '  <div class="form-floating mb-3">' +
+          '   <input class="form-control" type="text" id="Telefono" name="Telefono">' +
+          '   <label id="labelTelefono" for="Telefono">Teléfono. N°:' + index + '</label>' +
+          '  </div>' +
+          ' </div>' +
+          '</div>' +
+          '<hr class="bg-danger border-2 border-top border-primary">' +
+          '');
+      }
+    }
+  })
+
+</script>

@@ -5,6 +5,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
   <title>Finanzas:Vista de la obra</title>
 </head>
 
@@ -13,7 +15,7 @@
 
   <div class="VistaObra">
     <div class="Encabezado mt-2 ms-1">
-      <button class="btn btn-sm btn-danger bi bi-arrow-bar-left" onclick="history.go(-1)" title="Ir a pagína anterior"></button>
+<button class="btn btn-sm btn-danger bi bi-arrow-bar-left" onclick="history.go(-1)" title="Ir a pagína anterior"></button>
       <a href="/Finanzas/NuevoCliente/<%=NombreObra%>"><button class="btn btn-sm btn-success">NuevoCliente</button></a>
       <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalClientesPorLote">
         Nuevo cliente | Carga por lote
@@ -861,7 +863,7 @@
 
   </div>
   <%}%>
-        <%- include('./partials/NuevoPagoObras.ejs')%>
+        <%- include('./partials/modalClientesPorLote')%>
   <div class="container-fluid">
     <div class="modal fade" id="ModalConfiguracion" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
       <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-fullscreen" role="document">
@@ -1004,8 +1006,10 @@
     </div>
   </div>
   <form action="/GenerarComprobante" method="post">
+
+
   <div class="container-fluid">
-    <div class="modal fade" id="ModalNuevoPagoObras" tabindex="-1" role="dialog" aria-labelledby="ModalNuevoPagoObrasLabel" aria-hidden="true">
+    <div class="modal fade" id="ModalNuevoPagoObras2" tabindex="-1" role="dialog" aria-labelledby="ModalNuevoPagoObras2Label" aria-hidden="true">
       <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -1021,7 +1025,7 @@
 
             <div id="editarDatosCliente">
             </div>
-            <button type="button" class="close" onclick="$('#ModalNuevoPagoObras').modal('hide');" aria-label="Cerrar">
+            <button type="button" class="close" onclick="$('#ModalNuevoPagoObras2').modal('hide');" aria-label="Cerrar">
               <span aria-hidden="true">&times;</span>
             </button>
 
@@ -1040,7 +1044,6 @@
 
                 <div class="input-group mb-3">
                   <label id="labelDomicilio" class="input-group-text" for="InputDomicilio2">Domicilio</label>
-
                   <input class="form-control" type="text" id="inputDomicilio2" name="Domicilio">
                 </div>
                 <div class="input-group mb-3 ">
@@ -1082,14 +1085,12 @@
                   <label class="input-group-text" for="FechaPago2"> Fecha de pago</label>
                   <input required class="form-control" type="date" name="FechaPago" id="FechaPago2" autocomplete="on">
                 </div>
-
-                <div class="row">
+<div class="row">
                   <div class="col-md-6">
                     <label class="input-group-text" for="ObservacionesDelPago">Observaciones</label>
                     <input class="form-control" type="text" name="ObservacionesDelPago" id="ObservacionesDelPago">
                   </div>
-
-                  <div class="col-md-6">
+<div class="col-md-6">
                     <label class="input-group-text" for="FormaDePago">Forma de pago</label>
                     <select class="form-select" name="FormaDePago" id="">
                       <option value="Efectivo" selected>Efectivo</option>
@@ -1100,11 +1101,8 @@
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="modal-footer noImprimible">
-              <div class="col">
-
               </div>
+            <div class="modal-footer noImprimible">
               <button type="button" class="btn btn-danger noImprimible" onclick="$('#ModalNuevoPagoObras').modal('hide')">Cerrar</button>
               <button type="submit" id="btnGuardarCambios" class="btn btn-success  noImprimible ">Guardar</button>
             </div>
@@ -1279,7 +1277,7 @@
       url: '/BuscarDatosClienteQuePaga/' + idcliente,
     }).done(function(respuestaServidor) {
       var results = respuestaServidor.results;
-      $('#ModalNuevoPagoObras').modal("show");
+      $('#ModalNuevoPagoObras2').modal("show");
 $('#editarCliente').empty();
       $('#inputNombreCliente2').val(results[0].NombreCliente);
       $('#inputNombreCliente2').css('display', 'block');
