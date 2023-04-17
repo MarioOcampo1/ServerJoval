@@ -504,7 +504,7 @@ router.post('/Finanzas/NuevoCliente/guardarCliente', (req, res) => {
     var Domicilio = req.body.Domicilio;
     var Obra = req.body.Obra;
     var id_Obra;
-    var sql = 'Select id FROM obras where Nombre=?'
+    var sql = 'SELECT id FROM obras WHERE Nombre=?'
     var idCliente;
     var cuotasQuePaga = req.body.CuotasQuePaga;
     var NombreObra;
@@ -518,15 +518,14 @@ router.post('/Finanzas/NuevoCliente/guardarCliente', (req, res) => {
                     if(error)console.log(error);
                     else{
                         NombreObra=results[0].Nombre;
-             
                 sql = 'INSERT into finanzas_clientes_por_obra set?';
                 connection.query(sql, {
                     NombreCliente: Nombre, NombreObra:NombreObra, id_Obra: id_Obra, DNICliente: DNI, Telefono: Teléfono, Correo: Correo, Direccion: Domicilio
                 }, (error, results) => {
                     if (error) console.log(error);
                   else{
-                    sql='Select ID_cliente from finanzas_clientes_por_obra WHERE DNICliente =? ;';
-                    connection.query(sql,DNI,(error,results)=>{
+                    sql='Select MAX(ID_cliente) AS ID_cliente  FROM finanzas_clientes_por_obra ;';
+                    connection.query(sql,(error,results)=>{
                         if(error) console.log(error);
                         else{
                             idCliente=results[0].ID_cliente;
@@ -664,8 +663,14 @@ router.post('/Finanzas/NuevoCliente/guardarCliente', (req, res) => {
        
     })
   promise1.then(function(success,reject){
-    res.redirect('/Finanzas/cobrodeobras/VerObra/'+Obra);  
-  }) 
+   res.redirect('/Finanzas/cobrodeobras/VerObra/'+Obra);
+   
+  })
+  promise1.catch(function(data){
+    res.send(data);  
+  })
+
+  
 
 })
 router.post('/GenerarComprobante', (req, res,next) => {

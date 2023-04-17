@@ -1048,7 +1048,7 @@
                 </div>
                 <div class="input-group mb-3 ">
                   <label class="input-group-text" for="Concepto">Concepto</label>
-                  <select class="form-select" name="Concepto" id="Concepto2" aria-label="Seleccione el pago">
+                  <select class="form-select" name="Concepto" id="Concepto" aria-label="Seleccione el pago">
                     <!-- <input required list="ConceptosDePago"  class="form-control" type="text" name="Concepto" id="Concepto"> -->
                     <!-- <datalist id="ConceptosDePago"> -->
                     <option value="AnticipoFinanciero">Anticipo Financiero</option>
@@ -1243,7 +1243,6 @@
       '</div>'
     );
   }
-
   function EnviarFormulario() {
     $('#formActualizarPago').submit();
   }
@@ -1268,7 +1267,6 @@
     $("#TablaObras").table2excel({
       name: "file.xlsx"
     });
-
   }
   var MontosaPagar;
 
@@ -1278,7 +1276,7 @@
     }).done(function(respuestaServidor) {
       var results = respuestaServidor.results;
       $('#ModalNuevoPagoObras2').modal("show");
-$('#editarCliente').empty();
+      $('#editarCliente').empty();
       $('#inputNombreCliente2').val(results[0].NombreCliente);
       $('#inputNombreCliente2').css('display', 'block');
       $('#textoNombreCliente2').css('display', 'block');
@@ -1297,15 +1295,15 @@ $('#editarCliente').empty();
       $('#FechaPago2').val(ano + "-" + mes + "-" + dia);
       $('#FechaPago2').html(ano + "-" + mes + "-" + dia);
     });
-    $('#editarDatosCliente').html('<a class="btn btn-info" href="/Finanzas/CobroDeObras/EditarCliente/' + idcliente + '">Editar cliente</a>');
+    $('#editarDatosCliente').html('<a class="btn btn-info" href="/Finanzas/CobroDeObras/EditarCliente/'+ idcliente+'">Editar cliente</a>');
   }
-  $('#Concepto2').change(function() {
-    var idcliente = $('#').val();
+  $('#Concepto').change(function() {
+    var idcliente = $('#IDCliente').val();
     $.ajax({
       url: '/BuscarDatosClienteQuePaga/' + idcliente,
     }).done(function(respuestaServidor) {
       var montoAPagarPredeterminado = respuestaServidor.montosCuota;
-      $("#Concepto2 option:selected").each(function() {
+      $("#Concepto option:selected").each(function() {
         var ConceptoSeleccionado = $(this).attr('value');
         montoAPagarPredeterminado.forEach(element => {
           JSON.parse(JSON.stringify(element), (key, value) => {
@@ -1316,7 +1314,6 @@ $('#editarCliente').empty();
         })
         $('#divImporte2').css('display', 'block');
       })
-
     })
   })
 
