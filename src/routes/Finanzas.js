@@ -536,110 +536,113 @@ router.post('/Finanzas/NuevoCliente/guardarCliente', (req, res) => {
                             },(error,results)=>{
                                 if(error)console.log(error);
                                 else{
-                                    sql='INSERT INTO finanzas_clientes_predeterminados set?;'
-                            switch (cuotasQuePaga) {
-                                case'1':
-                                    connection.query(sql,{
-                                        id_obra:id_Obra,id_cliente:idCliente,NombreCliente:Nombre,AnticipoFinanciero: MontoAnticipoFinanciero[index],Cuota1:req.body.ImporteCuota
-                                    },(error,results)=>{
-                                        if(error) console.log(error);
-                                    })     
-                                    resolve();
-                                    break;
-                                    case'2':
-                                        connection.query(sql,{
-                                            id_obra:id_Obra,id_cliente:idCliente,NombreCliente:Nombre,AnticipoFinanciero: req.body.ImporteAnticipoFinanciero,Cuota1:req.body.ImporteCuota,Cuota2:req.body.ImporteCuota
-                                        },(error,results)=>{
-                                            if(error) console.log(error);
-                                        })     
-                                    resolve();
-                                        break;
-                                    case'3':
-                                        connection.query(sql,{
-                                            id_obra:id_Obra,id_cliente:idCliente,NombreCliente:Nombre,AnticipoFinanciero: req.body.ImporteAnticipoFinanciero,Cuota1:req.body.ImporteCuota,Cuota2:req.body.ImporteCuota,Cuota3:req.body.ImporteCuota
-                                        },(error,results)=>{
-                                            if(error) console.log(error);
-                                        })     
+                                    setTimeout(() => {
+                                        sql='INSERT INTO finanzas_clientes_predeterminados set?;'
+                                        switch (cuotasQuePaga) {
+                                            case'1':
+                                                connection.query(sql,{
+                                                    id_obra:id_Obra,id_cliente:idCliente,NombreCliente:Nombre,AnticipoFinanciero: req.body.ImporteAnticipoFinanciero,Cuota1:req.body.ImporteCuota
+                                                },(error,results)=>{
+                                                    if(error) console.log(error);
+                                                })     
+                                                resolve();
+                                                break;
+                                                case'2':
+                                                    connection.query(sql,{
+                                                        id_obra:id_Obra,id_cliente:idCliente,NombreCliente:Nombre,AnticipoFinanciero: req.body.ImporteAnticipoFinanciero,Cuota1:req.body.ImporteCuota,Cuota2:req.body.ImporteCuota
+                                                    },(error,results)=>{
+                                                        if(error) console.log(error);
+                                                    })     
+                                                resolve();
+                                                    break;
+                                                case'3':
+                                                    connection.query(sql,{
+                                                        id_obra:id_Obra,id_cliente:idCliente,NombreCliente:Nombre,AnticipoFinanciero: req.body.ImporteAnticipoFinanciero,Cuota1:req.body.ImporteCuota,Cuota2:req.body.ImporteCuota,Cuota3:req.body.ImporteCuota
+                                                    },(error,results)=>{
+                                                        if(error) console.log(error);
+                                                    })     
+                                                
+                                                resolve();
+                                                    break;
+                                                case'4':
+                                                    connection.query(sql,{
+                                                        id_obra:id_Obra,id_cliente:idCliente,NombreCliente:Nombre,AnticipoFinanciero: req.body.ImporteAnticipoFinanciero,Cuota1:req.body.ImporteCuota,Cuota2:req.body.ImporteCuota,Cuota3:req.body.ImporteCuota, Cuota4:req.body.ImporteCuota,
+                                                    },(error,results)=>{
+                                                        if(error) console.log(error);
+                                                    })     
+                                                resolve();
+                                                    break;
+                                                case'5':
+                                                    connection.query(sql,{
+                                                        id_obra:id_Obra,id_cliente:idCliente,NombreCliente:Nombre,AnticipoFinanciero: req.body.ImporteAnticipoFinanciero,Cuota1:req.body.ImporteCuota,Cuota2:req.body.ImporteCuota,Cuota3:req.body.ImporteCuota, Cuota4:req.body.ImporteCuota,Cuota5:req.body.ImporteCuota
+                                                    },(error,results)=>{
+                                                        if(error) console.log(error);
+                                                    })     
+                                                resolve();
+                                                    break;
+                                                case'6':
+                                                    connection.query(sql,{
+                                                        id_obra:id_Obra,id_cliente:idCliente,NombreCliente:Nombre,AnticipoFinanciero: req.body.ImporteAnticipoFinanciero,Cuota1:req.body.ImporteCuota,Cuota2:req.body.ImporteCuota,Cuota3:req.body.ImporteCuota, Cuota4:req.body.ImporteCuota,Cuota5:req.body.ImporteCuota,Cuota6:req.body.ImporteCuota,
+                                                    },(error,results)=>{
+                                                        if(error) console.log(error);
+                                                    })     
+                                                resolve();
+                                                    break;
+                                                case'7':
+                                                    connection.query(sql,{
+                                                        id_obra:id_Obra,id_cliente:idCliente,NombreCliente:Nombre,AnticipoFinanciero: req.body.ImporteAnticipoFinanciero,Cuota1:req.body.ImporteCuota,Cuota2:req.body.ImporteCuota,Cuota3:req.body.ImporteCuota, Cuota4:req.body.ImporteCuota,Cuota5:req.body.ImporteCuota,Cuota6:req.body.ImporteCuota,Cuota7:req.body.ImporteCuota,Cuota8:req.body.ImporteCuota,
+                                                    },(error,results)=>{
+                                                        if(error) console.log(error);
+                                                    })     
+                                                resolve();
+                                                    break;
+                                                case'8':
+                                                    connection.query(sql,{
+                                                        id_obra:id_Obra,id_cliente:idCliente,NombreCliente:Nombre,AnticipoFinanciero: req.body.ImporteAnticipoFinanciero,Cuota1:req.body.ImporteCuota,Cuota2:req.body.ImporteCuota,Cuota3:req.body.ImporteCuota, Cuota4:req.body.ImporteCuota,Cuota5:req.body.ImporteCuota,Cuota6:req.body.ImporteCuota,Cuota7:req.body.ImporteCuota,Cuota8:req.body.ImporteCuota,
+                                                    },(error,results)=>{
+                                                        if(error) console.log(error);
+                                                    })     
+                                                resolve();
+                                                    break;
+                                                case'9':
+                                                    connection.query(sql,{
+                                                        id_obra:id_Obra,id_cliente:idCliente,NombreCliente:Nombre,AnticipoFinanciero: req.body.ImporteAnticipoFinanciero,Cuota1:req.body.ImporteCuota,Cuota2:req.body.ImporteCuota,Cuota3:req.body.ImporteCuota, Cuota4:req.body.ImporteCuota,Cuota5:req.body.ImporteCuota,Cuota6:req.body.ImporteCuota,Cuota7:req.body.ImporteCuota,Cuota8:req.body.ImporteCuota,Cuota9:req.body.ImporteCuota
+                                                    },(error,results)=>{
+                                                        if(error) console.log(error);
+                                                    })     
+                                                resolve();
+                                                    break;
+                                                case '10':
+                                                    connection.query(sql,{
+                                                        id_obra:id_Obra,id_cliente:idCliente,NombreCliente:Nombre,AnticipoFinanciero: req.body.ImporteAnticipoFinanciero,Cuota1:req.body.ImporteCuota,Cuota2:req.body.ImporteCuota,Cuota3:req.body.ImporteCuota, Cuota4:req.body.ImporteCuota,Cuota5:req.body.ImporteCuota,Cuota6:req.body.ImporteCuota,Cuota7:req.body.ImporteCuota,Cuota8:req.body.ImporteCuota,Cuota9:req.body.ImporteCuota,Cuota10:req.body.ImporteCuota
+                                                    },(error,results)=>{
+                                                        if(error) console.log(error);
+                                                    })     
+                                                resolve();
+                                                    break;
+                                                case '11':
+                                                    connection.query(sql,{
+                                                        id_obra:id_Obra,id_cliente:idCliente,NombreCliente:Nombre,AnticipoFinanciero: req.body.ImporteAnticipoFinanciero,Cuota1:req.body.ImporteCuota,Cuota2:req.body.ImporteCuota,Cuota3:req.body.ImporteCuota, Cuota4:req.body.ImporteCuota,Cuota5:req.body.ImporteCuota,Cuota6:req.body.ImporteCuota,Cuota7:req.body.ImporteCuota,Cuota8:req.body.ImporteCuota,Cuota9:req.body.ImporteCuota,Cuota10:req.body.ImporteCuota,Cuota11:req.body.ImporteCuota
+                                                    },(error,results)=>{
+                                                        if(error) console.log(error);
+                                                    })     
+                                                resolve();
+                                                    break;
+                                                case '12':
+                                                    connection.query(sql,{
+                                                        id_obra:id_Obra,id_cliente:idCliente,NombreCliente:Nombre,AnticipoFinanciero: req.body.ImporteAnticipoFinanciero,Cuota1:req.body.ImporteCuota,Cuota2:req.body.ImporteCuota,Cuota3:req.body.ImporteCuota, Cuota4:req.body.ImporteCuota,Cuota5:req.body.ImporteCuota,Cuota6:req.body.ImporteCuota,Cuota7:req.body.ImporteCuota,Cuota8:req.body.ImporteCuota,Cuota9:req.body.ImporteCuota,Cuota10:req.body.ImporteCuota,Cuota11:req.body.ImporteCuota,Cuota12:req.body.ImporteCuota
+                                                    },(error,results)=>{
+                                                        if(error) console.log(error);
+                                                    })     
+                                                resolve();
+                                                    break;
+                                        
+                                            default:
+                                                resolve();
+                                                break;
+                                        }
+                                    }, 1000);
                                     
-                                    resolve();
-                                        break;
-                                    case'4':
-                                        connection.query(sql,{
-                                            id_obra:id_Obra,id_cliente:idCliente,NombreCliente:Nombre,AnticipoFinanciero: req.body.ImporteAnticipoFinanciero,Cuota1:req.body.ImporteCuota,Cuota2:req.body.ImporteCuota,Cuota3:req.body.ImporteCuota, Cuota4:req.body.ImporteCuota,
-                                        },(error,results)=>{
-                                            if(error) console.log(error);
-                                        })     
-                                    resolve();
-                                        break;
-                                    case'5':
-                                        connection.query(sql,{
-                                            id_obra:id_Obra,id_cliente:idCliente,NombreCliente:Nombre,AnticipoFinanciero: req.body.ImporteAnticipoFinanciero,Cuota1:req.body.ImporteCuota,Cuota2:req.body.ImporteCuota,Cuota3:req.body.ImporteCuota, Cuota4:req.body.ImporteCuota,Cuota5:req.body.ImporteCuota
-                                        },(error,results)=>{
-                                            if(error) console.log(error);
-                                        })     
-                                    resolve();
-                                        break;
-                                    case'6':
-                                        connection.query(sql,{
-                                            id_obra:id_Obra,id_cliente:idCliente,NombreCliente:Nombre,AnticipoFinanciero: req.body.ImporteAnticipoFinanciero,Cuota1:req.body.ImporteCuota,Cuota2:req.body.ImporteCuota,Cuota3:req.body.ImporteCuota, Cuota4:req.body.ImporteCuota,Cuota5:req.body.ImporteCuota,Cuota6:req.body.ImporteCuota,
-                                        },(error,results)=>{
-                                            if(error) console.log(error);
-                                        })     
-                                    resolve();
-                                        break;
-                                    case'7':
-                                        connection.query(sql,{
-                                            id_obra:id_Obra,id_cliente:idCliente,NombreCliente:Nombre,AnticipoFinanciero: req.body.ImporteAnticipoFinanciero,Cuota1:req.body.ImporteCuota,Cuota2:req.body.ImporteCuota,Cuota3:req.body.ImporteCuota, Cuota4:req.body.ImporteCuota,Cuota5:req.body.ImporteCuota,Cuota6:req.body.ImporteCuota,Cuota7:req.body.ImporteCuota,Cuota8:req.body.ImporteCuota,
-                                        },(error,results)=>{
-                                            if(error) console.log(error);
-                                        })     
-                                    resolve();
-                                        break;
-                                    case'8':
-                                        connection.query(sql,{
-                                            id_obra:id_Obra,id_cliente:idCliente,NombreCliente:Nombre,AnticipoFinanciero: req.body.ImporteAnticipoFinanciero,Cuota1:req.body.ImporteCuota,Cuota2:req.body.ImporteCuota,Cuota3:req.body.ImporteCuota, Cuota4:req.body.ImporteCuota,Cuota5:req.body.ImporteCuota,Cuota6:req.body.ImporteCuota,Cuota7:req.body.ImporteCuota,Cuota8:req.body.ImporteCuota,
-                                        },(error,results)=>{
-                                            if(error) console.log(error);
-                                        })     
-                                    resolve();
-                                        break;
-                                    case'9':
-                                        connection.query(sql,{
-                                            id_obra:id_Obra,id_cliente:idCliente,NombreCliente:Nombre,AnticipoFinanciero: req.body.ImporteAnticipoFinanciero,Cuota1:req.body.ImporteCuota,Cuota2:req.body.ImporteCuota,Cuota3:req.body.ImporteCuota, Cuota4:req.body.ImporteCuota,Cuota5:req.body.ImporteCuota,Cuota6:req.body.ImporteCuota,Cuota7:req.body.ImporteCuota,Cuota8:req.body.ImporteCuota,Cuota9:req.body.ImporteCuota
-                                        },(error,results)=>{
-                                            if(error) console.log(error);
-                                        })     
-                                    resolve();
-                                        break;
-                                    case '10':
-                                        connection.query(sql,{
-                                            id_obra:id_Obra,id_cliente:idCliente,NombreCliente:Nombre,AnticipoFinanciero: req.body.ImporteAnticipoFinanciero,Cuota1:req.body.ImporteCuota,Cuota2:req.body.ImporteCuota,Cuota3:req.body.ImporteCuota, Cuota4:req.body.ImporteCuota,Cuota5:req.body.ImporteCuota,Cuota6:req.body.ImporteCuota,Cuota7:req.body.ImporteCuota,Cuota8:req.body.ImporteCuota,Cuota9:req.body.ImporteCuota,Cuota10:req.body.ImporteCuota
-                                        },(error,results)=>{
-                                            if(error) console.log(error);
-                                        })     
-                                    resolve();
-                                        break;
-                                    case '11':
-                                        connection.query(sql,{
-                                            id_obra:id_Obra,id_cliente:idCliente,NombreCliente:Nombre,AnticipoFinanciero: req.body.ImporteAnticipoFinanciero,Cuota1:req.body.ImporteCuota,Cuota2:req.body.ImporteCuota,Cuota3:req.body.ImporteCuota, Cuota4:req.body.ImporteCuota,Cuota5:req.body.ImporteCuota,Cuota6:req.body.ImporteCuota,Cuota7:req.body.ImporteCuota,Cuota8:req.body.ImporteCuota,Cuota9:req.body.ImporteCuota,Cuota10:req.body.ImporteCuota,Cuota11:req.body.ImporteCuota
-                                        },(error,results)=>{
-                                            if(error) console.log(error);
-                                        })     
-                                    resolve();
-                                        break;
-                                    case '12':
-                                        connection.query(sql,{
-                                            id_obra:id_Obra,id_cliente:idCliente,NombreCliente:Nombre,AnticipoFinanciero: req.body.ImporteAnticipoFinanciero,Cuota1:req.body.ImporteCuota,Cuota2:req.body.ImporteCuota,Cuota3:req.body.ImporteCuota, Cuota4:req.body.ImporteCuota,Cuota5:req.body.ImporteCuota,Cuota6:req.body.ImporteCuota,Cuota7:req.body.ImporteCuota,Cuota8:req.body.ImporteCuota,Cuota9:req.body.ImporteCuota,Cuota10:req.body.ImporteCuota,Cuota11:req.body.ImporteCuota,Cuota12:req.body.ImporteCuota
-                                        },(error,results)=>{
-                                            if(error) console.log(error);
-                                        })     
-                                    resolve();
-                                        break;
-                            
-                                default:
-                                    resolve();
-                                    break;
-                            }  
                                 }
                             })
                             
