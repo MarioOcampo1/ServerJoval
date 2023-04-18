@@ -685,14 +685,16 @@ router.post('/GenerarComprobante', (req, res,next) => {
     var anio,mes,dia;
     anio = fecha.getFullYear();
     mes= fecha.getMonth();
+    mes = mes+1;
     dia= fecha.getDate();
+    dia= dia+1;
     let FechaPago = (dia+'/'+mes+'/'+anio);
     var ObservacionesDelPago = req.body.ObservacionesDelPago;
     var Obra = req.body.Obra;
     var id_Obra;
     var FormaDePago = req.body.FormaDePago;
     var id_Cobro;
-    sql = 'Select id from obras where Nombre =?';
+    sql = 'SELECT id FROM obras WHERE Nombre =?';
     connection.query(sql, [Obra], (error, results) => {
         if (error) console.log(error);
 
@@ -707,8 +709,7 @@ router.post('/GenerarComprobante', (req, res,next) => {
         reject();
         }
         if (results.length > 0) {
-            
-                var a ;
+            var a ;
                 JSON.parse((JSON.stringify(results)), function (k, v) {
                     if (k == Concepto) {
                         a = parseInt(v);
@@ -716,16 +717,17 @@ router.post('/GenerarComprobante', (req, res,next) => {
     
                 });
                 console.log("El cliente seleccionado tiene pagos existentes. Actualizando pagos.")
-                if (a == null) {
-                } else {
-                  
-                    sumaDeTotalesPorConcepto =ValorIngresado + a;
+                if (a == null || a == "") {
+                    sumaDeTotalesPorConcepto = ValorIngresado;
+                } 
+                else {
+                sumaDeTotalesPorConcepto =(ValorIngresado + a);
                 }
                 sql = 'UPDATE finanzas_clientes_por_obra_cobros SET ' + Concepto + ' = ' + sumaDeTotalesPorConcepto + ', FechaPago'+Concepto+' = "'+FechaPago+'" WHERE ID_cliente = ' + ID + ' ;';
                 connection.query(sql, (error, results) => {
                     if (error) console.log(error);
                 })
-                sql = 'Select MAX(id_cobro) as id_Cobro from finanzas_clientes_por_obra_cobros WHERE id_Obra=' + id_Obra + '';
+                sql = 'SELECT id_Cobro AS id_Cobro FROM finanzas_clientes_por_obra_cobros WHERE ID_cliente=' + ID + ' ;';
                
                 connection.query(sql, (error, results) => {
                     if (error) console.log(error);
