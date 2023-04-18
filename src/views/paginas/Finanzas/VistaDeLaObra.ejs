@@ -1006,9 +1006,7 @@
     </div>
   </div>
   <form action="/GenerarComprobante" method="post">
-
-
-  <div class="container-fluid">
+<div class="container-fluid">
     <div class="modal fade" id="ModalNuevoPagoObras2" tabindex="-1" role="dialog" aria-labelledby="ModalNuevoPagoObras2Label" aria-hidden="true">
       <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
@@ -1031,7 +1029,7 @@
 
           </div>
             <div class="modal-body">
-              <input type="number" name="" id="" hidden>
+              <input type="number" name="IDCliente" id="IDCliente" hidden>
               <div class="container">
                 <div class="d-inline border">
                   Obra: <%=NombreObra%>
@@ -1049,8 +1047,9 @@
                 <div class="input-group mb-3 ">
                   <label class="input-group-text" for="Concepto">Concepto</label>
                   <select class="form-select" name="Concepto" id="Concepto" aria-label="Seleccione el pago">
-                    <!-- <input required list="ConceptosDePago"  class="form-control" type="text" name="Concepto" id="Concepto"> -->
+                    <!-- <input required list="ConceptosDePago" defaultValue=""  class="form-control" type="text" name="Concepto" id="Concepto"> -->
                     <!-- <datalist id="ConceptosDePago"> -->
+                    <option value="" selected> </option>
                     <option value="AnticipoFinanciero">Anticipo Financiero</option>
                     <option value="Cuota1">Cuota 1</option>
                     <option value="Cuota2">Cuota 2</option>
