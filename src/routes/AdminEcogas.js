@@ -2328,6 +2328,10 @@ router.post("/actObrasCarpEcogas/:id", upload.none(), function (req, res) {
   var Nombre = req.body.Nombre;
   var sql = "";
   var idObra = id;
+var InspectorAsignado= req.body.InspectorAsignado;
+var FechaInicioTrabajos = req.body.FechaComienzoObra;
+var FechaFinDeObra = req.body.FechaFinDeObra;
+var FechaPruebaHermeticidad = req.body.FechaPruebaHermeticidad;
 
   var ActaDeInicio = req.body.ActasDeInicio;
   var LibroOrdenesServicio = req.body.LibroOrdenesServicio;
@@ -2340,8 +2344,7 @@ router.post("/actObrasCarpEcogas/:id", upload.none(), function (req, res) {
   var ConformeDePermisos = req.body.ConformeDePermisos;
   var PruebaHermeticidad = req.body.PruebaHermeticidad;
   var InformesFinales = req.body.InformesFinales;
-  var FechaInicioTrabajos = req.body.FechaInicioTrabajos;
-  var FechaFindeobra = req.body.FechaFindeobra;
+
   // Variables externas a Caos
   var PCEntregadoInspeccion = req.body.PCEntregadoInspeccion;
   var AvisosDeObra = req.body.AvisosDeObra;
@@ -2401,72 +2404,16 @@ router.post("/actObrasCarpEcogas/:id", upload.none(), function (req, res) {
     }
   );
 
-  sql = "Update adminecogas_tareas_por_carpeta Set ? where Nombre=?";
-  if (FechaInicioTrabajos) {
-    if (FechaFindeobra) {
-      connection.query(
-        sql,
-        [
-          {
-            ActaDeInicio: ActaDeInicio,
-            Permisos: Permisos,
-            Interferencias: Interferencias,
-            LibroOrdenesServicio: LibroOrdenesServicio,
-            LibroNotasPedido: LibroNotasPedido,
-            PCEntregadoInspeccion: PCEntregadoInspeccion,
-            AvisosDeObra: AvisosDeObra,
-            CronogramaFirmadoComitente: CronogramaFirmadoComitente,
-            OrdenServicio: OrdenServicio,
-            FechaInicioTrabajos: FechaInicioTrabajos,
-            FechaFindeobra: FechaFindeobra,
-          },
-          Nombre,
-        ],
-        (error, results) => {
-          if (error) {
-            console.log(error);
-          }
-        }
-      );
-    } else {
-      connection.query(
-        sql,
-        [
-          {
-            ActaDeInicio: ActaDeInicio,
-            Permisos: Permisos,
-            Interferencias: Interferencias,
-            LibroOrdenesServicio: LibroOrdenesServicio,
-            LibroNotasPedido: LibroNotasPedido,
-            PCEntregadoInspeccion: PCEntregadoInspeccion,
-            AvisosDeObra: AvisosDeObra,
-            CronogramaFirmadoComitente: CronogramaFirmadoComitente,
-            OrdenServicio: OrdenServicio,
-            FechaInicioTrabajos: FechaInicioTrabajos,
-          },
-          Nombre,
-        ],
-        (error, results) => {
-          if (error) {
-            console.log(error);
-          }
-        }
-      );
-    }
-  } else {
+  sql = "Update adminecogas_tareas_por_carpeta Set ? WHERE Nombre=?";
+
+ 
+            
+  if (FechaInicioTrabajos[1].length>0 ) {
     connection.query(
       sql,
       [
         {
-          ActaDeInicio: ActaDeInicio,
-          Permisos: Permisos,
-          Interferencias: Interferencias,
-          LibroOrdenesServicio: LibroOrdenesServicio,
-          LibroNotasPedido: LibroNotasPedido,
-          PCEntregadoInspeccion: PCEntregadoInspeccion,
-          AvisosDeObra: AvisosDeObra,
-          CronogramaFirmadoComitente: CronogramaFirmadoComitente,
-          OrdenServicio: OrdenServicio,
+          FechaInicioTrabajos: FechaInicioTrabajos[1],
         },
         Nombre,
       ],
@@ -2477,6 +2424,63 @@ router.post("/actObrasCarpEcogas/:id", upload.none(), function (req, res) {
       }
     );
   }
+   
+    if (FechaFinDeObra[1].length>0 ) {
+      connection.query(
+        sql,
+        [
+          {
+            FechaFinDeObra: FechaFinDeObra[1],
+          },
+          Nombre,
+        ],
+        (error, results) => {
+          if (error) {
+            console.log(error);
+          }
+        }
+      );
+    }
+      if(FechaPruebaHermeticidad[1].length>0 ){
+        connection.query(
+          sql,
+          [
+            {
+              FechaPruebaHermeticidad:FechaPruebaHermeticidad[1]
+            },
+            Nombre,
+          ],
+          (error, results) => {
+            if (error) {
+              console.log(error);
+            }
+          }
+        );
+      }
+      connection.query(
+        sql,
+        [
+          {
+            ActaDeInicio: ActaDeInicio,
+            Permisos: Permisos,
+            Interferencias: Interferencias,
+            LibroOrdenesServicio: LibroOrdenesServicio,
+            LibroNotasPedido: LibroNotasPedido,
+            PCEntregadoInspeccion: PCEntregadoInspeccion,
+            AvisosDeObra: AvisosDeObra,
+            CronogramaFirmadoComitente: CronogramaFirmadoComitente,
+            OrdenServicio: OrdenServicio,InspectorAsignado:InspectorAsignado,
+          },
+          Nombre,
+        ],
+        (error, results) => {
+          if (error) {
+            console.log(error);
+          }
+        }
+      );
+       
+  
 
   //Seccion Actualizar Tareas
 

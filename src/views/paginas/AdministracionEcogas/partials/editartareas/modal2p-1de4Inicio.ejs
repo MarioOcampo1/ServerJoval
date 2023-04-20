@@ -127,6 +127,88 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-6 border">
+                                            <div class="card-title text-primary" onclick="document.getElementById('InspectorAsignadobody').style.display= 'block'">
+
+                                                <label for="InspectorAsignado">Inspector asignado</label>
+
+                                            </div>
+                                            <div class="text-success" id="EstadoTarea">
+                                                Nombre del inspector: <%=tareasporcarpeta.InspectorAsignado%>
+                                            </div>
+                                            <div class="card-text" id="InspectorAsignadobody" style="display: none;">
+                                                <div class="input-group ">
+                                                    <div class=" p-1">
+                                                        <label class="clm-sm-2 col-form-label" for="InspectorAsignado">Nombre:</label>
+                                                        <input id="InspectorAsignado" class="form-control" type="text"
+                                                            name="InspectorAsignado"
+                                                            value="<%= tareasporcarpeta.InspectorAsignado%>" checked>
+                                                    </div>
+                                                   </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-6 border p-1 bg-dark text-white formularioEditarTareasALlenar"
+                                            id="form1InspectorAsignado" style="display: none;">
+<input type="checkbox" name="Tarea" value="Mail Autorizacion" id=""  checked hidden>
+                                            <div class="row ">
+                                                <div class="col">
+                                                    <span>
+                                                        Responsable de la Tarea:
+                                                    </span>
+                                                    <select name="ResponsableDeTarea" id="">
+                                                         <option value="" selected></option>
+                                                    <%usuariosregistrados.forEach((usuario)=>{%>
+                                                        <option value="<%=usuario.Nombre%>"><%=usuario.Nombre%></option>
+                                                        <%})%>
+                                                        
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row pb-1 ">
+                                                <div class="input-group-sm">
+                                                    <span class="">Tarea Realizada:</span>
+                                                    <input class="form-control" type="text" name="TareaRealizada"
+                                                        id="TareaRealizada" placeholder="Ingrese ultima tarea realizada"
+                                                        aria-describedby="TareaRealizada">
+                                                </div>
+                                            </div>
+                                            <div class="row pb-1">
+                                                <div class="input-group-sm">
+                                                    <span class="">Proxima Tarea:</span>
+                                                    <input class="form-control" type="text" name="ProximaTarea"
+                                                        id="ProximaTarea" placeholder="Ingrese la proxima tarea"
+                                                        aria-describedby="ProximaTarea">
+                                                </div>
+                                            </div>
+                                            <div class="row pb-1">
+                                                <div class="input-group-sm">
+                                                    <span class="">Fecha Limite:</span>
+                                                    <input class="form-control" type="date" name="Fecha_limite"
+                                                        id="Fecha_limite" placeholder="Ingrese ultima tarea realizada"
+                                                        aria-describedby="Fecha_limite">
+
+                                                </div>
+
+                                            </div>
+                                            <div class="row-p-1">
+                                                <div class="input-group mt-1">
+                                                    <input type="file" class="form-control" placeholder="Archivo"
+                                                        aria-label="Archivo">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="input-group-sm pt-2">
+
+                                                </div>
+
+
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6 border">
                                             <div class="card-title text-primary" onclick="document.getElementById('plantrabajobody').style.display= 'block'">
                                                 <label for="PlanDeTrabajo">Plan de trabajo</label>
                                             </div>
