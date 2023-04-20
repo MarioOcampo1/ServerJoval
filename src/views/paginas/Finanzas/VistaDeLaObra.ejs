@@ -53,6 +53,8 @@
       <thead class="thead-default">
         <tr>
           <th>Cliente</th>
+          <th>Domicilio</th>
+          <th>DNI</th>
           <th>Anticipo financiero </th>
           <th>Cuota 1 </th>
           <th>Cuota 2 </th>
@@ -200,6 +202,9 @@
               <%= cliente.NombreCliente%>
             </button>
           </td>
+          <td><%= cliente.Direccion%></td>
+
+          <td> <%= cliente.DNICliente%></td>
           <%if(cliente.AnticipoFinanciero==null || cliente.AnticipoFinanciero=='0000' ||
                   cliente.AnticipoFinanciero==0 ){%>
           <td class="text-center text-light bg-danger">
