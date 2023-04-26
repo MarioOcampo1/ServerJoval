@@ -1209,7 +1209,7 @@ router.post("/act1pCarpEcogas/:id", upload.none(), function (req, res) {
     (CuestionarioRelevamientoAmbiental == "ok"|| CuestionarioRelevamientoAmbiental == "Ok") &&
     (EstudioImpactoAmbientalPrevio == "ok" || EstudioImpactoAmbientalPrevio == "Ok"||
       EstudioImpactoAmbientalPrevio == "NC" ||
-      EstudioImpactoAmbientalPrevio == "ok(Previo" ||
+      EstudioImpactoAmbientalPrevio == "ok(Previo)" ||
       EstudioImpactoAmbientalPrevio == "NC(Previo)" || EstudioImpactoAmbientalPrevio == "NC") &&
     (DDJJInicialAmbiental == "ok"|| DDJJInicialAmbiental == "Ok") &&
     (ListaVerificacionAmbiental == "ok"||ListaVerificacionAmbiental == "Ok" || ListaVerificacionAmbiental == "NC")
@@ -1285,7 +1285,7 @@ router.post("/act1pCarpEcogas/:id", upload.none(), function (req, res) {
       {
         Mensura: Mensura,
         TituloDePropiedad: TituloDePropiedad,
-        EstudioImpactoAmbiental: EstudioImpactoAmbientalPrevio + "(Previo)",
+        EstudioImpactoAmbiental: EstudioImpactoAmbientalPrevio,
         Contrato: Contrato,
         Presupuesto: Presupuesto,
         Sucedaneo: Sucedaneo,
