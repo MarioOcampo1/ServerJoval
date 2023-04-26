@@ -70,6 +70,7 @@
                         <tr class="m-0 p-0">
                             <th id="DatosCarpeta"  class="text-center m-0 text-light bg-dark" value="0"  colspan="3">
                                 <button class="btn text-light">Datos de carpeta</button>
+                                
                             </th>
                             <th id="EncabezadoPreliminar" class="SeccionTabla text-center m-0 text-light bg-dark"  value="1" colspan="3">
                                 <button id="Preliminar" class="btn text-light">Preliminar</button>
@@ -170,13 +171,13 @@
                                 <button class="btn"> Conformes </button>
                             </th>
                             <th id="EncabezadoCaos" class="text-center  MenuSuperior">
-                                <button class="btn"> Pr. hermeticidad </button>
+                                <button class="btn"> Prueba hermeticidad </button>
                             </th>
                             <th id="EncabezadoCaos" class="text-center  MenuSuperior">
                                 <button class="btn"> Info. finales </button>
                             </th>
                             <th id="EncabezadoFin" class="text-center  MenuSuperior">
-                                <button class="btn"> Pr. final </button>
+                                <button class="btn"> Presentación final </button>
                             </th>
                             <th id="EncabezadoFin" class="text-center  MenuSuperior">
                                 <button class="btn"> Habilitación de obra </button>
@@ -200,6 +201,8 @@
                                     <a href="/historialcarpeta/<%=clientes.Nombre%>">
                                     <%=clientes.Estado%>
                                     </a>
+                                    
+                                    <button type="button" class="btn btn-secondary" data-bs-toggle="popover" title="Popup title" data-bs-content="Popup content"><i class="bi bi-info-circle-fill" id="<%=clientes.Nombre%>INFO" onclick="MostrarInfoCliente(this.id,'<%=clientes.Nombre%>');"></i></button>
                                         <%if(clientes.Estado=="Sin presentar" ){%>
                                             <!-- <progress max="6" value="0"></progress> -->
                                             <%}%>
@@ -235,32 +238,28 @@
                                         <%=clientes.DocumentacionTerreno%>
                                     </td>
                                     <%}%>
-                                    <%if( clientes.DocumentacionTerreno=="Presentado"){%>
+                                    <%if(clientes.DocumentacionTerreno=="Presentado"){%>
                                         <td id="EncabezadoPreliminar" class="text-dark bg-info">
                                             <%=clientes.DocumentacionTerreno%>
                                         </td>
                                         <%}%>
-                                    <%if(clientes.DocumentacionTerreno=="EnGestion" ){%>
+                                    <%if(clientes.DocumentacionTerreno=="EnGestion" || clientes.DocumentacionTerreno=="Solicitado" ||  clientes.DocumentacionTerreno=="Observado" ){%>
                                         <td id="EncabezadoPreliminar" class="text-dark bg-warning">
                                             <%=clientes.DocumentacionTerreno%>
                                         </td>
                                         <%}%>
-                                        <%if(clientes.DocumentacionTerreno=="Sin presentar"){%>
+                                        <%if(clientes.DocumentacionTerreno=="Sin presentar" || clientes.DocumentacionTerreno=="Pedir"){%>
                                             <td id="EncabezadoPreliminar" class="text-light bg-danger">
                                                 <%=clientes.DocumentacionTerreno%>
                                             </td>
                                             <%}%>
-                                         <%if(clientes.DocumentacionTerreno!="ok"&& clientes.DocumentacionTerreno!="Presentado"&& clientes.DocumentacionTerreno!="EnGestion"&& clientes.DocumentacionTerreno!="Presentado"&& clientes.DocumentacionTerreno!="Sin presentar"){%>
-                                            <%if(clientes.DocumentacionTerreno==null||clientes.DocumentacionTerreno==""){ %>
-                                                <td id="EncabezadoPreliminar" class="text-light bg-danger">
-                                                 !
-                                                </td>
-                                                <%}else{%>
-                                            <td id="EncabezadoPreliminar" class="text-dark">
+                                         <%if(clientes.DocumentacionTerreno!="ok"&& clientes.DocumentacionTerreno!="Sin Presentar"&& clientes.DocumentacionTerreno!="Observado"&& clientes.DocumentacionTerreno!="Sin recibir"&& clientes.DocumentacionTerreno!="Pedir"&& clientes.DocumentacionTerreno!="Presentado"&& clientes.DocumentacionTerreno!="EnGestion"&& clientes.DocumentacionTerreno!="Sin presentar"){%>
+                                           
+                                            <td id="EncabezadoPreliminar" class="text-secondary">
                                                 <%=clientes.DocumentacionTerreno%>
                                             </td>
                                             
-                                            <%}}%>
+                                            <%}%>
                                             
                                          <!-- // -->
                                         <!-- Documentacion Sociedad -->
@@ -269,29 +268,27 @@
                                                 <%=clientes.DocumentacionSociedad%>
                                             </td>
                                             <%}%>
-                                            <%if( clientes.DocumentacionSociedad=="Presentado"){%>
+                                            <%if(clientes.DocumentacionSociedad=="Presentado"){%>
                                                 <td id="EncabezadoPreliminar" class="text-dark bg-info">
                                                     <%=clientes.DocumentacionSociedad%>
                                                 </td>
                                                 <%}%>
-                                            <%if(clientes.DocumentacionSociedad=="EnGestion" ){%>
+                                            <%if(clientes.DocumentacionSociedad=="EnGestion" || clientes.DocumentacionSociedad=="Solicitado" ||  clientes.DocumentacionSociedad=="Observado" ){%>
                                                 <td id="EncabezadoPreliminar" class="text-dark bg-warning">
                                                     <%=clientes.DocumentacionSociedad%>
                                                 </td>
                                                 <%}%>
 
-                                                <%if(clientes.DocumentacionSociedad=="Sin presentar"){%>
+                                                <%if(clientes.DocumentacionSociedad=="Sin presentar" || clientes.DocumentacionSociedad=="Pedir"){%>
                                                     <td id="EncabezadoPreliminar" class="text-light bg-danger">
                                                         <%=clientes.DocumentacionSociedad%>
                                                     </td>
                                                     <%}%>
-                                                    <%if(clientes.DocumentacionSociedad!="ok"&& clientes.DocumentacionSociedad!="EnGestion"&& clientes.DocumentacionSociedad!="Presentado"&& clientes.DocumentacionSociedad!="Presentado" && clientes.DocumentacionSociedad!="Sin presentar"){%>
-                                                        <%if(clientes.DocumentacionSociedad==null||clientes.DocumentacionSociedad==""){ %>
-                                                            <td id="EncabezadoPreliminar" class="text-light bg-danger">
-                                                             !
+                                                    <%if(clientes.DocumentacionSociedad!="ok"&& clientes.DocumentacionSociedad!="Sin Presentar"&& clientes.DocumentacionSociedad!="Observado"&& clientes.DocumentacionSociedad!="Sin recibir"&& clientes.DocumentacionSociedad!="Pedir"&& clientes.DocumentacionSociedad!="EnGestion"&& clientes.DocumentacionSociedad!="Presentado"&& clientes.DocumentacionSociedad!="Presentado" && clientes.DocumentacionSociedad!="Sin presentar"){%>
+                                                        <td id="EncabezadoPreliminar" class="text-light bg-danger">
+                                                                <%=clientes.secondary%>
                                                             </td>
-                                                            <%}%>  
-                                                        </td>
+                                                        
                                                         <%}%>
                                                        
                             <!-- // -->
@@ -301,31 +298,27 @@
                                     <%=clientes.DocumentacionContractual%>
                                 </td>
                                 <%}%>
-                                <%if( clientes.DocumentacionContractual=="Presentado"){%>
+                                <%if(clientes.DocumentacionContractual=="Presentado"){%>
                                     <td id="EncabezadoPreliminar" class="text-dark bg-info">
                                         <%=clientes.DocumentacionContractual%>
                                     </td>
                                     <%}%>
-                                <%if(clientes.DocumentacionContractual=="EnGestion" ){%>
+                                <%if(clientes.DocumentacionContractual=="EnGestion" || clientes.DocumentacionContractual=="Solicitado" ||  clientes.DocumentacionContractual=="Observado" ){%>
                                     <td id="EncabezadoPreliminar" class="text-dark bg-warning">
                                         <%=clientes.DocumentacionContractual%>
                                     </td>
                                     <%}%>
-                                    <%if(clientes.DocumentacionContractual=="Sin presentar"){%>
+                                    <%if(clientes.DocumentacionContractual=="Sin presentar"|| clientes.DocumentacionContractual=="Pedir"){%>
                                         <td id="EncabezadoPreliminar" class="text-light bg-danger">
                                             <%=clientes.DocumentacionContractual%>
                                         </td>
                                         <%}%>
-                                        <%if(clientes.DocumentacionContractual!="ok"&& clientes.DocumentacionContractual!="EnGestion" && clientes.DocumentacionContractual!="Presentado"&& clientes.DocumentacionContractual!="Sin presentar"){%>
-                                            <%if(clientes.DocumentacionContractual==null||clientes.DocumentacionContractual==""){ %>
-                                                <td id="EncabezadoPreliminar" class="text-light bg-danger">
-                                                 !
-                                                </td>
-                                                <%}else{%>
-                                            <td id="EncabezadoPreliminar" class="text-dark">
+                                        <%if(clientes.DocumentacionContractual!="ok"&& clientes.DocumentacionContractual!="Sin Presentar"&& clientes.DocumentacionContractual!="Observado"&& clientes.DocumentacionContractual!="Sin recibir"&& clientes.DocumentacionContractual!="Pedir"&& clientes.DocumentacionContractual!="EnGestion" && clientes.DocumentacionContractual!="Presentado"&& clientes.DocumentacionContractual!="Sin presentar"){%>
+                                            
+                                            <td id="EncabezadoPreliminar" class="text-secondary">
                                                 <%=clientes.DocumentacionContractual%>
                                             </td>
-                                            <%}}%>
+                                            <%}%>
                                            
                               <!-- // -->
                               <!-- Comercial  -->
@@ -334,31 +327,27 @@
                                     <%=clientes.Comercial%>
                                 </td>
                                 <%}%>
-                                <%if( clientes.Comercial=="Presentado"){%>
+                                <%if(clientes.Comercial=="Presentado"){%>
                                     <td id="Encabezado1P" class="text-dark bg-info">
                                         <%=clientes.Comercial%>
                                     </td>
                                     <%}%>
-                                <%if(clientes.Comercial=="EnGestion" ){%>
+                                <%if(clientes.Comercial=="EnGestion" || clientes.Comercial=="Solicitado" ||  clientes.Comercial=="Observado" ){%>
                                     <td id="Encabezado1P" class="text-dark bg-warning">
                                         <%=clientes.Comercial%>
                                     </td>
                                     <%}%>
-                                    <%if(clientes.Comercial=="Sin presentar" || clientes.Comercial=="Observado"){%>
+                                    <%if(clientes.Comercial=="Sin presentar"|| clientes.Comercial=="Pedir" || clientes.Comercial=="Observado"){%>
                                         <td id="Encabezado1P" class="text-light bg-danger">
                                             <%=clientes.Comercial%>
                                         </td>
                                         <%}%>
-                                        <%if(clientes.Comercial!="ok"&& clientes.Comercial!="EnGestion" && clientes.Comercial!="Presentado"&& clientes.Comercial!="Sin presentar"&& clientes.Comercial!="Observado"){%>
-                                            <%if(clientes.Comercial==null||clientes.Comercial==""){ %>
-                                                <td id="Encabezado1P" class="text-light bg-danger">
-                                                 !
-                                                </td>
-                                                <%}else{%>
-                                            <td id="Encabezado1P" class="text-dark">
+                                        <%if(clientes.Comercial!="ok"&& clientes.Comercial!="Sin Presentar"&& clientes.Comercial!="Observado"&& clientes.Comercial!="Sin recibir"&& clientes.Comercial!="Pedir"&& clientes.Comercial!="EnGestion" && clientes.Comercial!="Presentado"&& clientes.Comercial!="Sin presentar"&& clientes.Comercial!="Observado"){%>
+                                            
+                                            <td id="Encabezado1P" class="text-secondary">
                                                 <%=clientes.Comercial%>
                                             </td>
-                                            <%}}%>
+                                            <%}%>
                                            
                             <!-- // -->
                             <!-- Tecnica  -->
@@ -367,27 +356,27 @@
                                     <%=clientes.Tecnica%>
                                 </td>
                                 <%}%>
-                                <%if( clientes.Tecnica=="Presentado"){%>
+                                <%if(clientes.Tecnica=="Presentado"){%>
                                     <td id="Encabezado1P" class="text-dark bg-info">
                                         <%=clientes.Tecnica%> 
                                     </td>
                                     <%}%>
-                                <%if(clientes.Tecnica=="EnGestion" ){%>
+                                <%if(clientes.Tecnica=="EnGestion" || clientes.Tecnica=="Solicitado" ||  clientes.Tecnica=="Observado" ){%>
                                     <td id="Encabezado1P" class="text-dark bg-warning">
                                         <%=clientes.Tecnica%> 
                                     </td>
                                     <%}%>
-                                    <%if(clientes.Tecnica=="Sin presentar"|| clientes.Tecnica=="Observado"){%>
+                                    <%if(clientes.Tecnica=="Sin presentar"|| clientes.Tecnica=="Pedir"|| clientes.Tecnica=="Observado"){%>
                                         <td id="Encabezado1P" class="text-light bg-danger">
                                             <%=clientes.Tecnica%>
                                         </td>
                                         <%}%>
-                                        <%if(clientes.Tecnica!="ok"&& clientes.Tecnica!="EnGestion" && clientes.Tecnica!="Presentado"&& clientes.Tecnica!="Sin presentar"){%>
-                                            <%if(clientes.Tecnica==null||clientes.Tecnica==""){ %>
-                                                <td id="Encabezado1P" class="text-light bg-danger">
-                                                 !
+                                        <%if(clientes.Tecnica!="ok"&& clientes.Tecnica!="Sin Presentar"&& clientes.Tecnica!="Observado"&& clientes.Tecnica!="Sin recibir"&& clientes.Tecnica!="Pedir"&& clientes.Tecnica!="EnGestion" && clientes.Tecnica!="Presentado"&& clientes.Tecnica!="Sin presentar"){%>
+                                            
+                                                <td id="Encabezado1P" class="text-light sinbackground">
+                                                 <%=clientes.Tecnica%>
                                                 </td>
-                                                <%}%>
+                                                
                                            
                                             <%}%>
                                            
@@ -398,32 +387,28 @@
                                         <%=clientes.PermisosEspeciales%>
                                     </td>
                                     <%}%>
-                                    <%if( clientes.PermisosEspeciales=="Presentado"){%>
+                                    <%if(clientes.PermisosEspeciales=="Presentado"){%>
                                         <td id="Encabezado1P" class="text-dark bg-info">
                                             <%=clientes.PermisosEspeciales%> 
                                         </td>
                                         <%}%>
-                                    <%if(clientes.PermisosEspeciales=="EnGestion" ){%>
+                                    <%if(clientes.PermisosEspeciales=="EnGestion" || clientes.PermisosEspeciales=="Solicitado" ||  clientes.PermisosEspeciales=="Observado" ){%>
                                         <td id="Encabezado1P" class="text-dark bg-warning">
                                             <%=clientes.PermisosEspeciales%> 
                                         </td>
                                         <%}%>
-                                        <%if(clientes.PermisosEspeciales=="Sin presentar"){%>
+                                        <%if(clientes.PermisosEspeciales=="Sin presentar"|| clientes.PermisosEspeciales=="Pedir"){%>
                                             <td id="Encabezado1P" class="text-light bg-danger">
                                                 <%=clientes.PermisosEspeciales%> 
                                             </td>
                                             <%}%>
-                                            <%if(clientes.PermisosEspeciales=="Observado" || clientes.PermisosEspeciales=="Pedir"){%>
-                                                <td id="Encabezado1P" class="text-light bg-danger">
-                                                    <%=clientes.PermisosEspeciales%> 
-                                                </td>
-                                                <%}%>
-                                                <%if(clientes.PermisosEspeciales!="ok"&& clientes.PermisosEspeciales!="EnGestion"&& clientes.PermisosEspeciales!="Presentado"&& clientes.PermisosEspeciales!="Sin presentar"&& clientes.PermisosEspeciales!="Observado"){%>
-                                                    <%if(clientes.PermisosEspeciales==null||clientes.PermisosEspeciales==""){ %>
-                                                        <td id="Encabezado1P" class="text-dark bg-danger">
-                                                         !
+                                            
+                                                <%if(clientes.PermisosEspeciales!="ok"&& clientes.PermisosEspeciales!="Sin Presentar"&& clientes.PermisosEspeciales!="Observado"&& clientes.PermisosEspeciales!="Sin recibir"&& clientes.PermisosEspeciales!="Pedir"&& clientes.PermisosEspeciales!="EnGestion"&& clientes.PermisosEspeciales!="Presentado"&& clientes.PermisosEspeciales!="Sin presentar"&& clientes.PermisosEspeciales!="Observado"){%>
+                                                
+                                                        <td id="Encabezado1P" class="text-dark sinbackground">
+                                                         <%=clientes.PermisosEspeciales%>
                                                         </td>
-                                                        <%}%>
+                                                
                                                     <%}%>
                                                      <!-- DocumentacionAmbiental  -->
                                  <%if(clientes.DocumentacionAmbiental=="ok" || clientes.DocumentacionAmbiental=="NC"){%>
@@ -431,32 +416,28 @@
                                         <%=clientes.DocumentacionAmbiental%>
                                     </td>
                                     <%}%>
-                                    <%if( clientes.DocumentacionAmbiental=="Presentado"){%>
+                                    <%if(clientes.DocumentacionAmbiental=="Presentado"){%>
                                         <td id="Encabezado1P" class="text-dark bg-info">
                                             <%=clientes.DocumentacionAmbiental%> 
                                         </td>
                                         <%}%>
-                                    <%if(clientes.DocumentacionAmbiental=="EnGestion" ){%>
+                                    <%if(clientes.DocumentacionAmbiental=="EnGestion" || clientes.DocumentacionAmbiental=="Solicitado" ||  clientes.DocumentacionAmbiental=="Observado" ){%>
                                         <td id="Encabezado1P" class="text-dark bg-warning">
                                             <%=clientes.DocumentacionAmbiental%> 
                                         </td>
                                         <%}%>
-                                        <%if(clientes.DocumentacionAmbiental=="Sin presentar"){%>
+                                        <%if(clientes.DocumentacionAmbiental=="Sin presentar"|| clientes.DocumentacionAmbiental=="Pedir"){%>
                                             <td id="Encabezado1P" class="text-light bg-danger">
                                                 <%=clientes.DocumentacionAmbiental%> 
                                             </td>
                                             <%}%>
-                                            <%if(clientes.DocumentacionAmbiental=="Observado" || clientes.DocumentacionAmbiental=="Pedir"){%>
-                                                <td id="Encabezado1P" class="text-light bg-danger">
-                                                    <%=clientes.DocumentacionAmbiental%> 
-                                                </td>
-                                                <%}%>
-                                                <%if(clientes.DocumentacionAmbiental!="ok"&& clientes.DocumentacionAmbiental!="EnGestion"&& clientes.DocumentacionAmbiental!="Presentado"&& clientes.DocumentacionAmbiental!="Sin presentar"&& clientes.DocumentacionAmbiental!="Observado"){%>
-                                                    <%if(clientes.DocumentacionAmbiental==null||clientes.DocumentacionAmbiental==""){ %>
-                                                        <td id="Encabezado1P" class="text-dark bg-danger">
-                                                         !
+                                            
+                                                <%if(clientes.DocumentacionAmbiental!="ok"&& clientes.DocumentacionAmbiental!="Sin Presentar"&& clientes.DocumentacionAmbiental!="Observado"&& clientes.DocumentacionAmbiental!="Sin recibir"&& clientes.DocumentacionAmbiental!="Pedir"&& clientes.DocumentacionAmbiental!="EnGestion"&& clientes.DocumentacionAmbiental!="Presentado"&& clientes.DocumentacionAmbiental!="Sin presentar"&& clientes.DocumentacionAmbiental!="Observado"){%>
+                                                    
+                                                        <td id="Encabezado1P" class="text-dark sinbackground">
+                                                         <%=clientes.DocumentacionAmbiental%>
                                                         </td>
-                                                        <%}%>
+                                                    
                                                     <%}%>
                                              <!-- // -->
                              <!-- Mail de autorización -->
@@ -465,17 +446,17 @@
                                     <%=clientes.MailAutorizacion%>
                                 </td>
                                 <%}%>
-                                    <%if(clientes.MailAutorizacion=="Sin presentar"|| clientes.MailAutorizacion=="No Recibido"){%>
+                                    <%if(clientes.MailAutorizacion=="Sin presentar"|| clientes.MailAutorizacion=="Pedir"|| clientes.MailAutorizacion=="No Recibido"){%>
                                         <td id="Encabezado2P" class="text-light bg-danger">
                                             <%=clientes.MailAutorizacion%>
                                         </td>
                                         <%}%>
-                                        <%if((clientes.MailAutorizacion!="Sin presentar"|| clientes.MailAutorizacion!="No Recibido")&&(clientes.MailAutorizacion!="Recibido")&&(clientes.MailAutorizacion!="ok")){%>
-                                            <%if(clientes.MailAutorizacion==null||clientes.MailAutorizacion==""){ %>
-                                                <td id="Encabezado2P" class="text-dark bg-danger">
-                                                    Sin cargar
+                                        <%if((clientes.MailAutorizacion!="Sin presentar"|| clientes.MailAutorizacion!="No Recibido")&&(clientes.MailAutorizacion!="Recibido")&&(clientes.MailAutorizacion!="Pedir")&&(clientes.MailAutorizacion!="ok")){%>
+                                            
+                                                <td id="Encabezado2P" class="text-dark sinbackground">
+                                                    <%=clientes.MailAutorizacion%>
                                                 </td>
-                                                <%}%> 
+                                            
                                             <%}%>
                                                 
                              <!-- // -->
@@ -485,22 +466,22 @@
                                     <%=clientes.DocumentacionObra%>
                                 </td>
                                 <%}%>
-                                <%if(clientes.DocumentacionObra=="EnGestion"){%>
+                                <%if(clientes.DocumentacionObra=="EnGestion" || clientes.DocumentacionObra=="Solicitado" || clientes.DocumentacionObra=="Observado"){%>
                                     <td id="Encabezado2P" class="text-dark bg-warning">
                                         <%=clientes.DocumentacionObra%> 
                                     </td>
                                     <%}%>
-                                    <%if(clientes.DocumentacionObra=="Sin presentar"){%>
+                                    <%if(clientes.DocumentacionObra=="Sin presentar"|| clientes.DocumentacionObra=="Pedir"){%>
                                         <td id="Encabezado2P" class="text-light bg-danger">
                                             <%=clientes.DocumentacionObra%>
                                         </td>
                                         <%}%>
-                                        <%if((clientes.DocumentacionObra!="Sin presentar")&&(clientes.DocumentacionObra!="EnGestion")&&(clientes.DocumentacionObra!="ok")){%>
-                                            <%if(clientes.DocumentacionObra==null||clientes.DocumentacionObra==""){ %>
-                                                <td id="Encabezado2P" class="text-light bg-danger">
-                                                 !
+                                        <%if((clientes.DocumentacionObra!="Sin presentar")&&(clientes.DocumentacionObra!="Sin Presentar")&&(clientes.DocumentacionObra!="Sin recibir")&&(clientes.DocumentacionObra!="Presentado")&&(clientes.DocumentacionObra!="Recibido")&& (clientes.DocumentacionObra!="Sin cargar")&&(clientes.DocumentacionObra!="Solicitado")&&(clientes.DocumentacionObra!="EnGestion")&&(clientes.DocumentacionObra!="Pedir")&&(clientes.DocumentacionObra!="Observado")&&(clientes.DocumentacionObra!="ok")){%>
+                                            
+                                                <td id="Encabezado2P" class="text-light sinbackground">
+                                                 <%=clientes.DocumentacionObra%>
                                                 </td>
-                                                <%}%> 
+                                            
                                             <%}%>
                                             
                             <!-- // -->
@@ -510,23 +491,23 @@
                                     <%=clientes.Seguridad%>
                                 </td>
                                 <%}%>
-                                <%if(clientes.Seguridad=="EnGestion"){%>
+                                <%if(clientes.Seguridad=="EnGestion" || clientes.Seguridad=="Solicitado" || clientes.Seguridad=="Observado"){%>
                                     <td id="Encabezado2P" class="text-dark bg-warning">
                                         <%=clientes.Seguridad%> 
                                     </td>
                                     <%}%>
-                                    <%if(clientes.Seguridad=="Sin presentar"){%>
+                                    <%if(clientes.Seguridad=="Sin presentar"|| clientes.Seguridad=="Pedir"){%>
                                         <td id="Encabezado2P" class="text-light bg-danger">
                                             <%=clientes.Seguridad%>
                                         </td>
                                         <%}%>
-                                        <%if((clientes.Seguridad!="Sin presentar")&&(clientes.Seguridad!="EnGestion")&&(clientes.Seguridad!="ok")){%>
-                                            <%if(clientes.Seguridad==null||clientes.Seguridad==""){ %>
-                                                <td id="Encabezado2P" class="text-light bg-danger">
-                                                 !
+                                        <%if((clientes.Seguridad!="Sin presentar")&&(clientes.Seguridad!="Sin Presentar")&&(clientes.Seguridad!="Sin recibir")&&(clientes.Seguridad!="Presentado")&&(clientes.Seguridad!="Recibido")&& (clientes.Seguridad!="Sin cargar")&&(clientes.Seguridad!="Solicitado")&&(clientes.Seguridad!="EnGestion")&&(clientes.Seguridad!="Pedir")&&(clientes.Seguridad!="Observado")&&(clientes.Seguridad!="ok")){%>
+                                            
+                                                <td id="Encabezado2P" class="text-light sinbackground">
+                                                    <%=clientes.Seguridad%>
                                                 </td>
-                                                <%}%>  
-                                            </td>
+                                            
+                                            
                                             <%}%>
                                           
                             <!-- // -->
@@ -536,27 +517,27 @@
                                     <%=clientes.Interferencias%>
                                 </td>
                                 <%}%>
-                                <%if( clientes.Interferencias=="Pedida"){%>
+                                <%if(clientes.Interferencias=="Pedida"){%>
                                     <td id="Encabezado2P" class="text-dark bg-info">
                                         <%=clientes.Interferencias%> 
                                     </td>
                                     <%}%>
-                                <%if(clientes.Interferencias=="EnGestion" ){%>
+                                <%if(clientes.Interferencias=="EnGestion" || clientes.Interferencias=="Solicitado" ||  clientes.Interferencias=="Observado" ){%>
                                     <td id="Encabezado2P" class="text-dark bg-warning">
                                         <%=clientes.Interferencias%> 
                                     </td>
                                     <%}%>
-                                    <%if(clientes.Interferencias=="Sin presentar"){%>
+                                    <%if(clientes.Interferencias=="Sin presentar"|| clientes.Interferencias=="Pedir"){%>
                                         <td id="Encabezado2P" class="text-light bg-danger">
                                             <%=clientes.Interferencias%>
                                         </td>
                                         <%}%>
-                                        <%if((clientes.Interferencias!="Sin presentar")&&(clientes.Interferencias!="EnGestion")&&(clientes.Interferencias!="ok")){%>
-                                            <%if(clientes.Interferencias==null||clientes.Interferencias==""){ %>
-                                                <td id="Encabezado2P" class="text-light bg-danger">
-                                                 !
+                                        <%if((clientes.Interferencias!="Sin presentar")&&(clientes.Interferencias!="Sin Presentar")&&(clientes.Interferencias!="Sin recibir")&&(clientes.Interferencias!="Presentado")&&(clientes.Interferencias!="Recibido")&& (clientes.Interferencias!="Sin cargar")&&(clientes.Interferencias!="Solicitado")&&(clientes.Interferencias!="EnGestion")&&(clientes.Interferencias!="Pedir")&&(clientes.Interferencias!="Observado")&&(clientes.Interferencias!="ok")){%>
+                                            
+                                                <td id="Encabezado2P" class="text-light sinbackground">
+                                                    <%=clientes.Interferencias%>
                                                 </td>
-                                                <%}%>
+                                            
                                             <%}%>
                                            
                             <!-- // -->
@@ -566,22 +547,22 @@
                                     <%=clientes.Permisos%>
                                 </td>
                                 <%}%>
-                                <%if(clientes.Permisos=="EnGestion"){%>
+                                <%if(clientes.Permisos=="EnGestion" || clientes.Permisos=="Solicitado" || clientes.Permisos=="Observado"){%>
                                     <td id="Encabezado2P" class="text-dark bg-warning">
                                         <%=clientes.Permisos%> 
                                     </td>
                                     <%}%>
-                                    <%if(clientes.Permisos=="Sin presentar"){%>
+                                    <%if(clientes.Permisos=="Sin presentar"|| clientes.Permisos=="Pedir"){%>
                                         <td id="Encabezado2P" class="text-light bg-danger">
                                             <%=clientes.Permisos%>
                                         </td>
                                         <%}%>
-                                        <%if((clientes.Permisos!="Sin presentar")&&(clientes.Permisos!="EnGestion")&&(clientes.Permisos!="ok")){%>
-                                            <%if(clientes.Permisos==null||clientes.Permisos==""){ %>
-                                                <td id="Encabezado2P" class="text-light bg-danger">
-                                                 !
+                                        <%if((clientes.Permisos!="Sin presentar")&&(clientes.Permisos!="Sin Presentar")&&(clientes.Permisos!="Sin recibir")&&(clientes.Permisos!="Presentado")&&(clientes.Permisos!="Recibido")&& (clientes.Permisos!="Sin cargar")&&(clientes.Permisos!="Solicitado")&&(clientes.Permisos!="EnGestion")&&(clientes.Permisos!="Pedir")&&(clientes.Permisos!="Observado")&&(clientes.Permisos!="ok")){%>
+                                            
+                                                <td id="Encabezado2P" class="text-light sinbackground">
+                                                    <%=clientes.Permisos%>
                                                 </td>
-                                                <%}%>
+                                            
                                             <%}%>
                                            
                             <!-- // -->
@@ -591,22 +572,22 @@
                                     <%=clientes.PlanDeTrabajo%>
                                 </td>
                                 <%}%>
-                                <%if(clientes.PlanDeTrabajo=="EnGestion"){%>
+                                <%if(clientes.PlanDeTrabajo=="EnGestion" || clientes.PlanDeTrabajo=="Solicitado" || clientes.PlanDeTrabajo=="Observado"){%>
                                     <td id="Encabezado2P" class="text-dark bg-warning">
                                         <%=clientes.PlanDeTrabajo%> 
                                     </td>
                                     <%}%>
-                                    <%if(clientes.PlanDeTrabajo=="Sin presentar"){%>
+                                    <%if(clientes.PlanDeTrabajo=="Sin presentar"|| clientes.PlanDeTrabajo=="Pedir"){%>
                                         <td id="Encabezado2P" class="text-light bg-danger">
                                             <%=clientes.PlanDeTrabajo%>
                                         </td>
                                         <%}%>
-                                        <%if((clientes.PlanDeTrabajo!="Sin presentar")&&(clientes.PlanDeTrabajo!="EnGestion")&&(clientes.PlanDeTrabajo!="ok")){%>
-                                            <%if(clientes.PlanDeTrabajo==null||clientes.PlanDeTrabajo==""){ %>
-                                                <td id="Encabezado2P" class="text-light bg-danger">
-                                                 !
+                                        <%if((clientes.PlanDeTrabajo!="Sin presentar")&&(clientes.PlanDeTrabajo!="Sin Presentar")&&(clientes.PlanDeTrabajo!="Sin recibir")&&(clientes.PlanDeTrabajo!="Presentado")&&(clientes.PlanDeTrabajo!="Recibido")&& (clientes.PlanDeTrabajo!="Sin cargar")&&(clientes.PlanDeTrabajo!="Solicitado")&&(clientes.PlanDeTrabajo!="EnGestion")&&(clientes.PlanDeTrabajo!="Pedir")&&(clientes.PlanDeTrabajo!="Observado")&&(clientes.PlanDeTrabajo!="ok")){%>
+                                            
+                                                <td id="Encabezado2P" class="text-light sinbackground">
+                                                 <%=clientes.PlanDeTrabajo%>
                                                 </td>
-                                                <%}%>
+                                                
                                             <%}%>
                                          
                             <!-- // -->
@@ -616,22 +597,22 @@
                                     <%=clientes.Matriculas%>
                                 </td>
                                 <%}%>
-                                <%if(clientes.Matriculas=="EnGestion"){%>
+                                <%if(clientes.Matriculas=="EnGestion" || clientes.Matriculas=="Solicitado" || clientes.Matriculas=="Observado"){%>
                                     <td id="Encabezado2P" class="text-dark bg-warning">
                                         <%=clientes.Matriculas%> 
                                     </td>
                                     <%}%>
-                                    <%if(clientes.Matriculas=="Sin presentar"){%>
+                                    <%if(clientes.Matriculas=="Sin presentar"|| clientes.Matriculas=="Pedir"){%>
                                         <td id="Encabezado2P" class="text-light bg-danger">
                                             <%=clientes.Matriculas%>
                                         </td>
                                         <%}%>
-                                        <%if((clientes.Matriculas!="Sin presentar")&&(clientes.Matriculas!="EnGestion")&&(clientes.Matriculas!="ok")){%>
-                                            <%if(clientes.Matriculas==null||clientes.Matriculas==""){ %>
-                                                <td id="Encabezado2P" class="text-light bg-danger">
-                                                 !
+                                        <%if((clientes.Matriculas!="Sin presentar")&&(clientes.Matriculas!="Sin Presentar")&&(clientes.Matriculas!="Sin recibir")&&(clientes.Matriculas!="Presentado")&&(clientes.Matriculas!="Recibido")&& (clientes.Matriculas!="Sin cargar")&&(clientes.Matriculas!="Solicitado")&&(clientes.Matriculas!="EnGestion")&&(clientes.Matriculas!="Pedir")&&(clientes.Matriculas!="Observado")&&(clientes.Matriculas!="ok")){%>
+                                            
+                                                <td id="Encabezado2P" class="text-light sinbackground">
+                                                 <%=clientes.Matriculas%>
                                                 </td>
-                                                <%}}%>
+                                                <%}%>
                                          
                             <!-- // -->
                             <!-- Ambiente -->
@@ -640,22 +621,22 @@
                                     <%=clientes.Ambiente%>
                                 </td>
                                 <%}%>
-                                <%if(clientes.Ambiente=="EnGestion"){%>
+                                <%if(clientes.Ambiente=="EnGestion" || clientes.Ambiente=="Solicitado" || clientes.Ambiente=="Observado"){%>
                                     <td id="Encabezado2P" class="text-dark bg-warning">
                                         <%=clientes.Ambiente%> 
                                     </td>
                                     <%}%>
-                                    <%if(clientes.Ambiente=="Sin presentar"){%>
+                                    <%if(clientes.Ambiente=="Sin presentar"|| clientes.Ambiente=="Pedir"){%>
                                         <td id="Encabezado2P" class="text-light bg-danger">
                                             <%=clientes.Ambiente%>
                                         </td>
                                         <%}%>
-                                        <%if((clientes.Ambiente!="Sin presentar")&&(clientes.Ambiente!="EnGestion")&&(clientes.Ambiente!="ok")){%>
-                                            <%if(clientes.Ambiente==null||clientes.Ambiente==""){ %>
-                                                <td id="Encabezado2P" class="text-light bg-danger">
-                                                 !
+                                        <%if((clientes.Ambiente!="Sin presentar")&&(clientes.Ambiente!="Sin Presentar")&&(clientes.Ambiente!="Sin recibir")&&(clientes.Ambiente!="Presentado")&&(clientes.Ambiente!="Recibido")&& (clientes.Ambiente!="Sin cargar")&&(clientes.Ambiente!="Solicitado")&&(clientes.Ambiente!="EnGestion")&&(clientes.Ambiente!="Pedir")&&(clientes.Ambiente!="Observado")&&(clientes.Ambiente!="ok")){%>
+                                            
+                                                <td id="Encabezado2P" class="text-light sinbackground">
+                                                 <%=clientes.Ambiente%>
                                                 </td>
-                                                <%}}%>
+                                                <%}%>
                                           
                             <!-- // -->
                             <!-- Nota cumplimiento normativas -->
@@ -664,22 +645,22 @@
                                     <%=clientes.NotaCumplimentoNormativas%>
                                 </td>
                                 <%}%>
-                                <%if(clientes.NotaCumplimentoNormativas=="EnGestion"){%>
+                                <%if(clientes.NotaCumplimentoNormativas=="EnGestion" || clientes.NotaCumplimentoNormativas=="Solicitado" || clientes.NotaCumplimentoNormativas=="Observado"){%>
                                     <td id="Encabezado2P" class="text-dark bg-warning">
                                         <%=clientes.NotaCumplimentoNormativas%> 
                                     </td>
                                     <%}%>
-                                    <%if(clientes.NotaCumplimentoNormativas=="Sin presentar"){%>
+                                    <%if(clientes.NotaCumplimentoNormativas=="Sin presentar"|| clientes.NotaCumplimentoNormativas=="Pedir"){%>
                                         <td id="Encabezado2P" class="text-light bg-danger">
                                             <%=clientes.NotaCumplimentoNormativas%>
                                         </td>
                                         <%}%>
-                                        <%if((clientes.NotaCumplimentoNormativas!="Sin presentar")&&(clientes.NotaCumplimentoNormativas!="EnGestion")&&(clientes.NotaCumplimentoNormativas!="ok")){%>
-                                            <%if(clientes.NotaCumplimentoNormativas==null||clientes.NotaCumplimentoNormativas==""){ %>
-                                                <td id="Encabezado2P" class="text-light bg-danger">
-                                                 !
+                                        <%if((clientes.NotaCumplimentoNormativas!="Sin presentar")&&(clientes.NotaCumplimentoNormativas!="Sin Presentar")&&(clientes.NotaCumplimentoNormativas!="Sin recibir")&&(clientes.NotaCumplimentoNormativas!="Presentado")&&(clientes.NotaCumplimentoNormativas!="Recibido")&& (clientes.NotaCumplimentoNormativas!="Sin cargar")&&(clientes.NotaCumplimentoNormativas!="Solicitado")&&(clientes.NotaCumplimentoNormativas!="EnGestion")&&(clientes.NotaCumplimentoNormativas!="Pedir")&&(clientes.NotaCumplimentoNormativas!="Observado")&&(clientes.NotaCumplimentoNormativas!="ok")){%>
+                                            
+                                                <td id="Encabezado2P" class="text-light sinbackground">
+                                                 <%=clientes.NotaCumplimentoNormativas%>
                                                 </td>
-                                                <%}}%>
+                                                <%}%>
                                          
                             <!-- // -->
                             <!-- DDJJ NAG 153 -->
@@ -688,22 +669,22 @@
                                     <%=clientes.DDJJNAG153%>
                                 </td>
                                 <%}%>
-                                <%if(clientes.DDJJNAG153=="EnGestion"){%>
+                                <%if(clientes.DDJJNAG153=="EnGestion" || clientes.DDJJNAG153=="Solicitado" || clientes.DDJJNAG153=="Observado"){%>
                                     <td id="Encabezado2P" class="text-dark bg-warning">
                                         <%=clientes.DDJJNAG153%> 
                                     </td>
                                     <%}%>
-                                    <%if(clientes.DDJJNAG153=="Sin presentar"){%>
+                                    <%if(clientes.DDJJNAG153=="Sin presentar"|| clientes.DDJJNAG153=="Pedir"){%>
                                         <td id="Encabezado2P" class="text-light bg-danger">
                                             <%=clientes.DDJJNAG153%>
                                         </td>
                                         <%}%>
-                                        <%if((clientes.DDJJNAG153!="Sin presentar")&&(clientes.DDJJNAG153!="EnGestion")&&(clientes.DDJJNAG153!="ok")){%>
-                                            <%if(clientes.DDJJNAG153==null||clientes.DDJJNAG153==""){ %>
-                                                <td id="Encabezado2P" class="text-light bg-danger">
-                                                 !
+                                        <%if((clientes.DDJJNAG153!="Sin presentar")&&(clientes.DDJJNAG153!="Sin Presentar")&&(clientes.DDJJNAG153!="Sin recibir")&&(clientes.DDJJNAG153!="Presentado")&&(clientes.DDJJNAG153!="Recibido")&& (clientes.DDJJNAG153!="Sin cargar")&&(clientes.DDJJNAG153!="Solicitado")&&(clientes.DDJJNAG153!="EnGestion")&&(clientes.DDJJNAG153!="Pedir")&&(clientes.DDJJNAG153!="Observado")&&(clientes.DDJJNAG153!="ok")){%>
+                                            
+                                                <td id="Encabezado2P" class="text-light sinbackground">
+                                                 <%=clientes.DDJJNAG153%>
                                                 </td>
-                                                <%}}%>
+                                                <%}%>
                                            
                             <!-- // -->
                             <!-- Avisos -->
@@ -712,22 +693,22 @@
                                     <%=clientes.Avisos%>
                                 </td>
                                 <%}%>
-                                <%if(clientes.Avisos=="EnGestion"){%>
+                                <%if(clientes.Avisos=="EnGestion" || clientes.Avisos=="Solicitado" || clientes.Avisos=="Observado"){%>
                                     <td id="Encabezado2P" class="text-dark bg-warning">
                                         <%=clientes.Avisos%> 
                                     </td>
                                     <%}%>
-                                    <%if(clientes.Avisos=="Sin presentar"){%>
+                                    <%if(clientes.Avisos=="Sin presentar"|| clientes.Avisos=="Pedir"){%>
                                         <td id="Encabezado2P" class="text-light bg-danger">
                                             <%=clientes.Avisos%>
                                         </td>
                                         <%}%>
-                                        <%if((clientes.Avisos!="Sin presentar")&&(clientes.Avisos!="EnGestion")&&(clientes.Avisos!="ok")){%>
-                                            <%if(clientes.Avisos==null||clientes.Avisos==""){ %>
-                                                <td id="Encabezado2P" class="text-light bg-danger">
-                                                 !
+                                        <%if((clientes.Avisos!="Sin presentar")&&(clientes.Avisos!="Sin Presentar")&&(clientes.Avisos!="Sin recibir")&&(clientes.Avisos!="Presentado")&&(clientes.Avisos!="Recibido")&& (clientes.Avisos!="Sin cargar")&&(clientes.Avisos!="Solicitado")&&(clientes.Avisos!="EnGestion")&&(clientes.Avisos!="Pedir")&&(clientes.Avisos!="Observado")&&(clientes.Avisos!="ok")){%>
+                                            
+                                                <td id="Encabezado2P" class="text-light sinbackground">
+                                                 <%=clientes.Avisos%>
                                                 </td>
-                                                <%}}%>
+                                                <%}%>
                                           
                             <!-- // -->
                             <!-- Documentacion de inspeccion -->
@@ -736,22 +717,22 @@
                                     <%=clientes.DocumentacionInspeccion%>
                                 </td>
                                 <%}%>
-                                <%if(clientes.DocumentacionInspeccion=="EnGestion"){%>
+                                <%if(clientes.DocumentacionInspeccion=="EnGestion" || clientes.DocumentacionInspeccion=="Solicitado" || clientes.DocumentacionInspeccion=="Observado"){%>
                                     <td id="EncabezadoObras" class="text-dark bg-warning">
                                         <%=clientes.DocumentacionInspeccion%> 
                                     </td>
                                     <%}%>
-                                    <%if(clientes.DocumentacionInspeccion=="Sin presentar"){%>
+                                    <%if(clientes.DocumentacionInspeccion=="Sin presentar"|| clientes.DocumentacionInspeccion=="Pedir"){%>
                                         <td id="EncabezadoObras" class="text-light bg-danger">
                                             <%=clientes.DocumentacionInspeccion%>
                                         </td>
                                         <%}%>
-                                        <%if((clientes.DocumentacionInspeccion!="Sin presentar")&&(clientes.DocumentacionInspeccion!="EnGestion")&&(clientes.DocumentacionInspeccion!="ok")){%>
-                                            <%if(clientes.DocumentacionInspeccion==null||clientes.DocumentacionInspeccion==""){ %>
-                                                <td id="EncabezadoObras" class="text-light bg-danger">
-                                                 !
+                                        <%if((clientes.DocumentacionInspeccion!="Sin presentar")&&(clientes.DocumentacionInspeccion!="Sin Presentar")&&(clientes.DocumentacionInspeccion!="Sin recibir")&&(clientes.DocumentacionInspeccion!="Presentado")&&(clientes.DocumentacionInspeccion!="Recibido")&& (clientes.DocumentacionInspeccion!="Sin cargar")&&(clientes.DocumentacionInspeccion!="Solicitado")&&(clientes.DocumentacionInspeccion!="EnGestion")&&(clientes.DocumentacionInspeccion!="Pedir")&&(clientes.DocumentacionInspeccion!="Observado")&&(clientes.DocumentacionInspeccion!="ok")){%>
+                                            
+                                                <td id="EncabezadoObras" class="text-light sinbackground">
+                                                 <%=clientes.DocumentacionInspeccion%>
                                                 </td>
-                                                <%}}%>
+                                                <%}%>
                                            
                             <!-- // -->
                             <!-- Comunicacion de obras -->
@@ -760,7 +741,7 @@
                                     <%=clientes.ComunicacionObras%>
                                 </td>
                                 <%}%>
-                                <%if(clientes.ComunicacionObras=="EnGestion"){%>
+                                <%if(clientes.ComunicacionObras=="EnGestion" || clientes.ComunicacionObras=="Solicitado" || clientes.ComunicacionObras=="Observado"){%>
                                     <td id="EncabezadoObras" class="text-dark bg-warning">
                                         <%=clientes.ComunicacionObras%> 
                                     </td>
@@ -770,12 +751,12 @@
                                             <%=clientes.ComunicacionObras%>
                                         </td>
                                         <%}%>
-                                        <%if((clientes.ComunicacionObras!="Leer historial de carpeta")&&(clientes.ComunicacionObras!="EnGestion")&&(clientes.ComunicacionObras!="ok")){%>
-                                            <%if(clientes.ComunicacionObras==null||clientes.ComunicacionObras==""){ %>
-                                                <td id="EncabezadoObras" class="text-light bg-danger">
-                                                 !
+                                        <%if((clientes.ComunicacionObras!="Leer historial de carpeta")&&(clientes.ComunicacionObras!="EnGestion")&&(clientes.ComunicacionObras!="Pedir")&&(clientes.ComunicacionObras!="Observado")&&(clientes.ComunicacionObras!="ok")){%>
+                                            
+                                                <td id="EncabezadoObras" class="text-light sinbackground">
+                                                 <%=clientes.ComunicacionObras%>
                                                 </td>
-                                                <%}}%>
+                                                <%}%>
                                       
                             <!-- // -->
                             <!-- Actas finales de ecogas -->
@@ -795,11 +776,11 @@
                                         </td>
                                         <%}%>
                                         <%if((clientes.ActasFinalesEcogas!="Sin recibir")&&(clientes.ActasFinalesEcogas!="Recibidas")&&(clientes.ActasFinalesEcogas!="Firmadas")&&(clientes.ActasFinalesEcogas!="ok")){%>
-                                            <%if(clientes.ActasFinalesEcogas==null||clientes.ActasFinalesEcogas==""){ %>
-                                                <td id="EncabezadoCaos" class="text-light bg-danger">
-                                                 !
+                                            
+                                                <td id="EncabezadoCaos" class="text-light sinbackground">
+                                                    <%=clientes.ActasFinalesEcogas%>
                                                 </td>
-                                                <%}}%>
+                                                <%}%>
                                          
                             <!-- // -->
                             <!-- Planos y Croquis -->
@@ -808,27 +789,27 @@
                                     <%=clientes.PlanosyCroquis%>
                                 </td>
                                 <%}%>
-                                <%if( clientes.PlanosyCroquis=="Aprobado/Impreso" ||  clientes.PlanosyCroquis=="Presentado" ){%>
+                                <%if(clientes.PlanosyCroquis=="Aprobado/Impreso" ||  clientes.PlanosyCroquis=="Presentado" ){%>
                                     <td id="EncabezadoCaos" class="text-dark bg-info">
                                         <%=clientes.PlanosyCroquis%> 
                                     </td>
                                     <%}%>
-                                <%if(clientes.PlanosyCroquis=="EnGestion" ){%>
+                                <%if(clientes.PlanosyCroquis=="EnGestion" || clientes.PlanosyCroquis=="Solicitado" ||  clientes.PlanosyCroquis=="Observado" ){%>
                                     <td id="EncabezadoCaos" class="text-dark bg-warning">
                                         <%=clientes.PlanosyCroquis%> 
                                     </td>
                                     <%}%>
-                                    <%if(clientes.PlanosyCroquis=="Sin presentar"){%>
+                                    <%if(clientes.PlanosyCroquis=="Sin presentar" || clientes.PlanosyCroquis=="Pedir"|| clientes.PlanosyCroquis=="Pedir"){%>
                                         <td id="EncabezadoCaos" class="text-light bg-danger">
                                             <%=clientes.PlanosyCroquis%>
                                         </td>
                                         <%}%>
-                                        <%if((clientes.PlanosyCroquis!="Sin presentar")&&(clientes.PlanosyCroquis!="EnGestion")&&(clientes.PlanosyCroquis!="Aprobado/Impreso")&&(clientes.PlanosyCroquis!="ok")&&(clientes.PlanosyCroquis!="Presentado")){%>
-                                            <%if(clientes.PlanosyCroquis==null||clientes.PlanosyCroquis==""){ %>
-                                                <td id="EncabezadoCaos" class="text-light bg-danger">
-                                                 !
+                                        <%if((clientes.PlanosyCroquis!="Sin presentar")&&(clientes.PlanosyCroquis!="Sin Presentar")&&(clientes.PlanosyCroquis!="Sin recibir")&&(clientes.PlanosyCroquis!="Presentado")&&(clientes.PlanosyCroquis!="Recibido")&& (clientes.PlanosyCroquis!="Sin cargar")&&(clientes.PlanosyCroquis!="Solicitado")&&(clientes.PlanosyCroquis!="EnGestion")&&(clientes.PlanosyCroquis!="Pedir")&&(clientes.PlanosyCroquis!="Observado")&&(clientes.PlanosyCroquis!="Aprobado/Impreso")&&(clientes.PlanosyCroquis!="ok")&&(clientes.PlanosyCroquis!="Presentado")){%>
+                                            
+                                                <td id="EncabezadoCaos" class="text-light sinbackground">
+                                                    <%=clientes.PlanosyCroquis%>
                                                 </td>
-                                                <%}}%>
+                                                <%}%>
                                          
                             <!-- // -->
                             <!-- ConformeEntidades -->
@@ -837,22 +818,22 @@
                                     <%=clientes.ConformeEntidades%>
                                 </td>
                                 <%}%>
-                                <%if(clientes.ConformeEntidades=="EnGestion"|| clientes.ConformeEntidades=="Solicitado"){%>
+                                <%if(clientes.ConformeEntidades=="EnGestion" || clientes.ConformeEntidades=="Solicitado" ||  clientes.ConformeEntidades=="Observado" ){%>
                                     <td id="EncabezadoCaos" class="text-dark bg-warning">
                                         <%=clientes.ConformeEntidades%> 
                                     </td>
                                     <%}%>
-                                    <%if(clientes.ConformeEntidades=="Sin presentar"){%>
+                                    <%if(clientes.ConformeEntidades=="Sin presentar" || clientes.ConformeEntidades=="Pedir"){%>
                                         <td id="EncabezadoCaos" class="text-light bg-danger">
                                             <%=clientes.ConformeEntidades%>
                                         </td>
                                         <%}%>
-                                        <%if((clientes.ConformeEntidades!="Sin presentar")&&(clientes.ConformeEntidades!="EnGestion")&&(clientes.ConformeEntidades!="ok")){%>
-                                            <%if(clientes.ConformeEntidades==null||clientes.ConformeEntidades==""){ %>
-                                                <td id="EncabezadoCaos" class="text-light bg-danger">
-                                                 !
+                                        <%if((clientes.ConformeEntidades!="Sin presentar")&&(clientes.ConformeEntidades!="Sin Presentar")&&(clientes.ConformeEntidades!="Sin recibir")&&(clientes.ConformeEntidades!="Presentado")&&(clientes.ConformeEntidades!="Recibido")&& (clientes.ConformeEntidades!="Sin cargar")&&(clientes.ConformeEntidades!="Solicitado")&&(clientes.ConformeEntidades!="EnGestion")&&(clientes.ConformeEntidades!="Pedir")&&(clientes.ConformeEntidades!="Observado")&&(clientes.ConformeEntidades!="ok")){%>
+                                            
+                                                <td id="EncabezadoCaos" class="text-light sinbackground">
+                                                    <%=clientes.ConformeEntidades%>
                                                 </td>
-                                                <%}}%>
+                                                <%}%>
                                           
                             <!-- // -->
                             <!-- PruebaHermeticidad -->
@@ -861,7 +842,7 @@
                                     <%=clientes.PruebaHermeticidad%>
                                 </td>
                                 <%}%>
-                                <%if(clientes.PruebaHermeticidad=="EnGestion"){%>
+                                <%if(clientes.PruebaHermeticidad=="EnGestion" || clientes.PruebaHermeticidad=="Solicitado" || clientes.PruebaHermeticidad==="Observado"){%>
                                     <td id="EncabezadoCaos" class="text-dark bg-warning">
                                         <%=clientes.PruebaHermeticidad%> 
                                     </td>
@@ -871,12 +852,11 @@
                                             <%=clientes.PruebaHermeticidad%>
                                         </td>
                                         <%}%>
-                                        <%if((clientes.PruebaHermeticidad!="Sin realizar")&&(clientes.PruebaHermeticidad!="EnGestion")&&(clientes.PruebaHermeticidad!="ok")){%>
-                                            <%if(clientes.PruebaHermeticidad==null||clientes.PruebaHermeticidad==""){ %>
-                                                <td id="EncabezadoCaos" class="text-light bg-danger">
-                                                 !
+                                        <%if((clientes.PruebaHermeticidad!="Sin realizar")&&(clientes.PruebaHermeticidad!="EnGestion")&&(clientes.PruebaHermeticidad!="Pedir")&&(clientes.PruebaHermeticidad!="Observado")&&(clientes.PruebaHermeticidad!="ok")){%>
+                                            <td id="EncabezadoCaos" class="text-light bg-danger">
+                                                 <%=clientes.secondary%>
                                                 </td>
-                                                <%}}%>
+                                                <%}%>
                                           
                             <!-- // -->
                             <!-- Informes finales -->
@@ -885,22 +865,22 @@
                                     <%=clientes.InformesFinales%>
                                 </td>
                                 <%}%>
-                                <%if(clientes.InformesFinales=="EnGestion"){%>
+                                <%if(clientes.InformesFinales=="EnGestion" || clientes.InformesFinales=="Solicitado" || clientes.InformesFinales==="Observado"){%>
                                     <td id="EncabezadoCaos" class="text-dark bg-warning">
                                         <%=clientes.InformesFinales%> 
                                     </td>
                                     <%}%>
-                                    <%if(clientes.InformesFinales=="Sin presentar"){%>
+                                    <%if(clientes.InformesFinales=="Sin presentar" || clientes.InformesFinales=="Pedir"){%>
                                         <td id="EncabezadoCaos" class="text-light bg-danger">
                                             <%=clientes.InformesFinales%>
                                         </td>
                                         <%}%>
-                                        <%if((clientes.InformesFinales!="Sin presentar")&&(clientes.InformesFinales!="EnGestion")&&(clientes.InformesFinales!="ok")){%>
-                                            <%if(clientes.InformesFinales==null||clientes.InformesFinales==""){ %>
-                                                <td id="EncabezadoCaos" class="text-light bg-danger">
-                                                 !
+                                        <%if((clientes.InformesFinales!="Sin presentar")&&(clientes.InformesFinales!="Sin Presentar")&&(clientes.InformesFinales!="Sin recibir")&&(clientes.InformesFinales!="Presentado")&&(clientes.InformesFinales!="Recibido")&& (clientes.InformesFinales!="Sin cargar")&&(clientes.InformesFinales!="Solicitado")&&(clientes.InformesFinales!="EnGestion")&&(clientes.InformesFinales!="Pedir")&&(clientes.InformesFinales!="Observado")&&(clientes.InformesFinales!="ok")){%>
+                                            
+                                                <td id="EncabezadoCaos" class="text-light sinbackground">
+                                                 <%=clientes.InformesFinales%>
                                                 </td>
-                                                <%}}%>
+                                                <%}%>
                                          
                             <!-- // -->
                             <!-- Presentacion final -->
@@ -909,22 +889,22 @@
                                     <%=clientes.PresentacionFinal%>
                                 </td>
                                 <%}%>
-                                <%if(clientes.PresentacionFinal=="EnGestion"){%>
+                                <%if(clientes.PresentacionFinal=="EnGestion" || clientes.PresentacionFinal=="Solicitado" || clientes.PresentacionFinal==="Observado"){%>
                                     <td id="EncabezadoFin" class="text-dark bg-warning">
                                         <%=clientes.PresentacionFinal%> 
                                     </td>
                                     <%}%>
-                                    <%if(clientes.PresentacionFinal=="Sin presentar"){%>
+                                    <%if(clientes.PresentacionFinal=="Sin presentar" || clientes.PresentacionFinal=="Pedir"){%>
                                         <td id="EncabezadoFin" class="text-light bg-danger">
                                             <%=clientes.PresentacionFinal%>
                                         </td>
                                         <%}%>
-                                        <%if((clientes.PresentacionFinal!="Sin presentar")&&(clientes.PresentacionFinal!="EnGestion")&&(clientes.PresentacionFinal!="ok")){%>
-                                            <%if(clientes.PresentacionFinal==null||clientes.PresentacionFinal==""){ %>
-                                                <td id="EncabezadoFin" class="text-light bg-danger">
-                                                 !
+                                        <%if((clientes.PresentacionFinal!="Sin presentar")&&(clientes.PresentacionFinal!="Sin Presentar")&&(clientes.PresentacionFinal!="Sin recibir")&&(clientes.PresentacionFinal!="Presentado")&&(clientes.PresentacionFinal!="Recibido")&& (clientes.PresentacionFinal!="Sin cargar")&&(clientes.PresentacionFinal!="Solicitado")&&(clientes.PresentacionFinal!="EnGestion")&&(clientes.PresentacionFinal!="Pedir")&&(clientes.PresentacionFinal!="Observado")&&(clientes.PresentacionFinal!="ok")){%>
+                                        
+                                                <td id="EncabezadoFin" class="text-light sinbackground">
+                                                 <%=clientes.PresentacionFinal%>
                                                 </td>
-                                                <%}}%>
+                                                <%}%>
                                           
                             <!-- // -->
                             <!-- HabilitacionObra -->
@@ -933,22 +913,21 @@
                                     <%=clientes.HabilitacionObra%>
                                 </td>
                                 <%}%>
-                                <%if(clientes.HabilitacionObra=="EnGestion"){%>
+                                <%if(clientes.HabilitacionObra=="EnGestion" || clientes.HabilitacionObra=="Solicitado" || clientes.HabilitacionObra==="Observado"){%>
                                     <td id="EncabezadoFin" class="text-dark bg-warning">
                                         <%=clientes.HabilitacionObra%> 
                                     </td>
                                     <%}%>
-                                    <%if(clientes.HabilitacionObra=="Sin presentar"){%>
+                                    <%if(clientes.HabilitacionObra=="Sin presentar" || clientes.HabilitacionObra=="Pedir"){%>
                                         <td id="EncabezadoFin" class="text-light bg-danger">
                                             <%=clientes.HabilitacionObra%>
                                         </td>
                                         <%}%>
-                                        <%if((clientes.HabilitacionObra!="Sin presentar")&&(clientes.HabilitacionObra!="EnGestion")&&(clientes.HabilitacionObra!="ok")){%>
-                                            <%if(clientes.HabilitacionObra==null||clientes.HabilitacionObra==""){ %>
-                                                <td id="EncabezadoFin" class="text-light bg-danger">
-                                                 !
+                                        <%if((clientes.HabilitacionObra!="Sin presentar")&&(clientes.HabilitacionObra!="Sin Presentar")&&(clientes.HabilitacionObra!="Sin recibir")&&(clientes.HabilitacionObra!="Presentado")&&(clientes.HabilitacionObra!="Recibido")&& (clientes.HabilitacionObra!="Sin cargar")&&(clientes.HabilitacionObra!="Solicitado")&&(clientes.HabilitacionObra!="EnGestion")&&(clientes.HabilitacionObra!="Pedir")&&(clientes.HabilitacionObra!="Observado")&&(clientes.HabilitacionObra!="ok")){%>
+                                            <td id="EncabezadoFin" class="text-light bg-danger">
+                                                 <%=clientes.secondary%>
                                                 </td>
-                                                <%}}%>
+                                                <%}%>
                                           
                             <!-- // -->
                                 <td><a href="/edit/<%=clientes.id%>" class="btn btn-outline-info">editar</a>
@@ -1174,6 +1153,10 @@ $("#ModalOpcionesDeImpresion").modal('show');
 $("#ModalOpcionesDeImpresion").modal('toggle');
 
 }
+function MostrarInfoCliente(id,Nombre){
+
+}
+$('[data-bs-toggle="popovers"]').popover()
 </script>
 
 </html>
