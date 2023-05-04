@@ -136,7 +136,7 @@ router.get("/estadogeneral", (req, res) => {
   if (req.isAuthenticated()) {
     res.locals.moment = moment;
     const sql =
-      "SELECT e.CodigoVigentes, c.id, c.Nombre  ,c.NCarpeta,  c.Ubicacion ,c.Comitente ,c.Estado, c.Fechafirmacontrato  ,b.DocumentacionTerreno ,b.DocumentacionSociedad ,b.DocumentacionContractual  ,b.Comercial ,b.Tecnica ,b.PermisosEspeciales ,b.DocumentacionObra  ,b.Seguridad,b.Interferencias, b.Permisos, b.PlanDeTrabajo, b.Matriculas, b.Ambiente, b.NotaCumplimentoNormativas, b.DDJJNAG153, b.Avisos, b.DocumentacionInspeccion, b.ComunicacionObras, b.ActasFinalesEcogas, b.PlanosyCroquis, b.ConformeEntidades, b.PruebaHermeticidad, b.InformesFinales, b.PresentacionFinal, d.MailAutorizacion, b.HabilitacionObra, b.DocumentacionAmbiental  from obras_tareasgenerales b , codificacioncarpetas e, obras c, adminecogas_tareas_por_carpeta d WHERE b.Nombre = c.Nombre AND b.Nombre = e.Nombre AND d.Nombre = e.Nombre";
+      "SELECT e.CodigoVigentes, c.id, c.Nombre  ,c.NCarpeta,  c.Ubicacion ,c.Comitente ,c.Estado,  d.* ,b.DocumentacionTerreno ,b.DocumentacionSociedad ,b.DocumentacionContractual  ,b.Comercial ,b.Tecnica ,b.PermisosEspeciales ,b.DocumentacionObra  ,b.Seguridad,b.Interferencias, b.Permisos, b.PlanDeTrabajo, b.Matriculas, b.Ambiente, b.NotaCumplimentoNormativas, b.DDJJNAG153, b.Avisos, b.DocumentacionInspeccion, b.ComunicacionObras, b.ActasFinalesEcogas, b.PlanosyCroquis, b.ConformeEntidades, b.PruebaHermeticidad, b.InformesFinales, b.PresentacionFinal,  b.HabilitacionObra, b.DocumentacionAmbiental  from obras_tareasgenerales b , codificacioncarpetas e, obras c, adminecogas_tareas_por_carpeta d WHERE b.Nombre = c.Nombre AND b.Nombre = e.Nombre AND d.Nombre = e.Nombre";
     // const sql = 'SELECT c.id, c.Nombre  ,c.NCarpeta,  c.Ubicacion ,c.Comitente ,c.Estado, c.Fechafirmacontrato ,b.DocumentacionTerreno, b.DocumentacionSociedad,b.DocumentacionContractual  ,b.Comercial ,b.Tecnica,b.PermisosEspeciales ,b.DocumentacionObra  ,b.Seguridad,b.Interferencias, b.Permisos, b.PlanDeTrabajo, b.Matriculas, b.Ambiente, b.NotaCumplimentoNormativas, b.DDJJNAG153, b.Avisos, b.DocumentacionInspeccion, b.ComunicacionObras, b.ActasFinalesEcogas, b.PlanosyCroquis, b.ConformeEntidades, b.PruebaHermeticidad, b.InformesFinales,b.PresentacionFinal, b.HabilitacionObra  from obras c , obras_tareasgenerales b  ';
     // const sql='Select * from obras c';
     // const sql='Select * from obras_tareasgenerales b';
@@ -145,7 +145,7 @@ router.get("/estadogeneral", (req, res) => {
       if (error) console.log(error);
       if (results.length > 0) {
         res.render("paginas/AdministracionEcogas/estadogeneral.ejs", {
-          results: results,
+          results: results,moment:moment,
         }); //en {results:results} lo que hago es guardar los resultados que envia la bd, en la variable results
         // res.send(results);
       } else {
@@ -180,14 +180,19 @@ router.get("/editarTareas/:id", (req, res) => {
   if (req.isAuthenticated()) {
     const id = req.params.id;
     var Nombre = "";
-    var sql = "Select Nombre from obras where id=?";
+    let sql ;
     var resultados;
     var CodigoEnUsoVigentes = "";
     var CodigoFinalizadas = 0;
     var CodigoVigentes = 0;
     var interferenciasypermisos, tareasporcarpeta, tareasgenerales;
     var usuariosregistrados;
-   
+    var albacaucion;
+   sql='SELECT * FROM admingeneral_seguros_albacaucion WHERE id_obra='+ id;
+   connection.query(sql,(error,resultado)=>{
+    if (error) console.log(error);
+    albacaucion=resultado;
+   })
     var promise1 = new Promise(function (resolve, reject) {
       sql="SELECT * FROM usuariosregistrados;";
       connection.query(sql,(error,respuesta)=>{
@@ -246,18 +251,25 @@ router.get("/editarTareas/:id", (req, res) => {
           connection.query(sql, [id], (error, results) => {
             if (error) console.log(error);
             if (results.length > 0) {
+             
               //Se procede a enviar al front, los resultados de las consultas sql, prestar atencion que para que ejs pueda resolver el contenido de las sentencias hay que tratar las mismas como un arreglo [0], sino no funciona.
-              res.render("paginas/AdministracionEcogas/editarTareas", {
-                user: results[0],
-                interferenciasypermisos,
-                tareasporcarpeta,
-                tareasgenerales,
-                CodigoVigentes,
-                CodigoEnUsoVigentes,
-                CodigoFinalizadas,
-                moment: moment,
-                usuariosregistrados,
-              });
+         
+            res.render("paginas/AdministracionEcogas/editarTareas", {
+              moment:moment,
+              albacaucion:albacaucion,
+              user: results[0],
+              interferenciasypermisos,
+              tareasporcarpeta,
+              tareasgenerales,
+              CodigoVigentes,
+              CodigoEnUsoVigentes,
+              CodigoFinalizadas,
+              moment: moment,
+              usuariosregistrados,
+            });
+           
+         
+             
             } else {
               res.redirect("/adminecogas");
             }

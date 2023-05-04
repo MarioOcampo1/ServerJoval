@@ -8,14 +8,12 @@
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <link rel="stylesheet" href="../css/estadogeneral.css">
-  <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
-  <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-  <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap5.min.js"></script>
   <!-- dataTable js -->
   <title>Estado General</title>
 </head>
 
 <body>
+  
   <%- include('./partials/menusuperior.ejs')%>
   <h1 class="text-center">Estado General</h1>
   <div class="row">
@@ -182,6 +180,7 @@
         </tr>
       </thead>
       <tbody>
+        
         <% if(results){%>
         <% results.forEach((clientes)=>{ %>
         <%if(clientes.Estado!="Finalizada"){%>
@@ -198,8 +197,9 @@
             <a href="/historialcarpeta/<%=clientes.Nombre%>">
               <%=clientes.Estado%>
             </a>
-
-            <button type="button" class="btn btn-secondary" data-bs-toggle="popover" title="Popup title" data-bs-content="Popup content"><i class="bi bi-info-circle-fill" id="<%=clientes.Nombre%>INFO" onclick="MostrarInfoCliente(this.id,'<%=clientes.Nombre%>');"></i></button>
+            
+            <button type="button" id="Popover" class="btnPopover btn" data-bs-toggle="popover" title="Datos de la carpeta" data-bs-content=" Inspector: <%=clientes.InspectorAsignado%>. Fecha de inicio: <%=moment(clientes.FechaInicioTrabajos).format('DD-MM-YYYY')%>. Fecha de fin de obra: <%=moment(clientes.FechaFinDeObra).format('DD-MM-YYYY')%>.">
+              <i class="bi bi-info-circle-fill"></i></button>
             <%if(clientes.Estado=="Sin presentar" ){%>
             <!-- <progress max="6" value="0"></progress> -->
             <%}%>
@@ -223,7 +223,9 @@
             <%}%>
                                                                                 <%if(clientes.Estado=="en obras"){%>
             <br>
-            <img src="https://media.istockphoto.com/vectors/men-working-road-sign-vector-id856987802?s=612x612" alt="" widtd="45px" height="45px" class="text-center">
+              <img src="https://media.istockphoto.com/vectors/men-working-road-sign-vector-id856987802?s=612x612" alt="" widtd="45px" height="45px" class="text-center">
+            
+            
             <%}%>
                                 </td>
                                 <!-- Documentacion Terreno -->
@@ -361,15 +363,15 @@
         </div>
         
         
-        <!-- Optional: Place to the bottom of scripts -->
-        <script>
-            const myModal = new bootstrap.Modal(document.getElementById('modalId'), options)
-        
-        </script>
+      
 </body>
 
 <!-- <script type="text/javascript" src="/main.js"></script> -->
 <script>
+    $(function () {
+        $('[data-bs-toggle="popover"]').popover()
+      })
+
     jQuery("#buscador").keyup(function(){
     if( jQuery(this).val() != "0"){
         jQuery("#EstadoGeneral tbody>tr").hide();
@@ -388,6 +390,8 @@ jQuery.extend(jQuery.expr[":"],
 });
 
 $(document).ready(()=>{
+
+
     $('#Segundotr').children($('th')).each(function(columna){
         $(this).click(function(){
             let registros = $('#EstadoGeneral').find('tbody > tr').get();
@@ -416,6 +420,7 @@ $('td').each(function() {
         $(this).addClass('align-middle bg-warning ');
     }
 })
+
 })
 jQuery("#Preliminar").click(function(){
     //Primero Dibuja todo

@@ -20,7 +20,7 @@ router.use(passport.initialize());
 router.use(passport.session({
     secret: 'Mi ultra secreto',
     resave: true,
-saveUninitialized:true,
+    saveUninitialized: true,
 }
 ));
 
@@ -34,66 +34,67 @@ const connection = mysql.createConnection({
     database: 'joval'
 });
 //check de conexion a la base de datos
-try {connection.connect(error => {
-    while (error) {
-        if (error) console.log(error);  
-        setTimeout(() => {
-            connection.connect(error=>{
-                if (error) console.log(error);  
-                else{ error=false;}
-            })
-        }, 3000);  
-    }
-})
-} catch (error) {
-    while(error)
-    {
-        connection.connect(error => {
-                if (error) console.log(error);  
-                setTimeout(() => {
-                    connection.connect(error=>{
-                        if (error) console.log(error);  
-                        else{ error=false;}
-                    })
-                }, 3000);  
+try {
+    connection.connect(error => {
+        while (error) {
+            if (error) console.log(error);
+            setTimeout(() => {
+                connection.connect(error => {
+                    if (error) console.log(error);
+                    else { error = false; }
+                })
+            }, 3000);
+        }
     })
-}
+} catch (error) {
+    while (error) {
+        connection.connect(error => {
+            if (error) console.log(error);
+            setTimeout(() => {
+                connection.connect(error => {
+                    if (error) console.log(error);
+                    else { error = false; }
+                })
+            }, 3000);
+        })
+    }
 }
 
 passport.use(new PassportLocal(function (username, password, done) {
     let user = username;
     let pass = password;
-    var sql= 'SELECT * FROM usuariosregistrados WHERE usuario = "'+user+'" AND password = "'+pass+'" ;'; 
-    try { connection.query(sql,(error, results) => {
-        if (error){
-            console.log(error);
-            return done('Error de sistema, reintente más tarde', false);
-            
-        } 
-       if(results.length>0){
-           return done(null, { id: results[0].id, rol: results[0].rol, username: results[0].usuario });
-       }
-       else{
-        return done('No se ha encontrado el usuario y/o contraseña indicado', false);
-       }
-            });
-        
+    var sql = 'SELECT * FROM usuariosregistrados WHERE usuario = "' + user + '" AND password = "' + pass + '" ;';
+    try {
+        connection.query(sql, (error, results) => {
+            if (error) {
+                console.log(error);
+                return done('Error de sistema, reintente más tarde', false);
+
+            }
+            if (results.length > 0) {
+                return done(null, { id: results[0].id, rol: results[0].rol, username: results[0].usuario });
+            }
+            else {
+                return done('No se ha encontrado el usuario y/o contraseña indicado', false);
+            }
+        });
+
     } catch (error) {
         return done('No se ha encontrado el usuario y/o contraseña indicado', false);
     }
-   
+
     // done(null, false); // Esta linea define a traves del null, que no hubo ningun error, pero el al mismo tiempo, a traves del false, indica que el usuario no se ha encontrado.
     // Continuamos en serializacion
-    
+
 }));
 passport.serializeUser(function (user, done) {
-    
+
     done(null, user.id);
 })
 passport.deserializeUser(function (id, done) {
-   var sql='Select rol from usuariosregistrados where id ='+id+' ;';
-    connection.query(sql,(error,results)=>{
-        done(null,{rol: results[0].rol});
+    var sql = 'Select rol from usuariosregistrados where id =' + id + ' ;';
+    connection.query(sql, (error, results) => {
+        done(null, { rol: results[0].rol });
     })
 })
 router.get('/', (req, res) => {
@@ -108,7 +109,7 @@ router.get('/index', (req, res, next) => {
         connection.query(sql, (error, results) => {
             if (error) console.log(error);
             else {
-                res.render('./paginas/Principal/index.ejs', { albacaucion: results, moment: moment, rol:req.user.rol,fecha });
+                res.render('./paginas/Principal/index.ejs', { albacaucion: results, moment: moment, rol: req.user.rol, fecha });
             }
         })
     }
@@ -135,6 +136,13 @@ router.get('/nuevaObra', (req, res) => {
         res.redirect('/');
     }
 })
+router.get('/editarEmpleado', (req, res) => {
+    var sql = 'Select * from usuariosregistrados ';
+    connection.query(sql, (error, results) => {
+        if (error) console.log(error);
+        else { res.send(results); };
+    })
+})
 router.post('/editarContacto/delete/Contacto/:id', (req, res) => {
     const id = req.params.id;
     var sql = 'Delete FROM contactos WHERE id =?';
@@ -149,7 +157,7 @@ router.post('/editarContacto/delete/Contacto/:id', (req, res) => {
     })
 })
 router.post('/guardarNuevoCliente', (req, res) => {
-    var sql="";
+    var sql = "";
     const gasSeleccionado = req.body.GasSeleccionado;
     const finanzasSeleccionado = req.body.FinanzasSeleccionado;
     const fechaActual = new Date();
@@ -167,12 +175,14 @@ router.post('/guardarNuevoCliente', (req, res) => {
     var TipoDeRed = req.body.TipoDeRed
     var PerMunicipal = req.body.PerMunicipal;
     var Privado = req.body.PRIVADO;
+    var ServicioIncluido = req.body.ServicioIncluido
+    var MontoServicio = req.body.ServicioDomiciliario;
     // const TipoRed =req.body.Tipos-de-red;
     if (DNV == null) { DNV = "NC"; }
     if (PerMunicipal == null) { PerMunicipal = "NC"; }
     if (Privado == null) { Privado = "NC"; }
     if (DPV == null) { DPV = "NC"; }
-    if (IRRIGACION == null) { IRRIGACION = "NC"; }Nuevo
+    if (IRRIGACION == null) { IRRIGACION = "NC"; } Nuevo
     if (HIDRAULICA == null) { HIDRAULICA = "NC"; }
     if (FERROCARRIL == null) { FERROCARRIL = "NC"; }
     if (OTROSPERMISOS == null) { OTROSPERMISOS = "NC"; }
@@ -192,7 +202,7 @@ router.post('/guardarNuevoCliente', (req, res) => {
     const promise1 = new Promise((resolve, reject) => {
         sql = 'Insert into obras set ?';
         connection.query(sql, {
-            Nombre: Nombre, NCarpeta: NCarpeta, Comitente: Comitente, Ubicacion: Departamento, nuevaObra:"S"
+            Nombre: Nombre, NCarpeta: NCarpeta, Comitente: Comitente, Ubicacion: Departamento, nuevaObra: "S"
         }, (error, results) => {
             if (error) console.log(error);
         })
@@ -274,7 +284,7 @@ router.post('/guardarNuevoCliente', (req, res) => {
                 var TelefonoVecino = req.body.TelefonoVecino;
                 var CorreoVecino = req.body.CorreoVecino;
                 var LoteVecino = req.body.LoteVecino;
-                if (cantidadVecinos != 0 || cantidadVecinos != null || cantidadVecinos != undefined) {
+                if (cantidadVecinos > 1 || cantidadVecinos != null || cantidadVecinos != undefined) {
                     for (let index = 0; index < cantidadVecinos; index++) {
                         sql = 'Insert into finanzas_clientes_por_obra set?';
                         var NombreVecino = req.body.NombreVecino;
@@ -303,7 +313,7 @@ router.post('/guardarNuevoCliente', (req, res) => {
                                         })
                                         sql = 'INSERT into finanzas_clientes_por_obra_cobros set?';
                                         connection.query(sql, {
-                                            id_obra: idObra, ID_cliente: id_cliente, NombreCliente: NombreVecino[index],
+                                            id_obra: idObra, ID_cliente: id_cliente, NombreCliente: NombreVecino[index], ServicioIncluidoCuotas: ServicioIncluido[index],
                                         }, (error, results) => {
                                             if (error) console.log(error);
                                         })
@@ -314,15 +324,26 @@ router.post('/guardarNuevoCliente', (req, res) => {
                     }
                     resolve();
                 }
+                else {
+                    sql = 'Insert into finanzas_clientes_por_obra set?';
+                    var NombreVecino = req.body.NombreVecino;
+                    connection.query(sql, {
+                        id_Obra: idObra, NombreObra: Nombre, NombreCliente: NombreVecino, DniCliente: DniVecino, LocacionObra: Departamento, Telefono: TelefonoVecino, Correo: CorreoVecino, Direccion: LoteVecino,
+                    }, (error, results) => {
+                        if (error) console.log(error);
+
+                    }
+                    )
+                }
             })
-        }).then(function(){
-            
-                res.redirect('/editarTareas/'+idObra);
-           resolve();
-           
+        }).then(function () {
+
+            res.redirect('/editarTareas/' + idObra);
+            resolve();
+
         })
     })
-   
+
 }
 )
 router.post('/guardarNuevoContacto', (req, res) => {
@@ -370,43 +391,37 @@ router.get('/contactos', (req, res) => {
     } else { res.redirect('/'); }
 })
 //Logo
-router.get('/logo',(req,res)=>{
-    res.sendFile('logo.png',{root: 'src/public/images'});
+router.get('/logo', (req, res) => {
+    res.sendFile('logo.png', { root: 'src/public/images' });
 })
-router.post('/NuevoEmpleado',(req,res)=>{
+router.post('/NuevoEmpleado', (req, res) => {
     var sql = 'INSERT INTO usuariosregistrados set?';
-    connection.query(sql,{Nombre:req.body.Nombre,usuario:req.body.Usuario,password:req.body.Contraseña,rol:req.body.rol},(error,results)=>{
-        if(error) console.log(error);
-        else{
+    connection.query(sql, { Nombre: req.body.Nombre, usuario: req.body.Usuario, password: req.body.Contraseña, rol: req.body.rol }, (error, results) => {
+        if (error) console.log(error);
+        else {
             res.redirect('/index');
         }
     })
 })
-router.get('/editarEmpleado',(req,res)=>{
-    var sql= 'Select * from usuariosregistrados ';
-connection.query(sql,(error,results)=>{
-    if(error)console.log(error);
-    else{res.send(results);};
-})
-})
-router.post('/editarEmpleado',(req,res)=>{
-    var sql= 'UPDATE usuariosregistrados set? WHERE id =?';
-    connection.query(sql,[{
-        Nombre:req.body.Nombre, usuario:req.body.Usuario,password:req.body.Contraseña,rol:req.body.rol
-    },req.body.id],(error,results)=>{
-        if(error)console.log(error);
-        else{
+
+router.post('/editarEmpleado', (req, res) => {
+    var sql = 'UPDATE usuariosregistrados set? WHERE id =?';
+    connection.query(sql, [{
+        Nombre: req.body.Nombre, usuario: req.body.Usuario, password: req.body.Contraseña, rol: req.body.rol
+    }, req.body.id], (error, results) => {
+        if (error) console.log(error);
+        else {
             res.redirect('/index');
         }
     })
 })
-router.post('/eliminarEmpleado/:id',(req,res)=>{
-    var id= req.params.id;
-var sql='DELETE from usuariosregistrados WHERE ID=?';
-connection.query(sql,id,(error,results)=>{
-    if(error)console.log(error);
-    else{
-        res.send("Empleado eliminado");
-    }
-})
+router.post('/eliminarEmpleado/:id', (req, res) => {
+    var id = req.params.id;
+    var sql = 'DELETE from usuariosregistrados WHERE ID=?';
+    connection.query(sql, id, (error, results) => {
+        if (error) console.log(error);
+        else {
+            res.send("Empleado eliminado");
+        }
+    })
 })

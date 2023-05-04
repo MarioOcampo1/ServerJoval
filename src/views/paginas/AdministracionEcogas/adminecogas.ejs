@@ -145,11 +145,7 @@
  </div>
  
  
- <!-- Optional: Place to the bottom of scripts -->
- <script>
-  const myModal = new bootstrap.Modal(document.getElementById('modalId'), options)
- 
- </script>
+
   <script>  
     $("#comunicacionDiaria").css("width","100%")
 
@@ -278,10 +274,10 @@ return stringFinal;
         fecha = moment(fecha).locale('es').format("DD-MM-YYYY");
         if (dias>7){
           return '<div  style="display:none">'+ data+'</div><div id="TextoParpadeante" class="bg-black text-danger">'+ fecha+' </div>';
-          Blink();
+          
         }if(dias>0){
            return '<div style="display:none">'+ data+'</div><div class="bg-danger text-light">'+ fecha+' </div>';
-           Blink();
+           
           }
           if(dias==0){
             return '<div style="display:none">'+ data+'</div><div class="bg-warning text-dark">'+ fecha+' </div>';

@@ -248,10 +248,11 @@
       <!-- SECTOR FINANZAS -->
       <div id="SectorFinanzas" class="container-fluid mt-2">
         <input type="hidden" id="FinanzasSeleccionado" name="FinanzasSeleccionado">
+        <div class="row bg-danger text-white">
+          <h1 class="text-center">Sector Finanzas</h1>
+        </div>
         <div class="container-fluid mt-2 ">
-          <div class="row bg-danger text-white">
-            <h1 class="text-center">Sector Finanzas</h1>
-          </div>
+
           <div class="row">
             <div class="col-sm text-center">
               <label class="fw-bold" for="OpcionesDeCuotas">Tipo de pago</label>
@@ -266,7 +267,7 @@
             </div>
             <div class="col-sm text-center">
               <label class="fw-bold" for="cantidadVecinos">Cantidad de vecinos</label>
-              <input type="number" class="form-control" id="cantidadVecinos" value="1" name="cantidadVecinos" placeholder="Ingrese la cantidad de vecinos." required>
+              <input type="number" class="form-control" id="cantidadVecinos" value="0" name="cantidadVecinos" placeholder="Ingrese la cantidad de vecinos." required>
             </div>
             <div class="col-sm text-center">
               <label class="fw-bold" for="MontoContrato">Monto del contrato</label>
@@ -280,6 +281,34 @@
               <label class="fw-bold" for="AnticipoFinanciero">Valor anticipo financiero</label>
               <input type="number" class="form-control" id="AnticipoFinanciero" name="AnticipoFinanciero" placeholder="Ingrese el monto de la cuota." required>
             </div>
+          </div>
+          <div class="row">
+            <div class="col-sm text-center" id="MontoServicioDomiciliario" style="display: block;">
+              <label class="fw-bold" for="MontoServicioDomiciliario">Monto servicio domiciliario</label>
+              <input type="number" class="form-control" name="ServicioDomiciliario" value="35000">
+            </div> 
+            <div class="col-sm text-center" id="MontoServicioDomiciliario" style="display: block;">
+
+            <label class="fw-bold" for="">¿Servicio incluido en las cuotas?</label>
+            <div class="form-check border">
+              <input class="form-check-input" type="radio" value="S" id="ServicioIncluido" name="ServicioIncluido">
+              <label class="form-check-label" for="flexCheckDefault">
+                Sí
+              </label>
+            </div>
+            <div class="form-check border">
+              <input class="form-check-input" type="radio" value="N" id="ServicioIncluido" name="ServicioIncluido" checked>
+              <label class="form-check-label" for="flexCheckChecked">
+                No
+              </label>
+            </div>
+            </div>
+            <div class="col-sm text-center" id="MontoServicioDomiciliario" style="display: block;">
+</div>
+<div class="col-sm text-center" id="MontoServicioDomiciliario" style="display: block;">
+</div>
+<div class="col-sm text-center" id="MontoServicioDomiciliario" style="display: block;">
+</div>
           </div>
         </div>
 
@@ -320,7 +349,7 @@
     $('#cantidadVecinos').change(function(data) {
       var cantidadVecinos = $('#cantidadVecinos').val();
       $('#infoVecinos2').empty();
-
+if(( $('#cantidadVecinos').val())>1){
       for (let index = 2; index <= (cantidadVecinos); index++) {
         var text = '<br> <h4 class="bg-info">Datos del vecino N°: ' + index + '</h4>' +
           ' <div class="row"><div class="col-3"> <label class="fw-bold" for="NombreVecino">Nombre</label>' +
@@ -339,6 +368,28 @@
         $('#infoVecinos2').append(text);
 
       }
+    }
+    else{
+      $('#infoVecinos2').empty();
+      var text = '<br> <h4 class="bg-info">Datos del vecino:</h4>' +
+          ' <div class="row"><div class="col-3"> <label class="fw-bold" for="NombreVecino">Nombre</label>' +
+          '<input type="text" class="form-control" id="NombreVecino" name="NombreVecino"placeholder="Nombre."></div>' +
+          '<div class="col-3"><label class="fw-bold" for="ApellidoVecino">Apellido</label> ' +
+          ' <input type="text" class="form-control" id="ApellidoVecino" name="ApellidoVecino" placeholder="Apellido."> </div>' +
+          '<div class="col-3"><label class="fw-bold" for="DniVecino">Dni</label> ' +
+          '<input type="number" minlength="8" maxlength="9" class="form-control" id="DniVecino" name="DniVecino" placeholder="Dni."> </div>' +
+          '<div class="col-3"><label class="fw-bold" for="TeléfonoVecino">Teléfono</label>' +
+          '   <input type="text" class="form-control" id="TelefonoVecino" name="TelefonoVecino" placeholder="Teléfono."> </div>' +
+          '<div class="row"> <div class="col-3"><label class="fw-bold" for="CorreoVecino">Correo</label>' +
+          '<input type="email" class="form-control" id="CorreoVecino" name="CorreoVecino" placeholder="Correo."></div>' +
+          '<div class="col-3"><label class="fw-bold" for="LoteVecino">Manzana y lote</label>' +
+          '<input type="text" class="form-control" id="LoteVecino" name="LoteVecino" placeholder="Lote."></div></div>' +
+          '<br>'
+        $('#infoVecinos2').append(text);
+
+
+    }
+
     })
     $('#OpcionesDeCuotas').change(function() {
       var OpcionSeleccionada = $('#OpcionesDeCuotas option:selected').val();
