@@ -5,12 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.css">
-<link rel="stylesheet" href="\bootstrap-icons-1.10.3\bootstrap-icons-1.10.3\bootstrap-icons.css">
-<script src="/bootstrap/dist/js/bootstrap.js"></script>
-  <script src="\Jquery-3.6.3\jquery-3.6.3.js"></script>
-  <script src="\bootstrap-icons-1.10.3\bootstrap-icons-1.10.3\bootstrap-icons.json"></script>
-
+  <%- include('./partials/header.ejs') %>
   <title>Joval Administración</title>
 </head>
 
@@ -60,7 +55,10 @@
       <div class="table-responsive">
         <table class="table table-primary">
           <thead>
-            <h1 class="text-center">Albacaución</h1>
+            <h1 class="text-center">Vencimientos</h1>
+            <a href="https://docs.google.com/spreadsheets/d/10IXXhxgj6mok8VNA3M0fo7-Vhji-s7CADwVOLYI3L08/edit?usp=sharing"><button class="btn btn-primary">Tabla con vencimientos</button></a>
+            
+            <h2 class="text-center">Albacaución</h2>
             <tr>
               <th scope="col">Póliza N°</th>
               <th scope="col">Descripción</th>
