@@ -24,7 +24,7 @@
                 <marquee class="text-light bg-dark" behavior="scroll" direction="left">Póliza de caución: Número de póliza: <%=albacaucion[0].NumeroPoliza%>. Tipo de riesgo: <%= albacaucion[0].Riesgo%>. Proxima refacturación: <%= moment(albacaucion[0].ProximaRefacturacion).format('DD/MM/YYYY') %></marquee>
             </div>
             <%}%>
-           <h1><button id="btnprueba">PROBAR</button></h1>
+           
             <div class="card">
                 <div class="card-body ">
                     <div class="card-title text-center">
@@ -689,9 +689,7 @@
         $(this).popover('show');
     }
     );
-    $('#btnprueba').click(function(){
-        $('#ModalObras').modal('toggle');
-    })
+    
 </script>
 
 
