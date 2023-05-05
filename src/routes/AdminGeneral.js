@@ -34,6 +34,15 @@ connection.connect(error => {
 router.get('/admingral', (req, res) => {
     res.render('paginas/AdministracionGeneral/admingral.ejs');
 })
+router.get('/vencimientosDocGral',(req,res)=>{
+    let sql='SELECT * FROM admingeneral_vencimientos;'
+    connection.query(sql,(error,results)=>{
+        if(error)console.log(error);
+        else{
+            res.render('./paginas/AdministracionGeneral/vencimientos.ejs',{vencimientos:results, moment})
+        }
+    })
+})
 router.get('/seguros', (req, res) => {
     res.render('paginas/AdministracionGeneral/seguros.ejs');
 })
@@ -138,6 +147,31 @@ mes= mes+3;
     })
 
 
+})
+router.post('/NuevoItemVencimiento',(req,res)=>{
+    let sql='INSERT INTO admingeneral_vencimientos set?';
+    var fechaActual= new Date();
+connection.query(sql,{
+    Item: req.body.Item,FechaActualizacion:fechaActual,FechaVencimiento:req.body.FechaVencimiento,DiasPreviosAviso:req.body.AvisoSistema
+},(error,results)=>{
+if(error)console.log(error);
+else{
+    res.redirect('/vencimientosDocGral');
+}
+})    
+})
+router.post('/ActualizarVencimiento',(req,res)=>{
+    let sql='UPDATE admingeneral_vencimientos set? WHERE id=?';
+    var id= req.body.VencimientoID;
+    var fechaActual= new Date();
+connection.query(sql,[{
+    Item: req.body.Item,FechaActualizacion:fechaActual,FechaVencimiento:req.body.FechaVencimiento,DiasPreviosAviso:req.body.AvisoSistema
+},id],(error,results)=>{
+if(error)console.log(error);
+else{
+    res.redirect('/vencimientosDocGral');
+}
+})    
 })
 router.post('/GuardarPolizaAlbacaucion', (req, res) => {
         let Aseguradora = req.body.Aseguradora;
@@ -257,6 +291,15 @@ router.post('/GuardarPolizaAlbacaucion', (req, res) => {
         }
     
 
+})
+router.post('/DeleteItemVencimiento',(req,res)=>{
+    let sql= 'DELETE FROM admingeneral_vencimientos WHERE id =? ';
+    connection.query(sql,req.body.IdItemABorrar,(error,results)=>{
+        if(error)console.log(error);
+        else{
+            res.redirect('/vencimientosDocGral');
+        }
+    })
 })
 router.get('/seguros/ActualizarPolizaAlbacaucion/:id', (req, res) => {
     if (req.isAuthenticated()) {
