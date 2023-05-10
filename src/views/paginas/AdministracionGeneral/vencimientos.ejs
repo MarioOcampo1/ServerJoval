@@ -21,7 +21,8 @@
                 <th scope="col">Item</th>
                 <th scope="col">Fecha ultimo cambio</th>
                 <th scope="col">Fecha de vencimiento</th>
-                <th scope="col">Dias para notificación</th>
+                <th scope="col">Fecha para notificación</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -30,7 +31,7 @@
                 <td scope="row"><%=vencimiento.Item%></td>
                 <td><%=moment(vencimiento.FechaActualizacion).format('DD/MM/YYYY')%></td>
                 <td><%=moment(vencimiento.FechaVencimiento).format('DD/MM/YYYY')%></td>
-                <td><%=vencimiento.DiasPreviosAviso%></td>
+                <td><%=moment(vencimiento.DiasPreviosAviso).format('DD/MM/YYYY')%></td>
                 <td><button class="btn btn-lg btn-success btnConfigVencimiento" id="" onclick="configVencimiento('<%=vencimiento.id%>','<%=vencimiento.Item%>','<%vencimiento.FechaActualizacion%>','<%vencimiento.FechaVencimiento%>' )"><i class="bi bi-gear-fill"></i></button>
                     <button id="BtnDelete" class="btn btn-lg btn-danger" onclick="BorrarItem('<%=vencimiento.id%>')"><i class="bi bi-trash"></i></button>
                 </td>
@@ -61,8 +62,8 @@
                         <label id="label3" for="float3">Fecha de vencimiento</label>
                       </div>
                       <div class="form-floating">
-                        <input type="number" class="form-control" id="float3" name="AvisoSistema" placeholder="Avisar 10 dias antes" value="10">
-                        <label id="label3" for="float3">Dias previos en los que avisará el sistema</label>
+                        <input type="date" class="form-control" id="float3" name="AvisoSistema" placeholder="Avisar 10 dias antes" value="10">
+                        <label id="label3" for="float3">Fecha en la que avisará el sistema</label>
                       </div>
                 </div>
                 <div class="modal-footer">
