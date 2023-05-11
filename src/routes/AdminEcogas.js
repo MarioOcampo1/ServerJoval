@@ -3735,7 +3735,7 @@ router.post("/ActualizarEstadoCarpeta/:id", (req, res) => {
       if (error) console.log(error);
     }
   );
-  var sql = "Update obras Set ? where id=?";
+   sql = "Update obras Set ? where id=?";
   connection.query(
     sql,
     [
@@ -3748,6 +3748,10 @@ router.post("/ActualizarEstadoCarpeta/:id", (req, res) => {
       if (error) console.log(error);
     }
   );
+  sql=' UPDATE adminecogas_tareas_por_carpeta SET? WHERE id_obra=?';
+  connection.query(sql,[{Estado:Estado}, id],(error,results)=>{
+    if(error)console.log(error);
+  })
   res.redirect(req.get("referer"));
 });
 //Informes para Marcelo
