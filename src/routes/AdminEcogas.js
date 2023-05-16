@@ -3297,7 +3297,6 @@ router.post("/actFinalCarpEcogas/:id", upload.none(), function (req, res) {
     sql,
     [
       {
-        Estado:"Finalizada",
         PresentacionFinal: PresentacionFinal,
         HabilitacionFinal: HabilitacionFinal,
       },
@@ -3779,7 +3778,10 @@ router.post("/ActualizarEstadoCarpeta/:id", (req, res) => {
   connection.query(sql,[{Estado:Estado}, id],(error,results)=>{
     if(error)console.log(error);
   })
-  res.redirect(req.get("referer"));
+  setTimeout(() => {
+    res.redirect(req.get("referer"));  
+  }, 2000);
+  
 });
 //Informes para Marcelo
 router.get("ObtenerInformesObras", (req, res) => {

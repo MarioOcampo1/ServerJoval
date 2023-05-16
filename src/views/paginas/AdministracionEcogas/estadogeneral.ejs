@@ -446,13 +446,13 @@
     $('td').each(function () {
       var contenido = $(this).text();
       contenido = contenido.toUpperCase();
-      if (contenido == "OK" || contenido == "REALIZADA" || contenido == "RECIBIDO") {
+      if ( contenido.includes( "OK") ||  contenido.includes( "REALIZADA") ||  contenido.includes( "RECIBIDO")) {
         $(this).addClass('align-middle bg-success');
       }
-      if (contenido == "PEDIR" || contenido == "NO RECIBIDO" || contenido == "SIN PRESENTAR" || contenido == "OBSERVADO") {
+      if ( contenido.includes( "PEDIR") ||  contenido.includes( "NO RECIBIDO") ||  contenido.includes( "SIN PRESENTAR") ||  contenido.includes( "OBSERVADO")) {
         $(this).addClass('align-middle bg-danger text-white');
       }
-      if (contenido == "ENGESTION" || contenido == "PRESENTADO" || contenido == "SOLICITADO") {
+      if ( contenido.includes( "ENGESTION") ||  contenido.includes( "PRESENTADO") ||  contenido.includes( "SOLICITADO")) {
         $(this).addClass('align-middle bg-warning ');
       }
     })
