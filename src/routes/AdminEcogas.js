@@ -3297,6 +3297,7 @@ router.post("/actFinalCarpEcogas/:id", upload.none(), function (req, res) {
     sql,
     [
       {
+        Estado:"Finalizada",
         PresentacionFinal: PresentacionFinal,
         HabilitacionFinal: HabilitacionFinal,
       },
