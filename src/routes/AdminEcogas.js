@@ -136,11 +136,7 @@ router.get("/estadogeneral", (req, res) => {
   if (req.isAuthenticated()) {
     res.locals.moment = moment;
     const sql =
-      "SELECT e.CodigoVigentes, c.id, c.Nombre  ,c.NCarpeta,  c.Ubicacion ,c.Comitente ,c.Estado,  d.* ,b.DocumentacionTerreno ,b.DocumentacionSociedad ,b.DocumentacionContractual  ,b.Comercial ,b.Tecnica ,b.PermisosEspeciales ,b.DocumentacionObra  ,b.Seguridad,b.Interferencias, b.Permisos, b.PlanDeTrabajo, b.Matriculas, b.Ambiente, b.NotaCumplimentoNormativas, b.DDJJNAG153, b.Avisos, b.DocumentacionInspeccion, b.ComunicacionObras, b.ActasFinalesEcogas, b.PlanosyCroquis, b.ConformeEntidades, b.PruebaHermeticidad, b.InformesFinales, b.PresentacionFinal,  b.HabilitacionObra, b.DocumentacionAmbiental  from obras_tareasgenerales b , codificacioncarpetas e, obras c, adminecogas_tareas_por_carpeta d WHERE b.Nombre = c.Nombre AND b.Nombre = e.Nombre AND d.Nombre = e.Nombre";
-    // const sql = 'SELECT c.id, c.Nombre  ,c.NCarpeta,  c.Ubicacion ,c.Comitente ,c.Estado, c.Fechafirmacontrato ,b.DocumentacionTerreno, b.DocumentacionSociedad,b.DocumentacionContractual  ,b.Comercial ,b.Tecnica,b.PermisosEspeciales ,b.DocumentacionObra  ,b.Seguridad,b.Interferencias, b.Permisos, b.PlanDeTrabajo, b.Matriculas, b.Ambiente, b.NotaCumplimentoNormativas, b.DDJJNAG153, b.Avisos, b.DocumentacionInspeccion, b.ComunicacionObras, b.ActasFinalesEcogas, b.PlanosyCroquis, b.ConformeEntidades, b.PruebaHermeticidad, b.InformesFinales,b.PresentacionFinal, b.HabilitacionObra  from obras c , obras_tareasgenerales b  ';
-    // const sql='Select * from obras c';
-    // const sql='Select * from obras_tareasgenerales b';
-
+      "SELECT e.CodigoVigentes, c.id, c.Nombre,c.NCarpeta,c.Ubicacion ,c.Comitente ,c.Estado,d.* ,b.DocumentacionTerreno ,b.DocumentacionSociedad ,b.DocumentacionContractual  ,b.Comercial ,b.Tecnica ,b.PermisosEspeciales ,b.DocumentacionObra  ,b.Seguridad,b.Interferencias, b.Permisos, b.PlanDeTrabajo, b.Matriculas, b.Ambiente, b.NotaCumplimentoNormativas, b.DDJJNAG153, b.Avisos, b.DocumentacionInspeccion, b.ComunicacionObras, b.ActasFinalesEcogas, b.PlanosyCroquis, b.ConformeEntidades, b.PruebaHermeticidad, b.InformesFinales, b.PresentacionFinal,  b.HabilitacionObra, b.DocumentacionAmbiental  from obras_tareasgenerales b , codificacioncarpetas e, obras c, adminecogas_tareas_por_carpeta d WHERE b.Nombre = c.Nombre AND b.Nombre = e.Nombre AND d.Nombre = e.Nombre";
     connection.query(sql, (error, results) => {
       if (error) console.log(error);
       if (results.length > 0) {
@@ -3680,6 +3676,36 @@ router.post("/actFinalCarpEcogas/:id", upload.none(), function (req, res) {
   }
   res.redirect("/historialcarpeta/" + Nombre);
 });
+router.post("/ActualizarHistorialTareas",(req,res)=>{
+var idObra=req.body.idObra;
+var NombreObra;
+var EtapaSeleccionada= req.body.EtapaTarea;
+var subtarea = req.body.Subtarea;
+var ResponsableTarea= req.body.ResponsableDeTarea;
+var TareaRealizada= req.body.TareaRealizada;
+var ProximaTarea=req.body.ProximaTarea;
+var FechaLimiteTarea=req.body.Fecha_limite;
+let fecha = new Date();
+let anio = fecha.getFullYear();
+let mes = fecha.getMonth() + 1;
+let dia = fecha.getDate();
+let fechaHoy = anio + '-' + mes + '-' + dia;
+var sql= 'SELECT Nombre FROM obras WHERE id='+idObra+';';
+connection.query(sql,(error,results)=>{
+  if(error)console.log(error);
+  else{
+    NombreObra=results[0].Nombre;
+    sql='INSERT INTO historialdecambios set?';
+connection.query(sql,[{Nombre_sub:NombreObra,EtapaTarea_sub:EtapaSeleccionada,Tarea:subtarea,Fecha_Tarea_sub:fechaHoy, ResponsableDeTarea:ResponsableTarea,Tarea_Realizada_sub:TareaRealizada,Fecha_Proxima_Tarea_sub:FechaLimiteTarea,Proxima_Tarea_sub:ProximaTarea, id_obra:idObra}],(error,results)=>{
+  if(error)console.log(error);
+  else{
+    res.send('Tarea cargada con exito en el historial. Recuerde cargar los checks en la carpeta.');
+  }
+})
+  }
+})
+
+})
 //Opciones de editar tareas POST
 router.post("/ActualizarEstadoCarpeta/:id", (req, res) => {
   console.log("Actualizando estado de carpeta");

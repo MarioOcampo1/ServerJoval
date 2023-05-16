@@ -1,106 +1,115 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title class="text-center">Administración Ecogas</title>
+  <title class="text-center">Administración Ecogas</title>
 </head>
-<body>
-   <%- include('./partials/menusuperior.ejs');%>
-   <%if(results){%>
-   <div class="container-fluid text-center">
-    <h1 class="fw-bold text-decoration-underline ">
-      Administración obras de gas</h1>
-      <div class="col-md-12 d-flex mb-2">
-        <a href="/nuevaObra" class="me-2">
-          <button class="btn btn-success ml-auto ">Nueva Obra</button>
-        </a>
-        <div class="me-2">
-        <button class=" btn btn-success ml-auto" disabled>Nueva tarea</button>
-      </div>
-        
 
-      </div>
-        
-       
-    <div class="row">
-      <div class="col-12">
-          <input class="form-control text-primary"type="text" name="" id="buscador" placeholder="Buscar en tabla">
-      </div>
-    
-    </div>
-   
-  </div>
-  </div>
-<div id="Avisos" class="container" style="display: none;">
-<button disabled class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#Interferencias" onclick="document.getElementById('interferencias').style.display='block'">Interferencias</button>
-<button disabled>Permisos</button>
-<button disabled>Documentación</button>
-</div>
-<div id=interferencias class=""style="display: none ;">
-  <%- include('./interferencias.ejs')%>
-</div>
-<div class="row">
-  <div class="col-12">
-    <div class="table-responsive ">
-      <table id="comunicacionDiaria" class="table table-striped table-bordered table-hover  ">
-        <thead class="">
-          <tr>
-            <th class="text-center align-middle">
-              <i class="bi bi-c-circle" style="font-size: 2rem;" title="Codigo designado para ubicar en las carpetas fisicas de la oficina."></i>
-            </th>
-            <th class="text-center align-middle">
-              <h6>Nombre - N°</h6>
-            </th>
-            <th class="text-center align-middle">
-              <div class="btn-toolbar" role="toolbar">
-                <div class="btn-group" role="group">
-                  <% usuariosregistrados.forEach(usuarios => { %>
-                    <button id="<%=usuarios.Nombre%>"class="btn btn-outline-primary btn-sm "><%=usuarios.Nombre%></button>
-                   
-                  <% }) %>
-              
+<body>
+
+  <%- include('./partials/menusuperior.ejs');%>
+    <%- include('./modals/modal-adminecogas.ejs') %>
+      <%if(results){%>
+        <div class="container-fluid text-center">
+          <h1 class="fw-bold text-decoration-underline ">
+            Administración obras de gas</h1>
+          <div class="col-md-12 d-flex mb-2">
+            <a href="/nuevaObra" class="me-2">
+              <button class="btn btn-success ml-auto ">Nueva Obra</button>
+            </a>
+            <div class="me-2">
             </div>
+
+
+          </div>
+
+
+          <div class="row">
+            <div class="col-12">
+              <input class="form-control text-primary" type="text" name="" id="buscador" placeholder="Buscar en tabla">
             </div>
-            </th>
-            <th class="text-center align-middle">
-              <h6>Tarea realizada
-                <button id="TablaGral"clicked class=" btn btn-outline-primary btn-sm">Quitar filtros</button>
-              </h6>
-            </th>
-            <th class="text-center align-middle">
-              <div class="btn-toolbar" role="toolbar">
-  <div class="btn-group btn-sm" role="group">
-             <button class="btn btn-outline-primary btn-sm" id="Prel"> P</button>
-             <button class="btn btn-outline-primary btn-sm" id="1ra"> 1P</button>
-             <button class="btn btn-outline-primary btn-sm" id="2da"> 2P</button>
-             <button class="btn btn-outline-primary btn-sm" id="Obras"> O</button>
-             <button class="btn btn-outline-primary btn-sm" id="Caos"> CAOS</button>
+
+          </div>
+
+        </div>
+        </div>
+        <div id="Avisos" class="container" style="display: none;">
+          <button disabled class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#Interferencias"
+            onclick="document.getElementById('interferencias').style.display='block'">Interferencias</button>
+          <button disabled>Permisos</button>
+          <button disabled>Documentación</button>
+        </div>
+        <div id=interferencias class="" style="display: none ;">
+          <%- include('./interferencias.ejs')%>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="table-responsive ">
+              <table id="comunicacionDiaria" class="table table-striped table-bordered table-hover  ">
+                <thead class="">
+                  <tr>
+                    <th class="text-center align-middle">
+                      <i class="bi bi-c-circle" style="font-size: 2rem;"
+                        title="Codigo designado para ubicar en las carpetas fisicas de la oficina."></i>
+                    </th>
+                    <th class="text-center align-middle">
+                      <h6>Nombre - N°</h6>
+                    </th>
+                    <th class="text-center align-middle">
+                      <div class="btn-toolbar" role="toolbar">
+                        <div class="btn-group" role="group">
+                          <% usuariosregistrados.forEach(usuarios=> { %>
+                            <button id="<%=usuarios.Nombre%>" class="btn btn-outline-primary btn-sm ">
+                              <%=usuarios.Nombre%>
+                            </button>
+
+                            <% }) %>
+
+                        </div>
+                      </div>
+                    </th>
+                    <th class="text-center align-middle">
+                      <h6>Tarea realizada
+                        <button id="TablaGral" clicked class=" btn btn-outline-primary btn-sm">Quitar filtros</button>
+                      </h6>
+                    </th>
+                    <th class="text-center align-middle">
+                      <div class="btn-toolbar" role="toolbar">
+                        <div class="btn-group btn-sm" role="group">
+                          <button class="btn btn-outline-primary btn-sm" id="Prel"> P</button>
+                          <button class="btn btn-outline-primary btn-sm" id="1ra"> 1P</button>
+                          <button class="btn btn-outline-primary btn-sm" id="2da"> 2P</button>
+                          <button class="btn btn-outline-primary btn-sm" id="Obras"> O</button>
+                          <button class="btn btn-outline-primary btn-sm" id="Caos"> CAOS</button>
+                        </div>
+                      </div>
+                    </th>
+                    <th class="text-center align-middle">
+                      <h2 class="bi bi-calendar2-minus text-primary"></h2>
+                      <h6>Proxima tarea</h6>
+                    </th>
+                    <th class="text-center align-middle">
+                      <h2 class="bi bi-calendar-x text-danger"></h2>
+                      <h6>Fecha Limite</h6>
+
+                      <!-- <button id="VerUrgentes"class="   btn btn-outline-dark btn-sm"> Ver urgentes</button> -->
+
+                    </th>
+                    <th>
+
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="text-center">
+                </tbody>
+              </table>
             </div>
           </div>
-  </th>
-            <th class="text-center align-middle">
-              <h2 class="bi bi-calendar2-minus text-primary"></h2>
-              <h6>Proxima tarea</h6>
-            </th>
-            <th class="text-center align-middle">
-              <h2 class="bi bi-calendar-x text-danger"></h2>
-              <h6>Fecha Limite</h6>
-              
-              <!-- <button id="VerUrgentes"class="   btn btn-outline-dark btn-sm"> Ver urgentes</button> -->
-  
-            </th>
-           
-          </tr>
-        </thead>
-        <tbody class="text-center">
-        </tbody>
-      </table>
-    </div>
-  </div>
-  <!-- <div class="col-2 border">
+          <!-- <div class="col-2 border">
     <div class="wrapper">
       <div class="menu">
         <p class="header">Notificaciones del sistema</p>
@@ -120,260 +129,249 @@
       </div>
     </div>
   </div> -->
-</div>
- <!-- Modal Body -->
- <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
- <div class="modal fade" id="modaltareasRapidas" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalTitleId">Tarea rapida</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="btn-group" role="group" aria-label="Basic example">
-          <button type="button" class="btn btn-secondary">EditarTareas</button>
-          
         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save</button>
-      </div>
-    </div>
-  </div>
- </div>
- 
- 
 
-  <script>  
-    $("#comunicacionDiaria").css("width","100%")
 
-  $(document).ready(function(){
-   
-      var url = '/adminecogas/TablaGeneral';
-      
-    var tabla= $('#comunicacionDiaria').DataTable({
-        "orderCellsTop": true,
-        "fixedHeader": true, //Deja fijo el header, para q cuando el usuario deslice la tabla hacia abajo, el header se siga viendo
-      "paging": false, //Permite la paginacion de la tabla, si esta desactivado, traera todos los resultados en una sola vista.
-      
-      "scrollX": true,
-      "searching":false,   
-      // columnDefs: [ { type: 'date', targets: [6],  } ], //Al activar este filtro, no permite que se puedan ordenar las fechas.
-      "order":[[6,'desc']],
-        "language": { url: "//cdn.datatables.net/plug-ins/1.11.3/i18n/es_es.json" },
-        "ajax": {
-          "url": url,
-          "dataSrc": "",
-        },    
-        "columns": [
-          {"width": "5%","data": "CodigoVigentes", render: function(data,type,row){
-            if(row.CodigoVigentes==null || row.CodigoEnUsoVigentes=="F"){
-              return ('<div class="text-light bg-success " title="Carpeta Finalizada. Codigo fisico.">'+row.CodigoFinalizadas+'</div>' );
-            }
-            else{
-            var fechaActual = new Date(); 
-            let quincediasEnMilisegundos = 1000 * 60 * 60 * 24 *15 ; 
-            var restaDeDias = (fechaActual.getTime() - quincediasEnMilisegundos);
-            fecha = new Date(restaDeDias).toISOString();
-            if(row.Estado=="2da parte"){
-              var Codigo='<div title="Codigo designado para ubicar en las carpetas fisicas de la oficina.">'+row.CodigoVigentes+'</div>'; ;
-              var Permiso=[];
-var Interferencia = [];
-// Interferencias
-              if(row.intTelefonicaObtenida<fecha && row.intTelefonicaObtenida!='0000-00-00' && row.intTelefonicaObtenida!='' ){
-           Interferencia.push('<div class="btn m-1 btn-danger bt-sm" TITLE="Interferencia de Teléfonica vencida"> TFA </div>');
-              }
-              if(row.intAguaObtenida<fecha && row.intAguaObtenida!='0000-00-00' && row.intAguaObtenida!=''){
-           Interferencia.push('<div class="btn m-1 btn-danger bt-sm" TITLE="Interferencia de Agua vencida"> AG </div>');
-              }
-              if(row.intClaroObtenida<fecha && row.intClaroObtenida!='0000-00-00' && row.intClaroObtenida!=''){
-           Interferencia.push('<div class="btn m-1 btn-danger bt-sm" TITLE="Interferencia de Claro vencida"> CL </div>');
-              }
-              if(row.intElectricidadObtenida<fecha && row.intElectricidadObtenida!='0000-00-00' && row.intElectricidadObtenida!=''){
-           Interferencia.push('<div class="btn m-1 btn-danger bt-sm" TITLE="Interferencia de Electricidad vencida"> E </div>');
-              }
-              if(row.intArnetObtenida<fecha && row.intArnetObtenida!='0000-00-00' && row.intArnetObtenida!=''){
-           Interferencia.push('<div class="btn m-1 btn-danger bt-sm" TITLE="Interferencia de Arnet vencida"> AR </div>');
-              }
-              if(row.intCloacasObtenida<fecha && row.intCloacasObtenida!='0000-00-00' && row.intCloacasObtenida!=''){
-           Interferencia.push('<div class="btn m-1 btn-danger bt-sm" TITLE="Interferencia de Cloacas vencida"> CC </div>');
-              }
-              if(row.intTelecomObtenida<fecha && row.intTelecomObtenida!='0000-00-00' && row.intTelecomObtenida!=''){
-           Interferencia.push('<div class="btn m-1 btn-danger bt-sm" TITLE="Interferencia de Telecom vencida"> TCM </div>');
-              }
-              // Fin interferencias
-              // Permisos
-              if(row.VencimientoDNV<fecha && row.VencimientoDNV!='0000-00-00'){
-Permiso.push('<div title="Permiso DNV Vencido" class="btn m-1 btn-warning bt-sm"> DNV </div>');
-              }
-              if(row.VencimientoDPV<fecha && row.VencimientoDPV!='0000-00-00'){
-Permiso.push('<div title="Permiso DPV Vencido" class="btn m-1 btn-warning bt-sm"> DPV </div>');
-              }
-              if(row.VencimientoFerrocarril<fecha && row.VencimientoFerrocarril!='0000-00-00'){
-Permiso.push('<div title="Permiso Ferrocarril Vencido" class="btn m-1 btn-warning bt-sm"> FFCC </div>');
-              }
-              if(row.VencimientoHidraulica<fecha && row.VencimientoHidraulica!='0000-00-00'){
-Permiso.push('<div title="Permiso Hidraulica Vencido" class="btn m-1 btn-warning bt-sm"> H </div>');
-              }
-              if(row.VencimientoIrrigacion<fecha && row.VencimientoIrrigacion!='0000-00-00'){
-Permiso.push('<div title="Permiso Irrigacion Vencido" class="btn m-1 btn-warning bt-sm"> IRR </div>');
-              }
-              if(row.VencimientoMunicipal<fecha && row.VencimientoMunicipal!='0000-00-00'){
-Permiso.push('<div title="Permiso Municipal Vencido" class="btn m-1 btn-warning bt-sm"> PM </div>');
-              }
-              if(row.VencimientoOtrosPermisos<fecha && row.VencimientoOtrosPermisos!='0000-00-00'){
-Permiso.push('<div title="Permiso OtrosPermisos Vencido" class="btn m-1 btn-warning bt-sm"> Op </div>');
-              }
-              if(row.VencimientoPrivado<fecha && row.VencimientoPrivado!='0000-00-00'){
-Permiso.push('<div title="Permiso Privado Vencido" class="btn m-1 btn-warning bt-sm"> P </div>');
-              }
-              var stringPermiso ="";
-              var stringInterferencia="";
-              Permiso.forEach(element => {
-                stringPermiso= stringPermiso + element
-              });
-Interferencia.forEach(element => {
-  stringInterferencia = stringInterferencia + element
-});
 
-var stringFinal = Codigo + stringPermiso+ stringInterferencia;
-return stringFinal;
-            }
-            else{
-              return '<div title="Codigo designado para ubicar en las carpetas fisicas de la oficina.">'+row.CodigoVigentes+'</div>'
-            }
-            }
-          }},
-          {"width": "1%","data": "Nombre_sub",  render: function(data,type,row){
-            return '<a href="/editarTareas/' + row.id + '" class=" text-center" title="Nombre de la carpeta">'+row.Nombre_sub+' - '+row.NCarpeta+'</a>'
-          } },
-          {"width": "1%","data": "ResponsableDeTarea", "orderable": false,  },
-          {"width": "50%","data": "Tarea_Realizada_sub", "searchable":false, "orderable": false, }, 
-          {"width": "1%","data": "EtapaTarea_sub", "orderable": false, render: function(data,type,row){
-  return '<a href="/historialcarpeta/' + row.Nombre_sub + '" class="text-center">'+row.EtapaTarea_sub+'</a>'} }, 
-          {"width": "50%","data": "Proxima_Tarea_sub","orderable": false,"searchable":false, },
-          {"width": "1%","data": "Fecha_Proxima_Tarea_sub", render:function(data,type,row){
-            moment.locale('es');
-            data= new Date(data);
-            data= data.toISOString();
-            var fecha = new Date(data);
-            var fechaActual = new Date();
-            var diaActual= fechaActual;
-        var diaData= fecha;
-            fecha = fecha.toISOString();
-            fechaActual = fechaActual.toISOString();
- //Calculamos la diferencia entre los dias =>{
-  var diferenciaDias= Math.abs(diaActual-diaData);
-        var dias=diferenciaDias/(1000*3600*24);
-        dias = parseInt(dias); //Para que el sistema pueda calcular mejor la diferencia entre fechas, pasamos el numero con coma, a numero entero.
-        //}
-   
-      if (fechaActual>fecha){//Dias atrasados
-        fecha = moment(fecha).locale('es').format("DD-MM-YYYY");
-        if (dias>7){
-          return '<div  style="display:none">'+ data+'</div><div id="TextoParpadeante" class="bg-black text-danger">'+ fecha+' </div>';
-          
-        }if(dias>0){
-           return '<div style="display:none">'+ data+'</div><div class="bg-danger text-light">'+ fecha+' </div>';
+
+        <script>
+          $("#comunicacionDiaria").css("width", "100%")
+
+          $(document).ready(function () {
+
+            var url = '/adminecogas/TablaGeneral';
+
+            var tabla = $('#comunicacionDiaria').DataTable({
+              "orderCellsTop": true,
+              "fixedHeader": true, //Deja fijo el header, para q cuando el usuario deslice la tabla hacia abajo, el header se siga viendo
+              "paging": false, //Permite la paginacion de la tabla, si esta desactivado, traera todos los resultados en una sola vista.
+
+              "scrollX": true,
+              "searching": false,
+              // columnDefs: [ { type: 'date', targets: [6],  } ], //Al activar este filtro, no permite que se puedan ordenar las fechas.
+              "order": [[6, 'desc']],
+              "language": { url: "//cdn.datatables.net/plug-ins/1.11.3/i18n/es_es.json" },
+              "ajax": {
+                "url": url,
+                "dataSrc": "",
+              },
+              "columns": [
+                {
+                  "width": "5%", "data": "CodigoVigentes", render: function (data, type, row) {
+                    if (row.CodigoVigentes == null || row.CodigoEnUsoVigentes == "F") {
+                      return ('<div class="text-light bg-success " title="Carpeta Finalizada. Codigo fisico.">' + row.CodigoFinalizadas + '</div>');
+                    }
+                    else {
+                      var fechaActual = new Date();
+                      let quincediasEnMilisegundos = 1000 * 60 * 60 * 24 * 15;
+                      var restaDeDias = (fechaActual.getTime() - quincediasEnMilisegundos);
+                      fecha = new Date(restaDeDias).toISOString();
+                      if (row.Estado == "2da parte") {
+                        var Codigo = '<div title="Codigo designado para ubicar en las carpetas fisicas de la oficina.">' + row.CodigoVigentes + '</div>';;
+                        var Permiso = [];
+                        var Interferencia = [];
+                        // Interferencias
+                        if (row.intTelefonicaObtenida < fecha && row.intTelefonicaObtenida != '0000-00-00' && row.intTelefonicaObtenida != '') {
+                          Interferencia.push('<div class="btn m-1 btn-danger bt-sm" TITLE="Interferencia de Teléfonica vencida"> TFA </div>');
+                        }
+                        if (row.intAguaObtenida < fecha && row.intAguaObtenida != '0000-00-00' && row.intAguaObtenida != '') {
+                          Interferencia.push('<div class="btn m-1 btn-danger bt-sm" TITLE="Interferencia de Agua vencida"> AG </div>');
+                        }
+                        if (row.intClaroObtenida < fecha && row.intClaroObtenida != '0000-00-00' && row.intClaroObtenida != '') {
+                          Interferencia.push('<div class="btn m-1 btn-danger bt-sm" TITLE="Interferencia de Claro vencida"> CL </div>');
+                        }
+                        if (row.intElectricidadObtenida < fecha && row.intElectricidadObtenida != '0000-00-00' && row.intElectricidadObtenida != '') {
+                          Interferencia.push('<div class="btn m-1 btn-danger bt-sm" TITLE="Interferencia de Electricidad vencida"> E </div>');
+                        }
+                        if (row.intArnetObtenida < fecha && row.intArnetObtenida != '0000-00-00' && row.intArnetObtenida != '') {
+                          Interferencia.push('<div class="btn m-1 btn-danger bt-sm" TITLE="Interferencia de Arnet vencida"> AR </div>');
+                        }
+                        if (row.intCloacasObtenida < fecha && row.intCloacasObtenida != '0000-00-00' && row.intCloacasObtenida != '') {
+                          Interferencia.push('<div class="btn m-1 btn-danger bt-sm" TITLE="Interferencia de Cloacas vencida"> CC </div>');
+                        }
+                        if (row.intTelecomObtenida < fecha && row.intTelecomObtenida != '0000-00-00' && row.intTelecomObtenida != '') {
+                          Interferencia.push('<div class="btn m-1 btn-danger bt-sm" TITLE="Interferencia de Telecom vencida"> TCM </div>');
+                        }
+                        // Fin interferencias
+                        // Permisos
+                        if (row.VencimientoDNV < fecha && row.VencimientoDNV != '0000-00-00') {
+                          Permiso.push('<div title="Permiso DNV Vencido" class="btn m-1 btn-warning bt-sm"> DNV </div>');
+                        }
+                        if (row.VencimientoDPV < fecha && row.VencimientoDPV != '0000-00-00') {
+                          Permiso.push('<div title="Permiso DPV Vencido" class="btn m-1 btn-warning bt-sm"> DPV </div>');
+                        }
+                        if (row.VencimientoFerrocarril < fecha && row.VencimientoFerrocarril != '0000-00-00') {
+                          Permiso.push('<div title="Permiso Ferrocarril Vencido" class="btn m-1 btn-warning bt-sm"> FFCC </div>');
+                        }
+                        if (row.VencimientoHidraulica < fecha && row.VencimientoHidraulica != '0000-00-00') {
+                          Permiso.push('<div title="Permiso Hidraulica Vencido" class="btn m-1 btn-warning bt-sm"> H </div>');
+                        }
+                        if (row.VencimientoIrrigacion < fecha && row.VencimientoIrrigacion != '0000-00-00') {
+                          Permiso.push('<div title="Permiso Irrigacion Vencido" class="btn m-1 btn-warning bt-sm"> IRR </div>');
+                        }
+                        if (row.VencimientoMunicipal < fecha && row.VencimientoMunicipal != '0000-00-00') {
+                          Permiso.push('<div title="Permiso Municipal Vencido" class="btn m-1 btn-warning bt-sm"> PM </div>');
+                        }
+                        if (row.VencimientoOtrosPermisos < fecha && row.VencimientoOtrosPermisos != '0000-00-00') {
+                          Permiso.push('<div title="Permiso OtrosPermisos Vencido" class="btn m-1 btn-warning bt-sm"> Op </div>');
+                        }
+                        if (row.VencimientoPrivado < fecha && row.VencimientoPrivado != '0000-00-00') {
+                          Permiso.push('<div title="Permiso Privado Vencido" class="btn m-1 btn-warning bt-sm"> P </div>');
+                        }
+                        var stringPermiso = "";
+                        var stringInterferencia = "";
+                        Permiso.forEach(element => {
+                          stringPermiso = stringPermiso + element
+                        });
+                        Interferencia.forEach(element => {
+                          stringInterferencia = stringInterferencia + element
+                        });
+
+                        var stringFinal = Codigo + stringPermiso + stringInterferencia;
+                        return stringFinal;
+                      }
+                      else {
+                        return '<div title="Codigo designado para ubicar en las carpetas fisicas de la oficina.">' + row.CodigoVigentes + '</div>'
+                      }
+                    }
+                  }
+                },
+                {
+                  "width": "1%", "data": "Nombre_sub", render: function (data, type, row) {
+                    return '<a href="/editarTareas/' + row.id + '" class=" text-center" title="Nombre de la carpeta">' + row.Nombre_sub + ' - ' + row.NCarpeta + '</a>'
+                  }
+                },
+                { "width": "1%", "data": "ResponsableDeTarea", "orderable": false, },
+                { "width": "50%", "data": "Tarea_Realizada_sub", "searchable": false, "orderable": false, },
+                {
+                  "width": "1%", "data": "EtapaTarea_sub", "orderable": false, render: function (data, type, row) {
+                    return '<a href="/historialcarpeta/' + row.Nombre_sub + '" class="text-center">' + row.EtapaTarea_sub + '</a>'
+                  }
+                },
+                { "width": "50%", "data": "Proxima_Tarea_sub", "orderable": false, "searchable": false, },
+                {
+                  "width": "1%", "data": "Fecha_Proxima_Tarea_sub", render: function (data, type, row) {
+                    moment.locale('es');
+                    data = new Date(data);
+                    data = data.toISOString();
+                    var fecha = new Date(data);
+                    var fechaActual = new Date();
+                    var diaActual = fechaActual;
+                    var diaData = fecha;
+                    fecha = fecha.toISOString();
+                    fechaActual = fechaActual.toISOString();
+                    //Calculamos la diferencia entre los dias =>{
+                    var diferenciaDias = Math.abs(diaActual - diaData);
+                    var dias = diferenciaDias / (1000 * 3600 * 24);
+                    dias = parseInt(dias); //Para que el sistema pueda calcular mejor la diferencia entre fechas, pasamos el numero con coma, a numero entero.
+                    //}
+
+                    if (fechaActual > fecha) {//Dias atrasados
+                      fecha = moment(fecha).locale('es').format("DD-MM-YYYY");
+                      if (dias > 7) {
+                        return '<div  style="display:none">' + data + '</div><div id="TextoParpadeante" class="bg-black text-danger">' + fecha + ' </div>';
+
+                      } if (dias > 0) {
+                        return '<div style="display:none">' + data + '</div><div class="bg-danger text-light">' + fecha + ' </div>';
+
+                      }
+                      if (dias == 0) {
+                        return '<div style="display:none">' + data + '</div><div class="bg-warning text-dark">' + fecha + ' </div>';
+                      }
+                    }
+
+                    if (fechaActual < fecha) {
+                      if (dias > 30) {
+                        fecha = moment(fecha).locale('es').format("DD-MM-YYYY");
+                        return '<div style="display:none">' + data + '</div> <br>  <div  class="bg-primary text-light align-middle">' + fecha + ' </div>';
+                      } if (dias > (-4)) {
+                        fecha = moment(fecha).locale('es').format("DD-MM-YYYY");
+                        return '<div style="display:none">' + data + '</div> <br>  <div  class="bg-success text-light align-middle">' + fecha + ' </div>';
+                      }
+                    }
+                  }
+                },
+                {
+                  "width": "1%", render: function (data, type, row) {
+                    return '<button id="btnNuevaTarea" class="btn btn-sm btn-outline-secondary align-middle" name="'+ row.Nombre_sub +'" onclick="CargarNuevaTarea('+row.id+')"><i class="bi bi-pencil-square"></i></button>';
+
+                  }
+                },
+              ],
+            });
+            //Buscadores con botones.
+            '<%usuariosregistrados.forEach(usuarios => {%>'
+            $('#<%= usuarios.Nombre%>').click(function () {
+              $("#comunicacionDiaria tbody>tr").hide();
+              $("#comunicacionDiaria td:contiene-palabra('<%=usuarios.Nombre%>')").parent("tr").show();
+            });
+            '<%});%>'
+            $('#TablaGral').click(function () {
+              $("#comunicacionDiaria tbody>tr").show();
+            });
+            $('#Prel').click(function () {
+              $("#comunicacionDiaria tbody>tr").hide();
+              $("#comunicacionDiaria td:contiene-palabra('Preliminar')").parent("tr").show();
+            }); $('#1ra').click(function () {
+              $("#comunicacionDiaria tbody>tr").hide();
+              $("#comunicacionDiaria td:contiene-palabra('1ra')").parent("tr").show();
+            }); $('#2da').click(function () {
+              $("#comunicacionDiaria tbody>tr").hide();
+              $("#comunicacionDiaria td:contiene-palabra('2da')").parent("tr").show();
+            }); $('#Obras').click(function () {
+              $("#comunicacionDiaria tbody>tr").hide();
+              $("#comunicacionDiaria td:contiene-palabra('Obras')").parent("tr").show();
+            });
+            $('#Caos').click(function () {
+              $("#comunicacionDiaria tbody>tr").hide();
+              $("#comunicacionDiaria td:contiene-palabra('Caos')").parent("tr").show();
+            });
            
-          }
-          if(dias==0){
-            return '<div style="display:none">'+ data+'</div><div class="bg-warning text-dark">'+ fecha+' </div>';
-          }
-          }
-      //     if (fechaActual==fecha){
-      // fecha = moment(fecha).locale('es').format("DD-MM-YYYY");
-      //   return 
-      //   '<div style="display:none">'+ data+'</div> <br>  <div class="bg-warning text-dark">'+ fecha+' </div>';
-      // }
-    if (fechaActual<fecha){
-      if (dias>30)
-      { fecha = moment(fecha).locale('es').format("DD-MM-YYYY");
-       return '<div style="display:none">'+ data+'</div> <br>  <div  class="bg-primary text-light">'+ fecha+' </div>';
-      }if(dias>(-4)){
-      fecha = moment(fecha).locale('es').format("DD-MM-YYYY");
-       return '<div style="display:none">'+ data+'</div> <br>  <div  class="bg-success text-light">'+ fecha+' </div>';
-    }}
-           }},      
-        ],
-      });
-      //Buscadores con botones.
-    '<%usuariosregistrados.forEach(usuarios => {%>'
-    $('#<%= usuarios.Nombre%>').click(function() {
-        jQuery("#comunicacionDiaria tbody>tr").hide();
-        jQuery("#comunicacionDiaria td:contiene-palabra('<%=usuarios.Nombre%>')").parent("tr").show();
-  });     
-    '<%});%>'
- 
-//     $('#Gustavo').click(function() {
-//       jQuery("#comunicacionDiaria tbody>tr").hide();
-//         jQuery("#comunicacionDiaria td:contiene-palabra('Gustavo')").parent("tr").show();
-// });
-// $('#Daiana').click(function() {
-//       jQuery("#comunicacionDiaria tbody>tr").hide();
-//         jQuery("#comunicacionDiaria td:contiene-palabra('Daiana')").parent("tr").show();
-// });
-// $('#MarianaPirani').click(function() {
-//       jQuery("#comunicacionDiaria tbody>tr").hide();
-//         jQuery("#comunicacionDiaria td:contiene-palabra('Mariana')").parent("tr").show();
-// });
-$('#TablaGral').click(function() {
-  jQuery("#comunicacionDiaria tbody>tr").show();
-});
-$('#Prel').click(function() {
-  jQuery("#comunicacionDiaria tbody>tr").hide();
-        jQuery("#comunicacionDiaria td:contiene-palabra('Preliminar')").parent("tr").show();
-});  $('#1ra').click(function() {
-  jQuery("#comunicacionDiaria tbody>tr").hide();
-        jQuery("#comunicacionDiaria td:contiene-palabra('1ra')").parent("tr").show();
-});  $('#2da').click(function() {
-  jQuery("#comunicacionDiaria tbody>tr").hide();
-        jQuery("#comunicacionDiaria td:contiene-palabra('2da')").parent("tr").show();
-});  $('#Obras').click(function() {
-  jQuery("#comunicacionDiaria tbody>tr").hide();
-        jQuery("#comunicacionDiaria td:contiene-palabra('Obras')").parent("tr").show();
-});
-$('#Caos').click(function() {
-  jQuery("#comunicacionDiaria tbody>tr").hide();
-        jQuery("#comunicacionDiaria td:contiene-palabra('Caos')").parent("tr").show();
-});
-  });
-  jQuery("#buscador").keyup(function(){
-    if( jQuery(this).val() != "0"){
-        jQuery("#comunicacionDiaria tbody>tr").hide();
-        jQuery("#comunicacionDiaria td:contiene-palabra('" + jQuery(this).val() + "')").parent("tr").show();
-    }
-    else{
-        jQuery("#comunicacionDiaria tbody>tr").show();
-    }
-});
+          });
+          // FIN document.ready()
+          jQuery("#buscador").keyup(function () {
+            if (jQuery(this).val() != "0") {
+              jQuery("#comunicacionDiaria tbody>tr").hide();
+              jQuery("#comunicacionDiaria td:contiene-palabra('" + jQuery(this).val() + "')").parent("tr").show();
+            }
+            else {
+              jQuery("#comunicacionDiaria tbody>tr").show();
+            }
+          });
 
-jQuery.extend(jQuery.expr[":"], 
-{
-    "contiene-palabra": function(elem, i, match, array) {
-        return (elem.textContent || elem.innerText || jQuery(elem).text() || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
-    }
-});
-$('#btnNotificaciones').click(function(){
-    Notification.requestPermission().then(function(results){
-  console.log(results);
-  if(results==="denied"||results==="default"){
-console.log("Notificaciones denegadas");
-  }
-  if(results==="granted")
-  {
-    console.log("Notificaciones aceptadas");
-    var nuevaNotification = new Notification('Bienvenido al sistema de Joval S.A.',{body: 'Bienvenido al sistema de Joval S.A.',tag:'Soyunanotificacion'});
-  }
-  })
-})
-function llamarAModal(id){
-  $('#modaltareasRapidas').modal('show');
+          jQuery.extend(jQuery.expr[":"],
+            {
+              "contiene-palabra": function (elem, i, match, array) {
+                return (elem.textContent || elem.innerText || jQuery(elem).text() || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
+              }
+            });
+          $('#btnNotificaciones').click(function () {
+            Notification.requestPermission().then(function (results) {
+              console.log(results);
+              if (results === "denied" || results === "default") {
+                console.log("Notificaciones denegadas");
+              }
+              if (results === "granted") {
+                console.log("Notificaciones aceptadas");
+                var nuevaNotification = new Notification('Bienvenido al sistema de Joval S.A.', { body: 'Bienvenido al sistema de Joval S.A.', tag: 'Soyunanotificacion' });
+              }
+            })
+          })
+
+          function CargarNuevaTarea(id){
+  var idObra= id;
+  var NombreCarpeta=$(this).prop('name');
+  console.log(NombreCarpeta);
+  $('#IdDeLaObra').val(idObra);
+  $('#modalNuevaTarea').modal('show');
+  $('#modalNuevaTareaTitleId').html('Cargar nueva tarea en obra '+NombreCarpeta+'');
+  $('#btnActualizarTarea').removeAttr('disabled');
+  $('#infoServidor').empty();
+
 }
-     </script>
-<%}%>
+
+        </script>
+        <%}%>
 
 </body>
 

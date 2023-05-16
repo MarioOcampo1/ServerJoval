@@ -28,23 +28,23 @@
                             <div class="form-group">
                                 <h4>Etapa de la tarea en la cuál va a cargar la información</h4>
                                
-                                <input class="form-check-input" required type="radio" name="EtapaTarea"
+                                <input class="btnCheckEtapaTarea form-check-input" required type="radio" name="EtapaTarea"
                                     id="EtapaTareaPreliminar" value="Preliminar">
                                 <label class="form-check-label" for="inlineRadio1">Preliminar</label>
-                                <input class="form-check-input" type="radio" name="EtapaTarea" id="EtapaTarea1raparte"
+                                <input class="btnCheckEtapaTarea form-check-input" type="radio" name="EtapaTarea" id="EtapaTarea1raparte"
                                     value="1ra parte">
                                 <label class="form-check-label" for="inlineRadio2">1° parte</label>
-                                <input class="form-check-input" type="radio" name="EtapaTarea" id="EtapaTarea2daparte"
+                                <input class="btnCheckEtapaTarea form-check-input" type="radio" name="EtapaTarea" id="EtapaTarea2daparte"
                                     value="2da parte">
                                 <label class="form-check-label" for="inlineRadio3"> 2° parte</label>
-                                <input class="form-check-input" type="radio" name="EtapaTarea" id="EtapaTareaObras"
+                                <input class="btnCheckEtapaTarea form-check-input" type="radio" name="EtapaTarea" id="EtapaTareaObras"
                                     value="Obras">
                                 <label class="form-check-label" for="inlineRadio4">Obras </label>
-                                <input class="form-check-input" type="radio" name="EtapaTarea" id="EtapaTareaCaos"
+                                <input class="btnCheckEtapaTarea form-check-input" type="radio" name="EtapaTarea" id="EtapaTareaCaos"
                                     value="Caos">
                                 <label class="form-check-label" for="inlineRadio5">Caos </label>
 
-                                <input class="form-check-input" type="radio" name="EtapaTarea" id="EtapaTareaFinalizada"
+                                <input class="btnCheckEtapaTarea form-check-input" type="radio" name="EtapaTarea" id="EtapaTareaFinalizada"
                                     value="Finalizada">
                                 <label class="form-check-label" for="inlineRadio6">Finalizada </label>
                             </div>
@@ -107,13 +107,14 @@
                     <div class="col p-2 text-center">
                         <div class="button-group text-center" role="group">
                             <button type="submit" class="btn btn-primary text-center">Actualizar Tarea</button>
-                            <button onClick="history.go(-1);" class="btn btn-secondary text-center"">Cancelar</button>
+                            <button onClick="history.go(-1);" class="btn btn-secondary text-center">Cancelar</button>
                             </div>
                     </div>
                 </div>
                 </div>
         </form>
 <script>
+    $('.btnCheckEtapaTarea').click(function(){})
     function verEtapa(){
         var Etapa = "<%=user.Etapa%>";
         console.log(Etapa);
