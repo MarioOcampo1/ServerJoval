@@ -604,6 +604,26 @@
     jQuery("#EstadoGeneral td:contiene-palabra('" + palabra + "')").parent("tr").show();
 
   })
+  jQuery("#FinObra").click(function () {
+    jQuery("#EstadoGeneral SeccionTabla").show();
+    jQuery("#EstadoGeneral #EncabezadoPreliminar").hide();
+    jQuery("#EstadoGeneral #Encabezado1P").hide();
+    jQuery("#EstadoGeneral #Encabezado2P").hide();
+    jQuery("#EstadoGeneral #EncabezadoObras").hide();
+    jQuery("#EstadoGeneral #EncabezadoCaos").hide();
+    jQuery("#EstadoGeneral #EncabezadoFin").show();
+    jQuery("#EstadoGeneral tbody>tr").hide();
+    $('.Preliminar').hide();
+    $('.1P').hide();
+    $('.2P').hide();
+    $('.Obras').hide();
+    $('.CAOS ').hide();
+    $('.FinObra').show();
+    let palabra = "Finalizada";
+    jQuery("#EstadoGeneral tbody>tr").show();
+    jQuery("#EstadoGeneral td:contiene-palabra('" + palabra + "')").parent("tr").show();
+
+  })
   jQuery("#LimpiarFiltros").click(function () {
     jQuery("#EstadoGeneral SeccionTabla").show();
     jQuery("#EstadoGeneral #EncabezadoPreliminar").show();
@@ -632,23 +652,7 @@
     $('.FinObra').show();
     
   })
-  jQuery("#FinObra").click(function () {
-    jQuery("#EstadoGeneral SeccionTabla").show();
-    jQuery("#EstadoGeneral #EncabezadoPreliminar").show();
-    jQuery("#EstadoGeneral #Encabezado1P").show();
-    jQuery("#EstadoGeneral #Encabezado2P").show();
-    jQuery("#EstadoGeneral #EncabezadoObras").show();
-    jQuery("#EstadoGeneral #EncabezadoCaos").show();
-    jQuery("#EstadoGeneral #EncabezadoFin").show();
-    jQuery("#EstadoGeneral tbody>tr").show();
-    $('.Preliminar').hide();
-    $('.1P').hide();
-    $('.2P').hide();
-    $('.Obras').hide();
-    $('.CAOS ').hide();
-    $('.FinObra').show();
-    
-  })
+
   function ImprimirEstado() {
     $("#ModalOpcionesDeImpresion").modal('show');
     $("#ModalOpcionesDeImpresion").modal('toggle');
