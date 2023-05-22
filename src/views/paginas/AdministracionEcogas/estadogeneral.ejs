@@ -62,6 +62,7 @@
         <button id="2P" type="button" class="btn btn-primary">2da Parte</button>
         <button id="Obras" type="button" class="btn btn-primary">Obras</button>
         <button id="Caos" type="button" class="btn btn-primary">Caos</button>
+        <button id="FinObra" type="button" class="btn btn-primary">Fin de obra</button>
         <button id="LimpiarFiltros" type="button" class="btn btn-secondary">Limpiar Filtros</button>
       </div>
       <table id="EstadoGeneral"
@@ -210,28 +211,28 @@
 
                   </td>
                   <!-- Documentacion Terreno -->
-                  <td id="td">
+                  <td id="td" class="Preliminar">
                     <%=clientes.DocumentacionTerreno%>
                   </td>
 
                   <!-- // -->
                   <!-- Documentacion Sociedad -->
-                  <td id="td">
+                  <td id="td" class="Preliminar">
                     <%=clientes.DocumentacionSociedad%>
                   </td>
                   <!-- // -->
                   <!-- Documentacion Contractual -->
-                  <td id="td">
+                  <td id="td" class="Preliminar">
                     <%=clientes.DocumentacionContractual%>
                   </td>
                   <!-- // -->
                   <!-- Comercial  -->
-                  <td id="td">
+                  <td id="td" class="1P">
                     <%=clientes.Comercial%>
                   </td>
                   <!-- // -->
                   <!-- Tecnica  -->
-                  <td id="td">
+                  <td id="td" class="1P">
                     <%=clientes.Tecnica%>
                   </td>
 
@@ -239,121 +240,119 @@
                   <!-- //  -->
                   <!-- Permisos Especiales  -->
 
-                  <td id="td">
+                  <td id="td" class="1P">
                     <%=clientes.PermisosEspeciales%>
                   </td>
                   <!-- DocumentacionAmbiental  -->
 
-                  <td id="td">
+                  <td id="td" class="1P">
                     <%=clientes.DocumentacionAmbiental%>
                   </td>
                   <!-- // -->
                   <!-- Mail de autorización -->
-                  <td id="td">
+                  <td id="td" class="2P">
                     <%=clientes.MailAutorizacion%>
                   </td>
 
                   <!-- // -->
                   <!-- Documentacion de obra -->
-                  <td id="td">
+                  <td id="td" class="2P">
                     <%=clientes.DocumentacionObra%>
                   </td>
 
                   <!-- // -->
                   <!-- Seguridad -->
-                  <td id="td">
+                  <td id="td" class="2P">
                     <%=clientes.Seguridad%>
                   </td>
                   <!-- // -->
                   <!-- Interferencias -->
-                  <td id="td">
+                  <td id="td" class="2P">
                     <%=clientes.Interferencias%>
                   </td>
 
                   <!-- // -->
                   <!-- Permisos -->
-                  <td id="td">
+                  <td id="td" class="2P">
                     <%=clientes.Permisos%>
                   </td>
                   <!-- // -->
                   <!-- Plan de trabajo -->
-                  <td id="td">
+                  <td id="td" class="2P">
                     <%=clientes.PlanDeTrabajo%>
                   </td>
                   <!-- // -->
                   <!-- Matriculas -->
-                  <td id="td">
+                  <td id="td" class="2P">
                     <%=clientes.Matriculas%>
                   </td>
                   <!-- // -->
                   <!-- Ambiente -->
-                  <td id="td">
+                  <td id="td" class="2P">
                     <%=clientes.Ambiente%>
                   </td>
                   <!-- // -->
                   <!-- Nota cumplimiento normativas -->
-                  <td id="td">
+                  <td id="td" class="2P">
                     <%=clientes.NotaCumplimentoNormativas%>
                   </td>
                   <!-- // -->
                   <!-- DDJJ NAG 153 -->
-                  <td id="td">
+                  <td id="td" class="2P">
                     <%=clientes.DDJJNAG153%>
                   </td>
                   <!-- // -->
                   <!-- Avisos -->
-                  <td id="td">
+                  <td id="td" class="2P">
                     <%=clientes.Avisos%>
                   </td>
                   <!-- // -->
                   <!-- Documentacion de inspeccion -->
-                  <td id="td">
+                  <td id="td"class="Obras" >
                     <%=clientes.DocumentacionInspeccion%>
                   </td>
                   <!-- // -->
                   <!-- Comunicacion de obras -->
-                  <td id="td">
+                  <td id="td"class="Obras" >
                     <%=clientes.ComunicacionObras%>
                   </td>
                   <!-- // -->
                   <!-- Actas finales de ecogas -->
-                  <td id="td">
+                  <td id="td" class="CAOS">
                     <%=clientes.ActasFinalesEcogas%>
                   </td>
                   <!-- // -->
                   <!-- Planos y Croquis -->
-                  <td id="td">
+                  <td id="td" class="CAOS">
                     <%=clientes.PlanosyCroquis%>
                   </td>
                   <!-- // -->
                   <!-- ConformeEntidades -->
-                  <td id="td">
+                  <td id="td" class="CAOS">
                     <%=clientes.ConformeEntidades%>
                   </td>
                   <!-- // -->
                   <!-- PruebaHermeticidad -->
-                  <td id="td">
+                  <td id="td" class="CAOS">
                     <%=clientes.PruebaHermeticidad%>
                   </td>
                   <!-- // -->
                   <!-- Informes finales -->
-                  <td id="td">
+                  <td id="td" class="CAOS">
                     <%=clientes.InformesFinales%>
                   </td>
                   <!-- // -->
                   <!-- Presentacion final -->
-                  <td id="td">
+                  <td id="td" class="FinObra">
                     <%=clientes.PresentacionFinal%>
                   </td>
                   <!-- // -->
                   <!-- HabilitacionObra -->
-                  <td id="td">
+                  <td id="td" class="FinObra">
                     <%=clientes.HabilitacionObra%>
                   </td>
 
-                  <!-- // -->
-                  <td><a href="/edit/<%=clientes.id%>" class="btn btn-outline-info">editar</a>
-                  </td>
+               
                 </tr>
                 <% }});%>
 
@@ -468,6 +467,8 @@
     jQuery("#EstadoGeneral #EncabezadoCaos").show();
     jQuery("#EstadoGeneral #EncabezadoFin").show();
     jQuery("#EstadoGeneral tbody>tr").show();
+   
+
     //Luego borra lo que hagafalta
     jQuery("#EstadoGeneral SeccionTabla").hide();
     jQuery("#EstadoGeneral #Encabezado1P").hide();
@@ -475,10 +476,21 @@
     jQuery("#EstadoGeneral #EncabezadoObras").hide();
     jQuery("#EstadoGeneral #EncabezadoCaos").hide();
     jQuery("#EstadoGeneral #EncabezadoFin").hide();
+    
+
     //Busca en "Estado" la palabra clave
-    let palabra = "preliminar";
+    let palabra = "Preliminar";
     jQuery("#EstadoGeneral tbody>tr").hide();
     jQuery("#EstadoGeneral td:contiene-palabra('" + palabra + "')").parent("tr").show();
+    
+    
+    $('.1P').hide();
+    $('.2P').hide();
+    $('.Obras').hide();
+    $('.CAOS ').hide();
+    $('.FinObra').hide();
+    $('.Preliminar').show();
+
   })
   jQuery("#1P").click(function () {
     jQuery("#EstadoGeneral SeccionTabla").show();
@@ -489,6 +501,7 @@
     jQuery("#EstadoGeneral #EncabezadoCaos").show();
     jQuery("#EstadoGeneral #EncabezadoFin").show();
     jQuery("#EstadoGeneral tbody>tr").show();
+    
 
     jQuery("#EstadoGeneral SeccionTabla").hide();
     jQuery("#EstadoGeneral #EncabezadoPreliminar").hide();
@@ -496,6 +509,14 @@
     jQuery("#EstadoGeneral #EncabezadoObras").hide();
     jQuery("#EstadoGeneral #EncabezadoCaos").hide();
     jQuery("#EstadoGeneral #EncabezadoFin").hide();
+    
+    $('.Preliminar').hide();
+    $('.1P').show();
+    $('.2P').hide();
+    $('.Obras').hide();
+    $('.CAOS ').hide();
+    $('.FinObra').hide();
+    
     let palabra = "1ra parte";
     jQuery("#EstadoGeneral tbody>tr").hide();
     jQuery("#EstadoGeneral td:contiene-palabra('" + palabra + "')").parent("tr").show();
@@ -510,6 +531,13 @@
     jQuery("#EstadoGeneral #EncabezadoCaos").show();
     jQuery("#EstadoGeneral #EncabezadoFin").show();
     jQuery("#EstadoGeneral tbody>tr").show();
+    $('.Preliminar').hide();
+    $('.1P').hide();
+    $('.2P').show();
+    $('.Obras').hide();
+    $('.CAOS ').hide();
+    $('.FinObra').hide();
+    
 
     jQuery("#EstadoGeneral SeccionTabla").hide();
     jQuery("#EstadoGeneral #EncabezadoPreliminar").hide();
@@ -517,7 +545,7 @@
     jQuery("#EstadoGeneral #EncabezadoObras").hide();
     jQuery("#EstadoGeneral #EncabezadoCaos").hide();
     jQuery("#EstadoGeneral #EncabezadoFin").hide();
-
+    
     let palabra = "2da parte";
     jQuery("#EstadoGeneral tbody>tr").hide();
     jQuery("#EstadoGeneral td:contiene-palabra('" + palabra + "')").parent("tr").show();
@@ -532,6 +560,7 @@
     jQuery("#EstadoGeneral #EncabezadoCaos").show();
     jQuery("#EstadoGeneral #EncabezadoFin").show();
     jQuery("#EstadoGeneral tbody>tr").show();
+   
 
     jQuery("#EstadoGeneral SeccionTabla").hide();
     jQuery("#EstadoGeneral #EncabezadoPreliminar").hide();
@@ -539,7 +568,14 @@
     jQuery("#EstadoGeneral #Encabezado2P").hide();
     jQuery("#EstadoGeneral #EncabezadoCaos").hide();
     jQuery("#EstadoGeneral #EncabezadoFin").hide();
-
+    
+    $('.Preliminar').hide();
+    $('.1P').hide();
+    $('.2P').hide();
+    $('.Obras').Obras();
+    $('.CAOS ').hide();
+    $('.FinObra').hide();
+    
     let palabra = "Obras";
     jQuery("#EstadoGeneral tbody>tr").hide();
     jQuery("#EstadoGeneral td:contiene-palabra('" + palabra + "')").parent("tr").show();
@@ -554,6 +590,7 @@
     jQuery("#EstadoGeneral #EncabezadoCaos").show();
     jQuery("#EstadoGeneral #EncabezadoFin").show();
     jQuery("#EstadoGeneral tbody>tr").show();
+    
 
     jQuery("#EstadoGeneral SeccionTabla").hide();
     jQuery("#EstadoGeneral #EncabezadoPreliminar").hide();
@@ -561,7 +598,7 @@
     jQuery("#EstadoGeneral #Encabezado2P").hide();
     jQuery("#EstadoGeneral #EncabezadoObras").hide();
     jQuery("#EstadoGeneral #EncabezadoFin").hide();
-
+    
     let palabra = "Caos";
     jQuery("#EstadoGeneral tbody>tr").hide();
     jQuery("#EstadoGeneral td:contiene-palabra('" + palabra + "')").parent("tr").show();
@@ -576,6 +613,7 @@
     jQuery("#EstadoGeneral #EncabezadoCaos").show();
     jQuery("#EstadoGeneral #EncabezadoFin").show();
     jQuery("#EstadoGeneral tbody>tr").show();
+    
 
     jQuery("#EstadoGeneral SeccionTabla").show();
     jQuery("#EstadoGeneral #EncabezadoPreliminar").show();
@@ -585,7 +623,31 @@
     jQuery("#EstadoGeneral #EncabezadoCaos").show();
     jQuery("#EstadoGeneral #EncabezadoFin").show();
     jQuery("#EstadoGeneral tbody>tr").show();
-
+    
+    $('.Preliminar').show();
+    $('.1P').show();
+    $('.2P').show();
+    $('.Obras').show();
+    $('.CAOS ').show();
+    $('.FinObra').show();
+    
+  })
+  jQuery("#FinObra").click(function () {
+    jQuery("#EstadoGeneral SeccionTabla").show();
+    jQuery("#EstadoGeneral #EncabezadoPreliminar").show();
+    jQuery("#EstadoGeneral #Encabezado1P").show();
+    jQuery("#EstadoGeneral #Encabezado2P").show();
+    jQuery("#EstadoGeneral #EncabezadoObras").show();
+    jQuery("#EstadoGeneral #EncabezadoCaos").show();
+    jQuery("#EstadoGeneral #EncabezadoFin").show();
+    jQuery("#EstadoGeneral tbody>tr").show();
+    $('.Preliminar').hide();
+    $('.1P').hide();
+    $('.2P').hide();
+    $('.Obras').hide();
+    $('.CAOS ').hide();
+    $('.FinObra').show();
+    
   })
   function ImprimirEstado() {
     $("#ModalOpcionesDeImpresion").modal('show');
