@@ -3,77 +3,80 @@
 <link rel="stylesheet" href="/DataTables/DataTables-1.11.5/css/dataTables.bootstrap5.css">
 <link rel="stylesheet" href="/DataTables/DateTime-1.1.2/css/dataTables.dateTime.min.css">
 <link rel="stylesheet" href="/bootstrap-icons/font/bootstrap-icons.css">
-<script src="/Jquery-3.6.3/jquery-3.6.3.js"></script>  
-<script src="/bootstrap/dist/js/bootstrap.bundle.min.js"></script> 
+<link rel="stylesheet" href="/Hover CSS/Hover-master/css/hover-min.css">
+<script src="/Jquery-3.6.3/jquery-3.6.3.js"></script>
+<script src="/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript" src="/moment/moment.min.js"></script>
-<script  type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.4/locale/es.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.4/locale/es.js"></script>
 <script type="text/javascript" src="/DataTables/DateTime-1.1.2/js/dataTables.dateTime.js"></script>
 <script src="/DataTables/DataTables-1.11.5/js/jquery.dataTables.min.js"></script>
 <script src="/DataTables/DataTables-1.11.5/js/dataTables.dataTables.min.js"></script>
-  <!-- Datatable -->
-    <div class="container-fluid">
- 
-      <div class="row">
-        
-        <div class="col mr-32 ">
-          <button class="btn btn-outline-danger " onClick="history.go(-1);">
-            <i class="bi bi-arrow-left" style="font-size: 1rem;"></i>
-          </button>
-          <a href="/index"><img class="img-fluid w-25 mx-auto d-inline"
-              src="http://jovalsa.com/wp-content/uploads/2020/08/cropped-Joval-Web.png" alt="logo" id="LogoJoval"></a>
-              <h3 class="d-inline font-weight-bold align-middle">JOVAL S.A.</h3>
-              
-        </div>
-        <div class="col">
-        </div>
-        <div class="col ">
-          <p class="align-middle mx-auto">Version de prueba (alpha 2.0)</p>
-        </div>
-      </div>
-    </div>
-    <nav class="navbar navbar-expand-sm navbar-light bg-primary sticky-sm-top">
-      <div class="container-fluid">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#BarraNavegacion" aria-controls="BarraNavegacion" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+<!-- Datatable -->
+<div class="container-fluid">
+
+  <div class="row">
+
+    <div class="col mr-32  ">
+      <button class="btn btn-outline-danger hvr-pulse " onClick="history.go(-1);">
+        <i class="bi bi-arrow-left hvr-pulse" style="font-size: 1rem;"></i>
       </button>
-      <div class="collapse navbar-collapse" id="BarraNavegacion">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="btn btn-primary  text-white  " type="button" href="/adminecogas">Administración de obras</a>
-          </li>
-          <li class="nav-item">
-            <a class="btn btn-primary  text-white " href="/estadogeneral">Estado General</a>
-          </li>
-          <li class="nav-item">
-            <a class="btn btn-primary  text-white " href="/contactos">Contactos</a>
-          </li>
-          <li class="nav-item">
-            <a class="btn btn-primary  text-white " href="/vencimientos">Vencimientos</a>
-          </li>
-          <li class="nav-item">
-            <a class="btn btn-primary  text-white " href="/ComunicacionAlSistema">Comunicacion al sistema</a>
-          </li>
-          <li class="nav-item">
-            <a class="btn btn-primary  text-white disabled " href="/AdminEcogas/Materiales">Materiales por obra</a>
-          </li>
-          <!-- <li class="nav-item">
+      <a href="/index"><img class="img-fluid w-25 mx-auto d-inline"
+          src="http://jovalsa.com/wp-content/uploads/2020/08/cropped-Joval-Web.png" alt="logo" id="LogoJoval"></a>
+      <h3 class="d-inline font-weight-bold align-middle hvr-underline-from-center">JOVAL S.A.</h3>
+
+    </div>
+    <div class="col">
+    </div>
+    <div class="col ">
+      <p class="align-middle mx-auto ">Version de prueba (alpha 2.0)</p>
+    </div>
+  </div>
+</div>
+<nav class="navbar navbar-expand-sm navbar-light bg-primary sticky-sm-top ">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#BarraNavegacion"
+      aria-controls="BarraNavegacion" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="BarraNavegacion">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item hvr-wobble-horizontal">
+          <a class="btn btn-primary  text-white  " type="button" href="/adminecogas">Administración de obras</a>
+        </li>
+        <li class="nav-item hvr-wobble-horizontal">
+          <a class="btn btn-primary  text-white " href="/estadogeneral">Estado General</a>
+        </li>
+        <li class="nav-item hvr-wobble-horizontal">
+          <a class="btn btn-primary  text-white " href="/contactos">Contactos</a>
+        </li>
+        <li class="nav-item hvr-wobble-horizontal">
+          <a class="btn btn-primary  text-white " href="/vencimientos">Vencimientos</a>
+        </li>
+        <li class="nav-item hvr-wobble-horizontal">
+          <a class="btn btn-primary  text-white " href="/ComunicacionAlSistema">Comunicacion al sistema</a>
+        </li>
+        <li class="nav-item hvr-wobble-horizontal">
+          <a class="btn btn-primary  text-white disabled " href="/AdminEcogas/Materiales">Materiales por obra</a>
+        </li>
+        <!-- <li class="nav-item">
             
               <button class=" bg-light bi bi-bell top-50 rounded" id="btnNotificaciones" >
               </button>
           </li>     -->
-            
-        </ul>
-      </div>
+
+      </ul>
     </div>
-    
-    </nav>
- 
+  </div>
+
+</nav>
+
 
 <style>
-#LogoJoval:hover {
-  transition:all .5s ease-in-out;
--webkit-transform: rotate(180deg);
--webkit-transform-style: preserve-3d;
-transform: rotate(360deg);
-transform-style: preserve-3d;}  
+  #LogoJoval:hover {
+    transition: all .5s ease-in-out;
+    -webkit-transform: rotate(180deg);
+    -webkit-transform-style: preserve-3d;
+    transform: rotate(360deg);
+    transform-style: preserve-3d;
+  }
 </style>
