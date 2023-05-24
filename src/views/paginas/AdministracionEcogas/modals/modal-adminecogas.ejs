@@ -1,237 +1,243 @@
-<div class="modal fade" id="modalNuevaTarea" tabindex="-1" role="dialog" aria-labelledby="modalNuevaTarea" aria-hidden="true">
+<div class="modal fade" id="modalNuevaTarea" tabindex="-1" role="dialog" aria-labelledby="modalNuevaTarea"
+    aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modalNuevaTareaTitleId"></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
             </div>
             <div class="modal-body">
-              <form id="formActualizarTareaCarpeta" action="/ActualizarHistorialTareas" method="POST">
-              
-                <input type="number" name="idObra" id="IdDeLaObra" hidden>
-        <!-- Tareas de la carpeta -->
-        <div class="container-fluid">
-            <div class="card-body">
-                <div class="border border-primary ">
-                    <div class="row ">
-                        <div class="col  text-center">
-                            <div class="form-group">
-                                <h4>Etapa a cargar la información</h4>
-                                <input class="EtapaTareaRadio form-check-input" required type="radio" name="EtapaTarea"
-                                    id="EtapaTareaPreliminar" value="Preliminar">
-                                <label class="form-check-label" for="inlineRadio1">Preliminar</label>
-                                <input class="EtapaTareaRadio form-check-input" type="radio" name="EtapaTarea" id="EtapaTarea1raparte"
-                                    value="1ra parte">
-                                <label class="form-check-label" for="inlineRadio2">1° parte</label>
-                                <input class="EtapaTareaRadio form-check-input" type="radio" name="EtapaTarea" id="EtapaTarea2daparte"
-                                    value="2da parte">
-                                <label class="form-check-label" for="inlineRadio3"> 2° parte</label>
-                                <input class="EtapaTareaRadio form-check-input" type="radio" name="EtapaTarea" id="EtapaTareaObras"
-                                    value="Obras">
-                                <label class="form-check-label" for="inlineRadio4">Obras </label>
-                                <input class="EtapaTareaRadio form-check-input" type="radio" name="EtapaTarea" id="EtapaTareaCaos"
-                                    value="Caos">
-                                <label class="form-check-label" for="inlineRadio5">Caos </label>
+                <form id="formActualizarTareaCarpeta" action="/ActualizarHistorialTareas" method="POST">
 
-                                <input class="EtapaTareaRadio form-check-input" type="radio" name="EtapaTarea" id="EtapaTareaFinalizada"
-                                    value="Finalizada">
-                                <label class="form-check-label" for="inlineRadio6">Finalizada </label>
+                    <input type="number" name="idObra" id="IdDeLaObra" hidden>
+                    <!-- Tareas de la carpeta -->
+                    <div class="container-fluid">
+                        <div class="card-body">
+                            <div class="border border-primary ">
+                                <div class="row ">
+                                    <div class="col  text-center">
+                                        <div class="form-group">
+                                            <h4>Etapa a cargar la información</h4>
+                                            <input class="EtapaTareaRadio form-check-input" required type="radio"
+                                                name="EtapaTarea" id="EtapaTareaPreliminar" value="Preliminar">
+                                            <label class="form-check-label" for="inlineRadio1">Preliminar</label>
+                                            <input class="EtapaTareaRadio form-check-input" type="radio"
+                                                name="EtapaTarea" id="EtapaTarea1raparte" value="1ra parte">
+                                            <label class="form-check-label" for="inlineRadio2">1° parte</label>
+                                            <input class="EtapaTareaRadio form-check-input" type="radio"
+                                                name="EtapaTarea" id="EtapaTarea2daparte" value="2da parte">
+                                            <label class="form-check-label" for="inlineRadio3"> 2° parte</label>
+                                            <input class="EtapaTareaRadio form-check-input" type="radio"
+                                                name="EtapaTarea" id="EtapaTareaObras" value="Obras">
+                                            <label class="form-check-label" for="inlineRadio4">Obras </label>
+                                            <input class="EtapaTareaRadio form-check-input" type="radio"
+                                                name="EtapaTarea" id="EtapaTareaCaos" value="Caos">
+                                            <label class="form-check-label" for="inlineRadio5">Caos </label>
+
+                                            <input class="EtapaTareaRadio form-check-input" type="radio"
+                                                name="EtapaTarea" id="EtapaTareaFinalizada" value="Finalizada">
+                                            <label class="form-check-label" for="inlineRadio6">Finalizada </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row p-2">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Subtarea</label>
+                                        <select id="SelectSubtarea" class="form-select form-select-sm" name="Subtarea"
+                                            id="">
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row ">
+                                    <div class="col  text-center">
+                                        <h4>
+                                            Responsable de la tarea:
+                                        </h4>
+
+                                        <input class="form-check-input" type="radio" name="ResponsableDeTarea"
+                                            id="ResponsableDeTarea" required value="Mauricio">
+                                        Mauricio
+                                        <input class="form-check-input" type="radio" name="ResponsableDeTarea"
+                                            id="ResponsableDeTarea" value="Gustavo">
+                                        Gustavo
+                                        <input class="form-check-input" type="radio" name="ResponsableDeTarea"
+                                            id="ResponsableDeTarea" value="Ramiro">
+                                        Ramiro
+                                    </div>
+                                </div>
+
+                                <div class="row p-1 ">
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="TareaRealizada">Tarea Realizada:</span>
+
+                                        <input class="form-control" type="text" name="TareaRealizada"
+                                            id="TareaRealizada" placeholder="Ingrese ultima tarea realizada"
+                                            aria-describedby="TareaRealizada">
+                                    </div>
+
+                                </div>
+                                <div class="row p-1">
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="ProximaTarea">Proxima Tarea:</span>
+
+                                        <input class="form-control" type="text" name="ProximaTarea" id="ProximaTarea"
+                                            placeholder="Ingrese la proxima tarea" aria-describedby="ProximaTarea">
+                                    </div>
+
+                                </div>
+                                <div class="row p-1">
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="Fecha_limite">Fecha Limite:</span>
+
+                                        <input class="form-control" type="date" name="Fecha_limite" id="Fecha_limite"
+                                            placeholder="Ingrese ultima tarea realizada"
+                                            aria-describedby="Fecha_limite">
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row p-2">
-                        <div class="mb-3">
-                            <label for="" class="form-label">Subtarea</label>
-                            <select id="SelectSubtarea" class="form-select form-select-sm" name="Subtarea" id="">
-                                
-                            </select>
-                        </div>
-                                            </div>
-                    <hr>
-                    <div class="row ">
-                        <div class="col  text-center">
-                            <h4>
-                                Responsable de la tarea:
-                            </h4>
-                                 
-                                <input class="form-check-input" type="radio" name="ResponsableDeTarea" id="ResponsableDeTarea" required
-                                    value="Mauricio">
-                                     Mauricio
-                                <input class="form-check-input" type="radio" name="ResponsableDeTarea" id="ResponsableDeTarea"
-                                    value="Gustavo">
-                                Gustavo
-                                <input class="form-check-input" type="radio" name="ResponsableDeTarea" id="ResponsableDeTarea"
-                                    value="Ramiro">
-                                Ramiro
-                        </div>
-                    </div>
-               
-                    <div class="row p-1 ">
-                        <div class="input-group">
-                            <span class="input-group-text" id="TareaRealizada">Tarea Realizada:</span>
-                            
-                            <input class="form-control"  type="text" name="TareaRealizada"
-                                id="TareaRealizada" placeholder="Ingrese ultima tarea realizada" aria-describedby="TareaRealizada">
-                        </div>
-                      
-                    </div>
-                    <div class="row p-1">
-                        <div class="input-group">
-                            <span class="input-group-text" id="ProximaTarea">Proxima Tarea:</span>
-                            
-                            <input class="form-control"  type="text" name="ProximaTarea"
-                                id="ProximaTarea" placeholder="Ingrese la proxima tarea" aria-describedby="ProximaTarea">
-                        </div>
-                       
-                    </div>
-                    <div class="row p-1">
-                        <div class="input-group">
-                            <span class="input-group-text" id="Fecha_limite">Fecha Limite:</span>
-                            
-                            <input class="form-control"  type="date" name="Fecha_limite"
-                                id="Fecha_limite" placeholder="Ingrese ultima tarea realizada" aria-describedby="Fecha_limite">
-                        </div>
-                       
-                    </div>
-                </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <h4 id="infoServidor" class=""></h4>
-                <button id="btnActualizarTarea" type="submit" class="btn btn-primary text-center">Actualizar Tarea</button>
-                
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Salir</button>
-                
-            </div>
-        </form>
+                    <div class="modal-footer">
+                        <h4 id="infoServidor" class=""></h4>
+                        <button id="btnActualizarTarea" type="submit" class="btn btn-primary text-center">Actualizar
+                            Tarea</button>
 
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Salir</button>
+
+                    </div>
+                </form>
+
+            </div>
         </div>
     </div>
 </div>
 <script>
-    $('.EtapaTareaRadio').click(function(){
-        var etapaSeleccionada=$(this).val();
-        if (etapaSeleccionada=="Preliminar"){
-            
-          $('#SelectSubtarea').empty();
-          $('#SelectSubtarea').append("<option value='DocumentacionDelTerreno' >Documentación del terreno</option>");
-$('#SelectSubtarea').append("<option value='Mensura' >Mensura</option>");
-$('#SelectSubtarea').append("<option value='TituloDePropiedad' >Titulo de propiedad</option>");
-$('#SelectSubtarea').append("<option value='DocumentacionSociedad' >Documentación Sociedad</option>");
-$('#SelectSubtarea').append("<option value='ActaConstitutiva' >Acta constitutiva</option>");
-$('#SelectSubtarea').append("<option value='ActaCargoVigente' >Acta cargo vigente</option>");
-$('#SelectSubtarea').append("<option value='DocumentacionContractual' >Documentación Contractual</option>");
-$('#SelectSubtarea').append("<option value='Cotizacion' >Cotizacion</option>");
-$('#SelectSubtarea').append("<option value='Contrato' >Contrato</option>");
-        }
-        if (etapaSeleccionada=="1ra parte"){
-          $('#SelectSubtarea').empty();
+    $('.EtapaTareaRadio').click(function () {
+        var etapaSeleccionada = $(this).val();
+        if (etapaSeleccionada == "Preliminar") {
 
- $('#SelectSubtarea').append("<option value='DocumentacionTerreno'>Documentación del terreno</option>");
- $('#SelectSubtarea').append("<option value='Mensura'>Mensura</option>");
- $('#SelectSubtarea').append("<option value='TituloDePropiedad'>Título de propiedad</option>");
- $('#SelectSubtarea').append("<option value='Comercial'>Comercial</option>");
- $('#SelectSubtarea').append("<option value='Tecnica'>Tecnica</option>");
- $('#SelectSubtarea').append("<option value='PlanoTipo'>Plano tipo</option>");
- $('#SelectSubtarea').append("<option value='PermisosEspeciales'>Permisos especiales</option>");
- $('#SelectSubtarea').append("<option value='DocumentacionAmbiente'>Documentación ambiente</option>");
+            $('#SelectSubtarea').empty();
+            $('#SelectSubtarea').append("<option value='DocumentacionDelTerreno' >Documentación del terreno</option>");
+            $('#SelectSubtarea').append("<option value='Mensura' >Mensura</option>");
+            $('#SelectSubtarea').append("<option value='TituloDePropiedad' >Titulo de propiedad</option>");
+            $('#SelectSubtarea').append("<option value='DocumentacionSociedad' >Documentación Sociedad</option>");
+            $('#SelectSubtarea').append("<option value='ActaConstitutiva' >Acta constitutiva</option>");
+            $('#SelectSubtarea').append("<option value='ActaCargoVigente' >Acta cargo vigente</option>");
+            $('#SelectSubtarea').append("<option value='DocumentacionContractual' >Documentación Contractual</option>");
+            $('#SelectSubtarea').append("<option value='Cotizacion' >Cotizacion</option>");
+            $('#SelectSubtarea').append("<option value='Contrato' >Contrato</option>");
+        }
+        if (etapaSeleccionada == "1ra parte") {
+            $('#SelectSubtarea').empty();
 
-            
+            $('#SelectSubtarea').append("<option value='DocumentacionTerreno'>Documentación del terreno</option>");
+            $('#SelectSubtarea').append("<option value='Mensura'>Mensura</option>");
+            $('#SelectSubtarea').append("<option value='TituloDePropiedad'>Título de propiedad</option>");
+            $('#SelectSubtarea').append("<option value='Comercial'>Comercial</option>");
+            $('#SelectSubtarea').append("<option value='Tecnica'>Tecnica</option>");
+            $('#SelectSubtarea').append("<option value='PlanoTipo'>Plano tipo</option>");
+            $('#SelectSubtarea').append("<option value='PermisosEspeciales'>Permisos especiales</option>");
+            $('#SelectSubtarea').append("<option value='DocumentacionAmbiente'>Documentación ambiente</option>");
+
+
         }
-        if (etapaSeleccionada=="2da parte"){
-          $('#SelectSubtarea').empty();
-$('#SelectSubtarea').append("<option value='MailAutorizacion'>Mail Autorización</option>");
-$('#SelectSubtarea').append("<option value='InspectorAsignado'>Inspector Asignado</option>");
-$('#SelectSubtarea').append("<option value='PlanDeTrabajo'>Plan de trabajo</option>");
-$('#SelectSubtarea').append("<option value='DocumentacionObras'>Documentación obras</option>");
-$('#SelectSubtarea').append("<option value='SolicitudInicioObras'>Solicitud inicio obras</option>");
-$('#SelectSubtarea').append("<option value='CertificadoRT'>Certificado RT</option>");
-$('#SelectSubtarea').append("<option value='Seguridad'>Seguridad</option>");
-$('#SelectSubtarea').append("<option value='Programadeseguridad'>Programa de seguridad</option>");
-$('#SelectSubtarea').append("<option value='CronogramaSyH'>Cronograma SyH</option>");
-$('#SelectSubtarea').append("<option value='SeguroRC'>Seguro RC</option>");
-$('#SelectSubtarea').append("<option value='Monotributos'>Monotributos</option>");
-$('#SelectSubtarea').append("<option value='SeguroAccidentesPersonales'>Seguro accidentes personales</option>");
-$('#SelectSubtarea').append("<option value='Matriculas'>Matriculas</option>");
-$('#SelectSubtarea').append("<option value='MatriculaFusionista'>Matrícula Fusionista</option>");
-$('#SelectSubtarea').append("<option value='MatriculaSoldador'>Matrícula Soldador</option>");
-$('#SelectSubtarea').append("<option value='Ambiente'>Ambiente</option>");
-$('#SelectSubtarea').append("<option value='EstudioImpactoAmbiental'>Estudio impacto ambiental</option>");
-$('#SelectSubtarea').append("<option value='CronogramaAmbiente'>Cronograma ambiente</option>");
-$('#SelectSubtarea').append("<option value='NotaCumplimentoNormativa'>Nota cumplimento normativa</option>");
-$('#SelectSubtarea').append("<option value='DDJJNAG153'>DDJJNAG153</option>");
-$('#SelectSubtarea').append("<option value='Avisos'>Avisos</option>");
-$('#SelectSubtarea').append("<option value='AvisoInicioObraART'>Aviso inicio de obra ART</option>");
-$('#SelectSubtarea').append("<option value='VencimientoAvisoObraArt'>Vencimiento aviso obra ART</option>");
-$('#SelectSubtarea').append("<option value='AvisoInicioObraIERIC'>Aviso inicio de obra IERIC</option>");
-$('#SelectSubtarea').append("<option value='VencimientoAvisoObraIeric'>Vencimiento aviso de obra IERIC</option>");
-$('#SelectSubtarea').append("<option value='ActaInicioEfectivo'>Acta inicio efectivo</option>");
+        if (etapaSeleccionada == "2da parte") {
+            $('#SelectSubtarea').empty();
+            $('#SelectSubtarea').append("<option value='MailAutorizacion'>Mail Autorización</option>");
+            $('#SelectSubtarea').append("<option value='InspectorAsignado'>Inspector Asignado</option>");
+            $('#SelectSubtarea').append("<option value='PlanDeTrabajo'>Plan de trabajo</option>");
+            $('#SelectSubtarea').append("<option value='DocumentacionObras'>Documentación obras</option>");
+            $('#SelectSubtarea').append("<option value='SolicitudInicioObras'>Solicitud inicio obras</option>");
+            $('#SelectSubtarea').append("<option value='CertificadoRT'>Certificado RT</option>");
+            $('#SelectSubtarea').append("<option value='Seguridad'>Seguridad</option>");
+            $('#SelectSubtarea').append("<option value='Programadeseguridad'>Programa de seguridad</option>");
+            $('#SelectSubtarea').append("<option value='CronogramaSyH'>Cronograma SyH</option>");
+            $('#SelectSubtarea').append("<option value='SeguroRC'>Seguro RC</option>");
+            $('#SelectSubtarea').append("<option value='Monotributos'>Monotributos</option>");
+            $('#SelectSubtarea').append("<option value='SeguroAccidentesPersonales'>Seguro accidentes personales</option>");
+            $('#SelectSubtarea').append("<option value='Matriculas'>Matriculas</option>");
+            $('#SelectSubtarea').append("<option value='MatriculaFusionista'>Matrícula Fusionista</option>");
+            $('#SelectSubtarea').append("<option value='MatriculaSoldador'>Matrícula Soldador</option>");
+            $('#SelectSubtarea').append("<option value='Ambiente'>Ambiente</option>");
+            $('#SelectSubtarea').append("<option value='EstudioImpactoAmbiental'>Estudio impacto ambiental</option>");
+            $('#SelectSubtarea').append("<option value='CronogramaAmbiente'>Cronograma ambiente</option>");
+            $('#SelectSubtarea').append("<option value='NotaCumplimentoNormativa'>Nota cumplimento normativa</option>");
+            $('#SelectSubtarea').append("<option value='DDJJNAG153'>DDJJNAG153</option>");
+            $('#SelectSubtarea').append("<option value='Avisos'>Avisos</option>");
+            $('#SelectSubtarea').append("<option value='AvisoInicioObraART'>Aviso inicio de obra ART</option>");
+            $('#SelectSubtarea').append("<option value='VencimientoAvisoObraArt'>Vencimiento aviso obra ART</option>");
+            $('#SelectSubtarea').append("<option value='AvisoInicioObraIERIC'>Aviso inicio de obra IERIC</option>");
+            $('#SelectSubtarea').append("<option value='VencimientoAvisoObraIeric'>Vencimiento aviso de obra IERIC</option>");
+            $('#SelectSubtarea').append("<option value='ActaInicioEfectivo'>Acta inicio efectivo</option>");
         }
-        if (etapaSeleccionada=="Obras"){
-          $('#SelectSubtarea').empty();
-$('#SelectSubtarea').append("<option value='DatosInspeccion'>Datos Inspección</option>");
-$('#SelectSubtarea').append("<option value='InspectorAsignado'>Inspector Asignado</option>");
-$('#SelectSubtarea').append("<option value='FechaComienzoObra'>Fecha Comienzo Obra</option>");
-$('#SelectSubtarea').append("<option value='FechaFinDeObra'>Fecha Fin De Obra</option>");
-$('#SelectSubtarea').append("<option value='FechaPruebaHermeticidad'>Fecha Prueba Hermeticidad</option>");
-$('#SelectSubtarea').append("<option value='DocumentacionPresentadaInspeccion'>Documentación Presentada Inspección</option>");
-$('#SelectSubtarea').append("<option value='Permisos'>Permisos</option>");
-$('#SelectSubtarea').append("<option value='ActasDeInicio'>Actas De Inicio</option>");
-$('#SelectSubtarea').append("<option value='Interferencias'>Interferencias</option>");
-$('#SelectSubtarea').append("<option value='LibroOrdenesServicio'>Libro Ordenes Servicio</option>");
-$('#SelectSubtarea').append("<option value='LibroNotasPedido'>Libro Notas Pedido</option>");
-$('#SelectSubtarea').append("<option value='PCEntregadoInspeccion'>PC Entregado Inspección</option>");
-$('#SelectSubtarea').append("<option value='AvisosDeObra'>Avisos De Obra</option>");
-$('#SelectSubtarea').append("<option value='CronogramaFirmadoComitente'>Cronograma Firmado Comitente</option>");
-$('#SelectSubtarea').append("<option value='ComunicacionObras'>Comunicación Obras</option>");
-$('#SelectSubtarea').append("<option value='OrdenServicio'>Orden Servicio</option>");
-$('#SelectSubtarea').append("<option value='FechaInicioTrabajos'>Fecha Inicio Trabajos</option>");
-$('#SelectSubtarea').append("<option value='FechaFindeobra'>Fecha Fin de obra</option>");
+        if (etapaSeleccionada == "Obras") {
+            $('#SelectSubtarea').empty();
+            $('#SelectSubtarea').append("<option value='DatosInspeccion'>Datos Inspección</option>");
+            $('#SelectSubtarea').append("<option value='InspectorAsignado'>Inspector Asignado</option>");
+            $('#SelectSubtarea').append("<option value='FechaComienzoObra'>Fecha Comienzo Obra</option>");
+            $('#SelectSubtarea').append("<option value='FechaFinDeObra'>Fecha Fin De Obra</option>");
+            $('#SelectSubtarea').append("<option value='FechaPruebaHermeticidad'>Fecha Prueba Hermeticidad</option>");
+            $('#SelectSubtarea').append("<option value='DocumentacionPresentadaInspeccion'>Documentación Presentada Inspección</option>");
+            $('#SelectSubtarea').append("<option value='Permisos'>Permisos</option>");
+            $('#SelectSubtarea').append("<option value='ActasDeInicio'>Actas De Inicio</option>");
+            $('#SelectSubtarea').append("<option value='Interferencias'>Interferencias</option>");
+            $('#SelectSubtarea').append("<option value='LibroOrdenesServicio'>Libro Ordenes Servicio</option>");
+            $('#SelectSubtarea').append("<option value='LibroNotasPedido'>Libro Notas Pedido</option>");
+            $('#SelectSubtarea').append("<option value='PCEntregadoInspeccion'>PC Entregado Inspección</option>");
+            $('#SelectSubtarea').append("<option value='AvisosDeObra'>Avisos De Obra</option>");
+            $('#SelectSubtarea').append("<option value='CronogramaFirmadoComitente'>Cronograma Firmado Comitente</option>");
+            $('#SelectSubtarea').append("<option value='ComunicacionObras'>Comunicación Obras</option>");
+            $('#SelectSubtarea').append("<option value='OrdenServicio'>Orden Servicio</option>");
+            $('#SelectSubtarea').append("<option value='FechaInicioTrabajos'>Fecha Inicio Trabajos</option>");
+            $('#SelectSubtarea').append("<option value='FechaFindeobra'>Fecha Fin de obra</option>");
         }
-        if (etapaSeleccionada=="Caos"){
-          $('#SelectSubtarea').empty();
-$('#SelectSubtarea').append("<option value='FinObra'>Fin de obra</option>");
-$('#SelectSubtarea').append("<option value='PresentacionFinal'>Presentación Final</option>");
-$('#SelectSubtarea').append("<option value='HabilitacionFinal '>Habilitación Final </option>");
+        if (etapaSeleccionada == "Caos") {
+            $('#SelectSubtarea').empty();
+            $('#SelectSubtarea').append("<option value='FinObra'>Fin de obra</option>");
+            $('#SelectSubtarea').append("<option value='PresentacionFinal'>Presentación Final</option>");
+            $('#SelectSubtarea').append("<option value='HabilitacionFinal '>Habilitación Final </option>");
         }
-        if (etapaSeleccionada=="Finalizada"){
-          $('#SelectSubtarea').empty();
-$('#SelectSubtarea').append("<option value='Fin ' selected>Fin </option>");
-            
+        if (etapaSeleccionada == "Finalizada") {
+            $('#SelectSubtarea').empty();
+            $('#SelectSubtarea').append("<option value='Fin ' selected>Fin </option>");
+
         }
 
     })
-    $('#formActualizarTareaCarpeta').submit(function(event){
-    event.preventDefault();
-    var formData = $(this).serialize();$.ajax({
-      url: '/ActualizarHistorialTareas',
-      type: 'POST',
-      data: formData,
-      success: function(data) {
-        $('#infoServidor').empty();
-        $('#infoServidor').removeClass('text-danger');
-        $('#infoServidor').addClass('text-success');
-        $('#infoServidor').html(data);
-  $('#btnActualizarTarea').attr('disabled','disabled');
+    $('#formActualizarTareaCarpeta').submit(function (event) {
+        event.preventDefault();
+        var formData = $(this).serialize(); $.ajax({
+            url: '/ActualizarHistorialTareas',
+            type: 'POST',
+            data: formData,
+            success: function (data) {
+                $('#infoServidor').empty();
+                $('#infoServidor').removeClass('text-danger');
+                $('#infoServidor').addClass('text-success');
+                $('#infoServidor').html(data);
+                $('#btnActualizarTarea').attr('disabled', 'disabled');
 
-        setTimeout(() => {
-            $('#modalNuevaTarea').modal('hide');
-            $('#modalNuevaTarea').modal('close');
-        }, 4000);
-      },error: function(data){
-        $('#infoServidor').empty();
-        $('#infoServidor').removeClass('text-success');
-        $('#infoServidor').addClass('text-danger');
-        $('#infoServidor').html('No se pudo cargar la tarea en el historial.');
-  $('#btnActualizarTarea').attr('disabled','disabled');
+                setTimeout(() => {
+                    $('#modalNuevaTarea').modal('hide');
+                    $('#modalNuevaTarea').modal('close');
+                }, 4000);
+            }, error: function (data) {
+                $('#infoServidor').empty();
+                $('#infoServidor').removeClass('text-success');
+                $('#infoServidor').addClass('text-danger');
+                $('#infoServidor').html('No se pudo cargar la tarea en el historial.');
+                $('#btnActualizarTarea').attr('disabled', 'disabled');
 
-        setTimeout(() => {
-            $('#modalNuevaTarea').modal('hide');
-            $('#modalNuevaTarea').modal('close');
-        }, 4000);
-      }
+                setTimeout(() => {
+                    $('#modalNuevaTarea').modal('hide');
+                    $('#modalNuevaTarea').modal('close');
+                }, 4000);
+            }
+        })
     })
-})
-   
+
 </script>
