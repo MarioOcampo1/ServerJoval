@@ -9,11 +9,20 @@
             </div>
             <div class="modal-body">
                 <form id="formActualizarTareaCarpeta" action="/ActualizarHistorialTareas" method="POST">
-
                     <input type="number" name="idObra" id="IdDeLaObra" hidden>
                     <!-- Tareas de la carpeta -->
                     <div class="container-fluid">
                         <div class="card-body">
+                            <label for="" class="form-label">Obra:</label>
+                            <select id="SelectObra" class="form-select form-select-sm" name="Obra"
+                                id="">
+<option value="">Sin Seleccion</option>
+<option value="">Sin Seleccion</option>
+<option value="">Sin Seleccion</option>
+<option value="">Sin Seleccion</option>
+<option value="">Sin Seleccion</option>
+
+                            </select>
                             <div class="border border-primary ">
                                 <div class="row ">
                                     <div class="col  text-center">
@@ -173,6 +182,8 @@
             $('#SelectSubtarea').append("<option value='AvisoInicioObraIERIC'>Aviso inicio de obra IERIC</option>");
             $('#SelectSubtarea').append("<option value='VencimientoAvisoObraIeric'>Vencimiento aviso de obra IERIC</option>");
             $('#SelectSubtarea').append("<option value='ActaInicioEfectivo'>Acta inicio efectivo</option>");
+            $('#SelectSubtarea').append("<option value='Permisos'>Permisos</option>");
+            $('#SelectSubtarea').append("<option value='Interferencias'>Interferencias</option>");
         }
         if (etapaSeleccionada == "Obras") {
             $('#SelectSubtarea').empty();
@@ -182,9 +193,7 @@
             $('#SelectSubtarea').append("<option value='FechaFinDeObra'>Fecha Fin De Obra</option>");
             $('#SelectSubtarea').append("<option value='FechaPruebaHermeticidad'>Fecha Prueba Hermeticidad</option>");
             $('#SelectSubtarea').append("<option value='DocumentacionPresentadaInspeccion'>Documentación Presentada Inspección</option>");
-            $('#SelectSubtarea').append("<option value='Permisos'>Permisos</option>");
             $('#SelectSubtarea').append("<option value='ActasDeInicio'>Actas De Inicio</option>");
-            $('#SelectSubtarea').append("<option value='Interferencias'>Interferencias</option>");
             $('#SelectSubtarea').append("<option value='LibroOrdenesServicio'>Libro Ordenes Servicio</option>");
             $('#SelectSubtarea').append("<option value='LibroNotasPedido'>Libro Notas Pedido</option>");
             $('#SelectSubtarea').append("<option value='PCEntregadoInspeccion'>PC Entregado Inspección</option>");
@@ -239,5 +248,5 @@
             }
         })
     })
-
+   
 </script>

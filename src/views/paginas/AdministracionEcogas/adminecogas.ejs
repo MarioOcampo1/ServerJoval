@@ -20,21 +20,31 @@
         <div class="container-fluid text-center">
           <h1 class="fw-bold hvr-underline-from-center">
             Administración obras de gas</h1>
-          <div class="col-md-12 d-flex mb-2">
+          <div class="col-md-12 d-inline-flex mb-2">
+            <div class="col-auto flex-row mb-2 ">
+
             <a href="/nuevaObra" class="me-2">
-              <button class="btn btn-success ml-auto hvr-pulse">Nueva Obra</button>
+              <button class="btn btn-success hvr-grow mb-2">Nueva Obra</button>
             </a>
 
+            <button id="btnNuevaTarea" class="hvr-grow me-auto btn btn-secondary mb-2">Nueva tarea</button>
+           <button class="hvr-grow btn btn-secondary mb-2 parpadearEnRojo" id="btnVencimientoAdministracion" data-target="VencimientosCollapse" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="VencimientosCollapse">Vencimientos</button>
+</div>
+              <div class="collapse" id="VencimientosCollapse">
+                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+              </div>
           </div>
-
-
+        
           <div class="row">
-            <div class="col-12 ">
+            <div class="col ">
               <input class="form-control text-primary hvr-wobble-horizontal " type="text" name="" id="buscador" placeholder="Buscar en tabla">
             </div>
+            <div class="col">
+            </div>
+<div class="col"></div>
+<div class="col"></div>
 
           </div>
-
         </div>
         <div id="Avisos" class="container" style="display: none;">
           <button disabled class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#Interferencias"
@@ -143,7 +153,7 @@
           $("#comunicacionDiaria").css("width", "100%")
 
           $(document).ready(function () {
-
+            $('.collapse').collapse('hide')
             var url = '/adminecogas/TablaGeneral';
 
             var tabla = $('#comunicacionDiaria').DataTable({
@@ -304,8 +314,8 @@
                 },
                 {
                   "width": "1%", render: function (data, type, row) {
-                    return '<button id="btnNuevaTarea" class="hvr-grow btn btn-sm btn-outline-secondary align-middle" name="'+ row.Nombre_sub +'" onclick="CargarNuevaTarea('+row.id+')"><i class="bi bi-pencil-square"></i></button>';
-
+                    // return '<button id="btnNuevaTarea" class="hvr-grow btn btn-sm btn-outline-secondary align-middle" name="'+ row.Nombre_sub +'" onclick="CargarNuevaTarea('+row.id+')"><i class="bi bi-pencil-square"></i></button>';
+return '';
                   }
                 },
               ],
@@ -380,7 +390,46 @@
   $('#infoServidor').empty();
 
 }
+$('#btnNuevaTarea').click(function(){    
+        console.log("click en btnNuevaTarea");
+        var idObra;
+  var NombreCarpeta=$(this).prop('name');
+  console.log(NombreCarpeta);
+  $('#IdDeLaObra').val(idObra);
+  $('#modalNuevaTarea').modal('show');
+  $('#modalNuevaTareaTitleId').html('Cargar nueva tarea en obra '+NombreCarpeta+'');
+  $('#btnActualizarTarea').removeAttr('disabled');
+  $('#infoServidor').empty();
 
+        $.ajax({
+            url:'/adminecogas/DatosObras',
+            type:'GET',
+            success: function(data){
+              console.log(data);
+              $('#SelectObra').empty();
+              data.forEach((obras)=>{
+                $('#SelectObra').append('<option value="'+obras.Nombre+'">'+obras.Nombre+'</option>');
+              })
+            }
+
+        }
+
+
+        )
+    })
+    $('#btnVencimientoAdministracion').click(function(){
+      $('#VencimientosCollapse').collapse('toggle');
+      $('#VencimientosCollapse').empty();
+      $.ajax({
+        url:'/VencimientosDocGral/obtenerinfo',
+        method:'GET',
+        success:function(data){
+          console.log(data);
+        }
+      })
+      // $('#VencimientosCollapse').html('Hola Juan Carlos');
+
+    })
         </script>
         <%}%>
 

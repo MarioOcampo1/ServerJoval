@@ -35,11 +35,22 @@ router.get('/admingral', (req, res) => {
     res.render('paginas/AdministracionGeneral/admingral.ejs');
 })
 router.get('/vencimientosDocGral',(req,res)=>{
+
     let sql='SELECT * FROM admingeneral_vencimientos;'
     connection.query(sql,(error,results)=>{
         if(error)console.log(error);
         else{
             res.render('./paginas/AdministracionGeneral/vencimientos.ejs',{vencimientos:results, moment})
+        }
+    })
+})
+router.get('/vencimientosDocGral/obtenerinfo',(req,res)=>{
+    
+    let sql='SELECT * FROM admingeneral_vencimientos;'
+    connection.query(sql,(error,results)=>{
+        if(error)console.log(error);
+        else{
+            res.send(results);
         }
     })
 })

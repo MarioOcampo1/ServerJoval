@@ -3826,3 +3826,12 @@ router.post('/actualizarTareaRealizada/:id',(req,res)=>{
 router.get("/BuscarEstadoFinanciero/:idObra",(req,res)=>{
 
 });
+router.get("/Adminecogas/DatosObras",(req,res)=>{
+  let sql='Select * FROM obras WHERE Estado !="Finalizada"';
+  connection.query(sql,(error,results)=>{
+    if(error)console.log(error);
+    else{
+      res.send(results);
+    }
+  })
+})
