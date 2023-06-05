@@ -32,7 +32,7 @@
                 <td scope="row"><%=vencimiento.Item%></td>
                 <td><%=moment(vencimiento.FechaActualizacion).format('DD/MM/YYYY')%></td>
                 <td id="Vencimiento"><%=moment(vencimiento.FechaVencimiento).format('DD/MM/YYYY')%></td>
-                <td class="avisoVencimientoitem"  id="<%=vencimiento.Item%>"><%=moment(vencimiento.DiasPreviosAviso).format('DD/MM/YYYY')%></td>
+                <td class="avisoVencimientoitem"  id="<%=vencimiento.DiasPreviosAviso%>"><%=moment(vencimiento.DiasPreviosAviso).format('DD/MM/YYYY')%></td>
                 <td><button class="btn btn-lg btn-success btnConfigVencimiento" id="" onclick="configVencimiento('<%=vencimiento.id%>','<%=vencimiento.Item%>','<%=moment(vencimiento.FechaActualizacion).format('DD/MM/YYYY')%>','<%=moment(vencimiento.FechaVencimiento).format('DD/MM/YYYY')%>' )"><i class="bi bi-gear-fill"></i></button>
                     <button id="BtnDelete" class="btn btn-lg btn-danger" onclick="BorrarItem('<%=vencimiento.id%>')"><i class="bi bi-trash"></i></button>
                 </td>
@@ -164,17 +164,22 @@ Swal.fire({
 
 }
   $(document).ready(function(){
+    var FechaActual = new Date();
+
     $('.avisoVencimientoitem').each(function() {
     var contenido = $(this).text();
-    let item = $(this).attr('id');
-    var contenido = new Date(contenido)
-    var FechaActual = new Date();
-    if(contenido<FechaActual)
+    var item = $(this).attr('id');
+    item = new Date(item);
+    var diff = item - FechaActual;
+    diff= diff/(1000*60*60*24);
+    diff= parseInt(diff);
+    if(diff<0)
     {  
         $(this).closest('tr').addClass('parpadearEnRojo ');
        
     }
 })
+
   })
     
 </script>
