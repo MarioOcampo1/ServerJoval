@@ -3677,14 +3677,21 @@ router.post("/actFinalCarpEcogas/:id", upload.none(), function (req, res) {
   res.redirect("/historialcarpeta/" + Nombre);
 });
 router.post("/ActualizarHistorialTareas",(req,res)=>{
-var idObra=req.body.idObra;
+var idObra;
 var NombreObra;
-var EtapaSeleccionada= req.body.EtapaTarea;
-var subtarea = req.body.Subtarea;
-var ResponsableTarea= req.body.ResponsableDeTarea;
-var TareaRealizada= req.body.TareaRealizada;
-var ProximaTarea=req.body.ProximaTarea;
-var FechaLimiteTarea=req.body.Fecha_limite;
+var EtapaSeleccionada;
+var subtarea;
+var ResponsableTarea;
+var TareaRealizada;
+var ProximaTarea;
+var FechaLimiteTarea;
+idObra=req.body.Obra;
+EtapaSeleccionada= req.body.EtapaTarea;
+subtarea = req.body.Subtarea;
+ResponsableTarea= req.body.ResponsableDeTarea;
+TareaRealizada= req.body.TareaRealizada;
+ProximaTarea=req.body.ProximaTarea;
+FechaLimiteTarea=req.body.Fecha_limite;
 let fecha = new Date();
 let anio = fecha.getFullYear();
 let mes = fecha.getMonth() + 1;
@@ -3827,7 +3834,7 @@ router.get("/BuscarEstadoFinanciero/:idObra",(req,res)=>{
 
 });
 router.get("/Adminecogas/DatosObras",(req,res)=>{
-  let sql='Select * FROM obras WHERE Estado !="Finalizada"';
+  let sql='Select * FROM obras WHERE Estado !="Finalizada" ORDER BY Nombre asc';
   connection.query(sql,(error,results)=>{
     if(error)console.log(error);
     else{

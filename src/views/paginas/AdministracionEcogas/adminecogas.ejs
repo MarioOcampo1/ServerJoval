@@ -27,7 +27,7 @@
               <button class="btn btn-success hvr-grow mb-2">Nueva Obra</button>
             </a>
 
-            <button id="btnNuevaTarea" class="hvr-grow me-auto btn btn-secondary mb-2">Nueva tarea</button>
+            <button id="btnNuevaTarea" class="hvr-grow me-auto btn btn-info mb-2">Carga rápida</button>
            <button class="hvr-grow btn btn-secondary mb-2 " id="btnVencimientoAdministracion" data-target="VencimientosCollapse" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="VencimientosCollapse">Vencimientos</button>
 </div>
               <div class="collapse border mb-2 ms-3" id="VencimientosCollapse">
@@ -415,7 +415,6 @@ return '';
 
 }
 $('#btnNuevaTarea').click(function(){    
-        console.log("click en btnNuevaTarea");
         var idObra;
   var NombreCarpeta=$(this).prop('name');
   console.log(NombreCarpeta);
@@ -424,7 +423,7 @@ $('#btnNuevaTarea').click(function(){
   $('#modalNuevaTareaTitleId').html('Cargar nueva tarea en obra '+NombreCarpeta+'');
   $('#btnActualizarTarea').removeAttr('disabled');
   $('#infoServidor').empty();
-
+  $('#bodyCargarNuevaTareaAdminecogas').hide();
         $.ajax({
             url:'/adminecogas/DatosObras',
             type:'GET',
@@ -432,7 +431,7 @@ $('#btnNuevaTarea').click(function(){
               console.log(data);
               $('#SelectObra').empty();
               data.forEach((obras)=>{
-                $('#SelectObra').append('<option value="'+obras.Nombre+'">'+obras.Nombre+'</option>');
+                $('#SelectObra').append('<option value="'+obras.id+'">'+obras.Nombre+'</option>');
               })
             }
 
@@ -445,6 +444,10 @@ $('#btnNuevaTarea').click(function(){
            $('#VencimientosCollapse').collapse('toggle');
            $('#btnVencimientoAdministracion').removeClass('parpadearEnRojo');
     })
+  
+    $('#SelectObra').change(function(){
+      $('#bodyCargarNuevaTareaAdminecogas').show()
+    });
         </script>
         <%}%>
 
