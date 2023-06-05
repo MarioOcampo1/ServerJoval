@@ -6,6 +6,8 @@ const session = require('express-session')
 const passport = require('passport');
 const PassportLocal = require('passport-local').Strategy;
 const router = Router();
+const fs= require('fs');
+const path= require('path');
 module.exports = router;
 const moment = require('moment');
 var xlsx = require('xlsx');
@@ -103,6 +105,7 @@ router.get('/', (req, res) => {
 })
 
 router.get('/index', (req, res, next) => {
+    CrearCarpetaEcogas("HOLAJUANCARLOS",123,00);    
     if (req.isAuthenticated()) {
         var fecha = new Date();
         var sql = 'Select * from admingeneral_seguros_albacaucion WHERE ProximaRefacturacion BETWEEN (NOW() - Interval 1 Month) AND (NOW() + Interval 2 Month)  AND Estado != "Dada de baja" AND Riesgo!= "Fondo de reparo" AND Riesgo!= "Mantenimiento de oferta"';
@@ -115,6 +118,7 @@ router.get('/index', (req, res, next) => {
     }
     else {
         (req, res) => {
+            
             res.redirect('/');
         }
     }
@@ -425,3 +429,12 @@ router.post('/eliminarEmpleado/:id', (req, res) => {
         }
     })
 })
+//Manejo de archivos en servidor
+ function CrearCarpetaEcogas(NombreObra,nPDT,CodigoVigente){
+if(NombreObra){
+    const ubicacion= 'Archivos/1 Administracion Ecogas/02. Carpetas Vigentes/'+CodigoVigente+'-'+nPDT+'-'+NombreObra+''
+    fs.mkdirSync(ubicacion,{recursive:true});
+}
+
+
+}

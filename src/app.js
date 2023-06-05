@@ -10,6 +10,7 @@ const session = require('express-session');
 const app = express();
 const nodemon = require('nodemon');
 const { dirname } = require('path');
+var Archivos = "";
 const path = require('path'); //El modulo path nos permite concatenar directorios, para poder usar todos y hacerlos multiplataforma.
 const morgan = require('morgan');
 const { Router } = require('express');
@@ -35,8 +36,11 @@ app.set('views', path.join(__dirname,'views' )); //path concatena dirname con la
 app.set('view engine','ejs'); //Ejs es un lenguaje que nos permite ser utilizado dentro de un html, permitiendo tener condicionales, bucles, dentro del html. 
 //Ejs es usado por defecto por express. Asique no es necesario que lo requiera. directamente se usa.
 //Static
+
 app.use (express.static(path.join(__dirname, 'public')));//Esta linea de codigo le dice a express que la carpeta public esta adentro de src
 app.use(express.static('public'));
+path.dirname(Archivos,'Archivos');//Esta linea de codigo le dice a express que la carpeta public esta adentro de src
+
 //Routes
 app.use(require('./routes/Principal'));
 app.use(require('./routes/AdminEcogas')); //Usa el enrutador
