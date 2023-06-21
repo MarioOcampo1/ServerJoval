@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagos semanales</title>
+    
+</head>
+
+<body>
+    <%- include('./partials/menusuperior.ejs'); %>
+        <h1 class="text-center">Pago semanal de haberes del personal de obras</h1>
+        <div class="container-fluid">
+        <div class="btn-group " role="group">
+            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalId">Nuevo Pago</button>
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalEgreso">Nuevo empleado</button>
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalEgreso">Nuevo apercibimiento</button>
+        </div>
+        <div class="row mt-2">
+    <div class="col-2">
+        <div class="mb-3">
+         
+            <label for="" class="form-label">Año</label>
+            <select class="form-select form-select-lg" name="" id="">
+                <option selected>2023</option>
+                <option value="">2024</option>
+            </select>
+          </div>
+        
+        </div>
+        <div class="col-2">
+        <div class="mb-3">
+            <label for="" class="form-label">Mes</label>
+            <select class="form-select form-select-lg" name="" id="">
+                <option selected>Enero</option>
+                <option value="">Febrero</option>
+                <option value="">Marzo</option>
+                <option value="">Abril</option>
+                <option value="">Mayo</option>
+                <option value="">Junio</option>
+                <option value="">Julio</option>
+                <option value="">Agosto</option>
+                <option value="">Septiembre</option>
+                <option value="">Octubre</option>
+                <option value="">Noviembre</option>
+                <option value="">Diciembre</option>
+            </select>
+        </div>
+            </div>
+            <div class="col-2">
+                <div class="mb-3">
+                    <label for="" class="form-label">Semana</label>
+                    <select class="form-select form-select-lg" name="" id="">
+                        <option selected>1</option>
+                        <option value="">2</option>
+                        <option value="">3</option>
+                        <option value="">4</option>
+                        
+                    </select>
+                </div>
+                    </div>
+            <div class="col-2">
+            <div class="mb-3">
+              <label for="" class="form-label">Filtrar por empleado</label>
+              <input type="text"
+                class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
+              <small id="helpId" class="form-text text-muted">Búsqueda por empleado</small>
+            </div>
+        </div>
+        </div>
+        <div class="table-responsive-md">
+            <table class="table table-danger">
+                <thead>
+                    <tr>
+                        <th scope="col">Empleado</th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Pago efectuado</th>
+                        <th scope="col">Descuento aplicado</th>
+                        <th scope="col">Préstamo</th>
+
+                        <th scope="col">Observaciones</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="">
+                        <td scope="row">Aliaga</td>
+                        <td>1/5/2023</td>
+                        <td>45000</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>Ninguna</td>
+                    </tr>
+                    <tr class="">
+                        <td scope="row">Aliaga</td>
+                        <td>8/5/2023</td>
+                        <td>45000</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>Ninguna</td>
+                    </tr>
+                    <tr class="">
+                        <td scope="row">Aliaga</td>
+                        <td>21/5/2023</td>
+                        <td>45000</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>Ninguna</td>
+                    </tr>
+                    <tr class="">
+                        <td scope="row">Aliaga</td>
+                        <td>30/5/2023</td>
+                        <td>45000</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>Ninguna</td>
+                    </tr>
+                    <tr>
+                        <td scope="row">Caballero Benjamin</td>
+                        <td>1/5/2023</td>
+                        <td>23000</td>
+                        <td>1500</td>
+                        <td>0</td>
+                        <td>Se aplica descuento debido a que choco la camioneta nueva</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+    </div>
+
+</body>
+</html>

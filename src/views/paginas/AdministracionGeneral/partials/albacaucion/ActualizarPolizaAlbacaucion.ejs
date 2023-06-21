@@ -10,40 +10,35 @@
     <title>Seguros</title>
 </head>
 
-<body class=">
+<body>
     <%- include('../menusuperior.ejs'); %>
-    
-    <h2 class="text-center bg-warning">Actualizar póliza de Albacaución</h2>
-   
-
-        <div class="form-group">
-
-            <div id="ActualizarPoliza" class="container border border- danger md-center " style="display:block ;">
-                <div class="btn-group pe-1 mt-1" role="group" aria-label="Botones">
-                    <button type="button" class="btn btn-outline-secondary mb-1" onclick="javascript:history.back()">Volver
-                        atrás</button>
-                    <form id="formularioBorrarBoton" action="/DarBajaPolizaAlbacaucion/<%=obras[0].ID_poliza%>" method="post">
-                        <button type="button" class="btn btn-outline-danger ms-1 mb-1" onclick="mostrarAlerta()">Dar de baja la póliza</button>
-                    </form>
+         
             
-                </div>
+                <h2 class="text-center">Actualizar póliza de Albacaución</h2>
+         
+        <div class="form-group">
+            <div id="ActualizarPoliza" class="container border border- danger md-center " style="display:block ;">
+                <form id="formularioBorrarBoton" action="/DarBajaPolizaAlbacaucion/<%=obras[0].ID_poliza%>" method="post">
+                    <button type="button" class="btn btn-outline-danger" onclick="mostrarAlerta()">
+                        <i class="bi bi-file-earmark-x" title="Eliminar póliza"></i>
+                    </button>
+                </form>     
                 <form class="" action="/ActualizarPolizaAlbacaucion/<%=obras[0].ID_poliza%>" method="post">
                 <div class="row justify-content-md-center ">
                     <div class="col m-1">
                         <div class="row">
-
-                            <label class="fw-bold" for="Aseguradora">Aseguradora</label>
+<input type="hidden" name="Aseguradora" value="Albacaucion">
+                            <!-- <label class="fw-bold" for="Aseguradora">Aseguradora</label>
                             <select name="Aseguradora" id="Aseguradora">Aseguradora
-                                <option class="m-1" value="Albacaucion">Albacaución</option>
                                 <option selected class="m-1" value="<%=obras[0].Aseguradora%>">
                                     <%=obras[0].Aseguradora%>
                                 </option>
-                            </select>
+                            </select> -->
 
                             <input hidden type="text" name="ID" id="ID" value="<%=obras[0].ID_poliza%>">
                         </div>
                         <div class="row">
-                            <label class="fw-bold" for="Obra">Obra a la que pertenece</label>
+                            <label class="fw-bold" for="Obra">Obra</label>
                             <select name="Obra" id="">
                                 <%listadoObras.forEach((listadoObra)=>{%>
                                     <%if(listadoObra.Nombre==obras[0].Obra){%>
@@ -70,18 +65,15 @@
                                 id="NPoliza">
                         </div>
                         <div class="row">
-                            <label class="fw-bold" for="FechaEmisionPoliza">Fecha de emisión actual:
-                                <%=moment(obras[0].FechaEmisionPoliza).format('DD /MM/YYYY')%></label>
+                            <label class="fw-bold" for="FechaEmisionPoliza">Fecha de emisión
+                                </label>
                             <input  type="date" value="<%=obras[0].FechaEmisionPoliza%>" class=" m-1"
                                 id="FechaEmisionPoliza" name="FechaEmisionPoliza"
                                 placeholder="Ingrese la fecha de emision "
-                                aria-label="<%=obras[0].FechaEmisionPoliza%>">
+                                aria-label="<%=obras[0].FechaEmisionPoliza%>">                               
+                                  <small id="FechaEmisionPolizaSmall" class="form-text text-muted">Fecha emisión actual:<%=moment(obras[0].FechaEmisionPoliza).format('DD/MM/YYYY')%></small>
                         </div>
-                    </div>
-                    <div class="col m-1">
-
                         <div class="row ">
-
                             <label class="fw-bold" for="DescripcionRiesgo">Tipo de riesgo</label>
                             <select name="DescripcionRiesgo" id="DescripcionRiesgo">Seleccione el tipo de poliza
                                 <option selected value="<%=obras[0].Riesgo%>">
@@ -94,18 +86,21 @@
                                 <option value="Mantenimiento de oferta"> Mantenimiento de oferta</option>
                             </select>
                         </div>
+                    </div>
+                    <div class="col m-1">
+                       
                         <div class="row">
 
 
 
 
-                            <label class="fw-bold" for="Valor">Valor a pagar</label>
+                            <label class="fw-bold" for="Valor">Monto</label>
                             <input required type="number" class="m-1" id="Valor" name="Valor"
                                 value="<%=obras[0].Valor%>" placeholder="Ingrese el valor de la póliza "
                                 aria-label="<%=obras[0].Valor%>">
                         </div>
                         <div class="row">
-                            <label class="fw-bold" for="VigenciaPoliza">Vigencia de la poliza</label>
+                            <label class="fw-bold" for="VigenciaPoliza">Vigencia</label>
                             <select name="VigenciaPoliza" id="VigenciaPoliza">Seleccione la vigencia de la poliza
                                 <option selected value="<%=obras[0].VigenciaPoliza%>">
                                     <%=obras[0].VigenciaPoliza%>
@@ -116,7 +111,7 @@
                             </select>
                         </div>
                         <div class="row">
-                            <label class="fw-bold" for="MontoAsegurado">Monto Asegurado</label>
+                            <label class="fw-bold" for="MontoAsegurado">Valor Asegurado</label>
                             <input  required type="number" class="m-1" id="MontoAsegurado" name="MontoAsegurado"
                                 value="<%=obras[0].MontoAsegurado%>"
                                 placeholder="Ingrese el Monto Asegurado de la póliza "
@@ -129,34 +124,38 @@
                                 placeholder="<%=obras[0].Endoso%>"
                                 aria-label="<%=obras[0].Endoso%>">
                         </div>
+                        <div class="row">
+                            <label class="fw-bold mt-1" for="ProximaRefacturacion">Refacturación</label>
+                           <input type="date" name="ProximaRefacturacion" id="ProximaRefacturacion" value="">
+                           <small id="ProximaRefacturacionSmall" class="form-text text-muted">Proxima refacturación: <%=moment(obras[0].ProximaRefacturacion).format('DD/MM/YYYY')%></small>
 
+                        </div>  
 
                     </div>
                     <div class="col m-1">
+                     
+                        
                         <div class="row">
                             <label class="fw-bold" for="Estado">Estado</label>
                             <select name="Estado" id="Estado">Seleccione el estado
                                 <%if(obras[0].Estado=="Vigente"){%>
-                                    <option selected value="<%=obras[0].Estado%>">
-                                        <%=obras[0].Estado%>
-                                    </option>
+                                    <option value="Vigente" selected>Vigente</option>
+                                    <option value="Dada de baja">Dada de baja</option>
+
                                     <%} if(obras[0].Estado=="Dada de baja"){%>
-                                    <option selected value="<%=obras[0].Estado%>">
+                                        <option value="Vigente" >Vigente</option>
+                                        <option value="Dada de baja" selected>Dada de baja</option>
+    
                                             <%=obras[0].Estado%>
                                         </option>
                                         <%}%>
-                                        <option value="Vigente">Vigente</option>
-                                        <option value="Dada de baja">Dada de baja</option>
+                                        
                                 
                             </select>
                         </div>
-                        <div class="row">
-                            <label class="fw-bold mt-1" for="ProximaRefacturacion">Proxima refacturación: <%=moment(obras[0].ProximaRefacturacion).format('DD/MM/YYYY')%></label>
-                           <input type="date" name="ProximaRefacturacion" id="ProximaRefacturacion" value="">
-                        </div>
-                        <div class="row bg-info mt-2">
-                            <label class="fw-bold bg-info" for="Descripcion">Endoso Pagado</label>
-                            <select class="bg-info" name="EndosoPagado" id="">
+                        <div class="row  mt-2">
+                            <label class="fw-bold " for="Descripcion">Endoso pagado</label>
+                            <select class="" name="EndosoPagado" id="">
                                 <option value="<%=obras[0].EndosoPagado%>" selected hidden> <%=obras[0].EndosoPagado%></option>
                                 
                                 <option value="S">Si</option>
@@ -165,15 +164,25 @@
                             </select>
                         </div>
                         <div class="row">
+                            <div class="mb-3">
+                                <label for="" class="form-label fw-bold">Doc. para aseguradora</label>
+                                <select class="form-select form-select-sm" name="DocumentacionAPresentar" id="SelectDocumentacionAPresentar">
+                                    <option selected>Certificado</option>
+                                    <option value="">Recepción Provisoria</option>
+                                    <option value="">Recepción Definitiva</option>
+                                </select>
+                            </div>
+                           
+                        </div>
+                    </div>
+                    <div class="col m-1">
+                        <div class="row mt-2">
                             <label class="fw-bold" for="Descripcion">Descripción</label>
-                            <textarea type="textarea" name="Descripcion" id="Descripcion" rows="7" cols="5" placeholder="<%=obras[0].Descripcion%>"> <%=obras[0].Descripcion%></textarea>
+                            <textarea class="form-control" type="textarea" name="Descripcion" id="Descripcion" rows="5" placeholder="<%=obras[0].Descripcion%>"> <%=obras[0].Descripcion%></textarea> 
                         </div>
                     </div>
                 </div>
-                <div class="row justify-content-md-center">
-
                     <button class="btn btn-success" type="submit">Actualizar póliza</button>
-                </div>
             </div>
         </div>
         </div>

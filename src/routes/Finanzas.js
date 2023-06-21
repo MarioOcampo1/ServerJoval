@@ -935,6 +935,9 @@ router.post('/GenerarComprobante', (req, res, next) => {
             })
     });
 })
+router.get('/Finanzas/PagosPersonal',(req,res)=>{
+res.render('./paginas/Finanzas/pagoPersonal.ejs');
+})
 // EDITAR CLIENTE
 router.get('/Finanzas/CobroDeObras/EditarCliente/:id', (req, res) => {
     var id = req.params.id;
