@@ -17,7 +17,7 @@ router.use(passport.initialize());
 router.use(passport.session());
 //Seteo server original
 const mysql = require('mysql');
-const { NULL } = require('mysql/lib/protocol/constants/types');
+const { NULL, DATE } = require('mysql/lib/protocol/constants/types');
 const { now } = require('moment');
 const connection = mysql.createConnection({
     host: '127.0.0.1',
@@ -137,8 +137,9 @@ resolve();
             console.log(cantidadPolizasVigentes);
              sql = 'Select Nombre from obras';
             connection.query(sql, (error, obras) => {
-                 sql = 'Select * from admingeneral_seguros_albacaucion ';
+                 sql = 'Select * from admingeneral_seguros_albacaucion ORDER BY NumeroPoliza';
                 connection.query(sql, (error, results) => {
+                   
                     if (error) console.log(error);
                     // res.send(results);
                     var fechaActual = new Date();
@@ -159,6 +160,7 @@ mes= mes+3;
 
 
 })
+
 router.post('/NuevoItemVencimiento',(req,res)=>{
     let sql='INSERT INTO admingeneral_vencimientos set?';
     var fechaActual= new Date();
@@ -417,4 +419,200 @@ router.post('/DarBajaPolizaAlbacaucion/:id', (req, res) => {
             }
         })
     }
+})
+//Vehiculos
+router.get('/Vehiculos',(req,res)=>{
+var sql='SELECT * FROM vehiculos';
+var vehiculos;
+    connection.query(sql,(error,resultado)=>{
+        vehiculos=resultado;
+        sql= 'SELECT * FROM vehiculos_registrokms ORDER BY Fecha DESC';
+        connection.query(sql,(error,results)=>{
+            res.render('./paginas/AdministracionGeneral/Vehiculos.ejs',{registrokms:results, vehiculos, moment:moment})
+        })
+        })
+
+    
+})
+router.get('/Vehiculos/datos',(req,res)=>{
+    var ListavehiculosDB;
+    var registrokms;
+    var registroActual=[];
+    var fechaHoy= new Date();
+    var cargasConCombustible=[];
+    var AnalisisCombustible=[];
+    var sql='SELECT * FROM vehiculos';
+    new Promise((resolve, reject) => {
+        connection.query(sql,(error,resultado)=>{
+            ListavehiculosDB=resultado;
+            // ListavehiculosDB.forEach(element => {
+            //     vehiculosSemana.push(element.Patente);
+            // });
+            // for (let index = 0; index < vehiculosSemana.length; index++) {
+            //   vehiculosSemana[index] = { Patente:vehiculosSemana[index]};
+            // }
+            sql= 'SELECT * FROM vehiculos_registrokms ORDER BY Kms DESC';
+            connection.query(sql,(error,results)=>{
+                if(error)reject();
+                registrokms=results;
+                resolve();
+            })
+            })
+    }
+    ).finally(function(){
+            var kmsAcumulados=0;
+            registrokms.forEach(registro=> {
+var fechaRegistro = new Date(registro.Fecha);
+var diferenciaFechas=Math.abs(fechaHoy-fechaRegistro); //Se realiza la resta entre el día de hoy, y la que indica el registro
+diferenciaFechas= diferenciaFechas/(1000 * 3600 * 24); //Se pasa a días
+if(diferenciaFechas<7){ //Compara con 7 días hacia atras, los registros mayores no serán tenidos en cuenta.
+registroActual.push(registro); //De esta forma, quedan cargados solo los registros de los últimos 7 días.
+}
+
+});
+registroActual.forEach((registro)=>{
+    if(registro.LitrosCargadosEnTanque>0){
+        cargasConCombustible.push(registro);
+    }
+}
+)
+ListavehiculosDB.forEach((vehiculo)=>{
+    var fechaAnterior=undefined;
+    var fechaActual=undefined;
+    var kmsAnterior=undefined;
+    var kmsActual=undefined;
+var CombustibleCargadoAnterior;
+var CombustibleCargadoActual;
+cargasConCombustible.forEach((registroDeCargaCombustible)=>{
+   if(vehiculo.Patente==registroDeCargaCombustible.Patente){
+if(fechaAnterior==undefined){
+    fechaAnterior=new Date(registroDeCargaCombustible.Fecha);
+    kmsAnterior= registroDeCargaCombustible.Kms;
+    CombustibleCargadoAnterior = registroDeCargaCombustible.LitrosCargadosEnTanque;
+}
+else{
+    fechaActual=new Date(registroDeCargaCombustible.Fecha);
+    kmsActual= registroDeCargaCombustible.Kms;
+    var diferenciaKMS=kmsActual-kmsAnterior;
+    var consumoCombustible=0;
+if(diferenciaKMS<0){
+    diferenciaKMS=kmsAnterior-kmsActual;
+}
+    CombustibleCargadoActual = registroDeCargaCombustible.LitrosCargadosEnTanque;
+    var diferenciaFechas=Math.abs(fechaActual-fechaAnterior); //Se realiza la resta entre el día de hoy, y la que indica el registro
+diferenciaFechas= diferenciaFechas/(1000 * 3600 * 24); //Se pasa a días
+diferenciaFechas= parseInt(diferenciaFechas); 
+if(consumoCombustible<=0){
+    consumoCombustible=  CombustibleCargadoAnterior;
+
+}else{
+consumoCombustible=  consumoCombustible + CombustibleCargadoActual;
+
+} 
+var promedioConsumo= (100*consumoCombustible)/diferenciaKMS; //Fórmula para calcular el consumo estimado en 100 kms
+// (diferenciaKMS/consumoCombustible);
+promedioConsumo= Number(promedioConsumo.toFixed(2));
+AnalisisCombustible.push({MarcaModelo:vehiculo.MarcaModelo,Patente:vehiculo.Patente, consumoCombustible,promedioConsumo, KmsRecorridos:diferenciaKMS, kmsAnterior,kmsActual,DiasTranscurridos:diferenciaFechas})
+}
+
+}
+
+  
+})
+})
+
+    res.send(AnalisisCombustible);
+})
+         
+        
+    })
+router.post('/Vehiculos/GuardarNuevoVehiculo',(req,res)=>{
+var MarcaModelo=req.body.MarcaModelo;
+var TipoVehiculo=req.body.TipoVehiculo;
+var Kilometros=req.body.Kilometros;
+var Patente=req.body.Patente;
+var sql='INSERT INTO vehiculos SET?';
+connection.query(sql,{Patente:Patente,MarcaModelo:MarcaModelo,Kms:Kilometros},(error,results)=>{
+if(error){
+    console.log(error);
+    res.send('Hubo un error, no se pudo guardar el vehículo en el sistema.')
+} 
+else{
+    sql='INSERT INTO vehiculos_registrokms SET?';
+    var FechaHoy = new Date().toLocaleDateString('en-CA');
+    FechaHoy = FechaHoy.replace('/','-');
+    FechaHoy = FechaHoy.replace('/','-');
+    connection.query(sql,{Patente:Patente,Kms:Kilometros,MarcaModelo:MarcaModelo, Fecha:FechaHoy},(error,results)=>{
+        if(error){
+            console.log(error);
+    res.send('Error 2: No se pudo terminar de guardar el vehículo en el sistema.')
+        }
+        else{
+            res.send('Vehículo cargado con exito en el sistema');
+
+        }
+    })
+}
+})
+})
+router.post('/Vehiculos/NuevoRegistro',(req,res)=>{
+    var Patente=req.body.Patente;
+    var sql='SELECT MarcaModelo FROM vehiculos WHERE Patente ="'+Patente+'" ;';
+    var MarcaModelo;
+var Kilometros=req.body.Kilometros;
+var LitrosCargadosEnTanque=req.body.LitrosCargadosEnTanque;
+var FechaIngreso= req.body.FechaIngreso;
+
+    new Promise((resolve, reject) => {
+        connection.query(sql,(error,results)=>{
+            if(error)console.log(error);
+            else{
+                MarcaModelo=results[0].MarcaModelo;
+                resolve();
+            }
+        }) 
+    }).then(function(){
+        sql= 'INSERT INTO vehiculos_registrokms SET?;';
+        if(FechaIngreso.length>0){
+         FechaIngreso = new Date(FechaIngreso).toLocaleDateString('en-CA');
+        }
+        else{
+            FechaIngreso = new Date().toLocaleDateString('en-CA');
+        }
+        FechaIngreso = FechaIngreso.replace('/','-');
+        FechaIngreso = FechaIngreso.replace('/','-');
+        connection.query(sql,{Patente:Patente,Kms:Kilometros,MarcaModelo:MarcaModelo,LitrosCargadosEnTanque:LitrosCargadosEnTanque, Fecha:FechaIngreso},(error,results)=>{
+            if(error){
+                console.log(error);
+        res.send('Error: No se pudo guardar el registro sistema.')
+            }
+            else{
+                res.send('Registro cargado con exito en el sistema');
+        
+            }
+        })
+    });
+  
+})
+//Combustible
+router.get('/Combustible/datos',(req,res)=>{
+    var sql = 'SELECT * FROM combustible';
+    connection.query(sql,(error,results)=>{
+        if(error)console.error(error);
+        
+else {
+    res.send(results)};
+    })
+})
+router.post('/Combustible/NuevoTicketCombustible',(req,res)=>{
+    var Fecha=req.body.Fecha;
+var TipoCombustible=req.body.TipoCombustible;
+var PrecioLitro=req.body.PrecioLitro;
+var CantidadLitros=req.body.CantidadLitros;
+var Observaciones=req.body.Observaciones;
+var sql='INSERT INTO combustible set?';
+connection.query(sql,{Fecha:Fecha,TipoCombustible:TipoCombustible,PrecioLitro:PrecioLitro,CantidadLitros:CantidadLitros,Total:(CantidadLitros*PrecioLitro),Observaciones:Observaciones,},(error,results)=>{
+if(error)console.log(error);
+else{ res.send("Se ha realizado la carga con exito.")}
+})
 })
