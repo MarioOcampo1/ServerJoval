@@ -21,12 +21,9 @@
 <div class="container">
     <div class="border" >
         <div class="row">
-            <div  class="col-10">
+            <div  class="col-12">
                 <p id="infoConsumoCombustible">
                     </p>
-            </div>
-            <div class="col">
-               
             </div>
         </div>
       
@@ -72,7 +69,7 @@
     <td class="table-success"><%= moment(vehiculo.Fecha).format("DD/MM/YYYY") %></td>
     <td class="table-success"><%= vehiculo.LitrosCargadosEnTanque %></td>
     <td class="table-success"><%= vehiculo.Observaciones %>
-        <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil-square"></i></button>
+        <button class="btn btn-sm btn-outline-secondary" id="<%= vehiculo.id_registro %>" onclick="EditarRegistroKMS(this.id)"><i class="bi bi-pencil-square"></i></button>
         <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash3"></i></button>
     </td>
 <% }else{ %>
@@ -82,7 +79,7 @@
     <td><%= moment(vehiculo.Fecha).format("DD/MM/YYYY") %></td>
     <td><%= vehiculo.LitrosCargadosEnTanque %></td>
     <td><%= vehiculo.Observaciones %>
-        <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil-square"></i></button>
+        <button class="btn btn-sm btn-outline-secondary" id="<%= vehiculo.id_registro %>" onclick="EditarRegistroKMS(this.id)" ><i class="bi bi-pencil-square"></i></button>
         <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash3"></i></button>
     </td>
     <%}%>
@@ -338,7 +335,7 @@
 </div>
             </div>
             <div class="modal-footer">
-                <p class="border text-primary Parpadear" id="RespuestaServidorActualizarRegistro"></p>
+                <p class="border text-primary Parpadear" id="RespuestaServidorNuevoRegistro"></p>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                 <button type="button" id="btnGuardarNuevoRegistro" class="btn btn-primary">Guardar</button>
             </div>
@@ -346,7 +343,78 @@
         </div>
     </div>
 </div>
-
+<!-- Modal Body -->
+<!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+<div class="modal fade" id="EdicionRegistroKms" tabindex="-1"  role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitleId">Editar registro de kms</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="FormEditarRegistroKMS" method="post">
+                    <input type="hidden" name="idRegistro" id="idRegistro">
+                <div class="row border">
+                    <div class="col">
+                        <div class="mb-3 text-center">
+                            <label for="" class="form-label">Marca y modelo</label>
+                            <p id="EditarRegistroMarcaModelo"></p>
+                        </div>
+                    </div>
+                        <div class="col">
+                        <div class="mb-3 text-center">
+                            <label for="" class="form-label">Patente</label>
+                            <p id="EditarRegistroPatente"></p>
+                           
+                          </div>
+                    </div>
+                         
+                        
+                    </div>
+                    <div class="row">
+                    <div class="col">
+                        <div class="mb-3">
+                            <label for="" class="form-label">Kms</label>
+                            <input type="number"
+                              class="form-control" name="EditarRegistroKms" id="EditarRegistroKms" aria-describedby="helpId" placeholder="Kms">
+                            <small id="helpId" class="form-text text-muted">Kms</small>
+                          </div>
+                        <div class="mb-3">
+                            <label for="" class="form-label">Fecha actualización</label>
+                            <input type="date" class="form-control" name="EditarRegistroFecha" id="EditarRegistroFecha">
+                            <small id="helpId" class="form-text text-muted">Fecha actualizacion</small>
+                          </div>
+                   
+                           
+                 
+                        <div class="mb-3">
+                            <label for="" class="form-label">Litros cargados</label>
+                            <input type="number"
+                              class="form-control" name="EditarRegistroLitrosCargados" id="EditarRegistroLitrosCargados" aria-describedby="helpId" placeholder="Litros cargados">
+                            <small id="helpId" class="form-text text-muted">Litros cargados</small>
+                          </div>
+                   
+                        <div class="mb-3">
+                            <label for="" class="form-label">Observaciones</label>
+                            <input type="number"
+                              class="form-control" name="EditarRegistroObservaciones" id="EditarRegistroObservaciones" aria-describedby="helpId" placeholder="Observaciones">
+                            <small id="helpId" class="form-text text-muted">Observaciones</small>
+                          </div>
+                    </div>
+                </div>
+              
+              
+            </form>
+            </div>
+            <div class="modal-footer">
+                <div class="" id="RespuestaServidorActualizarRegistro"></div>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" id="btnSendFormEditarRegistroKMS">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
     $('#btnCombustible').click(function(){
         $('#ModalCombustible').modal('show');
@@ -403,28 +471,31 @@ type:'POST',
 url:'/Vehiculos/NuevoRegistro',
 data:thisform,
 success:function(respuestaServidor){
-$('#RespuestaServidorActualizarRegistro').html(respuestaServidor);
+$('#RespuestaServidorNuevoRegistro').html(respuestaServidor);
 setTimeout(() => {
     $('#formActualizarRegistro')[0].reset();
-    $('#RespuestaServidorActualizarRegistro').empty();
+    $('#RespuestaServidorNuevoRegistro').empty();
 }, 3000);
 }
 
         })
   })
   $.ajax({
-    url:'/Vehiculos/datos',
+    url:'/Vehiculos/AnalisisCombustible',
     type:'GET',
     success: function(datos){
         $('#infoConsumoCombustible').empty()
         $('#infoConsumoCombustible').append(
-            '<H4 class="text-center"> Informe de consumo</H4> <p class="text-center"> Ultimos 7 días:</p>'
+            '<H4 class="text-center"> Informe de consumo ultimos 7 días</H4>'
         )
         datos.forEach(element => {
             $('#infoConsumoCombustible').append(
-               '<p>'+element.MarcaModelo+' ' + element.Patente+'. Kms recorridos:'+element.KmsRecorridos+'. Consumo litros: '+element.consumoCombustible+'.Promedio consumo:'+element.promedioConsumo+'  L/100Kms. Días transcurridos entre cargas:'+ element.DiasTranscurridos+' </p>'
+               '<p>'+element.MarcaModelo+' ' + element.Patente+'. Kms recorridos:'+element.KmsRecorridos+'. Consumo litros: '+element.consumoCombustible+'.<span id="TextoAnalizado">Promedio consumo:'+element.promedioConsumo+'  L/100Kms </span>. Días transcurridos entre cargas:'+ element.DiasTranscurridos+' </p>'
                 
             )
+            if(element.promedioConsumo>10||element.promedioConsumo<5){
+                $("#infoConsumoCombustible").find("#TextoAnalizado:last").addClass('bg-danger text-light');;
+            }
         });
        
     }
@@ -486,6 +557,44 @@ $('#formNuevoTicketCombustible')[0].reset();
         ]
         });
     });
+    function EditarRegistroKMS(idBtn){
+        $('#EdicionRegistroKms').modal('toggle');
+     var url='/Vehiculos/datos/vehiculos_registrokms/'+idBtn+'';
+        $.ajax({
+    url:url,
+    type:'GET',
+    success: function(datos){
+        datos.forEach(element => {
+
+if(element.LitrosCargadosEnTanque ==null || element.LitrosCargadosEnTanque ==undefined || element.LitrosCargadosEnTanque ==NaN){element.LitrosCargadosEnTanque=0;}
+       $('#EditarRegistroMarcaModelo').html(element.MarcaModelo);
+       $('#EditarRegistroPatente').html(element.Patente);
+       $('#EditarRegistroKms').val(element.Kms);
+       var fecha=moment(element.Fecha).locale('es').format("YYYY-MM-DD"); //Un input de tipo date siempre espera un valor en formato ISO-8601 (YYYY-MM-DD). 
+       $('#EditarRegistroFecha').val(fecha);       
+       $('#EditarRegistroLitrosCargados').val(element.LitrosCargadosEnTanque);
+       $('#EditarRegistroObservaciones').val(element.Observaciones);
+$('#idRegistro').val(idBtn);
+    });
+       
+    }
+  })
+    }
+    $('#btnSendFormEditarRegistroKMS').click(function(){
+        var form= $('#FormEditarRegistroKMS').serialize();
+        $.ajax({
+type:'POST',
+url:'/Vehiculos/EditarRegistroKms',
+data:form,
+success:function(respuestaServidor){
+$('#RespuestaServidorActualizarRegistro').html('<p class="text-primary">'+respuestaServidor+'</p>');
+setTimeout(() => {
+    $('#EdicionRegistroKms').modal('toggle');
+    $('#FormEditarRegistroKMS').reset();
+}, 2000);
+
+    }})
+})
 </script>
 </body>
 </html>

@@ -434,7 +434,18 @@ var vehiculos;
 
     
 })
-router.get('/Vehiculos/datos',(req,res)=>{
+router.get('/Vehiculos/datos/:datoBusqueda/:idregistro',(req,res)=>{
+    var idregistro=req.params.idregistro;
+    var datoBusqueda=req.params.datoBusqueda;
+    var sql='SELECT * FROM '+datoBusqueda+' WHERE id_registro ='+idregistro;
+    connection.query(sql,(error,resultado)=>{
+        if(error)console.log(error);
+        else{
+            res.send(resultado);
+    }
+})
+ })
+router.get('/Vehiculos/AnalisisCombustible',(req,res)=>{
     var ListavehiculosDB;
     var registrokms;
     var registroActual=[];
@@ -593,6 +604,22 @@ var FechaIngreso= req.body.FechaIngreso;
         })
     });
   
+})
+router.post('/Vehiculos/EditarRegistroKms',(req,res)=>{
+var idRegistro=req.body.idRegistro;
+var RegistroKms=req.body.EditarRegistroKms;
+var RegistroFecha=req.body.EditarRegistroFecha;
+var RegistroLitrosCargados=req.body.EditarRegistroLitrosCargados;
+var RegistroObservaciones=req.body.EditarRegistroObservaciones;
+var sql='UPDATE vehiculos_registrokms set? WHERE id_registro ="'+idRegistro+'"';
+connection.query(sql,{Kms:RegistroKms,Fecha:RegistroFecha,LitrosCargadosEnTanque:RegistroLitrosCargados,Observaciones:RegistroObservaciones},(error,result)=>{
+    if(error){console.log(error);
+    res.send('No se pudo actualizar los datos.')
+    }
+    else{
+        res.send('Datos actualizados correctamente');
+    }
+})
 })
 //Combustible
 router.get('/Combustible/datos',(req,res)=>{
