@@ -476,7 +476,7 @@ router.get('/Vehiculos/AnalisisCombustible',(req,res)=>{
 var fechaRegistro = new Date(registro.Fecha);
 var diferenciaFechas=Math.abs(fechaHoy-fechaRegistro); //Se realiza la resta entre el día de hoy, y la que indica el registro
 diferenciaFechas= diferenciaFechas/(1000 * 3600 * 24); //Se pasa a días
-if(diferenciaFechas<7){ //Compara con 7 días hacia atras, los registros mayores no serán tenidos en cuenta.
+if(diferenciaFechas<30){ //Compara con 7 días hacia atras, los registros mayores no serán tenidos en cuenta.
 registroActual.push(registro); //De esta forma, quedan cargados solo los registros de los últimos 7 días.
 }
 
@@ -523,8 +523,10 @@ consumoCombustible=  consumoCombustible + CombustibleCargadoActual;
 var promedioConsumo= (100*consumoCombustible)/diferenciaKMS; //Fórmula para calcular el consumo estimado en 100 kms
 // (diferenciaKMS/consumoCombustible);
 promedioConsumo= Number(promedioConsumo.toFixed(2));
-AnalisisCombustible.push({MarcaModelo:vehiculo.MarcaModelo,Patente:vehiculo.Patente, consumoCombustible,promedioConsumo, KmsRecorridos:diferenciaKMS, kmsAnterior,kmsActual,DiasTranscurridos:diferenciaFechas})
-}
+AnalisisCombustible.push({MarcaModelo:vehiculo.MarcaModelo,Patente:vehiculo.Patente, consumoCombustible,promedioConsumo, KmsRecorridos:diferenciaKMS, kmsAnterior,kmsActual,DiasTranscurridos:diferenciaFechas, Fecha:fechaActual})
+fechaAnterior=fechaActual;
+kmsAnterior=kmsActual;
+CombustibleCargadoAnterior=CombustibleCargadoActual;}
 
 }
 
