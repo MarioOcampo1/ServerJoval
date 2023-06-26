@@ -9,22 +9,26 @@
 </head>
 <body>
     <%- include('../partials/menusuperior.ejs'); %>
-    <h1 class="text-center">Albacaución</h1>
+    
+    <div class="text-center">
+    <h1 class=" hvr-underline-from-left">Albacaución</h1>
+</div>
+    
     <%- include('../partials/albacaucion/NuevaPolizaAlbacaucion.ejs'); %> <!-- Opcion para cargar la nueva póliza de albacaución -->
     
     <div class="div p-1 bg-light"  style="position: sticky; top:0;">
         <label for="Buscador" class="bg-light" >Buscador en tabla</label>
         <input type="text" name="Buscador" id="BuscadorTabla" class="" >
-        <button type="button" class="btn btn-danger" onclick="document.getElementById('nuevaPoliza').style.display='block';">Nueva póliza</button>
-        <button type="button" class="btn btn-info" onclick="MostrarTodasLasPolizas();"> Mostrar pólizas dadas de baja</button>
+        <button type="button" class="btn hvr-pulse-grow btn-danger" onclick="document.getElementById('nuevaPoliza').style.display='block';">Nueva póliza</button>
+        <button type="button" class="btn hvr-pulse-grow btn-info" onclick="MostrarTodasLasPolizas();"> Mostrar pólizas dadas de baja</button>
        <span>Cantidad de pólizas vigentes: <%=cantidadPolizasVigentes%>
 
        </span>
     </div>
     <div class="table-responsive-sm">
-       <table id="tablaAlbacaucion" cellspacing="0" class="table table-responsive table-bordered align-middle text-center">
+       <table id="tablaAlbacaucion" cellspacing="0" class="table  table-responsive table-bordered align-middle text-center">
         <thead>
-            <tr>
+            <tr class="">
     <th scope="col">N° póliza</th>
     <th scope="col">Emisión</th>
     <th scope="col">Endoso</th>
@@ -45,13 +49,13 @@
 <%results.forEach((poliza)=>{%>
 <tbody>
     <tr>
-        <td><%=poliza.NumeroPoliza%></td>
-        <td><%=moment(poliza.FechaEmisionPoliza).format('DD/MM/YYYY')%> </td>
-        <td><%=poliza.Endoso%></td>
-        <td><%=poliza.VigenciaPoliza%></td>
-        <td><%=poliza.Riesgo%></td>
-        <td>$ <%=poliza.Valor%></td>
-        <td>$ <%=poliza.MontoAsegurado%></td>
+        <td class=""><%=poliza.NumeroPoliza%></td>
+        <td class=""><%=moment(poliza.FechaEmisionPoliza).format('DD/MM/YYYY')%> </td>
+        <td class=""><%=poliza.Endoso%></td>
+        <td class=""><%=poliza.VigenciaPoliza%></td>
+        <td class=""><%=poliza.Riesgo%></td>
+        <td class="">$ <%=poliza.Valor%></td>
+        <td class="">$ <%=poliza.MontoAsegurado%></td>
         
         <%if(fechaAComparar>poliza.ProximaRefacturacion){%>
             <td class="bg-danger text-white"><%=moment(poliza.ProximaRefacturacion).format('DD/MM/YYYY')%> </td>
@@ -77,7 +81,7 @@
 
         <td><%=poliza.Estado%>
             <a href="ActualizarPolizaAlbacaucion/<%=poliza.ID_poliza%>">
-        <button  class="btn-sm btn-outline-primary btnEditar">Editar</button>
+        <button  class="btn hvr-pulse-grow-sm btn-outline-primary btnEditar">Editar</button>
     </a>
         </td>
         <%})%>

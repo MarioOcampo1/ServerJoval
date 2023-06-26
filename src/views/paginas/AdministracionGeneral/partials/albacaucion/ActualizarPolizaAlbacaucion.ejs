@@ -20,26 +20,20 @@
             <div id="ActualizarPoliza" class="container border border- danger md-center " style="display:block ;">
                 <form id="formularioBorrarBoton" action="/DarBajaPolizaAlbacaucion/<%=obras[0].ID_poliza%>" method="post">
                     <button type="button" class="btn btn-outline-danger" onclick="mostrarAlerta()">
-                        <i class="bi bi-file-earmark-x" title="Eliminar póliza"></i>
+                        <small class="bi bi-file-earmark-x" title="Eliminar póliza"> Eliminar póliza</small>
                     </button>
                 </form>     
                 <form class="" action="/ActualizarPolizaAlbacaucion/<%=obras[0].ID_poliza%>" method="post">
                 <div class="row justify-content-md-center ">
-                    <div class="col m-1">
-                        <div class="row">
-<input type="hidden" name="Aseguradora" value="Albacaucion">
-                            <!-- <label class="fw-bold" for="Aseguradora">Aseguradora</label>
-                            <select name="Aseguradora" id="Aseguradora">Aseguradora
-                                <option selected class="m-1" value="<%=obras[0].Aseguradora%>">
-                                    <%=obras[0].Aseguradora%>
-                                </option>
-                            </select> -->
+                    <div class="col m-1 border">
+                        <h5 class="text-center">Datos de la póliza</h5>
 
+<input type="hidden" name="Aseguradora" value="Albacaucion">
                             <input hidden type="text" name="ID" id="ID" value="<%=obras[0].ID_poliza%>">
-                        </div>
                         <div class="row">
+                            <div class="col-6">
                             <label class="fw-bold" for="Obra">Obra</label>
-                            <select name="Obra" id="">
+                            <select class="form-select form-select-sm" name="Obra" id="">
                                 <%listadoObras.forEach((listadoObra)=>{%>
                                     <%if(listadoObra.Nombre==obras[0].Obra){%>
                                         <option value="<%=listadoObra.Nombre%>" selected><%=listadoObra.Nombre%></option>    
@@ -49,33 +43,34 @@
                                     <%})%>
                             </select>
                         </div>
-                        <div class="row">
-
-
+                        <div class="col-6">
                             <label class="fw-bold" for="Asegurado">Asegurado</label>
-                            <input class="m-1" value="<%=obras[0].NombreAsegurado%>"
+                            <input class="form-control form-control-sm m-1" value="<%=obras[0].NombreAsegurado%>"
                                 placeholder="<%=obras[0].NombreAsegurado%>" aria-label="<%=obras[0].NombreAsegurado%>"
                                 required type="text" name="Asegurado" id="Asegurado">
+                            </div>
                         </div>
                         <div class="row">
 
-
-                            <label class="fw-bold" for="NPoliza">Número de póliza</label>
-                            <input value="<%=obras[0].NumeroPoliza%>" class="m-1" required type="number" name="NPoliza"
-                                id="NPoliza">
-                        </div>
-                        <div class="row">
-                            <label class="fw-bold" for="FechaEmisionPoliza">Fecha de emisión
-                                </label>
-                            <input  type="date" value="<%=obras[0].FechaEmisionPoliza%>" class=" m-1"
-                                id="FechaEmisionPoliza" name="FechaEmisionPoliza"
-                                placeholder="Ingrese la fecha de emision "
-                                aria-label="<%=obras[0].FechaEmisionPoliza%>">                               
-                                  <small id="FechaEmisionPolizaSmall" class="form-text text-muted">Fecha emisión actual:<%=moment(obras[0].FechaEmisionPoliza).format('DD/MM/YYYY')%></small>
-                        </div>
-                        <div class="row ">
+                        
+                      <div class="col-6">
+                        <label class="fw-bold" for="NPoliza">Número de póliza</label>
+                        <input value="<%=obras[0].NumeroPoliza%>" class="m-1 form-control form-control-sm" required type="number" name="NPoliza"
+                            id="NPoliza">
+                      </div>
+                      <div class="col-6">
+                        <label class="fw-bold" for="FechaEmisionPoliza">Fecha de emisión
+                        </label>
+                    <input  type="date" value="<%=obras[0].FechaEmisionPoliza%>" class="form-control form-control-sm m-1"
+                        id="FechaEmisionPoliza" name="FechaEmisionPoliza"
+                        placeholder="Ingrese la fecha de emision "
+                        aria-label="<%=obras[0].FechaEmisionPoliza%>">                               
+                          <small id="FechaEmisionPolizaSmall" class="form-text text-muted">Fecha emisión actual:<%=moment(obras[0].FechaEmisionPoliza).format('DD/MM/YYYY')%></small>
+                      </div>
+                      <div class="row">
+                        <div class="col">
                             <label class="fw-bold" for="DescripcionRiesgo">Tipo de riesgo</label>
-                            <select name="DescripcionRiesgo" id="DescripcionRiesgo">Seleccione el tipo de poliza
+                            <select class="form-select form-select-sm" name="DescripcionRiesgo" id="DescripcionRiesgo">Seleccione el tipo de poliza
                                 <option selected value="<%=obras[0].Riesgo%>">
                                     <%=obras[0].Riesgo%>
                                 </option>
@@ -86,87 +81,98 @@
                                 <option value="Mantenimiento de oferta"> Mantenimiento de oferta</option>
                             </select>
                         </div>
+                      </div>
                     </div>
-                    <div class="col m-1">
-                       
-                        <div class="row">
-
-
-
-
-                            <label class="fw-bold" for="Valor">Monto</label>
-                            <input required type="number" class="m-1" id="Valor" name="Valor"
-                                value="<%=obras[0].Valor%>" placeholder="Ingrese el valor de la póliza "
-                                aria-label="<%=obras[0].Valor%>">
-                        </div>
-                        <div class="row">
-                            <label class="fw-bold" for="VigenciaPoliza">Vigencia</label>
-                            <select name="VigenciaPoliza" id="VigenciaPoliza">Seleccione la vigencia de la poliza
-                                <option selected value="<%=obras[0].VigenciaPoliza%>">
-                                    <%=obras[0].VigenciaPoliza%>
-                                </option>
-                                <option value="Trimestral">Trimestral</option>
-                                <option value="Semestral">Semestral</option>
-                                <option value="Anual">Anual</option>
-                            </select>
-                        </div>
-                        <div class="row">
-                            <label class="fw-bold" for="MontoAsegurado">Valor Asegurado</label>
-                            <input  required type="number" class="m-1" id="MontoAsegurado" name="MontoAsegurado"
-                                value="<%=obras[0].MontoAsegurado%>"
-                                placeholder="Ingrese el Monto Asegurado de la póliza "
-                                aria-label="<%=obras[0].MontoAsegurado%>">
-                        </div>
-                        <div class="row">
-                            <label class="fw-bold" for="Endoso">N° de endoso</label>
-                            <input  type="number" class="m-1" id="Endoso" name="Endoso"
-                                value="<%=obras[0].Endoso%>"
-                                placeholder="<%=obras[0].Endoso%>"
-                                aria-label="<%=obras[0].Endoso%>">
-                        </div>
-                        <div class="row">
-                            <label class="fw-bold mt-1" for="ProximaRefacturacion">Refacturación</label>
-                           <input type="date" name="ProximaRefacturacion" id="ProximaRefacturacion" value="">
-                           <small id="ProximaRefacturacionSmall" class="form-text text-muted">Proxima refacturación: <%=moment(obras[0].ProximaRefacturacion).format('DD/MM/YYYY')%></small>
-
-                        </div>  
-
                     </div>
-                    <div class="col m-1">
-                     
-                        
+                    <div class="col m-1 border">
+                        <h5 class="text-center">Datos de facturación</h5> 
                         <div class="row">
-                            <label class="fw-bold" for="Estado">Estado</label>
-                            <select name="Estado" id="Estado">Seleccione el estado
-                                <%if(obras[0].Estado=="Vigente"){%>
-                                    <option value="Vigente" selected>Vigente</option>
-                                    <option value="Dada de baja">Dada de baja</option>
+<div class="col">
+    <label class="fw-bold" for="Valor">Monto</label>
+    <input required type="number" class="m-1 form-control form-control-sm" id="Valor" name="Valor"
+        value="<%=obras[0].Valor%>" placeholder="Ingrese el valor de la póliza "
+        aria-label="<%=obras[0].Valor%>">
+</div>
+<div class="col">
+    <label class="fw-bold" for="VigenciaPoliza">Vigencia</label>
+    <select class="form-select form-select-sm" name="VigenciaPoliza" id="VigenciaPoliza">Seleccione la vigencia de la poliza
+        <option selected value="<%=obras[0].VigenciaPoliza%>">
+            <%=obras[0].VigenciaPoliza%>
+        </option>
+        <option value="Trimestral">Trimestral</option>
+        <option value="Semestral">Semestral</option>
+        <option value="Anual">Anual</option>
+    </select>
+</div>
+                        </div>
+<div class="row">
+<div class="col">
+    <label class="fw-bold" for="MontoAsegurado">Valor Asegurado</label>
+    <input  required type="number" class="m-1 form-control form-control-sm" id="MontoAsegurado" name="MontoAsegurado"
+        value="<%=obras[0].MontoAsegurado%>"
+        placeholder="Ingrese el Monto Asegurado de la póliza "
+        aria-label="<%=obras[0].MontoAsegurado%>">
+</div>
+<div class="col">
+    <label class="fw-bold" for="Endoso">N° de endoso</label>
+    <input  type="number" class="m-1 form-control form-control-sm" id="Endoso" name="Endoso"
+        value="<%=obras[0].Endoso%>"
+        placeholder="<%=obras[0].Endoso%>"
+        aria-label="<%=obras[0].Endoso%>">
+</div>
+<div class="col">
+    <label class="fw-bold " for="Descripcion">Endoso pagado</label>
+    <select class="form-select form-select-sm" name="EndosoPagado" id="">
+        <option value="<%=obras[0].EndosoPagado%>" selected hidden> <%=obras[0].EndosoPagado%></option>
+        
+        <option value="S">Si</option>
+        <option value="N">No</option>
 
-                                    <%} if(obras[0].Estado=="Dada de baja"){%>
-                                        <option value="Vigente" >Vigente</option>
-                                        <option value="Dada de baja" selected>Dada de baja</option>
+    </select>
+</div>
+</div>           
+<div class="row">
+    <label class="fw-bold mt-1" for="ProximaRefacturacion">Refacturación</label>
+   <input type="date" class="form-control form-control-sm" name="ProximaRefacturacion" id="ProximaRefacturacion" value="">
+   <small id="ProximaRefacturacionSmall" class="form-text text-muted">Proxima refacturación: <%=moment(obras[0].ProximaRefacturacion).format('DD/MM/YYYY')%></small>
+
+</div>  
+                    </div>
+                    <div class="col m-1 border">
+                        <h5 class="text-center">Datos de la vigencia</h5>
+                        <div class="row">
+                            <div class="col">
+                                <label class="fw-bold" for="Estado">Estado</label>
+                                <select class="form-select form-select-sm" name="Estado" id="Estado">Seleccione el estado
+                                    <%if(obras[0].Estado=="Vigente"){%>
+                                        <option value="Vigente" selected>Vigente</option>
+                                        <option value="Dada de baja">Dada de baja</option>
     
-                                            <%=obras[0].Estado%>
-                                        </option>
-                                        <%}%>
+                                        <%} if(obras[0].Estado=="Dada de baja"){%>
+                                            <option value="Vigente" >Vigente</option>
+                                            <option value="Dada de baja" selected>Dada de baja</option>
+                                                <%=obras[0].Estado%>
+                                            </option>
+                                            <%}%>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <div class="mb-3">
+                                  <label for="" class="form-label fw-bold">Baja solicitada</label>
+                                    <select class="form-select form-select-sm" name="BajaSolicitada" id="">
+                                        <option selected></option>
+                                        <option value="S">Sí</option>
+                                        <option value="N">No</option>
                                         
-                                
-                            </select>
-                        </div>
-                        <div class="row  mt-2">
-                            <label class="fw-bold " for="Descripcion">Endoso pagado</label>
-                            <select class="" name="EndosoPagado" id="">
-                                <option value="<%=obras[0].EndosoPagado%>" selected hidden> <%=obras[0].EndosoPagado%></option>
-                                
-                                <option value="S">Si</option>
-                                <option value="N">No</option>
-
-                            </select>
+                                    </select>
+                                  <small id="helpId" class="form-text text-muted">Indicar si ha solicitado la baja en la aseguradora</small>
+                                </div>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="mb-3">
                                 <label for="" class="form-label fw-bold">Doc. para aseguradora</label>
-                                <select class="form-select form-select-sm" name="DocumentacionAPresentar" id="SelectDocumentacionAPresentar">
+                                <select class="form-select form-select-sm"  name="DocumentacionAPresentar" id="SelectDocumentacionAPresentar">
                                     <option selected>Certificado</option>
                                     <option value="">Recepción Provisoria</option>
                                     <option value="">Recepción Definitiva</option>
@@ -175,7 +181,8 @@
                            
                         </div>
                     </div>
-                    <div class="col m-1">
+                    <div class="col m-1 border">
+                        <h5 class="text-center">Descripción</h5>
                         <div class="row mt-2">
                             <label class="fw-bold" for="Descripcion">Descripción</label>
                             <textarea class="form-control" type="textarea" name="Descripcion" id="Descripcion" rows="5" placeholder="<%=obras[0].Descripcion%>"> <%=obras[0].Descripcion%></textarea> 

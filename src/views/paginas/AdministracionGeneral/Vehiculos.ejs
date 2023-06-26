@@ -538,7 +538,9 @@ setTimeout(() => {
         vehiculos.forEach(element => {
             nombreCamionetas.push(element.MarcaModelo + ' ' + element.Patente);
         });
-        // Obtén una referencia al elemento canvas
+        if(vehiculos.length<=0){}
+        else{
+            // Obtén una referencia al elemento canvas
     var ctx = document.getElementById('myChart').getContext('2d');
 // Crea el gráfico de barras
 var myChart = new Chart(ctx, {
@@ -561,7 +563,9 @@ var myChart = new Chart(ctx, {
       },
     },
   }
-});
+});     
+        }
+   
     }
   })
   $('#btnNuevoIngresoCombustible').click(function(){
