@@ -570,8 +570,7 @@ else{
 router.post('/Vehiculos/NuevoRegistro',(req,res)=>{
    
     var texto = req.body.Patente;
-var separador = "|";
-var partes = texto.split(separador);
+var partes = texto.split("|");
 
 var Patente=partes[0];
 Patente=Patente.trim();
