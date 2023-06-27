@@ -568,9 +568,18 @@ else{
 })
 })
 router.post('/Vehiculos/NuevoRegistro',(req,res)=>{
-    var Patente=req.body.Patente;
-    var sql='SELECT MarcaModelo FROM vehiculos WHERE Patente ="'+Patente+'" ;';
-    var MarcaModelo;
+   
+    var texto = req.body.Patente;
+var separador = "|";
+var partes = texto.split(separador);
+
+var Patente=partes[0];
+Patente=Patente.trim();
+var MarcaModelo = partes[1];
+MarcaModelo = MarcaModelo.trim();
+var Sobrenommbre;
+var idVehiculo;
+    var sql='SELECT idVehiculo FROM vehiculos WHERE Patente ="'+Patente+'" AND MarcaModelo ="'+MarcaModelo+'" ;';
 var Kilometros=req.body.Kilometros;
 var LitrosCargadosEnTanque=req.body.LitrosCargadosEnTanque;
 var FechaIngreso= req.body.FechaIngreso;
@@ -579,7 +588,7 @@ var FechaIngreso= req.body.FechaIngreso;
         connection.query(sql,(error,results)=>{
             if(error)console.log(error);
             else{
-                MarcaModelo=results[0].MarcaModelo;
+                idVehiculo=results[0].idVehiculo;
                 resolve();
             }
         }) 
@@ -593,7 +602,7 @@ var FechaIngreso= req.body.FechaIngreso;
         }
         FechaIngreso = FechaIngreso.replace('/','-');
         FechaIngreso = FechaIngreso.replace('/','-');
-        connection.query(sql,{Patente:Patente,Kms:Kilometros,MarcaModelo:MarcaModelo,LitrosCargadosEnTanque:LitrosCargadosEnTanque, Fecha:FechaIngreso},(error,results)=>{
+        connection.query(sql,{Patente:Patente,idVehiculo:idVehiculo,Kms:Kilometros,MarcaModelo:MarcaModelo,LitrosCargadosEnTanque:LitrosCargadosEnTanque, Fecha:FechaIngreso},(error,results)=>{
             if(error){
                 console.log(error);
         res.send('Error: No se pudo guardar el registro sistema.')

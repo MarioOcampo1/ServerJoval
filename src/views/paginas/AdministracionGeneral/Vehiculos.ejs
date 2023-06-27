@@ -114,7 +114,6 @@
             </div>
             <div class="modal-body">
                 
-                  <button id="btnNuevoIngresoCombustible" class="nav-btn-link btn btn-outline-primary mb-2" href="#" aria-current="page">Nuevo ingreso</button>
                 <div class="container border border-secondary" id="NuevoIngresoCombustible" style="display: none;">
                    <form action="Combustible/NuevoTicketCombustible" id="formNuevoTicketCombustible" method="post">
                     <h6 class="text-center">Carga de nuevo consumo</h6>
@@ -136,6 +135,8 @@
                                   </select>
                               </div>
                         </div>
+                        </div>
+                        <div class="row">
                         <div class="col">
                             <div class="mb-3">
                                 <label for="" class="form-label">Precio</label>
@@ -151,6 +152,8 @@
                               </div>
                              
                         </div>
+                        </div>
+                        <div class="row">
                         <div class="col">
                             <div class="mb-3">
                                 <label for="" class="form-label">Observaciones</label>
@@ -159,10 +162,12 @@
                                 <small id="helpId" class="form-text text-muted">Observaciones que desee agregar</small>
                               </div>
                               <button type="button" id="btnGuardarNuevoIngresoCombustible" class="btn btn-success">Guardar</button>
+                              <button type="button" id="btnSalirIngresoCombustible" class="btn btn-danger">Salir</button>
                               <p id="InfoSistemaCargaTicketCombustible" class="text-primary"></p>
-                            </form>
                         </div>
                     </div>
+                           
+                            </form>
                     
                   
                 </div>
@@ -211,6 +216,8 @@
             </div>
           
             <div class="table-responsive-md">
+            <button id="btnNuevoIngresoCombustible" class="nav-btn-link btn btn-sm btn-outline-primary mb-2" href="#" aria-current="page">Ingresar nueva compra</button>
+
                 <table id="tablaCombustible" class="table table-danger ">
                     <thead>
                         <tr>
@@ -312,9 +319,10 @@
                 <label for="" class="form-label">Patente</label>
                 <select class="form-select form-select-sm" name="Patente" id="" required>
                     <% vehiculos.forEach(vehiculo => { %>
-                        <option value="<%= vehiculo.Patente %>"><%= vehiculo.Patente %> - <%= vehiculo.MarcaModelo %> </option>                  
-                                         <% }) %> 
+                        <option value="<%= vehiculo.Patente %> | <%= vehiculo.MarcaModelo%>"><%= vehiculo.Patente %> - <%= vehiculo.MarcaModelo %> </option>                  
+                        <% }) %> 
                 </select>
+                
             </div>
             <div class="mb-3">
               <label for="" class="form-label">Fecha del ingreso</label>
@@ -426,9 +434,7 @@
     </div>
 </div>
 <script>
-    $('#btnCombustible').click(function(){
-        $('#ModalCombustible').modal('show');
-    })
+   
     $('#btnNuevoVehiculo').click(function(){
         $('#ModalNuevoVehiculo').modal('show');
     })
@@ -568,27 +574,7 @@ var myChart = new Chart(ctx, {
    
     }
   })
-  $('#btnNuevoIngresoCombustible').click(function(){
-    $('#NuevoIngresoCombustible').toggle();
-    $('#infoCombustible').toggle();
-  })
-  $('#btnGuardarNuevoIngresoCombustible').click(function(){
-    var thisform=$('#formNuevoTicketCombustible').serialize();
-        $.ajax({
-type:'POST',
-url:'/Combustible/NuevoTicketCombustible',
-data:thisform,
-success:function(respuestaServidor){
-$('#InfoSistemaCargaTicketCombustible').html(respuestaServidor);
-$('#NuevoIngresoCombustible').toggle();
-$('#infoCombustible').toggle();
-
-$('#formNuevoTicketCombustible')[0].reset();
-}
-
-        })
-  
-})
+ 
 
     $(document).ready(function(){
         $('#tablaCombustible').DataTable({
@@ -662,8 +648,38 @@ setTimeout(() => {
 
     }})
 })
+    //Seccion combustible
+    $('#btnCombustible').click(function(){
+        $('#ModalCombustible').modal('show');
+    })
+   
+    $('#btnNuevoIngresoCombustible').click(function(){
+    $('#NuevoIngresoCombustible').toggle();
+    $('#infoCombustible').toggle();
+  })
+  $('#btnSalirIngresoCombustible').click(function(){
+    $('#NuevoIngresoCombustible').toggle();
+    $('#infoCombustible').toggle();
+   
+  })
+  $('#btnGuardarNuevoIngresoCombustible').click(function(){
+    var thisform=$('#formNuevoTicketCombustible').serialize();
+        $.ajax({
+type:'POST',
+url:'/Combustible/NuevoTicketCombustible',
+data:thisform,
+success:function(respuestaServidor){
+$('#InfoSistemaCargaTicketCombustible').html(respuestaServidor);
+$('#NuevoIngresoCombustible').toggle();
+$('#infoCombustible').toggle();
+
+$('#formNuevoTicketCombustible')[0].reset();
+}
+
+        })
+  
+})
 
 </script>
-
 </body>
 </html>
