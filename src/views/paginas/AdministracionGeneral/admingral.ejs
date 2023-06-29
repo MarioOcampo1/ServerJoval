@@ -10,8 +10,31 @@
 </head>
 <body>
     <%- include('./partials/menusuperior.ejs'); %>
-    <h1 class="text-center">Bienvenido a Administración general</h1>
-    
-<img src="https://scontent.fmdz7-1.fna.fbcdn.net/v/t1.6435-9/118276293_3639459742732011_1631667518001446295_n.png?_nc_cat=108&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=Su9AUw-4WCMAX_NyWdO&tn=0uG7IDhxrSDRM1Ht&_nc_ht=scontent.fmdz7-1.fna&oh=00_AT_FQKUxGpENQ77htRaFTlbcKf3ApIzqUc7oHyzotPSuZQ&oe=62679B05" alt="Sitio web en construcción" class="img-fluid rounded mx-auto d-block">
+    <h1 class="text-center">Administración general</h1>
+<div class="" id="VencimientoSeguros"></div>
 </body>
+<script>
+$.ajax({
+    url:'/vencimientosDocGral/obtenerinfo',
+    method:'GET',
+    
+}).done(function(data){
+    var FechaActual = new Date();
+    var SegurosPorVencer=[];
+    data.forEach(element => {
+        var fechaAviso = new Date(element.DiasPrevioAviso);
+        if(fechaAviso<FechaActual){
+SegurosPorVencer.push(element);
+        }
+    });
+    console.log(SegurosPorVencer);
+    SegurosPorVencer.forEach(seguro=>{
+       
+        seguro.FechaVencimiento =  moment(seguro.FechaVencimiento).format("DD/MM/YYYY");
+        $('#VencimientoSeguros').append(''+seguro.Item+' se vencerá el día '+seguro.FechaVencimiento+'');
+    })
+    
+  
+})
+</script>
 </html>

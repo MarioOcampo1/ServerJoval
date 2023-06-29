@@ -652,3 +652,13 @@ if(error)console.log(error);
 else{ res.send("Se ha realizado la carga con exito.")}
 })
 })
+//Conductores
+router.get('/Conductores/datos',(req,res)=>{
+    var sql= 'SELECT * FROM conductores';
+    connection.query(sql,(error,results)=>{
+        if(error)console.log(error);
+        else{
+            res.send(results);
+        }
+    })
+})

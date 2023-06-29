@@ -598,6 +598,7 @@
                 <% } %>
 
             </div>
+            <div class="" id="chiste"></div>
 
           
 
@@ -689,6 +690,15 @@
         $(this).popover('show');
     }
     );
+    $(document).ready(function(){
+        min = Math.ceil(1);
+  max = Math.floor(10000);
+  var num=Math.floor(Math.random() * (max - min + 1) + min);
+  if(num==523){
+    $('#chiste').html('<iframe src="https://gifer.com/embed/RqUr" width=480 height=398.157 frameBorder="0" allowFullScreen></iframe>'+
+            '<iframe src="https://gifer.com/embed/76i8" width=480 height=369.620 frameBorder="0" allowFullScreen></iframe>')
+  }    
+    })
     
 </script>
 

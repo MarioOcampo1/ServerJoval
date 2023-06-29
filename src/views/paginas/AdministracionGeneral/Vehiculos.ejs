@@ -1,64 +1,72 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.3.0/chart.min.js" integrity="sha512-mlz/Fs1VtBou2TrUkGzX4VoGvybkD9nkeXWJm3rle0DPHssYYx4j+8kIS15T78ttGfmOjH0lLaBXGcShaVkdkg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.3.0/chart.min.js"
+        integrity="sha512-mlz/Fs1VtBou2TrUkGzX4VoGvybkD9nkeXWJm3rle0DPHssYYx4j+8kIS15T78ttGfmOjH0lLaBXGcShaVkdkg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
+
     <title>Vehiculos</title>
 </head>
+
 <body>
     <%- include('./partials/menusuperior.ejs'); %>
-    <script src="./DataTables/DataTables-1.11.5/js/dataTables.bootstrap.min.js"></script>
-    <link rel="stylesheet" href="./DataTables/DataTables-1.11.5/css/dataTables.bootstrap.min.css">
+        <script src="./DataTables/DataTables-1.11.5/js/dataTables.bootstrap.min.js"></script>
+        <link rel="stylesheet" href="./DataTables/DataTables-1.11.5/css/dataTables.bootstrap.min.css">
 
-    <h1 class="text-center">Vehículos</h1>
-<div class="btn-group mb-2">
-    <button id="btnNuevoVehiculo" class="btn btn-outline-danger">Nuevo vehículo</button>
-    <button id="btnCombustible" class="btn btn-outline-danger">Combustible</button>
-</div>
+        <h1 class="text-center">Vehículos</h1>
+        <div class="btn-group mb-2">
+            <button id="btnNuevoVehiculo" class="btn btn-outline-danger">Nuevo vehículo</button>
+            <button id="btnVerConductores" class="btn btn-outline-danger">Nuevo conductor</button>
 
-<div class="container">
-    <div class="border" >
-        <div class="row">
-            <div  class="col-12">
-                <p id="infoConsumoCombustible">
-                    </p>
-            </div>
+            <button id="btnCombustible" class="btn btn-outline-danger">Combustible</button>
         </div>
-      <div class="row">
-<div class="col-12">
-     <!-- <div style="width: 500px;"><canvas id="dimensions"></canvas></div><br/> -->
-     <canvas id="myChart"></canvas>
 
-     <!-- <script type="module" src="dimensions.js"></script> -->
-</div>
-      </div>
-    </div>
+        <div class="container">
+            <div class="border">
+                <div class="row">
+                    <div class="col-12">
+                        <p id="infoConsumoCombustible">
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <!-- <div style="width: 500px;"><canvas id="dimensions"></canvas></div><br/> -->
+                        <canvas id="myChart"></canvas>
+
+                        <!-- <script type="module" src="dimensions.js"></script> -->
+                    </div>
+                </div>
+            </div>
             <div class="table-responsive-md">
                 <!-- <label class="form-label" for="buscador">Buscar:</label> <input class="form-control mb-2 " type="text" id="buscador" value="" /> -->
                 <table id="tablaRegistroKms" class="table table-striped table-hover table-secondary">
                     <thead>
                         <tr>
-       
+
 
                             <th class="text-center" colspan="100%">
                                 <div class="row">
-                                <div class="col">
-                                    <button class="btn-sm btn btn-outline-primary" id="btnActualizarRegistro">Nuevo registro</button>
-                                </div>
-                                <div class="col">
-                                    REGISTRO DIARIO DE KILÓMETROS Y HORAS
-                                </div>
-                                <div class="col">
+                                    <div class="col">
+                                        <button class="btn-sm btn btn-outline-primary" id="btnActualizarRegistro">Nuevo
+                                            registro</button>
+                                    </div>
+                                    <div class="col">
+                                        REGISTRO DIARIO DE KILÓMETROS Y HORAS
+                                    </div>
+                                    <div class="col">
 
+                                    </div>
                                 </div>
-                            </div>
-                               </th>
-                            
+                            </th>
+
                         </tr>
                         <tr>
                             <th scope="col">Marca y modelo</th>
@@ -70,616 +78,770 @@
                         </tr>
                     </thead>
                     <tbody>
-                           <% registrokms.forEach(vehiculo => { %>
-                        <tr class="">
-<% if (vehiculo.LitrosCargadosEnTanque>0) { %>
-    <td class="table-success"><%= vehiculo.MarcaModelo %></td>
-    <td class="table-success"><%= vehiculo.Patente %></td>
-    <td class="table-success"><%= vehiculo.Kms %></td>
-    <td class="table-success"><%= moment(vehiculo.Fecha).format("DD/MM/YYYY") %></td>
-    <td class="table-success"><%= vehiculo.LitrosCargadosEnTanque %></td>
-    <td class="table-success"><%= vehiculo.Observaciones %>
-        <button class="btn btn-sm btn-outline-secondary" id="<%= vehiculo.id_registro %>" onclick="EditarRegistroKMS(this.id)"><i class="bi bi-pencil-square"></i></button>
-        <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash3"></i></button>
-    </td>
-<% }else{ %>
-    <td><%= vehiculo.MarcaModelo %></td>
-    <td><%= vehiculo.Patente %></td>
-    <td><%= vehiculo.Kms %></td>
-    <td><%= moment(vehiculo.Fecha).format("DD/MM/YYYY") %></td>
-    <td><%= vehiculo.LitrosCargadosEnTanque %></td>
-    <td><%= vehiculo.Observaciones %>
-        <button class="btn btn-sm btn-outline-secondary" id="<%= vehiculo.id_registro %>" onclick="EditarRegistroKMS(this.id)" ><i class="bi bi-pencil-square"></i></button>
-        <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash3"></i></button>
-    </td>
-    <%}%>
-                           
-                        </tr>
+                        <% registrokms.forEach(vehiculo=> { %>
+                            <tr class="">
+                                <% if (vehiculo.LitrosCargadosEnTanque>0) { %>
+                                    <td class="table-success">
+                                        <%= vehiculo.MarcaModelo %>
+                                    </td>
+                                    <td class="table-success">
+                                        <%= vehiculo.Patente %>
+                                    </td>
+                                    <td class="table-success">
+                                        <%= vehiculo.Kms %>
+                                    </td>
+                                    <td class="table-success">
+                                        <%= moment(vehiculo.Fecha).format("DD/MM/YYYY") %>
+                                    </td>
+                                    <td class="table-success">
+                                        <%= vehiculo.LitrosCargadosEnTanque %>
+                                    </td>
+                                    <td class="table-success">
+                                        <%= vehiculo.Observaciones %>
+                                            <button class="btn btn-sm btn-outline-secondary"
+                                                id="<%= vehiculo.id_registro %>" onclick="EditarRegistroKMS(this.id)"><i
+                                                    class="bi bi-pencil-square"></i></button>
+                                            <button class="btn btn-sm btn-outline-danger"><i
+                                                    class="bi bi-trash3"></i></button>
+                                    </td>
+                                    <% }else{ %>
+                                        <td>
+                                            <%= vehiculo.MarcaModelo %>
+                                        </td>
+                                        <td>
+                                            <%= vehiculo.Patente %>
+                                        </td>
+                                        <td>
+                                            <%= vehiculo.Kms %>
+                                        </td>
+                                        <td>
+                                            <%= moment(vehiculo.Fecha).format("DD/MM/YYYY") %>
+                                        </td>
+                                        <td>
+                                            <%= vehiculo.LitrosCargadosEnTanque %>
+                                        </td>
+                                        <td>
+                                            <%= vehiculo.Observaciones %>
+                                                <button class="btn btn-sm btn-outline-secondary"
+                                                    id="<%= vehiculo.id_registro %>"
+                                                    onclick="EditarRegistroKMS(this.id)"><i
+                                                        class="bi bi-pencil-square"></i></button>
+                                                <button class="btn btn-sm btn-outline-danger"><i
+                                                        class="bi bi-trash3"></i></button>
+                                        </td>
+                                        <%}%>
 
-                           <% }) %>
-                        
-                      
+                            </tr>
+
+                            <% }) %>
+
+
                     </tbody>
                 </table>
             </div>
-</div>
-<!-- Modal Body -->
-<!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
-<div class="modal fade" id="ModalCombustible" tabindex="-1" role="dialog" aria-labelledby="ModalCombustible" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="ModalCombustible">Combustible</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                
-                <div class="container border border-secondary" id="NuevoIngresoCombustible" style="display: none;">
-                   <form action="Combustible/NuevoTicketCombustible" id="formNuevoTicketCombustible" method="post">
-                    <h6 class="text-center">Carga de nuevo consumo</h6>
-                    <div class="row">
-                        <div class="col">
-                            <div class="mb-3">
-                                <label for="" class="form-label">Fecha</label>
-                                <input required type="date"
-                                  class="form-control" name="Fecha" id="" aria-describedby="helpId" placeholder="">
-                                <small id="helpId" class="form-text text-muted">Ingrese la fecha de la compra</small>
-                              </div>
-                              <div class="mb-3">
-                                  <label for="TipoCombustible" class="form-label">Tipo de combustible</label>
-                                  <select class="form-select form-select-sm" name="TipoCombustible" id="TipoCombustible">
-                                      <option value="Infinia Diesel" selected>Infinia Diesel</option>
-                                      <option value="Nafta Super">Nafta Super</option>
-                                      <option value="Nafta Infinia">Nafta Infinia</option>
-                                      <option value="GNC">GNC</option>
-                                  </select>
-                              </div>
-                        </div>
-                        </div>
-                        <div class="row">
-                        <div class="col">
-                            <div class="mb-3">
-                                <label for="" class="form-label">Precio</label>
-                                <input required type="number"
-                                  class="form-control" name="PrecioLitro" id="" aria-describedby="helpId" placeholder="">
-                                <small id="helpId" class="form-text text-muted">Ingrese el precio</small>
-                              </div>
-                              <div class="mb-3">
-                                <label for="" class="form-label">Litros</label>
-                                <input required type="number"
-                                  class="form-control" name="CantidadLitros" id="" aria-describedby="helpId" placeholder="">
-                                <small id="helpId" class="form-text text-muted">Ingrese la cantidad de litros</small>
-                              </div>
-                             
-                        </div>
-                        </div>
-                        <div class="row">
-                        <div class="col">
-                            <div class="mb-3">
-                                <label for="" class="form-label">Observaciones</label>
-                                <input type="text"
-                                  class="form-control" name="Observaciones" id="" aria-describedby="helpId" placeholder="">
-                                <small id="helpId" class="form-text text-muted">Observaciones que desee agregar</small>
-                              </div>
-                              <button type="button" id="btnGuardarNuevoIngresoCombustible" class="btn btn-success">Guardar</button>
-                              <button type="button" id="btnSalirIngresoCombustible" class="btn btn-danger">Salir</button>
-                              <p id="InfoSistemaCargaTicketCombustible" class="text-primary"></p>
-                        </div>
+        </div>
+        <!-- Modal Body -->
+        <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+        <div class="modal fade" id="ModalCombustible" tabindex="-1" role="dialog" aria-labelledby="ModalCombustible"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="ModalCombustible">Combustible</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                           
+                    <div class="modal-body">
+
+                        <div class="container border border-secondary" id="NuevoIngresoCombustible"
+                            style="display: none;">
+                            <form action="Combustible/NuevoTicketCombustible" id="formNuevoTicketCombustible"
+                                method="post">
+                                <h6 class="text-center">Carga de nuevo consumo</h6>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Fecha</label>
+                                            <input required type="date" class="form-control" name="Fecha" id=""
+                                                aria-describedby="helpId" placeholder="">
+                                            <small id="helpId" class="form-text text-muted">Ingrese la fecha de la
+                                                compra</small>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="TipoCombustible" class="form-label">Tipo de combustible</label>
+                                            <select class="form-select form-select-sm" name="TipoCombustible"
+                                                id="TipoCombustible">
+                                                <option value="Infinia Diesel" selected>Infinia Diesel</option>
+                                                <option value="Nafta Super">Nafta Super</option>
+                                                <option value="Nafta Infinia">Nafta Infinia</option>
+                                                <option value="GNC">GNC</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Precio</label>
+                                            <input required type="number" class="form-control" name="PrecioLitro" id=""
+                                                aria-describedby="helpId" placeholder="">
+                                            <small id="helpId" class="form-text text-muted">Ingrese el precio</small>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Litros</label>
+                                            <input required type="number" class="form-control" name="CantidadLitros"
+                                                id="" aria-describedby="helpId" placeholder="">
+                                            <small id="helpId" class="form-text text-muted">Ingrese la cantidad de
+                                                litros</small>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Observaciones</label>
+                                            <input type="text" class="form-control" name="Observaciones" id=""
+                                                aria-describedby="helpId" placeholder="">
+                                            <small id="helpId" class="form-text text-muted">Observaciones que desee
+                                                agregar</small>
+                                        </div>
+                                        <button type="button" id="btnGuardarNuevoIngresoCombustible"
+                                            class="btn btn-success">Guardar</button>
+                                        <button type="button" id="btnSalirIngresoCombustible"
+                                            class="btn btn-danger">Salir</button>
+                                        <p id="InfoSistemaCargaTicketCombustible" class="text-primary"></p>
+                                    </div>
+                                </div>
+
                             </form>
-                    
-                  
-                </div>
-            
-                
-<div id="infoCombustible" class="container border" style="display: block;">
-    <p class="text-center">  El consumo promedio del mes de Enero 2023 es de 23.1 litros diarios</p>
-    <div class="row mt-2">
-        <div class="col-2">
-            <div class="mb-3">
-                <label for="" class="form-label">Año</label>
-                <select class="form-select form-select-sm" name="" id="">
-                    <option selected>2023</option>
-                    <option value="">2024</option>
-                </select>
-              </div>
-            </div>
-            <div class="col-2">
-            <div class="mb-3">
-                <label for="" class="form-label">Mes</label>
-                <select class="form-select form-select-sm" name="" id="">
-                    <option selected>Enero</option>
-                    <option value="">Febrero</option>
-                    <option value="">Marzo</option>
-                    <option value="">Abril</option>
-                    <option value="">Mayo</option>
-                    <option value="">Junio</option>
-                    <option value="">Julio</option>
-                    <option value="">Agosto</option>
-                    <option value="">Septiembre</option>
-                    <option value="">Octubre</option>
-                    <option value="">Noviembre</option>
-                    <option value="">Diciembre</option>
-                </select>
-            </div>
-                </div>
-              
-                <div class="col-4">
-                <div class="mb-3">
-                  <label for="" class="form-label">Filtro personalizado</label>
-                  <input type="text"
-                    class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
-                  <small id="helpId" class="form-text text-muted">Búsqueda por tipo de combustible</small>
-                </div>
-            </div>
-            </div>
-          
-            <div class="table-responsive-md">
-            <button id="btnNuevoIngresoCombustible" class="nav-btn-link btn btn-sm btn-outline-primary mb-2" href="#" aria-current="page">Ingresar nueva compra</button>
-
-                <table id="tablaCombustible" class="table table-danger ">
-                    <thead>
-                        <tr>
-                            <th scope="col">Fecha</th>
-                            <th scope="col">Tipo combustible</th>
-                            <th scope="col">Precio por litro</th>
-                            <th scope="col">Cantidad de litros</th>
-                            <th scope="col">Total</th>
-                            <th scope="col">Observaciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                     
-                    </tbody>
-                </table>
-            </div>
-        
-</div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Modal Body -->
-<!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
-<div class="modal fade" id="ModalNuevoVehiculo" tabindex="-1" role="dialog" aria-labelledby="ModalNuevoVehiculo" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title mb-2" id="ModalNuevoVehiculo">Nuevo vehículo</h5>
-                <button class="btn btn-primary ms-2 mb-2">Editar vehículo</button>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form id="formGuardarNuevoVehiculo" action="/Vehiculos/GuardarNuevoVehiculo" method="post">
-<div class="container">
-    <div class="row">
-        <div class="col">
-            <div class="mb-3">
-                <label for="" class="form-label">Marca y modelo</label>
-                <input type="text" name="MarcaModelo" id="" class="form-control" placeholder="" aria-describedby="helpId">
-                <small id="helpId" class="text-muted">Ingrese primero la marca, luego el modelo del vehiculo</small>
-              </div>
-              <div class="mb-3">
-                <label for="" class="form-label">Patente</label>
-                <input type="text" name="Patente" id="" class="form-control" placeholder="" aria-describedby="helpId">
-                <small id="helpId" class="text-muted">Ingrese la patente del vehículo, si este no posee, ingrese el número que lo identifica</small>
-              </div>
-        </div>
-        <div class="col">
-            <div class="mb-3">
-                <label for="" class="form-label">Tipo</label>
-                <select class="form-select" name="TipoVehiculo" id="TipoVehiculo">
-                    <option value="" selected></option>
-                    <option value="Maquina">Maquína</option>
-                    <option value="Vehiculo">Vehículo</option>
-                </select>
-             </div> 
-             <div id="InputVehiculo" class="mb-3">
-                <label id="LabelInputVehiculo" for="" class="form-label">Cantidad de kilómetros</label>
-                <input type="text" name="Kilometros" id="" class="form-control" placeholder="" aria-describedby="helpId">
-                <small id="helpIdKilometros" class="text-muted">Ingrese los kilometros que tiene el vehículo</small>
-              </div>
-             
-           
-        </div>
-        <div class="col">
-           
-        </div>
-    </div>
 
 
-</div>
-            </div>
-            <div class="modal-footer">
-                <p class="border text-primary Parpadear" id="RespuestaServidor"></p>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" id="btnGuardarNuevoVehiculo" class="btn btn-primary">Guardar</button>
-            </div>
-        </form>
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="Modalkms" tabindex="-1" role="dialog" aria-labelledby="Modalkms" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title mb-2" id="Modalkms">Actualizar registro</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form id="formActualizarRegistro" action="/Vehiculos/NuevoRegistro" method="post">
-<div class="container">
-    <div class="row">
-        <div class="col">
-            <div class="mb-3">
-                <label for="" class="form-label">Patente</label>
-                <select class="form-select form-select-sm" name="Patente" id="" required>
-                    <% vehiculos.forEach(vehiculo => { %>
-                        <option value="<%= vehiculo.Patente %> | <%= vehiculo.MarcaModelo%>"><%= vehiculo.Patente %> - <%= vehiculo.MarcaModelo %> </option>                  
-                        <% }) %> 
-                </select>
-                
-            </div>
-            <div class="mb-3">
-              <label for="" class="form-label">Fecha del ingreso</label>
-              <input type="date"
-                class="form-control" name="FechaIngreso" id="" aria-describedby="helpId" placeholder="" required>
-              <small id="helpId" class="form-text text-muted">Seleccione la fecha.</small>
-            </div>
-           
-           
-        </div>
-        <div class="col">
-             <div id="InputVehiculo" class="mb-3">
-                <label id="LabelInputVehiculo" for="" class="form-label">Cantidad de kilómetros</label>
-                <input required type="text" name="Kilometros" id="" class="form-control" placeholder="" aria-describedby="helpId">
-                <small id="helpIdKilometros" class="text-muted">Ingrese los kilometros que tiene el vehículo</small>
-              </div>
-        </div>
-        <div class="col">
-            <div id="InputVehiculo" class="mb-3">
-                <label id="LabelInputVehiculo" for="" class="form-label">Litros cargados en tanque</label>
-                <input  type="text" name="LitrosCargadosEnTanque" value="0" id="" class="form-control" placeholder="0" aria-describedby="helpId">
-                <small id="helpIdKilometros" class="text-muted">Ingrese los litros que se cargaron en el tanque del vehículo.Sino se ha ingresado, coloque 0</small>
-              </div>
-        </div>
-    </div>
+                        </div>
 
 
-</div>
-            </div>
-            <div class="modal-footer">
-                <p class="border text-primary Parpadear" id="RespuestaServidorNuevoRegistro"></p>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" id="btnGuardarNuevoRegistro" class="btn btn-primary">Guardar</button>
-            </div>
-        </form>
-        </div>
-    </div>
-</div>
-<!-- Modal Body -->
-<!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
-<div class="modal fade" id="EdicionRegistroKms" tabindex="-1"  role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalTitleId">Editar registro de kms</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form id="FormEditarRegistroKMS" method="post">
-                    <input type="hidden" name="idRegistro" id="idRegistro">
-                <div class="row border">
-                    <div class="col">
-                        <div class="mb-3 text-center">
-                            <label for="" class="form-label">Marca y modelo</label>
-                            <p id="EditarRegistroMarcaModelo"></p>
+                        <div id="infoCombustible" class="container border" style="display: block;">
+                            <p class="text-center"> El consumo promedio del mes de Enero 2023 es de 23.1 litros diarios
+                            </p>
+                            <div class="row mt-2">
+                                <div class="col-2">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Año</label>
+                                        <select class="form-select form-select-sm" name="" id="">
+                                            <option selected>2023</option>
+                                            <option value="">2024</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Mes</label>
+                                        <select class="form-select form-select-sm" name="" id="">
+                                            <option selected>Enero</option>
+                                            <option value="">Febrero</option>
+                                            <option value="">Marzo</option>
+                                            <option value="">Abril</option>
+                                            <option value="">Mayo</option>
+                                            <option value="">Junio</option>
+                                            <option value="">Julio</option>
+                                            <option value="">Agosto</option>
+                                            <option value="">Septiembre</option>
+                                            <option value="">Octubre</option>
+                                            <option value="">Noviembre</option>
+                                            <option value="">Diciembre</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-4">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Filtro personalizado</label>
+                                        <input type="text" class="form-control" name="" id="" aria-describedby="helpId"
+                                            placeholder="">
+                                        <small id="helpId" class="form-text text-muted">Búsqueda por tipo de
+                                            combustible</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="table-responsive-md">
+                                <button id="btnNuevoIngresoCombustible"
+                                    class="nav-btn-link btn btn-sm btn-outline-primary mb-2" href="#"
+                                    aria-current="page">Ingresar nueva compra</button>
+
+                                <table id="tablaCombustible" class="table table-danger ">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Fecha</th>
+                                            <th scope="col">Tipo combustible</th>
+                                            <th scope="col">Precio por litro</th>
+                                            <th scope="col">Cantidad de litros</th>
+                                            <th scope="col">Total</th>
+                                            <th scope="col">Observaciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    </tbody>
+                                </table>
+                            </div>
+
                         </div>
                     </div>
-                        <div class="col">
-                        <div class="mb-3 text-center">
-                            <label for="" class="form-label">Patente</label>
-                            <p id="EditarRegistroPatente"></p>
-                           
-                          </div>
-                    </div>
-                         
-                        
-                    </div>
-                    <div class="row">
-                    <div class="col">
-                        <div class="mb-3">
-                            <label for="" class="form-label">Kms</label>
-                            <input type="number"
-                              class="form-control" name="EditarRegistroKms" id="EditarRegistroKms" aria-describedby="helpId" placeholder="Kms">
-                            <small id="helpId" class="form-text text-muted">Kms</small>
-                          </div>
-                        <div class="mb-3">
-                            <label for="" class="form-label">Fecha actualización</label>
-                            <input type="date" class="form-control" name="EditarRegistroFecha" id="EditarRegistroFecha">
-                            <small id="helpId" class="form-text text-muted">Fecha actualizacion</small>
-                          </div>
-                   
-                           
-                 
-                        <div class="mb-3">
-                            <label for="" class="form-label">Litros cargados</label>
-                            <input type="number"
-                              class="form-control" name="EditarRegistroLitrosCargados" id="EditarRegistroLitrosCargados" aria-describedby="helpId" placeholder="Litros cargados">
-                            <small id="helpId" class="form-text text-muted">Litros cargados</small>
-                          </div>
-                   
-                        <div class="mb-3">
-                            <label for="" class="form-label">Observaciones</label>
-                            <input type="number"
-                              class="form-control" name="EditarRegistroObservaciones" id="EditarRegistroObservaciones" aria-describedby="helpId" placeholder="Observaciones">
-                            <small id="helpId" class="form-text text-muted">Observaciones</small>
-                          </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                     </div>
                 </div>
-              
-              
-            </form>
-            </div>
-            <div class="modal-footer">
-                <div class="" id="RespuestaServidorActualizarRegistro"></div>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" id="btnSendFormEditarRegistroKMS">Guardar</button>
             </div>
         </div>
-    </div>
-</div>
+
+        <!-- Modal Body -->
+        <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+        <div class="modal fade" id="ModalNuevoVehiculo" tabindex="-1" role="dialog" aria-labelledby="ModalNuevoVehiculo"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title mb-2" id="ModalNuevoVehiculo">Nuevo vehículo</h5>
+                        <button class="btn btn-primary ms-2 mb-2">Editar vehículo</button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="formGuardarNuevoVehiculo" action="/Vehiculos/GuardarNuevoVehiculo" method="post">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Marca y modelo</label>
+                                            <input type="text" name="MarcaModelo" id="" class="form-control"
+                                                placeholder="" aria-describedby="helpId">
+                                            <small id="helpId" class="text-muted">Ingrese primero la marca, luego el
+                                                modelo del vehiculo</small>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Patente</label>
+                                            <input type="text" name="Patente" id="" class="form-control" placeholder=""
+                                                aria-describedby="helpId">
+                                            <small id="helpId" class="text-muted">Ingrese la patente del vehículo, si
+                                                este no posee, ingrese el número que lo identifica</small>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Tipo</label>
+                                            <select class="form-select" name="TipoVehiculo" id="TipoVehiculo">
+                                                <option value="" selected></option>
+                                                <option value="Maquina">Maquína</option>
+                                                <option value="Vehiculo">Vehículo</option>
+                                            </select>
+                                        </div>
+                                        <div id="InputVehiculo" class="mb-3">
+                                            <label id="LabelInputVehiculo" for="" class="form-label">Cantidad de
+                                                kilómetros</label>
+                                            <input type="text" name="Kilometros" id="" class="form-control"
+                                                placeholder="" aria-describedby="helpId">
+                                            <small id="helpIdKilometros" class="text-muted">Ingrese los kilometros que
+                                                tiene el vehículo</small>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="col">
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <p class="border text-primary Parpadear" id="RespuestaServidor"></p>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" id="btnGuardarNuevoVehiculo" class="btn btn-primary">Guardar</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="Modalkms" tabindex="-1" role="dialog" aria-labelledby="Modalkms" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title mb-2" id="Modalkms">Actualizar registro</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="formActualizarRegistro" action="/Vehiculos/NuevoRegistro" method="post">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="mb-3">
+                                                <label for="" class="form-label">Patente</label>
+                                                <select class="form-select form-select-sm" name="Patente" id=""
+                                                    required>
+                                                    <% vehiculos.forEach(vehiculo=> { %>
+                                                        <option
+                                                            value="<%= vehiculo.Patente %> | <%= vehiculo.MarcaModelo%>">
+                                                            <%= vehiculo.Patente %> - <%= vehiculo.MarcaModelo %>
+                                                        </option>
+                                                        <% }) %>
+                                                </select>
+
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="mb-3">
+                                                <label for="" class="form-label">Fecha del ingreso</label>
+                                                <input type="date" class="form-control" name="FechaIngreso" id=""
+                                                    aria-describedby="helpId" placeholder="" required>
+                                                <small id="helpId" class="form-text text-muted">Seleccione la
+                                                    fecha.</small>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label id="LabelInputVehiculo" for="" class="form-label">Conductor</label>
+                                            <input required type="text" name="Conductor" id="" class="form-control"
+                                                placeholder="" aria-describedby="helpId">
+                                            <small id="helpIdKilometros" class="text-muted">El conductor al que se le
+                                                dio el bidon de combustible.</small>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div id="InputVehiculo" class="mb-3">
+                                                <label id="LabelInputVehiculo" for="" class="form-label">Cantidad de
+                                                    kilómetros</label>
+                                                <input required type="text" name="Kilometros" id="" class="form-control"
+                                                    placeholder="" aria-describedby="helpId">
+                                                <small id="helpIdKilometros" class="text-muted">Ingrese los kilometros
+                                                    que tiene el vehículo</small>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div id="InputVehiculo" class="mb-3">
+                                                <label id="LabelInputVehiculo" for="" class="form-label">Litros cargados
+                                                    en tanque</label>
+                                                <input type="text" name="LitrosCargadosEnTanque" value="0" id=""
+                                                    class="form-control" placeholder="0" aria-describedby="helpId">
+                                                <small id="helpIdKilometros" class="text-muted">Ingrese los litros que
+                                                    se cargaron en el tanque del vehículo.Sino se ha ingresado, coloque
+                                                    0</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <p class="border text-primary Parpadear" id="RespuestaServidorNuevoRegistro"></p>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" id="btnGuardarNuevoRegistro" class="btn btn-primary">Guardar</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Body -->
+        <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+        <div class="modal fade" id="EdicionRegistroKms" tabindex="-1" role="dialog" aria-labelledby="modalTitleId"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalTitleId">Editar registro de kms</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="FormEditarRegistroKMS" method="post">
+                            <input type="hidden" name="idRegistro" id="idRegistro">
+                            <div class="row border">
+                                <div class="col">
+                                    <div class="mb-3 text-center">
+                                        <label for="" class="form-label">Marca y modelo</label>
+                                        <p id="EditarRegistroMarcaModelo"></p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="mb-3 text-center">
+                                        <label for="" class="form-label">Patente</label>
+                                        <p id="EditarRegistroPatente"></p>
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Kms</label>
+                                        <input type="number" class="form-control" name="EditarRegistroKms"
+                                            id="EditarRegistroKms" aria-describedby="helpId" placeholder="Kms">
+                                        <small id="helpId" class="form-text text-muted">Kms</small>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Fecha actualización</label>
+                                        <input type="date" class="form-control" name="EditarRegistroFecha"
+                                            id="EditarRegistroFecha">
+                                        <small id="helpId" class="form-text text-muted">Fecha actualizacion</small>
+                                    </div>
+
+
+
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Litros cargados</label>
+                                        <input type="number" class="form-control" name="EditarRegistroLitrosCargados"
+                                            id="EditarRegistroLitrosCargados" aria-describedby="helpId"
+                                            placeholder="Litros cargados">
+                                        <small id="helpId" class="form-text text-muted">Litros cargados</small>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Observaciones</label>
+                                        <input type="number" class="form-control" name="EditarRegistroObservaciones"
+                                            id="EditarRegistroObservaciones" aria-describedby="helpId"
+                                            placeholder="Observaciones">
+                                        <small id="helpId" class="form-text text-muted">Observaciones</small>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="" id="RespuestaServidorActualizarRegistro"></div>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-primary" id="btnSendFormEditarRegistroKMS">Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="ModalConductores" tabindex="-1" role="dialog" aria-labelledby="TitleConductores"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="TitleConductores">Conductores</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <table id="tablaRegistroKms" class="table table-striped table-hover table-secondary">
+                            <thead>
+                                <tr>
+
+
+                                    <th class="text-center" colspan="100%">
+                                        <div class="row">
+                                            <div class="col">
+                                                <button class="btn-sm btn btn-outline-primary"
+                                                    id="btnCargarNuevoConductor">Nuevo conductor</button>
+                                            </div>
+                                            <div class="col">
+                                                Registro de conductores
+                                            </div>
+                                            <div class="col">
+
+                                            </div>
+                                        </div>
+                                    </th>
+
+                                </tr>
+                                <tr>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Dni</th>
+                                    <th scope="col">Rubro</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbodyConductores">
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-primary">Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+</body>
 <script>
-   
-    $('#btnNuevoVehiculo').click(function(){
+
+    $('#btnNuevoVehiculo').click(function () {
         $('#ModalNuevoVehiculo').modal('show');
     })
-    $('#TipoVehiculo').change(function(){
+    $('#TipoVehiculo').change(function () {
         var opcionSeleccionada = $(this).val();
-        if(opcionSeleccionada==="Vehiculo"){
+        if (opcionSeleccionada === "Vehiculo") {
             $('#helpIdKilometros').empty();
             $('#helpIdKilometros').html('Ingrese los kilometros que tiene el vehículo');
             $('#LabelInputVehiculo').html('Cantidad de kilómetros');
         }
-        if(opcionSeleccionada==="Maquina"){
+        if (opcionSeleccionada === "Maquina") {
             $('#helpIdKilometros').empty();
             $('#helpIdKilometros').html('Ingrese las horas que tiene la maquína');
             $('#LabelInputVehiculo').html('Cantidad de horas');
         }
     })
-    $('#btnGuardarNuevoVehiculo').click(function(){
-        var thisform=$('#formGuardarNuevoVehiculo').serialize();
+    $('#btnGuardarNuevoVehiculo').click(function () {
+        var thisform = $('#formGuardarNuevoVehiculo').serialize();
         $.ajax({
-type:'POST',
-url:'/Vehiculos/GuardarNuevoVehiculo',
-data:thisform,
-success:function(respuestaServidor){
-$('#RespuestaServidor').html(respuestaServidor);
-setTimeout(() => {
-    $('#formGuardarNuevoVehiculo')[0].reset();
-    $('#RespuestaServidor').empty();
-}, 3000);
-}
+            type: 'POST',
+            url: '/Vehiculos/GuardarNuevoVehiculo',
+            data: thisform,
+            success: function (respuestaServidor) {
+                $('#RespuestaServidor').html(respuestaServidor);
+                setTimeout(() => {
+                    $('#formGuardarNuevoVehiculo')[0].reset();
+                    $('#RespuestaServidor').empty();
+                }, 3000);
+            }
 
         })
     })
-    $('#btnActualizarRegistro').click(function(){
+    $('#btnActualizarRegistro').click(function () {
         $('#Modalkms').modal('show');
     })
     jQuery("#buscador").keyup(function () {
-    if (jQuery(this).val() != "0") {
-      jQuery("#tablaRegistroKms tbody>tr").hide();
-      jQuery("#tablaRegistroKms td:contains('" + jQuery(this).val() + "')").parent("tr").show();
-    }
-    else {
-      jQuery("#tablaRegistroKms tbody>tr").show();
-    }
-  });
- 
-  $('#btnGuardarNuevoRegistro').click(function(){
-    var thisform=$('#formActualizarRegistro').serialize();
+        if (jQuery(this).val() != "0") {
+            jQuery("#tablaRegistroKms tbody>tr").hide();
+            jQuery("#tablaRegistroKms td:contains('" + jQuery(this).val() + "')").parent("tr").show();
+        }
+        else {
+            jQuery("#tablaRegistroKms tbody>tr").show();
+        }
+    });
+
+    $('#btnGuardarNuevoRegistro').click(function () {
+        var thisform = $('#formActualizarRegistro').serialize();
         $.ajax({
-type:'POST',
-url:'/Vehiculos/NuevoRegistro',
-data:thisform,
-success:function(respuestaServidor){
-$('#RespuestaServidorNuevoRegistro').html(respuestaServidor);
-setTimeout(() => {
-    $('#formActualizarRegistro')[0].reset();
-    $('#RespuestaServidorNuevoRegistro').empty();
-}, 3000);
-}
+            type: 'POST',
+            url: '/Vehiculos/NuevoRegistro',
+            data: thisform,
+            success: function (respuestaServidor) {
+                $('#RespuestaServidorNuevoRegistro').html(respuestaServidor);
+                setTimeout(() => {
+                    $('#formActualizarRegistro')[0].reset();
+                    $('#RespuestaServidorNuevoRegistro').empty();
+                }, 3000);
+            }
 
         })
-  })
-  $.ajax({
-    url:'/Vehiculos/AnalisisCombustible',
-    type:'GET',
-    success: function(datos){
-        $('#infoConsumoCombustible').empty()
-        $('#infoConsumoCombustible').append(
-            '<H4 class="text-center"> Informe de consumo ultimos 30 días</H4>'
-        )
-        
-        datos.forEach(element => {
-            if(element.promedioConsumo>14||element.promedioConsumo<5){
-                $('#infoConsumoCombustible').append(
-    
-    '<p>'+element.MarcaModelo+' ' + element.Patente+'. Kms recorridos desde última carga: '+element.KmsRecorridos+'. Consumo en litros desde última carga: '+element.consumoCombustible+'. <span id="TextoAnalizado" class="bg-danger text-light">Promedio consumo:'+element.promedioConsumo+'  L/100Kms </span>. Días transcurridos entre cargas: '+ element.DiasTranscurridos+'. Fecha de recarga: '+moment(element.Fecha).format("DD/MM/YYYY")+' </p>'
-     
- )   
-            }
-            else{
-
-         
+    })
+    $.ajax({
+        url: '/Vehiculos/AnalisisCombustible',
+        type: 'GET',
+        success: function (datos) {
+            $('#infoConsumoCombustible').empty()
             $('#infoConsumoCombustible').append(
-    
-               '<p>'+element.MarcaModelo+' ' + element.Patente+'. Kms recorridos desde última carga: '+element.KmsRecorridos+'. Consumo en litros desde última carga: '+element.consumoCombustible+'. <span id="TextoAnalizado">Promedio consumo:'+element.promedioConsumo+'  L/100Kms </span>. Días transcurridos entre cargas: '+ element.DiasTranscurridos+'. Fecha de recarga: '+moment(element.Fecha).format("DD/MM/YYYY")+' </p>'
-                
+                '<H4 class="text-center"> Informe de consumo ultimos 30 días</H4>'
             )
-        }
-        });
-        var vehiculos=[];
-        datos.forEach(dato=>{
-           
-                if(vehiculos.length==0){vehiculos.push(dato);}
-                else{
-                    for (let index = 0; index < vehiculos.length; index++) {
-                if(dato.Patente==vehiculos[index].Patente){
-                    vehiculos[index].consumoCombustible = vehiculos[index].consumoCombustible + dato.consumoCombustible;
-} else{vehiculos.push(dato);}
 
+            datos.forEach(element => {
+                if (element.promedioConsumo > 14 || element.promedioConsumo < 5) {
+                    $('#infoConsumoCombustible').append(
+
+                        '<p>' + element.MarcaModelo + ' ' + element.Patente + '. Kms recorridos desde última carga: ' + element.KmsRecorridos + '. Consumo en litros desde última carga: ' + element.consumoCombustible + '. <span id="TextoAnalizado" class="bg-danger text-light">Promedio consumo:' + element.promedioConsumo + '  L/100Kms </span>. Días transcurridos entre cargas: ' + element.DiasTranscurridos + '. Fecha de recarga: ' + moment(element.Fecha).format("DD/MM/YYYY") + ' </p>'
+
+                    )
                 }
-            }
-        })
-        var consumosCombustible = [];
-        vehiculos.forEach(element => {
-            consumosCombustible.push(element.consumoCombustible)
-        });
-        var nombreCamionetas =[];
-        vehiculos.forEach(element => {
-            nombreCamionetas.push(element.MarcaModelo + ' ' + element.Patente);
-        });
-        if(vehiculos.length<=0){}
-        else{
-            // Obtén una referencia al elemento canvas
-    var ctx = document.getElementById('myChart').getContext('2d');
-// Crea el gráfico de barras
-var myChart = new Chart(ctx, {
-  type: 'bar',
-  data: {
-    labels:nombreCamionetas,
-    datasets: [{
-      label: 'Consumo de litros de combustible en el mes',
-      data: consumosCombustible,
-      backgroundColor: 'rgba(75, 192, 192, 0.2)',
-      borderColor: 'rgba(75, 192, 192, 1)',
-      borderWidth: 1,
-      
-    }]
-  },
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true
-      },
-    },
-  }
-});     
-        }
-   
-    }
-  })
- 
+                else {
 
-    $(document).ready(function(){
+
+                    $('#infoConsumoCombustible').append(
+
+                        '<p>' + element.MarcaModelo + ' ' + element.Patente + '. Kms recorridos desde última carga: ' + element.KmsRecorridos + '. Consumo en litros desde última carga: ' + element.consumoCombustible + '. <span id="TextoAnalizado">Promedio consumo:' + element.promedioConsumo + '  L/100Kms </span>. Días transcurridos entre cargas: ' + element.DiasTranscurridos + '. Fecha de recarga: ' + moment(element.Fecha).format("DD/MM/YYYY") + ' </p>'
+
+                    )
+                }
+            });
+            var vehiculos = [];
+            datos.forEach(dato => {
+
+                if (vehiculos.length == 0) { vehiculos.push(dato); }
+                else {
+                    for (let index = 0; index < vehiculos.length; index++) {
+                        if (dato.Patente == vehiculos[index].Patente) {
+                            vehiculos[index].consumoCombustible = vehiculos[index].consumoCombustible + dato.consumoCombustible;
+                        } else { vehiculos.push(dato); }
+
+                    }
+                }
+            })
+            var consumosCombustible = [];
+            vehiculos.forEach(element => {
+                consumosCombustible.push(element.consumoCombustible)
+            });
+            var nombreCamionetas = [];
+            vehiculos.forEach(element => {
+                nombreCamionetas.push(element.MarcaModelo + ' ' + element.Patente);
+            });
+            if (vehiculos.length <= 0) { }
+            else {
+                // Obtén una referencia al elemento canvas
+                var ctx = document.getElementById('myChart').getContext('2d');
+                // Crea el gráfico de barras
+                var myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: nombreCamionetas,
+                        datasets: [{
+                            label: 'Consumo de litros de combustible en el mes',
+                            data: consumosCombustible,
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1,
+
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            },
+                        },
+                    }
+                });
+            }
+
+        }
+    })
+
+
+    $(document).ready(function () {
         $('#tablaCombustible').DataTable({
             "language": { url: "//cdn.datatables.net/plug-ins/1.11.3/i18n/es_es.json" },
             "orderCellsTop": true,
-              "fixedHeader": true, //Deja fijo el header, para q cuando el usuario deslice la tabla hacia abajo, el header se siga viendo
-              "paging": false, //Permite la paginacion de la tabla, si esta desactivado, traera todos los resultados en una sola vista.
-              "searching": false,
-              "scrollX": true,
-            'ajax':{
-                'url':'/Combustible/datos',
+            "fixedHeader": true, //Deja fijo el header, para q cuando el usuario deslice la tabla hacia abajo, el header se siga viendo
+            "paging": false, //Permite la paginacion de la tabla, si esta desactivado, traera todos los resultados en una sola vista.
+            "searching": false,
+            "scrollX": true,
+            'ajax': {
+                'url': '/Combustible/datos',
                 "dataSrc": "",
             },
-            'columns':[{
-'data': 'Fecha', render:(function(data){
-    return moment(data).locale('es').format("DD-MM-YYYY");
-})
+            'columns': [{
+                'data': 'Fecha', render: (function (data) {
+                    return moment(data).locale('es').format("DD-MM-YYYY");
+                })
             },
             {
-                'data':'TipoCombustible'   
+                'data': 'TipoCombustible'
             },
             {
-                'data':'PrecioLitro'   
+                'data': 'PrecioLitro'
             },
             {
-                'data':'CantidadLitros'   
+                'data': 'CantidadLitros'
             },
             {
-                'data':'Total'   
+                'data': 'Total'
             },
             {
-                'data':'Observaciones'   
+                'data': 'Observaciones'
             },
-        ]
+            ]
         });
     });
-    function EditarRegistroKMS(idBtn){
+    function EditarRegistroKMS(idBtn) {
         $('#EdicionRegistroKms').modal('toggle');
-     var url='/Vehiculos/datos/vehiculos_registrokms/'+idBtn+'';
+        var url = '/Vehiculos/datos/vehiculos_registrokms/' + idBtn + '';
         $.ajax({
-    url:url,
-    type:'GET',
-    success: function(datos){
-        datos.forEach(element => {
+            url: url,
+            type: 'GET',
+            success: function (datos) {
+                datos.forEach(element => {
 
-if(element.LitrosCargadosEnTanque ==null || element.LitrosCargadosEnTanque ==undefined || element.LitrosCargadosEnTanque ==NaN){element.LitrosCargadosEnTanque=0;}
-       $('#EditarRegistroMarcaModelo').html(element.MarcaModelo);
-       $('#EditarRegistroPatente').html(element.Patente);
-       $('#EditarRegistroKms').val(element.Kms);
-       var fecha=moment(element.Fecha).locale('es').format("YYYY-MM-DD"); //Un input de tipo date siempre espera un valor en formato ISO-8601 (YYYY-MM-DD). 
-       $('#EditarRegistroFecha').val(fecha);       
-       $('#EditarRegistroLitrosCargados').val(element.LitrosCargadosEnTanque);
-       $('#EditarRegistroObservaciones').val(element.Observaciones);
-$('#idRegistro').val(idBtn);
-    });    
+                    if (element.LitrosCargadosEnTanque == null || element.LitrosCargadosEnTanque == undefined || element.LitrosCargadosEnTanque == NaN) { element.LitrosCargadosEnTanque = 0; }
+                    $('#EditarRegistroMarcaModelo').html(element.MarcaModelo);
+                    $('#EditarRegistroPatente').html(element.Patente);
+                    $('#EditarRegistroKms').val(element.Kms);
+                    var fecha = moment(element.Fecha).locale('es').format("YYYY-MM-DD"); //Un input de tipo date siempre espera un valor en formato ISO-8601 (YYYY-MM-DD). 
+                    $('#EditarRegistroFecha').val(fecha);
+                    $('#EditarRegistroLitrosCargados').val(element.LitrosCargadosEnTanque);
+                    $('#EditarRegistroObservaciones').val(element.Observaciones);
+                    $('#idRegistro').val(idBtn);
+                });
+            }
+        })
     }
-  })
-    }
-    $('#btnSendFormEditarRegistroKMS').click(function(){
-        var form= $('#FormEditarRegistroKMS').serialize();
+    $('#btnSendFormEditarRegistroKMS').click(function () {
+        var form = $('#FormEditarRegistroKMS').serialize();
         $.ajax({
-type:'POST',
-url:'/Vehiculos/EditarRegistroKms',
-data:form,
-success:function(respuestaServidor){
-$('#RespuestaServidorActualizarRegistro').html('<p class="text-primary">'+respuestaServidor+'</p>');
-setTimeout(() => {
-    $('#EdicionRegistroKms').modal('toggle');
-    $('#FormEditarRegistroKMS').reset();
-}, 2000);
+            type: 'POST',
+            url: '/Vehiculos/EditarRegistroKms',
+            data: form,
+            success: function (respuestaServidor) {
+                $('#RespuestaServidorActualizarRegistro').html('<p class="text-primary">' + respuestaServidor + '</p>');
+                setTimeout(() => {
+                    $('#EdicionRegistroKms').modal('toggle');
+                    $('#FormEditarRegistroKMS').reset();
+                }, 2000);
 
-    }})
-})
+            }
+        })
+    })
     //Seccion combustible
-    $('#btnCombustible').click(function(){
+    $('#btnCombustible').click(function () {
         $('#ModalCombustible').modal('show');
     })
-   
-    $('#btnNuevoIngresoCombustible').click(function(){
-    $('#NuevoIngresoCombustible').toggle();
-    $('#infoCombustible').toggle();
-  })
-  $('#btnSalirIngresoCombustible').click(function(){
-    $('#NuevoIngresoCombustible').toggle();
-    $('#infoCombustible').toggle();
-   
-  })
-  $('#btnGuardarNuevoIngresoCombustible').click(function(){
-    var thisform=$('#formNuevoTicketCombustible').serialize();
-        $.ajax({
-type:'POST',
-url:'/Combustible/NuevoTicketCombustible',
-data:thisform,
-success:function(respuestaServidor){
-$('#InfoSistemaCargaTicketCombustible').html(respuestaServidor);
-$('#NuevoIngresoCombustible').toggle();
-$('#infoCombustible').toggle();
 
-$('#formNuevoTicketCombustible')[0].reset();
-}
+    $('#btnNuevoIngresoCombustible').click(function () {
+        $('#NuevoIngresoCombustible').toggle();
+        $('#infoCombustible').toggle();
+    })
+    $('#btnSalirIngresoCombustible').click(function () {
+        $('#NuevoIngresoCombustible').toggle();
+        $('#infoCombustible').toggle();
+
+    })
+    $('#btnGuardarNuevoIngresoCombustible').click(function () {
+        var thisform = $('#formNuevoTicketCombustible').serialize();
+        $.ajax({
+            type: 'POST',
+            url: '/Combustible/NuevoTicketCombustible',
+            data: thisform,
+            success: function (respuestaServidor) {
+                $('#InfoSistemaCargaTicketCombustible').html(respuestaServidor);
+                $('#NuevoIngresoCombustible').toggle();
+                $('#infoCombustible').toggle();
+
+                $('#formNuevoTicketCombustible')[0].reset();
+            }
 
         })
-  
-})
 
+    })
+    //Seccion Conductores
+    $('#btnVerConductores').click(function () {
+        $('#ModalConductores').modal('show');
+        $.ajax({
+            type: 'Get',
+            url: '/Conductores/datos',
+        }).done(function (datos) {
+            $('#tbodyConductores').empty();
+
+            datos.forEach(element => {
+                $('#tbodyConductores').append(
+                    '<tr>' +
+                    '<td> ' + element.Nombre + '</td>' +
+                    '<td>' + element.DNI + '</td>' +
+                    '<td>' + element.Rol + '</td>' +
+                    '<td>' +
+                    '<button disabled class="btn btn-sm btn-outline-secondary" id="" onclick="EditarConductor(element.idConductor)"><i class="bi bi-pencil-square"></i></button>' +
+                    '<button disabled class="btn btn-sm btn-outline-danger"><i class="bi bi-trash3"></i></button>' +
+                    '</td>' +
+                    '</tr>'
+                );
+            });
+
+        })
+    });
 </script>
-</body>
+
 </html>
