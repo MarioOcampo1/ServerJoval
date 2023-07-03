@@ -16,11 +16,13 @@ const morgan = require('morgan');
 const { Router } = require('express');
 const { log } = require('console');
 const router = Router();
+const cors= require('cors');
 module.exports = router;
 //Middlewares //Son funciones que se van ejecutando antes de que llegue a las rutas.
 app.use(morgan('dev'));
 app.use(express.urlencoded({extended: true }));
 app.use(express.json());
+app.use(cors());
 app.use(cookieParser('secreto'));
 app.use(session({
     secret: 'misecreto',

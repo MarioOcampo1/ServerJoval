@@ -3,6 +3,7 @@ const { Router } = require('express');
 const cookieParser = require('cookie-parser')
 const session = require('express-session')
 const passport = require('passport');
+const react= require('react');
 const PassportLocal = require('passport-local').Strategy;
 const router = Router();
 const moment = require('moment');
