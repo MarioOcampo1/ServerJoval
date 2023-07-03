@@ -7,6 +7,7 @@ const session = require("express-session");
 const passport = require("passport");
 const PassportLocal = require("passport-local").Strategy;
 const router = Router();
+const cors = require('cors');
 module.exports = router;
 const moment = require("moment");
 var xlsx = require("xlsx");
