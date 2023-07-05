@@ -3704,7 +3704,7 @@ connection.query(sql,(error,results)=>{
   else{
     NombreObra=results[0].Nombre;
     sql='INSERT INTO historialdecambios set?';
-connection.query(sql,[{Nombre_sub:NombreObra,EtapaTarea_sub:EtapaSeleccionada,Tarea:subtarea,Fecha_Tarea_sub:fechaHoy, ResponsableDeTarea:ResponsableTarea,Tarea_Realizada_sub:TareaRealizada,Fecha_Proxima_Tarea_sub:FechaLimiteTarea,Proxima_Tarea_sub:ProximaTarea, id_obra:idObra}],(error,results)=>{
+connection.query(sql,[{Nombre_sub:NombreObra,EtapaTarea_sub:EtapaSeleccionada,Tarea:subtarea,Fecha_Tarea_sub:fechaHoy, ResponsableDeTarea:ResponsableTarea,Tarea_Realizada_sub:TareaRealizada,Fecha_Proxima_Tarea_sub:FechaLimiteTarea,Proxima_Tarea_sub:ProximaTarea,Si_NO_TareaRealizada:"N", id_obra:idObra}],(error,results)=>{
   if(error)console.log(error);
   else{
     res.send('Tarea cargada con exito en el historial. Recuerde cargar los checks en la carpeta.');
