@@ -94,7 +94,6 @@
     var mostrandoDadasDeBaja= false;
    jQuery("#BuscadorTabla").keyup(function(){
     if( jQuery(this).val() != "0"){
-     
         jQuery("#tablaAlbacaucion tbody>tr").hide();
         jQuery("#tablaAlbacaucion td:contiene-palabra('" + jQuery(this).val() + "')").parent("tr").show();
         jQuery("#tablaAlbacaucion td:contiene-palabra('Dada de baja')").parent("tr").hide();
@@ -102,7 +101,6 @@
     else{
         jQuery("#tablaAlbacaucion tbody>tr").show();
         jQuery("#tablaAlbacaucion td:contiene-palabra('Dada de baja')").parent("tr").hide();
-
     }
 });
 jQuery.extend(jQuery.expr[":"], 
