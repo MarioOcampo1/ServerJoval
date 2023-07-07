@@ -614,7 +614,6 @@
                     $('#RespuestaServidor').empty();
                 }, 3000);
             }
-
         })
     })
     $('#btnActualizarRegistro').click(function () {
@@ -629,7 +628,6 @@
             jQuery("#tablaRegistroKms tbody>tr").show();
         }
     });
-
     $('#btnGuardarNuevoRegistro').click(function () {
         var thisform = $('#formActualizarRegistro').serialize();
         $.ajax({
@@ -654,35 +652,38 @@
             $('#infoConsumoCombustible').append(
                 '<H4 class="text-center"> Informe de consumo ultimos 30 días</H4>'
             )
-
             datos.forEach(element => {
                 if (element.promedioConsumo > 14 || element.promedioConsumo < 5) {
                     $('#infoConsumoCombustible').append(
-
                         '<p>' + element.MarcaModelo + ' ' + element.Patente + '. Kms recorridos desde última carga: ' + element.KmsRecorridos + '. Consumo en litros desde última carga: ' + element.consumoCombustible + '. <span id="TextoAnalizado" class="bg-danger text-light">Promedio consumo:' + element.promedioConsumo + '  L/100Kms </span>. Días transcurridos entre cargas: ' + element.DiasTranscurridos + '. Fecha de recarga: ' + moment(element.Fecha).format("DD/MM/YYYY") + ' </p>'
-
                     )
                 }
                 else {
-
-
                     $('#infoConsumoCombustible').append(
-
                         '<p>' + element.MarcaModelo + ' ' + element.Patente + '. Kms recorridos desde última carga: ' + element.KmsRecorridos + '. Consumo en litros desde última carga: ' + element.consumoCombustible + '. <span id="TextoAnalizado">Promedio consumo:' + element.promedioConsumo + '  L/100Kms </span>. Días transcurridos entre cargas: ' + element.DiasTranscurridos + '. Fecha de recarga: ' + moment(element.Fecha).format("DD/MM/YYYY") + ' </p>'
-
                     )
                 }
             });
             var vehiculos = [];
-            datos.forEach(dato => {
-
+            datos.forEach(dato => { //Se realiza la carga de los vehiculos y al mismo tiempo, la suma de litros de combustible consumido, para luego ser mostrada en el grafico de barras.
                 if (vehiculos.length == 0) { vehiculos.push(dato); }
                 else {
+                    var VehiculoLocalizadoEnArreglo=false;
                     for (let index = 0; index < vehiculos.length; index++) {
                         if (dato.Patente == vehiculos[index].Patente) {
-                            vehiculos[index].consumoCombustible = vehiculos[index].consumoCombustible + dato.consumoCombustible;
-                        } else { vehiculos.push(dato); }
-
+                            VehiculoLocalizadoEnArreglo=true;
+                            
+                                if(vehiculos[index].consumoCombustible>=0){
+                                    vehiculos[index].consumoCombustible=vehiculos[index].consumoCombustible + dato.consumoCombustible;
+                                }else{
+                                    vehiculos[index].consumoCombustible = dato.consumoCombustible;
+                                }
+                            
+                        }
+                        
+                    }
+                    if(VehiculoLocalizadoEnArreglo==false){
+                        vehiculos.push(dato);
                     }
                 }
             })
@@ -696,6 +697,7 @@
             });
             if (vehiculos.length <= 0) { }
             else {
+                console.log(vehiculos);
                 // Obtén una referencia al elemento canvas
                 var ctx = document.getElementById('myChart').getContext('2d');
                 // Crea el gráfico de barras
