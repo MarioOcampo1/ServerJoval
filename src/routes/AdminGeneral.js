@@ -422,6 +422,7 @@ router.post('/DarBajaPolizaAlbacaucion/:id', (req, res) => {
 })
 //Vehiculos
 router.get('/Vehiculos',(req,res)=>{
+    if (req.isAuthenticated()) {
 var sql='SELECT * FROM vehiculos';
 var vehiculos;
     connection.query(sql,(error,resultado)=>{
@@ -432,7 +433,10 @@ var vehiculos;
         })
         })
 
-    
+    }
+    else {
+        res.redirect('/');
+    }
 })
 router.get('/Vehiculos/datos/:datoBusqueda/:idregistro',(req,res)=>{
     var idregistro=req.params.idregistro;
