@@ -545,7 +545,7 @@ var TipoVehiculo=req.body.TipoVehiculo;
 var Kilometros=req.body.Kilometros;
 var Patente=req.body.Patente;
 var sql='INSERT INTO vehiculos SET?';
-connection.query(sql,{Patente:Patente,MarcaModelo:MarcaModelo,Kms:Kilometros},(error,results)=>{
+connection.query(sql,{Patente:Patente,MarcaModelo:MarcaModelo,Kms:Kilometros, Tipo:TipoVehiculo},(error,results)=>{
 if(error){
     console.log(error);
     res.send('Hubo un error, no se pudo guardar el vehículo en el sistema.')
