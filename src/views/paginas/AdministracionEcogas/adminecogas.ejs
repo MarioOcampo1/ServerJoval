@@ -161,7 +161,7 @@
             var diff = vencimientoAnalizado.DiasPreviosAviso - fechaHoy;
             var fechaVencimiento=moment(vencimientoAnalizado.FechaVencimiento).locale('es').format("DD-MM-YYYY");
             diff= diff/(1000*60*60*24);
-            if(diff<10){
+            if(diff<0){
               $('#btnVencimientoAdministracion').addClass('parpadearEnRojo');
               $('#VencimientosCollapse').append('<i class="text-danger">'+vencimientoAnalizado.Item+'</i> vence el '+fechaVencimiento+' <a name="" id="" class="btn-sm btn-outline-dark" href="/VencimientosDocGral" role="button"><i class="bi bi-pencil-square"></i></a> | ')
             }

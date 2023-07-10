@@ -18,11 +18,11 @@
 <div class="table-responsive-sm">
     <table class="table table-sm table-info align-middle text-center">
         <thead>
-            <tr>
-                <th scope="col">Item</th>
-                <th scope="col">Fecha último cambio</th>
-                <th scope="col">Fecha de vencimiento</th>
-                <th scope="col">Fecha para notificación</th>
+            <tr class="sticky-top">
+                <th scope="col ">Item</th>
+                <th scope="col ">Fecha último cambio</th>
+                <th scope="col ">Fecha de vencimiento</th>
+                <th scope="col ">Fecha para notificación</th>
                 <th></th>
             </tr>
         </thead>
@@ -32,7 +32,7 @@
                 <td scope="row"><%=vencimiento.Item%></td>
                 <td><%=moment(vencimiento.FechaActualizacion).format('DD/MM/YYYY')%></td>
                 <td id="Vencimiento"><%=moment(vencimiento.FechaVencimiento).format('DD/MM/YYYY')%></td>
-                <td class="avisoVencimientoitem"  id="<%=vencimiento.DiasPreviosAviso%>"><%=moment(vencimiento.DiasPreviosAviso).format('DD/MM/YYYY')%></td>
+                <td class="avisoVencimientoitem" name="<%=vencimiento.Item%>"  id="<%=vencimiento.DiasPreviosAviso%>"><%=moment(vencimiento.DiasPreviosAviso).format('DD/MM/YYYY')%></td>
                 <td><button class="btn btn-lg btn-success btnConfigVencimiento" id="" onclick="configVencimiento('<%=vencimiento.id%>','<%=vencimiento.Item%>','<%=moment(vencimiento.FechaActualizacion).format('DD/MM/YYYY')%>','<%=moment(vencimiento.FechaVencimiento).format('DD/MM/YYYY')%>' )"><i class="bi bi-gear-fill"></i></button>
                     <button id="BtnDelete" class="btn btn-lg btn-danger" onclick="BorrarItem('<%=vencimiento.id%>')"><i class="bi bi-trash"></i></button>
                 </td>
@@ -164,8 +164,7 @@ Swal.fire({
 
 }
   $(document).ready(function(){
-    var FechaActual = new Date();
-
+    const FechaActual = new Date();
     $('.avisoVencimientoitem').each(function() {
     var contenido = $(this).text();
     var item = $(this).attr('id');
@@ -173,7 +172,7 @@ Swal.fire({
     var diff = item - FechaActual;
     diff= diff/(1000*60*60*24);
     diff= parseInt(diff);
-    if(diff<0)
+    if(diff<1)
     {  
         $(this).closest('tr').addClass('parpadearEnRojo ');
        
