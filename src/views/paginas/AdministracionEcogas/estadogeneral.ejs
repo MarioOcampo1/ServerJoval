@@ -89,7 +89,7 @@
               <button id="Caos" class="btn text-light">Caos</button>
             </th>
             <th id="EncabezadoFin" class="SeccionTabla text-center m-0 text-light bg-dark" value="6" colspan="2">
-              <button id="FinObras" class="btn text-light">Fin de obra</button>
+              <button id="FinObra" class="btn text-light">Fin de obra</button>
             </th>
           </tr>
           <tr id="Segundotr" class="m-0 p-0">
@@ -619,8 +619,7 @@
     $('.Obras').hide();
     $('.CAOS ').hide();
     $('.FinObra').show();
-    let palabra = "Finalizada";
-    jQuery("#EstadoGeneral tbody>tr").show();
+    let palabra = "Caos";
     jQuery("#EstadoGeneral td:contiene-palabra('" + palabra + "')").parent("tr").show();
 
   })
