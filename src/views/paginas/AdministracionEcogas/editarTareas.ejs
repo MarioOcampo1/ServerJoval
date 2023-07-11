@@ -397,7 +397,6 @@
                                                                                 aria-describedby="Fecha_limite">
 
                                                                         </div>
-
                                                                     </div>
                                                                     <div class="row-p-1">
                                                                         <div class="input-group mt-1">
@@ -408,10 +407,7 @@
                                                                     </div>
                                                                     <div class="row">
                                                                         <div class="input-group-sm pt-2">
-
                                                                         </div>
-
-
                                                                     </div>
                                                                 </div>
 
@@ -434,18 +430,13 @@
                     </div>
 
                 </form>
-
+   <!--Finalizada-->
                 <form action="/actFinalCarpEcogas/<%=user.id%>" id="actFinalCarpEcogas" method="post">
                     <input type="checkbox" value="Finalizada" checked hidden name="EtapaTarea">
                     <input type="hidden" name="Nombre" id="Nombre" value="<%= user.Nombre%>">
                     <input type="hidden" name="id" id="id" value="<%= user.id%>">
-
-
-                    <!--Finalizada-->
-
-                    <!-- Modal -->
-                    <div class="modal fade" id="ModalFinalizacion" tabindex="-1" role="dialog" aria-labelledby="Caos"
-                        aria-hidden=" true">
+                 
+                    <div class="modal fade" id="ModalFinalizacion" tabindex="-1" role="dialog" aria-labelledby="Caos"aria-hidden=" true">
                         <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -457,7 +448,130 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="container">
-                                        <div class="card p-3 border-secondary">
+                                        <div class="card p-3 mb-4 border-secondary">
+                                            <%if(tareasgenerales.FinObra=="ok"||tareasgenerales.FinObra=="Ok"){%>
+                                                <div class="card-header bg-success text-white">
+                                                    <%} else{%>
+                                                        <div class="card-header bg-primary text-white">
+                                                            <%}%>
+                                                                <label for="RecepcionesEntes" class="mx-auto"
+                                                                    onclick="$('#RecepcionesEntesBody').css('display','block')">
+                                                                    Recepciones de entes</label>
+                                                        </div>
+                                                        <div id="RecepcionesEntesBody" class="card-body" style="display: none;">
+                                                            <div class="row">
+                                                                <div class="col-6">
+                                                                    <label for="RecepcionEcogas">Recepción Ecogas</label>
+                                                                    <select class="form-control" id="RecepcionEcogas"
+                                                                        name="RecepcionEcogas"
+                                                                        value="<%= tareasporcarpeta.RecepcionEcogas%>"
+                                                                        placeholder="<%= tareasporcarpeta.RecepcionEcogas%>">
+                                                                        <option hidden
+                                                                            value="<%=tareasporcarpeta.RecepcionEcogas%>"
+                                                                            selected>
+                                                                            <%=tareasporcarpeta.RecepcionEcogas%>
+                                                                        </option>
+                                                                        <option value="Sin presentar"
+                                                                            onclick="llamarAFormularioEditarTareas('RecepcionEcogas');">
+                                                                            Sin presentar
+                                                                        </option>
+                                                                        <option value="ProvisoriaRecibida"
+                                                                            onclick="llamarAFormularioEditarTareas('RecepcionEcogas');">
+                                                                            Provisoria Recibida
+                                                                        </option>
+                                                                        <option value="DefinitivaRecibida"
+                                                                        onclick="llamarAFormularioEditarTareas('RecepcionEcogas');">
+                                                                        Definitiva Recibida
+                                                                    </option>
+                                                                    </select>
+                                                                    <label for="RecepcionMunicipal">Recepción Municipal</label>
+                                                                    <select class="form-control" id="RecepcionMunicipal"
+                                                                        name="RecepcionMunicipal"
+                                                                        value="<%= tareasporcarpeta.RecepcionMunicipal%>"
+                                                                        placeholder="<%= tareasporcarpeta.RecepcionMunicipal%>">
+                                                                        <option hidden
+                                                                            value="<%=tareasporcarpeta.RecepcionMunicipal%>"
+                                                                            selected>
+                                                                            <%=tareasporcarpeta.RecepcionMunicipal%>
+                                                                        </option>
+                                                                        <option value="Sin presentar"
+                                                                            onclick="llamarAFormularioEditarTareas('RecepcionMunicipal');">
+                                                                            Sin presentar
+                                                                        </option>
+                                                                        <option value="ProvisoriaRecibida"
+                                                                            onclick="llamarAFormularioEditarTareas('RecepcionMunicipal');">
+                                                                            Provisoria Recibida
+                                                                        </option>
+                                                                        <option value="DefinitivaRecibida"
+                                                                        onclick="llamarAFormularioEditarTareas('RecepcionMunicipal');">
+                                                                        Definitiva Recibida
+                                                                    </option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="col-6 border p-1 bg-dark text-white formularioEditarTareasALlenar"id="form1RecepcionMunicipal" style="display: none;">
+                                                                    <input type="hidden" name="Tareas"
+                                                                        value="Finalización de carpeta" checked hidden>
+                                                                    <div class="row ">
+                                                                        <div class="col">
+                                                                            <span>
+                                                                                Responsable de la Tarea:
+                                                                            </span>
+                                                                            <select name="ResponsableDeTarea" id="">
+                                                                                <option value="" selected></option>
+                                                                                <%usuariosregistrados.forEach((usuario)=>
+                                                                                    {%>
+                                                                                    <option value="<%=usuario.Nombre%>">
+                                                                                        <%=usuario.Nombre%>
+                                                                                    </option>
+                                                                                    <%})%>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row pb-1 ">
+                                                                        <div class="input-group-sm">
+                                                                            <span class="">Tarea Realizada:</span>
+                                                                            <input class="form-control" type="text"
+                                                                                name="TareaRealizada"
+                                                                                id="TareaRealizada"
+                                                                                placeholder="Ingrese ultima tarea realizada"
+                                                                                aria-describedby="TareaRealizada">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row pb-1">
+                                                                        <div class="input-group-sm">
+                                                                            <span class="">Proxima Tarea:</span>
+                                                                            <input class="form-control" type="text"
+                                                                                name="ProximaTarea" id="ProximaTarea"
+                                                                                placeholder="Ingrese la proxima tarea"
+                                                                                aria-describedby="ProximaTarea">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row pb-1">
+                                                                        <div class="input-group-sm">
+                                                                            <span class="">Fecha Limite:</span>
+                                                                            <input class="form-control" type="date"
+                                                                                name="Fecha_limite" id="Fecha_limite"
+                                                                                placeholder="Ingrese ultima tarea realizada"
+                                                                                aria-describedby="Fecha_limite">
+
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="row-p-1">
+                                                                        <div class="input-group mt-1">
+                                                                            <input type="file" class="form-control"
+                                                                                placeholder="Archivo"
+                                                                                aria-label="Archivo">
+                                                                        </div>
+                                                                    </div>
+</div>
+
+
+                                                                </div>
+                                                            </div>
+                                                </div>
+                                        </div>
+                                        <div class="card p-3 mb-4 border-secondary">
                                             <%if(tareasgenerales.FinObra=="ok"||tareasgenerales.FinObra=="Ok"){%>
                                                 <div class="card-header bg-success text-white">
                                                     <%} else{%>
@@ -581,6 +695,7 @@
                                                 </div>
                                         </div>
                                     </div>
+                                </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal"
                                             onclick="CerrarModal()">Cerrar</button>
@@ -588,7 +703,7 @@
                                             form="actFinalCarpEcogas">Guardar
                                             Cambios</button>
                                     </div>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>

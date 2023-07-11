@@ -425,11 +425,18 @@ router.get('/Vehiculos',(req,res)=>{
     if (req.isAuthenticated()) {
 var sql='SELECT * FROM vehiculos';
 var vehiculos;
+var conductores;
+
     connection.query(sql,(error,resultado)=>{
         vehiculos=resultado;
+        sql='SELECT * FROM conductores';
+        connection.query(sql,(error,result)=>{
+console.log(error);
+conductores=result;
+        })
         sql= 'SELECT * FROM vehiculos_registrokms ORDER BY Fecha DESC';
         connection.query(sql,(error,results)=>{
-            res.render('./paginas/AdministracionGeneral/Vehiculos.ejs',{registrokms:results, vehiculos, moment:moment})
+            res.render('./paginas/AdministracionGeneral/Vehiculos.ejs',{registrokms:results, vehiculos, conductores,moment:moment})
         })
         })
 
@@ -576,7 +583,7 @@ router.post('/Vehiculos/NuevoRegistro',(req,res)=>{
    
     var texto = req.body.Patente;
 var partes = texto.split("|");
-
+var conductores=req.body.Conductor;
 var Patente=partes[0];
 Patente=Patente.trim();
 var MarcaModelo = partes[1];
@@ -606,7 +613,7 @@ var FechaIngreso= req.body.FechaIngreso;
         }
         FechaIngreso = FechaIngreso.replace('/','-');
         FechaIngreso = FechaIngreso.replace('/','-');
-        connection.query(sql,{Patente:Patente,idVehiculo:idVehiculo,Kms:Kilometros,MarcaModelo:MarcaModelo,LitrosCargadosEnTanque:LitrosCargadosEnTanque, Fecha:FechaIngreso},(error,results)=>{
+        connection.query(sql,{Patente:Patente,Conductor:conductores,idVehiculo:idVehiculo,Kms:Kilometros,MarcaModelo:MarcaModelo,LitrosCargadosEnTanque:LitrosCargadosEnTanque, Fecha:FechaIngreso},(error,results)=>{
             if(error){
                 console.log(error);
         res.send('Error: No se pudo guardar el registro sistema.')

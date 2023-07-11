@@ -70,6 +70,7 @@
                         <tr>
                             <th scope="col">Marca y modelo</th>
                             <th scope="col">Patente</th>
+                            <th scope="col">Conductor</th>
                             <th scope="col">Ubicación</th>
                             <th scope="col">KMS/Horas</th>
                             <th scope="col">Fecha actualización</th>
@@ -87,6 +88,10 @@
                                     <td class="table-success">
                                         <%= vehiculo.Patente %>
                                     </td>
+                                    <td class="table-success">    
+                                            <%= vehiculo.Conductor %> 
+                                    </td>
+                                    
                                     <td class="table-success">
                                         <%= vehiculo.Ubicacion %>
                                     </td>
@@ -114,6 +119,9 @@
                                         <td>
                                             <%= vehiculo.Patente %>
                                         </td>
+                                        <td>    
+                                            <%= vehiculo.Conductor %> 
+                                    </td>
                                         <td class="">
                                             <%= vehiculo.Ubicacion %>
                                         </td>
@@ -406,8 +414,11 @@
                                         </div>
                                         <div class="row">
                                             <label id="LabelInputVehiculo" for="" class="form-label">Conductor</label>
-                                            <input required type="text" name="Conductor" id="" class="form-control"
-                                                placeholder="" aria-describedby="helpId">
+                                          <select name="Conductor" id="">
+                                            <% conductores.forEach(element => { %>
+                                             <option value="<%=element.Nombre%>"><%=element.Nombre%></option>
+                                            <% }) %>
+                                          </select>
                                             <small id="helpIdKilometros" class="text-muted">El conductor al que se le
                                                 dio el bidon de combustible.</small>
                                         </div>

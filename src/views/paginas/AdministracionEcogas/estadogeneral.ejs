@@ -13,49 +13,10 @@
 </head>
 
 <body>
-
   <%- include('./partials/menusuperior.ejs')%>
     <h1 class="text-center">Estado General</h1>
-    <div class="row">
-      <div class="col-4">
-        <div class="btn-group" role="group" aria-label="Basic example">
-          <button class="btn btn-outline-secondary"
-            onclick="document.getElementById('ObrasFinalizadas').style.display = 'block' ; ">Finalizadas</button>
-          <button class="btn btn-outline-secondary bi bi-printer" onclick="ImprimirEstado()"></button>
-        </div>
-      </div>
-    </div>
-    <div class="modal" id="ObrasFinalizadas" tabindex="-1" style="display:none;">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="text-center modal-header ">
-            <h5 class="modal-title text-center">Carpetas Finalizadas</h5>
-            <button type="button" class="btn-close"
-              onclick="document.getElementById('ObrasFinalizadas').style.display = 'none' ; "
-              aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <% results.forEach((carpeta)=>{ %>
-              <% if(carpeta.Estado=="Finalizada" ){%>
-                <a href="/editarTareas/<%=carpeta.id%>" class="link-dark">
-                  <%=carpeta.Nombre%>
-                </a> -
-
-                <%}})%>
-
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary"
-              onclick="document.getElementById('ObrasFinalizadas').style.display = 'none' ; ">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="table-responsive-sm ">
-
-      <label for="buscador">Buscar:</label> <input type="text" id="buscador" value="" />
-
+    <div class="container-fluid ">
+      <label for="buscador">Buscar:</label> <input type="text" id="buscador" value="" />  
       <div class="btn-group p-3 btn-group-sm " role="group" aria-label="Basic example">
         <button id="Preliminar" type="button" class="btn btn-primary">Prel</button>
         <button id="1P" type="button" class="btn btn-primary">1ra Parte</button>
@@ -64,10 +25,14 @@
         <button id="Caos" type="button" class="btn btn-primary">Caos</button>
         <button id="FinObra" type="button" class="btn btn-primary">Fin de obra</button>
         <button id="LimpiarFiltros" type="button" class="btn btn-secondary">Limpiar Filtros</button>
+        
       </div>
-      <table id="EstadoGeneral"
-        class="table table-striped table-bordered border-secondary text-center table-sm compact table-condensed">
-        <thead>
+      <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+        <button id="btnVerFinalizadas" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalObrasFinalizadas">Finalizadas</button>
+      </div>
+      <table id="EstadoGeneral" class="table table-striped table-bordered border-secondary text-center table-sm compact table-condensed">
+        <thead class="p-0">
+       
           <tr class="m-0 p-0">
             <th id="DatosCarpeta" class="text-center m-0 text-light bg-dark p-0" value="0" colspan="3">
               <button class="btn text-light">Datos de carpeta</button>
@@ -186,7 +151,6 @@
           </tr>
         </thead>
         <tbody>
-
           <% if(results){%>
             <% results.forEach((clientes)=>{ %>
               <%if(clientes.Estado!="Finalizada"){%>
@@ -351,62 +315,60 @@
                   <td id="td" class="p-0 FinObra">
                     <%=clientes.HabilitacionObra%>
                   </td>
-
-               
                 </tr>
-                <% }});%>
-
-
-        </tbody>
-
-      </table>
-
-    </div>
-
-    </div>
-    </div>
-    <%}%>
-      <!-- Modal Body -->
-      <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
-      <div class="modal fade" id="ModalOpcionesDeImpresion" tabindex="-1" data-bs-backdrop="static"
-        data-bs-keyboard="false" role="dialog" aria-labelledby="ModalOpcionesDeImpresion" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="modalTitleId">Impresión de estado</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body text-center">
-              Seleccione el estado que desea imprimir
-              <br>
-              <div class="btn-group " role="group" aria-label="Opciones de impresion">
-                <button type="button" class="btn btn-primary">Preliminar</button>
-                <button type="button" class="btn btn-primary">1ra Parte</button>
-                <button type="button" class="btn btn-primary">2da Parte</button>
-                <button type="button" class="btn btn-primary">Obras</button>
-                <button type="button" class="btn btn-primary">Caos</button>
-                <button type="button" class="btn btn-info">Todos los estados</button>
-
-
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-          </div>
+                <% }})};%>
+                
+</tbody>
+</table>
+</div>
+<div class="modal fade" id="modalObrasFinalizadas" tabindex="1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalTitleId">Finalizadas</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="table-responsive-sm">
+          <table id="tableFinalizadas" class="table tabler-bordered">
+            <thead>
+              <tr class="sticky-top">
+                <th scope="col">Nombre</th>
+                <th scope="col">N° carpeta</th>
+                <th scope="col">Codigo finalizada</th>
+                <th scope="col">Editar</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% results.forEach((carpeta2)=>{ %>
+                <% if(carpeta2.Estado=="Finalizada"){%>
+                <tr class="">
+                  <td scope="row"><%=carpeta2.Nombre%></td>
+                  <td><%=carpeta2.NCarpeta%></td>
+                  <td><%=carpeta2.CodigoFinalizadas%></td>
+                  <td>  <a href="/editarTareas/<%=carpeta2.id%>" class="bi bi-pencil-square">
+                  </a> 
+  </td>
+                </tr>
+              
+                <%}})%>
+            </tbody>
+          </table>
+          
         </div>
       </div>
-
-
-
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+   
+      </div>
+    </div>
+  </div>
+</div>
 </body>
-
-<!-- <script type="text/javascript" src="/main.js"></script> -->
 <script>
   $(function () {
     $('[data-bs-toggle="popover"]').popover()
   })
-
   jQuery("#buscador").keyup(function () {
     if (jQuery(this).val() != "0") {
       jQuery("#EstadoGeneral tbody>tr").hide();
@@ -455,7 +417,7 @@
         $(this).addClass('align-middle bg-warning ');
       }
     })
-
+    jQuery("#Obras").trigger('click');
   })
   jQuery("#Preliminar").click(function () {
     //Primero Dibuja todo
@@ -651,13 +613,9 @@
     $('.FinObra').show();
     
   })
-
-  function ImprimirEstado() {
-    $("#ModalOpcionesDeImpresion").modal('show');
-    $("#ModalOpcionesDeImpresion").modal('toggle');
-
-  }
-
+$('#btnVerFinalizadas').click(function(){
+  $('#modalObrasFinalizadas').modal('show');
+})
 </script>
 
 </html>
