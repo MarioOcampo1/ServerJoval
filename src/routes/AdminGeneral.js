@@ -607,8 +607,8 @@ router.post('/Vehiculos/NuevoRegistro', (req, res) => {
     var Sobrenommbre;
     var idVehiculo;
     var sql = 'SELECT idVehiculo FROM vehiculos WHERE Patente ="' + Patente + '" AND MarcaModelo ="' + MarcaModelo + '" ;';
-    var Kilometros = req.body.Kilometros;
-    var LitrosCargadosEnTanque = req.body.LitrosCargadosEnTanque;
+    var Kilometros = Math.trunc(Number(req.body.Kilometros)); //Se debe de redondear los numeros ingresados por el usuario, debido a que la base de datos trabaja con enteros.
+    var LitrosCargadosEnTanque = Math.trunc(Number(req.body.LitrosCargadosEnTanque));//Se debe de redondear los numeros ingresados por el usuario, debido a que la base de datos trabaja con enteros.
     var FechaIngreso = req.body.FechaIngreso;
 
     new Promise((resolve, reject) => {
