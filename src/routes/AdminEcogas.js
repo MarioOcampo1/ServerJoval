@@ -136,8 +136,7 @@ router.get("/adminecogas/TablaGeneral", (req, res) => {
 router.get("/estadogeneral", (req, res) => {
   if (req.isAuthenticated()) {
     res.locals.moment = moment;
-    const sql =
-      "SELECT e.CodigoVigentes,e.CodigoFinalizadas, c.id, c.Nombre,c.NCarpeta,c.Ubicacion ,c.Comitente ,c.Estado,d.* ,b.DocumentacionTerreno ,b.DocumentacionSociedad ,b.DocumentacionContractual  ,b.Comercial ,b.Tecnica ,b.PermisosEspeciales ,b.DocumentacionObra  ,b.Seguridad,b.Interferencias, b.Permisos, b.PlanDeTrabajo, b.Matriculas, b.Ambiente, b.NotaCumplimentoNormativas, b.DDJJNAG153, b.Avisos, b.DocumentacionInspeccion, b.ComunicacionObras, b.ActasFinalesEcogas, b.PlanosyCroquis, b.ConformeEntidades, b.PruebaHermeticidad, b.InformesFinales, b.PresentacionFinal,  b.HabilitacionObra, b.DocumentacionAmbiental  from obras_tareasgenerales b , codificacioncarpetas e, obras c, adminecogas_tareas_por_carpeta d WHERE b.Nombre = c.Nombre AND b.Nombre = e.Nombre AND d.Nombre = e.Nombre";
+    const sql ="SELECT e.CodigoVigentes,e.CodigoFinalizadas, c.id, c.Nombre,c.NCarpeta,c.Ubicacion ,c.Comitente ,c.Estado,d.* ,b.DocumentacionTerreno ,b.DocumentacionSociedad ,b.DocumentacionContractual  ,b.Comercial ,b.Tecnica ,b.PermisosEspeciales ,b.DocumentacionObra  ,b.Seguridad,b.Interferencias, b.Permisos, b.PlanDeTrabajo, b.Matriculas, b.Ambiente, b.NotaCumplimentoNormativas, b.DDJJNAG153, b.Avisos, b.DocumentacionInspeccion, b.ComunicacionObras, b.ActasFinalesEcogas, b.PlanosyCroquis, b.ConformeEntidades, b.PruebaHermeticidad, b.InformesFinales, b.PresentacionFinal,  b.HabilitacionObra, b.DocumentacionAmbiental  from obras_tareasgenerales b , codificacioncarpetas e, obras c, adminecogas_tareas_por_carpeta d WHERE b.Nombre = c.Nombre AND b.Nombre = e.Nombre AND d.Nombre = e.Nombre";
     connection.query(sql, (error, results) => {
       if (error) console.log(error);
       if (results.length > 0) {

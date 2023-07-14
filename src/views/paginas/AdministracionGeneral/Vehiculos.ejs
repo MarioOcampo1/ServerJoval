@@ -109,7 +109,7 @@
                                             <button class="btn btn-sm btn-outline-secondary"
                                                 id="<%= vehiculo.id_registro %>" onclick="EditarRegistroKMS(this.id)"><i
                                                     class="bi bi-pencil-square"></i></button>
-                                            <button class="btn btn-sm btn-outline-danger"><i
+                                            <button class="btn btn-sm btn-outline-danger" onclick="EliminarRegistroKMS('<%=vehiculo.id_registro%>')"><i
                                                     class="bi bi-trash3"></i></button>
                                     </td>
                                     <% }else{ %>
@@ -140,7 +140,7 @@
                                                     id="<%= vehiculo.id_registro %>"
                                                     onclick="EditarRegistroKMS(this.id)"><i
                                                         class="bi bi-pencil-square"></i></button>
-                                                <button class="btn btn-sm btn-outline-danger"><i
+                                                <button id="btnEliminarRegistroKms" class="btn btn-sm btn-outline-danger" onclick="EliminarRegistroKMS('<%=vehiculo.id_registro%>')"><i
                                                         class="bi bi-trash3"></i></button>
                                         </td>
                                         <%}%>
@@ -645,10 +645,12 @@
             url: '/Vehiculos/NuevoRegistro',
             data: thisform,
             success: function (respuestaServidor) {
+                $('#btnGuardarNuevoRegistro').prop('disabled',true);
                 $('#RespuestaServidorNuevoRegistro').html(respuestaServidor);
                 setTimeout(() => {
                     $('#formActualizarRegistro')[0].reset();
                     $('#RespuestaServidorNuevoRegistro').empty();
+                    $('#btnGuardarNuevoRegistro').prop('disabled',false);
                 }, 3000);
             }
 
@@ -817,11 +819,24 @@
                 setTimeout(() => {
                     $('#EdicionRegistroKms').modal('toggle');
                     $('#FormEditarRegistroKMS').reset();
-                }, 2000);
+                }, 1000);
 
             }
         })
     })
+    function EliminarRegistroKMS(idRegistro){
+        if(confirm('¿Esta seguro de querer eliminar el registro de los kms?')){
+            $.ajax({
+            type: "POST",
+            url: "/Vehiculos/registrokms/eliminarRegistro/"+idRegistro,
+            success: function (response) {
+             location.reload()
+            }
+        
+        });
+    }
+    }
+    
     //Seccion combustible
     $('#btnCombustible').click(function () {
         $('#ModalCombustible').modal('show');

@@ -659,6 +659,18 @@ router.post('/Vehiculos/EditarRegistroKms', (req, res) => {
         }
     })
 })
+router.post('/Vehiculos/registrokms/eliminarRegistro/:idregistro',(req,res)=>{
+    var idRegistro= req.params.idregistro;
+    var sql= 'DELETE FROM vehiculos_registrokms WHERE id_registro =?';
+connection.query(sql,idRegistro,(error,results)=>{
+    if(error){console.log(error);
+        res.send('Ha ocurrido un error, no se elimino el registro.');
+    }
+    else{
+res.send('El registro ha sido eliminado.');
+    }
+})
+})
 //Combustible
 router.get('/Combustible/datos', (req, res) => {
     var sql = 'SELECT * FROM combustible';
