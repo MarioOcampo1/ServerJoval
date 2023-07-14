@@ -332,11 +332,11 @@
         <div class="table-responsive-sm">
           <table id="tableFinalizadas" class="table tabler-bordered">
             <thead>
-              <tr class="sticky-top">
-                <th scope="col">Nombre</th>
-                <th scope="col">N° carpeta</th>
-                <th scope="col">Codigo finalizada</th>
-                <th scope="col">Editar</th>
+              <tr class="sticky-top bg-info">
+                <th class="" scope="col">Nombre</th>
+                <th class="" scope="col">N° carpeta</th>
+                <th class="" scope="col">Codigo finalizada</th>
+                <th class="" scope="col">Editar</th>
               </tr>
             </thead>
             <tbody>
@@ -398,7 +398,9 @@
           return valor1 < valor2 ? -1 : valor1 > valor2 ? 1 : 0;
         })
         $.each(registros, function (indice, elemento) {
-          $('tbody').append(elemento);
+          // $('tbody').append(elemento);
+          $('#EstadoGeneral tbody').append(elemento);
+
         })
       })
     })
