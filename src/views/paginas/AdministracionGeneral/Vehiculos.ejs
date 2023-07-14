@@ -668,12 +668,12 @@
                 if(element.Tipo!="Vehiculo"){
                     if (element.promedioConsumo > 3.5 || element.promedioConsumo < 2.5) {
                     $('#infoConsumoCombustible').append(
-                        '<p>' + element.MarcaModelo + ' ' + element.Patente + '. Horas trabajadas desde última carga: ' + element.KmsRecorridos + '. Consumo en litros desde última carga: ' + element.consumoCombustible + '. <span id="TextoAnalizado" class="bg-danger text-light">Promedio consumo:' + element.promedioConsumo + '  L/24Hs </span>. Días transcurridos entre cargas: ' + element.DiasTranscurridos + '. Fecha de recarga: ' + moment(element.Fecha).format("DD/MM/YYYY") + ' </p>'
+                        '<p>' + element.MarcaModelo + ' ' + element.Patente + '. Horas trabajadas desde última carga: ' + element.KmsRecorridos + '. Consumo en litros desde última carga: ' + element.consumoCombustible + '. <span id="TextoAnalizado" class="bg-danger text-light">Promedio consumo:' + element.promedioConsumo + '  Litros </span>. Días transcurridos entre cargas: ' + element.DiasTranscurridos + '. Fecha de recarga: ' + moment(element.Fecha).format("DD/MM/YYYY") + ' </p>'
                     )
                 }
                 else {
                     $('#infoConsumoCombustible').append(
-                        '<p>' + element.MarcaModelo + ' ' + element.Patente + '. Horas trabajadas desde última carga: ' + element.KmsRecorridos + '. Consumo en litros desde última carga: ' + element.consumoCombustible + '. <span id="TextoAnalizado">Promedio consumo:' + element.promedioConsumo + '  L/24Hs </span>. Días transcurridos entre cargas: ' + element.DiasTranscurridos + '. Fecha de recarga: ' + moment(element.Fecha).format("DD/MM/YYYY") + ' </p>'
+                        '<p>' + element.MarcaModelo + ' ' + element.Patente + '. Horas trabajadas desde última carga: ' + element.KmsRecorridos + '. Consumo en litros desde última carga: ' + element.consumoCombustible + '. <span id="TextoAnalizado">Promedio consumo:' + element.promedioConsumo + '  Litros </span>. Días transcurridos entre cargas: ' + element.DiasTranscurridos + '. Fecha de recarga: ' + moment(element.Fecha).format("DD/MM/YYYY") + ' </p>'
                     )
                 }
                 }else{
