@@ -136,7 +136,7 @@ router.get("/adminecogas/TablaGeneral", (req, res) => {
 router.get("/estadogeneral", (req, res) => {
   if (req.isAuthenticated()) {
     res.locals.moment = moment;
-    const sql ="SELECT e.CodigoVigentes,e.CodigoFinalizadas, c.id, c.Nombre,c.NCarpeta,c.Ubicacion ,c.Comitente ,c.Estado,d.* ,b.DocumentacionTerreno ,b.DocumentacionSociedad ,b.DocumentacionContractual  ,b.Comercial ,b.Tecnica ,b.PermisosEspeciales ,b.DocumentacionObra  ,b.Seguridad,b.Interferencias, b.Permisos, b.PlanDeTrabajo, b.Matriculas, b.Ambiente, b.NotaCumplimentoNormativas, b.DDJJNAG153, b.Avisos, b.DocumentacionInspeccion, b.ComunicacionObras, b.ActasFinalesEcogas, b.PlanosyCroquis, b.ConformeEntidades, b.PruebaHermeticidad, b.InformesFinales, b.PresentacionFinal,  b.HabilitacionObra, b.DocumentacionAmbiental  from obras_tareasgenerales b , codificacioncarpetas e, obras c, adminecogas_tareas_por_carpeta d WHERE b.Nombre = c.Nombre AND b.Nombre = e.Nombre AND d.Nombre = e.Nombre";
+    const sql ="SELECT e.CodigoVigentes,e.CodigoFinalizadas,c.id, c.Nombre,c.NCarpeta,c.Ubicacion ,c.Comitente ,c.Estado,d.* ,b.* FROM obras_tareasgenerales b , codificacioncarpetas e, obras c, adminecogas_tareas_por_carpeta d WHERE b.Nombre = c.Nombre AND b.Nombre = e.Nombre AND d.Nombre = e.Nombre";
     connection.query(sql, (error, results) => {
       if (error) console.log(error);
       if (results.length > 0) {
@@ -3698,17 +3698,28 @@ let mes = fecha.getMonth() + 1;
 let dia = fecha.getDate();
 let fechaHoy = anio + '-' + mes + '-' + dia;
 var sql= 'SELECT Nombre FROM obras WHERE id='+idObra+';';
+var CantidadResponsables=req.body.CantidadResponsables;
 connection.query(sql,(error,results)=>{
   if(error)console.log(error);
   else{
     NombreObra=results[0].Nombre;
     sql='INSERT INTO historialdecambios set?';
+    if(CantidadResponsables>1){
+      ResponsableTarea.forEach((responsable)=>{
+        connection.query(sql,[{Nombre_sub:NombreObra,EtapaTarea_sub:EtapaSeleccionada,Tarea:subtarea,Fecha_Tarea_sub:fechaHoy, ResponsableDeTarea:responsable,Tarea_Realizada_sub:TareaRealizada,Fecha_Proxima_Tarea_sub:FechaLimiteTarea,Proxima_Tarea_sub:ProximaTarea,Si_NO_TareaRealizada:"N", id_obra:idObra}],(error,results)=>{
+          if(error)console.log(error);
+        
+        })
+      })
+      res.send('Tarea cargada con exito en el historial. Recuerde cargar los checks en la carpeta.');
+    }else{
 connection.query(sql,[{Nombre_sub:NombreObra,EtapaTarea_sub:EtapaSeleccionada,Tarea:subtarea,Fecha_Tarea_sub:fechaHoy, ResponsableDeTarea:ResponsableTarea,Tarea_Realizada_sub:TareaRealizada,Fecha_Proxima_Tarea_sub:FechaLimiteTarea,Proxima_Tarea_sub:ProximaTarea,Si_NO_TareaRealizada:"N", id_obra:idObra}],(error,results)=>{
   if(error)console.log(error);
   else{
     res.send('Tarea cargada con exito en el historial. Recuerde cargar los checks en la carpeta.');
   }
 })
+}
   }
 })
 

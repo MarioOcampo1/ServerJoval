@@ -421,6 +421,7 @@ $('#btnNuevaTarea').click(function(){
             success: function(data){
               console.log(data);
               $('#SelectObra').empty();
+              $('#SelectObra').append('<option value="" selected></option>');
               data.forEach((obras)=>{
                 $('#SelectObra').append('<option value="'+obras.id+'">'+obras.Nombre+'</option>');
               })
@@ -430,6 +431,16 @@ $('#btnNuevaTarea').click(function(){
 
 
         )
+    })
+    $('#CantidadResponsables').change(function(){
+      if($('#CantidadResponsables').val()>1){
+
+        $('.responsablesTarea').attr('type','checkbox');
+        $('.responsablesTareaDiv').append('<small id="smallResponsablesTarea">Seleccione los responsables</small>')
+      }
+      else{$('.responsablesTarea').attr('type','radio');
+      $('#smallResponsablesTarea').empty();
+    }
     })
     $('#btnVencimientoAdministracion').click(function(){
            $('#VencimientosCollapse').collapse('toggle');

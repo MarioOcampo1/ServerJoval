@@ -13,95 +13,119 @@
                     <!-- Tareas de la carpeta -->
                     <div class="container-fluid mb-2">
                         <div class="card-body">
-                            <label for="" class="form-label">Obra:</label>
-                            <select id="SelectObra" class="form-select form-select-sm mb-2" name="Obra"
-                                id="">
-                            </select>
-                            <div id="bodyCargarNuevaTareaAdminecogas" class="">
-                                <div class="row ">
-                                    <div class="col  text-center">
-                                        <div class="form-group">
-                                            <h4>Etapa</h4>
-                                            <input class="EtapaTareaRadio form-check-input" required type="radio"
-                                                name="EtapaTarea" id="EtapaTareaPreliminar" value="Preliminar">
-                                            <label class="form-check-label" for="inlineRadio1">Preliminar</label>
-                                            <input class="EtapaTareaRadio form-check-input" type="radio"
-                                                name="EtapaTarea" id="EtapaTarea1raparte" value="1ra parte">
-                                            <label class="form-check-label" for="inlineRadio2">1° parte</label>
-                                            <input class="EtapaTareaRadio form-check-input" type="radio"
-                                                name="EtapaTarea" id="EtapaTarea2daparte" value="2da parte">
-                                            <label class="form-check-label" for="inlineRadio3"> 2° parte</label>
-                                            <input class="EtapaTareaRadio form-check-input" type="radio"
-                                                name="EtapaTarea" id="EtapaTareaObras" value="Obras">
-                                            <label class="form-check-label" for="inlineRadio4">Obras </label>
-                                            <input class="EtapaTareaRadio form-check-input" type="radio"
-                                                name="EtapaTarea" id="EtapaTareaCaos" value="Caos">
-                                            <label class="form-check-label" for="inlineRadio5">Caos </label>
-
-                                            <input class="EtapaTareaRadio form-check-input" type="radio"
-                                                name="EtapaTarea" id="EtapaTareaFinalizada" value="Finalizada">
-                                            <label class="form-check-label" for="inlineRadio6">Finalizada </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row p-2">
-                                    <div class="mb-3">
-                                        <label for="" class="form-label">Subtareas</label> <small class="form-text text-muted">Ordenadas alfabéticamente</small>
-                                        <select id="SelectSubtarea" class="form-select form-select-sm" name="Subtarea"
-                                            id="">
-
-                                        </select>
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="row ">
-                                    <div class="col  text-center">
-                                        <h4>
-                                            Responsable de tarea:
-                                        </h4>
-
-                                        <input class="form-check-input" type="radio" name="ResponsableDeTarea"
-                                            id="ResponsableDeTarea" required value="Mauricio">
-                                        Mauricio
-                                        <input class="form-check-input" type="radio" name="ResponsableDeTarea"
-                                            id="ResponsableDeTarea" value="Gustavo">
-                                        Gustavo
-                                        <input class="form-check-input" type="radio" name="ResponsableDeTarea"
-                                            id="ResponsableDeTarea" value="Ramiro">
-                                        Ramiro
-                                    </div>
-                                </div>
-
-                                <div class="row p-1 ">
-                                    <div class="input-group">
-                                        <span class="input-group-text" id="TareaRealizada">Tarea Realizada:</span>
-
-                                        <input class="form-control" type="text" name="TareaRealizada"
-                                            id="TareaRealizada" placeholder="Ingrese ultima tarea realizada"
-                                            aria-describedby="TareaRealizada">
-                                    </div>
-
-                                </div>
-                                <div class="row p-1">
-                                    <div class="input-group">
-                                        <span class="input-group-text" id="ProximaTarea">Proxima Tarea:</span>
-
-                                        <input class="form-control" type="text" name="ProximaTarea" id="ProximaTarea"
-                                            placeholder="Ingrese la proxima tarea" aria-describedby="ProximaTarea">
-                                    </div>
-
-                                </div>
-                                <div class="row p-1">
-                                    <div class="input-group">
-                                        <span class="input-group-text" id="Fecha_limite">Fecha Limite:</span>
-
-                                        <input class="form-control" type="date" name="Fecha_limite" id="Fecha_limite"
-                                            placeholder="Ingrese ultima tarea realizada"
-                                            aria-describedby="Fecha_limite">
-                                    </div>
-
-                                </div>
+                            <div class="row">
+                            <div class="col-2">
+                                <label for="" class="form-label">Obra:</label>
+                                <select id="SelectObra" class="form-select form-select-sm mb-2" name="Obra"
+                                    id="">
+                                    <option value="" selected></option>
+                                </select>
                             </div>
+                            <div id="bodyCargarNuevaTareaAdminecogas" class="">
+                            <div class="form-group">
+                                <h4>Etapa</h4>
+                                <input class="EtapaTareaRadio form-check-input" required type="radio"
+                                    name="EtapaTarea" id="EtapaTareaPreliminar" value="Preliminar">
+                                <label class="form-check-label" for="inlineRadio1">Preliminar</label>
+                                <input class="EtapaTareaRadio form-check-input" type="radio"
+                                    name="EtapaTarea" id="EtapaTarea1raparte" value="1ra parte">
+                                <label class="form-check-label" for="inlineRadio2">1° parte</label>
+                                <input class="EtapaTareaRadio form-check-input" type="radio"
+                                    name="EtapaTarea" id="EtapaTarea2daparte" value="2da parte">
+                                <label class="form-check-label" for="inlineRadio3"> 2° parte</label>
+                                <input class="EtapaTareaRadio form-check-input" type="radio"
+                                    name="EtapaTarea" id="EtapaTareaObras" value="Obras">
+                                <label class="form-check-label" for="inlineRadio4">Obras </label>
+                                <input class="EtapaTareaRadio form-check-input" type="radio"
+                                    name="EtapaTarea" id="EtapaTareaCaos" value="Caos">
+                                <label class="form-check-label" for="inlineRadio5">Caos </label>
+
+                                <input class="EtapaTareaRadio form-check-input" type="radio"
+                                    name="EtapaTarea" id="EtapaTareaFinalizada" value="Finalizada">
+                                <label class="form-check-label" for="inlineRadio6">Finalizada </label>
+                            </div>
+
+                           <div class="col"></div>
+                           <div class="row p-2">
+                            <div class="mb-3">
+                                <label for="" class="form-label">Subtareas</label> <small class="form-text text-muted">Ordenadas alfabéticamente</small>
+                                <select id="SelectSubtarea" class="form-select form-select-sm" name="Subtarea"
+                                    id="">
+
+                                </select>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row ">
+                            <div class="col  text-center">
+                                <h4>
+                                    Responsable de tarea:
+                                </h4>
+                                <div class="row">
+                                <div class="col -2">
+<div class="mb-3">
+<label for="" class="form-label">Cantidad de responsables</label>
+<select class="form-select form-select-lg" name="CantidadResponsables" id="CantidadResponsables">
+<option selected></option>
+<option value="1">1</option>
+<option value="2">Multiple</option>
+</select>
+</div>
+</div>
+<div class="col -8">
+<div class="form-check responsablesTareaDiv">
+<label for="" class="form-label">Mauricio</label>
+<input type="radio"
+class="form-check-radio form-check-inline responsablesTarea" name="ResponsableDeTarea" value="Mauricio" id="" aria-describedby="helpId" placeholder="">
+
+<label for="" class="form-label">Gustavo</label>
+<input type="radio"
+  class="form-check-radio form-check-inline responsablesTarea" name="ResponsableDeTarea" value="Gustavo" id="" aria-describedby="helpId" placeholder="">
+
+<label for="" class="form-label">Ramiro</label>
+<input type="radio"
+  class="form-check-radio form-check-inline responsablesTarea" name="ResponsableDeTarea" value="Ramiro" id="" aria-describedby="helpId" placeholder="">
+</div>
+                           
+                            </div>
+                            <div class="col-2"></div>
+                        </div>
+                            </div>
+                        </div>
+
+                        <div class="row p-1 ">
+                            <div class="input-group">
+                                <span class="input-group-text" id="TareaRealizada">Tarea Realizada:</span>
+
+                                <input class="form-control" type="text" name="TareaRealizada"
+                                    id="TareaRealizada" placeholder="Ingrese ultima tarea realizada"
+                                    aria-describedby="TareaRealizada">
+                            </div>
+
+                        </div>
+                        <div class="row p-1">
+                            <div class="input-group">
+                                <span class="input-group-text" id="ProximaTarea">Proxima Tarea:</span>
+
+                                <input class="form-control" type="text" name="ProximaTarea" id="ProximaTarea"
+                                    placeholder="Ingrese la proxima tarea" aria-describedby="ProximaTarea">
+                            </div>
+
+                        </div>
+                        <div class="row p-1">
+                            <div class="input-group">
+                                <span class="input-group-text" id="Fecha_limite">Fecha Limite:</span>
+
+                                <input class="form-control" type="date" name="Fecha_limite" id="Fecha_limite"
+                                    placeholder="Ingrese ultima tarea realizada"
+                                    aria-describedby="Fecha_limite">
+                            </div>
+
+                        </div>
+                        </div>
+                        </div>
+                            
+                            
                         </div>
                     </div>
                     <div class="modal-footer">
