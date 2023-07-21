@@ -14,8 +14,8 @@
     <%- include('./partials/menusuperior.ejs'); %>
         <h1 class="text-center">Pago semanal de haberes del personal de obras</h1>
         <div class="container-fluid">
-        <div class="btn-group " role="group">
-            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalId">Nuevo Pago</button>
+        <div class="btn-group btn-sm " role="group">
+            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalNuevoPago">Nuevo Pago</button>
             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalEgreso">Nuevo empleado</button>
             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalEgreso">Nuevo apercibimiento</button>
         </div>
@@ -24,7 +24,7 @@
         <div class="mb-3">
          
             <label for="" class="form-label">Año</label>
-            <select class="form-select form-select-lg" name="" id="">
+            <select class="form-select form-select-sm" name="" id="">
                 <option selected>2023</option>
                 <option value="">2024</option>
             </select>
@@ -34,26 +34,27 @@
         <div class="col-2">
         <div class="mb-3">
             <label for="" class="form-label">Mes</label>
-            <select class="form-select form-select-lg" name="" id="">
-                <option selected>Enero</option>
-                <option value="">Febrero</option>
-                <option value="">Marzo</option>
-                <option value="">Abril</option>
-                <option value="">Mayo</option>
-                <option value="">Junio</option>
-                <option value="">Julio</option>
-                <option value="">Agosto</option>
-                <option value="">Septiembre</option>
-                <option value="">Octubre</option>
-                <option value="">Noviembre</option>
-                <option value="">Diciembre</option>
+            <select class="form-select form-select-sm" name="" id="">
+                <option value="" selected></option>
+                <option value="Enero">Enero</option>
+                <option value="Febrero">Febrero</option>
+                <option value="Marzo">Marzo</option>
+                <option value="Abril">Abril</option>
+                <option value="Mayo">Mayo</option>
+                <option value="Junio">Junio</option>
+                <option value="Julio">Julio</option>
+                <option value="Agosto">Agosto</option>
+                <option value="Septiembre">Septiembre</option>
+                <option value="Octubre">Octubre</option>
+                <option value="Noviembre">Noviembre</option>
+                <option value="Diciembre">Diciembre</option>
             </select>
         </div>
             </div>
             <div class="col-2">
                 <div class="mb-3">
                     <label for="" class="form-label">Semana</label>
-                    <select class="form-select form-select-lg" name="" id="">
+                    <select class="form-select form-select-sm" name="" id="">
                         <option selected>1</option>
                         <option value="">2</option>
                         <option value="">3</option>
@@ -131,6 +132,80 @@
         </div>
         
     </div>
+<!-- Modal trigger button -->
+<button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#modalNuevoPago">
+  Launch
+</button>
 
+<!-- Modal Body -->
+<!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+<div class="modal fade" id="modalNuevoPago" tabindex="-1"role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitleId">Nuevo pago</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col">
+                        <div class="mb-3">
+                            <label for="" class="form-label">Empleado</label>
+                            <select class="form-select form-select-sm" name="" id="">
+                                <option selected>Select one</option>
+                            
+                            </select>
+                        </div>
+                    </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="" class="form-label">Fecha de pago</label>
+                                <input type="date"
+                                  class="form-control" name="FechaPago" id="" aria-describedby="helpId" placeholder="">
+                                <small id="helpId" class="form-text text-muted"></small>
+                              </div>
+                        </div>
+                    
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="mb-3">
+                            <label for="" class="form-label">Monto</label>
+                            <input type="number"
+                              class="form-control" name="Monto" id="" aria-describedby="helpId" placeholder="Monto a pagar">
+                            <small id="helpId" class="form-text text-muted">Ingrese el monto que se le va a pagar al empleado.</small>
+                          </div>  
+                    </div>
+                    <div class="col">
+                        <div class="mb-3">
+                            <label for="" class="form-label">Descuento aplicado</label>
+                            <input type="number"
+                              class="form-control" name="Descuento" id="" aria-describedby="helpId" placeholder="Descuento aplicado">
+                            <small id="helpId" class="form-text text-muted">Ingrese el monto del descuento aplicado</small>
+                          </div>
+                    </div>
+                </div>
+<div class="row">
+    <div class="col">
+        <div class="mb-3">
+            <label for="" class="form-label">Observaciones</label>
+            <input type="text"
+              class="form-control" name="Observaciones" id="" aria-describedby="helpId" placeholder="Observaciones">
+            <small id="helpId" class="form-text text-muted">Reservados para indicar observaciones.</small>
+          </div>
+    </div>
+</div>
+
+
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

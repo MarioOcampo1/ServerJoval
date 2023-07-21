@@ -135,19 +135,30 @@ router.get("/adminecogas/TablaGeneral", (req, res) => {
 });
 router.get("/estadogeneral", (req, res) => {
   if (req.isAuthenticated()) {
-    res.locals.moment = moment;
-    const sql ="SELECT e.CodigoVigentes,e.CodigoFinalizadas,c.id, c.Nombre,c.NCarpeta,c.Ubicacion ,c.Comitente ,c.Estado,d.* ,b.* FROM obras_tareasgenerales b , codificacioncarpetas e, obras c, adminecogas_tareas_por_carpeta d WHERE b.Nombre = c.Nombre AND b.Nombre = e.Nombre AND d.Nombre = e.Nombre";
-    connection.query(sql, (error, results) => {
-      if (error) console.log(error);
-      if (results.length > 0) {
-        res.render("paginas/AdministracionEcogas/estadogeneral.ejs", {
-          results: results,moment:moment,
-        }); //en {results:results} lo que hago es guardar los resultados que envia la bd, en la variable results
-        // res.send(results);
-      } else {
-        res.send("Ningun resultado encontrado");
-      }
-    });
+    var Finalizadas;
+    var sql= 'SELECT * FROM codificacioncarpetas WHERE CodigoEnUsoVigentes ="F" ORDER BY CodigoFinalizadas asc';
+  async function cargarFinalizadas() {connection.query(sql,(error,result)=>{
+    if(error)console.log(error);
+    else{
+Finalizadas=result;
+    }
+  })  }
+    cargarFinalizadas().then(function(){
+      res.locals.moment = moment;
+      sql ="SELECT e.CodigoVigentes,e.CodigoFinalizadas,c.id, c.Nombre,c.NCarpeta,c.Ubicacion ,c.Comitente ,c.Estado,d.* ,b.* FROM obras_tareasgenerales b , codificacioncarpetas e , obras c, adminecogas_tareas_por_carpeta d WHERE b.Nombre = c.Nombre AND b.Nombre = e.Nombre AND d.Nombre = e.Nombre ";
+      connection.query(sql, (error, results) => {
+        if (error) console.log(error);
+        if (results.length > 0) {
+          res.render("paginas/AdministracionEcogas/estadogeneral.ejs", {
+            results: results,moment:moment,Finalizadas:Finalizadas}
+            ); //en {results:results} lo que hago es guardar los resultados que envia la bd, en la variable results
+          // res.send(results);
+        } else {
+          res.send("Ningun resultado encontrado");
+        }
+      });
+    })
+    
   } else {
     res.redirect("/");
   }

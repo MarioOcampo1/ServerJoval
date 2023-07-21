@@ -2,7 +2,7 @@
     transition: ease-in .4s;
 }
 #LogoJoval:hover{
-    transform: scale(1.2);
+    transform: rotate(360deg);
 }
 .parpadearEnRojo{
     color:red;

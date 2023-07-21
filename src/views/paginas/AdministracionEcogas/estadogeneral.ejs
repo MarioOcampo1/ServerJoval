@@ -334,24 +334,20 @@
             <thead>
               <tr class="sticky-top bg-info">
                 <th class="" scope="col">Nombre</th>
-                <th class="" scope="col">N° carpeta</th>
                 <th class="" scope="col">Codigo finalizada</th>
                 <th class="" scope="col">Editar</th>
               </tr>
             </thead>
             <tbody>
-              <% results.forEach((carpeta2)=>{ %>
-                <% if(carpeta2.Estado=="Finalizada"){%>
+              <% Finalizadas.forEach((carpeta2)=>{ %>
                 <tr class="">
-                  <td scope="row"><%=carpeta2.Nombre%></td>
-                  <td><%=carpeta2.NCarpeta%></td>
+                  <td><%=carpeta2.Nombre%></td>
                   <td><%=carpeta2.CodigoFinalizadas%></td>
                   <td>  <a href="/editarTareas/<%=carpeta2.id%>" class="bi bi-pencil-square">
                   </a> 
   </td>
-                </tr>
-              
-                <%}})%>
+                </tr>      
+                <%})%>
             </tbody>
           </table>
           
