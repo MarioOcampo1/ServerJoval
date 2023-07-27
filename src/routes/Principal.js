@@ -105,7 +105,7 @@ router.get('/', (req, res) => {
 })
 
 router.get('/index', (req, res, next) => {
-    CrearCarpetaEcogas("HOLAJUANCARLOS",123,00);    
+  
     if (req.isAuthenticated()) {
         var fecha = new Date();
         var sql = 'Select * from admingeneral_seguros_albacaucion WHERE ProximaRefacturacion BETWEEN (NOW() - Interval 1 Month) AND (NOW() + Interval 2 Month)  AND Estado != "Dada de baja" AND Riesgo!= "Fondo de reparo" AND Riesgo!= "Mantenimiento de oferta"';
