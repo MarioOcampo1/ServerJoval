@@ -333,9 +333,9 @@
           <table id="tableFinalizadas" class="table tabler-bordered">
             <thead>
               <tr class="sticky-top bg-info">
-                <th class="" scope="col">Nombre</th>
-                <th class="" scope="col">Codigo finalizada</th>
-                <th class="" scope="col">Editar</th>
+                <th class="">Nombre</th>
+                <th class="">Codigo finalizada</th>
+                <th class=""></th>
               </tr>
             </thead>
             <tbody>
@@ -343,9 +343,7 @@
                 <tr class="">
                   <td><%=carpeta2.Nombre%></td>
                   <td><%=carpeta2.CodigoFinalizadas%></td>
-                  <td>  <a href="/editarTareas/<%=carpeta2.id%>" class="bi bi-pencil-square">
-                  </a> 
-  </td>
+                  <td> <button class="btn btn-outline-primary btn-sm" onclick="EditarFinalizada('<%=carpeta2.Nombre%>')"><i class="bi bi-pencil-square"></i></button></td>
                 </tr>      
                 <%})%>
             </tbody>
@@ -614,6 +612,21 @@
 $('#btnVerFinalizadas').click(function(){
   $('#modalObrasFinalizadas').modal('show');
 })
+function EditarFinalizada(NombreObra) {
+  $.ajax({
+    type: "Get",
+    url: "/Adminecogas/DatosObras/all",
+    data: "data",
+    success: function (response) {
+      response.forEach(element => {
+        if(element.Nombre==NombreObra){
+          var url= '/editarTareas/'+element.id;
+          window.open(url);
+        }
+      });
+    }
+  });
+  }
 </script>
 
 </html>

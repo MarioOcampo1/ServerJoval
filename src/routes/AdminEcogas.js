@@ -3812,33 +3812,7 @@ router.post("/ActualizarEstadoCarpeta/:id", (req, res) => {
   }, 2000);
   
 });
-//Informes para Marcelo
-router.get("ObtenerInformesObras", (req, res) => {
-  var sql = "";
-  var obras, tareasgenerales, historialdetareas;
-  sql = "Select * from obras";
-  connection.query(sql, (error, results) => {
-    if (error) console.log(error);
-    else {
-      obras = results;
-    }
-  });
-  sql = "Select * from obras_tareasgenerales ";
-  connection.query(sql, (error, results) => {
-    if (error) console.log(error);
-    else {
-      tareasgenerales = results;
-    }
-  });
-  sql = "Select * from historialdecambios ";
-  connection.query(sql, (error, results) => {
-    if (error) console.log(error);
-    else {
-      historialdetareas = results;
-    }
-  });
-  setTimeout(() => {}, 2000);
-});
+
 router.post('/actualizarTareaRealizada/:id',(req,res)=>{
   var id= req.params.id;
   var NombreCarpeta= req.body.NombreCarpeta;
@@ -3857,6 +3831,15 @@ router.get("/BuscarEstadoFinanciero/:idObra",(req,res)=>{
 });
 router.get("/Adminecogas/DatosObras",(req,res)=>{
   let sql='Select * FROM obras WHERE Estado !="Finalizada" ORDER BY Nombre asc';
+  connection.query(sql,(error,results)=>{
+    if(error)console.log(error);
+    else{
+      res.send(results);
+    }
+  })
+})
+router.get("/Adminecogas/DatosObras/all",(req,res)=>{
+  let sql='Select * FROM obras ORDER BY Nombre asc';
   connection.query(sql,(error,results)=>{
     if(error)console.log(error);
     else{
