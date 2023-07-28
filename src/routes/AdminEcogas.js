@@ -2871,7 +2871,7 @@ router.post("/actCaosCarpEcogas/:id", upload.none(), function (req, res) {
   var idObra = id;
   var ActasFinales = req.body.ActasFinales;
   if (ActasFinales=="Sin recibir"){
-    ActasFinales="Sin presentar"
+    ActasFinales="Sin presentar";
   }
   var PlanosyCroquis = req.body.PlanosyCroquis;
   var ConformeDePermisos = req.body.ConformeDePermisos;
