@@ -2350,8 +2350,6 @@ router.post("/actObrasCarpEcogas/:id", upload.none(), function (req, res) {
 var InspectorAsignado= req.body.InspectorAsignado;
 var FechaInicioTrabajos = req.body.FechaComienzoObra;
 var FechaFinDeObra = req.body.FechaFinDeObra;
-var FechaPruebaHermeticidad = req.body.FechaPruebaHermeticidad;
-
   var ActaDeInicio = req.body.ActasDeInicio;
   var LibroOrdenesServicio = req.body.LibroOrdenesServicio;
   var LibroNotasPedido = req.body.LibroNotasPedido;
@@ -2460,22 +2458,6 @@ var FechaPruebaHermeticidad = req.body.FechaPruebaHermeticidad;
         }
       );
     }
-      if(FechaPruebaHermeticidad[1].length>0 ){
-        connection.query(
-          sql,
-          [
-            {
-              FechaPruebaHermeticidad:FechaPruebaHermeticidad[1]
-            },
-            Nombre,
-          ],
-          (error, results) => {
-            if (error) {
-              console.log(error);
-            }
-          }
-        );
-      }
       connection.query(
         sql,
         [
@@ -3740,12 +3722,12 @@ connection.query(sql,[{Nombre_sub:NombreObra,EtapaTarea_sub:EtapaSeleccionada,Ta
 //Opciones de editar tareas POST
 router.post("/ActualizarEstadoCarpeta/:id", (req, res) => {
   console.log("Actualizando estado de carpeta");
-
   var id = req.body.id;
   var Nombre = req.body.Nombre;
   var Estado = req.body.Estado;
   var sql;
   var CodigoFinalizada = 0;
+
   if (Estado == "Finalizada") {
     var CodigoEnUso = "F";
     sql = "Select max(CodigoFinalizadas) from codificacioncarpetas";
@@ -3790,9 +3772,10 @@ router.post("/ActualizarEstadoCarpeta/:id", (req, res) => {
     ],
     (error, results) => {
       if (error) console.log(error);
+      console.log("codificacioncarpetas actualizado.");
     }
   );
-   sql = "Update obras Set ? where id=?";
+   sql = "UPDATE obras SET ? WHERE id=?";
   connection.query(
     sql,
     [
@@ -3803,11 +3786,13 @@ router.post("/ActualizarEstadoCarpeta/:id", (req, res) => {
     ],
     (error, results) => {
       if (error) console.log(error);
+      console.log("obras actualizado.");
     }
   );
   sql=' UPDATE adminecogas_tareas_por_carpeta SET? WHERE id_obra=?';
   connection.query(sql,[{Estado:Estado}, id],(error,results)=>{
     if(error)console.log(error);
+    console.log("admiencogas_tareas por carpeta actualizado.");
   })
   setTimeout(() => {
     res.redirect(req.get("referer"));  

@@ -29,6 +29,7 @@ router.use(passport.session({
 //Seteo server original
 const mysql = require('mysql');
 const { NULL } = require('mysql/lib/protocol/constants/types');
+const { error } = require('console');
 const connection = mysql.createConnection({
     host: '127.0.0.1',
     user: 'root',
@@ -209,32 +210,40 @@ router.post('/guardarNuevoCliente', (req, res) => {
             Nombre: Nombre, NCarpeta: NCarpeta, Comitente: Comitente, Ubicacion: Departamento, nuevaObra: "S"
         }, (error, results) => {
             if (error) console.log(error);
+            else{
+            sql='SELECT MAX(id) FROM obras;';
+            connection.query(sql),(error,results2)=>{
+                idObra=results2[0].id;
+                resolve(idObra);
+        }
+    }
         })
-        sql = 'Insert into adminecogas_tareas_por_carpeta set ?';
+      
+    }).then((idObra)=>{
+        sql = 'INSERT INTO adminecogas_tareas_por_carpeta set ?';
         connection.query(sql, {
-            Nombre: Nombre, NCarpeta: NCarpeta, TipoDeRed: TipoDeRed
+            id_obra:idObra,Nombre: Nombre, NCarpeta: NCarpeta, TipoDeRed: TipoDeRed
         }, (error, results) => {
             if (error) console.log(error);
         })
-        sql = 'Insert into adgastareas set ?';
+        sql = 'INSERT INTO adgastareas set ?';
         connection.query(sql, {
             Nombre: Nombre
         }, (error, results) => {
             if (error) console.log(error);
         })
-        sql = 'Insert into historialdecambios set ?';
-        connection.query(sql, {
-            Nombre_sub: Nombre, Tarea_Realizada_sub: "Se crea nuevo cliente", Proxima_Tarea_sub: "Actualizar estado de carpeta", Si_NO_TareaRealizada: "N", Fecha_Tarea_sub: fechaActual
+        sql = 'INSERT INTO historialdecambios set ?';
+        connection.query(sql, { id_obra:idObra,Nombre_sub: Nombre, Tarea_Realizada_sub: "Se crea nuevo cliente", Proxima_Tarea_sub: "Actualizar estado de carpeta", Si_NO_TareaRealizada: "N", Fecha_Tarea_sub: fechaActual
         }, (error, results) => {
             if (error) console.log(error);
         })
-        sql = 'Insert into obras_tareasgenerales set ?';
+        sql = 'INSERT INTO obras_tareasgenerales set ?';
         connection.query(sql, {
             Nombre: Nombre, PermisosEspeciales: PermisosEspeciales, Permisos: Permisos
         }, (error, results) => {
             if (error) console.log(error);
         })
-        sql = 'Insert into codificacioncarpetas Set?';
+        sql = 'INSERT INTO codificacioncarpetas Set?';
         connection.query(sql, [{
             Nombre: Nombre, CodigoVigentes: Codigo, CodigoEnUsoVigentes: "S",
         },], (error, results) => {
@@ -264,7 +273,6 @@ router.post('/guardarNuevoCliente', (req, res) => {
         }], (error, results) => {
             if (error) console.log(error);
         })
-        resolve();
     }).then(function (resultadopromise1) {
         new Promise((resolve, reject) => {
             sql = 'Select id from obras where Nombre =?';
