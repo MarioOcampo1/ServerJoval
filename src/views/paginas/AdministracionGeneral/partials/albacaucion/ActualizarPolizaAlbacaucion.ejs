@@ -18,12 +18,22 @@
          
         <div class="form-group">
             <div id="ActualizarPoliza" class="container border border- danger md-center " style="display:block ;">
-                <form id="formularioBorrarBoton" action="/DarBajaPolizaAlbacaucion/<%=obras[0].ID_poliza%>" method="post">
-                    <button type="button" class="btn btn-outline-danger" onclick="mostrarAlerta()">
-                        <small class="bi bi-file-earmark-x" title="Eliminar póliza"> Eliminar póliza</small>
-                    </button>
-                </form>     
-                <form class="" action="/ActualizarPolizaAlbacaucion/<%=obras[0].ID_poliza%>" method="post">
+                <div class="btn-toolbar" role="toolbar" aria-label="Toolbar">
+                    <div class="btn-group" role="group" aria-label="Button Group">
+                        <form id="formularioBorrarBoton" action="/DarBajaPolizaAlbacaucion/<%=obras[0].ID_poliza%>" method="post">
+                            <button type="button" class="btn btn-outline-danger bi bi-file-earmark-x" onclick="mostrarAlerta()">
+                               Eliminar póliza
+                            </button>
+                        </form>       
+                    </div>
+                    <div class="btn-group ms-3" role="group" aria-label="">
+                        <form class="" action="/ActualizarPolizaAlbacaucion/<%=obras[0].ID_poliza%>" method="post">
+                            <button class="btn btn-outline-success" type="submit">Actualizar póliza</button>
+         
+                    </div>
+                </div>
+               
+               
                 <div class="row justify-content-md-center ">
                     <div class="col m-1 border">
                         <h5 class="text-center">Datos de la póliza</h5>
@@ -31,7 +41,7 @@
 <input type="hidden" name="Aseguradora" value="Albacaucion">
                             <input hidden type="text" name="ID" id="ID" value="<%=obras[0].ID_poliza%>">
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-12">
                             <label class="fw-bold" for="Obra">Obra</label>
                             <select class="form-select form-select-sm" name="Obra" id="">
                                 <%listadoObras.forEach((listadoObra)=>{%>
@@ -43,7 +53,7 @@
                                     <%})%>
                             </select>
                         </div>
-                        <div class="col-6">
+                        <div class="col-12">
                             <label class="fw-bold" for="Asegurado">Asegurado</label>
                             <input class="form-control form-control-sm m-1" value="<%=obras[0].NombreAsegurado%>"
                                 placeholder="<%=obras[0].NombreAsegurado%>" aria-label="<%=obras[0].NombreAsegurado%>"
@@ -53,12 +63,12 @@
                         <div class="row">
 
                         
-                      <div class="col-6">
+                      <div class="col-12">
                         <label class="fw-bold" for="NPoliza">Número de póliza</label>
                         <input value="<%=obras[0].NumeroPoliza%>" class="m-1 form-control form-control-sm" required type="number" name="NPoliza"
                             id="NPoliza">
                       </div>
-                      <div class="col-6">
+                      <div class="col-12">
                         <label class="fw-bold" for="FechaEmisionPoliza">Fecha de emisión
                         </label>
                     <input  type="date" value="<%=obras[0].FechaEmisionPoliza%>" class="form-control form-control-sm m-1"
@@ -67,7 +77,6 @@
                         aria-label="<%=obras[0].FechaEmisionPoliza%>">                               
                           <small id="FechaEmisionPolizaSmall" class="form-text text-muted">Fecha emisión actual:<%=moment(obras[0].FechaEmisionPoliza).format('DD/MM/YYYY')%></small>
                       </div>
-                      <div class="row">
                         <div class="col">
                             <label class="fw-bold" for="DescripcionRiesgo">Tipo de riesgo</label>
                             <select class="form-select form-select-sm" name="DescripcionRiesgo" id="DescripcionRiesgo">Seleccione el tipo de poliza
@@ -81,19 +90,18 @@
                                 <option value="Mantenimiento de oferta"> Mantenimiento de oferta</option>
                             </select>
                         </div>
-                      </div>
                     </div>
                     </div>
                     <div class="col m-1 border">
                         <h5 class="text-center">Datos de facturación</h5> 
                         <div class="row">
-<div class="col">
+<div class="col-12">
     <label class="fw-bold" for="Valor">Monto</label>
     <input required type="number" class="m-1 form-control form-control-sm" id="Valor" name="Valor"
         value="<%=obras[0].Valor%>" placeholder="Ingrese el valor de la póliza "
         aria-label="<%=obras[0].Valor%>">
 </div>
-<div class="col">
+<div class="col-12">
     <label class="fw-bold" for="VigenciaPoliza">Vigencia</label>
     <select class="form-select form-select-sm" name="VigenciaPoliza" id="VigenciaPoliza">Seleccione la vigencia de la poliza
         <option selected value="<%=obras[0].VigenciaPoliza%>">
@@ -106,21 +114,21 @@
 </div>
                         </div>
 <div class="row">
-<div class="col">
+<div class="col-12">
     <label class="fw-bold" for="MontoAsegurado">Valor Asegurado</label>
     <input  required type="number" class="m-1 form-control form-control-sm" id="MontoAsegurado" name="MontoAsegurado"
         value="<%=obras[0].MontoAsegurado%>"
         placeholder="Ingrese el Monto Asegurado de la póliza "
         aria-label="<%=obras[0].MontoAsegurado%>">
 </div>
-<div class="col">
+<div class="col-12">
     <label class="fw-bold" for="Endoso">N° de endoso</label>
     <input  type="number" class="m-1 form-control form-control-sm" id="Endoso" name="Endoso"
         value="<%=obras[0].Endoso%>"
         placeholder="<%=obras[0].Endoso%>"
         aria-label="<%=obras[0].Endoso%>">
 </div>
-<div class="col">
+<div class="col-12">
     <label class="fw-bold " for="Descripcion">Endoso pagado</label>
     <select class="form-select form-select-sm" name="EndosoPagado" id="">
         <option value="<%=obras[0].EndosoPagado%>" selected hidden> <%=obras[0].EndosoPagado%></option>
@@ -130,18 +138,17 @@
 
     </select>
 </div>
-</div>           
-<div class="row">
+<div class="col-12">
     <label class="fw-bold mt-1" for="ProximaRefacturacion">Refacturación</label>
    <input type="date" class="form-control form-control-sm" name="ProximaRefacturacion" id="ProximaRefacturacion" value="">
    <small id="ProximaRefacturacionSmall" class="form-text text-muted">Proxima refacturación: <%=moment(obras[0].ProximaRefacturacion).format('DD/MM/YYYY')%></small>
-
+</div>
 </div>  
                     </div>
                     <div class="col m-1 border">
                         <h5 class="text-center">Datos de la vigencia</h5>
                         <div class="row">
-                            <div class="col">
+                            <div class="col-12">
                                 <label class="fw-bold" for="Estado">Estado</label>
                                 <select class="form-select form-select-sm" name="Estado" id="Estado">Seleccione el estado
                                     <%if(obras[0].Estado=="Vigente"){%>
@@ -156,7 +163,7 @@
                                             <%}%>
                                 </select>
                             </div>
-                            <div class="col">
+                            <div class="col-12">
                                 <div class="mb-3">
                                   <label for="" class="form-label fw-bold">Baja solicitada</label>
                                     <select class="form-select form-select-sm" name="BajaSolicitada" id="">
@@ -178,18 +185,17 @@
                                     <option value="">Recepción Definitiva</option>
                                 </select>
                             </div>
-                           
+                            <div class="col-12 m-1 border">
+                                <h5 class="text-center">Descripción</h5>
+                                <div class="row mt-2">
+                                    <label class="fw-bold" for="Descripcion">Descripción</label>
+                                    <textarea class="form-control" type="textarea" name="Descripcion" id="Descripcion" rows="5" placeholder="<%=obras[0].Descripcion%>"> <%=obras[0].Descripcion%></textarea> 
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="col m-1 border">
-                        <h5 class="text-center">Descripción</h5>
-                        <div class="row mt-2">
-                            <label class="fw-bold" for="Descripcion">Descripción</label>
-                            <textarea class="form-control" type="textarea" name="Descripcion" id="Descripcion" rows="5" placeholder="<%=obras[0].Descripcion%>"> <%=obras[0].Descripcion%></textarea> 
-                        </div>
-                    </div>
+                   
                 </div>
-                    <button class="btn btn-success" type="submit">Actualizar póliza</button>
             </div>
         </div>
         </div>

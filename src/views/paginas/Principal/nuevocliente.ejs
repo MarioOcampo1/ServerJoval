@@ -26,13 +26,24 @@
             <label class="fw-bold" class="form-check-label" for="">Finanzas</label>
             </div>
           </div>     -->
-  <form action="/guardarNuevoCliente" method="post">
+  <form id='formGuardarCliente' action="/guardarNuevoCliente" method="post">
     <div class="row m-3">
       <div class="col-4">
         <label class="fw-bold" for="Nombre">Nombre de carpeta</label>
         <input type="text" class="form-control" id="NombreCarpeta" name="NombreCarpeta" placeholder="Nombre de carpeta" required>
       </div>
-      <div class="col-4">
+      <!-- <div class="col-4">
+        <div class="mb-3">
+          <label for="" class="form-label fw-bold">Carpeta Provisoria</label>
+          <select class="form-select form-select-sm " name="CarpetaProvisoria" id="CarpetaProvisoria">
+            <option value=""selected>Seleccione alguna opción</option>
+            <option value="S">Si</option>
+            <option value="N">No</option>
+            
+          </select>
+        </div>
+      </div> -->
+      <div class="col-4 SeleccionCodigoCarpeta">
         <label class="fw-bold" for="Codigo">Codigo de carpeta</label><br>
         <input type="number" name="Codigo" id="Codigo" placeholder="Elija un numero" required>
         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalCodigosCarpeta" id="CodigoCarpeta">
@@ -114,8 +125,8 @@
           </div>
         </div>
       </div>
-      
-        <div class="row text-center mt-2">
+      <div class="Permisos">
+        <div class=" row text-center mt-2">
           <h2 class="text-center bg-primary text-light">Permisos de la obra</h2>
        
           <div class="form-group col-sm border">
@@ -215,7 +226,7 @@
           </div>
 
         </div>
-
+</div>
       
       <div class="row text-center mt-2 mt-1">
     
@@ -246,7 +257,7 @@
     </div>
       </div>
       <!-- SECTOR FINANZAS -->
-      <div id="SectorFinanzas" class="container-fluid mt-2">
+      <div id="SectorFinanzas" class="Finanzas container-fluid mt-2">
         <input type="hidden" id="FinanzasSeleccionado" name="FinanzasSeleccionado">
         <div class="row bg-danger text-white">
           <h1 class="text-center">Sector Finanzas</h1>
@@ -319,7 +330,7 @@
 
 
       <div class="button-group m-3 text-center" role="group">
-        <button type="submit" class="btn btn-success text-center">Guardar</button>
+        <button type="button" id="btnSubmit" class="btn btn-success text-center">Guardar</button>
         <a href="/adminecogas" class="btn btn-danger text-center">Cancelar</a>
       </div>
     </div>
@@ -437,6 +448,33 @@ if(( $('#cantidadVecinos').val())>1){
 
 
     )
+    // $('#CarpetaProvisoria').change(function(){
+    //   if($(this).val()=='S'){
+    //     $('.SeleccionCodigoCarpeta').css('display','none');
+    //     $('.Permisos').css('display','none');
+    //     $('.Finanzas').css('display','none');
+    //   }
+    //   else{
+    //     $('.SeleccionCodigoCarpeta').css('display','block');
+    //     $('.Permisos').css('display','block');
+    //     $('.Finanzas').css('display','block');
+
+    //   }
+    // })
+    $('#btnSubmit').click(function(){
+//       if($('#CarpetaProvisoria').val()=='S'){
+//  $('.SeleccionCodigoCarpeta').empty();
+//         $('.Permisos').empty();
+//         $('.Finanzas').empty();
+//         $('#formGuardarCliente').submit();
+//       }
+//       else{
+//   $('#formGuardarCliente').submit();
+
+//       }
+  $('#formGuardarCliente').submit();
+
+    })
   </script>
 </body>
 

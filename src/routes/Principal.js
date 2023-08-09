@@ -6,8 +6,8 @@ const session = require('express-session')
 const passport = require('passport');
 const PassportLocal = require('passport-local').Strategy;
 const router = Router();
-const fs= require('fs');
-const path= require('path');
+const fs = require('fs');
+const path = require('path');
 module.exports = router;
 const moment = require('moment');
 var xlsx = require('xlsx');
@@ -106,7 +106,7 @@ router.get('/', (req, res) => {
 })
 
 router.get('/index', (req, res, next) => {
-  
+
     if (req.isAuthenticated()) {
         var fecha = new Date();
         var sql = 'Select * from admingeneral_seguros_albacaucion WHERE ProximaRefacturacion BETWEEN (NOW() - Interval 1 Month) AND (NOW() + Interval 2 Month)  AND Estado != "Dada de baja" AND Riesgo!= "Fondo de reparo" AND Riesgo!= "Mantenimiento de oferta"';
@@ -119,7 +119,7 @@ router.get('/index', (req, res, next) => {
     }
     else {
         (req, res) => {
-            
+
             res.redirect('/');
         }
     }
@@ -163,14 +163,16 @@ router.post('/editarContacto/delete/Contacto/:id', (req, res) => {
 })
 router.post('/guardarNuevoCliente', (req, res) => {
     var sql = "";
+    var CarpetaProvisoria = req.body.CarpetaProvisoria;
+    CarpetaProvisoria="N";
     const gasSeleccionado = req.body.GasSeleccionado;
     const finanzasSeleccionado = req.body.FinanzasSeleccionado;
     const fechaActual = new Date();
-    const Codigo = req.body.Codigo;
     const Nombre = req.body.NombreCarpeta;
     const NCarpeta = req.body.NCarpeta;
     const Comitente = req.body.Comitente;
     const Departamento = req.body.Departamento;
+    const Codigo = req.body.Codigo;
     var DNV = req.body.DNV;
     var DPV = req.body.DPV;
     var IRRIGACION = req.body.IRRIGACION;
@@ -182,6 +184,10 @@ router.post('/guardarNuevoCliente', (req, res) => {
     var Privado = req.body.PRIVADO;
     var ServicioIncluido = req.body.ServicioIncluido
     var MontoServicio = req.body.ServicioDomiciliario;
+    console.log("ATENCION: SE PROCEDE A GUARDAR NUEVO CLIENTE");
+    console.log("DATOS DEL CLIENTE QUE SE GUARDA");
+    console.log('NOMBRE:' + Nombre + ', NCarpeta:' + NCarpeta);
+    //Variables de las promesas
     // const TipoRed =req.body.Tipos-de-red;
     if (DNV == null) { DNV = "NC"; }
     if (PerMunicipal == null) { PerMunicipal = "NC"; }
@@ -199,162 +205,177 @@ router.post('/guardarNuevoCliente', (req, res) => {
             var Permisos = "Sin presentar";
         }
     }
-    console.log("ATENCION: SE PROCEDE A GUARDAR NUEVO CLIENTE");
-    console.log("DATOS DEL CLIENTE QUE SE GUARDA");
-    console.log('NOMBRE:' + Nombre + ', NCarpeta:' + NCarpeta);
-    //Variables de las promesas
     var idObra;
-    const promise1 = new Promise((resolve, reject) => {
-        sql = 'Insert into obras set ?';
-        connection.query(sql, {
-            Nombre: Nombre, NCarpeta: NCarpeta, Comitente: Comitente, Ubicacion: Departamento, nuevaObra: "S"
-        }, (error, results) => {
-            if (error) console.log(error);
-            else{
-            sql='SELECT MAX(id) FROM obras;';
-            connection.query(sql),(error,results2)=>{
-                idObra=results2[0].id;
-                resolve(idObra);
-        }
-    }
-        })
-      
-    }).then((idObra)=>{
-        sql = 'INSERT INTO adminecogas_tareas_por_carpeta set ?';
-        connection.query(sql, {
-            id_obra:idObra,Nombre: Nombre, NCarpeta: NCarpeta, TipoDeRed: TipoDeRed
-        }, (error, results) => {
-            if (error) console.log(error);
-        })
-        sql = 'INSERT INTO adgastareas set ?';
-        connection.query(sql, {
-            Nombre: Nombre
-        }, (error, results) => {
-            if (error) console.log(error);
-        })
-        sql = 'INSERT INTO historialdecambios set ?';
-        connection.query(sql, { id_obra:idObra,Nombre_sub: Nombre, Tarea_Realizada_sub: "Se crea nuevo cliente", Proxima_Tarea_sub: "Actualizar estado de carpeta", Si_NO_TareaRealizada: "N", Fecha_Tarea_sub: fechaActual
-        }, (error, results) => {
-            if (error) console.log(error);
-        })
-        sql = 'INSERT INTO obras_tareasgenerales set ?';
-        connection.query(sql, {
-            Nombre: Nombre, PermisosEspeciales: PermisosEspeciales, Permisos: Permisos
-        }, (error, results) => {
-            if (error) console.log(error);
-        })
-        sql = 'INSERT INTO codificacioncarpetas Set?';
-        connection.query(sql, [{
-            Nombre: Nombre, CodigoVigentes: Codigo, CodigoEnUsoVigentes: "S",
-        },], (error, results) => {
-            if (error) console.log(error);
-
-        })
-        //La siguiente sentencia, elimina la carpeta de la BD donde el codigo de la carpeta se encuentre en "E" de "Eliminado". Tarea necesaria
-        // para que no figura el codigo como disponible.
-        sql = "Delete from codificacioncarpetas where CodigoEnUsoVigentes= 'E' and CodigoVigentes=?"
-        connection.query(sql, [Codigo], (error) => {
-            if (error) console.log(error);
-        })
-        //En caso de que el codigo no provenga de la carpeta eliminada, sino de una finalizada, se procede
-        //a dejar la carpeta finalizada sin "CodigoVigentes". 
-        //Esto es con motivo de que deje de figurar como que el codigo esta disponible.
-        sql = 'Update codificacioncarpetas set? where CodigoEnUsoVigentes="F" and CodigoVigentes=?';
-        connection.query(sql, [{
-            CodigoVigentes: null
-        }, Codigo], (error) => {
-            if (error) console.log(error);
-        })
-        sql = 'Insert into adminecogas_interferencias_y_permisos Set?';
-        connection.query(sql, [{
-            Nombre: Nombre,
-            DNV: DNV, DPV: DPV, Irrigacion: IRRIGACION,
-            Hidraulica: HIDRAULICA, PerMunicipal: PerMunicipal, Ferrocarriles: FERROCARRIL, Privado: Privado, OtrosPermisos: OTROSPERMISOS
-        }], (error, results) => {
-            if (error) console.log(error);
-        })
-    }).then(function (resultadopromise1) {
-        new Promise((resolve, reject) => {
-            sql = 'Select id from obras where Nombre =?';
-            connection.query(sql, Nombre, (error, results) => {
+    function insertObra(){
+        return new Promise((resolve, reject) => {
+            sql = 'Insert into obras set ?';
+            connection.query(sql, {
+                Nombre: Nombre, NCarpeta: NCarpeta, Comitente: Comitente, Ubicacion: Departamento, nuevaObra: "S"
+            }, (error, results) => {
                 if (error) console.log(error);
                 else {
-                    idObra = results[0].id;
-                    resolve();
+                    console.log('Comienzo de carga de nueva obra.');
+                    sql = 'SELECT MAX(id) as id FROM obras ';
+                    connection.query(sql, (error, results2) => {
+                        idObra = results2[0].id;
+                        resolve(idObra);
+                    })
                 }
+              
             })
-        }).then(function (resultado) {
-            const promise2 = new Promise((resolve, reject) => {
-                const cantidadVecinos = req.body.cantidadVecinos;
-                const MontoContrato = req.body.MontoContrato;
-                const PrecioDeCuota = req.body.PrecioDeCuota;
-                const AnticipoFinanciero = req.body.AnticipoFinanciero;
-                const CantidadCuotas = req.body.CantidadCuotas;
-                var ArregloVecinos = [];
-                var NombreVecino = req.body.NombreVecino;
-                var DniVecino = req.body.DniVecino;
-                var TelefonoVecino = req.body.TelefonoVecino;
-                var CorreoVecino = req.body.CorreoVecino;
-                var LoteVecino = req.body.LoteVecino;
-                if (cantidadVecinos > 1 || cantidadVecinos != null || cantidadVecinos != undefined) {
-                    for (let index = 0; index < cantidadVecinos; index++) {
-                        sql = 'Insert into finanzas_clientes_por_obra set?';
+        })
+    }
+    insertObra().then((idObra) => {
+            sql = 'INSERT INTO adminecogas_tareas_por_carpeta set ?';
+            connection.query(sql, {
+                id_obra: idObra, Nombre: Nombre, NCarpeta: NCarpeta, TipoDeRed: TipoDeRed
+            }, (error, results) => {
+                if (error) console.log(error);
+            })
+            sql = 'INSERT INTO adgastareas set ?';
+            connection.query(sql, {
+                Nombre: Nombre
+            }, (error, results) => {
+                if (error) console.log(error);
+            })
+                if (CarpetaProvisoria == 'S') {
+                    sql = 'INSERT INTO obras_tareasgenerales set ?';
+                    connection.query(sql, {
+                        idObra: idObra,
+                        Nombre: Nombre, PermisosEspeciales: 'Sin presentar', Permisos: 'Sin presentar'
+                    }, (error, results) => {
+                        if (error) console.log(error);
+                    })
+                    sql = 'INSERT INTO codificacioncarpetas Set?';
+                    connection.query(sql, [{
+                        Nombre: Nombre, CodigoVigentes: idObra, CodigoEnUsoVigentes: "P",
+                    },], (error, results) => {
+                        if (error) console.log(error);
+
+                    })
+                }
+                else {
+                    sql = 'INSERT INTO obras_tareasgenerales set ?';
+                    connection.query(sql, {
+                        Nombre: Nombre, PermisosEspeciales: PermisosEspeciales, Permisos: Permisos
+                    }, (error, results) => {
+                        if (error) console.log(error);
+                    })
+                    sql = 'INSERT INTO codificacioncarpetas Set?';
+                    connection.query(sql, [{
+                        Nombre: Nombre, CodigoVigentes: Codigo, CodigoEnUsoVigentes: "S",
+                    },], (error, results) => {
+                        if (error) console.log(error);
+                    })
+                    //La siguiente sentencia, elimina la carpeta de la BD donde el codigo de la carpeta se encuentre en "E" de "Eliminado". Tarea necesaria
+                    // para que no figura el codigo como disponible.
+                    sql = "DELETE from codificacioncarpetas WHERE CodigoEnUsoVigentes= 'E' and CodigoVigentes=?"
+                    connection.query(sql, [Codigo], (error) => {
+                        if (error) console.log(error);
+                    })
+                    //En caso de que el codigo no provenga de la carpeta eliminada, sino de una finalizada, se procede
+                    //a dejar la carpeta finalizada sin "CodigoVigentes". 
+                    //Esto es con motivo de que deje de figurar como que el codigo esta disponible.
+                    sql = 'Update codificacioncarpetas set? where CodigoEnUsoVigentes="F" and CodigoVigentes=?';
+                    connection.query(sql, [{
+                        CodigoVigentes: null
+                    }, Codigo], (error) => {
+                        if (error) console.log(error);
+                    })
+                    sql = 'Insert into adminecogas_interferencias_y_permisos Set?';
+                    connection.query(sql, [{
+                        Nombre: Nombre,
+                        DNV: DNV, DPV: DPV, Irrigacion: IRRIGACION,
+                        Hidraulica: HIDRAULICA, PerMunicipal: PerMunicipal, Ferrocarriles: FERROCARRIL, Privado: Privado, OtrosPermisos: OTROSPERMISOS
+                    }], (error, results) => {
+                        if (error) console.log(error);
+                    })
+                }
+                sql = 'INSERT INTO historialdecambios set ?';
+                connection.query(sql, {
+                    id_obra: idObra, Nombre_sub: Nombre, Tarea_Realizada_sub: "Se crea nuevo cliente", Proxima_Tarea_sub: "Actualizar estado de carpeta", Si_NO_TareaRealizada: "N", Fecha_Tarea_sub: fechaActual
+                }, (error, results) => {
+                    if (error) console.log(error);
+                })
+                function cargarenFinanzas(){
+                    return new Promise((resolve, reject) => {
+                        const cantidadVecinos = req.body.cantidadVecinos;
+                        const MontoContrato = req.body.MontoContrato;
+                        const PrecioDeCuota = req.body.PrecioDeCuota;
+                        const AnticipoFinanciero = req.body.AnticipoFinanciero;
+                        const CantidadCuotas = req.body.CantidadCuotas;
+                        var ArregloVecinos = [];
                         var NombreVecino = req.body.NombreVecino;
-                        connection.query(sql, {
-                            id_Obra: idObra, NombreObra: Nombre, NombreCliente: NombreVecino[index], DniCliente: DniVecino[index], LocacionObra: Departamento, Telefono: TelefonoVecino[index], Correo: CorreoVecino[index], Direccion: LoteVecino[index],
-                        }, (error, results) => {
-                            if (error) console.log(error);
-                            else {
-                                sql = 'Select id_cliente from finanzas_clientes_por_obra where NombreCliente =? and id_Obra =?';
-                                connection.query(sql, [NombreVecino[index], idObra], (error, results) => {
+                        var DniVecino = req.body.DniVecino;
+                        var TelefonoVecino = req.body.TelefonoVecino;
+                        var CorreoVecino = req.body.CorreoVecino;
+                        var LoteVecino = req.body.LoteVecino;
+                        if (cantidadVecinos > 1 || cantidadVecinos != null || cantidadVecinos != undefined) {
+                            for (let index = 0; index < cantidadVecinos; index++) {
+                                sql = 'Insert into finanzas_clientes_por_obra set?';
+                                var NombreVecino = req.body.NombreVecino;
+                                connection.query(sql, {
+                                    id_Obra: idObra, NombreObra: Nombre, NombreCliente: NombreVecino[index], DniCliente: DniVecino[index], LocacionObra: Departamento, Telefono: TelefonoVecino[index], Correo: CorreoVecino[index], Direccion: LoteVecino[index],
+                                }, (error, results) => {
                                     if (error) console.log(error);
                                     else {
-                                        var id_cliente = results[0].id_cliente;
-                                        sql = 'Insert into finanzas_clientes_predeterminados set?';
-                                        connection.query(sql, {
-                                            id_obra: idObra, id_cliente: id_cliente, NombreCliente: NombreVecino[index], AnticipoFinanciero: AnticipoFinanciero
-                                        }, (error, results) => {
+                                        sql = 'Select id_cliente from finanzas_clientes_por_obra where NombreCliente =? and id_Obra =?';
+                                        connection.query(sql, [NombreVecino[index], idObra], (error, results) => {
                                             if (error) console.log(error);
-                                            for (let j = 1; j < CantidadCuotas; j++) {
-                                                var cuota = "Cuota" + j;
-                                                sql = 'UPDATE finanzas_clientes_predeterminados SET ' + cuota + ' = ' + PrecioDeCuota + ' WHERE id_cliente=?';
-                                                connection.query(sql, id_cliente, (error, results) => {
-                                                    if (error) console.log(error.sqlMessage);
+                                            else {
+                                                var id_cliente = results[0].id_cliente;
+                                                sql = 'Insert into finanzas_clientes_predeterminados set?';
+                                                connection.query(sql, {
+                                                    id_obra: idObra, id_cliente: id_cliente, NombreCliente: NombreVecino[index], AnticipoFinanciero: AnticipoFinanciero
+                                                }, (error, results) => {
+                                                    if (error) console.log(error);
+                                                    for (let j = 1; j < CantidadCuotas; j++) {
+                                                        var cuota = "Cuota" + j;
+                                                        sql = 'UPDATE finanzas_clientes_predeterminados SET ' + cuota + ' = ' + PrecioDeCuota + ' WHERE id_cliente=?';
+                                                        connection.query(sql, id_cliente, (error, results) => {
+                                                            if (error) console.log(error.sqlMessage);
+                                                        })
+                                                    }
+                                                })
+                                                sql = 'INSERT into finanzas_clientes_por_obra_cobros set?';
+                                                connection.query(sql, {
+                                                    id_obra: idObra, ID_cliente: id_cliente, NombreCliente: NombreVecino[index], ServicioIncluidoCuotas: ServicioIncluido[index],
+                                                }, (error, results) => {
+                                                    if (error) console.log(error);
                                                 })
                                             }
-                                        })
-                                        sql = 'INSERT into finanzas_clientes_por_obra_cobros set?';
-                                        connection.query(sql, {
-                                            id_obra: idObra, ID_cliente: id_cliente, NombreCliente: NombreVecino[index], ServicioIncluidoCuotas: ServicioIncluido[index],
-                                        }, (error, results) => {
-                                            if (error) console.log(error);
                                         })
                                     }
                                 })
                             }
-                        })
-                    }
-                    resolve();
+                            resolve();
+                        }
+                        else {
+                            sql = 'Insert into finanzas_clientes_por_obra set?';
+                            var NombreVecino = req.body.NombreVecino;
+                            connection.query(sql, {
+                                id_Obra: idObra, NombreObra: Nombre, NombreCliente: NombreVecino, DniCliente: DniVecino, LocacionObra: Departamento, Telefono: TelefonoVecino, Correo: CorreoVecino, Direccion: LoteVecino,
+                            }, (error, results) => {
+                                if (error) console.log(error);
+                                resolve();
+                            }
+                            )
+                        }
+                    })
                 }
-                else {
-                    sql = 'Insert into finanzas_clientes_por_obra set?';
-                    var NombreVecino = req.body.NombreVecino;
-                    connection.query(sql, {
-                        id_Obra: idObra, NombreObra: Nombre, NombreCliente: NombreVecino, DniCliente: DniVecino, LocacionObra: Departamento, Telefono: TelefonoVecino, Correo: CorreoVecino, Direccion: LoteVecino,
-                    }, (error, results) => {
-                        if (error) console.log(error);
+                cargarenFinanzas().then(function () {
 
-                    }
-                    )
-                }
-            })
-        }).then(function () {
+                    res.redirect('/editarTareas/' + idObra);
 
-            res.redirect('/editarTareas/' + idObra);
-            resolve();
+                })
 
-        })
+
+            
+        
+
     })
+
+
 
 }
 )
@@ -438,11 +459,11 @@ router.post('/eliminarEmpleado/:id', (req, res) => {
     })
 })
 //Manejo de archivos en servidor
- function CrearCarpetaEcogas(NombreObra,nPDT,CodigoVigente){
-if(NombreObra){
-    const ubicacion= 'Archivos/1 Administracion Ecogas/02. Carpetas Vigentes/'+CodigoVigente+'-'+nPDT+'-'+NombreObra+''
-    fs.mkdirSync(ubicacion,{recursive:true});
-}
+function CrearCarpetaEcogas(NombreObra, nPDT, CodigoVigente) {
+    if (NombreObra) {
+        const ubicacion = 'Archivos/1 Administracion Ecogas/02. Carpetas Vigentes/' + CodigoVigente + '-' + nPDT + '-' + NombreObra + ''
+        fs.mkdirSync(ubicacion, { recursive: true });
+    }
 
 
 }

@@ -412,8 +412,11 @@
       if ( contenido.includes( "PEDIR") ||  contenido.includes( "NO RECIBIDO") ||  contenido.includes( "SIN PRESENTAR") ||  contenido.includes( "OBSERVADO")) {
         $(this).addClass('align-middle bg-danger text-white');
       }
-      if ( contenido.includes( "ENGESTION") ||  contenido.includes( "PRESENTADO") ||  contenido.includes( "SOLICITADO")) {
+      if ( contenido.includes( "ENGESTION") ||  contenido.includes( "SOLICITADO")) {
         $(this).addClass('align-middle bg-warning ');
+      }
+      if ( contenido.includes( "LEER HISTORIAL DE CARPETA") || contenido.includes( "PRESENTADO") || contenido.includes( "APROBADO/IMPRESO") || contenido.includes( "FIRMADAS")) {
+        $(this).addClass('align-middle bg-info ');
       }
     })
     jQuery("#Obras").trigger('click');
