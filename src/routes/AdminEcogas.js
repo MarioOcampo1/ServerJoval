@@ -1,6 +1,6 @@
 const { render } = require("ejs");
 const multer = require("multer");
-const upload = multer({ dest: "src/uploads" });
+const upload = multer({ dest: "Archivos/temp" });
 const { Router } = require("express");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
@@ -3833,4 +3833,23 @@ router.get("/Adminecogas/DatosObras/all",(req,res)=>{
       res.send(results);
     }
   })
+})
+router.post('/AdminEcogas/CargarDocumento',upload.single('CargaDocumento'),async (req,res)=>{
+// SE DEBE DE TERMINAR LA GESTION DE LA CARGA DE LOS ARCHIVOS. ACTUALMENTE NO FUNCIONA.
+// DESDE EDITAR TAREAS, APARENTEMENTE SE ENVIA A TRAVES DEL Modal, EL ARCHIVO. PERO CUANDO LLEGA ACA AL BACKEND
+// EL MISMO NO PUEDE SER PROCESADO. DEBIDO A SOLICITUD DE MAURICIO EN HACER OTRA COSA SE DEJA EL CODIGO ADONDE ESTA Y SE CONTINUA CON OTRAS 
+// TAREAS.
+
+const codigoObra=req.body.nCodigoObra;
+const nombreDocumento=req.body.CargaDocumento;
+const ubicacion=req.body.nombreDocumento;
+try {
+  const ArchivoTemporal = path.join(__dirname,'/Archivos/temp','archivo');
+  const CarpetaDestino = path.join(__dirname,'Archivos/1 Administracion Ecogas/02. Carpetas Vigentes/'+codigoObra,ubicacion);
+  await fs.rename(tempFilePath, finalDestinationPath);
+  res.send('Archivo cargado exitosamente');
+} catch (error) {
+  console.error(error);
+    res.status(500).send('Error al mover el archivo');
+}
 })
