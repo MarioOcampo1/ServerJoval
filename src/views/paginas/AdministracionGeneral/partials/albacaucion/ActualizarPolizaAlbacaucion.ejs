@@ -151,8 +151,9 @@
                             <div class="col-12">
                                 <label class="fw-bold" for="Estado">Estado</label>
                                 <select class="form-select form-select-sm" name="Estado" id="Estado">Seleccione el estado
+                                    
                                     <%if(obras[0].Estado=="Vigente"){%>
-                                        <option value="Vigente" selected>Vigente</option>
+                                     <option value="Vigente" >Vigente</option>
                                         <option value="Dada de baja">Dada de baja</option>
     
                                         <%} if(obras[0].Estado=="Dada de baja"){%>
@@ -161,6 +162,13 @@
                                                 <%=obras[0].Estado%>
                                             </option>
                                             <%}%>
+                                            <% if (obras[0].Estado != "Vigente" && obras[0].Estado !="Dada de baja") { %>
+                                                <option value="" ></option>
+                                                <option value="Vigente" >Vigente</option>
+                                                <option value="Dada de baja">Dada de baja</option>
+                                                   
+                                                
+                                            <% } %>
                                 </select>
                             </div>
                             <div class="col-12">
