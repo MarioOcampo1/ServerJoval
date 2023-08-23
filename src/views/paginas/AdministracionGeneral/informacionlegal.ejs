@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Información Legal</title>
+</head>
+<body>
+    <%- include('./partials/menusuperior.ejs'); %>
+    <h1 class="text-center">Información legal</h1>
+    <h1>Archivos en la carpeta</h1>
+    <ul>
+        <% archivos.forEach(element => { %>
+         <li><%= element %></li>
+        <% }) %>
+    </ul>
+    <table id="infolegal" class="display">
+        <thead>
+            <tr>
+                <th>Column 1</th>
+                <th>Column 2</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Row 1 Data 1</td>
+                <td>Row 1 Data 2</td>
+            </tr>
+            <tr>
+                <td>Row 2 Data 1</td>
+                <td>Row 2 Data 2</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+<script>
+//     $('#infolegal').DataTable( {
+//     ajax: ...,
+//     columns: [
+//         { data: 0 },
+//         { data: 1 },
+//         { data: 2 },
+//         { data: 3 },
+//         { data: 4 },
+//         { data: 5 }
+//     ]
+// } );
+</script>
+</html>

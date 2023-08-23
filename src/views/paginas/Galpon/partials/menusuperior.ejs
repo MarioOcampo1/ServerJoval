@@ -1,0 +1,50 @@
+<link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.css">
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+<link rel="s|tylesheet" href="/DataTables/DataTables-1.11.5/css/dataTables.bootstrap5.css">
+<link rel="stylesheet" href="/DataTables/DateTime-1.1.2/css/dataTables.dateTime.min.css">
+<link rel="stylesheet" href="/bootstrap-icons/font/bootstrap-icons.css">
+<link rel="stylesheet" href="/css/Principal.css">
+<link rel="stylesheet" href="/css/Animaciones.css">
+<link rel="stylesheet" href="/Hover CSS/Hover-master/css/hover-min.css">
+<script src="/Jquery-3.6.3/jquery-3.6.3.js"></script>  
+<script src="/bootstrap/dist/js/bootstrap.bundle.min.js"></script> 
+<script type="text/javascript" src="/moment/moment.min.js"></script>
+<script  type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.4/locale/es.js"></script>
+<script type="text/javascript" src="/DataTables/DateTime-1.1.2/js/dataTables.dateTime.js"></script>
+<script src="/DataTables/DataTables-1.11.5/js/jquery.dataTables.min.js"></script>
+<script src="/DataTables/DataTables-1.11.5/js/dataTables.dataTables.min.js"></script>
+<div class="container-fluid">
+    <div class="row">
+      <div class="col align-left">
+        <button id="btn-Back" class="btn bg-warning text-dark text-dark "><i class="bi bi-arrow-left-square-fill"></i></button>
+        <a href="/index"><img class="img-fluid w-25 mx-auto d-inline"
+          src="/images/Logo-Joval.png" alt="logo" id="LogoJoval"></a>
+          <button class="btn btn-sm btn-warning">
+          <a class="hvr-pulse-grow nav-link text-dark " type="button" href="/Galpon">Galpon</a>
+        </button>
+      </div>
+      <div class="col">
+      </div>
+      <div class="col">
+        <p>Version de prueba (alpha 0.1)</p>
+      </div>
+    </div>
+  </div>
+  <nav class="navbar navbar-expand-sm navbar-light bg-warning text-dark sticky-top ">
+    </button>
+    <div class="" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+            <a class="hvr-pulse-grow nav-link text-dark " href="/vencimientosDocGral">Vencimientos</a>
+          </li>  
+        <li class="nav-item">
+          <a class="hvr-pulse-grow nav-link text-dark " href="/Vehiculos">Vehículos</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <script>
+    $('#btn-Back').click(function(){
+      history.go(-1);
+    })
+  </script>

@@ -11,10 +11,73 @@
 <body>
     <%- include('./partials/menusuperior.ejs'); %>
     <h1 class="text-center">Administración general</h1>
-<div class="" id="VencimientoSeguros"></div>
+<div class=" border mb-2 text-center" id="VencimientoSeguros">
+    <h5 class="fw-bold">Proximos vencimientos:</h5>
+</div>
+
+<div class="table-responsive-sm">
+    <table class="table table-primary">
+        <thead>
+            <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Proxima actualización</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="">
+                <td scope="row">Asamblea ordinaria</td>
+                <td>Sin fecha</td>
+                <td><buttton class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil-square"></i></buttton></td>
+            </tr>
+            <tr class="">
+                <td scope="row">Inscripcion registro publico comercio GC</td>
+                <td>Sin fecha</td>
+                <td><buttton class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil-square"></i></buttton></td>
+            </tr>
+            <tr class="">
+                <td scope="row">Renovacion matricula RT</td>
+                <td>Sin fecha</td>
+                <td><buttton class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil-square"></i></buttton></td>
+            </tr>
+            <tr class="">
+                <td scope="row">Matricula residuos peligrosos</td>
+                <td>Sin fecha</td>
+                <td><buttton class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil-square"></i></buttton></td>
+            </tr>
+            <tr class="">
+                <td scope="row">Matricula ecogas</td>
+                <td>Sin fecha</td>
+                <td><buttton class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil-square"></i></buttton></td>
+            </tr>
+            <tr class="">
+                <td scope="row">Matricula ROPYCE</td>
+                <td>Sin fecha</td>
+                <td><buttton class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil-square"></i></buttton></td>
+            </tr>
+            <tr class="">
+                <td scope="row">Renovar 931</td>
+                <td>Sin fecha</td>
+                <td><buttton class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil-square"></i></buttton></td>
+            </tr>
+            <tr class="">
+                <td scope="row">Pagar ATM</td>
+                <td>Sin fecha</td>
+                <td><buttton class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil-square"></i></buttton></td>
+            </tr>
+            <tr class="">
+                <td scope="row">Preparar facturas para contador</td>
+                <td>Sin fecha</td>
+                <td><buttton class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil-square"></i></buttton></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
 </body>
 <script>
-$.ajax({
+    $(document).ready(function () {
+        $.ajax({
     url:'/vencimientosDocGral/obtenerinfo',
     method:'GET',
     
@@ -22,19 +85,24 @@ $.ajax({
     var FechaActual = new Date();
     var SegurosPorVencer=[];
     data.forEach(element => {
-        var fechaAviso = new Date(element.DiasPrevioAviso);
+        if(element.idSector=='2'){
+            var fechaAviso = new Date(element.DiasPreviosAviso);
+        
         if(fechaAviso<FechaActual){
 SegurosPorVencer.push(element);
         }
+        }
+       
     });
-    console.log(SegurosPorVencer);
     SegurosPorVencer.forEach(seguro=>{
        
         seguro.FechaVencimiento =  moment(seguro.FechaVencimiento).format("DD/MM/YYYY");
-        $('#VencimientoSeguros').append(''+seguro.Item+' se vencerá el día '+seguro.FechaVencimiento+'');
+        $('#VencimientoSeguros').append('<i class="text-primary">'+seguro.Item+'</i> se vencerá el día '+seguro.FechaVencimiento+'. <br>');
     })
     
   
 })
+    });
+
 </script>
 </html>

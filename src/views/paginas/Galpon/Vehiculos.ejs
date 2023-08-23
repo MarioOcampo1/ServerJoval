@@ -56,7 +56,12 @@
                                     <div class="col">
                                         <button class="btn-sm btn btn-outline-primary" id="btnActualizarRegistro">Nuevo
                                             registro</button>
+                                            
+                                              <input type="text" class="form-control" name="" id="BuscarTablaRegistrokmsHoras" aria-describedby="helpId" placeholder="Buscar en tabla">
+                                              
+                                            
                                     </div>
+
                                     <div class="col">
                                         REGISTRO DIARIO DE KILÓMETROS Y HORAS
                                     </div>
@@ -893,6 +898,24 @@
 
         })
     });
+    
+        jQuery("#BuscarTablaRegistrokmsHoras").keyup(function () {
+            if (jQuery(this).val() != "0") {
+              jQuery("#tablaRegistroKms tbody>tr").hide();
+              jQuery("#tablaRegistroKms td:contiene-palabra('" + jQuery(this).val() + "')").parent("tr").show();
+            }
+            else {
+              jQuery("#tablaRegistroKms tbody>tr").show();
+            }
+          });
+
+          jQuery.extend(jQuery.expr[":"],
+            {
+              "contiene-palabra": function (elem, i, match, array) {
+                return (elem.textContent || elem.innerText || jQuery(elem).text() || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
+              }
+            });
+    
 </script>
 </html>
 

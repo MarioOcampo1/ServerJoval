@@ -49,6 +49,8 @@ app.use(require('./routes/AdminEcogas')); //Usa el enrutador
 app.use(require('./routes/AdminGeneral'));
 app.use(require('./routes/Compra-Venta'));
 app.use(require('./routes/Finanzas'));
+app.use(require('./routes/Galpon'));
+
 //404 Handler
 app.use((req,res,next)=>{
 res.status(404).render('404.ejs');
