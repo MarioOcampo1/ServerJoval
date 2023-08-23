@@ -293,6 +293,19 @@ router.post('/GuardarPolizaAlbacaucion', (req, res) => {
             }
             else {
                 idObra = results[0].id;
+                if(TipoRiesgo==="Mantenimiento de oferta"){
+                    sql = 'Insert into admingeneral_seguros_albacaucion set?'
+                    connection.query(sql, {
+                        Aseguradora: Aseguradora, Obra: NombreObra, NumeroPoliza: NPoliza,
+                        FechaEmisionPoliza: FechaEmisionPoliza, Descripcion: Descripcion, Endoso: 0, EndosoPagado: EndosoPagado, Estado: EstadoPoliza,
+                        VigenciaPoliza: VigenciaPoliza, Riesgo: TipoRiesgo, Valor: ValorAPagar, MontoAsegurado: montoAsegurado, NombreAsegurado: Asegurado
+                    }, (error, results) => {
+                        if (error) console.log(error);
+                        else {
+                            res.redirect('/seguros/Albacaucion');
+                        }
+                    })
+                }
                 sql = 'Insert into admingeneral_seguros_albacaucion set?'
                 connection.query(sql, {
                     Aseguradora: Aseguradora, ProximaRefacturacion: ProximaRefacturacion, Obra: NombreObra, NumeroPoliza: NPoliza,
