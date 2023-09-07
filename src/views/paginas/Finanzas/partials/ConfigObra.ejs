@@ -1,0 +1,231 @@
+<div class="container-fluid">
+    <div class="modal fade" id="ModalConfiguracion" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-fullscreen" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalTitleId">Configuraciones de la obra</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="container">
+              <div class="row">
+                <h4 class="text-center" title="Configura el valor predeterminado que se mostrará al momento de cargar un pago.">
+                  Configura el monto que pagan todos los clientes.
+                </h4>
+               <div style="background:black; border-radius:25%;">
+                <span class="text-light"> En caso de que algún cliente tenga un monto de pago diferente al resto, Ud. deberá de modificarlo desde el botón "Editar cliente", el cúal se ubica haciendo click en el nombre del cliente a editar.</span>
+              </div>
+              </div>
+              <div class="row p-2 mb-2 text-center border">
+                <span class="mb-2">Pagos principales</span>
+                <div class="mb-3 col-3"> 
+                  <div class="input-group">
+                <label for="" class="input-group-text">Serv. Domicil.</label>
+                <input type="number"class="form-control form-control-sm" name="" id="ConfigServicioDomiciliario" aria-describedby="helpId" placeholder="">
+                                    <button class="btn btn-outline-success " onclick="editarPago('ConfigServicioDomiciliario')"><span><i class="bi bi-check"></i></span></button>
+  </div>
+              </div>
+              <div class="mb-3 col-3 ">
+                <div class="input-group">
+                  <label for="" class="input-group-text">A. financiero</label>
+                  <input type="number"
+                    class="form-control form-control-sm" name="" id="ConfigAnticipoFinanciero" aria-describedby="helpId" placeholder="">
+                    <button class="btn btn-outline-success " onclick="editarPago('ConfigAnticipoFinanciero')"><span><i class="bi bi-check"></i></span></button>
+                </div>
+              
+              </div>
+               <div class="mb-3 col-3">
+                <div class="input-group">
+                <label for="" class="input-group-text">Cuota 1</label>
+                <input type="number"
+                  class="form-control form-control-sm" name="" id="ConfigCuota1" aria-describedby="helpId" placeholder="">
+                  <button class="btn btn-outline-success " onclick="editarPago('ConfigCuota1')"><span><i class="bi bi-check"></i></span></button>
+               
+                </div>
+              </div>
+              <div class="mb-3 col-3">
+                <div class="input-group">
+                <label for="" class="input-group-text">Cuota 2</label>
+                <input type="number"class="form-control form-control-sm" name="" id="ConfigCuota2" aria-describedby="helpId" placeholder="">
+                <button class="btn btn-outline-success " onclick="editarPago('ConfigCuota2')"><span><i class="bi bi-check"></i></span></button>
+              </div>
+              </div>
+              <div class="mb-3 col-3">
+                <div class="input-group">
+                <label for="" class="input-group-text">Cuota 3</label>
+                <input type="number"
+                  class="form-control form-control-sm" name="" id="ConfigCuota3" aria-describedby="helpId" placeholder="">
+                  <button class="btn btn-outline-success " onclick="editarPago('ConfigCuota3')"><span><i class="bi bi-check"></i></span></button>
+                </div>
+                </div>
+              
+              <div class="mb-3 col-3">
+                <div class="input-group">
+                <label for="" class="input-group-text">Cuota 4</label>
+                <input type="number"
+                  class="form-control form-control-sm" name="" id="ConfigCuota4" aria-describedby="helpId" placeholder="">
+                  <button class="btn btn-outline-success " onclick="editarPago('ConfigCuota4')"><span><i class="bi bi-check"></i></span></button>
+              </div>
+              </div>
+              <div class="mb-3 col-3">
+                <div class="input-group">
+                <label for="" class="input-group-text">Cuota 5</label>
+                <input type="number"
+                  class="form-control form-control-sm" name="" id="ConfigCuota5" aria-describedby="helpId" placeholder="">
+                  <button class="btn btn-outline-success " onclick="editarPago('ConfigCuota5')"><span><i class="bi bi-check"></i></span></button>
+              </div>
+              </div>
+              <div class="mb-3 col-3">
+                <div class="input-group">
+                <label for="" class="input-group-text">Cuota 6</label>
+                <input type="number"
+                  class="form-control form-control-sm" name="" id="ConfigCuota6" aria-describedby="helpId" placeholder="">
+                  <button class="btn btn-outline-success " onclick="editarPago('ConfigCuota6')"><span><i class="bi bi-check"></i></span></button>
+
+                </div>
+                </div>
+               
+            </div>
+             
+              <div class="row p-2 mb-2  text-center border">
+                <span class="mb-2">Cuotas adicionales</span>
+                <div class="mb-3 col-3"> <div class="input-group">
+                  <label for="" class="input-group-text">Cuota 7</label>
+                  <input type="number"
+                    class="form-control form-control-sm" name="" id="ConfigCuota7" aria-describedby="helpId" placeholder="">
+                                      <button class="btn btn-outline-success " onclick="editarPago('ConfigCuota7')"><span><i class="bi bi-check"></i></span></button>
+</div>
+                </div>
+                <div class="mb-3 col-3"> <div class="input-group">
+                  <label for="" class="input-group-text">Cuota 8</label>
+                  <input type="number"
+                    class="form-control form-control-sm" name="" id="ConfigCuota8" aria-describedby="helpId" placeholder="">
+                                      <button class="btn btn-outline-success " onclick="editarPago('ConfigCuota8')"><span><i class="bi bi-check"></i></span></button>
+</div>
+                </div>
+                <div class="mb-3 col-3"> <div class="input-group">
+                  <label for="" class="input-group-text">Cuota 9</label>
+                  <input type="number"
+                    class="form-control form-control-sm" name="" id="ConfigCuota9" aria-describedby="helpId" placeholder="">
+                                      <button class="btn btn-outline-success " onclick="editarPago('ConfigCuota9')"><span><i class="bi bi-check"></i></span></button>
+</div>
+                </div>
+                <div class="mb-3 col-3"> <div class="input-group">
+                  <label for="" class="input-group-text">Cuota 10</label>
+                  <input type="number"
+                    class="form-control form-control-sm" name="" id="ConfigCuota10" aria-describedby="helpId" placeholder="">
+                                      <button class="btn btn-outline-success " onclick="editarPago('ConfigCuota10')"><span><i class="bi bi-check"></i></span></button>
+</div>
+                </div>
+                <div class="mb-3 col-3"> <div class="input-group">
+                  <label for="" class="input-group-text">Cuota 11</label>
+                  <input type="number"
+                    class="form-control form-control-sm" name="" id="ConfigCuota11" aria-describedby="helpId" placeholder="">
+                                      <button class="btn btn-outline-success " onclick="editarPago('ConfigCuota11')"><span><i class="bi bi-check"></i></span></button>
+</div>
+                </div>
+                <div class="mb-3 col-3"> <div class="input-group">
+                  <label for="" class="input-group-text">Cuota 12</label>
+                  <input type="number"
+                    class="form-control form-control-sm" name="" id="ConfigCuota12" aria-describedby="helpId" placeholder="">
+                                      <button class="btn btn-outline-success " onclick="editarPago('ConfigCuota12')"><span><i class="bi bi-check"></i></span></button>
+</div>
+                </div>
+              </div>
+              <div class="row p-2 mb-2 text-center border">
+                <span class="mb-2">Permisos </span>
+                  <div class="mb-3 col-3"> 
+                    <div class="input-group">
+                  <label for="" class="input-group-text">P. DNV</label>
+                  <input type="number"class="form-control form-control-sm" name="" id="ConfigDNV" aria-describedby="helpId" placeholder="">
+                                      <button class="btn btn-outline-success " onclick="editarPago('ConfigDNV')"><span><i class="bi bi-check"></i></span></button>
+</div>
+                </div>
+                <div class="mb-3 col-3"> 
+                  <div class="input-group">
+                <label for="" class="input-group-text">P. DPV</label>
+                <input type="number"class="form-control form-control-sm" name="" id="ConfigDPV" aria-describedby="helpId" placeholder="">
+                                    <button class="btn btn-outline-success " onclick="editarPago('ConfigDPV')"><span><i class="bi bi-check"></i></span></button>
+</div>
+              </div>
+              <div class="mb-3 col-3"> 
+                <div class="input-group">
+              <label for="" class="input-group-text">P. Hidraulica</label>
+              <input type="number"class="form-control form-control-sm" name="" id="ConfigHidraulica" aria-describedby="helpId" placeholder="">
+                                  <button class="btn btn-outline-success " onclick="editarPago('ConfigHidraulica')"><span><i class="bi bi-check"></i></span></button>
+</div>
+            </div>
+            <div class="mb-3 col-3"> 
+              <div class="input-group">
+            <label for="" class="input-group-text">P. FFCC</label>
+            <input type="number"class="form-control form-control-sm" name="" id="ConfigFFCC" aria-describedby="helpId" placeholder="">
+                                <button class="btn btn-outline-success " onclick="editarPago('ConfigFFCC')"><span><i class="bi bi-check"></i></span></button>
+</div>
+          </div>
+          <div class="mb-3 col-3"> 
+            <div class="input-group">
+          <label for="" class="input-group-text">P. Privado</label>
+          <input type="number"class="form-control form-control-sm" name="" id="ConfigPrivado" aria-describedby="helpId" placeholder="">
+                              <button class="btn btn-outline-success " onclick="editarPago('ConfigPrivado')"><span><i class="bi bi-check"></i></span></button>
+</div>
+        </div>
+             
+                <div class="mb-3 col-3"> 
+                  <div class="input-group">
+                <label for="" class="input-group-text">P. Municipal</label>
+                <input type="number"class="form-control form-control-sm" name="" id="ConfigMunicipal" aria-describedby="helpId" placeholder="">
+                                    <button class="btn btn-outline-success " onclick="editarPago('ConfigMunicipal')"><span><i class="bi bi-check"></i></span></button>
+</div>
+              </div>
+          
+               
+              </div>
+              <form action="actualizarConfigObra" method="post">
+              </form>
+<div class="" id="FormActualizarPredeterminadosObraEntera"></div>
+
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+      function editarPago(id, valor) {
+        var idOriginal= '#'+id;
+    var value=$('#' + id).val();
+    id= id.replace('Config',"");
+    var formulario = $("<form>",{
+      id:"FormActualizarPredeterminadosObraEntera",
+      action: "/Finanzas/actualizarPredeterminadosObraEntera/<%=id_Obra%>/" + id + "/<%=NombreObra%>",
+      method:"POST"
+    });
+ var infoFormulario = new FormData();
+ infoFormulario.append("valor", value);
+    formulario.submit(function(e){
+      e.preventDefault();
+      $.ajax({
+                type: formulario.attr("method"),
+                url: formulario.attr("action"),
+                data: infoFormulario,
+                dataType: 'json',
+                processData: false, // Evitar el procesamiento automático
+    contentType: false, // Evitar el encabezado Content-Type automático
+               
+                complete:function(response){
+                  if(response.responseText=="Ok"){
+                    $(idOriginal).parent().css('display','none');
+                  }
+                  else{
+                    $(idOriginal).addClass('bg-danger');
+                  }
+                }
+            });
+    })
+    
+    formulario.submit();
+  }
+  </script>

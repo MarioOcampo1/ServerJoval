@@ -87,18 +87,18 @@ router.get("/adminecogas", (req, res) => {
         interferenciasypermisos = results;
       }
     });
-    sql="SELECT * FROM usuariosregistrados;";
-    connection.query(sql,(error,respuesta)=>{
-      if(error)console.log(error);
-      else{
-usuariosregistrados=respuesta;
-}
+    sql = "SELECT * FROM usuariosregistrados;";
+    connection.query(sql, (error, respuesta) => {
+      if (error) console.log(error);
+      else {
+        usuariosregistrados = respuesta;
+      }
     })
     // FIN INTERFERENCIAS
-    sql ="SELECT a.id, a.Nombre, a.NCarpeta,b.TareaRealizada, b.ProximaTarea, b.EtapaTarea, b.FechaLimite,c.*" +
+    sql = "SELECT a.id, a.Nombre, a.NCarpeta,b.TareaRealizada, b.ProximaTarea, b.EtapaTarea, b.FechaLimite,c.*" +
       "FROM obras a INNER JOIN adminecogas_tareas_por_carpeta b ON a.id = b.id_obra " +
       "INNER JOIN adminecogas_interferencias_y_permisos c ON c.NCarpeta = b.NCarpeta ";
-      
+
     res.locals.moment = moment;
     connection.query(sql, (error, results) => {
       if (error) console.log(error);
@@ -136,29 +136,579 @@ router.get("/adminecogas/TablaGeneral", (req, res) => {
 router.get("/estadogeneral", (req, res) => {
   if (req.isAuthenticated()) {
     var Finalizadas;
-    var sql= 'SELECT * FROM codificacioncarpetas WHERE CodigoEnUsoVigentes ="F" ORDER BY CodigoFinalizadas asc';
-  async function cargarFinalizadas() {connection.query(sql,(error,result)=>{
-    if(error)console.log(error);
-    else{
-Finalizadas=result;
-    }
-  })  }
-    cargarFinalizadas().then(function(){
-      res.locals.moment = moment;
-      sql ="SELECT e.CodigoVigentes,e.CodigoFinalizadas,c.id, c.Nombre,c.NCarpeta,c.Ubicacion ,c.Comitente ,c.Estado,d.* ,b.* FROM obras_tareasgenerales b , codificacioncarpetas e , obras c, adminecogas_tareas_por_carpeta d WHERE b.Nombre = c.Nombre AND b.Nombre = e.Nombre AND d.Nombre = e.Nombre ";
-      connection.query(sql, (error, results) => {
+    var sql = 'SELECT * FROM codificacioncarpetas WHERE CodigoEnUsoVigentes ="F" ORDER BY CodigoFinalizadas asc';
+    async function cargarFinalizadas() {
+      connection.query(sql, (error, result) => {
         if (error) console.log(error);
-        if (results.length > 0) {
-          res.render("paginas/AdministracionEcogas/estadogeneral.ejs", {
-            results: results,moment:moment,Finalizadas:Finalizadas}
-            ); //en {results:results} lo que hago es guardar los resultados que envia la bd, en la variable results
-          // res.send(results);
-        } else {
-          res.send("Ningun resultado encontrado");
+        else {
+          Finalizadas = result;
         }
+      })
+    }
+    async function actualizarEstadoGral() {
+      console.log('actualizando el estado general...');
+      var sql = 'SELECT * FROM adminecogas_tareas_por_carpeta;';
+      var tareasgenerales;
+      var tareadelacarpeta;
+      var promise1 = new Promise((resolve, reject) => {
+        connection.query(sql, (error, tareas) => {
+          if (error) {
+            console.log(error);
+            reject(error);
+          }
+          else {
+            resolve(tareas);
+          }
+        });
       });
+      var promise2 = new Promise((resolve, reject) => {
+        sql = 'SELECT * FROM obras_tareasgenerales';
+        connection.query(sql, (error2, tareasgenerales2) => {
+          if (error2) {
+            console.log(error2);
+            reject(error);
+          }
+          else {
+            resolve(tareasgenerales2);
+          }
+        })
+      });
+      Promise.all([promise1, promise2]).then(([data1, data2]) => {
+        tareadelacarpeta = data1;
+        tareasgenerales = data2;
+        tareasgenerales.forEach(tareageneral => {
+          tareadelacarpeta.forEach(tareaporcarpeta => {
+            if (tareaporcarpeta.id_obra == tareageneral.idObra) {
+              //PRELIMINAR
+              if (
+                (tareaporcarpeta.Mensura == "Ok" || tareaporcarpeta.Mensura == "ok" || tareaporcarpeta.Mensura == "NC") &&
+                (tareaporcarpeta.TituloDePropiedad == "Ok" ||
+                  tareaporcarpeta.TituloDePropiedad == "ok" ||
+                  tareaporcarpeta.TituloDePropiedad == "NC")
+              ) {
+                var tareageneralACargarDocumentacionTerreno = "ok";
+              }
+              if (tareaporcarpeta.Mensura == "EnGestion" || tareaporcarpeta.TituloDePropiedad == "EnGestion") {
+                var tareageneralACargarDocumentacionTerreno = "EnGestion";
+              }
+              if (tareaporcarpeta.Mensura == "Sin presentar" || tareaporcarpeta.TituloDePropiedad == "Sin presentar") {
+                var tareageneralACargarDocumentacionTerreno = "Sin presentar";
+              }
+              //Documentacion Sociedad
+              if (
+                (tareaporcarpeta.ActaConstitutiva == "Ok" ||
+                  tareaporcarpeta.ActaConstitutiva == "ok" ||
+                  tareaporcarpeta.ActaConstitutiva == "NC") &&
+                (tareaporcarpeta.ActaCargoVigente == "ok" || tareaporcarpeta.ActaCargoVigente == "Ok" || tareaporcarpeta.ActaCargoVigente == "NC")
+              ) {
+                var tareageneralACargarDocumentacionSociedad = "ok";
+              }
+              if (tareaporcarpeta.ActaConstitutiva == "EnGestion" || tareaporcarpeta.ActaCargoVigente == "EnGestion") {
+                var tareageneralACargarDocumentacionSociedad = "EnGestion";
+              }
+              if (
+                tareaporcarpeta.ActaConstitutiva == "Sin presentar" ||
+                tareaporcarpeta.ActaCargoVigente == "Sin presentar"
+              ) {
+                var tareageneralACargarDocumentacionSociedad = "Sin presentar";
+              }
+              //Documentacion Contractual
+              if (
+                (tareaporcarpeta.Cotizacion == "ok" || tareaporcarpeta.Cotizacion == "Ok" || tareaporcarpeta.Cotizacion == "NC") &&
+                (tareaporcarpeta.Contrato == "Ok(Preliminar)" || tareaporcarpeta.Contrato == "ok(Preliminar)" ||
+                  tareaporcarpeta.Contrato == "ok" || tareaporcarpeta.Contrato == "Ok" ||
+                  tareaporcarpeta.Contrato == "NC(Preliminar)" ||
+                  tareaporcarpeta.Contrato == "NC")
+              ) {
+                var tareageneralACargarDocumentacionContractual = "ok";
+              }
+              if (
+                tareaporcarpeta.Cotizacion == "EnGestion" ||
+                tareaporcarpeta.Contrato == "EnGestion" ||
+                tareaporcarpeta.Contrato == "EnGestion(Preliminar)"
+              ) {
+                var tareageneralACargarDocumentacionContractual = "EnGestion";
+              }
+              if (
+                tareaporcarpeta.Cotizacion == "Sin presentar" ||
+                tareaporcarpeta.Contrato == "Sin presentar" ||
+                tareaporcarpeta.Contrato == "Sin presentar(Preliminar)"
+              ) {
+                var tareageneralACargarDocumentacionContractual = "Sin presentar";
+              }
+              //PRIMERA PARTE
+              //Documentacion del terreno
+              if (
+                (tareaporcarpeta.Mensura == "ok" || tareaporcarpeta.Mensura == "Ok" || tareaporcarpeta.Mensura == "NC") &&
+                (tareaporcarpeta.TituloDePropiedad == "ok" || tareaporcarpeta.TituloDePropiedad == "Ok" || tareaporcarpeta.TituloDePropiedad == "NC")
+              ) {
+                var tareageneralACargarDocumentacionTerreno = "ok";
+              }
+              if (tareaporcarpeta.Mensura == "EnGestion" || tareaporcarpeta.TituloDePropiedad == "EnGestion") {
+                var tareageneralACargarDocumentacionTerreno = "EnGestion";
+              }
+              if (tareaporcarpeta.Mensura == "Sin presentar" || tareaporcarpeta.TituloDePropiedad == "Sin presentar") {
+                var tareageneralACargarDocumentacionTerreno = "Sin presentar";
+              }
+              // Comercial
+              if (
+                (tareaporcarpeta.Contrato == "ok" || tareaporcarpeta.Contrato == "Ok" || tareaporcarpeta.Contrato == "Ok(Preliminar)") &&
+                (tareaporcarpeta.Presupuesto == "ok" || tareaporcarpeta.Presupuesto == "Ok") &&
+                (tareaporcarpeta.Sucedaneo == "ok" || tareaporcarpeta.Sucedaneo == "Ok") &&
+                (tareaporcarpeta.NotaDeExcepcion == "ok" || tareaporcarpeta.NotaDeExcepcion == "Ok" || tareaporcarpeta.NotaDeExcepcion == "NC")
+              ) {
+                var tareageneralACargarComercial = "ok";
+              }
+              if (
+                tareaporcarpeta.Contrato == "Presentado" ||
+                tareaporcarpeta.Presupuesto == "Presentado" ||
+                tareaporcarpeta.Sucedaneo == "Presentado" ||
+                tareaporcarpeta.NotaDeExcepcion == "Presentado"
+              ) {
+                var tareageneralACargarComercial = "Presentado";
+              }
+              if (
+                tareaporcarpeta.Contrato == "EnGestion" ||
+                tareaporcarpeta.Presupuesto == "EnGestion" ||
+                tareaporcarpeta.Sucedaneo == "EnGestion" ||
+                tareaporcarpeta.NotaDeExcepcion == "EnGestion"
+              ) {
+                var tareageneralACargarComercial = "EnGestion";
+              }
+
+
+              if (
+                tareaporcarpeta.Contrato == "Observado" ||
+                tareaporcarpeta.Presupuesto == "Observado" ||
+                tareaporcarpeta.Sucedaneo == "Observado" ||
+                tareaporcarpeta.NotaDeExcepcion == "Observado"
+              ) {
+                var tareageneralACargarComercial = "Observado";
+              }
+              //Tecnica
+              if ((tareaporcarpeta.PCaprobado == "ok" || tareaporcarpeta.PCaprobado == "Ok") && (tareaporcarpeta.PlanoTipo == "ok" || tareaporcarpeta.PlanoTipo == "Ok" || tareaporcarpeta.PlanoTipo == "NC")) {
+                var tareageneralACargarTecnica = "ok";
+              }
+              if (tareaporcarpeta.PCaprobado == "EnGestion" || tareaporcarpeta.PlanoTipo == "EnGestion") {
+                var tareageneralACargarTecnica = "EnGestion";
+              }
+              if (tareaporcarpeta.PCaprobado == "Presentado" || tareaporcarpeta.PlanoTipo == "Presentado") {
+                var tareageneralACargarTecnica = "Presentado";
+              }
+              if (tareaporcarpeta.PCaprobado == "Observado" || tareaporcarpeta.PlanoTipo == "Observado") {
+                var tareageneralACargarTecnica = "Observado";
+              }
+              if (tareaporcarpeta.PCaprobado == "Sin presentar" || tareaporcarpeta.PlanoTipo == "Sin presentar") {
+                var tareageneralACargarTecnica = "Sin presentar";
+              }
+              //Permisos Especiales
+              if (
+                (tareaporcarpeta.CartaOferta == "ok" || tareaporcarpeta.CartaOferta == "Ok" || tareaporcarpeta.CartaOferta == "NC" || tareaporcarpeta.CartaOferta == "") &&
+                (tareaporcarpeta.PlanoAnexo == "ok" || tareaporcarpeta.PlanoAnexo == "Ok" || tareaporcarpeta.PlanoAnexo == "NC" || tareaporcarpeta.PlanoAnexo == "") &&
+                (tareaporcarpeta.DNVVisacion == "Visado" || tareaporcarpeta.DNVVisacion == "No corresponde" || tareaporcarpeta.DNVVisacion == "NC" || tareaporcarpeta.DNVVisacion == "") &&
+                (tareaporcarpeta.HidraulicaVisacion == "Visado" || tareaporcarpeta.HidraulicaVisacion == "No corresponde" ||
+                  tareaporcarpeta.HidraulicaVisacion == "NC" ||
+                  tareaporcarpeta.HidraulicaVisacion == "") &&
+                (tareaporcarpeta.FerrocarrilesVisacion == "Visado" || tareaporcarpeta.FerrocarrilesVisacion == "No corresponde" ||
+                  tareaporcarpeta.FerrocarrilesVisacion == "NC" ||
+                  tareaporcarpeta.FerrocarrilesVisacion == "")
+              ) {
+                var tareageneralACargarPermisosEspeciales = "ok";
+              }
+              if (
+                tareaporcarpeta.CartaOferta == "EnGestion" ||
+                tareaporcarpeta.PlanoAnexo == "EnGestion" ||
+                tareaporcarpeta.DNVVisacion == "EnGestion" ||
+                tareaporcarpeta.HidraulicaVisacion == "EnGestion" ||
+                tareaporcarpeta.FerrocarrilesVisacion == "EnGestion"
+              ) {
+                var tareageneralACargarPermisosEspeciales = "EnGestion";
+              }
+              if (
+                tareaporcarpeta.CartaOferta == "Presentado" ||
+                tareaporcarpeta.PlanoAnexo == "Presentado" ||
+                tareaporcarpeta.DNVVisacion == "Presentado" ||
+                tareaporcarpeta.HidraulicaVisacion == "Presentado" ||
+                tareaporcarpeta.FerrocarrilesVisacion == "Presentado"
+              ) {
+                var tareageneralACargarPermisosEspeciales = "Presentado";
+              }
+              if (
+                tareaporcarpeta.CartaOferta == "Observado" ||
+                tareaporcarpeta.PlanoAnexo == "Observado" ||
+                tareaporcarpeta.DNVVisacion == "Observado" ||
+                tareaporcarpeta.HidraulicaVisacion == "Observado" ||
+                tareaporcarpeta.FerrocarrilesVisacion == "Observado"
+              ) {
+                var tareageneralACargarPermisosEspeciales = "Observado";
+              }
+              if (
+                (tareaporcarpeta.CartaOferta == "Sin presentar" || tareaporcarpeta.CartaOferta == "Pedir") ||
+                (tareaporcarpeta.PlanoAnexo == "Sin presentar" || tareaporcarpeta.PlanoAnexo == "Pedir") ||
+                (tareaporcarpeta.DNVVisacion == "Sin presentar" || tareaporcarpeta.DNVVisacion == "Pedir") ||
+                (tareaporcarpeta.HidraulicaVisacion == "Sin presentar" || tareaporcarpeta.HidraulicaVisacion == "Pedir") ||
+                (tareaporcarpeta.FerrocarrilesVisacion == "Sin presentar" || tareaporcarpeta.FerrocarrilesVisacion == "Pedir")
+              ) {
+                var tareageneralACargarPermisosEspeciales = "Sin presentar";
+              }
+              //Documentacion Ambiental
+              if (
+                (tareaporcarpeta.CuestionarioRelevamientoAmbiental == "ok" || tareaporcarpeta.CuestionarioRelevamientoAmbiental == "Ok") &&
+                (tareaporcarpeta.EstudioImpactoAmbientalPrevio == "ok" || tareaporcarpeta.EstudioImpactoAmbientalPrevio == "Ok" ||
+                  tareaporcarpeta.EstudioImpactoAmbientalPrevio == "NC" ||
+                  tareaporcarpeta.EstudioImpactoAmbientalPrevio == "ok(Previo)" ||
+                  tareaporcarpeta.EstudioImpactoAmbientalPrevio == "NC(Previo)" || tareaporcarpeta.EstudioImpactoAmbientalPrevio == "NC") &&
+                (tareaporcarpeta.DDJJInicialAmbiental == "ok" || tareaporcarpeta.DDJJInicialAmbiental == "Ok") &&
+                (tareaporcarpeta.ListaVerificacionAmbiental == "ok" || tareaporcarpeta.ListaVerificacionAmbiental == "Ok" || tareaporcarpeta.ListaVerificacionAmbiental == "NC")
+              ) {
+                var tareageneralACargarDocumentacionAmbiente = "ok";
+              }
+
+              if (
+                tareaporcarpeta.CuestionarioRelevamientoAmbiental == "EnGestion" ||
+                tareaporcarpeta.EstudioImpactoAmbientalPrevio == "EnGestion" ||
+                tareaporcarpeta.DDJJInicialAmbiental == "EnGestion" ||
+                tareaporcarpeta.ListaVerificacionAmbiental == "EnGestion"
+              ) {
+                var tareageneralACargarDocumentacionAmbiente = "EnGestion";
+              }
+              if (
+                tareaporcarpeta.CuestionarioRelevamientoAmbiental == "Presentado" ||
+                tareaporcarpeta.EstudioImpactoAmbientalPrevio == "Presentado" ||
+                tareaporcarpeta.DDJJInicialAmbiental == "Presentado" ||
+                tareaporcarpeta.ListaVerificacionAmbiental == "Presentado"
+              ) {
+                var tareageneralACargarDocumentacionAmbiente = "Presentado";
+              }
+              if (
+                tareaporcarpeta.CuestionarioRelevamientoAmbiental == "Observado" ||
+                tareaporcarpeta.EstudioImpactoAmbientalPrevio == "Observado" ||
+                tareaporcarpeta.DDJJInicialAmbiental == "Observado" ||
+                tareaporcarpeta.ListaVerificacionAmbiental == "Observado"
+              ) {
+                var tareageneralACargarDocumentacionAmbiente = "Observado";
+              }
+              //Segunda Parte
+              //Documentación de obra
+              if ((tareaporcarpeta.SolicitudInicioObras == "ok" || tareaporcarpeta.SolicitudInicioObras == "Ok") && (tareaporcarpeta.CertificadoRT == "ok" || tareaporcarpeta.CertificadoRT == "Ok")) {
+                var tareageneralACargarDocumentacionObra = "ok";
+              }
+              if (tareaporcarpeta.SolicitudInicioObras == "Presentado" || tareaporcarpeta.CertificadoRT == "EnGestion") {
+                var tareageneralACargarDocumentacionObra = "EnGestion";
+              }
+              if (
+                tareaporcarpeta.SolicitudInicioObras == "Sin presentar" ||
+                tareaporcarpeta.CertificadoRT == "Sin presentar"
+              ) {
+                var tareageneralACargarDocumentacionObra = "Sin presentar";
+              }
+              //Seguridad
+              if (
+                (tareaporcarpeta.Programadeseguridad == "ok" || tareaporcarpeta.Programadeseguridad == "Ok") &&
+                (tareaporcarpeta.CronogramaSyH == "ok" || tareaporcarpeta.CronogramaSyH == "Ok") &&
+                (tareaporcarpeta.SeguroRC == "ok" || tareaporcarpeta.SeguroRC == "Ok") &&
+                (tareaporcarpeta.Monotributos == "ok" || tareaporcarpeta.Monotributos == "Ok" || tareaporcarpeta.Monotributos == "NC") &&
+                (tareaporcarpeta.SeguroAccidentesPersonales == "ok" || tareaporcarpeta.SeguroAccidentesPersonales == "Ok" || tareaporcarpeta.SeguroAccidentesPersonales == "NC")
+              ) {
+                var tareageneralACargarSeguridad = "ok";
+              }
+              if (
+                tareaporcarpeta.Programadeseguridad == "EnGestion" ||
+                tareaporcarpeta.CronogramaSyH == "EnGestion" ||
+                tareaporcarpeta.SeguroRC == "EnGestion" ||
+                tareaporcarpeta.Monotributos == "EnGestion" ||
+                tareaporcarpeta.SeguroAccidentesPersonales == "EnGestion"
+              ) {
+                var tareageneralACargarSeguridad = "EnGestion";
+              }
+              if (
+                tareaporcarpeta.Programadeseguridad == "Sin presentar" ||
+                tareaporcarpeta.CronogramaSyH == "Sin presentar" ||
+                tareaporcarpeta.SeguroRC == "Sin presentar" ||
+                tareaporcarpeta.Monotributos == "Sin presentar" ||
+                tareaporcarpeta.SeguroAccidentesPersonales == "Sin presentar"
+              ) {
+                var tareageneralACargarSeguridad = "Sin presentar";
+              }
+
+              //Interferencias
+              if (
+                (tareaporcarpeta.intAgua == "ok" || tareaporcarpeta.intAgua == "Ok") ||
+                (tareaporcarpeta.intAgua == "NC" && (tareaporcarpeta.intCloacas == "ok" || tareaporcarpeta.intCloacas == "Ok")) ||
+                (tareaporcarpeta.intCloacas == "NC" && (tareaporcarpeta.intElectricidad == "ok" || tareaporcarpeta.intElectricidad == "Ok")) ||
+                (tareaporcarpeta.intElectricidad == "NC" && (tareaporcarpeta.intArsat == "ok" || tareaporcarpeta.intArsat == "Ok")) ||
+                (tareaporcarpeta.intArsat == "NC" && (tareaporcarpeta.intClaro == "ok" || tareaporcarpeta.intClaro == "Ok")) ||
+                (tareaporcarpeta.intClaro == "NC" && (tareaporcarpeta.intTelefonica == "ok" || tareaporcarpeta.intTelefonica == "Ok")) ||
+                (tareaporcarpeta.intTelefonica == "NC" && (tareaporcarpeta.intArnet == "ok" || tareaporcarpeta.intArnet == "Ok")) ||
+                (tareaporcarpeta.intArnet == "NC" && (tareaporcarpeta.intTelecom == "ok" || tareaporcarpeta.intTelecom == "Ok")) ||
+                tareaporcarpeta.intTelecom == "NC"
+              ) {
+                var tareageneralACargarInterferencias = "ok";
+              }
+              if (
+                tareaporcarpeta.intAgua == "EnGestion" ||
+                tareaporcarpeta.intCloacas == "EnGestion" ||
+                tareaporcarpeta.intElectricidad == "EnGestion" ||
+                tareaporcarpeta.intArsat == "EnGestion" ||
+                tareaporcarpeta.intClaro == "EnGestion" ||
+                tareaporcarpeta.intTelefonica == "EnGestion" ||
+                tareaporcarpeta.intArnet == "EnGestion" ||
+                tareaporcarpeta.intTelecom == "EnGestion" ||
+                tareaporcarpeta.intAgua == "Pedida" ||
+                tareaporcarpeta.intCloacas == "Pedida" ||
+                tareaporcarpeta.intElectricidad == "Pedida" ||
+                tareaporcarpeta.intArsat == "Pedida" ||
+                tareaporcarpeta.intClaro == "Pedida" ||
+                tareaporcarpeta.intTelefonica == "Pedida" ||
+                tareaporcarpeta.intArnet == "Pedida" ||
+                tareaporcarpeta.intTelecom == "Pedida"
+              ) {
+                var tareageneralACargarInterferencias = "EnGestion";
+              }
+
+              //Permisos
+              if (
+                tareaporcarpeta.PerMunicipal == "Pedir" ||
+                tareaporcarpeta.Irrigacion == "Pedir" ||
+                tareaporcarpeta.DPV == "Pedir" ||
+                tareaporcarpeta.DNV == "Pedir" ||
+                tareaporcarpeta.FERROCARRIL == "Pedir" ||
+                tareaporcarpeta.HIDRAULICA == "Pedir" ||
+                tareaporcarpeta.PerMunicipal == "pedir" ||
+                tareaporcarpeta.Irrigacion == "pedir" ||
+                tareaporcarpeta.DPV == "pedir" ||
+                tareaporcarpeta.DNV == "pedir" ||
+                tareaporcarpeta.FERROCARRIL == "pedir" ||
+                tareaporcarpeta.HIDRAULICA == "pedir" ||
+                tareaporcarpeta.PerMunicipal == "Sin presentar" ||
+                tareaporcarpeta.Irrigacion == "Sin presentar" ||
+                tareaporcarpeta.DPV == "Sin presentar" ||
+                tareaporcarpeta.DNV == "Sin presentar" ||
+                tareaporcarpeta.FERROCARRIL == "Sin presentar" ||
+                tareaporcarpeta.HIDRAULICA == "Sin presentar"
+              ) {
+                var tareageneralACargarPermisos = "Pedir";
+              }
+              if (
+                ((tareaporcarpeta.PerMunicipal == "ok" || tareaporcarpeta.PerMunicipal == "Ok") || tareaporcarpeta.PerMunicipal == "NC") &&
+                ((tareaporcarpeta.Irrigacion == "ok" || tareaporcarpeta.Irrigacion == "Ok") || tareaporcarpeta.Irrigacion == "NC") &&
+                ((tareaporcarpeta.DPV == "ok" || tareaporcarpeta.DPV == "Ok") || tareaporcarpeta.DPV == "NC") &&
+                ((tareaporcarpeta.DNV == "ok" || tareaporcarpeta.DNV == "Ok") || tareaporcarpeta.DNV == "NC") &&
+                ((tareaporcarpeta.FERROCARRIL == "ok" || tareaporcarpeta.FERROCARRIL == "Ok") || tareaporcarpeta.FERROCARRIL == "NC") &&
+                ((tareaporcarpeta.HIDRAULICA == "ok" || tareaporcarpeta.HIDRAULICA == "Ok") || tareaporcarpeta.HIDRAULICA == "NC")
+              ) {
+                var tareageneralACargarPermisos = "ok";
+              }
+              if (
+                tareaporcarpeta.PerMunicipal == "EnGestion" ||
+                tareaporcarpeta.Irrigacion == "EnGestion" ||
+                tareaporcarpeta.DPV == "EnGestion" ||
+                tareaporcarpeta.DNV == "EnGestion" ||
+                tareaporcarpeta.FERROCARRIL == "EnGestion" ||
+                tareaporcarpeta.HIDRAULICA == "EnGestion"
+              ) {
+                var tareageneralACargarPermisos = "EnGestion";
+              }
+              if (tareaporcarpeta.DPV == "ok" && tareaporcarpeta.DNV == "ok" && tareaporcarpeta.FERROCARRIL == "ok" && tareaporcarpeta.HIDRAULICA == "ok") {
+                var tareageneralACargarPermisosEspeciales = "ok";
+              }
+              if (
+                (tareaporcarpeta.DPV == "Visado" || tareaporcarpeta.DPV == "NC") &&
+                (tareaporcarpeta.DNV == "Visado" || tareaporcarpeta.DNV == "NC") &&
+                (tareaporcarpeta.FERROCARRIL == "Visado" || tareaporcarpeta.FERROCARRIL == "NC") &&
+                (tareaporcarpeta.HIDRAULICA == "Visado" || tareaporcarpeta.FERROCARRIL == "NC")
+              ) {
+                var tareageneralACargarPermisosEspeciales = "ok";
+              }
+              if (
+                tareaporcarpeta.DPV == "EnGestion" ||
+                tareaporcarpeta.DNV == "EnGestion" ||
+                tareaporcarpeta.FERROCARRIL == "EnGestion" ||
+                tareaporcarpeta.HIDRAULICA == "EnGestion"
+              ) {
+                var tareageneralACargarPermisosEspeciales = "EnGestion";
+              }
+              if (
+                tareaporcarpeta.DPV == "Observado" ||
+                tareaporcarpeta.DNV == "Observado" ||
+                tareaporcarpeta.FERROCARRIL == "Observado" ||
+                tareaporcarpeta.HIDRAULICA == "Observado"
+              ) {
+                var tareageneralACargarPermisosEspeciales = "Observado";
+              }
+
+              if (
+                tareaporcarpeta.DPV == "Pedir" ||
+                tareaporcarpeta.DNV == "Pedir" ||
+                tareaporcarpeta.FERROCARRIL == "Pedir" ||
+                tareaporcarpeta.HIDRAULICA == "Pedir"
+              ) {
+                var tareageneralACargarPermisosEspeciales = "Pedir";
+              }
+              // Matriculas
+              if (
+                (tareaporcarpeta.MatriculaFusionista == "ok" || tareaporcarpeta.MatriculaFusionista == "Ok" || tareaporcarpeta.MatriculaFusionista == "NC") &&
+                (tareaporcarpeta.MatriculaSoldador == "ok" || tareaporcarpeta.MatriculaSoldador == "Ok" || tareaporcarpeta.MatriculaSoldador == "NC")
+              ) {
+                var tareageneralACargarMatriculas = "ok";
+              }
+              if (tareaporcarpeta.MatriculaFusionista == "EnGestion" || tareaporcarpeta.MatriculaSoldador == "EnGestion") {
+                var tareageneralACargarMatriculas = "EnGestion";
+              }
+              if (tareaporcarpeta.MatriculaFusionista == "EnGestion" || tareaporcarpeta.MatriculaSoldador == "EnGestion") {
+                var tareageneralACargarMatriculas = "EnGestion";
+              }
+              if (
+                tareaporcarpeta.MatriculaFusionista == NULL ||
+                tareaporcarpeta.MatriculaSoldador == NULL ||
+                tareaporcarpeta.MatriculaFusionista == "" ||
+                tareaporcarpeta.MatriculaSoldador == ""
+              ) {
+                var tareageneralACargarMatriculas = "Sin presentar";
+              }
+              //Ambiente
+              if (
+                (tareaporcarpeta.EstudioImpactoAmbiental == "ok" || tareaporcarpeta.EstudioImpactoAmbiental == "Ok" || tareaporcarpeta.EstudioImpactoAmbiental == "NC") &&
+                (tareaporcarpeta.CronogramaAmbiente == "ok" || tareaporcarpeta.CronogramaAmbiente == "Ok" || tareaporcarpeta.CronogramaAmbiente == "NC")
+              ) {
+                var tareageneralACargarAmbiente = "ok";
+              }
+              if (
+                tareaporcarpeta.EstudioImpactoAmbiental == "EnGestion" ||
+                tareaporcarpeta.CronogramaAmbiente == "EnGestion"
+              ) {
+                var tareageneralACargarAmbiente = "EnGestion";
+              }
+              if (tareaporcarpeta.EstudioImpactoAmbiental == "pedir" || tareaporcarpeta.CronogramaAmbiente == "pedir") {
+                var tareageneralACargarAmbiente = "Sin presentar";
+              }
+              // Avisos
+              if (
+                (tareaporcarpeta.AvisoInicioObraART == "ok" || tareaporcarpeta.AvisoInicioObraART == "Ok") &&
+                (tareaporcarpeta.AvisoInicioObraIERIC == "ok" || tareaporcarpeta.AvisoInicioObraIERIC == "Ok") &&
+                (tareaporcarpeta.ActaInicioEfectivo == "ok" || tareaporcarpeta.ActaInicioEfectivo == "Ok")
+              ) {
+                var tareageneralACargarAvisos = "ok";
+              }
+              if (
+                tareaporcarpeta.AvisoInicioObraART == "EnGestion" ||
+                tareaporcarpeta.AvisoInicioObraIERIC == "EnGestion" ||
+                tareaporcarpeta.ActaInicioEfectivo == "EnGestion"
+              ) {
+                var tareageneralACargarAvisos = "EnGestion";
+              }
+              if (
+                tareaporcarpeta.AvisoInicioObraART == "Sin presentar" ||
+                tareaporcarpeta.AvisoInicioObraIERIC == "Sin presentar" ||
+                tareaporcarpeta.ActaInicioEfectivo == "Sin presentar"
+              ) {
+                var tareageneralACargarAvisos = "Sin presentar";
+              }
+              //OBRAS
+              // DocumentacionInspeccion
+              if (
+                (tareaporcarpeta.ActaDeInicio == "Presentado" || tareaporcarpeta.ActaDeInicio == "Ok") &&
+                (tareaporcarpeta.Permisos == "Presentado" || tareaporcarpeta.Permisos == "Ok") &&
+                (tareaporcarpeta.Interferencias == "Presentado" || tareaporcarpeta.Interferencias == "Ok") &&
+                (tareaporcarpeta.LibroOrdenesServicio == "Presentado" || tareaporcarpeta.LibroOrdenesServicio == "Ok") &&
+                (tareaporcarpeta.LibroNotasPedido == "Presentado" || tareaporcarpeta.LibroNotasPedido == "Ok") &&
+                (tareaporcarpeta.PCEntregadoInspeccion == "Presentado" || tareaporcarpeta.PCEntregadoInspeccion == "Ok") &&
+                (tareaporcarpeta.AvisosDeObra == "Presentado" || tareaporcarpeta.AvisosDeObra == "Ok") &&
+                (tareaporcarpeta.CronogramaFirmadoComitente == "Presentado" ||
+                  tareaporcarpeta.CronogramaFirmadoComitente == "Ok")
+              ) {
+                var tareageneralACargarDocumentacionInspeccion = "ok";
+              }
+              if (
+                tareaporcarpeta.ActaDeInicio == "Sin presentar" ||
+                tareaporcarpeta.Permisos == "Sin presentar" ||
+                tareaporcarpeta.Interferencias == "Sin presentar" ||
+                tareaporcarpeta.LibroOrdenesServicio == "Sin presentar" ||
+                tareaporcarpeta.LibroNotasPedido == "Sin presentar" ||
+                tareaporcarpeta.PCEntregadoInspeccion == "Sin presentar" ||
+                tareaporcarpeta.AvisosDeObra == "Sin presentar" ||
+                tareaporcarpeta.CronogramaFirmadoComitente == "Sin presentar"
+              ) {
+                var tareageneralACargarDocumentacionInspeccion = "Sin presentar";
+              }
+              // ComunicacionObras
+              if (tareaporcarpeta.OrdenServicio == "No") {
+                var tareageneralACargarComunicacionObras = "ok";
+              }
+              if (tareaporcarpeta.OrdenServicio == "Si") {
+                var tareageneralACargarComunicacionObras = "Leer historial de carpeta";
+              }
+              //CAOS
+              var tareageneralACargarActasFinales = tareaporcarpeta.ActasFinales;
+              var tareageneralACargarPlanosyCroquis = tareaporcarpeta.PlanosyCroquis;
+              var tareageneralACargarConformeDePermisos = tareaporcarpeta.ConformeDePermisos;
+              var tareageneralACargarPruebaHermeticidad = tareaporcarpeta.PruebaHermeticidad;
+              var tareageneralACargarInformesFinales = tareaporcarpeta.InformesFinales;
+              //FinalCarpeta
+              var tareageneralACargarPresentacionFinal = tareaporcarpeta.PresentacionFinal;
+              var tareageneralACargarHabilitacionObra = tareaporcarpeta.HabilitacionObra;
+              sql = "UPDATE obras_tareasgenerales SET ? WHERE idObra=" + tareageneral.idObra + ";";
+              connection.query(sql, {
+                DocumentacionTerreno: tareageneralACargarDocumentacionTerreno,
+                DocumentacionSociedad: tareageneralACargarDocumentacionSociedad,
+                DocumentacionContractual: tareageneralACargarDocumentacionContractual,
+                DocumentacionObra: tareageneralACargarDocumentacionObra,
+                Seguridad: tareageneralACargarSeguridad,
+                Interferencias: tareageneralACargarInterferencias,
+                Permisos: tareageneralACargarPermisos,
+                PermisosEspeciales: tareageneralACargarPermisosEspeciales,
+                Matriculas: tareageneralACargarMatriculas,
+                Ambiente: tareageneralACargarAmbiente,
+                Avisos: tareageneralACargarAvisos,
+                DocumentacionInspeccion: tareageneralACargarDocumentacionInspeccion,
+                ComunicacionObras: tareageneralACargarComunicacionObras,
+                InformesFinales: tareageneralACargarActasFinales,
+                PlanosyCroquis: tareageneralACargarPlanosyCroquis,
+                ConformeEntidades: tareageneralACargarConformeDePermisos,
+                PruebaHermeticidad: tareageneralACargarPruebaHermeticidad,
+                InformesFinales: tareageneralACargarInformesFinales,
+                PresentacionFinal: tareageneralACargarPresentacionFinal,
+                HabilitacionObra: tareageneralACargarHabilitacionObra,
+              }, (error3, responseCargaTareaGenerales) => {
+                if (error3) console.log(error3);
+                else {
+                }
+              })
+            }
+
+
+          });
+        });
+      })
+        .catch(error => {
+          console.log('Error:', error);
+        })
+
+
+
+
+
+    }
+    cargarFinalizadas().then(function () {
+      actualizarEstadoGral().then(function () {
+        res.locals.moment = moment;
+        sql = "SELECT e.CodigoVigentes,e.CodigoFinalizadas,c.id, c.Nombre,c.NCarpeta,c.Ubicacion ,c.Comitente ,c.Estado,d.* ,b.* FROM obras_tareasgenerales b , codificacioncarpetas e , obras c, adminecogas_tareas_por_carpeta d WHERE b.Nombre = c.Nombre AND b.Nombre = e.Nombre AND d.Nombre = e.Nombre ";
+        connection.query(sql, (error, results) => {
+          if (error) console.log(error);
+          if (results.length > 0) {
+            res.render("paginas/AdministracionEcogas/estadogeneral.ejs", {
+              results: results, moment: moment, Finalizadas: Finalizadas
+            }
+            ); //en {results:results} lo que hago es guardar los resultados que envia la bd, en la variable results
+            // res.send(results);
+          } else {
+            res.send("Ningun resultado encontrado");
+          }
+        });
+      });
+
     })
-    
+
   } else {
     res.redirect("/");
   }
@@ -187,7 +737,7 @@ router.get("/editarTareas/:id", (req, res) => {
   if (req.isAuthenticated()) {
     const id = req.params.id;
     var Nombre = "";
-    let sql ;
+    let sql;
     var resultados;
     var CodigoEnUsoVigentes = "";
     var CodigoFinalizadas = 0;
@@ -195,20 +745,20 @@ router.get("/editarTareas/:id", (req, res) => {
     var interferenciasypermisos, tareasporcarpeta, tareasgenerales;
     var usuariosregistrados;
     var albacaucion;
-   sql='SELECT * FROM admingeneral_seguros_albacaucion WHERE id_obra='+ id;
-   connection.query(sql,(error,resultado)=>{
-    if (error) console.log(error);
-    albacaucion=resultado;
-   })
+    sql = 'SELECT * FROM admingeneral_seguros_albacaucion WHERE id_obra=' + id;
+    connection.query(sql, (error, resultado) => {
+      if (error) console.log(error);
+      albacaucion = resultado;
+    })
     var promise1 = new Promise(function (resolve, reject) {
-      sql="SELECT * FROM usuariosregistrados;";
-      connection.query(sql,(error,respuesta)=>{
-        if(error)console.log(error);
-        else{
-  usuariosregistrados=respuesta;
-  }
+      sql = "SELECT * FROM usuariosregistrados;";
+      connection.query(sql, (error, respuesta) => {
+        if (error) console.log(error);
+        else {
+          usuariosregistrados = respuesta;
+        }
       })
-    sql = "Select Nombre from obras where id=?";
+      sql = "Select Nombre from obras where id=?";
       connection.query(sql, [id], (error, results) => {
         if (error) console.log(error);
         if (results.length > 0) {
@@ -218,12 +768,12 @@ router.get("/editarTareas/:id", (req, res) => {
               contador = contador + 1;
               Nombre = v;
             }
-            return(Nombre);
+            return (Nombre);
           });
           resolve(Nombre);
         }
       });
-    }).then(function(Nombre){
+    }).then(function (Nombre) {
       sql = "Select * from codificacioncarpetas Where Nombre=?";
       connection.query(sql, [Nombre], (error, results) => {
         if (error) console.log(error);
@@ -242,54 +792,54 @@ router.get("/editarTareas/:id", (req, res) => {
         });
       });
       sql =
-      "Select * from adminecogas_interferencias_y_permisos Where Nombre=?";
-    connection.query(sql, [Nombre], (error, results) => {
-      if (error) console.log(error);
-      interferenciasypermisos = results[0];
-      sql = "Select * from adminecogas_tareas_por_carpeta Where Nombre=?";
-      connection.query(sql, [Nombre], (error2, results2) => {
-        if (error2) console.log(error2);
-        tareasporcarpeta = results2[0];
-        sql = "Select * from obras_tareasgenerales WHERE Nombre=?";
-        connection.query(sql, [Nombre], (error3, results3) => {
-          if (error3) console.log(error3);
-          tareasgenerales = results3[0];
-          sql = "Select * from obras where id=?";
-          connection.query(sql, [id], (error, results) => {
-            if (error) console.log(error);
-            if (results.length > 0) {
-             
-              //Se procede a enviar al front, los resultados de las consultas sql, prestar atencion que para que ejs pueda resolver el contenido de las sentencias hay que tratar las mismas como un arreglo [0], sino no funciona.
-         
-            res.render("paginas/AdministracionEcogas/editarTareas", {
-              moment:moment,
-              albacaucion:albacaucion,
-              user: results[0],
-              interferenciasypermisos,
-              tareasporcarpeta,
-              tareasgenerales,
-              CodigoVigentes,
-              CodigoEnUsoVigentes,
-              CodigoFinalizadas,
-              moment: moment,
-              usuariosregistrados,
+        "Select * from adminecogas_interferencias_y_permisos Where id_obra=?";
+      connection.query(sql, [id], (error, results) => {
+        if (error) console.log(error);
+        interferenciasypermisos = results[0];
+        sql = "Select * from adminecogas_tareas_por_carpeta WHERE id_obra=?";
+        connection.query(sql, [id], (error2, results2) => {
+          if (error2) console.log(error2);
+          tareasporcarpeta = results2[0];
+          sql = "Select * from obras_tareasgenerales WHERE Nombre=?";
+          connection.query(sql, [Nombre], (error3, results3) => {
+            if (error3) console.log(error3);
+            tareasgenerales = results3[0];
+            sql = "Select * from obras where id=?";
+            connection.query(sql, [id], (error, results) => {
+              if (error) console.log(error);
+              if (results.length > 0) {
+
+                //Se procede a enviar al front, los resultados de las consultas sql, prestar atencion que para que ejs pueda resolver el contenido de las sentencias hay que tratar las mismas como un arreglo [0], sino no funciona.
+
+                res.render("paginas/AdministracionEcogas/editarTareas", {
+                  moment: moment,
+                  albacaucion: albacaucion,
+                  user: results[0],
+                  interferenciasypermisos,
+                  tareasporcarpeta,
+                  tareasgenerales,
+                  CodigoVigentes,
+                  CodigoEnUsoVigentes,
+                  CodigoFinalizadas,
+                  moment: moment,
+                  usuariosregistrados,
+                });
+
+
+
+              } else {
+                res.redirect("/adminecogas");
+              }
             });
-           
-         
-             
-            } else {
-              res.redirect("/adminecogas");
-            }
           });
+
+
         });
-        
-      
       });
-    });
     })
-   
-       
-      
+
+
+
   }
 });
 
@@ -360,10 +910,10 @@ router.get("/edit/:id", (req, res) => {
 });
 router.get("/historialcarpeta/:Nombre", (req, res) => {
   if (req.isAuthenticated()) {
-    var rol= req.user.rol;
-    var id,NCarpeta;
+    var rol = req.user.rol;
+    var id, NCarpeta;
     const Nombre = req.params.Nombre;
-var usuariosregistrados;
+    var usuariosregistrados;
     var sql = "SELECT id,NCarpeta FROM obras WHERE Nombre =?";
     connection.query(sql, [Nombre], (error, results) => {
       if (error) console.log(error);
@@ -372,14 +922,14 @@ var usuariosregistrados;
         NCarpeta = results[0].NCarpeta;
       }
     });
-    sql="SELECT * FROM usuariosregistrados;";
-    connection.query(sql,(error,respuesta)=>{
-      if(error)console.log(error);
-      else{
-usuariosregistrados=respuesta;
-}
-})
-    sql="SELECT c.* FROM historialdecambios c WHERE Nombre_sub =? ORDER BY id DESC";
+    sql = "SELECT * FROM usuariosregistrados;";
+    connection.query(sql, (error, respuesta) => {
+      if (error) console.log(error);
+      else {
+        usuariosregistrados = respuesta;
+      }
+    })
+    sql = "SELECT c.* FROM historialdecambios c WHERE Nombre_sub =? ORDER BY id DESC";
     res.locals.moment = moment;
     connection.query(sql, [Nombre], (error, results) => {
       if (error) console.log(error);
@@ -819,8 +1369,8 @@ router.post("/actPrelCarpEcogas/:id", upload.none(), function (req, res) {
   }
   //Documentacion Contractual
   if (
-    (Cotizacion == "ok" ||Cotizacion == "Ok" || Cotizacion == "NC") &&
-    (Contrato == "Ok(Preliminar)" || Contrato == "ok(Preliminar)"||
+    (Cotizacion == "ok" || Cotizacion == "Ok" || Cotizacion == "NC") &&
+    (Contrato == "Ok(Preliminar)" || Contrato == "ok(Preliminar)" ||
       Contrato == "ok" || Contrato == "Ok" ||
       Contrato == "NC(Preliminar)" ||
       Contrato == "NC")
@@ -1121,12 +1671,12 @@ router.post("/act1pCarpEcogas/:id", upload.none(), function (req, res) {
   if (
     (Contrato == "ok" || Contrato == "Ok" || Contrato == "Ok(Preliminar)") &&
     (Presupuesto == "ok" || Presupuesto == "Ok") &&
-    (Sucedaneo == "ok"|| Sucedaneo == "Ok") &&
+    (Sucedaneo == "ok" || Sucedaneo == "Ok") &&
     (NotaDeExcepcion == "ok" || NotaDeExcepcion == "Ok" || NotaDeExcepcion == "NC")
   ) {
     Comercial = "ok";
   }
-   if (
+  if (
     Contrato == "Presentado" ||
     Presupuesto == "Presentado" ||
     Sucedaneo == "Presentado" ||
@@ -1142,8 +1692,8 @@ router.post("/act1pCarpEcogas/:id", upload.none(), function (req, res) {
   ) {
     Comercial = "EnGestion";
   }
-  
- 
+
+
   if (
     Contrato == "Observado" ||
     Presupuesto == "Observado" ||
@@ -1153,7 +1703,7 @@ router.post("/act1pCarpEcogas/:id", upload.none(), function (req, res) {
     Comercial = "Observado";
   }
   //Tecnica
-  if ((Pcaprobado == "ok"||Pcaprobado == "Ok") && (PlanoTipo == "ok"||PlanoTipo == "Ok" || PlanoTipo == "NC")) {
+  if ((Pcaprobado == "ok" || Pcaprobado == "Ok") && (PlanoTipo == "ok" || PlanoTipo == "Ok" || PlanoTipo == "NC")) {
     Tecnica = "ok";
     console.log("1La variable Tecnica va tener el valor: " + Tecnica);
   }
@@ -1176,8 +1726,8 @@ router.post("/act1pCarpEcogas/:id", upload.none(), function (req, res) {
   //Permisos Especiales
   if (
     (CartaOferta == "ok" || CartaOferta == "Ok" || CartaOferta == "NC" || CartaOferta == "") &&
-    (PlanoAnexo == "ok"|| PlanoAnexo == "Ok" || PlanoAnexo == "NC" || PlanoAnexo == "") &&
-    (DNVVisacion == "Visado" || DNVVisacion == "No corresponde" ||  DNVVisacion == "NC" || DNVVisacion == "") &&
+    (PlanoAnexo == "ok" || PlanoAnexo == "Ok" || PlanoAnexo == "NC" || PlanoAnexo == "") &&
+    (DNVVisacion == "Visado" || DNVVisacion == "No corresponde" || DNVVisacion == "NC" || DNVVisacion == "") &&
     (HidraulicaVisacion == "Visado" || HidraulicaVisacion == "No corresponde" ||
       HidraulicaVisacion == "NC" ||
       HidraulicaVisacion == "") &&
@@ -1216,22 +1766,22 @@ router.post("/act1pCarpEcogas/:id", upload.none(), function (req, res) {
   }
   if (
     (CartaOferta == "Sin presentar" || CartaOferta == "Pedir") ||
-    (PlanoAnexo == "Sin presentar" ||PlanoAnexo == "Pedir")||
-(DNVVisacion == "Sin presentar"||DNVVisacion == "Pedir" )||
-    (HidraulicaVisacion == "Sin presentar"|| HidraulicaVisacion == "Pedir") ||
-    (FerrocarrilesVisacion == "Sin presentar" ||FerrocarrilesVisacion == "Pedir")
+    (PlanoAnexo == "Sin presentar" || PlanoAnexo == "Pedir") ||
+    (DNVVisacion == "Sin presentar" || DNVVisacion == "Pedir") ||
+    (HidraulicaVisacion == "Sin presentar" || HidraulicaVisacion == "Pedir") ||
+    (FerrocarrilesVisacion == "Sin presentar" || FerrocarrilesVisacion == "Pedir")
   ) {
     PermisosEspeciales = "Sin presentar";
   }
   //Documentacion Ambiental
   if (
-    (CuestionarioRelevamientoAmbiental == "ok"|| CuestionarioRelevamientoAmbiental == "Ok") &&
-    (EstudioImpactoAmbientalPrevio == "ok" || EstudioImpactoAmbientalPrevio == "Ok"||
+    (CuestionarioRelevamientoAmbiental == "ok" || CuestionarioRelevamientoAmbiental == "Ok") &&
+    (EstudioImpactoAmbientalPrevio == "ok" || EstudioImpactoAmbientalPrevio == "Ok" ||
       EstudioImpactoAmbientalPrevio == "NC" ||
       EstudioImpactoAmbientalPrevio == "ok(Previo)" ||
       EstudioImpactoAmbientalPrevio == "NC(Previo)" || EstudioImpactoAmbientalPrevio == "NC") &&
-    (DDJJInicialAmbiental == "ok"|| DDJJInicialAmbiental == "Ok") &&
-    (ListaVerificacionAmbiental == "ok"||ListaVerificacionAmbiental == "Ok" || ListaVerificacionAmbiental == "NC")
+    (DDJJInicialAmbiental == "ok" || DDJJInicialAmbiental == "Ok") &&
+    (ListaVerificacionAmbiental == "ok" || ListaVerificacionAmbiental == "Ok" || ListaVerificacionAmbiental == "NC")
   ) {
     DocumentacionAmbiente = "ok";
   }
@@ -1663,11 +2213,11 @@ router.post("/act2pCarpEcogas/:id", upload.none(), function (req, res) {
   }
   //Seguridad
   if (
-    (Programadeseguridad == "ok"||Programadeseguridad == "Ok" )&&
-    (CronogramaSyH == "ok"||CronogramaSyH == "Ok" )&&
-    (SeguroRC == "ok"||SeguroRC == "Ok" )&&
-    (Monotributos == "ok"||Monotributos == "Ok" || Monotributos == "NC") &&
-    (SeguroAccidentesPersonales == "ok"||SeguroAccidentesPersonales == "Ok" || SeguroAccidentesPersonales == "NC")
+    (Programadeseguridad == "ok" || Programadeseguridad == "Ok") &&
+    (CronogramaSyH == "ok" || CronogramaSyH == "Ok") &&
+    (SeguroRC == "ok" || SeguroRC == "Ok") &&
+    (Monotributos == "ok" || Monotributos == "Ok" || Monotributos == "NC") &&
+    (SeguroAccidentesPersonales == "ok" || SeguroAccidentesPersonales == "Ok" || SeguroAccidentesPersonales == "NC")
   ) {
     Seguridad = "ok";
   }
@@ -1692,14 +2242,14 @@ router.post("/act2pCarpEcogas/:id", upload.none(), function (req, res) {
 
   //Interferencias
   if (
-    (intAgua == "ok" ||     intAgua == "Ok") ||
-    (intAgua == "NC" &&( intCloacas == "ok" || intCloacas == "Ok") )||
-    (intCloacas == "NC" &&( intElectricidad == "ok" || intElectricidad == "Ok") )||
-    (intElectricidad == "NC" &&( intArsat == "ok" || intArsat == "Ok") )||
-    (intArsat == "NC" &&( intClaro == "ok" || intClaro == "Ok") )||
-    (intClaro == "NC" &&( intTelefonica == "ok" || intTelefonica == "Ok") )||
-    (intTelefonica == "NC" &&( intArnet == "ok" || intArnet == "Ok") )||
-    (intArnet == "NC" &&( intTelecom == "ok" || intTelecom == "Ok") )||
+    (intAgua == "ok" || intAgua == "Ok") ||
+    (intAgua == "NC" && (intCloacas == "ok" || intCloacas == "Ok")) ||
+    (intCloacas == "NC" && (intElectricidad == "ok" || intElectricidad == "Ok")) ||
+    (intElectricidad == "NC" && (intArsat == "ok" || intArsat == "Ok")) ||
+    (intArsat == "NC" && (intClaro == "ok" || intClaro == "Ok")) ||
+    (intClaro == "NC" && (intTelefonica == "ok" || intTelefonica == "Ok")) ||
+    (intTelefonica == "NC" && (intArnet == "ok" || intArnet == "Ok")) ||
+    (intArnet == "NC" && (intTelecom == "ok" || intTelecom == "Ok")) ||
     intTelecom == "NC"
   ) {
     Interferencias = "ok";
@@ -2347,9 +2897,9 @@ router.post("/actObrasCarpEcogas/:id", upload.none(), function (req, res) {
   var Nombre = req.body.Nombre;
   var sql = "";
   var idObra = id;
-var InspectorAsignado= req.body.InspectorAsignado;
-var FechaInicioTrabajos = req.body.FechaComienzoObra;
-var FechaFinDeObra = req.body.FechaFinDeObra;
+  var InspectorAsignado = req.body.InspectorAsignado;
+  var FechaInicioTrabajos = req.body.FechaComienzoObra;
+  var FechaFinDeObra = req.body.FechaFinDeObra;
   var ActaDeInicio = req.body.ActasDeInicio;
   var LibroOrdenesServicio = req.body.LibroOrdenesServicio;
   var LibroNotasPedido = req.body.LibroNotasPedido;
@@ -2423,9 +2973,9 @@ var FechaFinDeObra = req.body.FechaFinDeObra;
 
   sql = "Update adminecogas_tareas_por_carpeta Set ? WHERE Nombre=?";
 
- 
-            
-  if (FechaInicioTrabajos[1].length>0 ) {
+
+
+  if (FechaInicioTrabajos[1].length > 0) {
     connection.query(
       sql,
       [
@@ -2441,47 +2991,47 @@ var FechaFinDeObra = req.body.FechaFinDeObra;
       }
     );
   }
-   
-    if (FechaFinDeObra[1].length>0 ) {
-      connection.query(
-        sql,
-        [
-          {
-            FechaFinDeObra: FechaFinDeObra[1],
-          },
-          Nombre,
-        ],
-        (error, results) => {
-          if (error) {
-            console.log(error);
-          }
+
+  if (FechaFinDeObra[1].length > 0) {
+    connection.query(
+      sql,
+      [
+        {
+          FechaFinDeObra: FechaFinDeObra[1],
+        },
+        Nombre,
+      ],
+      (error, results) => {
+        if (error) {
+          console.log(error);
         }
-      );
+      }
+    );
+  }
+  connection.query(
+    sql,
+    [
+      {
+        ActaDeInicio: ActaDeInicio,
+        Permisos: Permisos,
+        Interferencias: Interferencias,
+        LibroOrdenesServicio: LibroOrdenesServicio,
+        LibroNotasPedido: LibroNotasPedido,
+        PCEntregadoInspeccion: PCEntregadoInspeccion,
+        AvisosDeObra: AvisosDeObra,
+        CronogramaFirmadoComitente: CronogramaFirmadoComitente,
+        OrdenServicio: OrdenServicio, InspectorAsignado: InspectorAsignado,
+      },
+      Nombre,
+    ],
+    (error, results) => {
+      if (error) {
+        console.log(error);
+      }
     }
-      connection.query(
-        sql,
-        [
-          {
-            ActaDeInicio: ActaDeInicio,
-            Permisos: Permisos,
-            Interferencias: Interferencias,
-            LibroOrdenesServicio: LibroOrdenesServicio,
-            LibroNotasPedido: LibroNotasPedido,
-            PCEntregadoInspeccion: PCEntregadoInspeccion,
-            AvisosDeObra: AvisosDeObra,
-            CronogramaFirmadoComitente: CronogramaFirmadoComitente,
-            OrdenServicio: OrdenServicio,InspectorAsignado:InspectorAsignado,
-          },
-          Nombre,
-        ],
-        (error, results) => {
-          if (error) {
-            console.log(error);
-          }
-        }
-      );
-       
-  
+  );
+
+
 
   //Seccion Actualizar Tareas
 
@@ -2852,8 +3402,8 @@ router.post("/actCaosCarpEcogas/:id", upload.none(), function (req, res) {
   var sql = "";
   var idObra = id;
   var ActasFinales = req.body.ActasFinales;
-  if (ActasFinales=="Sin recibir"){
-    ActasFinales="Sin presentar";
+  if (ActasFinales == "Sin recibir") {
+    ActasFinales = "Sin presentar";
   }
   var PlanosyCroquis = req.body.PlanosyCroquis;
   var ConformeDePermisos = req.body.ConformeDePermisos;
@@ -3671,52 +4221,102 @@ router.post("/actFinalCarpEcogas/:id", upload.none(), function (req, res) {
   }
   res.redirect("/historialcarpeta/" + Nombre);
 });
-router.post("/ActualizarHistorialTareas",(req,res)=>{
-var idObra;
-var NombreObra;
-var EtapaSeleccionada;
-var subtarea;
-var ResponsableTarea;
-var TareaRealizada;
-var ProximaTarea;
-var FechaLimiteTarea;
-idObra=req.body.Obra;
-EtapaSeleccionada= req.body.EtapaTarea;
-subtarea = req.body.Subtarea;
-ResponsableTarea= req.body.ResponsableDeTarea;
-TareaRealizada= req.body.TareaRealizada;
-ProximaTarea=req.body.ProximaTarea;
-FechaLimiteTarea=req.body.Fecha_limite;
-let fecha = new Date();
-let anio = fecha.getFullYear();
-let mes = fecha.getMonth() + 1;
-let dia = fecha.getDate();
-let fechaHoy = anio + '-' + mes + '-' + dia;
-var sql= 'SELECT Nombre FROM obras WHERE id='+idObra+';';
-var CantidadResponsables=req.body.CantidadResponsables;
-connection.query(sql,(error,results)=>{
-  if(error)console.log(error);
-  else{
-    NombreObra=results[0].Nombre;
-    sql='INSERT INTO historialdecambios set?';
-    if(CantidadResponsables>1){
-      ResponsableTarea.forEach((responsable)=>{
-        connection.query(sql,[{Nombre_sub:NombreObra,EtapaTarea_sub:EtapaSeleccionada,Tarea:subtarea,Fecha_Tarea_sub:fechaHoy, ResponsableDeTarea:responsable,Tarea_Realizada_sub:TareaRealizada,Fecha_Proxima_Tarea_sub:FechaLimiteTarea,Proxima_Tarea_sub:ProximaTarea,Si_NO_TareaRealizada:"N", id_obra:idObra}],(error,results)=>{
-          if(error)console.log(error);
-        
+//Carga rapida
+router.post('/adminecogas/actualizarestadotarea/:idObra/:tarea/:subtarea/:estado', (req, res) => {
+  var estadoTarea = req.params.estado;
+  var tarea = req.params.tarea;
+  var subtarea = req.params.subtarea;
+  var id_obra = req.params.idObra;
+
+  if (tarea == "Interferencias" || tarea == "Permisos") {
+    var sql = 'SHOW COLUMNS FROM adminecogas_interferencias_y_permisos';
+    connection.query(sql, (error, results) => {
+      if (error) console.log(error);
+      else {
+        results.forEach(element => {
+          if (element.Field == subtarea) {
+            //HAY QUE ARMAR PARA CUANDO LLEGUE UNA INTERFERENCIA, DEBIDO A QUE ESO VA EN OTRA TABLA DE LA BD.
+            //Tambien para PERMISOS.
+            sql = 'UPDATE adminecogas_interferencias_y_permisos SET ' + subtarea + ' ="' + estadoTarea + '" WHERE id_obra=' + id_obra;
+            connection.query(sql, (error, results) => {
+              if (error) console.log(error);
+            })
+          }
+        });
+        res.send('ok');
+      }
+
+    })
+  } else {
+    var sql = 'SHOW COLUMNS FROM adminecogas_tareas_por_carpeta';
+    connection.query(sql, (error, results) => {
+      if (error) console.log(error);
+      else {
+        results.forEach(element => {
+          if (element.Field == subtarea) {
+            //HAY QUE ARMAR PARA CUANDO LLEGUE UNA INTERFERENCIA, DEBIDO A QUE ESO VA EN OTRA TABLA DE LA BD.
+            //Tambien para PERMISOS.
+            sql = 'UPDATE adminecogas_tareas_por_carpeta SET ' + subtarea + ' ="' + estadoTarea + '" WHERE id_obra=' + id_obra;
+            connection.query(sql, (error, results) => {
+              if (error) console.log(error);
+            })
+          }
+
+        });
+      }
+      res.send('ok');
+    })
+  }
+
+  //  sql='UPDATE adminecogas_tareas_por_carpeta SET?';
+  // connection.query(sql,({}))
+})
+router.post("/ActualizarHistorialTareas", (req, res) => {
+  var idObra;
+  var NombreObra;
+  var EtapaSeleccionada;
+  var subtarea;
+  var ResponsableTarea;
+  var TareaRealizada;
+  var ProximaTarea;
+  var FechaLimiteTarea;
+  idObra = req.body.Obra;
+  EtapaSeleccionada = req.body.EtapaTarea;
+  subtarea = req.body.Subtarea;
+  ResponsableTarea = req.body.ResponsableDeTarea;
+  TareaRealizada = req.body.TareaRealizada;
+  ProximaTarea = req.body.ProximaTarea;
+  FechaLimiteTarea = req.body.Fecha_limite;
+  let fecha = new Date();
+  let anio = fecha.getFullYear();
+  let mes = fecha.getMonth() + 1;
+  let dia = fecha.getDate();
+  let fechaHoy = anio + '-' + mes + '-' + dia;
+  var sql = 'SELECT Nombre FROM obras WHERE id=' + idObra + ';';
+  var CantidadResponsables = req.body.CantidadResponsables;
+  connection.query(sql, (error, results) => {
+    if (error) console.log(error);
+    else {
+      NombreObra = results[0].Nombre;
+      sql = 'INSERT INTO historialdecambios set?';
+      if (CantidadResponsables > 1) {
+        ResponsableTarea.forEach((responsable) => {
+          connection.query(sql, [{ Nombre_sub: NombreObra, EtapaTarea_sub: EtapaSeleccionada, Tarea: subtarea, Fecha_Tarea_sub: fechaHoy, ResponsableDeTarea: responsable, Tarea_Realizada_sub: TareaRealizada, Fecha_Proxima_Tarea_sub: FechaLimiteTarea, Proxima_Tarea_sub: ProximaTarea, Si_NO_TareaRealizada: "N", id_obra: idObra }], (error, results) => {
+            if (error) console.log(error);
+
+          })
         })
-      })
-      res.send('Tarea cargada con exito en el historial. Recuerde cargar los checks en la carpeta.');
-    }else{
-connection.query(sql,[{Nombre_sub:NombreObra,EtapaTarea_sub:EtapaSeleccionada,Tarea:subtarea,Fecha_Tarea_sub:fechaHoy, ResponsableDeTarea:ResponsableTarea,Tarea_Realizada_sub:TareaRealizada,Fecha_Proxima_Tarea_sub:FechaLimiteTarea,Proxima_Tarea_sub:ProximaTarea,Si_NO_TareaRealizada:"N", id_obra:idObra}],(error,results)=>{
-  if(error)console.log(error);
-  else{
-    res.send('Tarea cargada con exito en el historial. Recuerde cargar los checks en la carpeta.');
-  }
-})
-}
-  }
-})
+        res.send('Tarea cargada con exito en el historial. Recuerde cargar los checks en la carpeta.', 200);
+      } else {
+        connection.query(sql, [{ Nombre_sub: NombreObra, EtapaTarea_sub: EtapaSeleccionada, Tarea: subtarea, Fecha_Tarea_sub: fechaHoy, ResponsableDeTarea: ResponsableTarea, Tarea_Realizada_sub: TareaRealizada, Fecha_Proxima_Tarea_sub: FechaLimiteTarea, Proxima_Tarea_sub: ProximaTarea, Si_NO_TareaRealizada: "N", id_obra: idObra }], (error, results) => {
+          if (error) console.log(error);
+          else {
+            res.send('Tarea cargada con exito en el historial. Recuerde cargar los checks en la carpeta.');
+          }
+        })
+      }
+    }
+  })
 
 })
 //Opciones de editar tareas POST
@@ -3775,7 +4375,7 @@ router.post("/ActualizarEstadoCarpeta/:id", (req, res) => {
       console.log("codificacioncarpetas actualizado.");
     }
   );
-   sql = "UPDATE obras SET ? WHERE id=?";
+  sql = "UPDATE obras SET ? WHERE id=?";
   connection.query(
     sql,
     [
@@ -3789,67 +4389,67 @@ router.post("/ActualizarEstadoCarpeta/:id", (req, res) => {
       console.log("obras actualizado.");
     }
   );
-  sql=' UPDATE adminecogas_tareas_por_carpeta SET? WHERE id_obra=?';
-  connection.query(sql,[{Estado:Estado}, id],(error,results)=>{
-    if(error)console.log(error);
+  sql = ' UPDATE adminecogas_tareas_por_carpeta SET? WHERE id_obra=?';
+  connection.query(sql, [{ Estado: Estado }, id], (error, results) => {
+    if (error) console.log(error);
     console.log("admiencogas_tareas por carpeta actualizado.");
   })
   setTimeout(() => {
-    res.redirect(req.get("referer"));  
+    res.redirect(req.get("referer"));
   }, 2000);
-  
+
 });
 
-router.post('/actualizarTareaRealizada/:id',(req,res)=>{
-  var id= req.params.id;
-  var NombreCarpeta= req.body.NombreCarpeta;
-  var TareaRealizada= req.body.TareaRealizada;
-  sql='UPDATE historialdecambios set? WHERE id=?';
-  connection.query(sql,[{Tarea_Realizada_sub:TareaRealizada},id],(error,result)=>{
-    if(error)console.log(error);
-    else(
-      res.redirect("/historialcarpeta/"+NombreCarpeta)
+router.post('/actualizarTareaRealizada/:id', (req, res) => {
+  var id = req.params.id;
+  var NombreCarpeta = req.body.NombreCarpeta;
+  var TareaRealizada = req.body.TareaRealizada;
+  sql = 'UPDATE historialdecambios set? WHERE id=?';
+  connection.query(sql, [{ Tarea_Realizada_sub: TareaRealizada }, id], (error, result) => {
+    if (error) console.log(error);
+    else (
+      res.redirect("/historialcarpeta/" + NombreCarpeta)
     )
   })
 })
 //AJAX
-router.get("/BuscarEstadoFinanciero/:idObra",(req,res)=>{
+router.get("/BuscarEstadoFinanciero/:idObra", (req, res) => {
 
 });
-router.get("/Adminecogas/DatosObras",(req,res)=>{
-  let sql='Select * FROM obras WHERE Estado !="Finalizada" ORDER BY Nombre asc';
-  connection.query(sql,(error,results)=>{
-    if(error)console.log(error);
-    else{
+router.get("/Adminecogas/DatosObras", (req, res) => {
+  let sql = 'SELECT * FROM obras WHERE (Estado !="Finalizada" AND Estado !="ELIMINADO") ORDER BY Nombre asc';
+  connection.query(sql, (error, results) => {
+    if (error) console.log(error);
+    else {
       res.send(results);
     }
   })
 })
-router.get("/Adminecogas/DatosObras/all",(req,res)=>{
-  let sql='Select * FROM obras ORDER BY Nombre asc';
-  connection.query(sql,(error,results)=>{
-    if(error)console.log(error);
-    else{
+router.get("/Adminecogas/DatosObras/all", (req, res) => {
+  let sql = 'Select * FROM obras ORDER BY Nombre asc';
+  connection.query(sql, (error, results) => {
+    if (error) console.log(error);
+    else {
       res.send(results);
     }
   })
 })
-router.post('/AdminEcogas/CargarDocumento',upload.single('CargaDocumento'),async (req,res)=>{
-// SE DEBE DE TERMINAR LA GESTION DE LA CARGA DE LOS ARCHIVOS. ACTUALMENTE NO FUNCIONA.
-// DESDE EDITAR TAREAS, APARENTEMENTE SE ENVIA A TRAVES DEL Modal, EL ARCHIVO. PERO CUANDO LLEGA ACA AL BACKEND
-// EL MISMO NO PUEDE SER PROCESADO. DEBIDO A SOLICITUD DE MAURICIO EN HACER OTRA COSA SE DEJA EL CODIGO ADONDE ESTA Y SE CONTINUA CON OTRAS 
-// TAREAS.
+router.post('/AdminEcogas/CargarDocumento', upload.single('CargaDocumento'), async (req, res) => {
+  // SE DEBE DE TERMINAR LA GESTION DE LA CARGA DE LOS ARCHIVOS. ACTUALMENTE NO FUNCIONA.
+  // DESDE EDITAR TAREAS, APARENTEMENTE SE ENVIA A TRAVES DEL Modal, EL ARCHIVO. PERO CUANDO LLEGA ACA AL BACKEND
+  // EL MISMO NO PUEDE SER PROCESADO. DEBIDO A SOLICITUD DE MAURICIO EN HACER OTRA COSA SE DEJA EL CODIGO ADONDE ESTA Y SE CONTINUA CON OTRAS 
+  // TAREAS.
 
-const codigoObra=req.body.nCodigoObra;
-const nombreDocumento=req.body.CargaDocumento;
-const ubicacion=req.body.nombreDocumento;
-try {
-  const ArchivoTemporal = path.join(__dirname,'/Archivos/temp','archivo');
-  const CarpetaDestino = path.join(__dirname,'Archivos/1 Administracion Ecogas/02. Carpetas Vigentes/'+codigoObra,ubicacion);
-  await fs.rename(tempFilePath, finalDestinationPath);
-  res.send('Archivo cargado exitosamente');
-} catch (error) {
-  console.error(error);
+  const codigoObra = req.body.nCodigoObra;
+  const nombreDocumento = req.body.CargaDocumento;
+  const ubicacion = req.body.nombreDocumento;
+  try {
+    const ArchivoTemporal = path.join(__dirname, '/Archivos/temp', 'archivo');
+    const CarpetaDestino = path.join(__dirname, 'Archivos/1 Administracion Ecogas/02. Carpetas Vigentes/' + codigoObra, ubicacion);
+    await fs.rename(tempFilePath, finalDestinationPath);
+    res.send('Archivo cargado exitosamente');
+  } catch (error) {
+    console.error(error);
     res.status(500).send('Error al mover el archivo');
-}
+  }
 })

@@ -26,46 +26,32 @@
           <tr>
             <th>Obra</th>
             <th>N°</th>
-            <th>Cantidad de vecinos</th>
             <th>Estado</th>
-            <th>Monto contratado</th>
-            <th>Monto pendiente de pago</th>
-            <th>Materiales</th>
-            <th>Extras incluidos</th>
+            <th>Firma del contrado</th>
+           
 
             </tr>
         </thead>
         <tbody>
-            <%  for (let index = 0; index < NombreObras.length; index++) {%>
-              <%    const element = NombreObras[index];%>
-              <%var contador=0;%>
-              <%if(element.Estado=="Finalizada"){ %>
-              <tr id="trOculto" class="bg-danger text-light" style="display: none;">
-                <%}%>
-                <%if(element.Estado=="ELIMINADO"){%>
-                  <tr id="trOculto" class="bg-warning" style="display: none;">
-                  <%}if(element.Estado!="Finalizada"&&element.Estado!="ELIMINADO" ){%>
-                  <tr class="">
-                    <%}%>
-                    <td>
-                      <a class="btn btn-sm" href="Finanzas/cobrodeobras/VerObra/<%= element.Nombre%>"><%= element.Nombre%></a
-                    </td>
-              <td>
-                <%=element.NCarpeta%>
-              </td>
-              <td><%clientes.forEach((clientes)=>{%>
-                
-              <%if(clientes.id_Obra==element.id){%>
-               <% contador=contador+1%>
-                <%}%>
-                <%})%>
-                <%=contador%>
-              </td>
-              <td>
-                <%=element.Estado%>
-              </td>
+          <% obras.forEach(element => { %>
+           <% if (element.Estado=='Finalizada' || element.Estado=='ELIMINADO') { %>
+            <% }else{ %>
+            <tr>
+            <td>
+              <a class="btn btn-sm" href="Finanzas/cobrodeobras/VerObra/<%= element.id%>"><%= element.Nombre%></a
+            </td>
+            <td>
+              <%=element.NCarpeta%>
+            </td>
+            <td>
+              <%=element.Estado%>
+            </td>
+            <td>
+              <%=element.Fechafirmacontrato %>
+            </td>
           </tr>
-                <%}%>
+           <% } %>
+          <% }) %>
         </tbody>
       </table>
     </div>
@@ -98,7 +84,7 @@
                       <label class="form-label text-center" for="Obra">Obra </label>
                       <input list="obras" type="text" name="Obra" id="Obra">
                       <datalist id="obras">
-                        <%NombreObras.forEach((element)=>{%>
+                        <%obras.forEach((element)=>{%>
                           <option id="opcionesObras" value="<%=element.Nombre%>"></option>
                           <%})%>
                       </datalist>

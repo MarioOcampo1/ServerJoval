@@ -8,7 +8,7 @@
       <div class="modal-body">
         <form action="/Finanzas/NuevoCliente/cargarLote" method="post">
           <input type="hidden" name="idObra" value="<%=id_Obra%>">
-          <label class="form-label" for="Obra">Obra: <%=NombreObra%> </label>
+          <h4 class="text-center"><%=NombreObra%></h4>
           <input type="text" class="form-control" name="Obra" id="Obra" value="<%=NombreObra%>" hidden>
           <div class="row g-5">
             <div class="col-md">
@@ -23,6 +23,13 @@
                 <input type="number" class="form-control" name="MontoCuota" id="MontoCuota" min="1"
                   aria-describedby="ingrese la cantidad de clientes a agregar" placeholder="">
                 <label for="MontoCuota"> Valor Cuota</label>
+              </div>
+            </div>
+             <div class="col-md">
+              <div class="form-floating mb-3">
+                <input type="number" class="form-control" name="ServicioDomiciliarioPorLote" id="ServicioDomiciliarioPorLote" min="1"
+                  aria-describedby="ingrese el monto a pagar del servicio domiciliario" placeholder="">
+                <label for="ServicioDomiciliarioPorLote"> Valor serv. domiciliario</label>
               </div>
             </div>
           </div>

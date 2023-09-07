@@ -397,39 +397,32 @@
           function CargarNuevaTarea(id){
   var idObra= id;
   var NombreCarpeta=$(this).prop('name');
-  console.log(NombreCarpeta);
   $('#IdDeLaObra').val(idObra);
   $('#modalNuevaTarea').modal('show');
   $('#modalNuevaTareaTitleId').html('Cargar nueva tarea en obra '+NombreCarpeta+'');
-  $('#btnActualizarTarea').removeAttr('disabled');
   $('#infoServidor').empty();
 
 }
 $('#btnNuevaTarea').click(function(){    
         var idObra;
   var NombreCarpeta=$(this).prop('name');
-  console.log(NombreCarpeta);
   $('#IdDeLaObra').val(idObra);
   $('#modalNuevaTarea').modal('show');
-  $('#modalNuevaTareaTitleId').html('Cargar nueva tarea en obra '+NombreCarpeta+'');
-  $('#btnActualizarTarea').removeAttr('disabled');
+  $('#modalNuevaTareaTitleId').html('Cargar de nueva tarea');
   $('#infoServidor').empty();
   $('#bodyCargarNuevaTareaAdminecogas').hide();
         $.ajax({
             url:'/adminecogas/DatosObras',
             type:'GET',
             success: function(data){
-              console.log(data);
+              var obrasVigentes
               $('#SelectObra').empty();
               $('#SelectObra').append('<option value="" selected></option>');
               data.forEach((obras)=>{
                 $('#SelectObra').append('<option value="'+obras.id+'">'+obras.Nombre+'</option>');
               })
             }
-
         }
-
-
         )
     })
     $('#CantidadResponsables').change(function(){
@@ -448,7 +441,9 @@ $('#btnNuevaTarea').click(function(){
     })
   
     $('#SelectObra').change(function(){
-      $('#bodyCargarNuevaTareaAdminecogas').show()
+      $('.EtapaTareaRadio').attr('checked',false);
+      $('#bodyCargarNuevaTareaAdminecogas').show();
+      
     });
         </script>
         <%}%>

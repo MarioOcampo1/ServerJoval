@@ -1,1259 +1,258 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <title>Finanzas:Vista de la obra</title>
 </head>
 
 <body>
   <%- include('./partials/menusuperior.ejs'); %>
-
-  <div class="VistaObra">
-    <div class="Encabezado mt-2 ms-1">
-<button class="btn btn-sm btn-danger bi bi-arrow-bar-left" onclick="history.go(-1)" title="Ir a pagína anterior"></button>
-      <a href="/Finanzas/NuevoCliente/<%=NombreObra%>"><button class="btn btn-sm btn-success">NuevoCliente</button></a>
-      <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalClientesPorLote">
-        Nuevo cliente | Carga por lote
-      </button>
-      <button class="btn btn-sm btn-primary" onclick="ExportarAExcel();" disabled>Exportar planilla</button>
-      <button class="btn btn-sm btn-primary bi bi-gear" data-bs-toggle="modal" data-bs-target="#ModalConfiguracion">
-        Configuraciones de
-        la obra</button>
-      <h1 class="text-center">
-        <%=NombreObra%>- lista de clientes
-      </h1>
-    </div>
-    <%if(PredeterminadosyCobros){%>
-    <div class="container ">
-      <p class="text-center">En caso de no encontrar el vecino, debera de cargarlo en el sistema.</p>
-    </div>
-
-    <div class="container VistaClientes m-2">
-      <label for="BuscadorCliente">Buscar cliente</label>
-      <input class="border border-danger" type="text" name="BuscadorCliente" id="BuscadorCliente">
-
-      <div class="btn-toolbar m-2 border border-secondary rounded">
-        <label class="list-group-item" for="">Colores de referencia: </label>
-
-        <ul class="list-group list-group-horizontal">
-          <li class="list-group-item text-light bg-danger">Sin pagar </li>
-          <li class="list-group-item bg-danger">Pago inferior al esperado</li>
-          <li class="list-group-item text-warning bg-success">Pago superior al esperado</li>
-          <li class="list-group-item bg-success">Pagado</li>
-        </ul>
+    <div class="VistaObra">
+      <div class="Encabezado mt-2 ms-1">
+        <button class="btn btn-sm btn-danger bi bi-arrow-bar-left" onclick="history.go(-1)"
+          title="Ir a pagína anterior"></button>
+        <a href="/Finanzas/NuevoCliente/<%=NombreObra%>"><button
+            class="btn btn-sm btn-success">NuevoCliente</button></a>
+        <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal"
+          data-bs-target="#modalClientesPorLote">
+          Nuevo cliente | Carga por lote
+        </button>
+        <button class="btn btn-sm btn-primary" onclick="ExportarAExcel();" disabled>Exportar planilla</button>
+        <button id="btnVerConfigObra" class="btn btn-sm btn-primary bi bi-gear" data-bs-toggle="modal"
+          data-bs-target="#ModalConfiguracion">
+          Configurar obra</button>
+        <h1 class="text-center">
+         
+        </h1>
       </div>
-    </div>
 
-    <table id="TablaObras" class="table table-bordered table-inverse table-responsive" style="display: block; width:100%;">
-      <thead class="thead-default">
-        <tr>
-          <th>Cliente</th>
-          <th>Domicilio</th>
-          <th>DNI</th>
-          <th>Anticipo financiero </th>
-          <th>Cuota 1 </th>
-          <th>Cuota 2 </th>
-          <th>Cuota 3 </th>
-          <th>Cuota 4 </th>
-          <th>Cuota 5 </th>
-          <th>Cuota 6 </th>
-          <%var Cuota1=false;%>
-          <%var Cuota2=false;%>
-          <%var Cuota3=false;%>
-          <%var Cuota4=false;%>
-          <%var Cuota5=false;%>
-          <%var Cuota6=false;%>
-          <%var Cuota7=false;%>
-          <%var Cuota8=false;%>
-          <%var Cuota9=false;%>
-          <%var Cuota10=false;%>
-          <%var Cuota11=false;%>
-          <%var Cuota12=false;%>
-          <%var PredeterminadoIrrigacion=false;%>
-          <%var PredeterminadoDNV=false;%>
-          <%var PredeterminadoDPV=false;%>
-          <%var PredeterminadoHidraulica=false;%>
-          <%var PredeterminadoFFCC=false;%>
-          <%var PredeterminadoPrivado=false;%>
-          <%var PredeterminadoServicioDomiciliario=false;%>
-          <%var PredeterminadoMunicipal=false;%>
-          <%var PredeterminadoIngresoDocumentacion=false;%>
-          <%PredeterminadosyCobros.forEach((cobros)=>{%>
+      <div class="container ">
+        <p class="text-center">En caso de no encontrar el vecino, debera de cargarlo en el sistema.</p>
+      </div>
 
-<%if((  cobros.Cuota7!=0  || cobros.PredeterminadoCuota7!=0  )){Cuota7=true}%>
-<%if((  cobros.Cuota8!=0  || cobros.PredeterminadoCuota8!=0  )){Cuota8=true}%>
-<%if((  cobros.Cuota9!=0  ||cobros.PredeterminadoCuota9!=0  )){Cuota9=true}%>
-<%if((  cobros.Cuota10!=0  ||cobros.PredeterminadoCuota10!=0  )){Cuota10=true}%>
-<%if((  cobros.Cuota11!=0  ||cobros.PredeterminadoCuota11!=0  )){Cuota11=true}%>
-<%if(( cobros.Cuota12!=0||cobros.PredeterminadoCuota12!=0)){Cuota12=true}%>
-<%if(cobros.PredeterminadoIrrigacion!=0 ){PredeterminadoIrrigacion=true;}%>
-<%if(cobros.PredeterminadoDNV!=0 ){PredeterminadoDNV=true;}%>
-<%if(cobros.PredeterminadoDPV!=0 ){PredeterminadoDPV=true;}%>
-<%if(cobros.PredeterminadoHidraulica!=0 ){PredeterminadoHidraulica=true;}%>
-<%if(cobros.PredeterminadoFFCC!=0 ){PredeterminadoFFCC=true;}%>
-<%if(cobros.PredeterminadoPrivado!=0 ){PredeterminadoPrivado=true;}%>
-<%if(cobros.PredeterminadoServicioDomiciliario!=0){PredeterminadoServicioDomiciliario=true;}%>
-<%if(cobros.PredeterminadoMunicipal!=0){PredeterminadoMunicipal=true;}%>
-<%if(cobros.PredeterminadoIngresoDocumentacion!=0){PredeterminadoIngresoDocumentacion=true;}%>
-          <%})%>
-          <%if(Cuota7){%>
-          <th>Cuota 7 </th>
-          <%}%>
-                                                                                              <%if(Cuota8){%>
-          <th>Cuota 8</th>
-          <%}%>
-                                                                                                  <%if(Cuota9){%>
-          <th>Cuota 9 </th>
-          <%}%>
-                                                                                                      <%if(Cuota10){%>
-          <th>Cuota 10
-          </th>
-          <%}%>
-                                                                                                          <%if(Cuota11){%>
-          <th>Cuota 11
-          </th>
-          <%}%>
-                                                                                                              <%if(Cuota12){%>
-          <th>
-            Cuota
-            12
-          </th>
-          <%}%>
+      <div class="container VistaClientes m-2">
+        <label for="BuscadorCliente">Buscar cliente</label>
+        <input class="border border-danger" type="text" name="BuscadorCliente" id="BuscadorCliente">
 
-                                                                                                                  <%if(PredeterminadoDNV){%>
-          <th>
-            Permiso
-            DNV
-          </th>
-
-          <%}%>
-                                                                                                                      <%if(PredeterminadoDPV){%>
-          <th>
-            Permiso
-            DPV
-          </th>
-
-          <%}%>
-                                                                                                                          <%if(PredeterminadoHidraulica){%>
-          <th>
-            Permiso
-            Hidraulica
-          </th>
-
-          <%}%>
-                                                                                                                              <%if(PredeterminadoFFCC){%>
-          <th>
-            Permiso
-            FFCC
-          </th>
-
-          <%}%>
-                                                                                                                                  <%if(PredeterminadoPrivado){%>
-          <th>
-            Permiso
-            Privado
-          </th>
-
-          <%}%>
-                                                                                                                                      <%if(PredeterminadoMunicipal){%>
-          <th>
-            Permiso
-            Municipal
-          </th>
-
-          <%}%>
-                                                                                                                                          <%if(PredeterminadoServicioDomiciliario){%>
-          <th>
-            Servicio
-            Domiciliario
-          </th>
-
-          <%}%>
-
-                                                                                                                                              <%if(PredeterminadoIngresoDocumentacion){%>
-          <th>
-            Ingreso
-            documentación
-            por
-            comienzo
-            tramite
-          </th>
-          <%}%>
-                                                                                                                                                  <%if(PredeterminadoIrrigacion){%>
-          <th>
-            Permiso
-            Irrigación
-          </th>
-
-          <%}%>
-
-            </tr>
-          </thead>
-          <tbody>
-            <% PredeterminadosyCobros.forEach((cliente)=>{ %>
-        <tr>
-          <td class="text-center">
-            <button class="btn" onclick="CargarPago('<%=cliente.ID_cliente%>','<%=cliente.NombreCliente%>');">
-              <%= cliente.NombreCliente%>
-            </button>
-          </td>
-          <td><%= cliente.Direccion%></td>
-
-          <td> <%= cliente.DNICliente%></td>
-          <%if(cliente.AnticipoFinanciero==null || cliente.AnticipoFinanciero=='0000' ||
-                  cliente.AnticipoFinanciero==0 ){%>
-          <td class="text-center text-light bg-danger">
-            <%=cliente.PredeterminadoAnticipoFinanciero%>
-          </td>
-          <%}else{%>
-          <%if(cliente.AnticipoFinanciero>cliente.PredeterminadoAnticipoFinanciero ){%>
-          <td class="text-center text-warning bg-success">
-            <%=cliente.AnticipoFinanciero %>
-          </td>
-          <%}%>
-                        <%if(cliente.AnticipoFinanciero<cliente.PredeterminadoAnticipoFinanciero){%>
-          <td class="text-center text-dark bg-danger">
-            <%=cliente.AnticipoFinanciero %>
-          </td>
-          <%}%>
-                            <%if(cliente.AnticipoFinanciero==cliente.PredeterminadoAnticipoFinanciero){%>
-          <td class="text-center bg-success text-dark ">
-            <%=cliente.AnticipoFinanciero%>
-          </td>
-          <%}%>
-                                <%}%>
-          <%if(cliente.Cuota1==null || cliente.Cuota1=="" || cliente.Cuota1==undefined ||
-                                    cliente.Cuota1==0 ||cliente.Cuota1=='0000' ){%>
-          <td class="text-center text-light bg-danger">
-            <%=cliente.PredeterminadoCuota1%>
-          </td>
-          <%}else{%>
-          <%if(cliente.Cuota1>cliente.PredeterminadoCuota1 ){%>
-          <td class="text-center text-warning bg-success">
-            <%=cliente.Cuota1 %>
-          </td>
-          <%}%>
-                                          <%if(cliente.Cuota1<cliente.PredeterminadoCuota1){%>
-          <td class="text-center text-dark bg-danger">
-            <%=cliente.Cuota1 %>
-          </td>
-          <%}%>
-                                              <%if(cliente.Cuota1==cliente.PredeterminadoCuota1){%>
-          <td class="text-center bg-success text-dark ">
-            <%=cliente.Cuota1%>
-          </td>
-          <%}%>
-                                                  <%}%>
-          <%if(cliente.Cuota2==null || cliente.Cuota2==""
-                                                      ||cliente.Cuota2==undefined || cliente.Cuota2==0 ||
-                                                      cliente.Cuota2=='0000' ){%>
-          <td class="text-center text-light bg-danger">
-            <%=cliente.PredeterminadoCuota2%>
-          </td>
-          <%}else{%>
-          <%if(cliente.Cuota2>cliente.PredeterminadoCuota2 ){%>
-          <td class="text-center text-warning bg-success">
-            <%=cliente.Cuota2 %>
-          </td>
-          <%}%>
-                                                            <%if(cliente.Cuota2<cliente.PredeterminadoCuota2){%>
-          <td class="text-center text-dark bg-danger">
-            <%=cliente.Cuota2 %>
-          </td>
-          <%}%>
-                                                                <%if(cliente.Cuota2==cliente.PredeterminadoCuota2){%>
-          <td class="text-center bg-success text-dark ">
-            <%=cliente.Cuota2%>
-          </td>
-          <%}%>
-                                                                    <%}%>
-          <%if(cliente.Cuota3==null || cliente.Cuota3==""
-                                                                        ||cliente.Cuota3==undefined || cliente.Cuota3==0
-                                                                        ||cliente.Cuota3=='0000' ){%>
-          <td class="text-center text-light bg-danger">
-            <%=cliente.PredeterminadoCuota3%>
-          </td>
-          <%}else{%>
-          <%if(cliente.Cuota3>
-                                                                            cliente.PredeterminadoCuota3 ){%>
-          <td class="text-center text-warning bg-success">
-            <%=cliente.Cuota3 %>
-          </td>
-          <%}%>
-                                                                              <%if(cliente.Cuota3<cliente.PredeterminadoCuota3){%>
-          <td class="text-center text-dark bg-danger">
-            <%=cliente.Cuota3 %>
-          </td>
-          <%}%>
-                                                                                  <%if(cliente.Cuota3==cliente.PredeterminadoCuota3){%>
-          <td class="text-center bg-success text-dark ">
-            <%=cliente.Cuota3%>
-          </td>
-          <%}%>
-                                                                                      <%}%>
-          <%if(cliente.Cuota4==null
-                                                                                          ||cliente.Cuota4==""
-                                                                                          ||cliente.Cuota4==undefined ||
-                                                                                          cliente.Cuota4==0
-                                                                                          ||cliente.Cuota4=='0000' ){%>
-          <td class="text-center text-light bg-danger">
-            <%=cliente.PredeterminadoCuota4%>
-          </td>
-          <%}else{%>
-          <%if(cliente.Cuota4>
-                                                                                              cliente.PredeterminadoCuota4
-                                                                                              ){%>
-          <td class="text-center text-warning bg-success">
-            <%=cliente.Cuota4 %>
-          </td>
-          <%}%>
-                                                                                                <%if(cliente.Cuota4<cliente.PredeterminadoCuota4){%>
-          <td class="text-center text-dark bg-danger">
-            <%=cliente.Cuota4 %>
-          </td>
-          <%}%>
-                                                                                                    <%if(cliente.Cuota4==cliente.PredeterminadoCuota4){%>
-          <td class="text-center bg-success text-dark ">
-            <%=cliente.Cuota4%>
-          </td>
-          <%}%>
-                                                                                                        <%}%>
-          <%if(cliente.Cuota5==null||cliente.Cuota5==""||cliente.Cuota5==undefined
-                                                                                                            ||
-                                                                                                            cliente.Cuota5==0||cliente.Cuota5=='0000'
-                                                                                                            ){%>
-          <td class="text-center text-light bg-danger">
-            <%=cliente.PredeterminadoCuota5%>
-          </td>
-          <%}else{%>
-          <%if(cliente.Cuota5>
-                                                                                                                cliente.PredeterminadoCuota5
-                                                                                                                ){%>
-          <td class="text-center text-warning bg-success">
-            <%=cliente.Cuota5
-                                                                                                                    %>
-          </td>
-          <%}%>
-                                                                                                                  <%if(cliente.Cuota5<cliente.PredeterminadoCuota5){%>
-          <td class="text-center text-dark bg-danger">
-            <%=cliente.Cuota5
-                                                                                                                        %>
-          </td>
-          <%}%>
-                                                                                                                      <%if(cliente.Cuota5==cliente.PredeterminadoCuota5){%>
-          <td class="text-center bg-success text-dark ">
-            <%=cliente.Cuota5%>
-          </td>
-          <%}%>
-                                                                                                                          <%}%>
-          <%if(cliente.Cuota6==null||cliente.Cuota6==""||cliente.Cuota6==undefined
-                                                                                                                              ||
-                                                                                                                              cliente.Cuota6==0||cliente.Cuota6=='0000'
-                                                                                                                              ){%>
-          <td class="text-center text-light bg-danger">
-            <%=cliente.PredeterminadoCuota6%>
-          </td>
-          <%}else{%>
-          <%if(cliente.Cuota6>
-                                                                                                                                  cliente.PredeterminadoCuota6
-                                                                                                                                  ){%>
-          <td class="text-center text-warning bg-success">
-            <%=cliente.Cuota6
-                                                                                                                                      %>
-          </td>
-          <%}%>
-                                                                                                                                    <%if(cliente.Cuota6<cliente.PredeterminadoCuota6){%>
-          <td class="text-center text-dark bg-danger">
-            <%=cliente.Cuota6
-                                                                                                                                          %>
-          </td>
-          <%}%>
-                                                                                                                                        <%if(cliente.Cuota6==cliente.PredeterminadoCuota6){%>
-          <td class="text-center bg-success text-dark ">
-            <%=cliente.Cuota6%>
-          </td>
-          <%}%>
-                                                                                                                                            <%}%>
-          <%if(Cuota7){%>
-          <%if(cliente.Cuota7==null||cliente.Cuota7==0){%>
-          <td class="text-center text-light bg-danger">
-            <%=cliente.PredeterminadoCuota7%>
-          </td>
-          <%}else{%>
-          <%if(cliente.Cuota7>
-                                                                                                                                                      cliente.PredeterminadoCuota7){%>
-          <td class="text-center text-warning bg-success">
-            <%=cliente.Cuota7%>
-          </td>
-          <%}%>
-                                                                                                                                                        <%if(cliente.Cuota7<cliente.PredeterminadoCuota7){%>
-          <td class="text-center text-dark bg-danger">
-            <%=cliente.Cuota7
-                                                                                                                                                              %>
-          </td>
-          <%}%>
-                                                                                                                                                            <%if(cliente.Cuota7==cliente.PredeterminadoCuota7){%>
-          <td class="text-center bg-success text-dark ">
-            <%=cliente.Cuota7%>
-          </td>
-          <%}%>
-                                                                                                                                                                <%}%>
-          <%}%>
-                                                                                                                                                                    <%if(Cuota8){%>
-          <%if(cliente.Cuota8==null||cliente.Cuota8==""||cliente.Cuota8==undefined
-                                                                                                                                                                        ||
-                                                                                                                                                                        cliente.Cuota8==0||cliente.Cuota8=='0000'
-                                                                                                                                                                        ){%>
-          <td class="text-center text-light bg-danger">
-            <%=cliente.PredeterminadoCuota8%>
-          </td>
-          <%}else{%>
-          <%if(cliente.Cuota8>
-                                                                                                                                                                            cliente.PredeterminadoCuota8
-                                                                                                                                                                            ){%>
-          <td class="text-center text-warning bg-success">
-            <%=cliente.Cuota8
-                                                                                                                                                                                %>
-          </td>
-          <%}%>
-                                                                                                                                                                              <%if(cliente.Cuota8<cliente.PredeterminadoCuota8){%>
-          <td class="text-center text-dark bg-danger">
-            <%=cliente.Cuota8
-                                                                                                                                                                                    %>
-          </td>
-          <%}%>
-                                                                                                                                                                                  <%if(cliente.Cuota8==cliente.PredeterminadoCuota8){%>
-          <td class="text-center bg-success text-dark ">
-            <%=cliente.Cuota8%>
-          </td>
-          <%}%>
-                                                                                                                                                                                      <%}%>
-          <%}%>
-                                                                                                                                                                                          <%if(Cuota9){%>
-          <%if(cliente.Cuota9==null
-                                                                                                                                                                                              ||
-                                                                                                                                                                                              cliente.Cuota9==""
-                                                                                                                                                                                              ||
-                                                                                                                                                                                              cliente.Cuota9==undefined
-                                                                                                                                                                                              ||
-                                                                                                                                                                                              cliente.Cuota9==0
-                                                                                                                                                                                              ||
-                                                                                                                                                                                              cliente.Cuota9=='0000'
-                                                                                                                                                                                              ){%>
-
-          <td class="text-center text-light bg-danger">
-            <%=cliente.PredeterminadoCuota9%>
-          </td>
-          <%}else{%>
-          <%if(cliente.Cuota9>
-                                                                                                                                                                                                  cliente.PredeterminadoCuota9
-                                                                                                                                                                                                  ){%>
-          <td class="text-center text-warning bg-success">
-            <%=cliente.Cuota9
-                                                                                                                                                                                                      %>
-          </td>
-          <%}%>
-                                                                                                                                                                                                    <%if(cliente.Cuota9<cliente.PredeterminadoCuota9){%>
-          <td class="text-center text-dark bg-danger">
-            <%=cliente.Cuota9
-                                                                                                                                                                                                          %>
-          </td>
-          <%}%>
-                                                                                                                                                                                                        <%if(cliente.Cuota9==cliente.PredeterminadoCuota9){%>
-          <td class="text-center bg-success text-dark ">
-            <%=cliente.Cuota9%>
-          </td>
-          <%}%>
-                                                                                                                                                                                                            <%}%>
-          <%}%>
-                                                                                                                                                                                                                <%if(Cuota10){%>
-          <%if(cliente.Cuota10==null
-                                                                                                                                                                                                                    ||
-                                                                                                                                                                                                                    cliente.Cuota10==""
-                                                                                                                                                                                                                    ||
-                                                                                                                                                                                                                    cliente.Cuota10==undefined
-                                                                                                                                                                                                                    ||
-                                                                                                                                                                                                                    cliente.Cuota10==0
-                                                                                                                                                                                                                    ||
-                                                                                                                                                                                                                    cliente.Cuota10=='0000'
-                                                                                                                                                                                                                    ){%>
-          <td class="text-center text-light bg-danger">
-            <%=cliente.PredeterminadoCuota10%>
-          </td>
-          <%}else{%>
-          <%if(cliente.Cuota10>
-                                                                                                                                                                                                                        cliente.PredeterminadoCuota10
-                                                                                                                                                                                                                        ){%>
-          <td class="text-center text-warning bg-success">
-            <%=cliente.Cuota10
-                                                                                                                                                                                                                            %>
-          </td>
-          <%}%>
-                                                                                                                                                                                                                          <%if(cliente.Cuota10<cliente.PredeterminadoCuota10){%>
-          <td class="text-center text-dark bg-danger">
-            <%=cliente.Cuota10
-                                                                                                                                                                                                                                %>
-          </td>
-          <%}%>
-
-                                                                                                                                                                                                                              <%if(cliente.Cuota10==cliente.PredeterminadoCuota10){%>
-          <td class="text-center bg-success text-dark ">
-            <%=cliente.Cuota10%>
-          </td>
-
-          <%}%>
-                                                                                                                                                                                                                                  <%}%>
-          <%}%>
-                                                                                                                                                                                                                                      <%if(Cuota11){%>
-          <%if(cliente.Cuota11==null
-                                                                                                                                                                                                                                          ||
-                                                                                                                                                                                                                                          cliente.Cuota11==""
-                                                                                                                                                                                                                                          ||
-                                                                                                                                                                                                                                          cliente.Cuota11==undefined
-                                                                                                                                                                                                                                          ||
-                                                                                                                                                                                                                                          cliente.Cuota11==0
-                                                                                                                                                                                                                                          ||
-                                                                                                                                                                                                                                          cliente.Cuota11=='0000'
-                                                                                                                                                                                                                                          ){%>
-
-          <td class="text-center text-light bg-danger">
-            <%=cliente.PredeterminadoCuota11%>
-          </td>
-          <%}else{%>
-          <%if(cliente.Cuota11>
-                                                                                                                                                                                                                                              cliente.PredeterminadoCuota11
-                                                                                                                                                                                                                                              ){%>
-          <td class="text-center text-warning bg-success">
-            <%=cliente.Cuota11
-                                                                                                                                                                                                                                                  %>
-          </td>
-          <%}%>
-                                                                                                                                                                                                                                                <%if(cliente.Cuota11<cliente.PredeterminadoCuota11){%>
-          <td class="text-center text-dark bg-danger">
-            <%=cliente.Cuota11
-                                                                                                                                                                                                                                                      %>
-          </td>
-          <%}%>
-
-                                                                                                                                                                                                                                                    <%if(cliente.Cuota11==cliente.PredeterminadoCuota11){%>
-          <td class="text-center bg-success text-dark ">
-            <%=cliente.Cuota11%>
-          </td>
-
-          <%}%>
-                                                                                                                                                                                                                                                        <%}%>
-          <%}%>
-                                                                                                                                                                                                                                                            <%if(Cuota12){%>
-          <%if(cliente.Cuota12==null||
-                                                                                                                                                                                                                                                                cliente.Cuota12==0||cliente.Cuota12==""
-                                                                                                                                                                                                                                                                ||cliente.Cuota12==undefined
-                                                                                                                                                                                                                                                                ||
-                                                                                                                                                                                                                                                                cliente.Cuota12==0||cliente.Cuota12=='0000'
-                                                                                                                                                                                                                                                                ){%>
-          <td class="text-center text-light bg-danger">
-            <%=cliente.PredeterminadoCuota12%>
-          </td>
-          <%}else{%>
-          <%if(cliente.Cuota12>
-                                                                                                                                                                                                                                                                    cliente.PredeterminadoCuota12){%>
-          <td class="text-center text-warning bg-success">
-            <%=cliente.Cuota12%>
-          </td>
-          <%}%>
-                                                                                                                                                                                                                                                                      <%if(cliente.Cuota12<cliente.PredeterminadoCuota12){%>
-          <td class="text-center text-dark bg-danger">
-            <%=cliente.Cuota12
-                                                                                                                                                                                                                                                                            %>
-          </td>
-          <%}%>
-                                                                                                                                                                                                                                                                          <%if(cliente.Cuota12==cliente.PredeterminadoCuota12){%>
-          <td class="text-center bg-success text-dark ">
-            <%=cliente.Cuota12%>
-          </td>
-
-          <%}%>
-                                                                                                                                                                                                                                                                              <%}%>
-          <%}%>
-                                                                                                                                                                                                                                                                                  <%if(PredeterminadoDNV){%>
-          <%if(cliente.DNV==null||cliente.DNV==undefined
-                                                                                                                                                                                                                                                                                      ||
-                                                                                                                                                                                                                                                                                      cliente.DNV==0){%>
-          <td class="text-center text-light bg-danger">
-            <%=cliente.PredeterminadoDNV%>
-          </td>
-          <%}else{%>
-          <%if(cliente.DNV>
-                                                                                                                                                                                                                                                                                          cliente.PredeterminadoDNV
-                                                                                                                                                                                                                                                                                          ){%>
-          <td class="text-center text-warning bg-success">
-            <%=cliente.DNV
-                                                                                                                                                                                                                                                                                              %>
-          </td>
-          <%}%>
-                                                                                                                                                                                                                                                                                            <%if(cliente.DNV<cliente.PredeterminadoDNV){%>
-          <td class="text-center text-dark bg-danger">
-            <%=cliente.DNV
-                                                                                                                                                                                                                                                                                                  %>
-          </td>
-          <%}%>
-
-                                                                                                                                                                                                                                                                                                <%if(cliente.DNV==cliente.PredeterminadoDNV
-                                                                                                                                                                                                                                                                                                  &&
-                                                                                                                                                                                                                                                                                                  cliente.PredeterminadoDNV>
-                                                                                                                                                                                                                                                                                                  0){%>
-          <td class="text-center bg-success text-dark ">
-            <%=cliente.DNV%>
-          </td>
-          <%}%>
-                                                                                                                                                                                                                                                                                                    <%}%>
-          <%}%>
-                                                                                                                                                                                                                                                                                                        <%if(PredeterminadoDPV){%>
-          <%if(cliente.DPV==null
-                                                                                                                                                                                                                                                                                                            ||
-                                                                                                                                                                                                                                                                                                            cliente.DPV==undefined
-                                                                                                                                                                                                                                                                                                            ||
-                                                                                                                                                                                                                                                                                                            cliente.DPV==0){%>
-          <td class="text-center text-light bg-danger">
-            <%=cliente.PredeterminadoDPV%>
-          </td>
-          <%}else{%>
-          <%if(cliente.DPV>
-                                                                                                                                                                                                                                                                                                                cliente.PredeterminadoDPV
-                                                                                                                                                                                                                                                                                                                ){%>
-          <td class="text-center text-warning bg-success">
-            <%=cliente.DPV
-                                                                                                                                                                                                                                                                                                                    %>
-          </td>
-          <%}%>
-                                                                                                                                                                                                                                                                                                                  <%if(cliente.DPV<cliente.PredeterminadoDPV){%>
-          <td class="text-center text-dark bg-danger">
-            <%=cliente.DPV
-                                                                                                                                                                                                                                                                                                                        %>
-          </td>
-          <%}%>
-
-                                                                                                                                                                                                                                                                                                                      <%if(cliente.DPV==cliente.PredeterminadoDPV
-                                                                                                                                                                                                                                                                                                                        &&
-                                                                                                                                                                                                                                                                                                                        cliente.PredeterminadoDPV>
-                                                                                                                                                                                                                                                                                                                        0){%>
-          <td class="text-center bg-success text-dark ">
-            <%=cliente.DPV%>
-          </td>
-          <%}%>
-                                                                                                                                                                                                                                                                                                                          <%}%>
-          <%}%>
-                                                                                                                                                                                                                                                                                                                              <%if(PredeterminadoHidraulica){%>
-          <%if(cliente.Hidraulica==null
-                                                                                                                                                                                                                                                                                                                                  ||
-                                                                                                                                                                                                                                                                                                                                  cliente.Hidraulica==undefined
-                                                                                                                                                                                                                                                                                                                                  ||
-                                                                                                                                                                                                                                                                                                                                  cliente.Hidraulica==0){%>
-          <td class="text-center text-light bg-danger">
-            <%=cliente.PredeterminadoHidraulica%>
-          </td>
-          <%}else{%>
-          <%if(cliente.Hidraulica>
-                                                                                                                                                                                                                                                                                                                                      cliente.PredeterminadoHidraulica
-                                                                                                                                                                                                                                                                                                                                      ){%>
-          <td class="text-center text-warning bg-success">
-            <%=cliente.Hidraulica
-                                                                                                                                                                                                                                                                                                                                          %>
-          </td>
-          <%}%>
-                                                                                                                                                                                                                                                                                                                                        <%if(cliente.Hidraulica<cliente.PredeterminadoHidraulica){%>
-          <td class="text-center text-dark bg-danger">
-            <%=cliente.Hidraulica
-                                                                                                                                                                                                                                                                                                                                              %>
-          </td>
-          <%}%>
-
-                                                                                                                                                                                                                                                                                                                                            <%if(cliente.Hidraulica==cliente.PredeterminadoHidraulica
-                                                                                                                                                                                                                                                                                                                                              &&
-                                                                                                                                                                                                                                                                                                                                              cliente.PredeterminadoHidraulica>
-                                                                                                                                                                                                                                                                                                                                              0){%>
-          <td class="text-center bg-success text-dark ">
-            <%=cliente.Hidraulica%>
-          </td>
-          <%}%>
-                                                                                                                                                                                                                                                                                                                                                <%}%>
-          <%}%>
-                                                                                                                                                                                                                                                                                                                                                    <%if(PredeterminadoFFCC){%>
-          <%if(cliente.FFCC==null||cliente.FFCC==undefined
-                                                                                                                                                                                                                                                                                                                                                        ||
-                                                                                                                                                                                                                                                                                                                                                        cliente.FFCC==0){%>
-          <td class="text-center text-light bg-danger">
-            <%=cliente.PredeterminadoFFCC%>
-          </td>
-          <%}else{%>
-          <%if(cliente.FFCC>
-                                                                                                                                                                                                                                                                                                                                                            cliente.PredeterminadoFFCC){%>
-          <td class="text-center text-warning bg-success">
-            <%=cliente.FFCC%>
-          </td>
-          <%}%>
-                                                                                                                                                                                                                                                                                                                                                              <%if(cliente.FFCC<cliente.PredeterminadoFFCC){%>
-          <td class="text-center text-dark bg-danger">
-            <%=cliente.FFCC%>
-          </td>
-          <%}%>
-                                                                                                                                                                                                                                                                                                                                                                  <%if(cliente.FFCC==cliente.PredeterminadoFFCC&&cliente.PredeterminadoFFCC>
-                                                                                                                                                                                                                                                                                                                                                                    0){%>
-          <td class="text-center bg-success text-dark ">
-            <%=cliente.FFCC%>
-          </td>
-          <%}%>
-                                                                                                                                                                                                                                                                                                                                                                      <%}%>
-          <%}%>
-                                                                                                                                                                                                                                                                                                                                                                          <%if(PredeterminadoPrivado){%>
-          <%if(cliente.Privado==null||cliente.Privado==undefined
-                                                                                                                                                                                                                                                                                                                                                                              ||
-                                                                                                                                                                                                                                                                                                                                                                              cliente.Privado==0){%>
-          <td class="text-center text-light bg-danger">
-            <%=cliente.PredeterminadoPrivado%>
-          </td>
-          <%}else{%>
-          <%if(cliente.Privado>
-                                                                                                                                                                                                                                                                                                                                                                                  cliente.PredeterminadoPrivado){%>
-          <td class="text-center text-warning bg-success">
-            <%=cliente.Privado%>
-          </td>
-          <%}%>
-                                                                                                                                                                                                                                                                                                                                                                                    <%if(cliente.Privado<cliente.PredeterminadoPrivado){%>
-          <td class="text-center text-dark bg-danger">
-            <%=cliente.Privado%>
-          </td>
-          <%}%>
-                                                                                                                                                                                                                                                                                                                                                                                        <%if(cliente.Privado==cliente.PredeterminadoPrivado&&cliente.PredeterminadoPrivado>
-                                                                                                                                                                                                                                                                                                                                                                                          0){%>
-          <td class="text-center bg-success text-dark ">
-            <%=cliente.Privado%>
-          </td>
-          <%}%>
-                                                                                                                                                                                                                                                                                                                                                                                            <%}%>
-          <%}%>
-                                                                                                                                                                                                                                                                                                                                                                                                <%if(PredeterminadoMunicipal){%>
-          <%if(cliente.Municipal==null||cliente.Municipal==undefined
-                                                                                                                                                                                                                                                                                                                                                                                                    ||
-                                                                                                                                                                                                                                                                                                                                                                                                    cliente.Municipal==0){%>
-          <td class="text-center text-light bg-danger">
-            <%=cliente.PredeterminadoMunicipal%>
-          </td>
-          <%}else{%>
-          <%if(cliente.Municipal>
-                                                                                                                                                                                                                                                                                                                                                                                                        cliente.PredeterminadoMunicipal){%>
-          <td class="text-center text-warning bg-success">
-            <%=cliente.Municipal%>
-          </td>
-          <%}%>
-                                                                                                                                                                                                                                                                                                                                                                                                          <%if(cliente.Municipal<cliente.PredeterminadoMunicipal){%>
-          <td class="text-center text-dark bg-danger">
-            <%=cliente.Municipal%>
-          </td>
-          <%}%>
-                                                                                                                                                                                                                                                                                                                                                                                                              <%if(cliente.Municipal==cliente.PredeterminadoMunicipal&&cliente.PredeterminadoMunicipal>
-                                                                                                                                                                                                                                                                                                                                                                                                                0){%>
-          <td class="text-center bg-success text-dark ">
-            <%=cliente.Municipal%>
-          </td>
-          <%}%>
-                                                                                                                                                                                                                                                                                                                                                                                                                  <%}%>
-          <%}%>
-                                                                                                                                                                                                                                                                                                                                                                                                                      <%if(PredeterminadoServicioDomiciliario){%>
-          <%if(cliente.ServicioDomiciliario==null||cliente.ServicioDomiciliario==undefined
-                                                                                                                                                                                                                                                                                                                                                                                                                          ||
-                                                                                                                                                                                                                                                                                                                                                                                                                          cliente.ServicioDomiciliario==0){%>
-          <td class="text-center text-light bg-danger">
-            <%=cliente.PredeterminadoServicioDomiciliario%>
-          </td>
-          <%}else{%>
-          <%if(cliente.ServicioDomiciliario>
-                                                                                                                                                                                                                                                                                                                                                                                                                              cliente.PredeterminadoServicioDomiciliario){%>
-          <td class="text-center text-warning bg-success">
-            <%=cliente.ServicioDomiciliario%>
-          </td>
-          <%}%>
-                                                                                                                                                                                                                                                                                                                                                                                                                                <%if(cliente.ServicioDomiciliario<cliente.PredeterminadoServicioDomiciliario){%>
-          <td class="text-center text-dark bg-danger">
-            <%=cliente.ServicioDomiciliario%>
-          </td>
-          <%}%>
-                                                                                                                                                                                                                                                                                                                                                                                                                                    <%if(cliente.ServicioDomiciliario==cliente.PredeterminadoServicioDomiciliario&&cliente.PredeterminadoServicioDomiciliario>
-                                                                                                                                                                                                                                                                                                                                                                                                                                      0){%>
-          <td class="text-center bg-success text-dark ">
-            <%=cliente.ServicioDomiciliario%>
-          </td>
-          <%}%>
-                                                                                                                                                                                                                                                                                                                                                                                                                                        <%}%>
-          <%}%>
-                                                                                                                                                                                                                                                                                                                                                                                                                                            <%if(PredeterminadoIngresoDocumentacion){%>
-          <%if(cliente.IngresoDocumentacion==null||cliente.IngresoDocumentacion==undefined
-                                                                                                                                                                                                                                                                                                                                                                                                                                                ||
-                                                                                                                                                                                                                                                                                                                                                                                                                                                cliente.IngresoDocumentacion==0){%>
-          <td class="text-center text-light bg-danger">
-            <%=cliente.PredeterminadoIngresoDocumentacion%>
-          </td>
-          <%}else{%>
-          <%if(cliente.IngresoDocumentacion>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                    cliente.PredeterminadoIngresoDocumentacion){%>
-          <td class="text-center text-warning bg-success">
-            <%=cliente.IngresoDocumentacion%>
-          </td>
-          <%}%>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                      <%if(cliente.IngresoDocumentacion<cliente.PredeterminadoIngresoDocumentacion){%>
-          <td class="text-center text-dark bg-danger">
-            <%=cliente.IngresoDocumentacion%>
-          </td>
-          <%}%>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                          <%if(cliente.IngresoDocumentacion==cliente.PredeterminadoIngresoDocumentacion&&cliente.PredeterminadoIngresoDocumentacion>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                            0){%>
-          <td class="text-center bg-success text-dark ">
-            <%=cliente.IngresoDocumentacion%>
-          </td>
-          <%}%>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                              <%}%>
-          <%}%>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                  <%if(PredeterminadoIrrigacion){%>
-          <%if(cliente.Irrigacion==null||cliente.Irrigacion==undefined
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ||
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                      cliente.Irrigacion==0){%>
-          <td class="text-center text-light bg-danger">
-            <%=cliente.PredeterminadoIrrigacion%>
-          </td>
-          <%}else{%>
-          <%if(cliente.Irrigacion>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                          cliente.PredeterminadoIrrigacion){%>
-          <td class="text-center text-warning bg-success">
-            <%=cliente.Irrigacion%>
-          </td>
-          <%}%>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <%if(cliente.Irrigacion<cliente.PredeterminadoIrrigacion){%>
-          <td class="text-center text-dark bg-danger">
-            <%=cliente.Irrigacion%>
-          </td>
-          <%}%>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <%if(cliente.Irrigacion==cliente.PredeterminadoIrrigacion&&cliente.PredeterminadoIrrigacion>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  0){%>
-          <td class="text-center bg-success text-dark ">
-            <%=cliente.Irrigacion%>
-          </td>
-          <%}%>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <%}%>
-          <%}%>
-
-              </tr>
-              <% })%>
-          </tbody>
-    </table>
-  </div>
-  <%}else{%>
-  <div class="container ">
-    <div class="alert alert-secondary text-center border">
-      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-exclamation-octagon" viewBox="0 0 16 16">
-        <path d="M4.54.146A.5.5 0 0 1 4.893 0h6.214a.5.5 0 0 1 .353.146l4.394 4.394a.5.5 0 0 1 .146.353v6.214a.5.5 0 0 1-.146.353l-4.394 4.394a.5.5 0 0 1-.353.146H4.893a.5.5 0 0 1-.353-.146L.146 11.46A.5.5 0 0 1 0 11.107V4.893a.5.5 0 0 1 .146-.353L4.54.146zM5.1 1 1 5.1v5.8L5.1 15h5.8l4.1-4.1V5.1L10.9 1H5.1z" />
-        <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z" />
-      </svg>
-
-      No se encuentran vecinos cargados en esta carpeta, proceda a cargarlos.
-      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-exclamation-octagon " viewBox="0 0 16 16">
-        <path d="M4.54.146A.5.5 0 0 1 4.893 0h6.214a.5.5 0 0 1 .353.146l4.394 4.394a.5.5 0 0 1 .146.353v6.214a.5.5 0 0 1-.146.353l-4.394 4.394a.5.5 0 0 1-.353.146H4.893a.5.5 0 0 1-.353-.146L.146 11.46A.5.5 0 0 1 0 11.107V4.893a.5.5 0 0 1 .146-.353L4.54.146zM5.1 1 1 5.1v5.8L5.1 15h5.8l4.1-4.1V5.1L10.9 1H5.1z" />
-        <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z" />
-      </svg>
-
-    </div>
-
-  </div>
-  <%}%>
-        <%- include('./partials/modalClientesPorLote')%>
-  <div class="container-fluid">
-    <div class="modal fade" id="ModalConfiguracion" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-fullscreen" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="modalTitleId">Configuraciones de la obra</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <div class="container">
-              <div class="row">
-                <h3 class="text-center" title="Configura el valor predeterminado que se mostrará al momento de cargar un pago.">
-                  Configurar montos que pagarán los clientes
-                </h3>
-              </div>
-              <div class="row">
-                <div class="col border border-secondary"> <label for="AnticipoFinanciero"> Anticipo
-                    Financiero</label>
-                  <button class="btn btn-outline-success p-1 bi bi-gear  " id="AnticipoFinanciero" onclick="editarPago(this.id)">
-
-                  </button>
-                </div>
-                <div class="col border border-secondary"> <label for="Cuota1"> Cuota 1</label>
-                  <button class="btn btn-outline-success p-1 bi bi-gear  " id="Cuota1" onclick="editarPago(this.id)">
-
-                  </button>
-                </div>
-                <div class="col border border-secondary"> <label for="Cuota2"> Cuota 2</label>
-                  <button class="btn btn-outline-success p-1 bi bi-gear  " id="Cuota2" onclick="editarPago(this.id)">
-
-                  </button>
-                </div>
-                <div class="col border border-secondary"> <label for="Cuota3"> Cuota 3</label>
-                  <button class="btn btn-outline-success p-1 bi bi-gear  " id="Cuota3" onclick="editarPago(this.id)">
-
-                  </button>
-                </div>
-                <div class="col border border-secondary"> <label for="Cuota4"> Cuota 4</label>
-                  <button class="btn btn-outline-success p-1 bi bi-gear  " id="Cuota4" onclick="editarPago(this.id)">
-
-                  </button>
-                </div>
-                <div class="col border border-secondary"> <label for="Cuota5"> Cuota 5</label>
-                  <button class="btn btn-outline-success p-1 bi bi-gear  " id="Cuota5" onclick="editarPago(this.id)">
-
-                  </button>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col border border-secondary"> <label for="Cuota6"> Cuota 6</label>
-                  <button class="btn btn-outline-success p-1 bi bi-gear  " id="Cuota6" onclick="editarPago(this.id)">
-
-                  </button>
-                </div>
-                <div class="col border border-secondary"> <label for="Cuota7"> Cuota 7</label>
-
-                  <button class="btn btn-outline-success p-1 bi bi-gear  " id="Cuota7" onclick="editarPago(this.id)">
-
-                  </button>
-                </div>
-                <div class="col border border-secondary"> <label for="Cuota8"> Cuota 8</label>
-                  <button class="btn btn-outline-success p-1 bi bi-gear  " id="Cuota8" onclick="editarPago(this.id)">
-
-                  </button>
-                </div>
-                <div class="col border border-secondary"> <label for="Cuota9"> Cuota 9</label>
-                  <button class="btn btn-outline-success p-1 bi bi-gear  " id="Cuota9" onclick="editarPago(this.id)">
-
-                  </button>
-                </div>
-                <div class="col border border-secondary"> <label for="Cuota10"> Cuota 10</label>
-                  <button class="btn btn-outline-success p-1 bi bi-gear  " id="Cuota10" onclick="editarPago(this.id)">
-
-                  </button>
-                </div>
-                <div class="col border border-secondary"> <label for="Cuota11"> Cuota 11</label>
-                  <button class="btn btn-outline-success p-1 bi bi-gear  " id="Cuota11" onclick="editarPago(this.id)">
-
-                  </button>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col border border-secondary"> <label for="Cuota12"> Cuota 12</label>
-                  <button class="btn btn-outline-success p-1 bi bi-gear  " id="Cuota12" onclick="editarPago(this.id)">
-
-                  </button>
-                </div>
-                <div class="col border border-secondary"> <label for="DNV"> Permiso DNV </label>
-                  <button class="btn btn-outline-success p-1 bi bi-gear  " id="DNV" onclick="editarPago(this.id)">
-
-                  </button>
-                </div>
-                <div class="col border border-secondary"> <label for="DPV"> Permiso DPV</label>
-                  <button class="btn btn-outline-success p-1 bi bi-gear  " id="DPV" onclick="editarPago(this.id)">
-
-                  </button>
-                </div>
-                <div class="col border border-secondary"> <label for="Hidraulica"> Permiso Hidraulica</label>
-                  <button class="btn btn-outline-success p-1 bi bi-gear  " id="Hidraulica" onclick="editarPago(this.id)">
-
-                  </button>
-                </div>
-                <div class="col border border-secondary"> <label for="FFCC"> Permiso FFCC</label>
-                  <button class="btn btn-outline-success p-1 bi bi-gear  " id="FFCC" onclick="editarPago(this.id)">
-
-                  </button>
-                </div>
-                <div class="col border border-secondary"> <label for="Privado"> Permiso Privado</label>
-                  <button class="btn btn-outline-success p-1 bi bi-gear  " id="Privado" onclick="editarPago(this.id)">
-
-                  </button>
-                </div>
-
-              </div>
-              <div class="row">
-                <div class="col border border-secondary"> <label for="Municipal"> Permiso Municipal</label>
-                  <button class="btn btn-outline-success p-1 bi bi-gear  " id="Municipal" onclick="editarPago(this.id)">
-
-                  </button>
-                </div>
-                <div class="col border border-secondary"> <label for="ServicioDomiciliario"> Servicio
-                    domiciliario
-                  </label>
-                  <button class="btn btn-outline-success p-1 bi bi-gear  " id="ServicioDomiciliario" onclick="editarPago(this.id)">
-
-                  </button>
-                </div>
-              </div>
-              <form action="actualizarConfigObra" method="post">
-              </form>
-
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            <button type="button" class="btn btn-primary">Guardar</button>
-          </div>
+        <div class="btn-toolbar m-2 border border-secondary rounded">
+          <label class="list-group-item" for="">Colores de referencia: </label>
+          <ul class="list-group list-group-horizontal">
+            <!-- <li class="list-group-item text-light bg-danger">Sin pagar </li> -->
+            <li class="list-group-item text-danger">Pago inferior al esperado</li>
+            <li class="list-group-item text-success">Pago superior al esperado</li>
+            <li class="list-group-item bg-success">Pagado</li>
+          </ul>
         </div>
       </div>
+
+      <table id="TablaObras" class="table table-bordered table-inverse table-responsive text-center"
+       >
+        <thead class="thead-default">
+          <tr>
+<th>Cliente</th>
+<th>Domicilio</th>
+<th>DNI</th>
+<th id="thDomiciliario">Serv. Domiciliario</th>
+<th id="thAnticipo">A. financiero </th>
+<th id="thCuota1">Cuota 1 </th>
+<th id="thCuota2">Cuota 2 </th>
+<th id="thCuota3">Cuota 3 </th>
+<th id="thCuota4">Cuota 4 </th>
+<th id="thCuota5">Cuota 5 </th>
+<th id="thCuota6">Cuota 6 </th>
+<th id="thCuota7" class="cuotasAdicionales">Cuota 7 </th>
+<th id="thCuota8" class="cuotasAdicionales">Cuota 8</th>
+<th id="thCuota9" class="cuotasAdicionales">Cuota 9 </th>
+<th id="thCuota10" class="cuotasAdicionales">Cuota 10</th>
+<th id="thCuota11" class="cuotasAdicionales">Cuota 11</th>
+<th id="thCuota12" class="cuotasAdicionales">Cuota 12</th>
+<th id="thDNV">Permiso DNV</th>
+<th id="thDPV">Permiso DPV</th>
+<th id="thHidraulica">Permiso Hidraulica</th>
+<th id="thFFCC">Permiso FFCC</th>
+<th id="thPrivado">Permiso Privado</th>
+<th id="thMunicipal">Permiso Municipal</th>
+<th id="thIngresoDoc">gastos asociados aforos</th>
+<th id="thIrrigacion">Permiso Irrigación</th>
+</tr>
+        </thead>
+        <tbody>
+       
+        </tbody>
+      </table>
     </div>
-  </div>
-  <form action="/GenerarComprobante" method="post">
-<div class="container-fluid">
-    <div class="modal fade" id="ModalNuevoPagoObras2" tabindex="-1" role="dialog" aria-labelledby="ModalNuevoPagoObras2Label" aria-hidden="true">
-      <div class="modal-dialog modal-xl" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="TituloModal">Nuevo pago</h5>
-            <div class="btn-group">
-              <button class="btn btn-outline-secondary" type="submit" id="btnClientesPorLote" onclick="cargarClientesPorLote('<%=NombreObra%>')">Cargar
-                clientes por lotes</button>
-              <button class="btn btn-outline-secondary">Ver comprobantes registrados</button>
-              <button type="button" class="btn btn-outline-secondary" onclick="editarVecino()">
-                <i id="engranajeEditarVecino" class="bi bi-gear"></i>
-                Montos a pagar</button>
-            </div>
+      <%- include('./partials/modalClientesPorLote')%>
+        <%- include('./partials/ConfigObra.ejs') %>
+          <%- include('./partials/PagoCliente.ejs') %>
+          <form action="/EditarCliente/ActualizarValoresPredeterminados" method="post">
 
-            <div id="editarDatosCliente">
-            </div>
-            <button type="button" class="close" onclick="$('#ModalNuevoPagoObras2').modal('hide');" aria-label="Cerrar">
-              <span aria-hidden="true">&times;</span>
-            </button>
-
-          </div>
-            <div class="modal-body">
-              <input type="number" name="IDCliente" id="IDCliente" hidden>
-              <div class="container">
-                <div class="d-inline border">
-                  Obra: <%=NombreObra%>
-                  <input class="" type="text" name="Obra" id="Obra" value="<%=NombreObra%>" hidden>
-
-                </div>
-                <div class="d-inline border ms-5" id="textoNombreCliente2">
-                </div>
-                <input class="" id="inputNombreCliente2" type="hidden" name="NombreCompleto" value="">
-
-                <div class="input-group mb-3">
-                  <label id="labelDomicilio" class="input-group-text" for="InputDomicilio2">Domicilio</label>
-                  <input class="form-control" type="text" id="inputDomicilio2" name="Domicilio">
-                </div>
-                <div class="input-group mb-3 ">
-                  <label class="input-group-text" for="Concepto">Concepto</label>
-                  <select class="form-select" name="Concepto" id="Concepto" aria-label="Seleccione el pago">
-                    <!-- <input required list="ConceptosDePago" defaultValue=""  class="form-control" type="text" name="Concepto" id="Concepto"> -->
-                    <!-- <datalist id="ConceptosDePago"> -->
-                    <option value="" selected> </option>
-                    <option value="AnticipoFinanciero">Anticipo Financiero</option>
-                    <option value="Cuota1">Cuota 1</option>
-                    <option value="Cuota2">Cuota 2</option>
-                    <option value="Cuota3">Cuota 3</option>
-                    <option value="Cuota4">Cuota 4</option>
-                    <option value="Cuota5">Cuota 5</option>
-                    <option value="Cuota6">Cuota 6</option>
-                    <option value="Cuota7">Cuota 7</option>
-                    <option value="Cuota8">Cuota 8</option>
-                    <option value="Cuota9">Cuota 9</option>
-                    <option value="Cuota10">Cuota 10</option>
-                    <option value="Cuota11">Cuota 11</option>
-                    <option value="Cuota12">Cuota 12</option>
-                    <option value="DNV">Permiso DNV</option>
-                    <option value="DPV">Permiso DPV</option>
-                    <option value="Hidraulica">Permiso Hidraulica</option>
-                    <option value="FFCC">Permiso FFCC</option>
-                    <option value="Privado">Permiso Privado</option>
-                    <option value="Municipal">Permiso Municipal</option>
-                    <option value="ServicioDomiciliario">Servicio Domiciliario</option>
-                    <option value="IngresoDocumentacion">Ingreso de documentacion comienzo tramite
-                    </option>
-                    <option value="Irrigacion">Permiso Irrigacion</option>
-                    <!-- </datalist> -->
-                  </select>
-                </div>
-                <div class="input-group-text mb-3" id="divImporte2" style="display: none;">
-                  <label class="input-group-text" for="ImporteIngresado">Importe</label>
-                  <input required class="form-control" value="0" type="number" name="ValorIngresado" id="ImporteIngresado">
-                </div>
-                <div class="mb-3">
-                  <label class="input-group-text" for="FechaPago2"> Fecha de pago</label>
-                  <input required class="form-control" type="date" name="FechaPago" id="FechaPago2" autocomplete="on">
-                </div>
-<div class="row">
-                  <div class="col-md-6">
-                    <label class="input-group-text" for="ObservacionesDelPago">Observaciones</label>
-                    <input class="form-control" type="text" name="ObservacionesDelPago" id="ObservacionesDelPago">
+            <div class="modal fade" id="modalEditarVecino" tabindex="-1" role="dialog" aria-labelledby="modalTitleId"
+              aria-hidden="true">
+              <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-xl" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitleId">Editar monto a pagar</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
-<div class="col-md-6">
-                    <label class="input-group-text" for="FormaDePago">Forma de pago</label>
-                    <select class="form-select" name="FormaDePago" id="">
-                      <option value="Efectivo" selected>Efectivo</option>
-                      <option value="Transferencia bancaria">Transferencia bancaria</option>
-                      <option value="Cheque">Cheque</option>
-                      <option value="Mercado Pago">Mercado Pago</option>
-                    </select>
+                  <div class="modal-body">
+                    <div id="EdicionVecino" class="container">
+                      <input type="number" name="IDCliente" id="IDCliente" hidden>
+                      <div class="row">
+                        <h5>Anticipo y cuotas</h5>
+                        <div class="input-group input-group-sm">
+                          <span class="input-group-text" id="inputGroup-sizing-sm">Anticipo
+                            financiero</span>
+                          <input type="text" class="form-control" aria-label="Sizing example input"
+                            name="AnticipoFinanciero" id="2AnticipoFinanciero"
+                            aria-describedby="inputGroup-sizing-sm">
+                          <span class="input-group-text" id="inputGroup-sizing-sm">Servicio
+                            domiciliario</span>
+                          <input type="text" class="form-control" aria-label="Sizing example input"
+                            name="ServicioDomiciliario" id="2ServicioDomiciliario"
+                            aria-describedby="inputGroup-sizing-sm">
+                        </div>
+                        <div class="input-group input-group-sm">
+                          <span class="input-group-text" id="inputGroup-sizing-sm">Cuota 1</span>
+                          <input type="text" class="form-control" aria-label="Sizing example input" name="Cuota1"
+                            id="2Cuota1" aria-describedby="inputGroup-sizing-sm">
+                          <span class="input-group-text" id="inputGroup-sizing-sm">Cuota 2</span>
+                          <input type="text" class="form-control" aria-label="Sizing example input" name="Cuota2"
+                            id="2Cuota2" aria-describedby="inputGroup-sizing-sm">
+                        </div>
+
+                        <div class="input-group input-group-sm">
+                          <span class="input-group-text" id="inputGroup-sizing-sm">Cuota 3</span>
+                          <input type="text" class="form-control" aria-label="Sizing example input" name="Cuota3"
+                            id="2Cuota3" aria-describedby="inputGroup-sizing-sm">
+
+
+                          <span class="input-group-text" id="inputGroup-sizing-sm">Cuota 4</span>
+                          <input type="text" class="form-control" aria-label="Sizing example input" name="Cuota4"
+                            id="2Cuota4" aria-describedby="inputGroup-sizing-sm">
+                        </div>
+                        <div class="input-group input-group-sm">
+                          <span class="input-group-text" id="inputGroup-sizing-sm">Cuota 5</span>
+                          <input type="text" class="form-control" aria-label="Sizing example input" name="Cuota5"
+                            id="2Cuota5" aria-describedby="inputGroup-sizing-sm">
+
+                          <span class="input-group-text" id="inputGroup-sizing-sm">Cuota 6</span>
+                          <input type="text" class="form-control" aria-label="Sizing example input" name="Cuota6"
+                            id="2Cuota6" aria-describedby="inputGroup-sizing-sm">
+                        </div>
+                        <div class="input-group input-group-sm">
+                          <span class="input-group-text" id="inputGroup-sizing-sm">Cuota 7</span>
+                          <input type="text" class="form-control" aria-label="Sizing example input" name="Cuota7"
+                            id="2Cuota7" aria-describedby="inputGroup-sizing-sm">
+
+                          <span class="input-group-text" id="inputGroup-sizing-sm">Cuota 8</span>
+                          <input type="text" class="form-control" aria-label="Sizing example input" name="Cuota8"
+                            id="2Cuota8" aria-describedby="inputGroup-sizing-sm">
+                        </div>
+                        <div class="input-group input-group-sm">
+                          <span class="input-group-text" id="inputGroup-sizing-sm">Cuota 9</span>
+                          <input type="text" class="form-control" aria-label="Sizing example input" name="Cuota9"
+                            id="2Cuota9" aria-describedby="inputGroup-sizing-sm">
+
+                          <span class="input-group-text" id="inputGroup-sizing-sm">Cuota 10</span>
+                          <input type="text" class="form-control" aria-label="Sizing example input" name="Cuota10"
+                            id="2Cuota10" aria-describedby="inputGroup-sizing-sm">
+                        </div>
+                        <div class="input-group input-group-sm mb-3">
+                          <span class="input-group-text" id="inputGroup-sizing-sm">Cuota 11</span>
+                          <input type="text" class="form-control" aria-label="Sizing example input" name="Cuota11"
+                            id="2Cuota11" aria-describedby="inputGroup-sizing-sm">
+
+                          <span class="input-group-text" id="inputGroup-sizing-sm">Cuota 12</span>
+                          <input type="text" class="form-control" aria-label="Sizing example input" name="Cuota12"
+                            id="2Cuota12" aria-describedby="inputGroup-sizing-sm">
+                        </div>
+
+                        <h5>Permisos</h5>
+
+                        <div class="input-group input-group-sm mb-1">
+                          <span class="input-group-text" id="inputGroup-sizing-sm">DNV</span>
+                          <input type="text" class="form-control" aria-label="Sizing example input" name="DNV"
+                            id="2DNV" aria-describedby="inputGroup-sizing-sm">
+                        </div>
+
+
+                        <div class="input-group input-group-sm mb-1">
+                          <span class="input-group-text" id="inputGroup-sizing-sm">DPV</span>
+                          <input type="text" class="form-control" aria-label="Sizing example input" name="DPV"
+                            id="2DPV" aria-describedby="inputGroup-sizing-sm">
+                        </div>
+
+
+                        <div class="input-group input-group-sm mb-1">
+                          <span class="input-group-text" id="inputGroup-sizing-sm">Hidraulica</span>
+                          <input type="text" class="form-control" aria-label="Sizing example input" name="Hidraulica"
+                            id="2Hidraulica" aria-describedby="inputGroup-sizing-sm">
+                        </div>
+
+
+                        <div class="input-group input-group-sm mb-1">
+                          <span class="input-group-text" id="inputGroup-sizing-sm">FFCC</span>
+                          <input type="text" class="form-control" aria-label="Sizing example input" name="FFCC"
+                            id="2FFCC" aria-describedby="inputGroup-sizing-sm">
+                        </div>
+
+
+                        <div class="input-group input-group-sm mb-1">
+                          <span class="input-group-text" id="inputGroup-sizing-sm">Privado</span>
+                          <input type="text" class="form-control" aria-label="Sizing example input" name="Privado"
+                            id="2Privado" aria-describedby="inputGroup-sizing-sm">
+                        </div>
+
+
+                        <div class="input-group input-group-sm mb-1">
+                          <span class="input-group-text" id="inputGroup-sizing-sm">Municipal</span>
+                          <input type="text" class="form-control" aria-label="Sizing example input" name="Municipal"
+                            id="2Municipal" aria-describedby="inputGroup-sizing-sm">
+                        </div>
+                        <div class="input-group input-group-sm mb-1">
+                          <span class="input-group-text" id="inputGroup-sizing-sm">Irrigacion</span>
+                          <input type="text" class="form-control" aria-label="Sizing example input" name="Irrigacion"
+                            id="2Irrigacion" aria-describedby="inputGroup-sizing-sm">
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
                   </div>
                 </div>
               </div>
-              </div>
-            <div class="modal-footer noImprimible">
-              <button type="button" class="btn btn-danger noImprimible" onclick="$('#ModalNuevoPagoObras').modal('hide')">Cerrar</button>
-              <button type="submit" id="btnGuardarCambios" class="btn btn-success  noImprimible ">Guardar</button>
             </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</form>
-
-  <form action="/EditarCliente/ActualizarValoresPredeterminados" method="post">
-
-  <div class="modal fade" id="modalEditarVecino" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-xl" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="modalTitleId">Editar monto a pagar</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <div id="EdicionVecino" class="container">
-<input type="number" name="IDCliente" id="IDCliente" hidden>
-<div class="row">
-                <h5>Anticipo y cuotas</h5>
-                <div class="input-group input-group-sm">
-                  <span class="input-group-text" id="inputGroup-sizing-sm">Anticipo
-                    financiero</span>
-                  <input type="text" class="form-control" aria-label="Sizing example input" name="AnticipoFinanciero" id="2AnticipoFinanciero" aria-describedby="inputGroup-sizing-sm">
-                  <span class="input-group-text" id="inputGroup-sizing-sm">Servicio
-                    domiciliario</span>
-                  <input type="text" class="form-control" aria-label="Sizing example input" name="ServicioDomiciliario" id="2ServicioDomiciliario" aria-describedby="inputGroup-sizing-sm">
-                </div>
-                <div class="input-group input-group-sm">
-                  <span class="input-group-text" id="inputGroup-sizing-sm">Cuota 1</span>
-                  <input type="text" class="form-control" aria-label="Sizing example input" name="Cuota1" id="2Cuota1" aria-describedby="inputGroup-sizing-sm">
-                  <span class="input-group-text" id="inputGroup-sizing-sm">Cuota 2</span>
-                  <input type="text" class="form-control" aria-label="Sizing example input" name="Cuota2" id="2Cuota2" aria-describedby="inputGroup-sizing-sm">
-                </div>
-
-                <div class="input-group input-group-sm">
-                  <span class="input-group-text" id="inputGroup-sizing-sm">Cuota 3</span>
-                  <input type="text" class="form-control" aria-label="Sizing example input" name="Cuota3" id="2Cuota3" aria-describedby="inputGroup-sizing-sm">
-
-
-                  <span class="input-group-text" id="inputGroup-sizing-sm">Cuota 4</span>
-                  <input type="text" class="form-control" aria-label="Sizing example input" name="Cuota4" id="2Cuota4" aria-describedby="inputGroup-sizing-sm">
-                </div>
-                <div class="input-group input-group-sm">
-                  <span class="input-group-text" id="inputGroup-sizing-sm">Cuota 5</span>
-                  <input type="text" class="form-control" aria-label="Sizing example input" name="Cuota5" id="2Cuota5" aria-describedby="inputGroup-sizing-sm">
-
-                  <span class="input-group-text" id="inputGroup-sizing-sm">Cuota 6</span>
-                  <input type="text" class="form-control" aria-label="Sizing example input" name="Cuota6" id="2Cuota6" aria-describedby="inputGroup-sizing-sm">
-                </div>
-                <div class="input-group input-group-sm">
-                  <span class="input-group-text" id="inputGroup-sizing-sm">Cuota 7</span>
-                  <input type="text" class="form-control" aria-label="Sizing example input" name="Cuota7" id="2Cuota7" aria-describedby="inputGroup-sizing-sm">
-
-                  <span class="input-group-text" id="inputGroup-sizing-sm">Cuota 8</span>
-                  <input type="text" class="form-control" aria-label="Sizing example input" name="Cuota8" id="2Cuota8" aria-describedby="inputGroup-sizing-sm">
-                </div>
-                <div class="input-group input-group-sm">
-                  <span class="input-group-text" id="inputGroup-sizing-sm">Cuota 9</span>
-                  <input type="text" class="form-control" aria-label="Sizing example input" name="Cuota9" id="2Cuota9" aria-describedby="inputGroup-sizing-sm">
-
-                  <span class="input-group-text" id="inputGroup-sizing-sm">Cuota 10</span>
-                  <input type="text" class="form-control" aria-label="Sizing example input" name="Cuota10" id="2Cuota10" aria-describedby="inputGroup-sizing-sm">
-                </div>
-                <div class="input-group input-group-sm mb-3">
-                  <span class="input-group-text" id="inputGroup-sizing-sm">Cuota 11</span>
-                  <input type="text" class="form-control" aria-label="Sizing example input" name="Cuota11" id="2Cuota11" aria-describedby="inputGroup-sizing-sm">
-
-                  <span class="input-group-text" id="inputGroup-sizing-sm">Cuota 12</span>
-                  <input type="text" class="form-control" aria-label="Sizing example input" name="Cuota12" id="2Cuota12" aria-describedby="inputGroup-sizing-sm">
-                </div>
-
-                <h5>Permisos</h5>
-
-                <div class="input-group input-group-sm mb-1">
-                  <span class="input-group-text" id="inputGroup-sizing-sm">DNV</span>
-                  <input type="text" class="form-control" aria-label="Sizing example input" name="DNV" id="2DNV" aria-describedby="inputGroup-sizing-sm">
-                </div>
-
-
-                <div class="input-group input-group-sm mb-1">
-                  <span class="input-group-text" id="inputGroup-sizing-sm">DPV</span>
-                  <input type="text" class="form-control" aria-label="Sizing example input" name="DPV" id="2DPV" aria-describedby="inputGroup-sizing-sm">
-                </div>
-
-
-                <div class="input-group input-group-sm mb-1">
-                  <span class="input-group-text" id="inputGroup-sizing-sm">Hidraulica</span>
-                  <input type="text" class="form-control" aria-label="Sizing example input" name="Hidraulica" id="2Hidraulica" aria-describedby="inputGroup-sizing-sm">
-                </div>
-
-
-                <div class="input-group input-group-sm mb-1">
-                  <span class="input-group-text" id="inputGroup-sizing-sm">FFCC</span>
-                  <input type="text" class="form-control" aria-label="Sizing example input" name="FFCC" id="2FFCC" aria-describedby="inputGroup-sizing-sm">
-                </div>
-
-
-                <div class="input-group input-group-sm mb-1">
-                  <span class="input-group-text" id="inputGroup-sizing-sm">Privado</span>
-                  <input type="text" class="form-control" aria-label="Sizing example input" name="Privado" id="2Privado" aria-describedby="inputGroup-sizing-sm">
-                </div>
-
-
-                <div class="input-group input-group-sm mb-1">
-                  <span class="input-group-text" id="inputGroup-sizing-sm">Municipal</span>
-                  <input type="text" class="form-control" aria-label="Sizing example input" name="Municipal" id="2Municipal" aria-describedby="inputGroup-sizing-sm">
-                </div>
-                <div class="input-group input-group-sm mb-1">
-                  <span class="input-group-text" id="inputGroup-sizing-sm">Irrigacion</span>
-                  <input type="text" class="form-control" aria-label="Sizing example input" name="Irrigacion" id="2Irrigacion" aria-describedby="inputGroup-sizing-sm">
-                </div>
-
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            <button type="submit" class="btn btn-primary">Guardar</button>
-          </div>
-        </div>
-    </div>
-  </div>
-</form>
+          </form>
+       
 </body>
 <script>
-  function editarPago(id, valor) {
-    $('#' + id).empty();
-    $('#' + id).removeAttr("onclick")
-    $('#' + id).parent().append(
-      '<form  action="/Finanzas/actualizarPredeterminadosObraEntera/<%=id_Obra%>/' + id + '/<%=NombreObra%>" method="post">' +
-      '<div class="m-1 text-center">' +
-      '<input name="valor" type="number" placeholder="Ingrese el monto a editar">' +
-      '<button class="btn btn-sm btn-success m-1 " type="submit" >Actualizar</button></form>' +
-      '</div>'
-    );
-  }
+
+  setTimeout(() => {
+         // Ocultar el contenido del popup inicialmente
+         $('.popup-content').css('display', 'none');
+
+// Mostrar el popup al hacer clic en el elemento con la clase "popup-trigger"
+$('.popup-trigger').hover(function() {
+    // Ocultar todos los demás popups antes de mostrar este
+    $('.popup-content').css('display', 'none');
+    // Mostrar el contenido del popup correspondiente
+    $(this).next('.popup-content').toggle();
+});
+  }, 1000);
   function EnviarFormulario() {
     $('#formActualizarPago').submit();
   }
-  $('#TipoCobro').click(function() {
+  $('#TipoCobro').click(function () {
     $('#FormTipoCobro').submit();
   })
-  jQuery("#BuscadorCliente").keyup(function() {
+  jQuery("#BuscadorCliente").keyup(function () {
     if (jQuery(this).val() != "0") {
       jQuery("#TablaObras tbody>tr").hide();
       jQuery("#TablaObras td:contiene-palabra('" + jQuery(this).val() + "')").parent("tr").show();
@@ -1262,7 +261,7 @@
   })
 
   jQuery.extend(jQuery.expr[":"], {
-    "contiene-palabra": function(elem, i, match, array) {
+    "contiene-palabra": function (elem, i, match, array) {
       return (elem.textContent || elem.innerText || jQuery(elem).text() || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
     }
   });
@@ -1274,40 +273,13 @@
   }
   var MontosaPagar;
 
-  function CargarPago(idcliente) {
-    $.ajax({
-      url: '/BuscarDatosClienteQuePaga/' + idcliente,
-    }).done(function(respuestaServidor) {
-      var results = respuestaServidor.results;
-      $('#ModalNuevoPagoObras2').modal("show");
-      $('#editarCliente').empty();
-      $('#inputNombreCliente2').val(results[0].NombreCliente);
-      $('#inputNombreCliente2').css('display', 'block');
-      $('#textoNombreCliente2').css('display', 'block');
-      $('#textoNombreCliente2').empty();
-      $('#textoNombreCliente2').append('Nombre del cliente: ' + results[0].NombreCliente);
-      $('#inputDomicilio2').val(results[0].Direccion);
-      $('#IDCliente').val(idcliente);
-      var fecha = new Date(); //Fecha actual
-      var mes = fecha.getMonth() + 1; //obteniendo mes
-      var dia = fecha.getDate(); //obteniendo dia
-      var ano = fecha.getFullYear(); //obteniendo año
-      if (dia < 10)
-        dia = '0' + dia; //agrega cero si el menor de 10
-      if (mes < 10)
-        mes = '0' + mes //agrega cero si el menor de 10
-      $('#FechaPago2').val(ano + "-" + mes + "-" + dia);
-      $('#FechaPago2').html(ano + "-" + mes + "-" + dia);
-    });
-    $('#editarDatosCliente').html('<a class="btn btn-info" href="/Finanzas/CobroDeObras/EditarCliente/'+ idcliente+'">Editar cliente</a>');
-  }
-  $('#Concepto').change(function() {
+  $('#Concepto').change(function () {
     var idcliente = $('#IDCliente').val();
     $.ajax({
       url: '/BuscarDatosClienteQuePaga/' + idcliente,
-    }).done(function(respuestaServidor) {
+    }).done(function (respuestaServidor) {
       var montoAPagarPredeterminado = respuestaServidor.montosCuota;
-      $("#Concepto option:selected").each(function() {
+      $("#Concepto option:selected").each(function () {
         var ConceptoSeleccionado = $(this).attr('value');
         montoAPagarPredeterminado.forEach(element => {
           JSON.parse(JSON.stringify(element), (key, value) => {
@@ -1326,8 +298,7 @@
     const url = '/Finanzas/CobroDeObras/EditarCliente/ObtenerDatosCliente/' + idCliente;
     $.ajax({
       url: url,
-    }).done(function(datos) {
-      console.log(datos);
+    }).done(function (datos) {
       $('#2AnticipoFinanciero').val(datos[0].AnticipoFinanciero);
       $('#2ServicioDomiciliario').val(datos[0].ServicioDomiciliario);
       $('#2Cuota1').val(datos[0].Cuota1);
@@ -1352,9 +323,443 @@
     })
     $('#modalEditarVecino').modal('show');
   }
- 
+  $('#btnVerConfigObra').click(function () {
+    $.ajax({
+      type: "GET",
+      url: "/Finanzas/cobrodeobras/VerObra/<%=id_Obra%>/data",
+      dataType: "json",
+      success: function (response) {
+$('#ConfigAnticipoFinanciero').val(response.PredeterminadosyCobros[0].PredeterminadoAnticipoFinanciero);
+$('#ConfigCuota1').val(response.PredeterminadosyCobros[0].PredeterminadoCuota1);
+$('#ConfigCuota2').val(response.PredeterminadosyCobros[0].PredeterminadoCuota2);
+$('#ConfigCuota3').val(response.PredeterminadosyCobros[0].PredeterminadoCuota3);
+$('#ConfigCuota4').val(response.PredeterminadosyCobros[0].PredeterminadoCuota4);
+$('#ConfigCuota5').val(response.PredeterminadosyCobros[0].PredeterminadoCuota5);
+$('#ConfigCuota6').val(response.PredeterminadosyCobros[0].PredeterminadoCuota6);
+if(response.PredeterminadosyCobros[0].CantidadCuotas>6){
+  $('#ConfigCuota7').val(response.PredeterminadosyCobros[0].PredeterminadoCuota7);
+$('#ConfigCuota8').val(response.PredeterminadosyCobros[0].PredeterminadoCuota8);
+$('#ConfigCuota9').val(response.PredeterminadosyCobros[0].PredeterminadoCuota9);
+$('#ConfigCuota10').val(response.PredeterminadosyCobros[0].PredeterminadoCuota10);
+$('#ConfigCuota11').val(response.PredeterminadosyCobros[0].PredeterminadoCuota11);
+$('#ConfigCuota12').val(response.PredeterminadosyCobros[0].PredeterminadoCuota12);
+}$('#ConfigDNV').val(response.PredeterminadosyCobros[0].PredeterminadoDNV);
+$('#ConfigDPV').val(response.PredeterminadosyCobros[0].PredeterminadoDPV);
+$('#ConfigHidraulica').val(response.PredeterminadosyCobros[0].PredeterminadoHidraulica);
+$('#ConfigFFCC').val(response.PredeterminadosyCobros[0].PredeterminadoFFCC);
+$('#ConfigPrivado').val(response.PredeterminadosyCobros[0].PredeterminadoPrivado);
+$('#ConfigMunicipal').val(response.PredeterminadosyCobros[0].PredeterminadoMunicipal);
+$('#ConfigServicioDomiciliario').val(response.PredeterminadosyCobros[0].PredeterminadoServicioDomiciliario);
+}
+    });
+   
+  })
+$(document).ready(function(){
+  $('#TablaObras').DataTable({
+    "scrollX": true,
+        "paging": false,
+        "info": false,
+        "searching": false,
+        "ajax": {
+            "url": "/Finanzas/cobrodeobras/VerObra/<%=id_Obra%>/data", 
+            "dataType": "json",
+            "dataSrc": function (data) {
+              console.log(data);
+                return data.PredeterminadosyCobros;
+                
+            }
+        },
+        "columnDefs":[{
+"targets":[0,1,2],
+"createdCell": function (td,cellData,rowData,row,col){
+  $(td).addClass('bg-secondary fw-bold text-light');
+},
+
+}      
+      ],
+        "columns": [
+            { "data": "NombreCliente", "render":function(data,type,row,meta){
+              return '<button class="btn" onclick="CargarPago(\''+row.ID_cliente+'\',\''+row.NombreCliente+'\');">'+row.NombreCliente+'</button>'
+            }},
+            { "data": "Direccion","render":function(data,type,row,meta){
+             
+                return data;
+              
+            }},
+            { "data": "DNICliente","render":function(data,type,row,meta){
+             
+                return data;
+              
+            }},
+            { "data": "ServicioDomiciliario" ,"render": function(data,type,row,meta){
+              if(row.ServicioDomiciliario==0){
+                
+                return null;}
+              else{
+                if(row.ServicioDomiciliario==row.PredeterminadoServicioDomiciliario){
+                  return '<span class="popup-trigger bg-success">$' + data + '</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoServicioDomiciliario +'</div>';
+                }
+                if(row.ServicioDomiciliario<row.PredeterminadoServicioDomiciliario){
+                return '<span class="popup-trigger text-danger">$' + data + '</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoServicioDomiciliario + ', resta por pagar:$'+(row.PredeterminadoServicioDomiciliario-data)+' </div>';
+              } if(row.ServicioDomiciliario>row.PredeterminadoServicioDomiciliario){
+                return '<span class="popup-trigger text-success">$' + data + '</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoServicioDomiciliario + ', ha pagado por demas:$'+(data-row.PredeterminadoServicioDomiciliario)+' </div>'; 
+              }
+              }
+            } },
+            { "data": "AnticipoFinanciero","render":function(data,type,row,meta){
+              if(row.AnticipoFinanciero==0){
+                return null;
+              }else{
+                if(row.AnticipoFinanciero==row.PredeterminadoAnticipoFinanciero){
+                  return '<span class="popup-trigger bg-success">$' + data + '</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoAnticipoFinanciero +'</div>';
+                }
+                if(row.AnticipoFinanciero<row.PredeterminadoAnticipoFinanciero){
+                return '<span class="popup-trigger text-danger">$' + data + '</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoAnticipoFinanciero + ', resta por pagar:$'+(row.PredeterminadoAnticipoFinanciero-data)+' </div>';
+              } if(row.AnticipoFinanciero>row.PredeterminadoAnticipoFinanciero){
+                return '<span class="popup-trigger text-success">$' + data + '</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoAnticipoFinanciero + ', ha pagado por demas:$'+(data-row.PredeterminadoAnticipoFinanciero)+' </div>'; 
+              }
+            }
+            }},
+            { "data": "Cuota1","render":function(data,type,row,meta){
+              if(row.Cuota1==0){
+                return null;
+              }else{
+                if(row.Cuota1==row.PredeterminadoCuota1){
+                  return '<span class="bg-success popup-trigger text-success">$' + data + '</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota1 +'</div>';
+                }
+                if(row.Cuota1<row.PredeterminadoCuota1){
+                return '<span class="popup-trigger text-danger">$' + data + '</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota1 + ', resta por pagar:$'+(row.PredeterminadoCuota1-data)+' </div>';
+              } if(row.Cuota1>row.PredeterminadoCuota1){
+                return '<span class="popup-trigger text-success">$' + data + '</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota1 + ', ha pagado por demas:$'+(data-row.PredeterminadoCuota1)+' </div>'; 
+              }
+              }
+            } },
+            { "data": "Cuota2","render":function(data,type,row,meta){
+              if(row.Cuota2==0){
+                return null;
+              }else{
+                if(row.Cuota2==row.PredeterminadoCuota2){
+                  return '<span class="bg-success popup-trigger text-success">$' + data + '</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota2 +'</div>';
+                }
+                if(row.Cuota2<row.PredeterminadoCuota2){
+                return '<span class="popup-trigger text-danger">$' + data + '</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota2 + ', resta por pagar:$'+(row.PredeterminadoCuota2-data)+' </div>';
+              } if(row.Cuota2>row.PredeterminadoCuota2){
+                return '<span class="popup-trigger text-success">$' + data + '</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota2 + ', ha pagado por demas:$'+(data-row.PredeterminadoCuota2)+' </div>'; 
+              }
+              }
+            } },
+            { "data": "Cuota3","render":function(data,type,row,meta){
+              if(row.Cuota3==0){
+                return null;
+              }else{
+                if(row.Cuota3==row.PredeterminadoCuota3){
+                  return '<span class="bg-success popup-trigger text-success">$' + data + '</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota3 +'</div>';
+                }
+                if(row.Cuota3<row.PredeterminadoCuota3){
+                return '<span class="popup-trigger text-danger">$' + data + '</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota3 + ', resta por pagar:$'+(row.PredeterminadoCuota3-data)+' </div>';
+              } if(row.Cuota3>row.PredeterminadoCuota3){
+                return '<span class="popup-trigger text-success">$' + data + '</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota3 + ', ha pagado por demas:$'+(data-row.PredeterminadoCuota3)+' </div>'; 
+              }
+              }
+            } },
+            { "data": "Cuota4","render":function(data,type,row,meta){
+              if(row.Cuota4==0){
+                return null;
+              }else{
+                if(row.Cuota4==row.PredeterminadoCuota4){
+                  return '<span class="bg-success popup-trigger text-success">$' + data + '</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota4 +'</div>';
+                }
+                if(row.Cuota4<row.PredeterminadoCuota4){
+                return '<span class="popup-trigger text-danger">$' + data + '</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota4 + ', resta por pagar:$'+(row.PredeterminadoCuota4-data)+' </div>';
+              } if(row.Cuota4>row.PredeterminadoCuota4){
+                return '<span class="popup-trigger text-success">$' + data + '</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota4 + ', ha pagado por demas:$'+(data-row.PredeterminadoCuota4)+' </div>'; 
+              }
+              }
+            } },
+            { "data": "Cuota5","render":function(data,type,row,meta){
+              if(row.Cuota5==0){
+                return null;
+              }else{
+                if(row.Cuota5==row.PredeterminadoCuota5){
+                  return '<span class="bg-success popup-trigger text-success">$' + data + '</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota5 +'</div>';
+                }
+                if(row.Cuota5<row.PredeterminadoCuota5){
+                return '<span class="popup-trigger text-danger">$' + data + '</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota5 + ', resta por pagar:$'+(row.PredeterminadoCuota5-data)+' </div>';
+              } if(row.Cuota5>row.PredeterminadoCuota5){
+                return '<span class="popup-trigger text-success">$' + data + '</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota5 + ', ha pagado por demas:$'+(data-row.PredeterminadoCuota5)+' </div>'; 
+              }
+              }
+            } },
+            { "data": "Cuota6","render":function(data,type,row,meta){
+              if(row.Cuota6==0){
+                return null;
+              }else{
+                if(row.Cuota6==row.PredeterminadoCuota6){
+                  return '<span class="bg-success popup-trigger text-success">$' + data + '</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota6 +'</div>';
+                }
+                if(row.Cuota6<row.PredeterminadoCuota6){
+                return '<span class="popup-trigger text-danger">$' + data + '</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota6 + ', resta por pagar:$'+(row.PredeterminadoCuota6-data)+' </div>';
+              } if(row.Cuota6>row.PredeterminadoCuota6){
+                return '<span class="popup-trigger text-success">$' + data + '</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota6 + ', ha pagado por demas:$'+(data-row.PredeterminadoCuota6)+' </div>'; 
+              }
+              }
+            } },
+            { "data": "Cuota7" ,"render":function(data,type,row,meta){
+              if(row.CantidadCuotas>6){
+                if(row.Cuota7==row.PredeterminadoCuota7){
+                  return '<span class="bg-success popup-trigger text-success">$' + data + '</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota7 +'</div>';
+                }
+                if(row.Cuota7<row.PredeterminadoCuota7){
+                return '<span class="popup-trigger text-danger">$' + data + '</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota7 + ', resta por pagar:$'+(row.PredeterminadoCuota7-data)+' </div>';
+              } if(row.Cuota7>row.PredeterminadoCuota7){
+                return '<span class="popup-trigger text-success">$' + data + '</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota7 + ', ha pagado por demas:$'+(data-row.PredeterminadoCuota7)+' </div>'; 
+              }
+              }else{
+                return null;}
+            }},
+            { "data": "Cuota8" ,"render":function(data,type,row,meta){
+              if(row.CantidadCuotas>7){
+                if(row.Cuota8==row.PredeterminadoCuota8){
+                  return '<span class="bg-success popup-trigger text-success">$' + data + '</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota8 +'</div>';
+                }
+                if(row.Cuota8<row.PredeterminadoCuota8){
+                return '<span class="popup-trigger text-danger">$' + data + '</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota8 + ', resta por pagar:$'+(row.PredeterminadoCuota8-data)+' </div>';
+              } if(row.Cuota8>row.PredeterminadoCuota8){
+                return '<span class="popup-trigger text-success">$' + data + '</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota8 + ', ha pagado por demas:$'+(data-row.PredeterminadoCuota8)+' </div>'; 
+              }
+              }else{
+                return null;}
+            }},
+            { "data": "Cuota9" ,"render":function(data,type,row,meta){
+              if(row.CantidadCuotas>8){
+                if(row.Cuota9==row.PredeterminadoCuota9){
+                  return '<span class="bg-success popup-trigger text-success">$' + data + '</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota9 +'</div>';
+                }
+                if(row.Cuota9<row.PredeterminadoCuota9){
+                return '<span class="popup-trigger text-danger">$' + data + '</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota9 + ', resta por pagar:$'+(row.PredeterminadoCuota9-data)+' </div>';
+              } if(row.Cuota9>row.PredeterminadoCuota9){
+                return '<span class="popup-trigger text-success">$' + data + '</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota9 + ', ha pagado por demas:$'+(data-row.PredeterminadoCuota9)+' </div>'; 
+              }
+              }else{
+                return null;}
+            }},
+            { "data": "Cuota10","render":function(data,type,row,meta){
+              if(row.CantidadCuotas>9){
+                if(row.Cuota10==row.PredeterminadoCuota10){
+                  return '<span class="bg-success popup-trigger text-success">$' + data + '</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota10 +'</div>';
+                }
+                if(row.Cuota10<row.PredeterminadoCuota10){
+                return '<span class="popup-danger text-danger">$' + data + '</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota10 + ', resta por pagar:$'+(row.PredeterminadoCuota10-data)+' </div>';
+              } if(row.Cuota10>row.PredeterminadoCuota10){
+                return '<span class="popup-trigger text-success">$' + data + '</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota10 + ', ha pagado por demas:$'+(data-row.PredeterminadoCuota10)+' </div>'; 
+              }
+              }else{
+                return null;}
+            } },
+            { "data": "Cuota11","render":function(data,type,row,meta){
+              if(row.CantidadCuotas>10){
+                if(row.Cuota11==row.PredeterminadoCuota11){
+                  return '<span class="bg-success popup-trigger text-success">$' + data + '</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota11 +'</div>';
+                }
+                if(row.Cuota11<row.PredeterminadoCuota11){
+                return '<span class="popup-danger text-danger">$' + data + '</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota11 + ', resta por pagar:$'+(row.PredeterminadoCuota11-data)+' </div>';
+              } if(row.Cuota11>row.PredeterminadoCuota11){
+                return '<span class="popup-trigger text-success">$' + data + '</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota11 + ', ha pagado por demas:$'+(data-row.PredeterminadoCuota11)+' </div>'; 
+              }
+              }else{
+                return null;}
+            } },
+            { "data": "Cuota12","render":function(data,type,row,meta){
+              if(row.CantidadCuotas>11){
+                if(row.Cuota11==row.PredeterminadoCuota11){
+                  return '<span class="bg-success popup-trigger text-success">$' + data + '</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota11 +'</div>';
+                }
+                if(row.Cuota11<row.PredeterminadoCuota11){
+                return '<span class="popup-danger text-danger">$' + data + '</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota11 + ', resta por pagar:$'+(row.PredeterminadoCuota11-data)+' </div>';
+              } if(row.Cuota11>row.PredeterminadoCuota11){
+                return '<span class="popup-trigger text-success">$' + data + '</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota11 + ', ha pagado por demas:$'+(data-row.PredeterminadoCuota11)+' </div>'; 
+              }
+              }else{
+                return null;}
+            } },
+            { "data": "PredeterminadoDNV" ,"render": function(data,type,row,meta){
+              if(row.PredeterminadoDNV==0){
+                
+                return null;}
+              else{return ('$'+data);}
+            } },
+            { "data": "PredeterminadoDPV" ,"render": function(data,type,row,meta){
+              if(row.PredeterminadoDPV==0){
+                
+                return null;}
+              else{
+                if(row.DPV==row.PredeterminadoDPV){
+                  return '<span class="bg-success popup-trigger text-success">$' + data + '</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoDPV +'</div>';
+                }
+                if(row.DPV<row.PredeterminadoDPV){
+                return '<span class="popup-trigger text-danger">$' + data + '</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoDPV + ', resta por pagar:$'+(row.PredeterminadoDPV-data)+' </div>';
+              } if(row.DPV>row.PredeterminadoDPV){
+                return '<span class="popup-trigger text-success">$' + data + '</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoDPV + ', ha pagado por demas:$'+(data-row.PredeterminadoDPV)+' </div>'; 
+              }
+            }
+            } },
+            { "data": "PredeterminadoHidraulica" ,"render": function(data,type,row,meta){
+              if(row.PredeterminadoHidraulica==0){
+                
+                return null;}
+              else{
+                if(row.Hidraulica==row.PredeterminadoHidraulica){
+                  return '<span class="popup-trigger bg-success-success">$' + data + '</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoHidraulica +'</div>';
+                }
+                if(row.Hidraulica<row.PredeterminadoHidraulica){
+                return '<span class="popup-trigger danger-danger">$' + data + '</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoHidraulica + ', resta por pagar:$'+(row.PredeterminadoHidraulica-data)+' </div>';
+              } if(row.Hidraulica>row.PredeterminadoHidraulica){
+                return '<span class="popup-trigger text-success">$' + data + '</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoHidraulica + ', ha pagado por demas:$'+(data-row.PredeterminadoHidraulica)+' </div>'; 
+              }
+              }
+            } },
+            { "data": "PredeterminadoFFCC" ,"render": function(data,type,row,meta){
+              if(row.PredeterminadoFFCC==0){
+                
+                return null;}
+              else{
+                if(row.FFCC==row.PredeterminadoFFCC){
+                  return '<span class="bg-success popup-trigger text-success">$' + data + '</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoFFCC +'</div>';
+                }
+                if(row.FFCC<row.PredeterminadoFFCC){
+                return '<span class="popup-trigger text-danger">$' + data + '</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoFFCC + ', resta por pagar:$'+(row.PredeterminadoFFCC-data)+' </div>';
+              } if(row.FFCC>row.PredeterminadoFFCC){
+                return '<span class="popup-trigger text-success">$' + data + '</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoFFCC + ', ha pagado por demas:$'+(data-row.PredeterminadoFFCC)+' </div>'; 
+              }
+              }
+            } },
+            { "data": "PredeterminadoPrivado" ,"render": function(data,type,row,meta){
+              if(row.PredeterminadoPrivado==0){
+                
+                return null;}
+              else{
+              
+              }
+            } },
+            { "data": "PredeterminadoMunicipal" ,"render": function(data,type,row,meta){
+              if(row.PredeterminadoMunicipal==0){
+                
+                return null;}
+              else{
+                if(row.Municipal==row.PredeterminadoMunicipal){
+                  return '<span class="popup-trigger bg-success text-success">$' + data + '</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoMunicipal +'</div>';
+                }
+                if(row.Municipal<row.PredeterminadoMunicipal){
+                return '<span class="popup-trigger danger-danger">$' + data + '</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoMunicipal + ', resta por pagar:$'+(row.PredeterminadoMunicipal-data)+' </div>';
+              } if(row.Municipal>row.PredeterminadoMunicipal){
+                return '<span class="popup-trigger text-success">$' + data + '</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoMunicipal + ', ha pagado por demas:$'+(data-row.PredeterminadoMunicipal)+' </div>'; 
+              }
+              }
+            } },
+           
+            { "data": "PredeterminadoIngresoDocumentacion" ,"render": function(data,type,row,meta){
+              if(row.PredeterminadoIngresoDocumentacion==0){
+                
+                return null;}
+              else{
+                if(row.IngresoDocumentacion==row.PredeterminadoIngresoDocumentacion){
+                  return '<span class="popup-trigger bg-success">$' + data + '</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoIngresoDocumentacion +'</div>';
+                }
+                if(row.IngresoDocumentacion<row.PredeterminadoIngresoDocumentacion){
+                return '<span class="popup-trigger text-danger">$' + data + '</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoIngresoDocumentacion + ', resta por pagar:$'+(row.PredeterminadoIngresoDocumentacion-data)+' </div>';
+              } if(row.IngresoDocumentacion>row.PredeterminadoIngresoDocumentacion){
+                return '<span class="popup-trigger text-success">$' + data + '</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoIngresoDocumentacion + ', ha pagado por demas:$'+(data-row.PredeterminadoIngresoDocumentacion)+' </div>'; 
+              }
+              }
+            } },
+            { "data": "PredeterminadoIrrigacion" ,"render": function(data,type,row,meta){
+              if(row.PredeterminadoIrrigacion==0){
+                
+                return null;}
+              else{
+                if(row.Irrigacion==row.PredeterminadoIrrigacion){
+                  return '<span class="popup-trigger bg-success-success">$' + data + '</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoIrrigacion +'</div>';
+                }
+                if(row.Irrigacion<row.PredeterminadoIrrigacion){
+                return '<span class="popup-trigger danger-danger">$' + data + '</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoIrrigacion + ', resta por pagar:$'+(row.PredeterminadoIrrigacion-data)+' </div>';
+              } if(row.Irrigacion>row.PredeterminadoIrrigacion){
+                return '<span class="popup-trigger text-success">$' + data + '</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoIrrigacion + ', ha pagado por demas:$'+(data-row.PredeterminadoIrrigacion)+' </div>'; 
+              }
+                }
+            } },
+        ]
+    });
+  })
  
 </script>
-
-
 </html>
+<style>
+  .popup-content{
+   display: none;
+   position: absolute;
+   background-color: white;
+   border: 1px solid #ccc;
+   padding: 10px;
+   z-index: 1000;
+    }
+  </style>

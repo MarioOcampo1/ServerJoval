@@ -257,6 +257,7 @@ router.post('/guardarNuevoCliente', (req, res) => {
                 else {
                     sql = 'INSERT INTO obras_tareasgenerales set ?';
                     connection.query(sql, {
+                        idObra: idObra,
                         Nombre: Nombre, PermisosEspeciales: PermisosEspeciales, Permisos: Permisos
                     }, (error, results) => {
                         if (error) console.log(error);
@@ -284,7 +285,7 @@ router.post('/guardarNuevoCliente', (req, res) => {
                     })
                     sql = 'Insert into adminecogas_interferencias_y_permisos Set?';
                     connection.query(sql, [{
-                        Nombre: Nombre,
+                        id_obra:idObra, Nombre: Nombre,
                         DNV: DNV, DPV: DPV, Irrigacion: IRRIGACION,
                         Hidraulica: HIDRAULICA, PerMunicipal: PerMunicipal, Ferrocarriles: FERROCARRIL, Privado: Privado, OtrosPermisos: OTROSPERMISOS
                     }], (error, results) => {
@@ -326,7 +327,7 @@ router.post('/guardarNuevoCliente', (req, res) => {
                                                 var id_cliente = results[0].id_cliente;
                                                 sql = 'Insert into finanzas_clientes_predeterminados set?';
                                                 connection.query(sql, {
-                                                    id_obra: idObra, id_cliente: id_cliente, NombreCliente: NombreVecino[index], AnticipoFinanciero: AnticipoFinanciero
+                                                    id_obra: idObra, id_cliente: id_cliente,CantidadCuotas:CantidadCuotas, NombreCliente: NombreVecino[index], AnticipoFinanciero: AnticipoFinanciero
                                                 }, (error, results) => {
                                                     if (error) console.log(error);
                                                     for (let j = 1; j < CantidadCuotas; j++) {
@@ -422,6 +423,19 @@ router.get('/contactos', (req, res) => {
             }
         })
     } else { res.redirect('/'); }
+})
+router.get('/data/Empleados',(req,res)=>{
+    if (req.isAuthenticated()){
+var sql= 'SELECT Nombre,id FROM usuariosregistrados';
+connection.query(sql,(error,results)=>{
+    if (error)console.log(error);
+    else{
+        res.send(results);
+    }
+})
+    } else{
+        res.redirect('/');
+    }
 })
 //Logo
 router.get('/logo', (req, res) => {
