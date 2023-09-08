@@ -916,7 +916,7 @@ router.post('/GenerarComprobante', (req, res, next) => {
             res.send(data);
         })
             .catch(function () {
-                res.redirect('/Finanzas/cobrodeobras/VerObra/' + Obra);
+                res.redirect('/Finanzas/cobrodeobras/VerObra/' + id_Obra);
             })
     });
 })
