@@ -53,7 +53,7 @@
        >
         <thead class="thead-default sticky-top">
           <tr>
-<th class="">Cliente</th>
+<th class="" >Cliente</th>
 <th class="">Domicilio</th>
 <th class="">DNI</th>
 <th class="" id="thDomiciliario"> Serv. Domiciliario</th>
@@ -64,12 +64,12 @@
 <th class="" id="thCuota4"> Cuota 4 </th>
 <th class="" id="thCuota5"> Cuota 5 </th>
 <th class="" id="thCuota6"> Cuota 6 </th>
-<th class="" id="thCuota7" class="cuotasAdicionales"> Cuota 7 </th>
-<th class="" id="thCuota8" class="cuotasAdicionales"> Cuota 8</th>
-<th class="" id="thCuota9" class="cuotasAdicionales"> Cuota 9 </th>
-<th class="" id="thCuota10" class="cuotasAdicionales"> Cuota 10</th>
-<th class="" id="thCuota11" class="cuotasAdicionales"> Cuota 11</th>
-<th class="" id="thCuota12" class="cuotasAdicionales"> Cuota 12</th>
+<th class="cuotasAdicionales" id="thCuota7"  Cuota 7 </th>
+<th class="cuotasAdicionales" id="thCuota8"  Cuota 8</th>
+<th class="cuotasAdicionales" id="thCuota9"  Cuota 9 </th>
+<th class="cuotasAdicionales" id="thCuota10"  Cuota 10</th>
+<th class="cuotasAdicionales" id="thCuota11"  Cuota 11</th>
+<th class="cuotasAdicionales" id="thCuota12"  Cuota 12</th>
 <th class="" id="thDNV"> Permiso DNV</th>
 <th class="" id="thDPV"> Permiso DPV</th>
 <th class="" id="thHidraulica"> Permiso Hidraulica</th>
@@ -244,6 +244,9 @@ $('.popup-trigger').hover(function() {
     $('.popup-content').css('display', 'none');
     // Mostrar el contenido del popup correspondiente
     $(this).next('.popup-content').toggle();
+    setTimeout(() => {
+      $(this).next('.popup-content').hide();
+    }, 2000);
 });
   }, 1000);
   function EnviarFormulario() {
@@ -360,25 +363,33 @@ $(document).ready(function(){
         "paging": false,
         "info": false,
         "searching": false,
+        
         "ajax": {
             "url": "/Finanzas/cobrodeobras/VerObra/<%=id_Obra%>/data", 
             "dataType": "json",
             "dataSrc": function (data) {
+              console.log(data.PredeterminadosyCobros[0]);
                 return data.PredeterminadosyCobros;
                 
             }
         },
-        "columnDefs":[{
-"targets":[0,1,2],
-"createdCell": function (td,cellData,rowData,row,col){
-  $(td).addClass('bg-secondary fw-bold text-light');
-},
-
-}      
-      ],
+        "columnDefs": [
+  {
+    "targets": "_all",
+    "sortable": false,
+   
+  },
+  {
+    "createdCell": function (td, cellData, rowData, row, col) {
+      $(td).addClass('bg-secondary fw-bold text-light');
+    },
+    "targets": [0, 1, 2], // Aquí especificas las columnas a las que se aplicará la configuración adicional
+    // Agrega cualquier configuración adicional específica para estas columnas aquí
+  }
+],
         "columns": [
             { "data": "NombreCliente", "render":function(data,type,row,meta){
-              return '<button class="btn" onclick="CargarPago(\''+row.ID_cliente+'\',\''+row.NombreCliente+'\');">'+row.NombreCliente+'</button>'
+              return '<button class="btn text-nowrap max-vh-25" onclick="CargarPago(\''+row.ID_cliente+'\',\''+row.NombreCliente+'\');">'+row.NombreCliente+'</button>'
             }},
             { "data": "Direccion","render":function(data,type,row,meta){
              
@@ -391,13 +402,17 @@ $(document).ready(function(){
               
             }},
             { "data": "ServicioDomiciliario" ,"render": function(data,type,row,meta){
-              if(row.ServicioDomiciliario==0){
-                
-                return null;}
+              if(row.ServicioDomiciliario==0 || row.ServicioDomiciliario=="0"){
+                if(row.PredeterminadoServicioDomiciliario==0){
+                  return null;
+                }else{
+                return '<span class="text-muted">$'+row.PredeterminadoServicioDomiciliario+'</span>';
+              }
+              }
               else{
                 if(row.ServicioDomiciliario==row.PredeterminadoServicioDomiciliario){
-                  return '<div class="tdServicioDomiciliario"><span class="popup-trigger bg-success">$' + data + '</span>' + 
-               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoServicioDomiciliario +'</div> </div>';
+                  return '<div class="tdServicioDomiciliario bg-success"><span class="popup-trigger ">PAGADO</span>' + 
+               '<div class="popup-content text-secondary">Monto pagado:$' + row.ServicioDomiciliario +'</div> </div>';
                 }
                 if(row.ServicioDomiciliario<row.PredeterminadoServicioDomiciliario){
                 return '<div class="tdServicioDomiciliario"><span class="popup-trigger text-danger">$' + data + '</span>' + 
@@ -409,12 +424,16 @@ $(document).ready(function(){
               }
             } },
             { "data": "AnticipoFinanciero","render":function(data,type,row,meta){
-              if(row.AnticipoFinanciero==0){
-                return null;
+              if(row.AnticipoFinanciero==0 || row.AnticipoFinanciero=="0"){
+                if(row.PredeterminadoAnticipoFinanciero==0){
+                  return null;
+                }else{
+                  return '<span class="text-muted">$'+row.PredeterminadoAnticipoFinanciero+'</span>';
+                }
               }else{
                 if(row.AnticipoFinanciero==row.PredeterminadoAnticipoFinanciero){
-                  return '<div class="tdAnticipoFinanciero"><span class="popup-trigger bg-success">$' + data + '</span>' + 
-               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoAnticipoFinanciero +'</div> </div>';
+                  return '<div class="tdAnticipoFinanciero bg-success" ><span class="popup-trigger">PAGADO</span>' + 
+               '<div class="popup-content text-secondary">Monto pagado:$' + row.AnticipoFinanciero +'</div> </div>';
                 }
                 if(row.AnticipoFinanciero<row.PredeterminadoAnticipoFinanciero){
                 return '<div class="tdAnticipoFinanciero"><span class="popup-trigger text-danger">$' + data + '</span>' + 
@@ -426,12 +445,17 @@ $(document).ready(function(){
             }
             }},
             { "data": "Cuota1","render":function(data,type,row,meta){
-              if(row.Cuota1==0){
-                return null;
+              if(row.Cuota1==0 || row.Cuota1=="0"){
+                if(row.PredeterminadoCuota1==0){
+                  return null;
+                }else{
+                  return '<span class="text-muted">$'+row.PredeterminadoCuota1+'</span>';
+                }
+
               }else{
                 if(row.Cuota1==row.PredeterminadoCuota1){
-                  return '<div class="tdCuota1"><span class="bg-success popup-trigger text-success">$' + data + '</span>' + 
-               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota1 +'</div> </div>';
+                  return '<div class="tdCuota1 bg-success"><span class=" popup-trigger ">PAGADO</span>' + 
+               '<div class="popup-content text-secondary">Valor a pagar:$' + row.Cuota1 +'</div> </div>';
                 }
                 if(row.Cuota1<row.PredeterminadoCuota1){
                 return '<div class="tdCuota1"><span class="popup-trigger text-danger">$' + data + '</span>' + 
@@ -443,12 +467,13 @@ $(document).ready(function(){
               }
             } },
             { "data": "Cuota2","render":function(data,type,row,meta){
-              if(row.Cuota2==0){
-                return null;
+              if(row.Cuota2==0 || row.Cuota2=="0"){
+                return '<span class="text-muted">$'+row.PredeterminadoCuota2+'</span>';
+
               }else{
                 if(row.Cuota2==row.PredeterminadoCuota2){
-                  return '<div class="td=="><span class="bg-success popup-trigger text-success">$' + data + '</span>' + 
-               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota2 +'</div> </div>';
+                  return '<div class="tdCuota2 bg-success"><span class="popup-trigger ">PAGADO</span>' + 
+               '<div class="popup-content text-secondary">Monto pagado:$' + row.Cuota2 +'</div> </div>';
                 }
                 if(row.Cuota2<row.PredeterminadoCuota2){
                 return '<div class="tdCuota2"><span class="popup-trigger text-danger">$' + data + '</span>' + 
@@ -460,12 +485,13 @@ $(document).ready(function(){
               }
             } },
             { "data": "Cuota3","render":function(data,type,row,meta){
-              if(row.Cuota3==0){
-                return null;
+              if(row.Cuota3==0 || row.Cuota3=="0"){
+                return '<span class="text-muted">$'+row.PredeterminadoCuota3+'</span>';
+
               }else{
                 if(row.Cuota3==row.PredeterminadoCuota3){
-                  return '<div class="td=="><span class="bg-success popup-trigger text-success">$' + data + '</span>' + 
-               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota3 +'</div> </div>';
+                  return '<div class="tdCuota3 bg-success"><span class=" popup-trigger ">PAGADO</span>' + 
+               '<div class="popup-content text-secondary">Monto pagado:$' + row.Cuota3 +'</div> </div>';
                 }
                 if(row.Cuota3<row.PredeterminadoCuota3){
                 return '<div class="tdCuota3"><span class="popup-trigger text-danger">$' + data + '</span>' + 
@@ -477,12 +503,14 @@ $(document).ready(function(){
               }
             } },
             { "data": "Cuota4","render":function(data,type,row,meta){
-              if(row.Cuota4==0){
-                return null;
+              if(row.Cuota4==0 || row.Cuota4=="0"){
+                return '<span class="text-muted">$'+row.PredeterminadoCuota4+'</span>';
+
+
               }else{
                 if(row.Cuota4==row.PredeterminadoCuota4){
-                  return '<div class="td=="><span class="bg-success popup-trigger text-success">$' + data + '</span>' + 
-               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota4 +'</div> </div>';
+                  return '<div class="tdCuota4 bg-success"><span class=" popup-trigger ">PAGADO</span>' + 
+               '<div class="popup-content text-secondary">Monto pagado:$' + row.Cuota4 +'</div> </div>';
                 }
                 if(row.Cuota4<row.PredeterminadoCuota4){
                 return '<div class="tdCuota4"><span class="popup-trigger text-danger">$' + data + '</span>' + 
@@ -494,12 +522,13 @@ $(document).ready(function(){
               }
             } },
             { "data": "Cuota5","render":function(data,type,row,meta){
-              if(row.Cuota5==0){
-                return null;
+              if(row.Cuota5==0 || row.Cuota5=="0"){
+                return '<span class="text-muted">$'+row.PredeterminadoCuota5+'</span>';
+
               }else{
                 if(row.Cuota5==row.PredeterminadoCuota5){
-                  return '<div class="td=="><span class="bg-success popup-trigger text-success">$' + data + '</span>' + 
-               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota5 +'</div> </div>';
+                  return '<div class="tdCuota5 bg-success"><span class=" popup-trigger ">PAGADO</span>' + 
+               '<div class="popup-content text-secondary">Monto pagado:$' + row.Cuota5 +'</div> </div>';
                 }
                 if(row.Cuota5<row.PredeterminadoCuota5){
                 return '<div class="tdCuota5"><span class="popup-trigger text-danger">$' + data + '</span>' + 
@@ -511,12 +540,13 @@ $(document).ready(function(){
               }
             } },
             { "data": "Cuota6","render":function(data,type,row,meta){
-              if(row.Cuota6==0){
-                return null;
+              if(row.Cuota6==0 || row.Cuota6=="0"){
+                return '<span class="text-muted">$'+row.PredeterminadoCuota6+'</span>';
+
               }else{
                 if(row.Cuota6==row.PredeterminadoCuota6){
-                  return '<div class="td=="><span class="bg-success popup-trigger text-success">$' + data + '</span>' + 
-               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota6 +'</div> </div>';
+                  return '<div class="tdCuota6 bg-success"><span class=" popup-trigger ">PAGADO</span>' + 
+               '<div class="popup-content text-secondary">Monto pagado:$' + row.Cuota6 +'</div> </div>';
                 }
                 if(row.Cuota6<row.PredeterminadoCuota6){
                 return '<div class="tdCuota6"><span class="popup-trigger text-danger">$' + data + '</span>' + 
@@ -530,8 +560,8 @@ $(document).ready(function(){
             { "data": "Cuota7" ,"render":function(data,type,row,meta){
               if(row.CantidadCuotas>6){
                 if(row.Cuota7==row.PredeterminadoCuota7){
-                  return '<div class="td=="><span class="bg-success popup-trigger text-success">$' + data + '</span>' + 
-               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota7 +'</div> </div>';
+                  return '<div class="tdCuota7 bg-success"><span class=" popup-trigger ">PAGADO</span>' + 
+               '<div class="popup-content text-secondary">Monto pagado:$' + row.Cuota7 +'</div> </div>';
                 }
                 if(row.Cuota7<row.PredeterminadoCuota7){
                 return '<div class="tdCuota7"><span class="popup-trigger text-danger">$' + data + '</span>' + 
@@ -541,13 +571,15 @@ $(document).ready(function(){
                '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota7 + ', ha pagado por demas:$'+(data-row.PredeterminadoCuota7)+' </div> </div>'; 
               }
               }else{
-                return null;}
+                return null;
+
+              }
             }},
             { "data": "Cuota8" ,"render":function(data,type,row,meta){
               if(row.CantidadCuotas>7){
                 if(row.Cuota8==row.PredeterminadoCuota8){
-                  return '<div class="td=="><span class="bg-success popup-trigger text-success">$' + data + '</span>' + 
-               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota8 +'</div> </div>';
+                  return '<div class="tdCuota8 bg-success"><span class=" popup-trigger ">PAGADO</span>' + 
+               '<div class="popup-content text-secondary">Monto pagado:$' + row.Cuota8 +'</div> </div>';
                 }
                 if(row.Cuota8<row.PredeterminadoCuota8){
                 return '<div class="tdCuota8"><span class="popup-trigger text-danger">$' + data + '</span>' + 
@@ -557,13 +589,15 @@ $(document).ready(function(){
                '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota8 + ', ha pagado por demas:$'+(data-row.PredeterminadoCuota8)+' </div> </div>'; 
               }
               }else{
-                return null;}
+                return null;
+
+              }
             }},
             { "data": "Cuota9" ,"render":function(data,type,row,meta){
               if(row.CantidadCuotas>8){
                 if(row.Cuota9==row.PredeterminadoCuota9){
-                  return '<div class="td=="><span class="bg-success popup-trigger text-success">$' + data + '</span>' + 
-               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota9 +'</div> </div>';
+                  return '<div class="tdCuota9 bg-success"><span class=" popup-trigger ">PAGADO</span>' + 
+               '<div class="popup-content text-secondary">Monto pagado:$' + row.Cuota9 +'</div> </div>';
                 }
                 if(row.Cuota9<row.PredeterminadoCuota9){
                 return '<div class="tdCuota9"><span class="popup-trigger text-danger">$' + data + '</span>' + 
@@ -573,13 +607,15 @@ $(document).ready(function(){
                '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota9 + ', ha pagado por demas:$'+(data-row.PredeterminadoCuota9)+' </div> </div>'; 
               }
               }else{
-                return null;}
+                return null;
+              
+              }
             }},
             { "data": "Cuota10","render":function(data,type,row,meta){
               if(row.CantidadCuotas>9){
                 if(row.Cuota10==row.PredeterminadoCuota10){
-                  return '<div class="td=="><span class="bg-success popup-trigger text-success">$' + data + '</span>' + 
-               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota10 +'</div> </div>';
+                  return '<div class="tdCuota10 bg-success"><span class=" popup-trigger ">PAGADO</span>' + 
+               '<div class="popup-content text-secondary">Monto pagado:$' + row.Cuota10 +'</div> </div>';
                 }
                 if(row.Cuota10<row.PredeterminadoCuota10){
                 return '<div class="tdCuota10"><span class="popup-danger text-danger">$' + data + '</span>' + 
@@ -589,13 +625,15 @@ $(document).ready(function(){
                '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota10 + ', ha pagado por demas:$'+(data-row.PredeterminadoCuota10)+' </div> </div>'; 
               }
               }else{
-                return null;}
+                return null;
+
+              }
             } },
             { "data": "Cuota11","render":function(data,type,row,meta){
               if(row.CantidadCuotas>10){
                 if(row.Cuota11==row.PredeterminadoCuota11){
-                  return '<div class="tdCuota11"><span class="bg-success popup-trigger text-success">$' + data + '</span>' + 
-               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota11 +'</div> </div>';
+                  return '<div class="tdCuota11 bg-success"><span class=" popup-trigger ">PAGADO</span>' + 
+               '<div class="popup-content text-secondary">Monto pagado:$' + row.Cuota11 +'</div> </div>';
                 }
                 if(row.Cuota11<row.PredeterminadoCuota11){
                 return '<div class="tdCuota11"><span class="popup-danger text-danger">$' + data + '</span>' + 
@@ -605,14 +643,16 @@ $(document).ready(function(){
                '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota11 + ', ha pagado por demas:$'+(data-row.PredeterminadoCuota11)+' </div> </div>'; 
               }
               }else{
-                return '<div class="tdCuota12"></div>';}
+                return null;
+
+              }
 
             } },
             { "data": "Cuota12","render":function(data,type,row,meta){
               if(row.CantidadCuotas>11){
                 if(row.Cuota12==row.PredeterminadoCuota12){
-                  return '<div class="tdCuota12"><span class="bg-success popup-trigger text-success">$' + data + '</span>' + 
-               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota12 +'</div> </div>';
+                  return '<div class="tdCuota12 bg-success"><span class=" popup-trigger ">PAGADO</span>' + 
+               '<div class="popup-content text-secondary">Monto pagado:$' + row.Cuota12 +'</div> </div>';
                 }
                 if(row.Cuota12<row.PredeterminadoCuota12){
                 return '<div class="tdCuota12"><span class="popup-danger text-danger">$' + data + '</span>' + 
@@ -622,17 +662,20 @@ $(document).ready(function(){
                '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota12 + ', ha pagado por demas:$'+(data-row.PredeterminadoCuota12)+' </div> </div>'; 
               }
               }else{
-                return null;}
+                return null;
+
+              }
             } },
             { "data": "PredeterminadoDNV" ,"render": function(data,type,row,meta){
-              if(row.PredeterminadoDNV==0){
+              if(row.PredeterminadoDNV==0 || row.PredeterminadoDNV=="0"){
                 
-                return '<div class="tdDNV"></div>';}
+                return null;
+              }
 
               else{
                 if(row.DPV==row.PredeterminadoDNV){
-                  return '<div class="tdDNV"><span class="bg-success popup-trigger text-success">$' + data + '</span>' + 
-               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoDNV +'</div> </div>';
+                  return '<div class="tdDNV bg-success"><span class=" popup-trigger ">PAGADO</span>' + 
+               '<div class="popup-content text-secondary">Monto pagado:$' + row.DNV +'</div> </div>';
                 }
                 if(row.DNV<row.PredeterminadoDNV){
                 return '<div class="tdDNV"><span class="popup-trigger text-danger">$' + data + '</span>' + 
@@ -644,14 +687,15 @@ $(document).ready(function(){
               }
             } },
             { "data": "PredeterminadoDPV" ,"render": function(data,type,row,meta){
-              if(row.PredeterminadoDPV==0){
+              if(row.PredeterminadoDPV==0 || row.PredeterminadoDPV=="0"){
                 
-                return '<div class="tdDPV"></div>';}
+                return null;
+              }
 
               else{
                 if(row.DPV==row.PredeterminadoDPV){
-                  return '<div class="tdDPV"><span class="bg-success popup-trigger text-success">$' + data + '</span>' + 
-               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoDPV +'</div> </div>';
+                  return '<div class="tdDPV bg-success"><span class=" popup-trigger ">PAGADO</span>' + 
+               '<div class="popup-content text-secondary">Monto pagado:$' + row.DPV +'</div> </div>';
                 }
                 if(row.DPV<row.PredeterminadoDPV){
                 return '<div class="tdDPV"><span class="popup-trigger text-danger">$' + data + '</span>' + 
@@ -663,13 +707,14 @@ $(document).ready(function(){
             }
             } },
             { "data": "PredeterminadoHidraulica" ,"render": function(data,type,row,meta){
-              if(row.PredeterminadoHidraulica==0){
-                return '<div class="tdHidraulica"></div>';}
+              if(row.PredeterminadoHidraulica==0 || row.PredeterminadoHidraulica=="0"){
+                return null;
+              }
 
               else{
                 if(row.Hidraulica==row.PredeterminadoHidraulica){
-                  return '<div class="tdHidraulica"><span class="popup-trigger bg-success-success">$' + data + '</span>' + 
-               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoHidraulica +'</div> </div>';
+                  return '<div class="tdHidraulica bg-success"><span class="popup-trigger ">PAGADO </span>' + 
+               '<div class="popup-content text-secondary">Monto pagado:$' + row.Hidraulica +'</div> </div>';
                 }
                 if(row.Hidraulica<row.PredeterminadoHidraulica){
                 return '<div class="tdHidraulica"><span class="popup-trigger danger-danger">$' + data + '</span>' + 
@@ -681,13 +726,14 @@ $(document).ready(function(){
               }
             } },
             { "data": "PredeterminadoFFCC" ,"render": function(data,type,row,meta){
-              if(row.PredeterminadoFFCC==0){
+              if(row.PredeterminadoFFCC==0 || row.PredeterminadoFFCC=="0"){
                 
-                return '<div class="tdFFCC"></div>';}
+                return null;
+              }
               else{
                 if(row.FFCC==row.PredeterminadoFFCC){
-                  return '<div class="tdFFCC"><span class="bg-success popup-trigger text-success">$' + data + '</span>' + 
-               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoFFCC +'</div> </div>';
+                  return '<div class="tdFFCC bg-success"><span class=" popup-trigger ">PAGADO</span>' + 
+               '<div class="popup-content text-secondary">Monto pagado:$' + row.FFCC +'</div> </div>';
                 }
                 if(row.FFCC<row.PredeterminadoFFCC){
                 return '<div class="tdFFCC"><span class="popup-trigger text-danger">$' + data + '</span>' + 
@@ -699,13 +745,14 @@ $(document).ready(function(){
               }
             } },
             { "data": "PredeterminadoPrivado" ,"render": function(data,type,row,meta){
-              if(row.PredeterminadoPrivado==0){
+              if(row.PredeterminadoPrivado==0 || row.PredeterminadoPrivado=="0"){
                 
-                return '<div class="tdPrivado"></div>';}
+                return null;
+              }
               else{
                 if(row.Privado==row.PredeterminadoPrivado){
                   return '<div class="tdMunicipal"><span class="popup-trigger bg-success text-success">$' + data + '</span>' + 
-               '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoPrivado +'</div> </div>';
+               '<div class="popup-content text-secondary">Monto pagado:$' + row.Privado +'</div> </div>';
                 }
                 if(row.Privado<row.PredeterminadoPrivado){
                 return '<div class="tdMunicipal"><span class="popup-trigger danger-danger">$' + data + '</span>' + 
@@ -717,9 +764,10 @@ $(document).ready(function(){
               }
             } },
             { "data": "PredeterminadoMunicipal" ,"render": function(data,type,row,meta){
-              if(row.PredeterminadoMunicipal==0){
+              if(row.PredeterminadoMunicipal==0 || row.PredeterminadoMunicipal=="0"){
                 
-                return '<div class="tdMunicipal"></div>';}
+                return null;
+              }
               else{
                 if(row.Municipal==row.PredeterminadoMunicipal){
                   return '<div class="tdMunicipal"><span class="popup-trigger bg-success text-success">$' + data + '</span>' + 
@@ -734,11 +782,12 @@ $(document).ready(function(){
               }
               }
             } },
-           
+  
             { "data": "PredeterminadoIngresoDocumentacion" ,"render": function(data,type,row,meta){
-              if(row.PredeterminadoIngresoDocumentacion==0){
+              if(row.PredeterminadoIngresoDocumentacion==0 || row.PredeterminadoIngresoDocumentacion=="0"){
                 
-                return '<div class="tdIngresoDocumentacion"></div>';}
+                return null;
+              }
               else{
                 if(row.IngresoDocumentacion==row.PredeterminadoIngresoDocumentacion){
                   return '<div class="tdIngresoDocumentacion"><span class="popup-trigger bg-success">$' + data + '</span>' + 
@@ -754,12 +803,13 @@ $(document).ready(function(){
               }
             } },
             { "data": "PredeterminadoIrrigacion" ,"render": function(data,type,row,meta){
-              if(row.PredeterminadoIrrigacion==0){
+              if(row.PredeterminadoIrrigacion==0 || row.PredeterminadoIrrigacion=="0"){
                 
-                return '<div class="tdIrrigacion"></div>';}
+                return null;
+              }
               else{
                 if(row.Irrigacion==row.PredeterminadoIrrigacion){
-                  return '<div class="tdIrrigacion"><span class="popup-trigger bg-success-success">$' + data + '</span>' + 
+                  return '<div class="tdIrrigacion bg-success"><span class="popup-trigger ">PAGADO </span>' + 
                '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoIrrigacion +'</div> </div>';
                 }
                 if(row.Irrigacion<row.PredeterminadoIrrigacion){
@@ -771,7 +821,8 @@ $(document).ready(function(){
               }
                 }
             } },
-        ]
+            
+        ],
     });
   })
  

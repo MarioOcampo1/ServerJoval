@@ -1,4 +1,4 @@
-<form action="/GenerarComprobante" method="post">
+<form  id="formGenerarComprobante" action="/GenerarComprobante" method="post">
     <div class="container-fluid">
         <div class="modal fade" id="ModalNuevoPagoObras2" tabindex="-1" role="dialog" aria-labelledby="ModalNuevoPagoObras2Label" aria-hidden="true">
           <div class="modal-dialog modal-xl" role="document">
@@ -95,8 +95,9 @@
                   </div>
                   </div>
                 <div class="modal-footer noImprimible">
+                  <div id="MensajeServidorPago"></div>
                   <button type="button" class="btn btn-danger noImprimible" onclick="$('#ModalNuevoPagoObras').modal('hide')">Cerrar</button>
-                  <button type="submit" id="btnGuardarCambios" class="btn btn-success  noImprimible ">Guardar</button>
+                  <button type="button" id="btnGuardarCambiosPagos" class="btn btn-success  noImprimible ">Guardar</button>
                 </div>
             </div>
           </div>
@@ -104,7 +105,6 @@
       </div>
     </form>
     <script>
-        
   function CargarPago(idcliente) {
     $.ajax({
       url: '/BuscarDatosClienteQuePaga/' + idcliente,
@@ -132,4 +132,35 @@
     });
     $('#editarDatosCliente').html('<a class="btn btn-info" href="/Finanzas/CobroDeObras/EditarCliente/'+ idcliente+'">Editar cliente</a>');
   }
+    </script>
+    <script>
+       $('#btnGuardarCambiosPagos').click(function(){ 
+    // Funcion que trabaja con el modal que se encuentra ubicado en PagoClientes.ejs
+    const form =$('#formGenerarComprobante');
+    const formData=form.serialize();
+    $.ajax({
+      type: "POST",
+      url: "/GenerarComprobante",
+      data: formData  ,
+      dataType: "json",
+      success: function (response) {
+        console.log(response);
+        $('#MensajeServidorPago').html('<span class="text-success">El pago se ha efectuado con exito!</span>');
+        setTimeout(() => {
+          $('#ModalNuevoPagoObras2').modal('toggle');
+          $('#formGenerarComprobante')[0].reset();
+          location.reload();
+        }, 2000);
+      },
+      error:function(error){
+        console.log(error);
+        $('#MensajeServidorPago').html('<span class="text-danger">ERROR: No se ha podido efectuar el pago. Intente cargarlo nuevamente.</span>');
+        setTimeout(() => {
+          $('#formGenerarComprobante')[0].reset();
+          
+        }, 2000);
+      }
+    });
+   }); 
+  
     </script>
