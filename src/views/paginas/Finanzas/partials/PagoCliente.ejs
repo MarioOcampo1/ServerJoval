@@ -8,10 +8,10 @@
                 <div class="btn-group">
                   <button class="btn btn-outline-secondary" type="submit" id="btnClientesPorLote" onclick="cargarClientesPorLote('<%=NombreObra%>')">Cargar
                     clientes por lotes</button>
-                  <button class="btn btn-outline-secondary">Ver comprobantes registrados</button>
+                  <button type="button" id="btnVerComprobantesRegistrados" class="btn btn-outline-secondary">Ver comprobantes registrados</button>
                   <button type="button" class="btn btn-outline-secondary" onclick="editarVecino()">
                     <i id="engranajeEditarVecino" class="bi bi-gear"></i>
-                    Montos a pagar</button>
+                  Editar montos a pagar</button>
                 </div>
     
                 <div id="editarDatosCliente">
@@ -24,13 +24,14 @@
                 <div class="modal-body">
                   <input type="number" name="IDCliente" id="IDCliente" hidden>
                   <div class="container">
-                    <div class="d-inline border">
+                    <div class="d-inline  mb-2">
                       Obra: <%=NombreObra%>
                       <input class="" type="text" name="Obra" id="Obra" value="<%=NombreObra%>" hidden>
     
                     </div>
-                    <div class="d-inline border ms-5" id="textoNombreCliente2">
+                    <div class="d-inline  ms-5 mb-2" id="textoNombreCliente2">
                     </div>
+                    
                     <input class="" id="inputNombreCliente2" type="hidden" name="NombreCompleto" value="">
     
                     <div class="input-group mb-3">
@@ -38,41 +39,70 @@
                       <input class="form-control" type="text" id="inputDomicilio2" name="Domicilio">
                     </div>
                     <div class="input-group mb-3 ">
-                      <label class="input-group-text" for="Concepto">Concepto</label>
-                      <select class="form-select" name="Concepto" id="Concepto" aria-label="Seleccione el pago">
-                        <!-- <input required list="ConceptosDePago" defaultValue=""  class="form-control" type="text" name="Concepto" id="Concepto"> -->
-                        <!-- <datalist id="ConceptosDePago"> -->
-                        <option value="" selected> </option>
-                        <option value="AnticipoFinanciero">Anticipo Financiero</option>
-                        <option value="Cuota1">Cuota 1</option>
-                        <option value="Cuota2">Cuota 2</option>
-                        <option value="Cuota3">Cuota 3</option>
-                        <option value="Cuota4">Cuota 4</option>
-                        <option value="Cuota5">Cuota 5</option>
-                        <option value="Cuota6">Cuota 6</option>
-                        <option value="Cuota7">Cuota 7</option>
-                        <option value="Cuota8">Cuota 8</option>
-                        <option value="Cuota9">Cuota 9</option>
-                        <option value="Cuota10">Cuota 10</option>
-                        <option value="Cuota11">Cuota 11</option>
-                        <option value="Cuota12">Cuota 12</option>
-                        <option value="DNV">Permiso DNV</option>
-                        <option value="DPV">Permiso DPV</option>
-                        <option value="Hidraulica">Permiso Hidraulica</option>
-                        <option value="FFCC">Permiso FFCC</option>
-                        <option value="Privado">Permiso Privado</option>
-                        <option value="Municipal">Permiso Municipal</option>
-                        <option value="ServicioDomiciliario">Servicio Domiciliario</option>
-                        <option value="IngresoDocumentacion">Ingreso de documentacion comienzo tramite
-                        </option>
-                        <option value="Irrigacion">Permiso Irrigacion</option>
-                        <!-- </datalist> -->
-                      </select>
+                          <label class="input-group-text" for="Concepto">Concepto</label>
+                          <select class="form-select" name="Concepto" id="Concepto" aria-label="Seleccione el pago">
+                            <!-- <input required list="ConceptosDePago" defaultValue=""  class="form-control" type="text" name="Concepto" id="Concepto"> -->
+                            <!-- <datalist id="ConceptosDePago"> -->
+                            <option value="" selected> </option>
+                            <option value="AnticipoFinanciero">Anticipo Financiero</option>
+                            <option value="Cuota1">Cuota 1</option>
+                            <option value="Cuota2">Cuota 2</option>
+                            <option value="Cuota3">Cuota 3</option>
+                            <option value="Cuota4">Cuota 4</option>
+                            <option value="Cuota5">Cuota 5</option>
+                            <option value="Cuota6">Cuota 6</option>
+                            <option value="Cuota7">Cuota 7</option>
+                            <option value="Cuota8">Cuota 8</option>
+                            <option value="Cuota9">Cuota 9</option>
+                            <option value="Cuota10">Cuota 10</option>
+                            <option value="Cuota11">Cuota 11</option>
+                            <option value="Cuota12">Cuota 12</option>
+                            <option value="DNV">Permiso DNV</option>
+                            <option value="DPV">Permiso DPV</option>
+                            <option value="Hidraulica">Permiso Hidraulica</option>
+                            <option value="FFCC">Permiso FFCC</option>
+                            <option value="Privado">Permiso Privado</option>
+                            <option value="Municipal">Permiso Municipal</option>
+                            <option value="ServicioDomiciliario">Servicio Domiciliario</option>
+                            <option value="IngresoDocumentacion">Ingreso de documentacion comienzo tramite
+                            </option>
+                            <option value="Irrigacion">Permiso Irrigacion</option>
+                            <!-- </datalist> -->
+                          </select>
+                        
+                        
+                 
                     </div>
-                    <div class="input-group-text mb-3" id="divImporte2" style="display: none;">
+                    <div class="input-group-text mb-3 col-3" id="divImporte2" style="display: none;">
                       <label class="input-group-text" for="ImporteIngresado">Importe</label>
                       <input required class="form-control" value="0" type="number" name="ValorIngresado" id="ImporteIngresado">
                     </div>
+                    <div class="mb-5 calculoUSD" style="display: none;" >
+                      <input type="hidden" id="cotizacionBaseDolar">
+                      <div class="row mb-5">
+                      <div class="col-2">
+                        <label for="" class="form-label">¿Cálculo en dólares?</label>
+                        <select class="form-select form-select-sm" name="" id="CalcularEnDolares">
+                          <option selected></option>
+                          <option value="No">No</option>
+                          <option value="Si">Si</option>
+                          
+                        </select>
+                      </div>
+<div class="col-2">
+  <label for="" class="form-label">Cotización actual:</label>
+  <input type="number"
+    class="form-control" name="" id="CotizacionUSD" aria-describedby="helpId" placeholder="" value="0">
+    
+</div>
+<div class="col-8" id="TextoUsuarioCotizacionUSD">
+  
+</div>
+</div>
+
+<span class="text-center">El sistema va a reajustar automáticamente el monto a pagar, en base al valor predefinido al momento de contratar la obra.</span>
+<span id="cotizacionInicial" class="text-center text-primary" val=""></span>
+ </div>
                     <div class="mb-3">
                       <label class="input-group-text" for="FechaPago2"> Fecha de pago</label>
                       <input required class="form-control" type="date" name="FechaPago" id="FechaPago2" autocomplete="on">
@@ -104,8 +134,80 @@
         </div>
       </div>
     </form>
+    <!-- Modal Body -->
+    <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+    <div class="modal fade" id="modalComprobantesEfectuados" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-fullscreen" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalTitleId">Comprobantes registrados</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+<div class="table-responsive">
+  <table class="table table-primary">
+    <thead>
+      <tr>
+        <th scope="col">N° comprobante</th>
+        <th scope="col">Concepto</th>
+        <th scope="col">Monto</th>
+        <th scope="col">Fecha de pago</th>
+
+        <th scope="col">Observacion</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="">
+        <td scope="row">1</td>
+        <td>Anticipo financiero</td>
+        <td>350000</td>
+        <td>14/08/2023</td>
+        <td>Entrego un auto cancelo todo</td>
+        <td><button type="button" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil-square"></i></button>
+        <button type="button" class="btn btn-sm btn-outline-primary"><i class="bi bi-search"></i></button>
+        <button type="button" class="btn btn-sm btn-outline-primary"> <i class="bi bi-printer"></i></button>
+      </td>
+
+      </tr>
+      <tr class="">
+        <td scope="row">2</td>
+        <td>Cuota 1</td>
+        <td>28000</td>
+        <td>28/08/2023</td>
+
+        <td>
+          Transf n°: 250899073 Supervielle
+        </td>
+
+        <td><button type="button" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil-square"></i></button>
+          <button type="button" class="btn btn-sm btn-outline-primary"><i class="bi bi-search"></i></button>
+          <button type="button" class="btn btn-sm btn-outline-primary"> <i class="bi bi-printer"></i></button>
+        </td>
+        
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+    <!-- Optional: Place to the bottom of scripts -->
+    <script>
+      const myModal = new bootstrap.Modal(document.getElementById('modalId'), options)
+    
+    </script>
     <script>
   function CargarPago(idcliente) {
+    $('#formGenerarComprobante')[0].reset();
     $.ajax({
       url: '/BuscarDatosClienteQuePaga/' + idcliente,
     }).done(function(respuestaServidor) {
@@ -119,6 +221,7 @@
       $('#textoNombreCliente2').append('Nombre del cliente: ' + results[0].NombreCliente);
       $('#inputDomicilio2').val(results[0].Direccion);
       $('#IDCliente').val(idcliente);
+
       var fecha = new Date(); //Fecha actual
       var mes = fecha.getMonth() + 1; //obteniendo mes
       var dia = fecha.getDate(); //obteniendo dia
@@ -162,5 +265,42 @@
       }
     });
    }); 
-  
+   
+             
+              
+  $('#CotizacionUSD').change(()=>{
+    if($('#CalcularEnDolares').val()=="Si"){
+      
+   //Si la opcion calcular en dolares esta seleccionada, se realiza el reajuste y se muestra en "Importe"
+   var cotizacionBaseDolar = $('#cotizacionInicial').val();
+                var montoAPagar = ImporteOriginalAPagar;
+                var cotizacionActualDolar = $('#CotizacionUSD').val();
+                montoAPagar = montoAPagar/cotizacionBaseDolar; //Se recalcula el importe base. Para saber cuantos dolares eran en su momento.
+                montoAPagar = montoAPagar * cotizacionActualDolar; //El monto en dolares base, se multiplica por la cotizacion actual, para saber el valor actual en ARS.
+               montoAPagar=montoAPagar.toFixed(2);
+               $('#TextoUsuarioCotizacionUSD').html('<label>Descripcion:</label><p>El monto original a pagar era:$'+ImporteOriginalAPagar+'. Con una cotización base de: 1USD = $'+cotizacionBaseDolar+'ARS. <br> La cotización actual es de: 1USD = $'+cotizacionActualDolar+' ARS.<span class="fw-bold"> El importe actual a pagar es de: $ '+montoAPagar+' ARS.</span></p>');
+                $('#ImporteIngresado').val(montoAPagar);
+              }
+  })
+
+$('#btnVerComprobantesRegistrados').click(()=>{
+  $('#modalComprobantesEfectuados').modal('show');
+})
+
     </script>
+    <style>
+      @keyframes rotate{
+        to{
+          transform: rotate(360deg);
+        }
+      }
+      .rotar{
+-webkit-transition: 3s;
+-o-transition: 30s; 
+      }
+      .rotar:hover{
+animation: rotate 1.5s linear infinite;
+/* Código by @damiande */
+
+      }
+    </style>

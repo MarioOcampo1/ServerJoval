@@ -12,11 +12,18 @@
                 <h4 class="text-center" title="Configura el valor predeterminado que se mostrará al momento de cargar un pago.">
                   Configura el monto que pagan todos los clientes.
                 </h4>
-               <div style="background:black; border-radius:25%;">
-                <span class="text-light"> En caso de que algún cliente tenga un monto de pago diferente al resto, Ud. deberá de modificarlo desde el botón "Editar cliente", el cúal se ubica haciendo click en el nombre del cliente a editar.</span>
+               <div >
+                <span class="text-primary"> En caso de que algún cliente tenga un monto de pago diferente al resto, Ud. deberá de modificarlo desde el botón "Editar cliente", el cúal se ubica haciendo click en el nombre del cliente a editar.</span>
               </div>
               </div>
               <div class="row p-2 mb-2 text-center border">
+                <div class="mb-2 col-3">
+                  <div class="input-group">
+                    <label for="" class="input-group-text">Cotización USD.</label>
+                    <input type="number"class="form-control form-control-sm" name="" id="ConfigCotizacionUSD" aria-describedby="helpId" placeholder="" value="365.50">
+                                        <button class="btn btn-outline-success " onclick="editarPago('ConfigCotizacionUSD')"><span><i class="bi bi-check"></i></span></button>
+      </div>
+                </div>
                 <span class="mb-2">Pagos principales</span>
                 <div class="mb-3 col-3"> 
                   <div class="input-group">

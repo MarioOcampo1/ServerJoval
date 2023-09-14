@@ -1118,7 +1118,7 @@ router.get('/BuscarDatosClienteQuePaga/:idCliente', (req, res) => {
 
     })
     promise1.then(function (results) {
-        sql = 'SELECT AnticipoFinanciero,Cuota1,Cuota2,Cuota3,Cuota4,Cuota5,Cuota6,Cuota7,Cuota8,Cuota9,Cuota10,Cuota11,Cuota12,Municipal,Irrigacion,DNV,DPV,Hidraulica,FFCC,Privado,ServicioDomiciliario FROM finanzas_clientes_predeterminados WHERE id_cliente = ? ';
+        sql = 'SELECT AnticipoFinanciero,Cuota1,Cuota2,Cuota3,Cuota4,Cuota5,Cuota6,Cuota7,Cuota8,Cuota9,Cuota10,Cuota11,Cuota12,Municipal,Irrigacion,DNV,DPV,Hidraulica,FFCC,Privado,ServicioDomiciliario,CotizacionUSD FROM finanzas_clientes_predeterminados WHERE id_cliente = ? ';
         connection.query(sql, idCliente, (error, montosCuota) => {
             if (error) console.log(error);
             else {
