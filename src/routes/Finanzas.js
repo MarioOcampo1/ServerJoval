@@ -433,9 +433,9 @@ router.post('/cobrodeobras/clientes/cargarArchivoConClientes', (req, res) => {
 
     res.send(datos);
 })
-router.get('/Finanzazas/cobros/VerComprobantesRegistrados/:idcliente',(req,res)=>{
+router.get('/Finanzas/cobros/VerComprobantesRegistrados/:idcliente',(req,res)=>{
     var id_cliente= req.params.idcliente;
-    var sql='SELECT * FROM finanzas_historial_comprobantes_emitidos WHERE ID_cliente =?';
+    var sql='SELECT * FROM finanzas_recibos_de_pago_obras WHERE idCliente =?';
     connection.query(sql,id_cliente,(error,response)=>{
 if(error)console.log(error);
 else{
@@ -461,161 +461,158 @@ router.post('/Finanzas/NuevoCliente/guardarCliente', (req, res) => {
             if (error) console.log(error);
             else {
                 id_Obra = results[0].id;
-                sql = 'SELECT Nombre from obras WHERE id =?';
-                connection.query(sql, id_Obra, (error, results) => {
-                    if (error) console.log(error);
-                    else {
-                        NombreObra = results[0].Nombre;
+               NombreObra = results[0].Nombre;
                         sql = 'INSERT into finanzas_clientes_por_obra set?';
                         connection.query(sql, {
-                            NombreCliente: Nombre, NombreObra: NombreObra, id_Obra: id_Obra, DNICliente: DNI, Telefono: Teléfono, Correo: Correo, Direccion: Domicilio
+                            NombreCliente: Nombre, NombreObra: Obra, id_Obra: id_Obra, DNICliente: DNI, Telefono: Teléfono, Correo: Correo, Direccion: Domicilio
                         }, (error, results) => {
                             if (error) console.log(error);
-                            else {
-                                sql = 'Select MAX(ID_cliente) AS ID_cliente  FROM finanzas_clientes_por_obra ;';
-                                connection.query(sql, (error, results) => {
-                                    if (error) console.log(error);
-                                    else {
-                                        idCliente = results[0].ID_cliente;
-                                        sql = 'INSERT INTO finanzas_clientes_por_obra_cobros set?;'
-                                        connection.query(sql, {
-                                            id_Obra: id_Obra, ID_cliente: idCliente, NombreCliente: Nombre, AnticipoFinanciero: 0, Cuota1: 0, Cuota2: 0, Cuota3: 0, Cuota4: 0, Cuota5: 0, Cuota6: 0, Cuota7: 0, Cuota8: 0, Cuota9: 0, Cuota10: 0, Cuota11: 0, Cuota12: 0, IngresoDocumentacion: 0, Municipal: 0, Irrigacion: 0, DNV: 0, DPV: 0, Hidraulica: 0, FFCC: 0, Privado: 0, ServicioDomiciliario: 0,
-                                        }, (error, results) => {
-                                            if (error) console.log(error);
-                                            else {
-                                                setTimeout(() => {
-                                                    sql = 'INSERT INTO finanzas_clientes_predeterminados set?;'
-                                                    switch (cuotasQuePaga) {
-                                                        case '1':
-                                                            connection.query(sql, {
-                                                                id_obra: id_Obra, id_cliente: idCliente, NombreCliente: Nombre, AnticipoFinanciero: req.body.ImporteAnticipoFinanciero,ServicioDomiciliario:req.body.ImporteServicioDomiciliario, Cuota1: req.body.ImporteCuota
-                                                            }, (error, results) => {
-                                                                if (error) console.log(error);
-                                                            })
-                                                            resolve();
-                                                            break;
-                                                        case '2':
-                                                            connection.query(sql, {
-                                                                id_obra: id_Obra, id_cliente: idCliente, NombreCliente: Nombre, AnticipoFinanciero: req.body.ImporteAnticipoFinanciero, Cuota1: req.body.ImporteCuota, Cuota2: req.body.ImporteCuota
-                                                            }, (error, results) => {
-                                                                if (error) console.log(error);
-                                                            })
-                                                            resolve();
-                                                            break;
-                                                        case '3':
-                                                            connection.query(sql, {
-                                                                id_obra: id_Obra, id_cliente: idCliente, NombreCliente: Nombre, AnticipoFinanciero: req.body.ImporteAnticipoFinanciero, Cuota1: req.body.ImporteCuota, Cuota2: req.body.ImporteCuota, Cuota3: req.body.ImporteCuota
-                                                            }, (error, results) => {
-                                                                if (error) console.log(error);
-                                                            })
-
-                                                            resolve();
-                                                            break;
-                                                        case '4':
-                                                            connection.query(sql, {
-                                                                id_obra: id_Obra, id_cliente: idCliente, NombreCliente: Nombre, AnticipoFinanciero: req.body.ImporteAnticipoFinanciero, Cuota1: req.body.ImporteCuota, Cuota2: req.body.ImporteCuota, Cuota3: req.body.ImporteCuota, Cuota4: req.body.ImporteCuota,
-                                                            }, (error, results) => {
-                                                                if (error) console.log(error);
-                                                            })
-                                                            resolve();
-                                                            break;
-                                                        case '5':
-                                                            connection.query(sql, {
-                                                                id_obra: id_Obra, id_cliente: idCliente, NombreCliente: Nombre, AnticipoFinanciero: req.body.ImporteAnticipoFinanciero, Cuota1: req.body.ImporteCuota, Cuota2: req.body.ImporteCuota, Cuota3: req.body.ImporteCuota, Cuota4: req.body.ImporteCuota, Cuota5: req.body.ImporteCuota
-                                                            }, (error, results) => {
-                                                                if (error) console.log(error);
-                                                            })
-                                                            resolve();
-                                                            break;
-                                                        case '6':
-                                                            connection.query(sql, {
-                                                                id_obra: id_Obra, id_cliente: idCliente, NombreCliente: Nombre, AnticipoFinanciero: req.body.ImporteAnticipoFinanciero, Cuota1: req.body.ImporteCuota, Cuota2: req.body.ImporteCuota, Cuota3: req.body.ImporteCuota, Cuota4: req.body.ImporteCuota, Cuota5: req.body.ImporteCuota, Cuota6: req.body.ImporteCuota,
-                                                            }, (error, results) => {
-                                                                if (error) console.log(error);
-                                                            })
-                                                            resolve();
-                                                            break;
-                                                        case '7':
-                                                            connection.query(sql, {
-                                                                id_obra: id_Obra, id_cliente: idCliente, NombreCliente: Nombre, AnticipoFinanciero: req.body.ImporteAnticipoFinanciero, Cuota1: req.body.ImporteCuota, Cuota2: req.body.ImporteCuota, Cuota3: req.body.ImporteCuota, Cuota4: req.body.ImporteCuota, Cuota5: req.body.ImporteCuota, Cuota6: req.body.ImporteCuota, Cuota7: req.body.ImporteCuota, Cuota8: req.body.ImporteCuota,
-                                                            }, (error, results) => {
-                                                                if (error) console.log(error);
-                                                            })
-                                                            resolve();
-                                                            break;
-                                                        case '8':
-                                                            connection.query(sql, {
-                                                                id_obra: id_Obra, id_cliente: idCliente, NombreCliente: Nombre, AnticipoFinanciero: req.body.ImporteAnticipoFinanciero, Cuota1: req.body.ImporteCuota, Cuota2: req.body.ImporteCuota, Cuota3: req.body.ImporteCuota, Cuota4: req.body.ImporteCuota, Cuota5: req.body.ImporteCuota, Cuota6: req.body.ImporteCuota, Cuota7: req.body.ImporteCuota, Cuota8: req.body.ImporteCuota,
-                                                            }, (error, results) => {
-                                                                if (error) console.log(error);
-                                                            })
-                                                            resolve();
-                                                            break;
-                                                        case '9':
-                                                            connection.query(sql, {
-                                                                id_obra: id_Obra, id_cliente: idCliente, NombreCliente: Nombre, AnticipoFinanciero: req.body.ImporteAnticipoFinanciero, Cuota1: req.body.ImporteCuota, Cuota2: req.body.ImporteCuota, Cuota3: req.body.ImporteCuota, Cuota4: req.body.ImporteCuota, Cuota5: req.body.ImporteCuota, Cuota6: req.body.ImporteCuota, Cuota7: req.body.ImporteCuota, Cuota8: req.body.ImporteCuota, Cuota9: req.body.ImporteCuota
-                                                            }, (error, results) => {
-                                                                if (error) console.log(error);
-                                                            })
-                                                            resolve();
-                                                            break;
-                                                        case '10':
-                                                            connection.query(sql, {
-                                                                id_obra: id_Obra, id_cliente: idCliente, NombreCliente: Nombre, AnticipoFinanciero: req.body.ImporteAnticipoFinanciero, Cuota1: req.body.ImporteCuota, Cuota2: req.body.ImporteCuota, Cuota3: req.body.ImporteCuota, Cuota4: req.body.ImporteCuota, Cuota5: req.body.ImporteCuota, Cuota6: req.body.ImporteCuota, Cuota7: req.body.ImporteCuota, Cuota8: req.body.ImporteCuota, Cuota9: req.body.ImporteCuota, Cuota10: req.body.ImporteCuota
-                                                            }, (error, results) => {
-                                                                if (error) console.log(error);
-                                                            })
-                                                            resolve();
-                                                            break;
-                                                        case '11':
-                                                            connection.query(sql, {
-                                                                id_obra: id_Obra, id_cliente: idCliente, NombreCliente: Nombre, AnticipoFinanciero: req.body.ImporteAnticipoFinanciero, Cuota1: req.body.ImporteCuota, Cuota2: req.body.ImporteCuota, Cuota3: req.body.ImporteCuota, Cuota4: req.body.ImporteCuota, Cuota5: req.body.ImporteCuota, Cuota6: req.body.ImporteCuota, Cuota7: req.body.ImporteCuota, Cuota8: req.body.ImporteCuota, Cuota9: req.body.ImporteCuota, Cuota10: req.body.ImporteCuota, Cuota11: req.body.ImporteCuota
-                                                            }, (error, results) => {
-                                                                if (error) console.log(error);
-                                                            })
-                                                            resolve();
-                                                            break;
-                                                        case '12':
-                                                            connection.query(sql, {
-                                                                id_obra: id_Obra, id_cliente: idCliente, NombreCliente: Nombre, AnticipoFinanciero: req.body.ImporteAnticipoFinanciero, Cuota1: req.body.ImporteCuota, Cuota2: req.body.ImporteCuota, Cuota3: req.body.ImporteCuota, Cuota4: req.body.ImporteCuota, Cuota5: req.body.ImporteCuota, Cuota6: req.body.ImporteCuota, Cuota7: req.body.ImporteCuota, Cuota8: req.body.ImporteCuota, Cuota9: req.body.ImporteCuota, Cuota10: req.body.ImporteCuota, Cuota11: req.body.ImporteCuota, Cuota12: req.body.ImporteCuota
-                                                            }, (error, results) => {
-                                                                if (error) console.log(error);
-                                                            })
-                                                            resolve();
-                                                            break;
-
-                                                        default:
-                                                            resolve();
-                                                            break;
-                                                    }
-                                                }, 1000);
-
-                                            }
-                                        })
-
-
-
-                                    }
-
-
-                                })
-
-                            }
+                            else {    resolve();    }
                         })
-                    }
-                })
+                           
             }
 
         })
 
 
+    }).then(()=>{
+        new Promise((resolve, reject) => {
+            sql = 'Select MAX(ID_cliente) AS ID_cliente  FROM finanzas_clientes_por_obra ;';
+            connection.query(sql, (error, results) => {
+                if (error) console.log(error);
+                else {
+                    idCliente = results[0].ID_cliente;
+                    sql = 'INSERT INTO finanzas_clientes_por_obra_cobros set?;'
+                    connection.query(sql, {
+                        id_Obra: id_Obra, ID_cliente: idCliente, NombreCliente: Nombre, AnticipoFinanciero: 0, Cuota1: 0, Cuota2: 0, Cuota3: 0, Cuota4: 0, Cuota5: 0, Cuota6: 0, Cuota7: 0, Cuota8: 0, Cuota9: 0, Cuota10: 0, Cuota11: 0, Cuota12: 0, IngresoDocumentacion: 0, Municipal: 0, Irrigacion: 0, DNV: 0, DPV: 0, Hidraulica: 0, FFCC: 0, Privado: 0, ServicioDomiciliario: 0,
+                    }, (error, results) => {
+                        if (error) console.log(error);
+                        else {
+                            setTimeout(() => {
+                                sql = 'INSERT INTO finanzas_clientes_predeterminados set?;'
+                                switch (cuotasQuePaga) {
+                                    case '1':
+                                        connection.query(sql, {
+                                            id_obra: id_Obra, id_cliente: idCliente, NombreCliente: Nombre, AnticipoFinanciero: req.body.ImporteAnticipoFinanciero,ServicioDomiciliario:req.body.ImporteServicioDomiciliario, Cuota1: req.body.ImporteCuota
+                                        }, (error, results) => {
+                                            if (error) console.log(error);
+                                        })
+                                        resolve();
+                                        break;
+                                    case '2':
+                                        connection.query(sql, {
+                                            id_obra: id_Obra, id_cliente: idCliente, NombreCliente: Nombre, AnticipoFinanciero: req.body.ImporteAnticipoFinanciero, Cuota1: req.body.ImporteCuota, Cuota2: req.body.ImporteCuota
+                                        }, (error, results) => {
+                                            if (error) console.log(error);
+                                        })
+                                        resolve();
+                                        break;
+                                    case '3':
+                                        connection.query(sql, {
+                                            id_obra: id_Obra, id_cliente: idCliente, NombreCliente: Nombre, AnticipoFinanciero: req.body.ImporteAnticipoFinanciero, Cuota1: req.body.ImporteCuota, Cuota2: req.body.ImporteCuota, Cuota3: req.body.ImporteCuota
+                                        }, (error, results) => {
+                                            if (error) console.log(error);
+                                        })
+    
+                                        resolve();
+                                        break;
+                                    case '4':
+                                        connection.query(sql, {
+                                            id_obra: id_Obra, id_cliente: idCliente, NombreCliente: Nombre, AnticipoFinanciero: req.body.ImporteAnticipoFinanciero, Cuota1: req.body.ImporteCuota, Cuota2: req.body.ImporteCuota, Cuota3: req.body.ImporteCuota, Cuota4: req.body.ImporteCuota,
+                                        }, (error, results) => {
+                                            if (error) console.log(error);
+                                        })
+                                        resolve();
+                                        break;
+                                    case '5':
+                                        connection.query(sql, {
+                                            id_obra: id_Obra, id_cliente: idCliente, NombreCliente: Nombre, AnticipoFinanciero: req.body.ImporteAnticipoFinanciero, Cuota1: req.body.ImporteCuota, Cuota2: req.body.ImporteCuota, Cuota3: req.body.ImporteCuota, Cuota4: req.body.ImporteCuota, Cuota5: req.body.ImporteCuota
+                                        }, (error, results) => {
+                                            if (error) console.log(error);
+                                        })
+                                        resolve();
+                                        break;
+                                    case '6':
+                                        connection.query(sql, {
+                                            id_obra: id_Obra, id_cliente: idCliente, NombreCliente: Nombre, AnticipoFinanciero: req.body.ImporteAnticipoFinanciero, Cuota1: req.body.ImporteCuota, Cuota2: req.body.ImporteCuota, Cuota3: req.body.ImporteCuota, Cuota4: req.body.ImporteCuota, Cuota5: req.body.ImporteCuota, Cuota6: req.body.ImporteCuota,
+                                        }, (error, results) => {
+                                            if (error) console.log(error);
+                                        })
+                                        resolve();
+                                        break;
+                                    case '7':
+                                        connection.query(sql, {
+                                            id_obra: id_Obra, id_cliente: idCliente, NombreCliente: Nombre, AnticipoFinanciero: req.body.ImporteAnticipoFinanciero, Cuota1: req.body.ImporteCuota, Cuota2: req.body.ImporteCuota, Cuota3: req.body.ImporteCuota, Cuota4: req.body.ImporteCuota, Cuota5: req.body.ImporteCuota, Cuota6: req.body.ImporteCuota, Cuota7: req.body.ImporteCuota, Cuota8: req.body.ImporteCuota,
+                                        }, (error, results) => {
+                                            if (error) console.log(error);
+                                        })
+                                        resolve();
+                                        break;
+                                    case '8':
+                                        connection.query(sql, {
+                                            id_obra: id_Obra, id_cliente: idCliente, NombreCliente: Nombre, AnticipoFinanciero: req.body.ImporteAnticipoFinanciero, Cuota1: req.body.ImporteCuota, Cuota2: req.body.ImporteCuota, Cuota3: req.body.ImporteCuota, Cuota4: req.body.ImporteCuota, Cuota5: req.body.ImporteCuota, Cuota6: req.body.ImporteCuota, Cuota7: req.body.ImporteCuota, Cuota8: req.body.ImporteCuota,
+                                        }, (error, results) => {
+                                            if (error) console.log(error);
+                                        })
+                                        resolve();
+                                        break;
+                                    case '9':
+                                        connection.query(sql, {
+                                            id_obra: id_Obra, id_cliente: idCliente, NombreCliente: Nombre, AnticipoFinanciero: req.body.ImporteAnticipoFinanciero, Cuota1: req.body.ImporteCuota, Cuota2: req.body.ImporteCuota, Cuota3: req.body.ImporteCuota, Cuota4: req.body.ImporteCuota, Cuota5: req.body.ImporteCuota, Cuota6: req.body.ImporteCuota, Cuota7: req.body.ImporteCuota, Cuota8: req.body.ImporteCuota, Cuota9: req.body.ImporteCuota
+                                        }, (error, results) => {
+                                            if (error) console.log(error);
+                                        })
+                                        resolve();
+                                        break;
+                                    case '10':
+                                        connection.query(sql, {
+                                            id_obra: id_Obra, id_cliente: idCliente, NombreCliente: Nombre, AnticipoFinanciero: req.body.ImporteAnticipoFinanciero, Cuota1: req.body.ImporteCuota, Cuota2: req.body.ImporteCuota, Cuota3: req.body.ImporteCuota, Cuota4: req.body.ImporteCuota, Cuota5: req.body.ImporteCuota, Cuota6: req.body.ImporteCuota, Cuota7: req.body.ImporteCuota, Cuota8: req.body.ImporteCuota, Cuota9: req.body.ImporteCuota, Cuota10: req.body.ImporteCuota
+                                        }, (error, results) => {
+                                            if (error) console.log(error);
+                                        })
+                                        resolve();
+                                        break;
+                                    case '11':
+                                        connection.query(sql, {
+                                            id_obra: id_Obra, id_cliente: idCliente, NombreCliente: Nombre, AnticipoFinanciero: req.body.ImporteAnticipoFinanciero, Cuota1: req.body.ImporteCuota, Cuota2: req.body.ImporteCuota, Cuota3: req.body.ImporteCuota, Cuota4: req.body.ImporteCuota, Cuota5: req.body.ImporteCuota, Cuota6: req.body.ImporteCuota, Cuota7: req.body.ImporteCuota, Cuota8: req.body.ImporteCuota, Cuota9: req.body.ImporteCuota, Cuota10: req.body.ImporteCuota, Cuota11: req.body.ImporteCuota
+                                        }, (error, results) => {
+                                            if (error) console.log(error);
+                                        })
+                                        resolve();
+                                        break;
+                                    case '12':
+                                        connection.query(sql, {
+                                            id_obra: id_Obra, id_cliente: idCliente, NombreCliente: Nombre, AnticipoFinanciero: req.body.ImporteAnticipoFinanciero, Cuota1: req.body.ImporteCuota, Cuota2: req.body.ImporteCuota, Cuota3: req.body.ImporteCuota, Cuota4: req.body.ImporteCuota, Cuota5: req.body.ImporteCuota, Cuota6: req.body.ImporteCuota, Cuota7: req.body.ImporteCuota, Cuota8: req.body.ImporteCuota, Cuota9: req.body.ImporteCuota, Cuota10: req.body.ImporteCuota, Cuota11: req.body.ImporteCuota, Cuota12: req.body.ImporteCuota
+                                        }, (error, results) => {
+                                            if (error) console.log(error);
+                                        })
+                                        resolve();
+                                        break;
+    
+                                    default:
+                                        resolve();
+                                        break;
+                                }
+                            }, 1000);
+    
+                        }
+                    })
+    
+    
+    
+                }
+    
+    
+            })
+        }).then(()=>{
+            res.redirect('/Finanzas/cobrodeobras/VerObra/' + id_Obra);
+        }).catch(()=>{
+            promise1.catch(function (data) {
+                res.send(data);
+        })
+       
     })
-    promise1.then(function (success, reject) {
-        res.redirect('/Finanzas/cobrodeobras/VerObra/' + Obra);
-
-    })
-    promise1.catch(function (data) {
-        res.send(data);
+    
     })
 
 

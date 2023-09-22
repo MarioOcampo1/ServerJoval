@@ -266,14 +266,14 @@ $('#btnVerComprobantesRegistrados').click(()=>{
         },
         "ajax": {
           "type": "GET",
-    "url": "/Finanzazas/cobros/VerComprobantesRegistrados/"+idcliente,
+    "url": "/Finanzas/cobros/VerComprobantesRegistrados/"+idcliente,
     "dataType": "json",
     "dataSrc": function (response) {
       return response;
       }
     },
     "columns":[
-      {"data": "nComprobante" },
+      {"data": "NRecibo" },
       {"data": "FechaPago" ,'render': function(data,type,row,meta){
         if(data){
         
@@ -282,21 +282,21 @@ $('#btnVerComprobantesRegistrados').click(()=>{
           return null;
         }
       }},
-      { "data": "Descripcion" ,'render': function(data,type,row,meta){
+      { "data": "Concepto" ,'render': function(data,type,row,meta){
         if(data){
           return data
         }else{
           return '';
         }
       }},
-      { "data": "Monto" ,'render': function(data,type,row,meta){
+      { "data": "ValorIngresado" ,'render': function(data,type,row,meta){
         if(data){
           return data
         }else{
           return null;
         }
       }},
-      { "data": "Observacion" ,'render': function(data,type,row,meta){
+      { "data": "ObservacionesDelPago" ,'render': function(data,type,row,meta){
         if(data){
           return data
         }else{
@@ -304,7 +304,7 @@ $('#btnVerComprobantesRegistrados').click(()=>{
         }
       }},
       { 'render': function(data,type,row,meta){
-        return'<button type="button" class="btn btn-sm btn-outline-primary" onclick=EditarPago("'+row.nComprobante+','+row.FechaPago+','+row.Descripcion+','+row.Monto+''+row.Observacion+'");><i class="bi bi-pencil-square"></i></button><button type="button" class="btn btn-sm btn-outline-primary"><i class="bi bi-search"></i></button><button type="button" class="btn btn-sm btn-outline-primary"> <i class="bi bi-printer"></i></button>'
+        return'<button type="button" class="btn btn-sm btn-outline-primary" onclick=EditarPago("'+row.NRecibo+','+row.FechaPago+','+row.Concepto+','+row.ValorIngresado+''+row.ObservacionesDelPago+'");><i class="bi bi-pencil-square"></i></button><button type="button" class="btn btn-sm btn-outline-primary"><i class="bi bi-search"></i></button><button type="button" class="btn btn-sm btn-outline-primary"> <i class="bi bi-printer"></i></button>'
       }
        },
     ]
@@ -312,7 +312,7 @@ $('#btnVerComprobantesRegistrados').click(()=>{
  
   $('#modalComprobantesEfectuados').modal('show');
 })
-function EditarPago(NComprobante, FechaPago, Descripcion, Monto, Observacion){
+function EditarPago(NRecibo, FechaPago, Concepto, ValorIngresado, ObservacionesDelPago){
   //Se debe de reemplazar la vista de ese pago en la misma tabla, y permitir modificar el contenido, luego mediante un boton,
   // enviar el formulario POST al servidor para actualizar la info. 
 }
