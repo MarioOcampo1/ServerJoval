@@ -144,51 +144,20 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-<div class="table-responsive">
-  <table class="table table-primary">
-    <thead>
-      <tr>
-        <th scope="col">N° comprobante</th>
-        <th scope="col">Concepto</th>
-        <th scope="col">Monto</th>
-        <th scope="col">Fecha de pago</th>
 
-        <th scope="col">Observacion</th>
-        <th scope="col"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="">
-        <td scope="row">1</td>
-        <td>Anticipo financiero</td>
-        <td>350000</td>
-        <td>14/08/2023</td>
-        <td>Entrego un auto cancelo todo</td>
-        <td><button type="button" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil-square"></i></button>
-        <button type="button" class="btn btn-sm btn-outline-primary"><i class="bi bi-search"></i></button>
-        <button type="button" class="btn btn-sm btn-outline-primary"> <i class="bi bi-printer"></i></button>
-      </td>
+  <table id="tableComprobantesEfectuados" class="table table-primary table-bordered table-inverse table-responsive text-center">
+  <thead>
+    <th>N° comprobante</th>
+    <th>Fecha de pago</th>
+    <th>Concepto</th>
+    <th>Monto</th>
+    <th>Observacion</th>
+    <th>Otros</th>
 
-      </tr>
-      <tr class="">
-        <td scope="row">2</td>
-        <td>Cuota 1</td>
-        <td>28000</td>
-        <td>28/08/2023</td>
-
-        <td>
-          Transf n°: 250899073 Supervielle
-        </td>
-
-        <td><button type="button" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil-square"></i></button>
-          <button type="button" class="btn btn-sm btn-outline-primary"><i class="bi bi-search"></i></button>
-          <button type="button" class="btn btn-sm btn-outline-primary"> <i class="bi bi-printer"></i></button>
-        </td>
-        
-      </tr>
-    </tbody>
+  </thead>
+  <tbody></tbody>
   </table>
-</div>
+
 
           </div>
           <div class="modal-footer">
@@ -284,9 +253,69 @@
   })
 
 $('#btnVerComprobantesRegistrados').click(()=>{
+  var idcliente= $('#IDCliente').val();
+ 
+      $('#tableComprobantesEfectuados').DataTable({
+        "scrollX": false,
+        "scrollY": false,
+        "paging": false,
+        "info": false,
+        "searching": true,
+        "language":{
+          url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json',
+        },
+        "ajax": {
+          "type": "GET",
+    "url": "/Finanzazas/cobros/VerComprobantesRegistrados/"+idcliente,
+    "dataType": "json",
+    "dataSrc": function (response) {
+      return response;
+      }
+    },
+    "columns":[
+      {"data": "nComprobante" },
+      {"data": "FechaPago" ,'render': function(data,type,row,meta){
+        if(data){
+        
+          return moment(data).locale('es').format("DD-MM-YYYY");
+        }else{
+          return null;
+        }
+      }},
+      { "data": "Descripcion" ,'render': function(data,type,row,meta){
+        if(data){
+          return data
+        }else{
+          return '';
+        }
+      }},
+      { "data": "Monto" ,'render': function(data,type,row,meta){
+        if(data){
+          return data
+        }else{
+          return null;
+        }
+      }},
+      { "data": "Observacion" ,'render': function(data,type,row,meta){
+        if(data){
+          return data
+        }else{
+          return null;
+        }
+      }},
+      { 'render': function(data,type,row,meta){
+        return'<button type="button" class="btn btn-sm btn-outline-primary" onclick=EditarPago("'+row.nComprobante+','+row.FechaPago+','+row.Descripcion+','+row.Monto+''+row.Observacion+'");><i class="bi bi-pencil-square"></i></button><button type="button" class="btn btn-sm btn-outline-primary"><i class="bi bi-search"></i></button><button type="button" class="btn btn-sm btn-outline-primary"> <i class="bi bi-printer"></i></button>'
+      }
+       },
+    ]
+    })
+ 
   $('#modalComprobantesEfectuados').modal('show');
 })
-
+function EditarPago(NComprobante, FechaPago, Descripcion, Monto, Observacion){
+  //Se debe de reemplazar la vista de ese pago en la misma tabla, y permitir modificar el contenido, luego mediante un boton,
+  // enviar el formulario POST al servidor para actualizar la info. 
+}
     </script>
     <style>
       @keyframes rotate{

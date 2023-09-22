@@ -179,7 +179,6 @@ router.get('/Finanzas_Cobros', (req, res) => {
 router.get('/Finanzas/NuevoCliente/:NombreObra', (req, res) => {
     var sql = 'Select Nombre from obras';
     var NombreObra = req.params.NombreObra;
-    console.log(NombreObra);
     connection.query(sql, (error, results) => {
         if (error) console.log(error);
         else {
@@ -434,6 +433,17 @@ router.post('/cobrodeobras/clientes/cargarArchivoConClientes', (req, res) => {
 
     res.send(datos);
 })
+router.get('/Finanzazas/cobros/VerComprobantesRegistrados/:idcliente',(req,res)=>{
+    var id_cliente= req.params.idcliente;
+    var sql='SELECT * FROM finanzas_historial_comprobantes_emitidos WHERE ID_cliente =?';
+    connection.query(sql,id_cliente,(error,response)=>{
+if(error)console.log(error);
+else{
+res.send(response);    
+    }
+})
+})
+//GUARDAR NUEVO CLIENTE
 router.post('/Finanzas/NuevoCliente/guardarCliente', (req, res) => {
     var Nombre = req.body.Nombre;
     var DNI = req.body.DNI;
@@ -478,7 +488,7 @@ router.post('/Finanzas/NuevoCliente/guardarCliente', (req, res) => {
                                                     switch (cuotasQuePaga) {
                                                         case '1':
                                                             connection.query(sql, {
-                                                                id_obra: id_Obra, id_cliente: idCliente, NombreCliente: Nombre, AnticipoFinanciero: req.body.ImporteAnticipoFinanciero, Cuota1: req.body.ImporteCuota
+                                                                id_obra: id_Obra, id_cliente: idCliente, NombreCliente: Nombre, AnticipoFinanciero: req.body.ImporteAnticipoFinanciero,ServicioDomiciliario:req.body.ImporteServicioDomiciliario, Cuota1: req.body.ImporteCuota
                                                             }, (error, results) => {
                                                                 if (error) console.log(error);
                                                             })
@@ -676,17 +686,21 @@ new Promise((resolve, reject) => {
         id_Cobro = results[0].id_Cobro
         resolve(id_Cobro);
     })
-}).then(function(){
+}).then(function(id_Cobro){
     if (ObservacionesDelPago == null || ObservacionesDelPago == '') {
-        sql = 'Insert into finanzas_clientes_por_obra_cobros_observaciones set?'
-        connection.query(sql, { id_cobro: id_Cobro, Observacion: "Sin observaciones" }, (error, results) => {
-            if (error) console.log(error);
+       var fechapagoDate= new Date(fecha);
+        sql='INSERT INTO finanzas_historial_comprobantes_emitidos SET?'
+        connection.query(sql,{
+        Descripcion:Concepto,id_cliente:ID,id_cobro:id_Cobro, id_obra:id_Obra, FechaPago:fechapagoDate, Monto: sumaDeTotalesPorConcepto, Observacion:'Sin observaciones'},(error,results)=>{
+                if (error) console.log(error);
         })
     }
     else {
-        sql = 'Insert into finanzas_clientes_por_obra_cobros_observaciones set?'
-        connection.query(sql, { id_cobro: id_Cobro, Observacion: ObservacionesDelPago }, (error, results) => {
-            if (error) console.log(error);
+        var fechapagoDate= new Date(fecha);
+        sql='INSERT INTO finanzas_historial_comprobantes_emitidos SET?'
+        connection.query(sql,{
+        Descripcion:Concepto,id_cliente:ID,id_cobro:id_Cobro, id_obra:id_Obra, FechaPago:fechapagoDate, Monto: sumaDeTotalesPorConcepto, Observacion:ObservacionesDelPago},(error,results)=>{
+                if (error) console.log(error);
         })
     }
 });
@@ -711,23 +725,25 @@ resolve(); }
                     connection.query(sql, (error, results) => {
                         if (error) console.log(error);
                     })
-                    sql = 'Select MAX(id_Cobro) from finanzas_clientes_por_obra_cobros WHERE id_Obra=' + id_Obra + '';
+                    sql = 'SELECT MAX(id_Cobro) FROM finanzas_clientes_por_obra_cobros WHERE id_Obra=' + id_Obra + '';
                     var id_Cobro;
                     connection.query(sql, (error, results) => {
                         if (error) console.log(error);
                         id_Cobro = results[0].id_Cobro
                         if (ObservacionesDelPago == null) {
+                            var fechapagoDate= new Date(fecha);
                             sql = 'Insert into finanzas_clientes_por_obra_cobros_observaciones set?'
-                            connection.query(sql, { id_cobro: id_Cobro, Observacion: "Sin observaciones" }, (error, results) => {
+                            connection.query(sql, {id_cliente:ID, id_cobro: id_Cobro, Observacion: "Sin observaciones" }, (error, results) => {
                                 if (error) console.log(error);
                                 resolve();
                             })
                         }
                         else {
-                            sql = 'INSERT INTO finanzas_clientes_por_obra_cobros_observaciones set?'
-                            connection.query(sql, { id_cobro: id_Cobro, Observacion: ObservacionesDelPago }, (error, results) => {
-                                if (error) console.log(error);
-                                resolve();
+                            var fechapagoDate= new Date(fecha);
+                            sql='INSERT INTO finanzas_historial_comprobantes_emitidos SET?'
+                            connection.query(sql,{
+                            Descripcion:Concepto,id_cliente:ID,id_cobro:id_Cobro, id_obra:id_Obra, FechaPago:fechapagoDate, Monto: sumaDeTotalesPorConcepto, Observacion:ObservacionesDelPago},(error,results)=>{
+                                    if (error) console.log(error);
                             })
                         }
                     })
