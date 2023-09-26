@@ -1011,7 +1011,6 @@ router.post('/Finanzas/CobroDeObras/EditarCliente/:id', (req, res) => {
     var Teléfono = req.body.Teléfono;
     var Correo = req.body.Correo;
     var Direccion = req.body.Direccion;
-    console.log(Direccion);
     var Obra = req.body.Obra;
 
     connection.query(sql, [{
@@ -1019,7 +1018,15 @@ router.post('/Finanzas/CobroDeObras/EditarCliente/:id', (req, res) => {
     }, id], (error, results) => {
         if (error) console.log(error)
         else {
-            res.redirect("/ListadoObras");
+    sql='UPDATE finanzas_clientes_predeterminados SET CantidadCuotas="'+req.body.CuotasQuePaga+'" WHERE id_cliente='+id+';';
+    connection.query(sql,(error,results)=>{
+        if (error) console.log(error)
+else{
+    res.redirect("/ListadoObras");
+}
+    
+    })
+           
         }
     })
 

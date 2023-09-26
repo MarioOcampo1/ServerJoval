@@ -98,7 +98,7 @@
                         </div>
                         <div class="col">
                             <button class="btn btn-danger" onclick="history.go(-1);">Cancelar</button>
-                            <button class="btn btn-success" type="submit">Guardar cliente</button>
+                            <button class="btn btn-success" id="btnGuardarCliente" type="submit">Guardar cliente</button>
                         </div>
                     </div>
                 </div>
@@ -216,7 +216,7 @@
         <script>
             const myModal = new bootstrap.Modal(document.getElementById('modalEditarPago'), options)
             function editarPago(id, valor) {
-                
+                $('#btnGuardarCliente').attr('disabled',true);
                 $('#' + id).empty();
                 $('#' + id).removeAttr("onclick")
                 $('#' + id).append(
