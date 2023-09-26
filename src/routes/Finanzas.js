@@ -433,6 +433,16 @@ router.post('/cobrodeobras/clientes/cargarArchivoConClientes', (req, res) => {
 
     res.send(datos);
 })
+router.post('/Finanzas/EdicionComprobanteEmitido',(req,res)=>{
+    var sql='UPDATE finanzas_historial_comprobantes_emitidos set? WHERE nComprobante="'+req.body.NComprobante+'"';
+    connection.query(sql,[{FechaPago:req.body.FechaPago,Descripcion:req.body.Concepto,Monto:req.body.Monto,Observacion:req.body.Observacion}],(error,results)=>{
+        
+        if(error)console.log(error);
+        else{
+            res.send('ok');
+        }
+    })
+})
 router.get('/Finanzas/cobros/VerComprobantesRegistrados/:idcliente',(req,res)=>{
     var id_cliente= req.params.idcliente;
     var sql='SELECT * FROM finanzas_recibos_de_pago_obras WHERE idCliente =?';
@@ -489,6 +499,9 @@ router.post('/Finanzas/NuevoCliente/guardarCliente', (req, res) => {
                         if (error) console.log(error);
                         else {
                             setTimeout(() => {
+                                if(AnticipoFinanciero==''){
+                                    AnticipoFinanciero=0;
+                                }
                                 sql = 'INSERT INTO finanzas_clientes_predeterminados set?;'
                                 switch (cuotasQuePaga) {
                                     case '1':

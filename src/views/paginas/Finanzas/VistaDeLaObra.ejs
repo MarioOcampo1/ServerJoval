@@ -353,6 +353,7 @@ $(document).ready(function(){
             "url": "/Finanzas/cobrodeobras/VerObra/<%=id_Obra%>/data", 
             "dataType": "json",
             "dataSrc": function (data) {
+              // console.log(data.PredeterminadosyCobros);
               return data.PredeterminadosyCobros;
               
             }
@@ -394,7 +395,7 @@ $(document).ready(function(){
               
             }},
             {title: 'Serv.Domiciliario', "data": "ServicioDomiciliario" ,"render": function(data,type,row,meta){
-              if(row.ServicioDomiciliario==0 || row.ServicioDomiciliario=="0"){
+              if(row.ServicioDomiciliario==0 ||row.ServicioDomiciliario==null || row.ServicioDomiciliario=="0" || row.ServicioDomiciliario==null){
                 if(row.PredeterminadoServicioDomiciliario==0){
                   return null;
                 }else{
@@ -416,7 +417,7 @@ $(document).ready(function(){
               }
             } },
             {title: 'A.Financiero', "data": "AnticipoFinanciero","render":function(data,type,row,meta){
-              if(row.AnticipoFinanciero==0 || row.AnticipoFinanciero=="0"){
+              if(row.AnticipoFinanciero==0 ||row.AnticipoFinanciero==null || row.AnticipoFinanciero=="0"){
                 if(row.PredeterminadoAnticipoFinanciero==0){
                   return null;
                 }else{
@@ -437,7 +438,7 @@ $(document).ready(function(){
             }
             }},
             {title: 'Cuota 1', "data": "Cuota1","render":function(data,type,row,meta){
-              if(row.Cuota1==0 || row.Cuota1=="0"){
+              if(row.Cuota1==0 ||row.Cuota1==null || row.Cuota1=="0"){
                 if(row.PredeterminadoCuota1==0){
                   return '<span class=" text-muted">$'+row.PredeterminadoCuota1+'</span>';
                 }else{
@@ -459,7 +460,7 @@ $(document).ready(function(){
               }
             } },
             {title: 'Cuota 2 ', "data": "Cuota2","render":function(data,type,row,meta){
-              if(row.Cuota2==0 || row.Cuota2=="0"){
+              if(row.Cuota2==0 ||row.Cuota2==null || row.Cuota2=="0"){
                 if(row.PredeterminadoCuota2==0){
                   return '<span class=" text-muted">$'+row.PredeterminadoCuota2+'</span>';
                 }else{
@@ -481,7 +482,7 @@ $(document).ready(function(){
               }
             } },
             {title: 'Cuota 3 ', "data": "Cuota3","render":function(data,type,row,meta){
-              if(row.Cuota3==0 || row.Cuota3=="0"){
+              if(row.Cuota3==0 ||row.Cuota3==null || row.Cuota3=="0"){
                 if(row.PredeterminadoCuota3==0){
                   return '<span class=" text-muted">$'+row.PredeterminadoCuota3+'</span>';
                 }else{
@@ -504,7 +505,7 @@ $(document).ready(function(){
               }
             } },
             {title: 'Cuota 4 ', "data": "Cuota4","render":function(data,type,row,meta){
-              if(row.Cuota4==0 || row.Cuota4=="0"){
+              if(row.Cuota4==0 ||row.Cuota4==null || row.Cuota4=="0"){
                 if(row.PredeterminadoCuota4==0){
                   return '<span class=" text-muted">$'+row.PredeterminadoCuota4+'</span>';
                 }else{
@@ -526,7 +527,7 @@ $(document).ready(function(){
               }
             } },
             {title: 'Cuota 5 ', "data": "Cuota5","render":function(data,type,row,meta){
-              if(row.Cuota5==0 || row.Cuota5=="0"){
+              if(row.Cuota5==0 ||row.Cuota5==null || row.Cuota5=="0"){
                 if(row.PredeterminadoCuota5==0){
                   return '<span class=" text-muted">$'+row.PredeterminadoCuota5+'</span>';
                 }else{
@@ -548,7 +549,7 @@ $(document).ready(function(){
               }
             } },
             {title:  '<span class="">Cuota 6 </span>', "data": "Cuota6","render":function(data,type,row,meta){
-              if(row.Cuota6==0 || row.Cuota6=="0"){
+              if(row.Cuota6==0 ||row.Cuota6==null || row.Cuota6=="0"){
                 if(row.PredeterminadoCuota6==0){
                   return '<span class=" text-muted">$'+row.PredeterminadoCuota6+'</span>';
                 }else{
@@ -730,7 +731,7 @@ $(document).ready(function(){
              th.addClass('OcultoPermisos');
     }, },
             { title:  '<span class="OcultoPermisos">Permiso DNV</span>',"data": "PredeterminadoDNV" ,"render": function(data,type,row,meta){
-              if(row.PredeterminadoDNV==0 || row.PredeterminadoDNV=="0"){
+              if(row.PredeterminadoDNV==0 ||row.PredeterminadoDNV==null || row.PredeterminadoDNV=="0"){
                 return '<span class="OcultoPermisos text-muted">$'+row.PredeterminadoDNV+'</span>';
               }else{
                 if(row.DPV==row.PredeterminadoDNV){
@@ -755,7 +756,7 @@ $(document).ready(function(){
              th.addClass('OcultoPermisos');
     }, },
             {title:  '<span class="OcultoPermisos">Permiso DPV</span>', "data": "PredeterminadoDPV" ,"render": function(data,type,row,meta){
-              if(row.PredeterminadoDPV==0 || row.PredeterminadoDPV=="0"){
+              if(row.PredeterminadoDPV==0 ||row.PredeterminadoDPV==null || row.PredeterminadoDPV=="0"){
                 return '<span class="OcultoPermisos text-muted">$'+row.PredeterminadoDPV+'</span>';
               }
 
@@ -783,7 +784,7 @@ $(document).ready(function(){
     },
       },
             {title:  '<span class="OcultoPermisos">Permiso Hidraulica</span>', "data": "PredeterminadoHidraulica" ,"render": function(data,type,row,meta){
-              if(row.PredeterminadoHidraulica==0 || row.PredeterminadoHidraulica=="0"){
+              if(row.PredeterminadoHidraulica==0 ||row.PredeterminadoHidraulica==null || row.PredeterminadoHidraulica=="0"){
                 return '<span class="OcultoPermisos text-muted">$'+row.PredeterminadoHidraulica+'</span>';
               }
 
@@ -812,7 +813,7 @@ $(document).ready(function(){
     },
    },
             { title:  '<span class="OcultoPermisos">Permiso FFCC</span>',"data": "PredeterminadoFFCC" ,"render": function(data,type,row,meta){
-              if(row.PredeterminadoFFCC==0 || row.PredeterminadoFFCC=="0"){
+              if(row.PredeterminadoFFCC==0 ||row.PredeterminadoFFCC==null || row.PredeterminadoFFCC=="0"){
                 
                 return '<span class="OcultoPermisos text-muted">$'+row.PredeterminadoFFCC+'</span>';
               }
@@ -835,7 +836,7 @@ $(document).ready(function(){
             
         },  },
             { title:  '<span class="OcultoPermisos">Permiso Privado</span>',"data": "PredeterminadoPrivado" ,"render": function(data,type,row,meta){
-              if(row.PredeterminadoPrivado==0 || row.PredeterminadoPrivado=="0"){
+              if(row.PredeterminadoPrivado==0 ||row.PredeterminadoPrivado==null || row.PredeterminadoPrivado=="0"){
                 
                 return '<span class="OcultoPermisos text-muted">$'+row.PredeterminadoPrivado+'</span>';
               }
@@ -857,7 +858,7 @@ $(document).ready(function(){
             $(td).addClass('OcultoPermisos ');
         }, },
             {title:  '<span class="OcultoPermisos">Permiso Municipal</span>', "data": "PredeterminadoMunicipal" ,"render": function(data,type,row,meta){
-              if(row.PredeterminadoMunicipal==0 || row.PredeterminadoMunicipal=="0"){
+              if(row.PredeterminadoMunicipal==0 ||row.PredeterminadoMunicipal==null || row.PredeterminadoMunicipal=="0"){
                 
                 return '<span class="OcultoPermisos text-muted">$'+row.PredeterminadoMunicipal+'</span>';
               }
@@ -880,7 +881,7 @@ $(document).ready(function(){
         },},
   
             {title:  '<span class="OcultoPermisos">Gastos asociados aforos</span>', "data": "PredeterminadoIngresoDocumentacion" ,"render": function(data,type,row,meta){
-              if(row.PredeterminadoIngresoDocumentacion==0 || row.PredeterminadoIngresoDocumentacion=="0"){
+              if(row.PredeterminadoIngresoDocumentacion==0 ||row.PredeterminadoIngresoDocumentacion==null || row.PredeterminadoIngresoDocumentacion=="0"){
                 
                 return '<span class="OcultoPermisos text-muted">$'+row.PredeterminadoIngresoDocumentacion+'</span>';
               }
@@ -902,7 +903,7 @@ $(document).ready(function(){
             $(td).addClass('OcultoPermisos ');
         }, },
             {title:  '<span class="OcultoPermisos">Permiso Irrigación</span>', "data": "PredeterminadoIrrigacion" ,"render": function(data,type,row,meta){
-              if(row.PredeterminadoIrrigacion==0 || row.PredeterminadoIrrigacion=="0"){
+              if(row.PredeterminadoIrrigacion==0 ||row.PredeterminadoIrrigacion==null || row.PredeterminadoIrrigacion=="0"){
                 
                 return '<span class="OcultoPermisos text-muted">$'+row.PredeterminadoIrrigacion+'</span>';
               }

@@ -134,8 +134,7 @@
         </div>
       </div>
     </form>
-    <!-- Modal Body -->
-    <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+  
     <div class="modal fade" id="modalComprobantesEfectuados" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
       <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-fullscreen" role="document">
         <div class="modal-content">
@@ -167,13 +166,49 @@
         </div>
       </div>
     </div>
-    
-    
-    <!-- Optional: Place to the bottom of scripts -->
-    <script>
-      const myModal = new bootstrap.Modal(document.getElementById('modalId'), options)
-    
-    </script>
+ 
+    <div class="modal fade" id="modalEditarComprobanteEmitido" tabindex="-2"  role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalTitleId">Edición de comprobante emitido</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form action="/Finanzas/EdicionComprobanteEmitido" method="post">
+            <div class="form-group">
+        <div class="mb-3">
+          <input type="hidden" name="NComprobante" id="EdicionComprobanteEmitidoNComprobante">
+          <label for="" class="form-label">Fecha de pago:</label>
+          <input type="date"
+            class="form-control" name="FechaPago" id="EdicionComprobanteEmitidoFechaPago" aria-describedby="helpId" placeholder="">
+          <small id="helpId" class="form-text text-muted">Editar la fecha de pago</small>
+        </div>
+        <div class="mb-3">
+          <label for="" class="form-label">Concepto:</label>
+         <input class="form-control" type="text" name="Concepto" id="EdicionComprobanteEmitidoConcepto">
+          
+        </div>
+        <div class="mb-3">
+          <label for="" class="form-label">Monto:</label>
+         <input class="form-control" type="text" name="Monto" id="EdicionComprobanteEmitidoMonto">
+          
+        </div>
+        <div class="mb-3">
+          <label for="" class="form-label">Observación:</label>
+         <input class="form-control" type="text" name="Observacion" id="EdicionComprobanteEmitidoObservacion">
+          
+        </div>
+      </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="submit" class="btn btn-success">Guardar edición</button>
+          </div>
+        </form>
+        </div>
+      </div>
+    </div>
     <script>
   function CargarPago(idcliente) {
     $('#formGenerarComprobante')[0].reset();
@@ -251,8 +286,27 @@
                 $('#ImporteIngresado').val(montoAPagar);
               }
   })
+  function EditarComprobanteEmitido(){
+    var boton= $(event.target); //Detecta que boton es al que se le hizo el click.
+  var fila=boton.closest('tr');
+  var celdas = fila.find('td');
+  var datosFila = [];
 
+    // Recorre cada celda y agrega su contenido al array
+    celdas.each(function() {
+      datosFila.push($(this).text());
+    });
+
+    // Ahora, datosFila contiene todos los datos de la fila
+  $('#modalEditarComprobanteEmitido').modal('show');
+  $('#EdicionComprobanteEmitidoNComprobante').val(datosFila[0]);
+$('#EdicionComprobanteEmitidoFechaPago').val(datosFila[1]);
+$('#EdicionComprobanteEmitidoConcepto').val(datosFila[2]);
+$('#EdicionComprobanteEmitidoMonto').val(datosFila[3]);
+$('#EdicionComprobanteEmitidoObservacion').val(datosFila[4]);
+}
 $('#btnVerComprobantesRegistrados').click(()=>{
+  
   var idcliente= $('#IDCliente').val();
  
       $('#tableComprobantesEfectuados').DataTable({
@@ -304,7 +358,7 @@ $('#btnVerComprobantesRegistrados').click(()=>{
         }
       }},
       { 'render': function(data,type,row,meta){
-        return'<button type="button" class="btn btn-sm btn-outline-primary" onclick=EditarPago("'+row.NRecibo+','+row.FechaPago+','+row.Concepto+','+row.ValorIngresado+''+row.ObservacionesDelPago+'");><i class="bi bi-pencil-square"></i></button><button type="button" class="btn btn-sm btn-outline-primary"><i class="bi bi-search"></i></button><button type="button" class="btn btn-sm btn-outline-primary"> <i class="bi bi-printer"></i></button>'
+        return'<button type="button" class="btn btn-sm btn-outline-primary" onclick="EditarComprobanteEmitido();";><i class="bi bi-pencil-square"></i></button><button type="button" class="btn btn-sm btn-outline-primary"><i class="bi bi-search"></i></button><button type="button" class="btn btn-sm btn-outline-primary"> <i class="bi bi-printer"></i></button>'
       }
        },
     ]
@@ -312,10 +366,8 @@ $('#btnVerComprobantesRegistrados').click(()=>{
  
   $('#modalComprobantesEfectuados').modal('show');
 })
-function EditarPago(NRecibo, FechaPago, Concepto, ValorIngresado, ObservacionesDelPago){
-  //Se debe de reemplazar la vista de ese pago en la misma tabla, y permitir modificar el contenido, luego mediante un boton,
-  // enviar el formulario POST al servidor para actualizar la info. 
-}
+
+
     </script>
     <style>
       @keyframes rotate{
