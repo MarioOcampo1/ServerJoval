@@ -6,7 +6,7 @@
               <div class="modal-header">
                 <h5 class="modal-title" id="TituloModal">Nuevo pago</h5>
                 <div class="btn-group">
-                  <button class="btn btn-outline-secondary" type="submit" id="btnClientesPorLote" onclick="cargarClientesPorLote('<%=NombreObra%>')">Cargar
+                  <button class="btn btn-outline-secondary" type="button" id="btnClientesPorLote" onclick="cargarClientesPorLote('<%=NombreObra%>')">Cargar
                     clientes por lotes</button>
                   <button type="button" id="btnVerComprobantesRegistrados" class="btn btn-outline-secondary">Ver comprobantes registrados</button>
                   <button type="button" class="btn btn-outline-secondary" onclick="editarVecino()">
@@ -73,11 +73,7 @@
                         
                  
                     </div>
-                    <div class="input-group-text mb-3 col-3" id="divImporte2" style="display: none;">
-                      <label class="input-group-text" for="ImporteIngresado">Importe</label>
-                      <input required class="form-control" value="0" type="number" name="ValorIngresado" id="ImporteIngresado">
-                    </div>
-                    <div class="mb-5 calculoUSD" style="display: none;" >
+                    <div class=" calculoUSD" style="display: none;" >
                       <input type="hidden" id="cotizacionBaseDolar">
                       <div class="row mb-5">
                       <div class="col-2">
@@ -92,17 +88,21 @@
 <div class="col-2">
   <label for="" class="form-label">Cotización actual:</label>
   <input type="number"
-    class="form-control" name="" id="CotizacionUSD" aria-describedby="helpId" placeholder="" value="0">
+    class="form-control" name="" id="CotizacionUSD" aria-describedby="helpId" placeholder="" value="365.50">
     
 </div>
 <div class="col-8" id="TextoUsuarioCotizacionUSD">
   
 </div>
+<span style="display: none;" class="descripcionUSD">El sistema reajusta automáticamente el monto a pagar, en base al valor predefinido al momento de contratar la obra.</span>
+<span id="cotizacionInicial" class="text-primary" val=""></span>
 </div>
-
-<span class="text-center">El sistema va a reajustar automáticamente el monto a pagar, en base al valor predefinido al momento de contratar la obra.</span>
-<span id="cotizacionInicial" class="text-center text-primary" val=""></span>
  </div>
+                    <div class="input-group-text mb-3 col-3" id="divImporte2" style="display: none;">
+                      <label class="input-group-text" for="ImporteIngresado">Importe</label>
+                      <input required class="form-control" value="0" type="number" name="ValorIngresado" id="ImporteIngresado">
+                    </div>
+               
                     <div class="mb-3">
                       <label class="input-group-text" for="FechaPago2"> Fecha de pago</label>
                       <input required class="form-control" type="date" name="FechaPago" id="FechaPago2" autocomplete="on">
@@ -243,6 +243,13 @@
     <script>
        $('#btnGuardarCambiosPagos').click(function(){ 
     // Funcion que trabaja con el modal que se encuentra ubicado en PagoClientes.ejs
+    //Primero comprobamos si el pago ingresado, es mayor al estipulado o no.
+    if($('#ImporteIngresado').val()>ImporteOriginalAPagar){
+    if($('#CalcularEnDolares').val()=="Si"){
+    //El importe ha sido calculado en dolares.
+
+    }
+    }
     const form =$('#formGenerarComprobante');
     const formData=form.serialize();
     $.ajax({
@@ -270,11 +277,24 @@
     });
    }); 
    
-             
-              
-  $('#CotizacionUSD').change(()=>{
+ 
+  $('#CotizacionUSD').on('change',(()=>{
     if($('#CalcularEnDolares').val()=="Si"){
-      
+   var cotizacionBaseDolar = $('#cotizacionInicial').val();
+                var montoAPagar = ImporteOriginalAPagar;
+                var cotizacionActualDolar = $('#CotizacionUSD').val();
+                montoAPagar = montoAPagar/cotizacionBaseDolar; //Se recalcula el importe base. Para saber cuantos dolares eran en su momento.
+                montoAPagar = montoAPagar * cotizacionActualDolar; //El monto en dolares base, se multiplica por la cotizacion actual, para saber el valor actual en ARS.
+               montoAPagar=montoAPagar.toFixed(2);
+               $('#TextoUsuarioCotizacionUSD').html('<label>Descripcion:</label><p>El monto original a pagar era:$'+ImporteOriginalAPagar+'. Con una cotización base de: 1USD = $'+cotizacionBaseDolar+'ARS. <br> La cotización actual es de: 1USD = $'+cotizacionActualDolar+' ARS.<span class="fw-bold"> El importe actual a pagar es de: $ '+montoAPagar+' ARS.</span></p>');
+                $('#ImporteIngresado').val(montoAPagar);
+              }
+             
+  })
+  )
+  $('#CalcularEnDolares').on('change',(()=>{
+    if($('#CalcularEnDolares').val()=="Si"){
+      $('.descripcionUSD').css('display','block');
    //Si la opcion calcular en dolares esta seleccionada, se realiza el reajuste y se muestra en "Importe"
    var cotizacionBaseDolar = $('#cotizacionInicial').val();
                 var montoAPagar = ImporteOriginalAPagar;
@@ -285,7 +305,13 @@
                $('#TextoUsuarioCotizacionUSD').html('<label>Descripcion:</label><p>El monto original a pagar era:$'+ImporteOriginalAPagar+'. Con una cotización base de: 1USD = $'+cotizacionBaseDolar+'ARS. <br> La cotización actual es de: 1USD = $'+cotizacionActualDolar+' ARS.<span class="fw-bold"> El importe actual a pagar es de: $ '+montoAPagar+' ARS.</span></p>');
                 $('#ImporteIngresado').val(montoAPagar);
               }
+              else{
+                $('.descripcionUSD').css('display','none');
+                $('#ImporteIngresado').val(ImporteOriginalAPagar);
+                 $('#TextoUsuarioCotizacionUSD').html('');
+              }
   })
+  )
   function EditarComprobanteEmitido(){
     var boton= $(event.target); //Detecta que boton es al que se le hizo el click.
   var fila=boton.closest('tr');

@@ -65,7 +65,7 @@
       <%- include('./partials/modalClientesPorLote')%>
         <%- include('./partials/ConfigObra.ejs') %>
           <%- include('./partials/PagoCliente.ejs') %>
-          <form action="/EditarCliente/ActualizarValoresPredeterminados" method="post">
+          <form action="/Finanzas/EditarCliente/ActualizarValoresPredeterminados" method="POST">
 
             <div class="modal fade" id="modalEditarVecino" tabindex="-1" role="dialog" aria-labelledby="modalTitleId"
               aria-hidden="true">
@@ -350,6 +350,7 @@ $(document).ready(function(){
         "searching": false,
         
         "ajax": {
+          "type":'GET',
             "url": "/Finanzas/cobrodeobras/VerObra/<%=id_Obra%>/data", 
             "dataType": "json",
             "dataSrc": function (data) {

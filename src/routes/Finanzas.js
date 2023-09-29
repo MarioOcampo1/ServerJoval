@@ -21,6 +21,7 @@ const { routes, set } = require('../app');
 const path = require('path');
 const { log, Console, error } = require('console');
 const { Dir } = require('fs');
+const { throws } = require('assert');
 const connection = mysql.createConnection({
     host: '127.0.0.1',
     user: 'root',
@@ -119,7 +120,8 @@ router.get('/Finanzas/cobrodeobras/VerObra/:idObra/data',(req,res)=>{
 })
 router.get('/Finanzas', (req, res) => {
     if (req.isAuthenticated()) {
-        res.render('paginas/Finanzas/Home.ejs');
+        res.redirect('/ListadoObras');
+        // res.render('paginas/Finanzas/Home.ejs');
     }
 })
 router.get('/Finanzas_CajaChica', (req, res) => {
@@ -1076,7 +1078,7 @@ router.get('/Finanzas/CobroDeObras/EditarCliente/ObtenerDatosCliente/:id', (req,
         else { res.send(results) }
     })
 })
-router.post('/EditarCliente/ActualizarValoresPredeterminados', (req, res) => {
+router.post('/Finanzas/EditarCliente/ActualizarValoresPredeterminados', (req, res) => {
     var id = req.body.IDCliente;
     var AnticipoFinanciero = req.body.AnticipoFinanciero;
     var ServicioDomiciliario = req.body.ServicioDomiciliario;
@@ -1108,8 +1110,8 @@ router.post('/EditarCliente/ActualizarValoresPredeterminados', (req, res) => {
             Cuota12: Cuota12, DNV: DNV, DPV: DPV, Hidraulica: Hidraulica, FFCC: FFCC, Privado: Privado, Municipal: Municipal, Irrigacion: Irrigacion,
         }, id], (error, results) => {
 
-            if (error) console.log(error);
-
+            if (error){ console.log(error);
+            throw(error);}
             else {
                 sql = 'SELECT NombreObra from finanzas_clientes_por_obra WHERE ID_cliente=?';
                 connection.query(sql, id, (error2, results2) => {

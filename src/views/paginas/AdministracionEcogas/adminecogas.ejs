@@ -190,9 +190,16 @@
                 "url": url,
                 "dataSrc": "",
               },
+              "columnDefs": [
+    {
+      "targets": 0, // Reemplaza COLUMN_INDEX con el índice de la columna que contiene HTML
+      "type": 'html', // Especifica el tipo de dato como "html"
+    },
+    // Puedes repetir este bloque para otras columnas si es necesario
+  ],
               "columns": [
                 {
-                  "width": "5%", "data": "CodigoVigentes", render: function (data, type, row) {
+                  "width": "5%", "data": "CodigoVigentes","render": function (data, type, row) {
                     if (row.CodigoVigentes == null || row.CodigoEnUsoVigentes == "F") {
                       return ('<div class="hvr-grow text-light bg-success " title="Carpeta Finalizada. Codigo fisico.">' + row.CodigoFinalizadas + '</div>');
                     }
@@ -272,26 +279,26 @@
                   }
                 },
                 {
-                  "width": "1%", "data": "Nombre_sub", render: function (data, type, row) {
+                  "width": "1%", "data": "Nombre_sub", "render": function (data, type, row) {
                     return '<a href="/editarTareas/' + row.id + '" class="hvr-grow  text-center" title="Nombre de la carpeta">' + row.Nombre_sub + ' - ' + row.NCarpeta + '</a>'
                   }
                 },
-                { "width": "1%", "data": "ResponsableDeTarea", "orderable": false,render: function (data, type, row) {
+                { "width": "1%", "data": "ResponsableDeTarea", "orderable": false,"render": function (data, type, row) {
                   return '<p class="hvr-grow">'+row.ResponsableDeTarea+'</p>'
                 } },
-                { "width": "50%", "data": "Tarea_Realizada_sub", "searchable": false, "orderable": false,render: function (data, type, row) {
+                { "width": "50%", "data": "Tarea_Realizada_sub", "searchable": false, "orderable": false,"render": function (data, type, row) {
                   return '<p class="hvr-grow">'+row.Tarea_Realizada_sub+'</p>'
                 } },
                 {
-                  "width": "1%", "data": "EtapaTarea_sub", "orderable": false, render: function (data, type, row) {
+                  "width": "1%", "data": "EtapaTarea_sub", "orderable": false, "render": function (data, type, row) {
                     return '<a href="/historialcarpeta/' + row.Nombre_sub + '" class="hvr-grow text-center">' + row.EtapaTarea_sub + '</a>'
                   }
                 },
-                { "width": "50%", "data": "Proxima_Tarea_sub", "orderable": false, "searchable": false,render: function (data, type, row) {
+                { "width": "50%", "data": "Proxima_Tarea_sub", "orderable": false, "searchable": false,"render": function (data, type, row) {
                   return '<p class="hvr-grow">'+row.Proxima_Tarea_sub+'</p>'
                 } },
                 {
-                  "width": "1%", "data": "Fecha_Proxima_Tarea_sub", render: function (data, type, row) {
+                  "width": "1%", "data": "Fecha_Proxima_Tarea_sub", "render": function (data, type, row) {
                     moment.locale('es');
                     data = new Date(data);
                     data = data.toISOString();
@@ -364,7 +371,6 @@
             });
            
           });
-          // FIN document.ready()
           jQuery("#buscador").keyup(function () {
             if (jQuery(this).val() != "0") {
               jQuery("#comunicacionDiaria tbody>tr").hide();
