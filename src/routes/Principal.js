@@ -437,6 +437,24 @@ connection.query(sql,(error,results)=>{
         res.redirect('/');
     }
 })
+router.get('/Principal/historialtareas',(req,res)=>{
+    res.render('./paginas/Principal/historialtareas.ejs');
+})
+router.post('/Principal/obtenerHistorialTareasEmpleados',(req,res)=>{
+    fechaInicio=new Date(req.body.fechaInicio);
+    fechaInicio= fechaInicio.toLocaleDateString('en-US',{ year: 'numeric', month: '2-digit', day: '2-digit' });
+    fechaFinal=new Date(req.body.fechaFinal);
+    fechaFinal= fechaFinal.toLocaleDateString('en-US',{ year: 'numeric', month: '2-digit', day: '2-digit' });
+
+    var sql='SELECT * FROM historialdecambios WHERE Fecha_Tarea_sub BETWEEN "'+req.body.fechaInicio+'" AND "'+req.body.fechaFinal+'";';
+    connection.query(sql,(error,results)=>{
+        console.log(sql);
+        if(error) console.log(error);
+        else{
+            res.send(results);
+        }
+    })
+})
 //Logo
 router.get('/logo', (req, res) => {
     res.sendFile('logo.png', { root: 'src/public/images' });

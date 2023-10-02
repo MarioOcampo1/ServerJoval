@@ -13,10 +13,11 @@
   <%if(rol=="admin"|| rol=="Supervisor"){%>
   <nav class="navbar navbar-expand navbar-light bg-light">
     <div class="nav navbar-nav">
-      <button class="nav-item nav-link active btn" href="#" aria-current="page" data-bs-toggle="modal" data-bs-target="#modalNuevoEmpleado">Nuevo empleado <span class="visually-hidden">(current)</span></button>
+      <button class="nav-item nav-link btn" href="#" aria-current="page" data-bs-toggle="modal" data-bs-target="#modalNuevoEmpleado">Nuevo empleado <span class="visually-hidden">(current)</span></button>
         <button type="button" class="btn nav-item nav-link" data-bs-toggle="modal" data-bs-target="#modalVistaEmpleados" onclick="editarEmpleado()">
           Editar empleado
         </button>
+        <button class="btn nav-item nav-link"> <a href="/Principal/historialtareas">Historial de tareas</a></button>
     </div>
   </nav>
 

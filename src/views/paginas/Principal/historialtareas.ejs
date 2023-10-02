@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include('./partials/header.ejs') %>
+    <title>Historial de tareas</title>
+    </head>
+<body>
+    <div class="container-fluid">
+
+        <div class="row">
+      
+          <div class="col mr-32  ">
+            <button class="btn btn-outline-danger hvr-pulse " onClick="history.go(-1);">
+              <i class="bi bi-arrow-left hvr-pulse" style="font-size: 1rem;"></i>
+            </button>
+            <a href="/index"><img class="img-fluid w-25 mx-auto d-inline"
+                src="/images/Logo-Joval.png" alt="logo" id="LogoJoval"></a>
+            <h3 class="d-inline font-weight-bold align-middle hvr-underline-from-center">JOVAL S.A.</h3>
+      
+          </div>
+          <div class="col">
+          </div>
+          <div class="col ">
+            <p class="align-middle mx-auto ">Version de prueba (alpha 2.0)</p>
+          </div>
+        </div>
+      </div>
+  
+    <div class="container-fluid">
+        <h1 class="text-center">
+            Historial de tareas
+        </h1>
+        <div class="row">
+    <div class="col-2">
+      <label for="" class="form-label">Fecha inicio:</label>
+      <input type="date"
+        class="form-control" name="" id="FechaInicio" aria-describedby="helpId" placeholder="">
+      </div><div class="col-2">
+          <label for="" class="form-label">Fecha Final:</label>
+        <input type="date"
+          class="form-control" name="" id="FechaFinal" aria-describedby="helpId" placeholder="">
+    </div>
+    <div class="col-1">
+      <button type="button" name="" id="btnFiltrar" class="btn btn-success btn-sm">Filtrar</button>
+    </div>
+</div>
+        <div class="table-responsive-sm">
+            <table class="table table-primary" id="tablaHistorialTareas">
+                <thead>
+                   
+                </thead>
+                <tbody>
+                   
+                </tbody>
+            </table>
+        </div>
+        
+
+    </div>
+</body>
+<script>
+    
+    $('#btnFiltrar').click(()=>{
+      
+        var fechaInicio = $('#FechaInicio').val();
+    var fechaFinal = $('#FechaFinal').val();
+     // Destruir la instancia existente de DataTable
+  if ($.fn.DataTable.isDataTable('#tablaHistorialTareas')) {
+    var table = $('#tablaHistorialTareas').DataTable();
+    table.destroy();
+  }
+    var table = $('#tablaHistorialTareas').DataTable({
+      "orderCellsTop": true,
+              "fixedHeader": true, //Deja fijo el header, para q cuando el usuario deslice la tabla hacia abajo, el header se siga viendo
+              "paging": false, //Permite la paginacion de la tabla, si esta desactivado, traera todos los resultados en una sola vista.
+              "scrollX": true,
+              "searching": false,
+              "language": { url: "//cdn.datatables.net/plug-ins/1.11.3/i18n/es_es.json" },
+              "ajax": {
+                type:'POST',
+                data:{"fechaInicio":fechaInicio,"fechaFinal": fechaFinal},
+                url: '/Principal/obtenerHistorialTareasEmpleados',
+                dataType: "json",
+                
+            "dataSrc": function (data) {
+              return data;
+              },},
+              "columnDefs":[{"targets":2,"type":"date-eu"}],
+              "columns":[{
+                title:'Empleado',data: "ResponsableDeTarea",},
+              {title:'Tarea realizada',data: "Tarea_Realizada_sub",},
+{title:'Fecha',data: "Fecha_Tarea_sub",render:function (data, type, row) {return moment(data).locale('es').format('DD-MM-YYYY');}},
+{title:'Obra',data: "Nombre_sub",
+}],
+    });
+    table.draw();
+    })
+    
+</script>
+</html>
