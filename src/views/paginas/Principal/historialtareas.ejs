@@ -94,6 +94,7 @@
 {title:'Fecha',data: "Fecha_Tarea_sub",render:function (data, type, row) {return moment(data).locale('es').format('DD-MM-YYYY');}},
 {title:'Obra',data: "Nombre_sub",
 }],
+order:[[2,'desc']]
     });
     table.draw();
     })
