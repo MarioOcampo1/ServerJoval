@@ -436,8 +436,9 @@ router.post('/cobrodeobras/clientes/cargarArchivoConClientes', (req, res) => {
     res.send(datos);
 })
 router.post('/Finanzas/EdicionComprobanteEmitido',(req,res)=>{
+    var FechaPago = new Date(req.body.FechaPago, "en-us");
     var sql='UPDATE finanzas_historial_comprobantes_emitidos set? WHERE nComprobante="'+req.body.NComprobante+'"';
-    connection.query(sql,[{FechaPago:req.body.FechaPago,Descripcion:req.body.Concepto,Monto:req.body.Monto,Observacion:req.body.Observacion}],(error,results)=>{
+    connection.query(sql,[{FechaPago:FechaPago,Descripcion:req.body.Concepto,Monto:req.body.Monto,Observacion:req.body.Observacion}],(error,results)=>{
         
         if(error)console.log(error);
         else{

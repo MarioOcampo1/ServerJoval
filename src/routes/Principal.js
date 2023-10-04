@@ -440,6 +440,15 @@ connection.query(sql,(error,results)=>{
 router.get('/Principal/historialtareas',(req,res)=>{
     res.render('./paginas/Principal/historialtareas.ejs');
 })
+router.post('/Principal/guardarTareaRapidaEnHistorial',(req,res)=>{
+var sql='INSERT INTO historialdecambios set?';
+connection.query(sql,[{Nombre_sub:req.body.TipoTarea,Tarea_Realizada_sub:req.body.TareaRealizada,ResponsableDeTarea: req.body.Empleado, Fecha_Tarea_sub:req.body.FechaTarea}],(error,results)=>{
+    if(error)console.log(error);
+    else{
+        res.status(200).send('Tarea cargada con exito en el historial');
+    }
+})
+})
 router.post('/Principal/obtenerHistorialTareasEmpleados',(req,res)=>{
     fechaInicio=new Date(req.body.fechaInicio);
     fechaInicio= fechaInicio.toLocaleDateString('en-US',{ year: 'numeric', month: '2-digit', day: '2-digit' });

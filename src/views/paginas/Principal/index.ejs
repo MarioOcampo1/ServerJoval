@@ -27,8 +27,8 @@
       <img class="img-fluid w-25 mx-auto d-block text-center"
                src="./images/Logo-Joval.png" alt="logo" id="LogoJoval" >
       
-    <div class="card ">
-        <div class="card-body text-center">
+    <div class="card mb-4">
+        <div class="card-body text-center ">
           
           <a href="/adminecogas">
           <button class="btn btn-primary">Administración
@@ -55,6 +55,10 @@
       </div>
 
     </div>
+    <div class="btn-group" role="group" aria-label="btngroup1">
+      <button type="button" id="btnTareaRapida" class="btn btn-primary">Tarea rápida</button>
+
+    </div>
     <div class="row">
       <div class="list-group">
       <div class="table-responsive">
@@ -79,19 +83,60 @@
     <td><%=polizaAlba.Riesgo%></td>
   </tr>
   <%})%>
-
-
-
-
   </tbody>
   </table>
   </div>
-
-  </div>
-
-
   </div>
   </div>
+  </div>
+  <div class="modal fade" id="modalTareaRapida" tabindex="-2" role="dialog">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalTitleId">Tarea rápida</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="/Principal/CargarTareaEnHistorial" id="formCargarTareaEnHistorial" method="post">
+         <div class="mb-3">
+           <label for="" class="form-label">Tarea realizada:</label>
+           <input required type="text" class="form-control" name="TareaRealizada" id="" aria-describedby="helpId" placeholder="">
+           </div>
+           <div class="mb-3">
+            <label for="" class="form-label">Fecha:</label>
+            <input required type="date" class="form-control" name="FechaTarea" id="" aria-describedby="helpId" placeholder="">
+            </div>
+            <div class="mb-3">
+              <label for="" class="form-label">Tipo:</label>
+              <select required class="form-select form-select" name="TipoTarea" id="">
+                <option selected></option>
+                <option value="ADMINISTRACION GENERAL">Administración General</option>
+                <option value="ADMINISTRACION ECOGAS">Administración Ecogas</option>
+                <option value="FINANZAS">Finanzas</option>
+                <option value="RRHH">Recursos humanos</option>
+                <option value="COMPRA/VENTA">Compra/Venta</option>
+                <option value="DEPOSITO,MANTENIMIENTO,CONTROL">Depósito,mantenimiento y/o control</option>
+                <option value="SERVICIOS EXTERNOS">Otros servicios</option>
+                <option value="ALQUILER MAQUINAS">Alquiler de maquínas</option>
+                
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="" class="form-label">Empleado:</label>
+              <select required class="form-select form-select" name="Empleado" id="selectEmpleadoTareaRapida">
+                <option selected>Seleccione alguno</option>
+                
+              </select>
+            </div>
+        </div>
+      </form>
+        <div class="modal-footer">
+          <div id="respuestaServidor"></div>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary" id="btnGuardarTareaRapidaHistorial">Guardar</button>
+        </div>
+      </div>
+    </div>
   </div>
   <%if(rol=="admin"|| rol=="Supervisor"){%>
   <!-- Modal trigger button -->
@@ -138,11 +183,6 @@
     </div>
   </div>
   </div>
-<!-- Modal trigger button -->
-
-
-<!-- Modal Body -->
-<!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
 <div class="modal fade" id="modalVistaEmpleados" tabindex="-1"  role="dialog" aria-labelledby="modalVistaEmpleados" aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal" role="document">
     <div class="modal-content">
@@ -163,7 +203,7 @@
               </tr>
             </thead>
             <tbody id="tbodyEditarEmpleado">
-             
+          
               
             </tbody>
           </table>
@@ -205,12 +245,9 @@
                 <option value="admin">Administrador</option>
                 <option value="Supervisor">Supervisor</option>
                 <option value="empleado">Empleado</option>
-
-              </select>
+</select>
             </div>
-
-
-          </div>
+</div>
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" onclick="$('#ModalEditarEmpleado').modal('hide')">Cancelar</button>
             <button type="submit" class="btn btn-success">Guardar</button>
@@ -221,6 +258,7 @@
 </div>
   
   <%}%>
+  
 </body>
 <style>
   #LogoJoval:hover {
@@ -234,6 +272,37 @@
   
   </style>
   <script>
+    
+    $('#btnTareaRapida').click(()=>{
+      $('#modalTareaRapida').modal('show')
+      $.ajax({
+        type: "GET",
+        url: "/data/Empleados",
+        dataType: "json",
+        success: function (response) {
+$('#selectEmpleadoTareaRapida').empty();
+$('#selectEmpleadoTareaRapida').append('<option selected>Seleccione alguno</option>');
+         response.forEach(element => {
+          $('#selectEmpleadoTareaRapida').append(    
+            '<option value="'+element.Nombre+'">'+element.Nombre+'</option>'
+          );
+         });
+        }
+      });
+    });
+    $('#btnGuardarTareaRapidaHistorial').click(()=>{
+      var form = $('#formCargarTareaEnHistorial');
+      var formData=form.serialize();
+      $.ajax({
+        type: "post",
+        url: "/Principal/guardarTareaRapidaEnHistorial",
+        data: formData,
+        dataType: "json",
+      }).done(function(response){
+        console.log(response);
+        $('#respuestaServidor').html('<span class="text-success">'+response+'</span>');
+      })
+    })
     function editarempleadoPOST(id){
       $.ajax({
       url:"/editarEmpleado",
