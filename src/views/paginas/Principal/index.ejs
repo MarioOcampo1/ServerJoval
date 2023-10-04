@@ -104,7 +104,7 @@
            </div>
            <div class="mb-3">
             <label for="" class="form-label">Fecha:</label>
-            <input required type="date" class="form-control" name="FechaTarea" id="" aria-describedby="helpId" placeholder="">
+            <input required type="date" class="form-control" name="FechaTarea" id="FechaTarea" aria-describedby="helpId" placeholder="">
             </div>
             <div class="mb-3">
               <label for="" class="form-label">Tipo:</label>
@@ -274,7 +274,10 @@
   <script>
     
     $('#btnTareaRapida').click(()=>{
-      $('#modalTareaRapida').modal('show')
+      var fechaActual= new Date().toLocaleDateString('es-ES');
+      $('#FechaTarea').val(fechaActual);
+      $('#modalTareaRapida').modal('show');
+
       $.ajax({
         type: "GET",
         url: "/data/Empleados",
@@ -293,15 +296,20 @@ $('#selectEmpleadoTareaRapida').append('<option selected>Seleccione alguno</opti
     $('#btnGuardarTareaRapidaHistorial').click(()=>{
       var form = $('#formCargarTareaEnHistorial');
       var formData=form.serialize();
-      $.ajax({
+      setTimeout(() => {
+        $('#formCargarTareaEnHistorial').trigger('reset'); 
+      }, 2000);
+      
+     var request= $.ajax({
         type: "post",
         url: "/Principal/guardarTareaRapidaEnHistorial",
         data: formData,
-        dataType: "json",
-      }).done(function(response){
-        console.log(response);
-        $('#respuestaServidor').html('<span class="text-success">'+response+'</span>');
+        dataType: "JSON",
       })
+    $('#respuestaServidor').html('<span class="text-success">Datos cargados en el historial de tareas, puede checkear la información en <a href="/Principal/historialtareas">Historial de tareas</a></span>');
+      setTimeout(() => {
+        $('#respuestaServidor').empty();
+      }, 5000);
     })
     function editarempleadoPOST(id){
       $.ajax({

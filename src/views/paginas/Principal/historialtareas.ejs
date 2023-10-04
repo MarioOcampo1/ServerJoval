@@ -61,7 +61,44 @@
     </div>
 </body>
 <script>
-    
+    $(function () {
+      var fecha = new Date();
+
+// Obtener el año, mes y día
+var anio = fecha.getFullYear();
+var mes = (fecha.getMonth() + 1).toString().padStart(2, '0'); // El mes comienza desde 0, así que sumamos 1
+var dia = fecha.getDate().toString().padStart(2, '0');
+
+// Formatear la fecha en "YYYY-MM-DD"
+var fechaFormateada = anio + '-' + mes + '-' + dia;
+     fechaInicio= fechaFormateada;
+      var table = $('#tablaHistorialTareas').DataTable({
+      "orderCellsTop": true,
+              "fixedHeader": true, //Deja fijo el header, para q cuando el usuario deslice la tabla hacia abajo, el header se siga viendo
+              "paging": false, //Permite la paginacion de la tabla, si esta desactivado, traera todos los resultados en una sola vista.
+              "scrollX": true,
+              "searching": false,
+              "language": { url: "//cdn.datatables.net/plug-ins/1.11.3/i18n/es_es.json" },
+              "ajax": {
+                type:'POST',
+                data:{"fechaInicio":fechaInicio,"fechaFinal": fechaInicio},
+                url: '/Principal/obtenerHistorialTareasEmpleados',
+                dataType: "json",
+                
+            "dataSrc": function (data) {
+              return data;
+              },},
+              "columnDefs":[{"targets":2,"type":"date-eu"}],
+              "columns":[{
+                title:'Empleado',data: "ResponsableDeTarea",},
+              {title:'Tarea realizada',data: "Tarea_Realizada_sub",},
+{title:'Fecha',data: "Fecha_Tarea_sub",render:function (data, type, row) {return moment(data).locale('es').format('DD-MM-YYYY');}},
+{title:'Obra',data: "Nombre_sub",
+}],
+order:[[2,'desc']]
+    });
+    table.draw();
+    });
     $('#btnFiltrar').click(()=>{
       
         var fechaInicio = $('#FechaInicio').val();
