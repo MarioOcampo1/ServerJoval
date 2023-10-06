@@ -77,8 +77,11 @@
 
                 <%}%> -->
         <td><%=poliza.TipoDocumentacion%></td>
-        <td><%=poliza.EnvioParaBajaAAlbacaucion%></td>
-
+        <%if(poliza.EnvioParaBajaAAlbacaucion=="S"){%>
+        <td class="bg-success EnvioSolicitado"> <%=poliza.EnvioParaBajaAAlbacaucion%></td>
+<%}else{%>
+    <td><%=poliza.EnvioParaBajaAAlbacaucion%></td>
+    <%}%>
         <td><%=poliza.Estado%>
             <a href="ActualizarPolizaAlbacaucion/<%=poliza.ID_poliza%>">
         <button  class="btn hvr-pulse-grow-sm btn-outline-primary btnEditar">Editar</button>
@@ -111,7 +114,9 @@ jQuery.extend(jQuery.expr[":"],
 });
 $(document).ready(function(){
     jQuery("#tablaAlbacaucion td:contains('Dada de baja')").parent("tr").hide();
- //Esconde las dadas de baja
+    
+    jQuery("#tablaAlbacaucion td.EnvioSolicitado").closest("tr").addClass("bg-success");   
+ 
 })
 function MostrarTodasLasPolizas(){
         jQuery("#tablaAlbacaucion tbody>tr").show();
