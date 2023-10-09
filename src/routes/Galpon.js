@@ -58,6 +58,28 @@ router.get('/Vehiculos', (req, res) => {
         res.redirect('/');
     }
 })
+router.post('/Vehiculos/registrokmsyhoras/:FechaInicio/:FechaFinal', (req, res) => {
+    if (req.isAuthenticated()) {
+        var sql = 'SELECT * FROM vehiculos';
+        var vehiculos;
+        var conductores;
+        connection.query(sql, (error, resultado) => {
+            vehiculos = resultado;
+            sql = 'SELECT * FROM conductores';
+            connection.query(sql, (error, result) => {
+                console.log(error);
+                conductores = result;
+            })
+            sql = "SELECT * FROM vehiculos_registrokms WHERE Fecha BETWEEN CAST('"+req.params.FechaInicio+"' AS DATE) AND CAST('"+req.params.FechaFinal+"' AS DATE) ORDER BY Fecha DESC ;";
+            connection.query(sql, (error, results) => {
+                res.send({registrokms: results}, vehiculos, conductores)
+            })
+        })
+
+    }else {
+        res.redirect('/');
+    }
+})
 router.get('/Vehiculos/datos/:datoBusqueda/:idregistro', (req, res) => {
     var idregistro = req.params.idregistro;
     var datoBusqueda = req.params.datoBusqueda;
@@ -69,9 +91,11 @@ router.get('/Vehiculos/datos/:datoBusqueda/:idregistro', (req, res) => {
         }
     })
 })
-router.get('/Vehiculos/AnalisisCombustible', (req, res) => {
+router.get('/Vehiculos/AnalisisCombustible/:FechaInicio/:FechaFinal', (req, res) => {
     var ListavehiculosDB;
     var registrokms;
+    var FechaInicio=req.params.FechaInicio
+var FechaFinal=req.params.FechaFinal
     var registroActual = [];
     var fechaHoy = new Date();
     var cargasConCombustible = [];
@@ -86,9 +110,11 @@ router.get('/Vehiculos/AnalisisCombustible', (req, res) => {
             // for (let index = 0; index < vehiculosSemana.length; index++) {
             //   vehiculosSemana[index] = { Patente:vehiculosSemana[index]};
             // }
-            sql = 'SELECT * FROM vehiculos_registrokms ORDER BY Kms DESC';
+            sql = 'SELECT * FROM vehiculos_registrokms WHERE Fecha BETWEEN CAST("'+FechaInicio+'" AS DATE) AND CAST("'+FechaFinal+'" AS DATE) ORDER BY Kms DESC';
             connection.query(sql, (error, results) => {
-                if (error) reject();
+                if (error){ reject();
+                }
+                else{
                 registrokms = results;
                 for (let index = 0; index < registrokms.length; index++) {
                     const registrokm = registrokms[index];
@@ -99,10 +125,11 @@ router.get('/Vehiculos/AnalisisCombustible', (req, res) => {
                     });
                 }
                 resolve();
+            }
             })
         })
     }
-    ).finally(function () {
+    ).then(function () {
         var kmsAcumulados = 0;
         registrokms.forEach(registro => {
 
@@ -175,8 +202,9 @@ router.get('/Vehiculos/AnalisisCombustible', (req, res) => {
         })
 
         res.send(AnalisisCombustible);
-    })
-
+    }).catch(()=>{
+    res.send('Algo Falló');
+})
 
 })
 router.post('/Vehiculos/GuardarNuevoVehiculo', (req, res) => {

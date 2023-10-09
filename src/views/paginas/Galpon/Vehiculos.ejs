@@ -29,9 +29,20 @@
         </div>
 
         <div class="container-fluid">
-            <div class="border">
+            <div class="row mb-2">
+                <div class="col-auto">
+                <label for="InformeConsumoFechaInicio">Fecha inicio:</label>
+                <input class="form-control" type="date" name="InformeConsumoFechaInicio" id="InformeConsumoFechaInicio">
+                </div>
+                <div class="col-auto">
+                <label for="InformeConsumoFechaFinal">Fecha Final:</label><input class="form-control" type="date" name="InformeConsumoFechaFinal" id="InformeConsumoFechaFinal">
+            </div>
+            <div class="col-auto">
+                <button type="button" name="" id="btnFiltrarInformeConsumo" class="btn btn-sm btn-primary">Filtrar</button>
+            </div>
+</div>
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-12 border">
                         <p id="infoConsumoCombustible">
                         </p>
                     </div>
@@ -49,26 +60,37 @@
                 <table id="tablaRegistroKms" class="table table-striped table-hover table-secondary">
                     <thead>
                         <tr>
+<th class="text-center" colspan="100%">
+                                <h2>REGISTRO DIARIO DE KILÓMETROS Y HORAS</h2>
 
-
-                            <th class="text-center" colspan="100%">
-                                <div class="row">
-                                    <div class="col">
-                                        <button class="btn-sm btn btn-outline-primary" id="btnActualizarRegistro">Nuevo
-                                            registro</button>
-                                            
+                                <div class="row mb-2">
+                                            <div class="col-auto">
+                                          <label for="FechaInicioKmsRecorridos">Fecha Inicio</label>
+                                          <input type="date"
+                                            class="form-control" name="FechaInicioKmsRecorridos" id="FechaInicioKmsRecorridos" aria-describedby="helpId" placeholder="">
+                                        </div>
+                                        <div class="col-auto">
+                                            <label for="FechaFinalKmsRecorridos">Fecha Final</label>
+                                            <input type="date"
+                                              class="form-control" name="FechaFinalKmsRecorridos" id="FechaFinalKmsRecorridos" aria-describedby="helpId" placeholder="">
+                                            </div>
+                                            <div class="col-auto">
+                <button type="button" name="" id="btnFiltrarKmsRecorridos" class="btn btn-sm btn-primary">Filtrar</button>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6">
                                               <input type="text" class="form-control" name="" id="BuscarTablaRegistrokmsHoras" aria-describedby="helpId" placeholder="Buscar en tabla">
                                               
-                                            
-                                    </div>
-
-                                    <div class="col">
-                                        REGISTRO DIARIO DE KILÓMETROS Y HORAS
-                                    </div>
-                                    <div class="col">
-
-                                    </div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <button class="mb-2 btn-sm btn btn-outline-primary" id="btnActualizarRegistro">Nuevo registro</button>
+                                            </div>
+                                        </div>
                                 </div>
+                                  
+                                   
+                               
                             </th>
 
                         </tr>
@@ -83,78 +105,8 @@
                             <th scope="col">Observaciones</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <% registrokms.forEach(vehiculo=> { %>
-                            <tr class="">
-                                <% if (vehiculo.LitrosCargadosEnTanque>0) { %>
-                                    <td class="table-success">
-                                        <%= vehiculo.MarcaModelo %>
-                                    </td>
-                                    <td class="table-success">
-                                        <%= vehiculo.Patente %>
-                                    </td>
-                                    <td class="table-success">    
-                                            <%= vehiculo.Conductor %> 
-                                    </td>
-                                    
-                                    <td class="table-success">
-                                        <%= vehiculo.Ubicacion %>
-                                    </td>
-                                    <td class="table-success">
-                                        <%= vehiculo.Kms %>
-                                    </td>
-                                    <td class="table-success">
-                                        <%= moment(vehiculo.Fecha).format("DD/MM/YYYY") %>
-                                    </td>
-                                    <td class="table-success">
-                                        <%= vehiculo.LitrosCargadosEnTanque %>
-                                    </td>
-                                    <td class="table-success">
-                                        <%= vehiculo.Observaciones %>
-                                            <button class="btn btn-sm btn-outline-secondary"
-                                                id="<%= vehiculo.id_registro %>" onclick="EditarRegistroKMS(this.id)"><i
-                                                    class="bi bi-pencil-square"></i></button>
-                                            <button class="btn btn-sm btn-outline-danger" onclick="EliminarRegistroKMS('<%=vehiculo.id_registro%>')"><i
-                                                    class="bi bi-trash3"></i></button>
-                                    </td>
-                                    <% }else{ %>
-                                        <td>
-                                            <%= vehiculo.MarcaModelo %>
-                                        </td>
-                                        <td>
-                                            <%= vehiculo.Patente %>
-                                        </td>
-                                        <td>    
-                                            <%= vehiculo.Conductor %> 
-                                    </td>
-                                        <td class="">
-                                            <%= vehiculo.Ubicacion %>
-                                        </td>
-                                        <td>
-                                            <%= vehiculo.Kms %>
-                                        </td>
-                                        <td>
-                                            <%= moment(vehiculo.Fecha).format("DD/MM/YYYY") %>
-                                        </td>
-                                        <td>
-                                            <%= vehiculo.LitrosCargadosEnTanque %>
-                                        </td>
-                                        <td>
-                                            <%= vehiculo.Observaciones %>
-                                                <button class="btn btn-sm btn-outline-secondary"
-                                                    id="<%= vehiculo.id_registro %>"
-                                                    onclick="EditarRegistroKMS(this.id)"><i
-                                                        class="bi bi-pencil-square"></i></button>
-                                                <button id="btnEliminarRegistroKms" class="btn btn-sm btn-outline-danger" onclick="EliminarRegistroKMS('<%=vehiculo.id_registro%>')"><i
-                                                        class="bi bi-trash3"></i></button>
-                                        </td>
-                                        <%}%>
-
-                            </tr>
-
-                            <% }) %>
-
-
+                    <tbody id="tbodytablaRegistroKms">
+                       
                     </tbody>
                 </table>
             </div>
@@ -663,13 +615,16 @@
 
         })
     })
-    $.ajax({
-        url: '/Vehiculos/AnalisisCombustible',
+    $('#btnFiltrarInformeConsumo').click(function(){
+               var FechaInicio= $('#InformeConsumoFechaInicio').val();
+               var FechaFinal=$('#InformeConsumoFechaFinal').val();
+        $.ajax({
+        url: '/Vehiculos/AnalisisCombustible/'+FechaInicio+'/'+FechaFinal,
         type: 'GET',
         success: function (datos) {
             $('#infoConsumoCombustible').empty()
             $('#infoConsumoCombustible').append(
-                '<H4 class="text-center"> Informe de consumo ultimos 30 días</H4>'
+                '<H4 class="text-center"> Informe de consumo</H4>'
             )
             datos.forEach(element => {
                 if(element.Tipo!="Vehiculo"){
@@ -726,12 +681,15 @@
             vehiculos.forEach(element => {
                 nombreCamionetas.push(element.MarcaModelo + ' ' + element.Patente);
             });
-            if (vehiculos.length <= 0) { }
+            if (vehiculos.length <= 0) {myChart.destroy();
+                    $('#myChart').empty(); }
             else {
+               
+                
                 // Obtén una referencia al elemento canvas
                 var ctx = document.getElementById('myChart').getContext('2d');
                 // Crea el gráfico de barras
-                var myChart = new Chart(ctx, {
+                myChart = new Chart(ctx, {
                     type: 'bar',
                     data: {
                         labels: nombreCamionetas,
@@ -756,9 +714,59 @@
 
         }
     })
+    })
+    
 
 
     $(document).ready(function () {
+        var FechaFinal= new Date();
+        var FechaInicio= new Date(FechaFinal.getTime() - 7 * 24 * 60 * 60 * 1000);
+        FechaFinal = FechaFinal.toISOString().split('T')[0];
+        FechaInicio = FechaInicio.toISOString().split('T')[0];
+console.log(FechaFinal);
+        $.ajax({
+            type: "POST",
+            url: "/Vehiculos/registrokmsyhoras/"+FechaInicio+"/"+FechaFinal+"",
+            data: "data",
+            dataType: "json",
+            success: function (response) {
+                console.log(response.registrokms[0]);
+                response.registrokms.forEach(element => {
+                        $('#tbodytablaRegistroKms').append(
+'                            <tr class="">'+
+'                                    <td class="table-success">'+
+                                        element.MarcaModelo +
+'                                    </td>'+
+'                                    <td class="table-success">'+
+                                        element.Patente +
+'                                    </td>'+
+'                                    <td class="table-success">    '+
+                                            element.Conductor +
+'                                    </td>'+
+'                                    '+
+'                                    <td class="table-success">'+
+                                        element.Ubicacion +
+'                                    </td>'+
+'                                    <td class="table-success">'+
+                                        element.Kms +
+'                                    </td>'+
+'                                    <td class="table-success">'+
+                                        moment(element.Fecha).format("DD/MM/YYYY") +
+'                                    </td>'+
+'                                    <td class="table-success">'+
+                                        element.LitrosCargadosEnTanque +
+'                                    </td>'+
+'                                    <td class="table-success">'+
+                                        element.Observaciones +
+'                                            <button class="btn btn-sm btn-outline-secondary" id="element.id_registro" onclick="EditarRegistroKMS(this.id)"><i class="bi bi-pencil-square"></i></button>'+
+'                                            <button class="btn btn-sm btn-outline-danger" onclick="EliminarRegistroKMS("'+element.id_registro+'")"><i class="bi bi-trash3"></i></button>'+
+'                                    </td>'+
+'                            </tr>'+
+''                        )
+                });
+            }
+        });
+
         $('#tablaCombustible').DataTable({
             "language": { url: "//cdn.datatables.net/plug-ins/1.11.3/i18n/es_es.json" },
             "orderCellsTop": true,
