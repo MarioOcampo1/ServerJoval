@@ -113,8 +113,7 @@
         </div>
         <!-- Modal Body -->
         <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
-        <div class="modal fade" id="ModalCombustible" tabindex="-1" role="dialog" aria-labelledby="ModalCombustible"
-            aria-hidden="true">
+        <div class="modal fade" id="ModalCombustible" tabindex="-1" role="dialog" aria-labelledby="ModalCombustible"aria-hidden="true">
             <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-xl" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -195,12 +194,10 @@
                             </form>
 
 
-                        </div>
 
 
-                        <div id="infoCombustible" class="container border" style="display: block;">
-                            <p class="text-center">
-                            </p>
+                        <div id="infoCombustible" class="container border">
+                          
                             <div class="row mt-2">
                                 <div class="col-2">
                                     <div class="mb-3">
@@ -245,13 +242,12 @@
                             </div>
 
                             <div class="table-responsive-md">
-                                <button id="btnNuevoIngresoCombustible"
-                                    class="nav-btn-link btn btn-sm btn-outline-primary mb-2" href="#"
-                                    aria-current="page">Ingresar nueva compra</button>
+                                <button id="btnNuevoIngresoCombustible"class="nav-btn-link btn btn-sm btn-outline-primary mb-2">Ingresar nueva compra</button>
 
                                 <table id="tablaCombustible" class="table table-danger ">
                                     <thead>
                                         <tr>
+                                            <th scope="col">N° ticket</th>
                                             <th scope="col">Fecha</th>
                                             <th scope="col">Tipo combustible</th>
                                             <th scope="col">Precio por litro</th>
@@ -265,15 +261,16 @@
                                     </tbody>
                                 </table>
                             </div>
+                        </div>
 
                         </div>
-                    </div>
+                    
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                     </div>
                 </div>
+                </div>
             </div>
-        </div>
 
         <!-- Modal Body -->
         <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
@@ -792,7 +789,9 @@ function BuscarRegistroKms(FechaInicio,FechaFinal){
                 'url': '/Combustible/datos',
                 "dataSrc": "",
             },
-            'columns': [{
+            'columns': [
+                {'data': 'nroTicket'},
+                {
                 'data': 'Fecha', render: (function (data) {
                     return moment(data).locale('es').format("DD-MM-YYYY");
                 })
