@@ -125,11 +125,18 @@
 
                         <div class="container border border-secondary" id="NuevoIngresoCombustible"
                             style="display: none;">
-                            <form action="Combustible/NuevoTicketCombustible" id="formNuevoTicketCombustible"
-                                method="post">
-                                <h6 class="text-center">Carga de nuevo consumo</h6>
+                            <form action="Combustible/NuevoTicketCombustible" id="formNuevoTicketCombustible"method="post">
+                                <h2 class="text-center">Nuevo ticket</h2>
                                 <div class="row">
-                                    <div class="col">
+                                    <div class="col-auto">
+                                        <div class="mb-3">
+                                          <label for="" class="form-label">N° ticket</label>
+                                          <input type="text"
+                                            class="form-control" name="nTicket" id="" aria-describedby="helpId" placeholder="">
+                                          <small id="helpId" class="form-text text-muted">Número de ticket</small>
+                                        </div>
+                                        </div>
+                                        <div class="col-auto">
                                         <div class="mb-3">
                                             <label for="" class="form-label">Fecha</label>
                                             <input required type="date" class="form-control" name="Fecha" id=""
@@ -137,6 +144,8 @@
                                             <small id="helpId" class="form-text text-muted">Ingrese la fecha de la
                                                 compra</small>
                                         </div>
+                                    </div>
+                                    <div class="col-auto">
                                         <div class="mb-3">
                                             <label for="TipoCombustible" class="form-label">Tipo de combustible</label>
                                             <select class="form-select form-select-sm" name="TipoCombustible"
@@ -150,13 +159,15 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col">
+                                    <div class="col-auto">
                                         <div class="mb-3">
                                             <label for="" class="form-label">Precio</label>
                                             <input required type="number" class="form-control" name="PrecioLitro" id=""
                                                 aria-describedby="helpId" placeholder="">
                                             <small id="helpId" class="form-text text-muted">Ingrese el precio</small>
                                         </div>
+                                        </div>
+                                        <div class="col-auto">
                                         <div class="mb-3">
                                             <label for="" class="form-label">Litros</label>
                                             <input required type="number" class="form-control" name="CantidadLitros"
@@ -164,26 +175,23 @@
                                             <small id="helpId" class="form-text text-muted">Ingrese la cantidad de
                                                 litros</small>
                                         </div>
-
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
+                                    <div class="col-auto">
                                         <div class="mb-3">
                                             <label for="" class="form-label">Observaciones</label>
                                             <input type="text" class="form-control" name="Observaciones" id=""
                                                 aria-describedby="helpId" placeholder="">
-                                            <small id="helpId" class="form-text text-muted">Observaciones que desee
-                                                agregar</small>
+                                          
                                         </div>
-                                        <button type="button" id="btnGuardarNuevoIngresoCombustible"
-                                            class="btn btn-success">Guardar</button>
-                                        <button type="button" id="btnSalirIngresoCombustible"
-                                            class="btn btn-danger">Salir</button>
-                                        <p id="InfoSistemaCargaTicketCombustible" class="text-primary"></p>
+                                        </div>
                                     </div>
+                                    
+                                    <button type="button" id="btnGuardarNuevoIngresoCombustible"
+                                    class="btn btn-success">Guardar</button>
+                                <button type="button" id="btnSalirIngresoCombustible"
+                                    class="btn btn-danger">Salir</button>
+                                <p id="InfoSistemaCargaTicketCombustible" class="text-primary"></p>
                                 </div>
-
                             </form>
 
 
@@ -717,20 +725,20 @@
     })
     
 
-
-    $(document).ready(function () {
-        var FechaFinal= new Date();
-        var FechaInicio= new Date(FechaFinal.getTime() - 7 * 24 * 60 * 60 * 1000);
-        FechaFinal = FechaFinal.toISOString().split('T')[0];
+function BuscarRegistroKms(FechaInicio,FechaFinal){
+      FechaFinal= new Date(FechaFinal);
+        FechaInicio= new Date(FechaInicio);
+    FechaFinal = FechaFinal.toISOString().split('T')[0];
         FechaInicio = FechaInicio.toISOString().split('T')[0];
-console.log(FechaFinal);
-        $.ajax({
+        console.log(FechaFinal);
+        console.log(FechaInicio);
+    $.ajax({
             type: "POST",
             url: "/Vehiculos/registrokmsyhoras/"+FechaInicio+"/"+FechaFinal+"",
             data: "data",
             dataType: "json",
             success: function (response) {
-                console.log(response.registrokms[0]);
+                $('#tbodytablaRegistroKms').empty();
                 response.registrokms.forEach(element => {
                         $('#tbodytablaRegistroKms').append(
 '                            <tr class="">'+
@@ -766,6 +774,12 @@ console.log(FechaFinal);
                 });
             }
         });
+}
+    $(document).ready(function () {
+        var FechaFinal= new Date();
+        var FechaInicio= new Date(FechaFinal.getTime() - 7 * 24 * 60 * 60 * 1000);
+        BuscarRegistroKms(FechaInicio,FechaFinal);
+      
 
         $('#tablaCombustible').DataTable({
             "language": { url: "//cdn.datatables.net/plug-ins/1.11.3/i18n/es_es.json" },
@@ -925,7 +939,14 @@ console.log(FechaFinal);
                 return (elem.textContent || elem.innerText || jQuery(elem).text() || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
               }
             });
-    
+$('#btnFiltrarKmsRecorridos').click(function(){
+    FechaInicio=$('#FechaInicioKmsRecorridos').val();
+    FechaFinal=$('#FechaFinalKmsRecorridos').val();
+    console.log(FechaFinal);
+    console.log(FechaInicio);
+    console.log('//////////');
+    BuscarRegistroKms(FechaInicio,FechaFinal);
+})    
 </script>
 </html>
 

@@ -325,12 +325,13 @@ router.get('/Combustible/datos', (req, res) => {
 })
 router.post('/Combustible/NuevoTicketCombustible', (req, res) => {
     var Fecha = req.body.Fecha;
+    var nTicket= req.body.nTicket;
     var TipoCombustible = req.body.TipoCombustible;
     var PrecioLitro = req.body.PrecioLitro;
     var CantidadLitros = req.body.CantidadLitros;
     var Observaciones = req.body.Observaciones;
     var sql = 'INSERT INTO combustible set?';
-    connection.query(sql, { Fecha: Fecha, TipoCombustible: TipoCombustible, PrecioLitro: PrecioLitro, CantidadLitros: CantidadLitros, Total: (CantidadLitros * PrecioLitro), Observaciones: Observaciones, }, (error, results) => {
+    connection.query(sql, { nroTicket:nTicket,Fecha: Fecha, TipoCombustible: TipoCombustible, PrecioLitro: PrecioLitro, CantidadLitros: CantidadLitros, Total: (CantidadLitros * PrecioLitro), Observaciones: Observaciones, }, (error, results) => {
         if (error) console.log(error);
         else { res.send("Se ha realizado la carga con exito.") }
     })
