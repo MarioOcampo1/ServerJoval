@@ -634,6 +634,7 @@ router.post('/Finanzas/NuevoCliente/guardarCliente', (req, res) => {
 
 
 })
+//PAGOS
 router.post('/GenerarComprobante', (req, res, next) => {
     let sql = '';
     var ID = req.body.IDCliente;
@@ -704,7 +705,7 @@ new Promise((resolve, reject) => {
        var fechapagoDate= new Date(fecha);
         sql='INSERT INTO finanzas_historial_comprobantes_emitidos SET?'
         connection.query(sql,{
-        Descripcion:Concepto,id_cliente:ID,id_cobro:id_Cobro, id_obra:id_Obra, FechaPago:fechapagoDate, Monto: sumaDeTotalesPorConcepto, Observacion:'Sin observaciones'},(error,results)=>{
+        Descripcion:Concepto,id_cliente:ID,id_cobro:id_Cobro, id_obra:id_Obra, FechaPago:fechapagoDate, Monto: sumaDeTotalesPorConcepto,TipoPago:FormaDePago, Observacion:'Sin observaciones'},(error,results)=>{
                 if (error) console.log(error);
         })
     }
@@ -712,7 +713,7 @@ new Promise((resolve, reject) => {
         var fechapagoDate= new Date(fecha);
         sql='INSERT INTO finanzas_historial_comprobantes_emitidos SET?'
         connection.query(sql,{
-        Descripcion:Concepto,id_cliente:ID,id_cobro:id_Cobro, id_obra:id_Obra, FechaPago:fechapagoDate, Monto: sumaDeTotalesPorConcepto, Observacion:ObservacionesDelPago},(error,results)=>{
+        Descripcion:Concepto,id_cliente:ID,id_cobro:id_Cobro, id_obra:id_Obra, FechaPago:fechapagoDate, Monto: sumaDeTotalesPorConcepto,TipoPago:FormaDePago, Observacion:ObservacionesDelPago},(error,results)=>{
                 if (error) console.log(error);
         })
     }
@@ -755,7 +756,7 @@ resolve(); }
                             var fechapagoDate= new Date(fecha);
                             sql='INSERT INTO finanzas_historial_comprobantes_emitidos SET?'
                             connection.query(sql,{
-                            Descripcion:Concepto,id_cliente:ID,id_cobro:id_Cobro, id_obra:id_Obra, FechaPago:fechapagoDate, Monto: sumaDeTotalesPorConcepto, Observacion:ObservacionesDelPago},(error,results)=>{
+                            Descripcion:Concepto,id_cliente:ID,id_cobro:id_Cobro, id_obra:id_Obra, FechaPago:fechapagoDate, Monto: sumaDeTotalesPorConcepto,TipoPago:FormaDePago, Observacion:ObservacionesDelPago},(error,results)=>{
                                     if (error) console.log(error);
                             })
                         }
