@@ -38,8 +38,9 @@
         <label for="BuscadorCliente">Buscar cliente</label>
         <input class="border border-danger" type="text" name="BuscadorCliente" id="BuscadorCliente">
 <div class="btn-group" role="group" aria-label="OpcionesTabla">
-  <button type="button" id="btnVerCuotas" class="btn btn-primary">Cuotas adicionales</button>
-  <button type="button" id="btnVerPermisos" class="btn btn-primary">Permisos</button>
+  <button type="button" id="btnVerCuotas" class="btn btn-sm btn-primary">Cuotas adicionales</button>
+  <button type="button" id="btnVerPermisos" class="btn btn-sm btn-primary">Permisos</button>
+  <button type="button" id="btnVerTransferenciasObra" class="btn btn-sm btn-primary">Ver transferencias</button>
 </div>
         <div class="btn-toolbar m-2 border border-secondary rounded">
           <label class="list-group-item" for="">Colores de referencia: </label>
@@ -207,7 +208,7 @@
               </div>
             </div>
           </form>
-       
+       <%- include('./VistaDeLaObraModals/modalVerTransferencias.ejs') %>
 </body>
 <script>
 
@@ -938,6 +939,41 @@ $(document).ready(function(){
     
     $('.OcultoCuotas').toggle();
       
+   })
+   $('#btnVerTransferenciasObra').click(()=>{
+        $('#tablaTransferenicasRecibidas').DataTable({
+          "paging": false,
+        "info": false,
+        "searching": false,
+        
+        "ajax": {
+          type: "GET",
+      url: "/Finanzas/VerComprobantesRegistrados/obra/<%=id_Obra%>",
+      dataType: "json",
+            "dataSrc": function (data) {
+              console.log(data);
+              // console.log(data.PredeterminadosyCobros);
+              return data
+              
+            }
+        },
+    
+        "columns": [
+
+            { "data": "Nombre"
+            },  
+            {"data":"FechaPago","render":function(data,type,row,meta){
+              var fecha = moment(row.FechaPago).locale("es").format("DD-MM-YYYY");
+              return fecha;
+            }},
+            {"data":"Descripcion"},
+            {"data":"Monto"},
+            {"data":"Observacion"},
+            {"data":"nroTransferencia"},
+          ],
+        
+    });
+    $('#modalVerTransferencias').modal('show');
    })
 </script>
 </html>

@@ -4,9 +4,9 @@ const xlsx = require('xlsx');
 const XlsxPopulate = require('xlsx-populate');
 const router = Router({ mergeParams: true });
 const moment = require('moment');
-const multer= require('multer');
+const multer = require('multer');
 const storage = multer.memoryStorage();
-const upload= multer ({storage:storage});
+const upload = multer({ storage: storage });
 module.exports = router;
 router.use(session({
     secret: 'mi secreto',
@@ -35,88 +35,88 @@ connection.connect(error => {
 //Settings
 //Vista general de la obra
 router.get('/Finanzas/cobrodeobras/VerObra/:idObra', (req, res) => {
-    var sql='SELECT Nombre from obras WHERE id='+req.params.idObra;
-    connection.query(sql,(error,results)=>{
-        if(error)console.log(error);
-        else{
-            res.render('paginas/Finanzas/VistaDeLaObra.ejs',{NombreObra:results[0].Nombre, id_Obra:req.params.idObra});
+    var sql = 'SELECT Nombre from obras WHERE id=' + req.params.idObra;
+    connection.query(sql, (error, results) => {
+        if (error) console.log(error);
+        else {
+            res.render('paginas/Finanzas/VistaDeLaObra.ejs', { NombreObra: results[0].Nombre, id_Obra: req.params.idObra });
         }
     })
-    
+
 })
-router.get('/Finanzas/cobrodeobras/VerObra/:idObra/data',(req,res)=>{
-    var idObra=req.params.idObra;
+router.get('/Finanzas/cobrodeobras/VerObra/:idObra/data', (req, res) => {
+    var idObra = req.params.idObra;
     async function checkearVecinosObra(idObra) {
-       var sql = 'SELECT ID_cliente,id_Obra,NombreCliente from finanzas_clientes_por_obra WHERE id_Obra =' + idObra;
-         connection.query(sql, (error, results) => {
-             if (error) console.log(error);
-             else {
-                 results.forEach(element => {
-                     sql = 'SELECT id_cliente FROM finanzas_clientes_predeterminados WHERE id_cliente =?';
-                     connection.query(sql, element.ID_cliente, (error, results2) => {
-                         if (error) console.log(error);
-                         if ((results2.length) == 0) {
-                             sql = 'INSERT INTO finanzas_clientes_predeterminados (id_obra,id_cliente,NombreCliente) VALUES (' + idObra + ',' + element.ID_cliente + ',"' + element.NombreCliente + '");';
-                             connection.query(sql, (error, results2) => {
-                                 if (error) {
-                                     console.log(error);
- 
-                                 }
-                             })
-                         }
-                     })
- 
-                 });
-             }
-         })
-     }
+        var sql = 'SELECT ID_cliente,id_Obra,NombreCliente from finanzas_clientes_por_obra WHERE id_Obra =' + idObra;
+        connection.query(sql, (error, results) => {
+            if (error) console.log(error);
+            else {
+                results.forEach(element => {
+                    sql = 'SELECT id_cliente FROM finanzas_clientes_predeterminados WHERE id_cliente =?';
+                    connection.query(sql, element.ID_cliente, (error, results2) => {
+                        if (error) console.log(error);
+                        if ((results2.length) == 0) {
+                            sql = 'INSERT INTO finanzas_clientes_predeterminados (id_obra,id_cliente,NombreCliente) VALUES (' + idObra + ',' + element.ID_cliente + ',"' + element.NombreCliente + '");';
+                            connection.query(sql, (error, results2) => {
+                                if (error) {
+                                    console.log(error);
+
+                                }
+                            })
+                        }
+                    })
+
+                });
+            }
+        })
+    }
     checkearVecinosObra(idObra);
-     var cobrosXobra;
-     var clientesObra;
-     var tiposDeCobros;
-     var obras;
-     const promise1 = new Promise((resolve, reject) => {
-                 sql = 'SELECT Nombre FROM obras;'
-                 connection.query(sql, (error, nombreobras) => {
-                     if (error) { console.log(error); }
-                     else {
-                         obras = nombreobras;
- 
-                         resolve(idObra);
-                     }
-                 })
-               
-     }).then(idObra => {
-         const promise2 = new Promise((resolve, reject) => {
-             sql = 'SELECT b.*,a.*, c.CantidadCuotas, c.AnticipoFinanciero as PredeterminadoAnticipoFinanciero, c.Cuota1 as PredeterminadoCuota1, c.Cuota2 as PredeterminadoCuota2, c.Cuota3 as PredeterminadoCuota3, c.Cuota4 as PredeterminadoCuota4, c.Cuota5 as PredeterminadoCuota5, c.Cuota6 as PredeterminadoCuota6, c.Cuota7 as PredeterminadoCuota7, c.Cuota8 as PredeterminadoCuota8, c.Cuota9 as PredeterminadoCuota9, c.Cuota10 as PredeterminadoCuota10, c.Cuota11 as PredeterminadoCuota11, c.Cuota12 as PredeterminadoCuota12, c.Irrigacion as PredeterminadoIrrigacion, c.DNV as PredeterminadoDNV, c.DPV as PredeterminadoDPV, c.Hidraulica as PredeterminadoHidraulica, c.FFCC as PredeterminadoFFCC, c.Privado as PredeterminadoPrivado, c.ServicioDomiciliario as PredeterminadoServicioDomiciliario,c.Municipal as PredeterminadoMunicipal, c.IngresoDocumentacion as PredeterminadoIngresoDocumentacion FROM finanzas_clientes_por_obra b LEFT JOIN finanzas_clientes_predeterminados c ON b.ID_cliente=c.id_cliente LEFT JOIN finanzas_clientes_por_obra_cobros a ON b.ID_cliente=a.id_cliente WHERE b.id_Obra =? ORDER BY a.NombreCliente';
-             connection.query(sql, idObra, (error, PredeterminadosyCobros) => {
-                 if (error) {
-                     console.log(error);
-                     reject(error);
-                 }
-                 console.log(PredeterminadosyCobros.CantidadCuotas);
-                 if (PredeterminadosyCobros.length > 0) {
-                     resolve(PredeterminadosyCobros);
-                 }
-                 else {
-                     PredeterminadosyCobros = null;
-                     resolve(PredeterminadosyCobros);
-                 }
-             })
-         }).then(PredeterminadosyCobros => {
-             sql= 'SELECT Nombre FROM obras WHERE id='+idObra;
-             connection.query(sql,(error,results)=>{
-                 if(error)console.log(error);
-                 else{
-                     res.send({PredeterminadosyCobros: PredeterminadosyCobros, id_Obra: idObra, NombreObra: results[0].Nombre, obras });
- 
-                 }
-             })
-         })
-     }).catch(function (err) {
-         res.redirect("/ListadoObras");
-     }
-     )
+    var cobrosXobra;
+    var clientesObra;
+    var tiposDeCobros;
+    var obras;
+    const promise1 = new Promise((resolve, reject) => {
+        sql = 'SELECT Nombre FROM obras;'
+        connection.query(sql, (error, nombreobras) => {
+            if (error) { console.log(error); }
+            else {
+                obras = nombreobras;
+
+                resolve(idObra);
+            }
+        })
+
+    }).then(idObra => {
+        const promise2 = new Promise((resolve, reject) => {
+            sql = 'SELECT b.*,a.*, c.CantidadCuotas, c.AnticipoFinanciero as PredeterminadoAnticipoFinanciero, c.Cuota1 as PredeterminadoCuota1, c.Cuota2 as PredeterminadoCuota2, c.Cuota3 as PredeterminadoCuota3, c.Cuota4 as PredeterminadoCuota4, c.Cuota5 as PredeterminadoCuota5, c.Cuota6 as PredeterminadoCuota6, c.Cuota7 as PredeterminadoCuota7, c.Cuota8 as PredeterminadoCuota8, c.Cuota9 as PredeterminadoCuota9, c.Cuota10 as PredeterminadoCuota10, c.Cuota11 as PredeterminadoCuota11, c.Cuota12 as PredeterminadoCuota12, c.Irrigacion as PredeterminadoIrrigacion, c.DNV as PredeterminadoDNV, c.DPV as PredeterminadoDPV, c.Hidraulica as PredeterminadoHidraulica, c.FFCC as PredeterminadoFFCC, c.Privado as PredeterminadoPrivado, c.ServicioDomiciliario as PredeterminadoServicioDomiciliario,c.Municipal as PredeterminadoMunicipal, c.IngresoDocumentacion as PredeterminadoIngresoDocumentacion FROM finanzas_clientes_por_obra b LEFT JOIN finanzas_clientes_predeterminados c ON b.ID_cliente=c.id_cliente LEFT JOIN finanzas_clientes_por_obra_cobros a ON b.ID_cliente=a.id_cliente WHERE b.id_Obra =? ORDER BY a.NombreCliente';
+            connection.query(sql, idObra, (error, PredeterminadosyCobros) => {
+                if (error) {
+                    console.log(error);
+                    reject(error);
+                }
+                console.log(PredeterminadosyCobros.CantidadCuotas);
+                if (PredeterminadosyCobros.length > 0) {
+                    resolve(PredeterminadosyCobros);
+                }
+                else {
+                    PredeterminadosyCobros = null;
+                    resolve(PredeterminadosyCobros);
+                }
+            })
+        }).then(PredeterminadosyCobros => {
+            sql = 'SELECT Nombre FROM obras WHERE id=' + idObra;
+            connection.query(sql, (error, results) => {
+                if (error) console.log(error);
+                else {
+                    res.send({ PredeterminadosyCobros: PredeterminadosyCobros, id_Obra: idObra, NombreObra: results[0].Nombre, obras });
+
+                }
+            })
+        })
+    }).catch(function (err) {
+        res.redirect("/ListadoObras");
+    }
+    )
 })
 router.get('/Finanzas', (req, res) => {
     if (req.isAuthenticated()) {
@@ -201,147 +201,147 @@ router.post('/Finanzas/NuevoCliente/cargarLote', (req, res) => {
     var Domicilio = req.body.Domicilio;
     var Teléfono = req.body.Telefono;
     var Domicilio = req.body.Domicilio;
-    async function runQueries(index){
+    async function runQueries(index) {
         return new Promise((resolve, reject) => {
-        var sql = 'INSERT INTO finanzas_clientes_por_obra SET?';
-        connection.query(sql, {
-            NombreCliente: NombreCompleto[index], NombreObra: Obra, id_Obra: id_Obra, DNICliente: DNI[index], Telefono: Teléfono[index], Direccion: Domicilio[index]
-        }, (error, results) => {
-            if (error) console.log(error);
-        })
-        sql = 'Select MAX(ID_cliente) AS ID_cliente from finanzas_clientes_por_obra ;';
-    connection.query(sql, (error, results2) => {
-        if (error) console.log(error);
-        else {
-            var idCliente = results2[0].ID_cliente;
-            sql = 'INSERT INTO finanzas_clientes_por_obra_cobros set?;'
+            var sql = 'INSERT INTO finanzas_clientes_por_obra SET?';
             connection.query(sql, {
-                id_Obra: id_Obra, ID_cliente: idCliente, NombreCliente: NombreCompleto[index], AnticipoFinanciero: 0, Cuota1: 0, Cuota2: 0, Cuota3: 0, Cuota4: 0, Cuota5: 0, Cuota6: 0, Cuota7: 0, Cuota8: 0, Cuota9: 0, Cuota10: 0, Cuota11: 0, Cuota12: 0, IngresoDocumentacion: 0, Municipal: 0, Irrigacion: 0, DNV: 0, DPV: 0, Hidraulica: 0, FFCC: 0, Privado: 0, ServicioDomiciliario: 0,
-            }, (error, results3) => {
+                NombreCliente: NombreCompleto[index], NombreObra: Obra, id_Obra: id_Obra, DNICliente: DNI[index], Telefono: Teléfono[index], Direccion: Domicilio[index]
+            }, (error, results) => {
+                if (error) console.log(error);
+            })
+            sql = 'Select MAX(ID_cliente) AS ID_cliente from finanzas_clientes_por_obra ;';
+            connection.query(sql, (error, results2) => {
                 if (error) console.log(error);
                 else {
-                    sql = 'INSERT INTO finanzas_clientes_predeterminados set?;'
-                    switch (CantidadCuotas) {
-                        case '1':
-                            connection.query(sql, {
-                                id_obra: id_Obra, id_cliente: idCliente, NombreCliente: NombreCompleto[index], AnticipoFinanciero: MontoAnticipoFinanciero, Cuota1: ImporteCuota
-                            }, (error, results4) => {
-                                if (error) console.log(error);
-                                resolve();
-                            })
-                            break;
-                        case '2':
-                            connection.query(sql, {
-                                id_obra: id_Obra, id_cliente: idCliente, NombreCliente: NombreCompleto[index], AnticipoFinanciero: MontoAnticipoFinanciero, Cuota1: ImporteCuota, Cuota2: ImporteCuota
-                            }, (error, results5) => {
-                                if (error) console.log(error);
-                                resolve();
-                            })
-                            break;
-                        case '3':
-                            connection.query(sql, {
-                                id_obra: id_Obra, id_cliente: idCliente, NombreCliente: NombreCompleto[index], AnticipoFinanciero: MontoAnticipoFinanciero, Cuota1: ImporteCuota, Cuota2: ImporteCuota, Cuota3: ImporteCuota
-                            }, (error, results5) => {
-                                if (error) console.log(error);
-                                resolve();
-                            })
+                    var idCliente = results2[0].ID_cliente;
+                    sql = 'INSERT INTO finanzas_clientes_por_obra_cobros set?;'
+                    connection.query(sql, {
+                        id_Obra: id_Obra, ID_cliente: idCliente, NombreCliente: NombreCompleto[index], AnticipoFinanciero: 0, Cuota1: 0, Cuota2: 0, Cuota3: 0, Cuota4: 0, Cuota5: 0, Cuota6: 0, Cuota7: 0, Cuota8: 0, Cuota9: 0, Cuota10: 0, Cuota11: 0, Cuota12: 0, IngresoDocumentacion: 0, Municipal: 0, Irrigacion: 0, DNV: 0, DPV: 0, Hidraulica: 0, FFCC: 0, Privado: 0, ServicioDomiciliario: 0,
+                    }, (error, results3) => {
+                        if (error) console.log(error);
+                        else {
+                            sql = 'INSERT INTO finanzas_clientes_predeterminados set?;'
+                            switch (CantidadCuotas) {
+                                case '1':
+                                    connection.query(sql, {
+                                        id_obra: id_Obra, id_cliente: idCliente, NombreCliente: NombreCompleto[index], AnticipoFinanciero: MontoAnticipoFinanciero, Cuota1: ImporteCuota
+                                    }, (error, results4) => {
+                                        if (error) console.log(error);
+                                        resolve();
+                                    })
+                                    break;
+                                case '2':
+                                    connection.query(sql, {
+                                        id_obra: id_Obra, id_cliente: idCliente, NombreCliente: NombreCompleto[index], AnticipoFinanciero: MontoAnticipoFinanciero, Cuota1: ImporteCuota, Cuota2: ImporteCuota
+                                    }, (error, results5) => {
+                                        if (error) console.log(error);
+                                        resolve();
+                                    })
+                                    break;
+                                case '3':
+                                    connection.query(sql, {
+                                        id_obra: id_Obra, id_cliente: idCliente, NombreCliente: NombreCompleto[index], AnticipoFinanciero: MontoAnticipoFinanciero, Cuota1: ImporteCuota, Cuota2: ImporteCuota, Cuota3: ImporteCuota
+                                    }, (error, results5) => {
+                                        if (error) console.log(error);
+                                        resolve();
+                                    })
 
-                            break;
-                        case '4':
-                            connection.query(sql, {
-                                id_obra: id_Obra, id_cliente: idCliente, NombreCliente: NombreCompleto[index], AnticipoFinanciero: MontoAnticipoFinanciero, Cuota1: ImporteCuota, Cuota2: ImporteCuota, Cuota3: ImporteCuota, Cuota4: ImporteCuota,
-                            }, (error, results5) => {
-                                if (error) console.log(error);
-                                resolve();
-                            })
-                            break;
-                        case '5':
-                            connection.query(sql, {
-                                id_obra: id_Obra, id_cliente: idCliente, NombreCliente: NombreCompleto[index], AnticipoFinanciero: MontoAnticipoFinanciero, Cuota1: ImporteCuota, Cuota2: ImporteCuota, Cuota3: ImporteCuota, Cuota4: ImporteCuota, Cuota5: ImporteCuota
-                            }, (error, results5) => {
-                                if (error) console.log(error);
-                                resolve();
-                            })
-                            break;
-                        case '6':
-                            connection.query(sql, {
-                                id_obra: id_Obra, id_cliente: idCliente, NombreCliente: NombreCompleto[index], AnticipoFinanciero: MontoAnticipoFinanciero, Cuota1: ImporteCuota, Cuota2: ImporteCuota, Cuota3: ImporteCuota, Cuota4: ImporteCuota, Cuota5: ImporteCuota, Cuota6: ImporteCuota,
-                            }, (error, results5) => {
-                                if (error) console.log(error);
-                                resolve();
-                            })
-                            break;
-                        case '7':
-                            connection.query(sql, {
-                                id_obra: id_Obra, id_cliente: idCliente, NombreCliente: NombreCompleto[index], AnticipoFinanciero: MontoAnticipoFinanciero, Cuota1: ImporteCuota, Cuota2: ImporteCuota, Cuota3: ImporteCuota, Cuota4: ImporteCuota, Cuota5: ImporteCuota, Cuota6: ImporteCuota, Cuota7: ImporteCuota, Cuota8: ImporteCuota,
-                            }, (error, results5) => {
-                                if (error) console.log(error);
-                                resolve();
-                            })
-                            break;
-                        case '8':
-                            connection.query(sql, {
-                                id_obra: id_Obra, id_cliente: idCliente, NombreCliente: NombreCompleto[index], AnticipoFinanciero: MontoAnticipoFinanciero, Cuota1: ImporteCuota, Cuota2: ImporteCuota, Cuota3: ImporteCuota, Cuota4: ImporteCuota, Cuota5: ImporteCuota, Cuota6: ImporteCuota, Cuota7: ImporteCuota, Cuota8: ImporteCuota,
-                            }, (error, results5) => {
-                                if (error) console.log(error);
-                                resolve();
-                            })
-                            break;
-                        case '9':
-                            connection.query(sql, {
-                                id_obra: id_Obra, id_cliente: idCliente, NombreCliente: NombreCompleto[index], AnticipoFinanciero: MontoAnticipoFinanciero, Cuota1: ImporteCuota, Cuota2: ImporteCuota, Cuota3: ImporteCuota, Cuota4: ImporteCuota, Cuota5: ImporteCuota, Cuota6: ImporteCuota, Cuota7: ImporteCuota, Cuota8: ImporteCuota, Cuota9: ImporteCuota
-                            }, (error, results5) => {
-                                if (error) console.log(error);
-                                resolve();
-                            })
-                            break;
-                        case '10':
-                            connection.query(sql, {
-                                id_obra: id_Obra, id_cliente: idCliente, NombreCliente: NombreCompleto[index], AnticipoFinanciero: MontoAnticipoFinanciero, Cuota1: ImporteCuota, Cuota2: ImporteCuota, Cuota3: ImporteCuota, Cuota4: ImporteCuota, Cuota5: ImporteCuota, Cuota6: ImporteCuota, Cuota7: ImporteCuota, Cuota8: ImporteCuota, Cuota9: ImporteCuota, Cuota10: ImporteCuota
-                            }, (error, results5) => {
-                                if (error) console.log(error);
-                                resolve();
-                            })
-                            break;
-                        case '11':
-                            connection.query(sql, {
-                                id_obra: id_Obra, id_cliente: idCliente, NombreCliente: NombreCompleto[index], AnticipoFinanciero: MontoAnticipoFinanciero, Cuota1: ImporteCuota, Cuota2: ImporteCuota, Cuota3: ImporteCuota, Cuota4: ImporteCuota, Cuota5: ImporteCuota, Cuota6: ImporteCuota, Cuota7: ImporteCuota, Cuota8: ImporteCuota, Cuota9: ImporteCuota, Cuota10: ImporteCuota, Cuota11: ImporteCuota
-                            }, (error, results5) => {
-                                if (error) console.log(error);
-                                resolve();
-                            })
-                            break;
-                        case '12':
-                            connection.query(sql, {
-                                id_obra: id_Obra, id_cliente: idCliente, NombreCliente: NombreCompleto[index], AnticipoFinanciero: MontoAnticipoFinanciero, Cuota1: ImporteCuota, Cuota2: ImporteCuota, Cuota3: ImporteCuota, Cuota4: ImporteCuota, Cuota5: ImporteCuota, Cuota6: ImporteCuota, Cuota7: ImporteCuota, Cuota8: ImporteCuota, Cuota9: ImporteCuota, Cuota10: ImporteCuota, Cuota11: ImporteCuota, Cuota12: ImporteCuota
-                            }, (error, results5) => {
-                                if (error) console.log(error);
-                                resolve();
-                            })
-                            break;
+                                    break;
+                                case '4':
+                                    connection.query(sql, {
+                                        id_obra: id_Obra, id_cliente: idCliente, NombreCliente: NombreCompleto[index], AnticipoFinanciero: MontoAnticipoFinanciero, Cuota1: ImporteCuota, Cuota2: ImporteCuota, Cuota3: ImporteCuota, Cuota4: ImporteCuota,
+                                    }, (error, results5) => {
+                                        if (error) console.log(error);
+                                        resolve();
+                                    })
+                                    break;
+                                case '5':
+                                    connection.query(sql, {
+                                        id_obra: id_Obra, id_cliente: idCliente, NombreCliente: NombreCompleto[index], AnticipoFinanciero: MontoAnticipoFinanciero, Cuota1: ImporteCuota, Cuota2: ImporteCuota, Cuota3: ImporteCuota, Cuota4: ImporteCuota, Cuota5: ImporteCuota
+                                    }, (error, results5) => {
+                                        if (error) console.log(error);
+                                        resolve();
+                                    })
+                                    break;
+                                case '6':
+                                    connection.query(sql, {
+                                        id_obra: id_Obra, id_cliente: idCliente, NombreCliente: NombreCompleto[index], AnticipoFinanciero: MontoAnticipoFinanciero, Cuota1: ImporteCuota, Cuota2: ImporteCuota, Cuota3: ImporteCuota, Cuota4: ImporteCuota, Cuota5: ImporteCuota, Cuota6: ImporteCuota,
+                                    }, (error, results5) => {
+                                        if (error) console.log(error);
+                                        resolve();
+                                    })
+                                    break;
+                                case '7':
+                                    connection.query(sql, {
+                                        id_obra: id_Obra, id_cliente: idCliente, NombreCliente: NombreCompleto[index], AnticipoFinanciero: MontoAnticipoFinanciero, Cuota1: ImporteCuota, Cuota2: ImporteCuota, Cuota3: ImporteCuota, Cuota4: ImporteCuota, Cuota5: ImporteCuota, Cuota6: ImporteCuota, Cuota7: ImporteCuota, Cuota8: ImporteCuota,
+                                    }, (error, results5) => {
+                                        if (error) console.log(error);
+                                        resolve();
+                                    })
+                                    break;
+                                case '8':
+                                    connection.query(sql, {
+                                        id_obra: id_Obra, id_cliente: idCliente, NombreCliente: NombreCompleto[index], AnticipoFinanciero: MontoAnticipoFinanciero, Cuota1: ImporteCuota, Cuota2: ImporteCuota, Cuota3: ImporteCuota, Cuota4: ImporteCuota, Cuota5: ImporteCuota, Cuota6: ImporteCuota, Cuota7: ImporteCuota, Cuota8: ImporteCuota,
+                                    }, (error, results5) => {
+                                        if (error) console.log(error);
+                                        resolve();
+                                    })
+                                    break;
+                                case '9':
+                                    connection.query(sql, {
+                                        id_obra: id_Obra, id_cliente: idCliente, NombreCliente: NombreCompleto[index], AnticipoFinanciero: MontoAnticipoFinanciero, Cuota1: ImporteCuota, Cuota2: ImporteCuota, Cuota3: ImporteCuota, Cuota4: ImporteCuota, Cuota5: ImporteCuota, Cuota6: ImporteCuota, Cuota7: ImporteCuota, Cuota8: ImporteCuota, Cuota9: ImporteCuota
+                                    }, (error, results5) => {
+                                        if (error) console.log(error);
+                                        resolve();
+                                    })
+                                    break;
+                                case '10':
+                                    connection.query(sql, {
+                                        id_obra: id_Obra, id_cliente: idCliente, NombreCliente: NombreCompleto[index], AnticipoFinanciero: MontoAnticipoFinanciero, Cuota1: ImporteCuota, Cuota2: ImporteCuota, Cuota3: ImporteCuota, Cuota4: ImporteCuota, Cuota5: ImporteCuota, Cuota6: ImporteCuota, Cuota7: ImporteCuota, Cuota8: ImporteCuota, Cuota9: ImporteCuota, Cuota10: ImporteCuota
+                                    }, (error, results5) => {
+                                        if (error) console.log(error);
+                                        resolve();
+                                    })
+                                    break;
+                                case '11':
+                                    connection.query(sql, {
+                                        id_obra: id_Obra, id_cliente: idCliente, NombreCliente: NombreCompleto[index], AnticipoFinanciero: MontoAnticipoFinanciero, Cuota1: ImporteCuota, Cuota2: ImporteCuota, Cuota3: ImporteCuota, Cuota4: ImporteCuota, Cuota5: ImporteCuota, Cuota6: ImporteCuota, Cuota7: ImporteCuota, Cuota8: ImporteCuota, Cuota9: ImporteCuota, Cuota10: ImporteCuota, Cuota11: ImporteCuota
+                                    }, (error, results5) => {
+                                        if (error) console.log(error);
+                                        resolve();
+                                    })
+                                    break;
+                                case '12':
+                                    connection.query(sql, {
+                                        id_obra: id_Obra, id_cliente: idCliente, NombreCliente: NombreCompleto[index], AnticipoFinanciero: MontoAnticipoFinanciero, Cuota1: ImporteCuota, Cuota2: ImporteCuota, Cuota3: ImporteCuota, Cuota4: ImporteCuota, Cuota5: ImporteCuota, Cuota6: ImporteCuota, Cuota7: ImporteCuota, Cuota8: ImporteCuota, Cuota9: ImporteCuota, Cuota10: ImporteCuota, Cuota11: ImporteCuota, Cuota12: ImporteCuota
+                                    }, (error, results5) => {
+                                        if (error) console.log(error);
+                                        resolve();
+                                    })
+                                    break;
 
-                        default:
-                            connection.query(sql, {
-                                id_obra: id_Obra, id_cliente: idCliente, NombreCliente: NombreCompleto[index], AnticipoFinanciero: MontoAnticipoFinanciero, Cuota1: ImporteCuota
-                            }, (error, results4) => {
-                                if (error) console.log(error);
-                                resolve();
-                            })
-                            break;
-                    }
+                                default:
+                                    connection.query(sql, {
+                                        id_obra: id_Obra, id_cliente: idCliente, NombreCliente: NombreCompleto[index], AnticipoFinanciero: MontoAnticipoFinanciero, Cuota1: ImporteCuota
+                                    }, (error, results4) => {
+                                        if (error) console.log(error);
+                                        resolve();
+                                    })
+                                    break;
+                            }
+                        }
+                    })
                 }
             })
-        }
-    })
-})
+        })
     }
-    async function hacerConsulta(NombreCompleto){
+    async function hacerConsulta(NombreCompleto) {
         for (let index = 0; index < NombreCompleto.length; index++) {
-      await runQueries(index);
+            await runQueries(index);
         }
         console.log("Todas las consultas han terminado");
     }
-   hacerConsulta(NombreCompleto);
+    hacerConsulta(NombreCompleto);
     res.redirect('/cobroDeObras');
 })
 router.get('/ListadoObras', (req, res) => {
@@ -349,9 +349,9 @@ router.get('/ListadoObras', (req, res) => {
     var obras;
     connection.query(sql, (error, resultados) => {
         obras = resultados;
-        res.render('paginas/Finanzas/ListadoObras.ejs', {obras});
+        res.render('paginas/Finanzas/ListadoObras.ejs', { obras });
     })
-   
+
 })
 router.get('/cobrodeobras/clientes/LocalizarClientes/:NombreObra', (req, res) => {
     var sql
@@ -435,27 +435,39 @@ router.post('/cobrodeobras/clientes/cargarArchivoConClientes', (req, res) => {
 
     res.send(datos);
 })
-router.post('/Finanzas/EdicionComprobanteEmitido',(req,res)=>{
+router.post('/Finanzas/EdicionComprobanteEmitido', (req, res) => {
     var FechaPago = new Date(req.body.FechaPago, "en-us");
-    var sql='UPDATE finanzas_historial_comprobantes_emitidos set? WHERE nComprobante="'+req.body.NComprobante+'"';
-    connection.query(sql,[{FechaPago:FechaPago,Descripcion:req.body.Concepto,Monto:req.body.Monto,Observacion:req.body.Observacion}],(error,results)=>{
-        
-        if(error)console.log(error);
-        else{
+    var sql = 'UPDATE finanzas_historial_comprobantes_emitidos set? WHERE nComprobante="' + req.body.NComprobante + '"';
+    connection.query(sql, [{ FechaPago: FechaPago, Descripcion: req.body.Concepto, Monto: req.body.Monto, Observacion: req.body.Observacion }], (error, results) => {
+
+        if (error) console.log(error);
+        else {
             res.send('ok');
         }
     })
 })
-router.get('/Finanzas/cobros/VerComprobantesRegistrados/:idcliente',(req,res)=>{
-    var id_cliente= req.params.idcliente;
-    var sql='SELECT * FROM finanzas_recibos_de_pago_obras WHERE idCliente =?';
-    connection.query(sql,id_cliente,(error,response)=>{
-if(error)console.log(error);
-else{
-res.send(response);    
+//Buscar comprobantes emitidos
+router.get('/Finanzas/VerComprobantesRegistrados/obra/:idObra',(req,res)=>{
+    var idObra = req.params.idObra;
+var sql = 'SELECT * FROM finanzas_historial_comprobantes_emitidos WHERE id_obra ='+idObra+';';
+connection.query(sql, (error, response) => {
+    if (error) console.log(error);
+    else {
+        res.send(response);
     }
 })
 })
+router.get('/Finanzas/cobros/VerComprobantesRegistrados/:idcliente', (req, res) => {
+    var id_cliente = req.params.idcliente;
+    var sql = 'SELECT * FROM finanzas_recibos_de_pago_obras WHERE idCliente =?';
+    connection.query(sql, id_cliente, (error, response) => {
+        if (error) console.log(error);
+        else {
+            res.send(response);
+        }
+    })
+})
+
 //GUARDAR NUEVO CLIENTE
 router.post('/Finanzas/NuevoCliente/guardarCliente', (req, res) => {
     var Nombre = req.body.Nombre;
@@ -474,21 +486,21 @@ router.post('/Finanzas/NuevoCliente/guardarCliente', (req, res) => {
             if (error) console.log(error);
             else {
                 id_Obra = results[0].id;
-               NombreObra = results[0].Nombre;
-                        sql = 'INSERT into finanzas_clientes_por_obra set?';
-                        connection.query(sql, {
-                            NombreCliente: Nombre, NombreObra: Obra, id_Obra: id_Obra, DNICliente: DNI, Telefono: Teléfono, Correo: Correo, Direccion: Domicilio
-                        }, (error, results) => {
-                            if (error) console.log(error);
-                            else {    resolve();    }
-                        })
-                           
+                NombreObra = results[0].Nombre;
+                sql = 'INSERT into finanzas_clientes_por_obra set?';
+                connection.query(sql, {
+                    NombreCliente: Nombre, NombreObra: Obra, id_Obra: id_Obra, DNICliente: DNI, Telefono: Teléfono, Correo: Correo, Direccion: Domicilio
+                }, (error, results) => {
+                    if (error) console.log(error);
+                    else { resolve(); }
+                })
+
             }
 
         })
 
 
-    }).then(()=>{
+    }).then(() => {
         new Promise((resolve, reject) => {
             sql = 'Select MAX(ID_cliente) AS ID_cliente  FROM finanzas_clientes_por_obra ;';
             connection.query(sql, (error, results) => {
@@ -502,14 +514,14 @@ router.post('/Finanzas/NuevoCliente/guardarCliente', (req, res) => {
                         if (error) console.log(error);
                         else {
                             setTimeout(() => {
-                                if(AnticipoFinanciero==''){
-                                    AnticipoFinanciero=0;
+                                if (AnticipoFinanciero == '') {
+                                    AnticipoFinanciero = 0;
                                 }
                                 sql = 'INSERT INTO finanzas_clientes_predeterminados set?;'
                                 switch (cuotasQuePaga) {
                                     case '1':
                                         connection.query(sql, {
-                                            id_obra: id_Obra, id_cliente: idCliente, NombreCliente: Nombre, AnticipoFinanciero: req.body.ImporteAnticipoFinanciero,ServicioDomiciliario:req.body.ImporteServicioDomiciliario, Cuota1: req.body.ImporteCuota
+                                            id_obra: id_Obra, id_cliente: idCliente, NombreCliente: Nombre, AnticipoFinanciero: req.body.ImporteAnticipoFinanciero, ServicioDomiciliario: req.body.ImporteServicioDomiciliario, Cuota1: req.body.ImporteCuota
                                         }, (error, results) => {
                                             if (error) console.log(error);
                                         })
@@ -529,7 +541,7 @@ router.post('/Finanzas/NuevoCliente/guardarCliente', (req, res) => {
                                         }, (error, results) => {
                                             if (error) console.log(error);
                                         })
-    
+
                                         resolve();
                                         break;
                                     case '4':
@@ -604,31 +616,31 @@ router.post('/Finanzas/NuevoCliente/guardarCliente', (req, res) => {
                                         })
                                         resolve();
                                         break;
-    
+
                                     default:
                                         resolve();
                                         break;
                                 }
                             }, 1000);
-    
+
                         }
                     })
-    
-    
-    
+
+
+
                 }
-    
-    
+
+
             })
-        }).then(()=>{
+        }).then(() => {
             res.redirect('/Finanzas/cobrodeobras/VerObra/' + id_Obra);
-        }).catch(()=>{
+        }).catch(() => {
             promise1.catch(function (data) {
                 res.send(data);
+            })
+
         })
-       
-    })
-    
+
     })
 
 
@@ -682,44 +694,52 @@ router.post('/GenerarComprobante', (req, res, next) => {
                     console.log("El cliente seleccionado tiene pagos existentes. Actualizando pagos.")
                     if (a == null || a == "") {
                         sumaDeTotalesPorConcepto = ValorIngresado;
-                        resolve();
+                        sql = 'UPDATE finanzas_clientes_por_obra_cobros SET ' + Concepto + ' = ' + sumaDeTotalesPorConcepto + ', FechaPago' + Concepto + ' = "' + FechaPago + '" WHERE ID_cliente = ' + ID + ' ;';
+                        connection.query(sql, (error, results) => {
+                            if (error) console.log(error);
+                            resolve();
+                        })
                     }
                     else {
                         sumaDeTotalesPorConcepto = (ValorIngresado + a);
-                        resolve();
+                        sql = 'UPDATE finanzas_clientes_por_obra_cobros SET ' + Concepto + ' = ' + sumaDeTotalesPorConcepto + ', FechaPago' + Concepto + ' = "' + FechaPago + '" WHERE ID_cliente = ' + ID + ' ;';
+                        connection.query(sql, (error, results) => {
+                            if (error) console.log(error);
+                            resolve();
+                        })
                     }
-                    sql = 'UPDATE finanzas_clientes_por_obra_cobros SET ' + Concepto + ' = ' + sumaDeTotalesPorConcepto + ', FechaPago' + Concepto + ' = "' + FechaPago + '" WHERE ID_cliente = ' + ID + ' ;';
-                    connection.query(sql, (error, results) => {
-                        if (error) console.log(error);
-                    })
-                }).then(()=>{
-new Promise((resolve, reject) => {
-    sql = 'SELECT id_Cobro AS id_Cobro FROM finanzas_clientes_por_obra_cobros WHERE ID_cliente=' + ID + ' ;';
-    connection.query(sql, (error, results) => {
-        if (error) console.log(error);
-        id_Cobro = results[0].id_Cobro
-        resolve(id_Cobro);
-    })
-}).then(function(id_Cobro){
-    if (ObservacionesDelPago == null || ObservacionesDelPago == '') {
-       var fechapagoDate= new Date(fecha);
-        sql='INSERT INTO finanzas_historial_comprobantes_emitidos SET?'
-        connection.query(sql,{
-        Descripcion:Concepto,id_cliente:ID,id_cobro:id_Cobro, id_obra:id_Obra, FechaPago:fechapagoDate, Monto: sumaDeTotalesPorConcepto,TipoPago:FormaDePago, Observacion:'Sin observaciones'},(error,results)=>{
-                if (error) console.log(error);
-        })
-    }
-    else {
-        var fechapagoDate= new Date(fecha);
-        sql='INSERT INTO finanzas_historial_comprobantes_emitidos SET?'
-        connection.query(sql,{
-        Descripcion:Concepto,id_cliente:ID,id_cobro:id_Cobro, id_obra:id_Obra, FechaPago:fechapagoDate, Monto: sumaDeTotalesPorConcepto,TipoPago:FormaDePago, Observacion:ObservacionesDelPago},(error,results)=>{
-                if (error) console.log(error);
-        })
-    }
-});
-}  );
-resolve(); }
+                   
+                }).then(() => {
+                    new Promise((resolve, reject) => {
+                        sql = 'SELECT id_Cobro AS id_Cobro FROM finanzas_clientes_por_obra_cobros WHERE ID_cliente=' + ID + ' ;';
+                        connection.query(sql, (error, results) => {
+                            if (error) console.log(error);
+                            id_Cobro = results[0].id_Cobro
+                            resolve(id_Cobro);
+                        })
+                    }).then(function (id_Cobro) {
+                        if (ObservacionesDelPago == null || ObservacionesDelPago == '') {
+                            var fechapagoDate = new Date(fecha);
+                            sql = 'INSERT INTO finanzas_historial_comprobantes_emitidos SET?'
+                            connection.query(sql, {
+                                Descripcion: Concepto, id_cliente: ID, id_cobro: id_Cobro, id_obra: id_Obra, FechaPago: fechapagoDate,nroTransferencia:req.body.nroTransferencia, Monto: sumaDeTotalesPorConcepto, TipoPago: FormaDePago, Observacion: 'Sin observaciones'
+                            }, (error, results) => {
+                                if (error) console.log(error);
+                            })
+                        }
+                        else {
+                            var fechapagoDate = new Date(fecha);
+                            sql = 'INSERT INTO finanzas_historial_comprobantes_emitidos SET?'
+                            connection.query(sql, {
+                                Descripcion: Concepto, id_cliente: ID, id_cobro: id_Cobro, id_obra: id_Obra, FechaPago: fechapagoDate,nroTransferencia:req.body.nroTransferencia, Monto: sumaDeTotalesPorConcepto, TipoPago: FormaDePago, Observacion: ObservacionesDelPago
+                            }, (error, results) => {
+                                if (error) console.log(error);
+                            })
+                        }
+                    });
+                });
+                resolve();
+            }
 
             if (results.length == null || results.length == 0) {
 
@@ -731,9 +751,9 @@ resolve(); }
                         ID_cliente: ID, id_Obra: id_Obra,
                     }, (error, results) => {
                         if (error) console.log(error);
-                        resolve(); 
-                    })  
-                }).then(()=>{
+                        resolve();
+                    })
+                }).then(() => {
                     console.log("El cliente se ha cargado en el sistema, cargando el concepto de pago junto con su valor....");
                     sql = 'Update finanzas_clientes_por_obra_cobros set ' + Concepto + '= ' + sumaDeTotalesPorConcepto + ' WHERE ID_cliente =' + ID + ' and id_Obra=' + id_Obra + '';
                     connection.query(sql, (error, results) => {
@@ -745,29 +765,30 @@ resolve(); }
                         if (error) console.log(error);
                         id_Cobro = results[0].id_Cobro
                         if (ObservacionesDelPago == null) {
-                            var fechapagoDate= new Date(fecha);
+                            var fechapagoDate = new Date(fecha);
                             sql = 'Insert into finanzas_clientes_por_obra_cobros_observaciones set?'
-                            connection.query(sql, {id_cliente:ID, id_cobro: id_Cobro, Observacion: "Sin observaciones" }, (error, results) => {
+                            connection.query(sql, { id_cliente: ID, id_cobro: id_Cobro, Observacion: "Sin observaciones" }, (error, results) => {
                                 if (error) console.log(error);
                                 resolve();
                             })
                         }
                         else {
-                            var fechapagoDate= new Date(fecha);
-                            sql='INSERT INTO finanzas_historial_comprobantes_emitidos SET?'
-                            connection.query(sql,{
-                            Descripcion:Concepto,id_cliente:ID,id_cobro:id_Cobro, id_obra:id_Obra, FechaPago:fechapagoDate, Monto: sumaDeTotalesPorConcepto,TipoPago:FormaDePago, Observacion:ObservacionesDelPago},(error,results)=>{
-                                    if (error) console.log(error);
+                            var fechapagoDate = new Date(fecha);
+                            sql = 'INSERT INTO finanzas_historial_comprobantes_emitidos SET?'
+                            connection.query(sql, {
+                                Descripcion: Concepto, id_cliente: ID, id_cobro: id_Cobro, id_obra: id_Obra, FechaPago: fechapagoDate,nroTransferencia:req.body.nroTransferencia, Monto: sumaDeTotalesPorConcepto, TipoPago: FormaDePago, Observacion: ObservacionesDelPago
+                            }, (error, results) => {
+                                if (error) console.log(error);
+                                resolve();
                             })
                         }
                     })
-                  
-                   
+
+
                 });
             }
         })
-    })
-    promise1.then((resolve) => {
+    }).then((resolve) => {
         //Generación del comprobante en archivo Excel
         //  Se utiliza como herramienta el xlsx-populate: https://www.npmjs.com/package/xlsx-populate#serving-from-express
         // La plantilla del comprobante es: src\public\plantillas\ReciboDePago.xlsx
@@ -783,7 +804,7 @@ resolve(); }
                 })
             }
         })
-       
+
         XlsxPopulate.fromFileAsync("src/public/plantillas/ReciboDePago.xlsx").then(workbook => {
             function Unidades(num) {
 
@@ -953,15 +974,19 @@ resolve(); }
         }).then(data => {
             let nombreDelArchivo = nDeComprobante + '-' + Obra + '-' + Concepto + '-' + Nombre + '.xlsx';
             res.attachment(nombreDelArchivo);
-            res.status(204).send(data);
+            // Configurar las cabeceras de la respuesta para la descarga del archivo
+    res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    res.setHeader('Content-Disposition', 'attachment; filename=' + nombreDelArchivo);
+
+    res.status(204).send(data);
         })
             .catch(function () {
                 res.redirect('/Finanzas/cobrodeobras/VerObra/' + id_Obra);
             })
     });
 })
-router.get('/Finanzas/PagosPersonal',(req,res)=>{
-res.render('./paginas/Finanzas/pagoPersonal.ejs');
+router.get('/Finanzas/PagosPersonal', (req, res) => {
+    res.render('./paginas/Finanzas/pagoPersonal.ejs');
 })
 // EDITAR CLIENTE
 router.get('/Finanzas/CobroDeObras/EditarCliente/:id', (req, res) => {
@@ -1022,17 +1047,17 @@ router.post('/Finanzas/CobroDeObras/EditarCliente/:id', (req, res) => {
     }, id], (error, results) => {
         if (error) console.log(error)
         else {
-    sql='UPDATE finanzas_clientes_predeterminados SET ? WHERE id_cliente='+id+';';
-    connection.query(sql,[{
-        CantidadCuotas:req.body.CuotasQuePaga, NombreCliente:Nombre
-    }], (error,results)=>{
-        if (error) console.log(error)
-else{
-    res.redirect("/ListadoObras");
-}
-    
-    })
-           
+            sql = 'UPDATE finanzas_clientes_predeterminados SET ? WHERE id_cliente=' + id + ';';
+            connection.query(sql, [{
+                CantidadCuotas: req.body.CuotasQuePaga, NombreCliente: Nombre
+            }], (error, results) => {
+                if (error) console.log(error)
+                else {
+                    res.redirect("/ListadoObras");
+                }
+
+            })
+
         }
     })
 
@@ -1114,8 +1139,10 @@ router.post('/Finanzas/EditarCliente/ActualizarValoresPredeterminados', (req, re
             Cuota12: Cuota12, DNV: DNV, DPV: DPV, Hidraulica: Hidraulica, FFCC: FFCC, Privado: Privado, Municipal: Municipal, Irrigacion: Irrigacion,
         }, id], (error, results) => {
 
-            if (error){ console.log(error);
-            throw(error);}
+            if (error) {
+                console.log(error);
+                throw (error);
+            }
             else {
                 sql = 'SELECT NombreObra from finanzas_clientes_por_obra WHERE ID_cliente=?';
                 connection.query(sql, id, (error2, results2) => {
@@ -1133,14 +1160,14 @@ router.post('/Finanzas/EditarCliente/ActualizarValoresPredeterminados', (req, re
     }
 })
 //Configuración de la obra en finanzas
-router.get('/Finanzas/configObra',(req,res)=>{
-var sql= 'SELECT * FROM finanzas_clientes_predeterminados';
-connection.query(sql,(error,results)=>{
-    if(error)console.log(error);
-    else{
-        res.send(results);
-    }
-})
+router.get('/Finanzas/configObra', (req, res) => {
+    var sql = 'SELECT * FROM finanzas_clientes_predeterminados';
+    connection.query(sql, (error, results) => {
+        if (error) console.log(error);
+        else {
+            res.send(results);
+        }
+    })
 })
 //Cargar comprobante de pago con los datos del cliente
 router.get('/BuscarDatosClienteQuePaga/:idCliente', (req, res) => {
@@ -1187,7 +1214,7 @@ router.post('/Finanzas/actualizarPredeterminadosObraEntera/:id/:keyACambiar/:Nom
     var ValorIngresado = req.body.valor;
     var NombreObra = req.params.NombreObra;
     if (keyACambiar == null || keyACambiar == undefined) {
-       res.status(404).send('No se incluyo el item a modificar');
+        res.status(404).send('No se incluyo el item a modificar');
     }
     else {
         var sql = 'UPDATE finanzas_clientes_predeterminados set ' + keyACambiar + '=' + ValorIngresado + ' WHERE id_obra = ' + idObra + ' ;';

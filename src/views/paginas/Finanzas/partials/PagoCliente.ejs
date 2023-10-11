@@ -114,12 +114,18 @@
                       </div>
     <div class="col-md-6">
                         <label class="input-group-text" for="FormaDePago">Forma de pago</label>
-                        <select class="form-select" name="FormaDePago" id="">
+                        <select class="form-select" name="FormaDePago" id="FormaDePago">
                           <option value="Efectivo" selected>Efectivo</option>
                           <option value="Transferencia bancaria">Transferencia bancaria</option>
                           <option value="Cheque">Cheque</option>
                           <option value="Mercado Pago">Mercado Pago</option>
                         </select>
+                        <div id="divnroTransferencia" class="mb-3" style="display: none;">
+                          <label for="" class="form-label">N° transferencia</label>
+                          <input type="text"
+                            class="form-control" name="nroTransferencia" id="" aria-describedby="helpId" placeholder="" value="0">
+                          <small id="helpId" class="form-text text-muted">Ingrese el número de transferencia</small>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -257,8 +263,9 @@
       url: "/GenerarComprobante",
       data: formData  ,
       dataType: "json",
-      success: function (response) {
-        console.log(response);
+      success: function (data) {
+
+
         $('#MensajeServidorPago').html('<span class="text-success">El pago se ha efectuado con exito!</span>');
         setTimeout(() => {
           $('#ModalNuevoPagoObras2').modal('toggle');
@@ -392,7 +399,14 @@ $('#btnVerComprobantesRegistrados').click(()=>{
  
   $('#modalComprobantesEfectuados').modal('show');
 })
-
+$('#FormaDePago').on('change', function(){
+  var opcionSeleccionada = $(this).val();
+  if(opcionSeleccionada==="Transferencia bancaria"){
+$('#divnroTransferencia').css('display','block');
+  }else{
+    $('#divnroTransferencia').css('display','none'); 
+  }
+})
 
     </script>
     <style>
