@@ -8,12 +8,15 @@
             </div>
             <div class="modal-body">
                <div class="table-responsive-sm">
-                <table class="table table-primary" id="tablaTransferenciasRecibidas">
+                <table class="table table-primary table-bordered" id="tablaTransferenciasRecibidas">
                     <thead>
-                        <div class="button-group">
+                        <div class="button-group" >
                         <button id="btnFiltrarTransferenciasRecibidasTransferencias" class="btn btn-sm btn-primary">Transferencias</button>
                         <button id="btnFiltrarTransferenciasRecibidasEfectivo" class="btn btn-sm btn-primary">Efectivo</button>
                         <button id="btnFiltrarTransferenciasRecibidasCheque" class="btn btn-sm btn-primary">Cheque</button>
+                        <button id="btnLimpiarFiltroTransferenciasRecibidas" class="btn btn-sm btn-primary">Limpiar filtro</button>
+                        <button id="btnImprimirmodalPagosRecibidos" class="btn btn-sm btn-outline-primary"><i class="bi bi-printer"></i></button>
+<span id="CantidadRegistros">Cantidad de registros:</span>
                     </div>
 
                         <tr>
@@ -51,17 +54,29 @@
     $('#btnFiltrarTransferenciasRecibidasTransferencias').click(function(){
         jQuery("#tablaTransferenciasRecibidas tbody>tr").hide();
               jQuery("#tablaTransferenciasRecibidas td:contiene-palabra('Transferencia')").parent("tr").show();
+              var filasvisible= $("#tablaTransferenciasRecibidas tr:visible").length;
+              $('#CantidadRegistros').html('Cantidad de registros:' +filasvisible);
           })
 $('#btnFiltrarTransferenciasRecibidasEfectivo').click(function(){
-    $('#btnFiltrarTransferenciasRecibidasTransferencias').click(function(){
         jQuery("#tablaTransferenciasRecibidas tbody>tr").hide();
               jQuery("#tablaTransferenciasRecibidas td:contiene-palabra('Efectivo')").parent("tr").show();
-    })
+              var filasvisible= $("#tablaTransferenciasRecibidas tr:visible").length;
+              $('#CantidadRegistros').html('Cantidad de registros:' +filasvisible);
+
 })
 $('#btnFiltrarTransferenciasRecibidasCheque').click(function(){
-    $('#btnFiltrarTransferenciasRecibidasTransferencias').click(function(){
         jQuery("#tablaTransferenciasRecibidas tbody>tr").hide();
               jQuery("#tablaTransferenciasRecibidas td:contiene-palabra('Cheque')").parent("tr").show();
-            })
+              var filasvisible= $("#tablaTransferenciasRecibidas tr:visible").length;
+              $('#CantidadRegistros').html('Cantidad de registros:' +filasvisible);
+
 })
+$('#btnLimpiarFiltroTransferenciasRecibidas').click(function(){
+    jQuery("#tablaTransferenciasRecibidas tbody>tr").show();
+    var filasvisible= $("#tablaTransferenciasRecibidas tr:visible").length;
+      $('#CantidadRegistros').html('Cantidad de registros:' +filasvisible);
+})
+$('#btnImprimirmodalPagosRecibidos').click( function(){
+    window.print();
+    });
 </script>
