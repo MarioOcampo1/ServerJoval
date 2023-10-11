@@ -8,28 +8,27 @@
             </div>
             <div class="modal-body">
                <div class="table-responsive-sm">
-                <table class="table table-primary" id="tablaTransferenicasRecibidas">
+                <table class="table table-primary" id="tablaTransferenciasRecibidas">
                     <thead>
+                        <div class="button-group">
+                        <button id="btnFiltrarTransferenciasRecibidasTransferencias" class="btn btn-sm btn-primary">Transferencias</button>
+                        <button id="btnFiltrarTransferenciasRecibidasEfectivo" class="btn btn-sm btn-primary">Efectivo</button>
+                        <button id="btnFiltrarTransferenciasRecibidasCheque" class="btn btn-sm btn-primary">Cheque</button>
+                    </div>
+
                         <tr>
                             <th scope="col">Cliente</th>
                             <th scope="col">Fecha</th>
                             <th scope="col">Concepto</th>
                             <th scope="col">Monto</th>
                             <th scope="col">Observación</th>
+                            <th scope="col">Tipo de pago</th>
+
                             <th scope="col">N° Transferencia</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="">
-                            <td scope="row">R1C1</td>
-                            <td>R1C2</td>
-                            <td>R1C3</td>
-                        </tr>
-                        <tr class="">
-                            <td scope="row">Item</td>
-                            <td>Item</td>
-                            <td>Item</td>
-                        </tr>
+                      
                     </tbody>
                 </table>
                </div>
@@ -42,3 +41,27 @@
         </div>
     </div>
 </div>
+<script>
+     jQuery.extend(jQuery.expr[":"],
+            {
+              "contiene-palabra": function (elem, i, match, array) {
+                return (elem.textContent || elem.innerText || jQuery(elem).text() || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
+              }
+            });
+    $('#btnFiltrarTransferenciasRecibidasTransferencias').click(function(){
+        jQuery("#tablaTransferenciasRecibidas tbody>tr").hide();
+              jQuery("#tablaTransferenciasRecibidas td:contiene-palabra('Transferencia')").parent("tr").show();
+          })
+$('#btnFiltrarTransferenciasRecibidasEfectivo').click(function(){
+    $('#btnFiltrarTransferenciasRecibidasTransferencias').click(function(){
+        jQuery("#tablaTransferenciasRecibidas tbody>tr").hide();
+              jQuery("#tablaTransferenciasRecibidas td:contiene-palabra('Efectivo')").parent("tr").show();
+    })
+})
+$('#btnFiltrarTransferenciasRecibidasCheque').click(function(){
+    $('#btnFiltrarTransferenciasRecibidasTransferencias').click(function(){
+        jQuery("#tablaTransferenciasRecibidas tbody>tr").hide();
+              jQuery("#tablaTransferenciasRecibidas td:contiene-palabra('Cheque')").parent("tr").show();
+            })
+})
+</script>

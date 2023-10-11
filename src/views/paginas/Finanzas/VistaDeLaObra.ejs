@@ -941,7 +941,11 @@ $(document).ready(function(){
       
    })
    $('#btnVerTransferenciasObra').click(()=>{
-        $('#tablaTransferenicasRecibidas').DataTable({
+    if($.fn.DataTable.isDataTable('#tablaTransferenciasRecibidas')){
+      $('#tablaTransferenciasRecibidas').DataTable().destroy();
+    }
+    
+        $('#tablaTransferenciasRecibidas').DataTable({
           "paging": false,
         "info": false,
         "searching": false,
@@ -969,6 +973,7 @@ $(document).ready(function(){
             {"data":"Descripcion"},
             {"data":"Monto"},
             {"data":"Observacion"},
+            {"data":"TipoPago"},
             {"data":"nroTransferencia"},
           ],
         
