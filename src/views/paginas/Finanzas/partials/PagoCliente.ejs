@@ -1,144 +1,4 @@
-<form  id="formGenerarComprobante" action="/GenerarComprobante" method="post">
-    <div class="container-fluid">
-        <div class="modal fade" id="ModalNuevoPagoObras2" tabindex="-1" role="dialog" aria-labelledby="ModalNuevoPagoObras2Label" aria-hidden="true">
-          <div class="modal-dialog modal-xl" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="TituloModal">Nuevo pago</h5>
-                <div class="btn-group">
-                  <button class="btn btn-outline-secondary" type="button" id="btnClientesPorLote" onclick="cargarClientesPorLote('<%=NombreObra%>')">Cargar
-                    clientes por lotes</button>
-                  <button type="button" id="btnVerComprobantesRegistrados" class="btn btn-outline-secondary">Ver comprobantes registrados</button>
-                  <button type="button" class="btn btn-outline-secondary" onclick="editarVecino()">
-                    <i id="engranajeEditarVecino" class="bi bi-gear"></i>
-                  Editar montos a pagar</button>
-                </div>
-    
-                <div id="editarDatosCliente">
-                </div>
-                <button type="button" class="close" onclick="$('#ModalNuevoPagoObras2').modal('hide');" aria-label="Cerrar">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-    
-              </div>
-                <div class="modal-body">
-                  <input type="number" name="IDCliente" id="IDCliente" hidden>
-                  <div class="container">
-                    <div class="d-inline  mb-2">
-                      Obra: <%=NombreObra%>
-                      <input class="" type="text" name="Obra" id="Obra" value="<%=NombreObra%>" hidden>
-    
-                    </div>
-                    <div class="d-inline  ms-5 mb-2" id="textoNombreCliente2">
-                    </div>
-                    
-                    <input class="" id="inputNombreCliente2" type="hidden" name="NombreCompleto" value="">
-    
-                    <div class="input-group mb-3">
-                      <label id="labelDomicilio" class="input-group-text" for="InputDomicilio2">Domicilio</label>
-                      <input class="form-control" type="text" id="inputDomicilio2" name="Domicilio">
-                    </div>
-                    <div class="input-group mb-3 ">
-                          <label class="input-group-text" for="Concepto">Concepto</label>
-                          <select class="form-select" name="Concepto" id="Concepto" aria-label="Seleccione el pago">
-                            <!-- <input required list="ConceptosDePago" defaultValue=""  class="form-control" type="text" name="Concepto" id="Concepto"> -->
-                            <!-- <datalist id="ConceptosDePago"> -->
-                            <option value="" selected> </option>
-                            <option value="AnticipoFinanciero">Anticipo Financiero</option>
-                            <option value="Cuota1">Cuota 1</option>
-                            <option value="Cuota2">Cuota 2</option>
-                            <option value="Cuota3">Cuota 3</option>
-                            <option value="Cuota4">Cuota 4</option>
-                            <option value="Cuota5">Cuota 5</option>
-                            <option value="Cuota6">Cuota 6</option>
-                            <option value="Cuota7">Cuota 7</option>
-                            <option value="Cuota8">Cuota 8</option>
-                            <option value="Cuota9">Cuota 9</option>
-                            <option value="Cuota10">Cuota 10</option>
-                            <option value="Cuota11">Cuota 11</option>
-                            <option value="Cuota12">Cuota 12</option>
-                            <option value="DNV">Permiso DNV</option>
-                            <option value="DPV">Permiso DPV</option>
-                            <option value="Hidraulica">Permiso Hidraulica</option>
-                            <option value="FFCC">Permiso FFCC</option>
-                            <option value="Privado">Permiso Privado</option>
-                            <option value="Municipal">Permiso Municipal</option>
-                            <option value="ServicioDomiciliario">Servicio Domiciliario</option>
-                            <option value="IngresoDocumentacion">Ingreso de documentacion comienzo tramite
-                            </option>
-                            <option value="Irrigacion">Permiso Irrigacion</option>
-                            <!-- </datalist> -->
-                          </select>
-                        
-                        
-                 
-                    </div>
-                    <div class=" calculoUSD" style="display: none;" >
-                      <input type="hidden" id="cotizacionBaseDolar">
-                      <div class="row mb-5">
-                      <div class="col-2">
-                        <label for="" class="form-label">¿Cálculo en dólares?</label>
-                        <select class="form-select form-select-sm" name="" id="CalcularEnDolares">
-                          <option selected></option>
-                          <option value="No">No</option>
-                          <option value="Si">Si</option>
-                          
-                        </select>
-                      </div>
-<div class="col-2">
-  <label for="" class="form-label">Cotización actual:</label>
-  <input type="number"
-    class="form-control" name="" id="CotizacionUSD" aria-describedby="helpId" placeholder="" value="365.50">
-    
-</div>
-<div class="col-8" id="TextoUsuarioCotizacionUSD">
-  
-</div>
-<span style="display: none;" class="descripcionUSD">El sistema reajusta automáticamente el monto a pagar, en base al valor predefinido al momento de contratar la obra.</span>
-<span id="cotizacionInicial" class="text-primary" val=""></span>
-</div>
- </div>
-                    <div class="input-group-text mb-3 col-3" id="divImporte2" style="display: none;">
-                      <label class="input-group-text" for="ImporteIngresado">Importe</label>
-                      <input required class="form-control" value="0" type="number" name="ValorIngresado" id="ImporteIngresado">
-                    </div>
-               
-                    <div class="mb-3">
-                      <label class="input-group-text" for="FechaPago2"> Fecha de pago</label>
-                      <input required class="form-control" type="date" name="FechaPago" id="FechaPago2" autocomplete="on">
-                    </div>
-    <div class="row">
-                      <div class="col-md-6">
-                        <label class="input-group-text" for="ObservacionesDelPago">Observaciones</label>
-                        <input class="form-control" type="text" name="ObservacionesDelPago" id="ObservacionesDelPago">
-                      </div>
-    <div class="col-md-6">
-                        <label class="input-group-text" for="FormaDePago">Forma de pago</label>
-                        <select class="form-select" name="FormaDePago" id="FormaDePago">
-                          <option value="Efectivo" selected>Efectivo</option>
-                          <option value="Transferencia">Transferencia bancaria</option>
-                          <option value="Cheque">Cheque</option>
-                        </select>
-                        <div id="divnroTransferencia" class="mb-3" style="display: none;">
-                          <label for="" class="form-label">N° transferencia</label>
-                          <input type="text"
-                            class="form-control" name="nroTransferencia" id="" aria-describedby="helpId" placeholder="" value="0">
-                          <small id="helpId" class="form-text text-muted">Ingrese el número de transferencia</small>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  </div>
-                <div class="modal-footer noImprimible">
-                  <div id="MensajeServidorPago"></div>
-                  <button type="button" class="btn btn-danger noImprimible" onclick="$('#ModalNuevoPagoObras').modal('hide')">Cerrar</button>
-                  <button type="button" id="btnGuardarCambiosPagos" class="btn btn-success  noImprimible ">Guardar</button>
-                </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </form>
+<%- include('../VistaDeLaObraModals/NuevoPagoObras.ejs') %>
   
     <div class="modal fade" id="modalComprobantesEfectuados" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
       <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-fullscreen" role="document">
@@ -165,95 +25,23 @@
 
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            
           </div>
         </div>
       </div>
     </div>
  
-    <div class="modal fade" id="modalEditarComprobanteEmitido" tabindex="-2"  role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="modalTitleId">Edición de comprobante emitido</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <form action="/Finanzas/EdicionComprobanteEmitido" method="post">
-            <div class="form-group">
-        <div class="mb-3">
-          <input type="hidden" name="NComprobante" id="EdicionComprobanteEmitidoNComprobante">
-          <label for="" class="form-label">Fecha de pago:</label>
-          <input type="date"
-            class="form-control" name="FechaPago" id="EdicionComprobanteEmitidoFechaPago" aria-describedby="helpId" placeholder="">
-          <small id="helpId" class="form-text text-muted">Editar la fecha de pago</small>
-        </div>
-        <div class="mb-3">
-          <label for="" class="form-label">Concepto:</label>
-         <input class="form-control" type="text" name="Concepto" id="EdicionComprobanteEmitidoConcepto">
-          
-        </div>
-        <div class="mb-3">
-          <label for="" class="form-label">Monto:</label>
-         <input class="form-control" type="text" name="Monto" id="EdicionComprobanteEmitidoMonto">
-          
-        </div>
-        <div class="mb-3">
-          <label for="" class="form-label">Observación:</label>
-         <input class="form-control" type="text" name="Observacion" id="EdicionComprobanteEmitidoObservacion">
-          
-        </div>
-      </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            <button type="submit" class="btn btn-success">Guardar edición</button>
-          </div>
-        </form>
-        </div>
-      </div>
-    </div>
+   <%- include('../VistaDeLaObraModals/EdicionComprobanteEmitido.ejs') %>
+   
     <script>
-  function CargarPago(idcliente) {
-    $('#formGenerarComprobante')[0].reset();
-    $.ajax({
-      url: '/BuscarDatosClienteQuePaga/' + idcliente,
-    }).done(function(respuestaServidor) {
-      var results = respuestaServidor.results;
-      $('#ModalNuevoPagoObras2').modal("show");
-      $('#editarCliente').empty();
-      $('#inputNombreCliente2').val(results[0].NombreCliente);
-      $('#inputNombreCliente2').css('display', 'block');
-      $('#textoNombreCliente2').css('display', 'block');
-      $('#textoNombreCliente2').empty();
-      $('#textoNombreCliente2').append('Nombre del cliente: ' + results[0].NombreCliente);
-      $('#inputDomicilio2').val(results[0].Direccion);
-      $('#IDCliente').val(idcliente);
-
-      var fecha = new Date(); //Fecha actual
-      var mes = fecha.getMonth() + 1; //obteniendo mes
-      var dia = fecha.getDate(); //obteniendo dia
-      var ano = fecha.getFullYear(); //obteniendo año
-      if (dia < 10)
-        dia = '0' + dia; //agrega cero si el menor de 10
-      if (mes < 10)
-        mes = '0' + mes //agrega cero si el menor de 10
-      $('#FechaPago2').val(ano + "-" + mes + "-" + dia);
-      $('#FechaPago2').html(ano + "-" + mes + "-" + dia);
-    });
-    $('#editarDatosCliente').html('<a class="btn btn-info" href="/Finanzas/CobroDeObras/EditarCliente/'+ idcliente+'">Editar cliente</a>');
-  }
-    </script>
-    <script>
-       $('#btnGuardarCambiosPagos').click(function(){ 
-    // Funcion que trabaja con el modal que se encuentra ubicado en PagoClientes.ejs
+           $('#btnGuardarCambiosPagos').click(function(){ 
+    // Funcion que trabaja con el modal que se encuentra ubicado en NuevoPagoObras.ejs, dentro de PagoClientes.ejs
     //Primero comprobamos si el pago ingresado, es mayor al estipulado o no.
+    // la variable "ImporteOriginalAPagar" se encuentra dentro de "VistaDeLaObra.ejs".
     if($('#ImporteIngresado').val()>ImporteOriginalAPagar){
-    if($('#CalcularEnDolares').val()=="Si"){
-    //El importe ha sido calculado en dolares.
+    console.log('Se ha detectado que el importe ingresado para pagar, es mayor al original estipulado');
 
-    }
     }
     const form =$('#formGenerarComprobante');
     const formData=form.serialize();
@@ -286,9 +74,10 @@
  
   $('#CotizacionUSD').on('change',(()=>{
     if($('#CalcularEnDolares').val()=="Si"){
+    
    var cotizacionBaseDolar = $('#cotizacionInicial').val();
                 var montoAPagar = ImporteOriginalAPagar;
-                var cotizacionActualDolar = $('#CotizacionUSD').val();
+             var cotizacionActualDolar=$('#CotizacionUSD').val();
                 montoAPagar = montoAPagar/cotizacionBaseDolar; //Se recalcula el importe base. Para saber cuantos dolares eran en su momento.
                 montoAPagar = montoAPagar * cotizacionActualDolar; //El monto en dolares base, se multiplica por la cotizacion actual, para saber el valor actual en ARS.
                montoAPagar=montoAPagar.toFixed(2);
@@ -299,9 +88,11 @@
   })
   )
   $('#CalcularEnDolares').on('change',(()=>{
-    if($('#CalcularEnDolares').val()=="Si"){
+    var cotizacionActualDolar=0;
+    if($('#CalcularEnDolares').val()=="Si"){ //Cuando selecciona la opcion "¿Calculo en dolares?" en sí, se procede a consultar una api externa que actualiza la cotización del dólar, correspondiente a dolar venta oficial banco nación.
+      
       $('.descripcionUSD').css('display','block');
-   //Si la opcion calcular en dolares esta seleccionada, se realiza el reajuste y se muestra en "Importe"
+   //Se realiza el reajuste en el valor a pagar, en "Importe".
    var cotizacionBaseDolar = $('#cotizacionInicial').val();
                 var montoAPagar = ImporteOriginalAPagar;
                 var cotizacionActualDolar = $('#CotizacionUSD').val();
@@ -400,7 +191,7 @@ $('#btnVerComprobantesRegistrados').click(()=>{
 })
 $('#FormaDePago').on('change', function(){
   var opcionSeleccionada = $(this).val();
-  if(opcionSeleccionada==="Transferencia bancaria"){
+  if(opcionSeleccionada==="Transferencia"){
 $('#divnroTransferencia').css('display','block');
   }else{
     $('#divnroTransferencia').css('display','none'); 

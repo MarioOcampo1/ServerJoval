@@ -1,0 +1,174 @@
+<form  id="formGenerarComprobante" action="/GenerarComprobante" method="post">
+    <div class="container-fluid">
+        <div class="modal fade" id="ModalNuevoPagoObras2" tabindex="-1" role="dialog" aria-labelledby="ModalNuevoPagoObras2Label" aria-hidden="true">
+          <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="TituloModal">Nuevo pago</h5>
+                <div class="btn-group">
+                  <button class="btn btn-outline-secondary" type="button" id="btnClientesPorLote" onclick="cargarClientesPorLote('<%=NombreObra%>')">Cargar
+                    clientes por lotes</button>
+                  <button type="button" id="btnVerComprobantesRegistrados" class="btn btn-outline-secondary">Ver comprobantes registrados</button>
+                  <button type="button" class="btn btn-outline-secondary" onclick="editarVecino()">
+                    <i id="engranajeEditarVecino" class="bi bi-gear"></i>
+                  Editar montos a pagar</button>
+                </div>
+    
+                <div id="editarDatosCliente">
+                </div>
+                <button type="button" class="close" onclick="$('#ModalNuevoPagoObras2').modal('hide');" aria-label="Cerrar">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+    
+              </div>
+                <div class="modal-body">
+    <input type="number" name="CotizacionUSD" id="CotizacionUSDGenerarComprobante" hidden> 
+
+                  <input type="number" name="IDCliente" id="IDCliente" hidden>
+                  <div class="container">
+                    <div class="d-inline  mb-2">
+                      Obra: <%=NombreObra%>
+                      <input class="" type="text" name="Obra" id="Obra" value="<%=NombreObra%>" hidden>
+    
+                    </div>
+                    <div class="d-inline  ms-5 mb-2" id="textoNombreCliente2">
+                    </div>
+                    
+                    <input class="" id="inputNombreCliente2" type="hidden" name="NombreCompleto" value="">
+    
+                    <div class="input-group mb-3">
+                      <label id="labelDomicilio" class="input-group-text" for="InputDomicilio2">Domicilio</label>
+                      <input class="form-control" type="text" id="inputDomicilio2" name="Domicilio">
+                    </div>
+                    <div class="input-group mb-3 ">
+                          <label class="input-group-text" for="Concepto">Concepto </label>
+                          <select class="form-select" name="Concepto" id="Concepto" aria-label="Seleccione el pago">
+                            <!-- <input required list="ConceptosDePago" defaultValue=""  class="form-control" type="text" name="Concepto" id="Concepto"> -->
+                            <!-- <datalist id="ConceptosDePago"> -->
+                            <option value="" selected> </option>
+                            <option value="AnticipoFinanciero">Anticipo Financiero</option>
+                            <option value="Cuota1">Cuota 1</option>
+                            <option value="Cuota2">Cuota 2</option>
+                            <option value="Cuota3">Cuota 3</option>
+                            <option value="Cuota4">Cuota 4</option>
+                            <option value="Cuota5">Cuota 5</option>
+                            <option value="Cuota6">Cuota 6</option>
+                            <option value="Cuota7">Cuota 7</option>
+                            <option value="Cuota8">Cuota 8</option>
+                            <option value="Cuota9">Cuota 9</option>
+                            <option value="Cuota10">Cuota 10</option>
+                            <option value="Cuota11">Cuota 11</option>
+                            <option value="Cuota12">Cuota 12</option>
+                            <option value="DNV">Permiso DNV</option>
+                            <option value="DPV">Permiso DPV</option>
+                            <option value="Hidraulica">Permiso Hidraulica</option>
+                            <option value="FFCC">Permiso FFCC</option>
+                            <option value="Privado">Permiso Privado</option>
+                            <option value="Municipal">Permiso Municipal</option>
+                            <option value="ServicioDomiciliario">Servicio Domiciliario</option>
+                            <option value="IngresoDocumentacion">Ingreso de documentacion comienzo tramite
+                            </option>
+                            <option value="Irrigacion">Permiso Irrigacion</option>
+                            <!-- </datalist> -->
+                          </select>
+                       
+                        
+                 
+                    </div>
+                    <div class=" calculoUSD" style="display: none;" >
+                      <input type="hidden" id="cotizacionBaseDolar">
+                      <div class="row mb-5">
+                      <div class="col-2">
+                        <label for="" class="form-label">¿Actualizar el precio?</label>
+                        <select class="form-select form-select-sm" name="" id="CalcularEnDolares">
+                          <option selected></option>
+                          <option value="No">No</option>
+                          <option value="Si">Si</option>
+                          
+                        </select>
+                      </div>
+<div class="col-2">
+  <label for="" class="form-label">Dólar venta oficial BNA:</label>
+  <input type="number"
+    class="form-control" name="" id="CotizacionUSD" aria-describedby="helpId" placeholder="" value="0">
+    
+</div>
+<div class="col-8" id="TextoUsuarioCotizacionUSD">
+  
+</div>
+<span style="display: none;" class="descripcionUSD">El sistema reajusta automáticamente el monto a pagar, en base al valor predefinido al momento de contratar la obra.</span>
+<span id="cotizacionInicial" class="text-primary" val=""></span>
+</div>
+ </div>
+                    <div class="input-group-text mb-3 col-3" id="divImporte2" style="display: none;">
+                      <label class="input-group-text" for="ImporteIngresado">Importe</label>
+                      <input required class="form-control" value="0" type="number" name="ValorIngresado" id="ImporteIngresado">
+                    </div>
+               
+                    <div class="mb-3">
+                      <label class="input-group-text" for="FechaPago2"> Fecha de pago</label>
+                      <input required class="form-control" type="date" name="FechaPago" id="FechaPago2" autocomplete="on">
+                    </div>
+    <div class="row">
+                      <div class="col-md-6">
+                        <label class="input-group-text" for="ObservacionesDelPago">Observaciones</label>
+                        <input class="form-control" type="text" name="ObservacionesDelPago" id="ObservacionesDelPago">
+                      </div>
+    <div class="col-md-6">
+                        <label class="input-group-text" for="FormaDePago">Forma de pago</label>
+                        <select class="form-select" name="FormaDePago" id="FormaDePago">
+                          <option value="Efectivo" selected>Efectivo</option>
+                          <option value="Transferencia">Transferencia bancaria</option>
+                          <option value="Cheque">Cheque</option>
+                        </select>
+                        <div id="divnroTransferencia" class="mb-3" style="display: none;">
+                          <label for="" class="form-label">N° identificación de transferencia</label>
+                          <input type="text"
+                            class="form-control" name="nroTransferencia" id="" aria-describedby="helpId" placeholder="" value="0">
+                          <small id="helpId" class="form-text text-muted">Ingrese el la identificación de la transferencia(solo números).</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+                <div class="modal-footer noImprimible">
+                  <div id="MensajeServidorPago"></div>
+                  <button type="button" class="btn btn-danger noImprimible" onclick="$('#ModalNuevoPagoObras').modal('hide')">Cerrar</button>
+                  <button type="button" id="btnGuardarCambiosPagos" class="btn btn-success  noImprimible ">Guardar</button>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <script>
+        function CargarPago(idcliente) {
+          $('#formGenerarComprobante')[0].reset();
+          $.ajax({
+            url: '/BuscarDatosClienteQuePaga/' + idcliente,
+          }).done(function(respuestaServidor) {
+            var results = respuestaServidor.results;
+            $('#ModalNuevoPagoObras2').modal("show");
+            $('#editarCliente').empty();
+            $('#inputNombreCliente2').val(results[0].NombreCliente);
+            $('#inputNombreCliente2').css('display', 'block');
+            $('#textoNombreCliente2').css('display', 'block');
+            $('#textoNombreCliente2').empty();
+            $('#textoNombreCliente2').append('Nombre del cliente: ' + results[0].NombreCliente);
+            $('#inputDomicilio2').val(results[0].Direccion);
+            $('#IDCliente').val(idcliente);
+      
+            var fecha = new Date(); //Fecha actual
+            var mes = fecha.getMonth() + 1; //obteniendo mes
+            var dia = fecha.getDate(); //obteniendo dia
+            var ano = fecha.getFullYear(); //obteniendo año
+            if (dia < 10)
+              dia = '0' + dia; //agrega cero si el menor de 10
+            if (mes < 10)
+              mes = '0' + mes //agrega cero si el menor de 10
+            $('#FechaPago2').val(ano + "-" + mes + "-" + dia);
+            $('#FechaPago2').html(ano + "-" + mes + "-" + dia);
+          });
+          $('#editarDatosCliente').html('<a class="btn btn-info" href="/Finanzas/CobroDeObras/EditarCliente/'+ idcliente+'">Editar cliente</a>');
+        }
+          </script>

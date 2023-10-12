@@ -648,6 +648,8 @@ router.post('/Finanzas/NuevoCliente/guardarCliente', (req, res) => {
 })
 //PAGOS
 router.post('/GenerarComprobante', (req, res, next) => {
+    var CotizacionUSD= req.body.CotizacionUSD;
+    var nroTransferencia= req.body.nroTransferencia;
     let sql = '';
     var ID = req.body.IDCliente;
     var Nombre = req.body.NombreCompleto;
@@ -721,7 +723,7 @@ router.post('/GenerarComprobante', (req, res, next) => {
                         if (ObservacionesDelPago == null || ObservacionesDelPago == '') {
                             var fechapagoDate = new Date(fecha);
                             sql = 'INSERT INTO finanzas_historial_comprobantes_emitidos SET?'
-                            connection.query(sql, {
+                            connection.query(sql, {Nombre:Nombre,nroTransferencia:nroTransferencia, CotizacionDolar:CotizacionUSD,
                                 Descripcion: Concepto, id_cliente: ID, id_cobro: id_Cobro, id_obra: id_Obra, FechaPago: fechapagoDate,nroTransferencia:req.body.nroTransferencia, Monto: sumaDeTotalesPorConcepto, TipoPago: FormaDePago, Observacion: 'Sin observaciones'
                             }, (error, results) => {
                                 if (error) console.log(error);
@@ -730,7 +732,7 @@ router.post('/GenerarComprobante', (req, res, next) => {
                         else {
                             var fechapagoDate = new Date(fecha);
                             sql = 'INSERT INTO finanzas_historial_comprobantes_emitidos SET?'
-                            connection.query(sql, {
+                            connection.query(sql, {Nombre:Nombre,nroTransferencia:nroTransferencia, CotizacionDolar:CotizacionUSD,
                                 Descripcion: Concepto, id_cliente: ID, id_cobro: id_Cobro, id_obra: id_Obra, FechaPago: fechapagoDate,nroTransferencia:req.body.nroTransferencia, Monto: sumaDeTotalesPorConcepto, TipoPago: FormaDePago, Observacion: ObservacionesDelPago
                             }, (error, results) => {
                                 if (error) console.log(error);
@@ -795,7 +797,7 @@ router.post('/GenerarComprobante', (req, res, next) => {
         // Datos que se cargan en la misma: Nombre, Domicilio, ValorIngresado, Concepto, FechaPago, ObservacionesDelPago, Obra.
         sql = 'INSERT INTO finanzas_recibos_de_pago_obras set?';
         var nDeComprobante;
-        connection.query(sql, { idObra: id_Obra, idCliente: ID, Concepto: Concepto, ValorIngresado: ValorIngresado, ObservacionesDelPago, ObservacionesDelPago }, (error, results) => {
+        connection.query(sql, {idObra: id_Obra, idCliente: ID, Concepto: Concepto, ValorIngresado: ValorIngresado, ObservacionesDelPago, ObservacionesDelPago }, (error, results) => {
             if (error) console.log(error);
             else {
                 sql = 'SELECT MAX(NRecibo) as Nrecibo FROM finanzas_recibos_de_pago_obras';
@@ -1184,10 +1186,12 @@ router.get('/BuscarDatosClienteQuePaga/:idCliente', (req, res) => {
 
     })
     promise1.then(function (results) {
+        var montosCuota;
         sql = 'SELECT AnticipoFinanciero,Cuota1,Cuota2,Cuota3,Cuota4,Cuota5,Cuota6,Cuota7,Cuota8,Cuota9,Cuota10,Cuota11,Cuota12,Municipal,Irrigacion,DNV,DPV,Hidraulica,FFCC,Privado,ServicioDomiciliario,CotizacionUSD FROM finanzas_clientes_predeterminados WHERE id_cliente = ? ';
-        connection.query(sql, idCliente, (error, montosCuota) => {
+        connection.query(sql, idCliente, (error, resultmontosCuota) => {
             if (error) console.log(error);
             else {
+                montosCuota=resultmontosCuota;
                 res.send({ results, montosCuota });
             }
         })
@@ -1217,9 +1221,10 @@ router.post('/Finanzas/actualizarPredeterminadosObraEntera/:id/:keyACambiar/:Nom
         res.status(404).send('No se incluyo el item a modificar');
     }
     else {
-        var sql = 'UPDATE finanzas_clientes_predeterminados set ' + keyACambiar + '=' + ValorIngresado + ' WHERE id_obra = ' + idObra + ' ;';
+        var sql = 'UPDATE finanzas_clientes_predeterminados set ' + keyACambiar + ' = "' + ValorIngresado + '" WHERE id_obra = ' + idObra + ' ;';
         connection.query(sql, (error, results) => {
-            if (error) console.log(error);
+            console.log(sql);
+            if (error){ console.log(error);}
             else {
                 res.send('Ok');
             }
