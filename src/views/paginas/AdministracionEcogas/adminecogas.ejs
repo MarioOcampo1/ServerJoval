@@ -173,7 +173,8 @@
 
           $(document).ready(function () {
             BuscarVencimientos();
-            $('.collapse').collapse('hide')
+            $('.collapse').collapse('hide')//Esconde todos los elementos con la clase collapse
+            $('#VencimientosCollapse').css('display', 'block');//Como queremos que los vencimientos se muestren al principio, lo mostramos.
             var url = '/adminecogas/TablaGeneral';
 
             var tabla = $('#comunicacionDiaria').DataTable({

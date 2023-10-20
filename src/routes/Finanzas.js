@@ -724,7 +724,7 @@ router.post('/GenerarComprobante', (req, res, next) => {
                             var fechapagoDate = new Date(fecha);
                             sql = 'INSERT INTO finanzas_historial_comprobantes_emitidos SET?'
                             connection.query(sql, {Nombre:Nombre,nroTransferencia:nroTransferencia, CotizacionDolar:CotizacionUSD,
-                                Descripcion: Concepto, id_cliente: ID, id_cobro: id_Cobro, id_obra: id_Obra, FechaPago: fechapagoDate,nroTransferencia:req.body.nroTransferencia, Monto: sumaDeTotalesPorConcepto, TipoPago: FormaDePago, Observacion: 'Sin observaciones'
+                                Descripcion: Concepto, id_cliente: ID, id_cobro: id_Cobro, id_obra: id_Obra, FechaPago: req.body.FechaPago,nroTransferencia:req.body.nroTransferencia, Monto: sumaDeTotalesPorConcepto, TipoPago: FormaDePago, Observacion: 'Sin observaciones'
                             }, (error, results) => {
                                 if (error) console.log(error);
                             })
@@ -733,7 +733,7 @@ router.post('/GenerarComprobante', (req, res, next) => {
                             var fechapagoDate = new Date(fecha);
                             sql = 'INSERT INTO finanzas_historial_comprobantes_emitidos SET?'
                             connection.query(sql, {Nombre:Nombre,nroTransferencia:nroTransferencia, CotizacionDolar:CotizacionUSD,
-                                Descripcion: Concepto, id_cliente: ID, id_cobro: id_Cobro, id_obra: id_Obra, FechaPago: fechapagoDate,nroTransferencia:req.body.nroTransferencia, Monto: sumaDeTotalesPorConcepto, TipoPago: FormaDePago, Observacion: ObservacionesDelPago
+                                Descripcion: Concepto, id_cliente: ID, id_cobro: id_Cobro, id_obra: id_Obra, FechaPago: req.body.FechaPago,nroTransferencia:req.body.nroTransferencia, Monto: sumaDeTotalesPorConcepto, TipoPago: FormaDePago, Observacion: ObservacionesDelPago
                             }, (error, results) => {
                                 if (error) console.log(error);
                             })
@@ -777,8 +777,8 @@ router.post('/GenerarComprobante', (req, res, next) => {
                         else {
                             var fechapagoDate = new Date(fecha);
                             sql = 'INSERT INTO finanzas_historial_comprobantes_emitidos SET?'
-                            connection.query(sql, {
-                                Descripcion: Concepto, id_cliente: ID, id_cobro: id_Cobro, id_obra: id_Obra, FechaPago: fechapagoDate,nroTransferencia:req.body.nroTransferencia, Monto: sumaDeTotalesPorConcepto, TipoPago: FormaDePago, Observacion: ObservacionesDelPago
+                            connection.query(sql, {Nombre:Nombre,nroTransferencia:nroTransferencia, CotizacionDolar:CotizacionUSD,
+                                Descripcion: Concepto, id_cliente: ID, id_cobro: id_Cobro, id_obra: id_Obra, FechaPago: req.body.FechaPago,nroTransferencia:req.body.nroTransferencia, Monto: sumaDeTotalesPorConcepto, TipoPago: FormaDePago, Observacion: ObservacionesDelPago
                             }, (error, results) => {
                                 if (error) console.log(error);
                                 resolve();
