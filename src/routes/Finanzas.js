@@ -437,14 +437,62 @@ router.post('/cobrodeobras/clientes/cargarArchivoConClientes', (req, res) => {
 })
 router.post('/Finanzas/EdicionComprobanteEmitido', (req, res) => {
     var FechaPago = new Date(req.body.FechaPago, "en-us");
-    var sql = 'UPDATE finanzas_historial_comprobantes_emitidos set? WHERE nComprobante="' + req.body.NComprobante + '"';
+    var datosComprobante;
+    var Monto= req.body.Monto;
+    var MontoOriginalCargado;
+    var sql = 'SELECT Monto from finanzas_historial_comprobantes_emitidos set ? WHERE nComprobante="' + req.body.NComprobante + '"';
+    connection.query(sql, (error, results) => {
+        if (error) console.log(error);
+        MontoOriginalCargado=results;
+    })
+    var sql = 'UPDATE finanzas_historial_comprobantes_emitidos set ? WHERE nComprobante="' + req.body.NComprobante + '"';
     connection.query(sql, [{ FechaPago: FechaPago, Descripcion: req.body.Concepto, Monto: req.body.Monto, Observacion: req.body.Observacion }], (error, results) => {
 
         if (error) console.log(error);
-        else {
-            res.send('ok');
+    })
+    sql='SELECT * FROM finanzas_historial_comprobantes_emitidos WHERE nComprobante= '+ req.body.NComprobante +'';
+    connection.query(sql,(error,results)=>{
+        if (error) console.log(error);
+        else{
+datosComprobante=results[0];
         }
     })
+    if(MontoOriginalCargado<Monto){
+        sql='SELECT '+req.body.Concepto+' FROM finanzas_clientes_por_obra_cobros WHERE ID_cliente ="'+datosComprobante.id_cliente+'"';
+        connection.query(sql,(error,results)=>{
+        if (error) console.log(error);
+else{
+    
+    var montoCargadoEnCobros = results[0];
+    montoCargadoEnCobros+Monto;
+    sql='UPDATE finanzas_clientes_por_obra_cobros '+req.body.Concepto+'=? WHERE ID_cliente ="'+datosComprobante.id_cliente+'"';
+    connection.query(sql,[{montoCargadoEnCobros}],(error,results2)=>{
+       if (error) console.log(error);
+       else{
+res.redirect('back');
+       }
+   })
+}
+        })
+    }
+    else{
+        sql='SELECT '+req.body.Concepto+' FROM finanzas_clientes_por_obra_cobros WHERE ID_cliente ="'+datosComprobante.id_cliente+'"';
+        connection.query(sql,(error,results)=>{
+        if (error) console.log(error);
+else{
+    
+    var montoCargadoEnCobros = results[0];
+    montoCargadoEnCobros-Monto;
+    sql='UPDATE finanzas_clientes_por_obra_cobros '+req.body.Concepto+'=? WHERE ID_cliente ="'+datosComprobante.id_cliente+'"';
+    connection.query(sql,[{montoCargadoEnCobros}],(error,results2)=>{
+       if (error) console.log(error);
+       else{
+res.redirect('back');
+       }
+   })
+}
+        })
+    }
 })
 //Buscar comprobantes emitidos
 router.get('/Finanzas/VerComprobantesRegistrados/obra/:idObra',(req,res)=>{
@@ -459,7 +507,7 @@ connection.query(sql, (error, response) => {
 })
 router.get('/Finanzas/cobros/VerComprobantesRegistrados/:idcliente', (req, res) => {
     var id_cliente = req.params.idcliente;
-    var sql = 'SELECT * FROM finanzas_recibos_de_pago_obras WHERE idCliente =?';
+    var sql = 'SELECT * FROM finanzas_historial_comprobantes_emitidos WHERE id_cliente =?';
     connection.query(sql, id_cliente, (error, response) => {
         if (error) console.log(error);
         else {
@@ -800,7 +848,7 @@ router.post('/GenerarComprobante', (req, res, next) => {
         connection.query(sql, {idObra: id_Obra, idCliente: ID, Concepto: Concepto, ValorIngresado: ValorIngresado, ObservacionesDelPago, ObservacionesDelPago }, (error, results) => {
             if (error) console.log(error);
             else {
-                sql = 'SELECT MAX(NRecibo) as Nrecibo FROM finanzas_recibos_de_pago_obras';
+                sql = 'SELECT MAX(nComprobante) as Nrecibo FROM finanzas_historial_comprobantes_emitidos';
                 connection.query(sql, (error, results) => {
                     nDeComprobante = results[0].Nrecibo;
                 })
@@ -979,7 +1027,6 @@ router.post('/GenerarComprobante', (req, res, next) => {
             // Configurar las cabeceras de la respuesta para la descarga del archivo
     res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
     res.setHeader('Content-Disposition', 'attachment; filename=' + nombreDelArchivo);
-
     res.status(204).send(data);
         })
             .catch(function () {

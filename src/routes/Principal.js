@@ -95,25 +95,23 @@ passport.serializeUser(function (user, done) {
     done(null, user.id);
 })
 passport.deserializeUser(function (id, done) {
-    var sql = 'Select rol from usuariosregistrados where id =' + id + ' ;';
+    var sql = 'Select id,Nombre,rol from usuariosregistrados where id =' + id + ' ;';
     connection.query(sql, (error, results) => {
-        done(null, { rol: results[0].rol });
+        done(null, { id:results[0].id,Nombre:results[0].Nombre,rol:results[0].rol  });
     })
 })
 router.get('/', (req, res) => {
-
     res.render('login.ejs');
 })
 
 router.get('/index', (req, res, next) => {
-
     if (req.isAuthenticated()) {
         var fecha = new Date();
         var sql = 'Select * from admingeneral_seguros_albacaucion WHERE ProximaRefacturacion BETWEEN (NOW() - Interval 1 Month) AND (NOW() + Interval 2 Month)  AND Estado != "Dada de baja" AND Riesgo!= "Fondo de reparo" AND Riesgo!= "Mantenimiento de oferta"';
         connection.query(sql, (error, results) => {
             if (error) console.log(error);
             else {
-                res.render('./paginas/Principal/index.ejs', { albacaucion: results, moment: moment, rol: req.user.rol, fecha });
+                res.render('./paginas/Principal/index.ejs', { albacaucion: results, moment: moment, rol: req.user.rol, fecha, user:req.user });
             }
         })
     }
@@ -457,7 +455,6 @@ router.post('/Principal/obtenerHistorialTareasEmpleados',(req,res)=>{
 
     var sql='SELECT * FROM historialdecambios WHERE Fecha_Tarea_sub BETWEEN "'+req.body.fechaInicio+'" AND "'+req.body.fechaFinal+'";';
     connection.query(sql,(error,results)=>{
-        console.log(sql);
         if(error) console.log(error);
         else{
             res.send(results);

@@ -51,7 +51,20 @@
       data: formData  ,
       dataType: "json",
       success: function (data) {
-
+      // Crear un enlace de descarga para el Blob
+    const blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+    const url = window.URL.createObjectURL(blob);
+    
+    const a = document.createElement('a');
+    a.style.display = 'none';
+    document.body.appendChild(a);
+    a.href = url;
+    a.download = 'nombre_del_archivo.xlsx';
+    a.click();
+    
+    // Liberar recursos
+    window.URL.revokeObjectURL(url);
+    document.body.removeChild(a);
 
         $('#MensajeServidorPago').html('<span class="text-success">El pago se ha efectuado con exito!</span>');
         setTimeout(() => {
@@ -143,14 +156,14 @@ $('#btnVerComprobantesRegistrados').click(()=>{
         },
         "ajax": {
           "type": "GET",
-    "url": "/Finanzas/cobros/VerComprobantesRegistrados/"+idcliente,
+    "url": "/Finanzas/cobros/VerComprobantesRegistrados/"+idcliente+"",
     "dataType": "json",
     "dataSrc": function (response) {
       return response;
       }
     },
     "columns":[
-      {"data": "NRecibo" },
+      {"data": "nComprobante" },
       {"data": "FechaPago" ,'render': function(data,type,row,meta){
         if(data){
         
@@ -159,21 +172,21 @@ $('#btnVerComprobantesRegistrados').click(()=>{
           return null;
         }
       }},
-      { "data": "Concepto" ,'render': function(data,type,row,meta){
+      { "data": "Descripcion" ,'render': function(data,type,row,meta){
         if(data){
           return data
         }else{
           return '';
         }
       }},
-      { "data": "ValorIngresado" ,'render': function(data,type,row,meta){
+      { "data": "Monto" ,'render': function(data,type,row,meta){
         if(data){
           return data
         }else{
           return null;
         }
       }},
-      { "data": "ObservacionesDelPago" ,'render': function(data,type,row,meta){
+      { "data": "Observacion" ,'render': function(data,type,row,meta){
         if(data){
           return data
         }else{
