@@ -78,7 +78,7 @@
                   </div>
                   <div class="modal-body">
                     <div id="EdicionVecino" class="container">
-                      <input type="number" name="IDCliente" id="IDCliente" hidden>
+                      <input type="number" name="IDCliente" id="IDCliente2" hidden>
                       <div class="row">
                         <h5>Anticipo y cuotas</h5>
                         <div class="input-group input-group-sm">
@@ -296,6 +296,7 @@ var ImporteOriginalAPagar=0;
 
   function editarVecino() {
     var idCliente = $('#IDCliente').val();
+    $('#IDCliente2').val(idCliente); //Este IDCliente2 se encuentra dentro del formulario que es enviado junto con los valores a editar. 
     const url = '/Finanzas/CobroDeObras/EditarCliente/ObtenerDatosCliente/' + idCliente;
     $.ajax({
       url: url,

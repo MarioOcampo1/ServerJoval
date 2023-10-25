@@ -2,7 +2,7 @@
     <div class="form-group mb-6">
         <div id="nuevaPoliza"class="container border border-secondary" style="display:none ;">
         <h2 class="text-center">Nueva póliza</h2>          
-        <div class="row ">
+        <div class="row m-2">
             <div class="col me-2 ">
              <div class="row">
                 <label class="fw-bold" for="Aseguradora">Aseguradora</label>
@@ -42,11 +42,11 @@
         <div class="row">
                   <label class="fw-bold" for="Valor">Valor a pagar</label>
                   <input required type="number" class="m-1" id="Valor" name="Valor"
-                    placeholder="Ingrese el valor de la póliza ">
+                    placeholder="Figura en la póliza ">
                 </div>
                 <div class="row">
                     <label class="fw-bold" for="VigenciaPoliza">Vigencia de la póliza</label>
-                    <select name="VigenciaPoliza" id="VigenciaPoliza">Seleccione la vigencia de la poliza
+                    <select name="VigenciaPoliza" id="VigenciaPoliza">
                     <option value="Trimestral">Trimestral</option>
                     <option value="Semestral">Semestral</option>
                     <option value="Anual">Anual</option>
@@ -55,7 +55,7 @@
               <div class="row">
                 <label class="fw-bold" for="MontoAsegurado">Monto Asegurado</label>
                 <input required type="number" class="m-1" id="MontoAsegurado" name="MontoAsegurado"
-                  placeholder="Ingrese el MontoAsegurado de la póliza "> 
+                  placeholder="Figura en la póliza "> 
               </div>
               <div class="row">
                 <label class="fw-bold" for="TipoRiesgo">Tipo de riesgo</label>
@@ -79,13 +79,13 @@
                     <div class="col ms-2 me-2">
                         <div class="row">
                             <label class="fw-bold" for="Descripcion">Descripción</label>
-                            <textarea type="textarea" name="Descripcion" id="Descripcion" rows="9" cols="5" placeholder="Ingrese una breve descripción del riesgo"> </textarea>
+                            <textarea type="textarea" name="Descripcion" id="Descripcion" rows="9" cols="5" placeholder="">Número de expediente: ,Descripción del riesgo: </textarea>
                           </div>
                     </div>
         </div>
-        <div class="row-6 text-center mt-1">
+        <div class="row-6 text-center m-2">
             <div class="btn-group">
-                <button class="btn btn-success" type="submit">Guardar póliza</button>
+                <button class="btn btn-success" type="submit" id="btnGuardarPoliza" disabled>Guardar póliza</button>
                 <button class="btn btn-danger" onclick="document.getElementById('nuevaPoliza').style.display='none';">Cancelar</button>
             </div>
             </div>

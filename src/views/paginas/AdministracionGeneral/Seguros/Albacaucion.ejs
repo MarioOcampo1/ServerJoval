@@ -11,7 +11,7 @@
     <%- include('../partials/menusuperior.ejs'); %>
     
     <div class="text-center">
-    <h1 class=" hvr-underline-from-left">Albacaución</h1>
+    <h1 class=" hvr-underline-from-left">ALBACAUCIÓN</h1>
 </div>
     
     <%- include('../partials/albacaucion/NuevaPolizaAlbacaucion.ejs'); %> <!-- Opcion para cargar la nueva póliza de albacaución -->
@@ -127,6 +127,15 @@ animacion = function(){
     $('EndosoPagadoAviso').fadeToggle('slow','linear');
 }
     setInterval(animacion,500);
+    $('#NombreObra').on('change', function(){
+        if( $(this).val()=="otro"){
+            $('#btnGuardarPoliza').prop('disabled',true);
+        }
+        else{
+            $('#btnGuardarPoliza').prop('disabled',false);
+        }
+    })
+    
  </script>
  
 </html>

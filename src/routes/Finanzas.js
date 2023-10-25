@@ -1193,18 +1193,18 @@ router.post('/Finanzas/EditarCliente/ActualizarValoresPredeterminados', (req, re
                 throw (error);
             }
             else {
-                sql = 'SELECT NombreObra from finanzas_clientes_por_obra WHERE ID_cliente=?';
+                sql = 'SELECT id_Obra from finanzas_clientes_por_obra WHERE ID_cliente=?';
                 connection.query(sql, id, (error2, results2) => {
-                    res.redirect('/Finanzas/cobrodeobras/VerObra/' + results2[0].NombreObra);
+                    res.redirect('/Finanzas/cobrodeobras/VerObra/' + results2[0].id_Obra);
                 })
             }
         })
 
     } catch (error) {
         console.log(error);
-        sql = 'SELECT NombreObra from finanzas_clientes_por_obra WHERE ID_cliente=?';
+        sql = 'SELECT id_Obra from finanzas_clientes_por_obra WHERE ID_cliente=?';
         connection.query(sql, id, (error2, results2) => {
-            res.redirect('/Finanzas/cobrodeobras/VerObra/' + results2[0].NombreObra);
+            res.redirect('/Finanzas/cobrodeobras/VerObra/' + results2[0].id_Obra);
         })
     }
 })
