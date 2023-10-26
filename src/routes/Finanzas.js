@@ -125,7 +125,11 @@ router.get('/Finanzas', (req, res) => {
     }
 })
 router.get('/Finanzas_CajaChica', (req, res) => {
-    var sql = 'SELECT * FROM finanzas_caja_chica ';
+    var fechaActual= new Date();
+    
+    var fechaPrincipioMes = moment().year()+'/'+(moment().month()+1)+'/'+1;
+    var sql = 'SELECT * FROM finanzas_caja_chica WHERE Fecha>="'+fechaPrincipioMes+'" ;';
+    console.log(sql);
     connection.query(sql, (error, results) => {
         if (error) console.log(error);
         else {

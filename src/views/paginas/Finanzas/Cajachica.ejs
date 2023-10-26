@@ -45,37 +45,27 @@
             <div class="table-responsive">
                 <table class="table table-success">
                     <thead>
-                       
-                        
                         <tr>
-                            <th colspan="4" class="text-center">Ingreso</th>
-                         
-                            
+                            <th colspan="4" class="text-center">Ingreso</th> 
                         </tr>
                         <tr>
-                            
                             <th  scope="col">Fecha</th>
                             <th  scope="col">Descripción</th>
                             <th  scope="col">$</th>
                         <th> Opciones</th>
-                          
                         </tr>
                     </thead>
                     <tbody>
-                        
-                            <%finanzas.forEach((Ingreso)=>{%>
+                         <%finanzas.forEach((Ingreso)=>{%>
                                 <tr class="">     
-                                    <%if(Ingreso.IngresoDescripcion==""|| Ingreso.IngresoDescripcion==null){%> 
-                                   
-                                    <%}else{%>
-                                <td><%= moment(Ingreso.IngresoFecha).locale('es').format("DD-MM-YYYY")%></td>
-                                <td><%= Ingreso.IngresoDescripcion%></td>
-                                <td><%= Ingreso.IngresoMonto%></td>
-                                <td><button  class="bi bi-pencil-square btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalEditarRegistro" onclick="abrirModalEditarRegistro('<%=Ingreso.id%>', 'Ingreso','<%=Ingreso.IngresoFecha%>','<%=Ingreso.IngresoDescripcion%>','<%=Ingreso.IngresoMonto%>')"></button></td>
+                                    <%if(Ingreso.Tipo=="Ingreso"){%>         
+                                    
+                                <td><%= moment(Ingreso.Fecha).locale('es').format("DD-MM-YYYY")%></td>
+                                <td><%= Ingreso.Descripcion%></td>
+                                <td><%= Ingreso.Monto%></td>
+                                <td><button  class="bi bi-pencil-square btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalEditarRegistro" onclick="abrirModalEditarRegistro('<%=Ingreso.id%>', 'Ingreso','<%=Ingreso.Fecha%>','<%=Ingreso.Descripcion%>','<%=Ingreso.Monto%>')"></button></td>
                             </tr>
                                 <%}})%>
-                        
-                      
                     </tbody>
                 </table>
             </div>
@@ -98,13 +88,11 @@
                        
                             <%finanzas.forEach((Egreso)=>{%>
                                 <tr class="">
-                               <%if(Egreso.EgresoDescripcion==""|| Egreso.EgresoDescripcion==null){%> 
-                              
-                               <%}else{%>
-                                <td><%= moment(Egreso.EgresoFecha).locale('es').format("DD-MM-YYYY")%></td>
-                                <td><%= Egreso.EgresoDescripcion%></td>
-                                <td><%= Egreso.EgresoMonto%></td>
-                                <td><button value="<%=Egreso.id%>" class="bi bi-pencil-square btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalEditarRegistro" onclick="abrirModalEditarRegistro('<%=Egreso.id%>', 'Egreso','<%=Egreso.EgresoFecha%>','<%=Egreso.EgresoDescripcion%>','<%=Egreso.EgresoMonto%>')"></button></td>
+                               <%if(Egreso.Tipo=="Egreso"){%> 
+                                <td><%= moment(Egreso.Fecha).locale('es').format("DD-MM-YYYY")%></td>
+                                <td><%= Egreso.Descripcion%></td>
+                                <td><%= Egreso.Monto%></td>
+                                <td><button value="<%=Egreso.id%>" class="bi bi-pencil-square btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalEditarRegistro" onclick="abrirModalEditarRegistro('<%=Egreso.id%>', 'Egreso','<%=Egreso.Fecha%>','<%=Egreso.Descripcion%>','<%=Egreso.Monto%>')"></button></td>
                             </tr>
                                 <%}})%>
                       
