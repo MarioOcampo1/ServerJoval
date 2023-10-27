@@ -129,7 +129,6 @@ router.get('/Finanzas_CajaChica', (req, res) => {
     
     var fechaPrincipioMes = moment().year()+'/'+(moment().month()+1)+'/'+1;
     var sql = 'SELECT * FROM finanzas_caja_chica WHERE Fecha>="'+fechaPrincipioMes+'" ;';
-    console.log(sql);
     connection.query(sql, (error, results) => {
         if (error) console.log(error);
         else {
@@ -137,11 +136,20 @@ router.get('/Finanzas_CajaChica', (req, res) => {
         }
     })
 })
+router.get('/Finanzas_CajaChica/data', (req, res) => {
+    var sql = 'SELECT * FROM finanzas_caja_chica ;'
+    connection.query(sql, (error, results) => {
+        if (error) console.log(error);
+        else {
+            res.send(results);
+        }
+    })
+})
 router.post('/Finanzas/IngresoCajaChica', (req, res) => {
 
     var sql = 'INSERT INTO finanzas_caja_chica set?';
     connection.query(sql, {
-        IngresoDescripcion: req.body.IngresoDescripcion, IngresoFecha: req.body.IngresoFecha, IngresoMonto: req.body.IngresoMonto
+        Descripcion: req.body.IngresoDescripcion, Fecha: req.body.IngresoFecha, Monto: req.body.IngresoMonto
     }, (error, results) => {
         if (error) console.log(error);
         res.redirect('/Finanzas_CajaChica');
@@ -151,7 +159,7 @@ router.post('/Finanzas/EgresoCajaChica', (req, res) => {
 
     var sql = 'INSERT INTO finanzas_caja_chica set?';
     connection.query(sql, {
-        EgresoDescripcion: req.body.EgresoDescripcion, EgresoFecha: req.body.EgresoFecha, EgresoMonto: req.body.EgresoMonto,
+        Descripcion: req.body.EgresoDescripcion, Fecha: req.body.EgresoFecha, Monto: req.body.EgresoMonto,
     }, (error, results) => {
         if (error) console.log(error);
         res.redirect('/Finanzas_CajaChica');

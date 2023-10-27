@@ -20,7 +20,7 @@
             
             
         </div>
-        <div class="row mt-2">
+        <div class="row mt-2 mb-2">
            
     <div class="col-4">
             <input class="form-control" list="datalistOptions" id="DatalistMeses" placeholder="Búsqueda por mes específico">
@@ -38,7 +38,11 @@
                 <option value="Noviembre">
                 <option value="Diciembre">
             </datalist>
+           
         </div>
+        <div id="BalanceDeCaja" class="col-auto border">
+        Balance de caja: 
+    </div>
         </div>
         <div class="row">
         <div class="col-6">
@@ -118,5 +122,27 @@ $('#IngresoEgreso').val(IngresoEgreso);
 $('#EdicionDescripcion').val(descripcion);
 $('#EdicionMonto').val(monto);
     }
+    $(function () {
+        $.ajax({
+        type: "GET",
+        url: "/Finanzas_CajaChica/data",
+                dataType: "JSON",
+        success: function (response) {
+            console.log(response);
+            var BalanceDeCaja=0;
+            response.forEach(element => {
+                if(element.Tipo=="Ingreso"){
+                    BalanceDeCaja=BalanceDeCaja+ element.Monto;
+                }else{
+                    BalanceDeCaja= BalanceDeCaja-element.Monto;
+                }
+
+                
+            });
+            $('#BalanceDeCaja').append(BalanceDeCaja); 
+        }
+    }); 
+    });
+  
 </script>
 </html>
