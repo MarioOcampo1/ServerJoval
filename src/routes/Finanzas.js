@@ -149,7 +149,7 @@ router.post('/Finanzas/IngresoCajaChica', (req, res) => {
 
     var sql = 'INSERT INTO finanzas_caja_chica set?';
     connection.query(sql, {
-        Descripcion: req.body.IngresoDescripcion, Fecha: req.body.IngresoFecha, Monto: req.body.IngresoMonto
+        Descripcion: req.body.IngresoDescripcion, Fecha: req.body.IngresoFecha, Monto: req.body.IngresoMonto, Tipo: "Ingreso",
     }, (error, results) => {
         if (error) console.log(error);
         res.redirect('/Finanzas_CajaChica');
@@ -159,7 +159,7 @@ router.post('/Finanzas/EgresoCajaChica', (req, res) => {
 
     var sql = 'INSERT INTO finanzas_caja_chica set?';
     connection.query(sql, {
-        Descripcion: req.body.EgresoDescripcion, Fecha: req.body.EgresoFecha, Monto: req.body.EgresoMonto,
+        Descripcion: req.body.EgresoDescripcion, Fecha: req.body.EgresoFecha, Monto: req.body.EgresoMonto, Tipo: "Egreso"
     }, (error, results) => {
         if (error) console.log(error);
         res.redirect('/Finanzas_CajaChica');
