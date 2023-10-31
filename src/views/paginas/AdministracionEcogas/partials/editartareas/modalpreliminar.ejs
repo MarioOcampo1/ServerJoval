@@ -14,6 +14,312 @@
             </div>
             <div class="modal-body">
                 <div class="container">
+                    <div class="card  p-3 mt-3 border-secondary">
+                        <div class="card-header bg-success text-white">
+                            <label for="PropuestaDeTraza"
+                            onclick="$('#PropuestaDeTrazaBody').css('display','block')">Propuesta de traza </label>
+                        </div>
+                        <div id="PropuestaDeTrazaBody" class="card-body" style="display: none;">
+                            <div class="row">
+                                <div class="col border">
+                                    <div class="card-title"onclick="document.getElementById('AutorizacionPropuestaDeTrazaBody').style.display= 'block'">
+                                    <label for="PropuestaDeTraza">Autorización:</label>
+                                    <div class="text-primary col-3" id="Estado"> Estado de la tarea:
+                                        <%=tareasporcarpeta.AutorizacionPropuestaDeTraza%>
+                                    </div>
+                                </div>
+                                <div class="card-text" id="AutorizacionPropuestaDeTrazaBody" style="display: none;">
+                                    <div class="input-group">
+                                        <input hidden id="" class="input" type="radio" name="AutorizacionPropuestaDeTraza"
+                                            onclick="llamarAFormularioEditarTareas('AutorizacionPropuestaDeTraza');"
+                                            value="<%=tareasporcarpeta.AutorizacionPropuestaDeTraza%>" checked>
+                                        <div class="col-2.5 p-1">
+                                            Sin Presentar<input id="" class="input" type="radio"
+                                                onclick="llamarAFormularioEditarTareas('AutorizacionPropuestaDeTraza');"
+                                                name="AutorizacionPropuestaDeTraza" value="Sin presentar">
+                                        </div>
+                                        <div class="col-2.5 p-1">
+                                            En Gestión<input id="" class="input" type="radio"
+                                                name="AutorizacionPropuestaDeTraza"
+                                                onclick="llamarAFormularioEditarTareas('AutorizacionPropuestaDeTraza','EnGestion');"
+                                                value="EnGestion">
+                                        </div>
+                                        <div class="col-2.5 p-1">
+                                            Presentado<input id="" class="input" type="radio"
+                                                name="AutorizacionPropuestaDeTraza"
+                                                onclick="llamarAFormularioEditarTareas('AutorizacionPropuestaDeTraza');"
+                                                value="Presentado">
+                                        </div>
+                                        <div class="col-2.5 p-1">
+                                            Observado<input id="" class="input" type="radio"
+                                                name="AutorizacionPropuestaDeTraza"
+                                                onclick="llamarAFormularioEditarTareas('AutorizacionPropuestaDeTraza');"
+                                                value="Observado">
+                                        </div>
+                                        <div class="col-2 p-1">
+                                            Ok<input id="" class="input" type="radio" name="AutorizacionPropuestaDeTraza"
+                                                onclick="llamarAFormularioEditarTareas('AutorizacionPropuestaDeTraza','Ok');"
+                                                value="ok">
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                                <div class="col-6 border p-1 bg-dark text-white formularioEditarTareasALlenar"id="form1AutorizacionPropuestaDeTraza" style="display: none;">
+                                    <input type="checkbox" value="AutorizacionPropuestaDeTraza" checked hidden name="Tarea">
+                                    <div class="row ">
+                                        <div class="col">
+                                            <span>
+                                                Responsable de la Tarea:
+                                            </span>
+                                            <select name="ResponsableDeTarea" id="">
+                                                <option value="" selected></option>
+                                                <%usuariosregistrados.forEach((usuario)=>{%>
+                                                    <option value="<%=usuario.Nombre%>">
+                                                        <%=usuario.Nombre%>
+                                                    </option>
+                                                    <%})%>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row pb-1 ">
+                                        <div class="input-group-sm">
+                                            <span class="">Tarea Realizada:</span>
+                                            <input class="form-control" type="text" name="TareaRealizada"
+                                                id="TareaRealizada"
+                                                placeholder="Ingrese ultima tarea realizada"
+                                                aria-describedby="TareaRealizada">
+                                        </div>
+                                    </div>
+                                    <div class="row pb-1">
+                                        <div class="input-group-sm">
+                                            <span class="">Proxima Tarea:</span>
+                                            <input class="form-control" type="text" name="ProximaTarea"
+                                                id="ProximaTarea" placeholder="Ingrese la proxima tarea"
+                                                aria-describedby="ProximaTarea">
+                                        </div>
+                                    </div>
+                                    <div class="row pb-1">
+                                        <div class="input-group-sm">
+                                            <span class="">Fecha Limite:</span>
+                                            <input class="form-control" type="date" name="Fecha_limite"
+                                                id="Fecha_limite"
+                                                placeholder="Ingrese ultima tarea realizada"
+                                                aria-describedby="Fecha_limite">
+                                        </div>
+                                    </div>
+                                    <div class="row-p-1">
+                                        <div class="input-group mt-1">
+                                            <button type="button" class="btn btn-sm btn-primary" onclick="AdjuntarArchivo('Mensura');" >Adjuntar archivo</button>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-group-sm pt-2">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col border">
+                                    <div class="card-title"onclick="document.getElementById('SolicitudDePedidoPropuestaDeTrazaBody').style.display= 'block'">
+                                    <label for="SolicitudDePedidoPropuestaDeTraza">Solicitud de pedido/actualización:</label>
+                                    <div class="text-primary col-3" id="Estado"> Estado de la tarea:
+                                        <%=tareasporcarpeta.SolicitudDePedidoPropuestaDeTraza%>
+                                    </div>
+                                </div>
+                                <div class="card-text" id="SolicitudDePedidoPropuestaDeTrazaBody" style="display: none;">
+                                    <div class="input-group">
+                                        <input hidden id="" class="input" type="radio" name="SolicitudDePedidoPropuestaDeTraza"
+                                            onclick="llamarAFormularioEditarTareas('SolicitudDePedidoPropuestaDeTraza');"
+                                            value="<%=tareasporcarpeta.SolicitudDePedidoPropuestaDeTraza%>" checked>
+                                        <div class="col-2.5 p-1">
+                                            Sin Presentar<input id="" class="input" type="radio"
+                                                onclick="llamarAFormularioEditarTareas('SolicitudDePedidoPropuestaDeTraza');"
+                                                name="SolicitudDePedidoPropuestaDeTraza" value="Sin presentar">
+                                        </div>
+                                        <div class="col-2.5 p-1">
+                                            En Gestión<input id="" class="input" type="radio"
+                                                name="SolicitudDePedidoPropuestaDeTraza"
+                                                onclick="llamarAFormularioEditarTareas('SolicitudDePedidoPropuestaDeTraza','EnGestion');"
+                                                value="EnGestion">
+                                        </div>
+                                        <div class="col-2.5 p-1">
+                                            Presentado<input id="" class="input" type="radio"
+                                                name="SolicitudDePedidoPropuestaDeTraza"
+                                                onclick="llamarAFormularioEditarTareas('SolicitudDePedidoPropuestaDeTraza');"
+                                                value="Presentado">
+                                        </div>
+                                        <div class="col-2.5 p-1">
+                                            Observado<input id="" class="input" type="radio"
+                                                name="SolicitudDePedidoPropuestaDeTraza"
+                                                onclick="llamarAFormularioEditarTareas('SolicitudDePedidoPropuestaDeTraza');"
+                                                value="Observado">
+                                        </div>
+                                        <div class="col-2 p-1">
+                                            Ok<input id="" class="input" type="radio" name="SolicitudDePedidoPropuestaDeTraza"
+                                                onclick="llamarAFormularioEditarTareas('SolicitudDePedidoPropuestaDeTraza','Ok');"
+                                                value="ok">
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                                <div class="col-6 border p-1 bg-dark text-white formularioEditarTareasALlenar"id="form1SolicitudDePedidoPropuestaDeTraza" style="display: none;">
+                                    <input type="checkbox" value="SolicitudDePedidoPropuestaDeTraza" checked hidden name="Tarea">
+                                    <div class="row ">
+                                        <div class="col">
+                                            <span>
+                                                Responsable de la Tarea:
+                                            </span>
+                                            <select name="ResponsableDeTarea" id="">
+                                                <option value="" selected></option>
+                                                <%usuariosregistrados.forEach((usuario)=>{%>
+                                                    <option value="<%=usuario.Nombre%>">
+                                                        <%=usuario.Nombre%>
+                                                    </option>
+                                                    <%})%>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row pb-1 ">
+                                        <div class="input-group-sm">
+                                            <span class="">Tarea Realizada:</span>
+                                            <input class="form-control" type="text" name="TareaRealizada"
+                                                id="TareaRealizada"
+                                                placeholder="Ingrese ultima tarea realizada"
+                                                aria-describedby="TareaRealizada">
+                                        </div>
+                                    </div>
+                                    <div class="row pb-1">
+                                        <div class="input-group-sm">
+                                            <span class="">Proxima Tarea:</span>
+                                            <input class="form-control" type="text" name="ProximaTarea"
+                                                id="ProximaTarea" placeholder="Ingrese la proxima tarea"
+                                                aria-describedby="ProximaTarea">
+                                        </div>
+                                    </div>
+                                    <div class="row pb-1">
+                                        <div class="input-group-sm">
+                                            <span class="">Fecha Limite:</span>
+                                            <input class="form-control" type="date" name="Fecha_limite"
+                                                id="Fecha_limite"
+                                                placeholder="Ingrese ultima tarea realizada"
+                                                aria-describedby="Fecha_limite">
+                                        </div>
+                                    </div>
+                                    <div class="row-p-1">
+                                        <div class="input-group mt-1">
+                                            <button type="button" class="btn btn-sm btn-primary" onclick="AdjuntarArchivo('Mensura');" >Adjuntar archivo</button>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-group-sm pt-2">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col border">
+                                    <div class="card-title"onclick="document.getElementById('KMLPropuestaDeTrazaBody').style.display= 'block'">
+                                    <label for="PropuestaDeTraza">KML:</label>
+                                    <div class="text-primary col-3" id="Estado"> Estado de la tarea:
+                                        <%=tareasporcarpeta.KMLPropuestaDeTraza%>
+                                    </div>
+                                </div>
+                                <div class="card-text" id="KMLPropuestaDeTrazaBody" style="display: none;">
+                                    <div class="input-group">
+                                        <input hidden id="" class="input" type="radio" name="KMLPropuestaDeTraza"
+                                            onclick="llamarAFormularioEditarTareas('KMLPropuestaDeTraza');"
+                                            value="<%=tareasporcarpeta.KMLPropuestaDeTraza%>" checked>
+                                        <div class="col-2.5 p-1">
+                                            Sin Presentar<input id="" class="input" type="radio"
+                                                onclick="llamarAFormularioEditarTareas('KMLPropuestaDeTraza');"
+                                                name="KMLPropuestaDeTraza" value="Sin presentar">
+                                        </div>
+                                        <div class="col-2.5 p-1">
+                                            En Gestión<input id="" class="input" type="radio"
+                                                name="KMLPropuestaDeTraza"
+                                                onclick="llamarAFormularioEditarTareas('KMLPropuestaDeTraza','EnGestion');"
+                                                value="EnGestion">
+                                        </div>
+                                        <div class="col-2.5 p-1">
+                                            Presentado<input id="" class="input" type="radio"
+                                                name="KMLPropuestaDeTraza"
+                                                onclick="llamarAFormularioEditarTareas('KMLPropuestaDeTraza');"
+                                                value="Presentado">
+                                        </div>
+                                        <div class="col-2.5 p-1">
+                                            Observado<input id="" class="input" type="radio"
+                                                name="KMLPropuestaDeTraza"
+                                                onclick="llamarAFormularioEditarTareas('KMLPropuestaDeTraza');"
+                                                value="Observado">
+                                        </div>
+                                        <div class="col-2 p-1">
+                                            Ok<input id="" class="input" type="radio" name="KMLPropuestaDeTraza"
+                                                onclick="llamarAFormularioEditarTareas('KMLPropuestaDeTraza','Ok');"
+                                                value="ok">
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                                <div class="col-6 border p-1 bg-dark text-white formularioEditarTareasALlenar"id="form1KMLPropuestaDeTraza" style="display: none;">
+                                    <input type="checkbox" value="KMLPropuestaDeTraza" checked hidden name="Tarea">
+                                    <div class="row ">
+                                        <div class="col">
+                                            <span>
+                                                Responsable de la Tarea:
+                                            </span>
+                                            <select name="ResponsableDeTarea" id="">
+                                                <option value="" selected></option>
+                                                <%usuariosregistrados.forEach((usuario)=>{%>
+                                                    <option value="<%=usuario.Nombre%>">
+                                                        <%=usuario.Nombre%>
+                                                    </option>
+                                                    <%})%>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row pb-1 ">
+                                        <div class="input-group-sm">
+                                            <span class="">Tarea Realizada:</span>
+                                            <input class="form-control" type="text" name="TareaRealizada"
+                                                id="TareaRealizada"
+                                                placeholder="Ingrese ultima tarea realizada"
+                                                aria-describedby="TareaRealizada">
+                                        </div>
+                                    </div>
+                                    <div class="row pb-1">
+                                        <div class="input-group-sm">
+                                            <span class="">Proxima Tarea:</span>
+                                            <input class="form-control" type="text" name="ProximaTarea"
+                                                id="ProximaTarea" placeholder="Ingrese la proxima tarea"
+                                                aria-describedby="ProximaTarea">
+                                        </div>
+                                    </div>
+                                    <div class="row pb-1">
+                                        <div class="input-group-sm">
+                                            <span class="">Fecha Limite:</span>
+                                            <input class="form-control" type="date" name="Fecha_limite"
+                                                id="Fecha_limite"
+                                                placeholder="Ingrese ultima tarea realizada"
+                                                aria-describedby="Fecha_limite">
+                                        </div>
+                                    </div>
+                                    <div class="row-p-1">
+                                        <div class="input-group mt-1">
+                                            <button type="button" class="btn btn-sm btn-primary" onclick="AdjuntarArchivo('Mensura');" >Adjuntar archivo</button>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-group-sm pt-2">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                       
+                    </div>
                     <div class="card p-3 mt-3 border-secondary">
                         <%if(tareasgenerales.DocumentacionTerreno=="ok"||tareasgenerales.DocumentacionTerreno=="Ok"){%>
                             <div class="card-header bg-success text-white">
@@ -27,8 +333,7 @@
                                     <div id="DocumentacionDelTerrenoBody" class="card-body" style="display: none;">
                                         <div class="row ">
                                             <div class="col border">
-                                                <div class="card-title "
-                                                    onclick="document.getElementById('MensuraBody').style.display= 'block'">
+                                                <div class="card-title "onclick="document.getElementById('MensuraBody').style.display= 'block'">
                                                     <label for="Mensura">Mensura</label>
                                                     <div class="text-primary col-3" id="Estado"> Estado de la tarea:
                                                         <%=tareasporcarpeta.Mensura%>
@@ -70,8 +375,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-6 border p-1 bg-dark text-white formularioEditarTareasALlenar"
-                                                id="form1Mensura" style="display: none;">
+                                            <div class="col-6 border p-1 bg-dark text-white formularioEditarTareasALlenar"id="form1Mensura" style="display: none;">
                                                 <input type="checkbox" value="Mensura" checked hidden name="Tarea">
                                                 <div class="row ">
                                                     <div class="col">

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     
@@ -40,7 +40,7 @@
             </datalist>
            
         </div>
-        <div id="BalanceDeCaja" class="col-auto border">
+        <div id="BalanceDeCaja" class="col-auto border bg-info">
         Balance de caja: 
     </div>
         </div>
@@ -59,7 +59,7 @@
                         <th> Opciones</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="tbodyIngresos">
                          <%finanzas.forEach((Ingreso)=>{%>
                                 <tr class="">     
                                     <%if(Ingreso.Tipo=="Ingreso"){%>         
@@ -88,7 +88,7 @@
                             <th> Opciones</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="tbodyEgresos">
                        
                             <%finanzas.forEach((Egreso)=>{%>
                                 <tr class="">
@@ -123,23 +123,36 @@ $('#EdicionDescripcion').val(descripcion);
 $('#EdicionMonto').val(monto);
     }
     $(function () {
+        var fechaActual= new Date();
+    
+    var fechaPrincipioMes = moment().year()+'/'+(moment().month()+1)+'/'+1;
         $.ajax({
         type: "GET",
-        url: "/Finanzas_CajaChica/data",
+        url: "/Finanzas_CajaChica/data/"+fechaPrincipioMes,
                 dataType: "JSON",
         success: function (response) {
             console.log(response);
             var BalanceDeCaja=0;
+            var TotalIngreso=0;
+            var TotalEgreso=0;
             response.forEach(element => {
-                if(element.Tipo=="Ingreso"){
+                if(element.Tipo=="Ingreso"){ //Carga el total de ingresos en balance de caja
+                    TotalIngreso=TotalIngreso+element.Monto;
+                    console.log(TotalIngreso);
+                    console.log(element.Descripcion);
                     BalanceDeCaja=BalanceDeCaja+ element.Monto;
-                }else{
+
+                    $('#tbodyIngresos').append();
+                }else{ //Carga en egresos
+                    TotalEgreso=TotalEgreso+element.Monto;
                     BalanceDeCaja= BalanceDeCaja-element.Monto;
+                    $('#tbodyEgresos').append();
                 }
 
                 
             });
-            $('#BalanceDeCaja').append(BalanceDeCaja); 
+            $('#BalanceDeCaja').append(BalanceDeCaja + ' Totales: Ingresos: '+TotalIngreso+'. Egresos: '+TotalEgreso+'.');  //Una vez termina el balance de caja, muestra el monto restante de la caja y el total de ingresos y egresos.
+
         }
     }); 
     });

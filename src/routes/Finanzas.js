@@ -128,7 +128,7 @@ router.get('/Finanzas_CajaChica', (req, res) => {
     var fechaActual= new Date();
     
     var fechaPrincipioMes = moment().year()+'/'+(moment().month()+1)+'/'+1;
-    var sql = 'SELECT * FROM finanzas_caja_chica WHERE Fecha>="'+fechaPrincipioMes+'" ;';
+    var sql = 'SELECT * FROM finanzas_caja_chica WHERE Fecha>="'+fechaPrincipioMes+'" ORDER BY Fecha DESC ;';
     connection.query(sql, (error, results) => {
         if (error) console.log(error);
         else {
@@ -136,8 +136,8 @@ router.get('/Finanzas_CajaChica', (req, res) => {
         }
     })
 })
-router.get('/Finanzas_CajaChica/data', (req, res) => {
-    var sql = 'SELECT * FROM finanzas_caja_chica ;'
+router.get('/Finanzas_CajaChica/data/:anio/:mes/:dia', (req, res) => {
+    var sql = 'SELECT * FROM finanzas_caja_chica WHERE Fecha>="'+req.params.anio+'/'+req.params.mes+''+req.params.dia+'" ORDER BY Fecha DESC;'
     connection.query(sql, (error, results) => {
         if (error) console.log(error);
         else {

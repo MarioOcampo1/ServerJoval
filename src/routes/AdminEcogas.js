@@ -1391,11 +1391,39 @@ router.post("/actPrelCarpEcogas/:id", upload.none(), function (req, res) {
   ) {
     DocumentacionContractual = "Sin presentar";
   }
-  sql = "Update obras_tareasgenerales Set ? where Nombre=?";
+  var PropuestaDeTraza="Sin presentar";
+  if( req.body.AutorizacionPropuestaDeTraza=="Ok"||
+    req.body.SolicitudDePedidoPropuestaDeTraza=="Ok"||
+    req.body.KMLPropuestaDeTraza=="Ok"){
+      PropuestaDeTraza="Ok";
+    }
+  if( req.body.AutorizacionPropuestaDeTraza=="Presentado"&&
+    req.body.SolicitudDePedidoPropuestaDeTraza=="Presentado"&&
+    req.body.KMLPropuestaDeTraza=="Presentado"){
+      PropuestaDeTraza="Presentado";
+    }
+    if( req.body.AutorizacionPropuestaDeTraza=="Observado"||
+    req.body.SolicitudDePedidoPropuestaDeTraza=="Observado"||
+    req.body.KMLPropuestaDeTraza=="Observado"){
+      PropuestaDeTraza="Observado";
+    }
+  if( req.body.AutorizacionPropuestaDeTraza=="Sin presentar"||
+    req.body.SolicitudDePedidoPropuestaDeTraza=="Sin presentar"||
+    req.body.KMLPropuestaDeTraza=="Sin presentar"){
+      PropuestaDeTraza="Sin presentar";
+    }
+    
+    if( req.body.AutorizacionPropuestaDeTraza=="EnGestion"||
+    req.body.SolicitudDePedidoPropuestaDeTraza=="EnGestion"||
+    req.body.KMLPropuestaDeTraza=="EnGestion"){
+      PropuestaDeTraza="EnGestion";
+    }
+  sql = "UPDATE obras_tareasgenerales SET ? WHERE Nombre=?";
   connection.query(
     sql,
     [
       {
+
         DocumentacionTerreno: DocumentacionTerreno,
         DocumentacionSociedad: DocumentacionSociedad,
         DocumentacionContractual: DocumentacionContractual,
@@ -1413,6 +1441,9 @@ router.post("/actPrelCarpEcogas/:id", upload.none(), function (req, res) {
     sql,
     [
       {
+        AutorizacionPropuestaDeTraza: req.body.AutorizacionPropuestaDeTraza,
+        SolicitudDePedidoPropuestaDeTraza:req.body.SolicitudDePedidoPropuestaDeTraza,
+        KMLPropuestaDeTraza:req.body.KMLPropuestaDeTraza,
         Mensura: Mensura,
         TituloDePropiedad: TituloDePropiedad,
         ActaCargoVigente: ActaCargoVigente,
