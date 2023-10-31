@@ -1392,10 +1392,10 @@ router.post("/actPrelCarpEcogas/:id", upload.none(), function (req, res) {
     DocumentacionContractual = "Sin presentar";
   }
   var PropuestaDeTraza="Sin presentar";
-  if( req.body.AutorizacionPropuestaDeTraza=="Ok"||
-    req.body.SolicitudDePedidoPropuestaDeTraza=="Ok"||
-    req.body.KMLPropuestaDeTraza=="Ok"){
-      PropuestaDeTraza="Ok";
+  if( req.body.AutorizacionPropuestaDeTraza=="ok"||
+    req.body.SolicitudDePedidoPropuestaDeTraza=="ok"||
+    req.body.KMLPropuestaDeTraza=="ok"){
+      PropuestaDeTraza="ok";
     }
   if( req.body.AutorizacionPropuestaDeTraza=="Presentado"&&
     req.body.SolicitudDePedidoPropuestaDeTraza=="Presentado"&&
@@ -1423,7 +1423,7 @@ router.post("/actPrelCarpEcogas/:id", upload.none(), function (req, res) {
     sql,
     [
       {
-
+PropuestaDeTraza:PropuestaDeTraza,
         DocumentacionTerreno: DocumentacionTerreno,
         DocumentacionSociedad: DocumentacionSociedad,
         DocumentacionContractual: DocumentacionContractual,
