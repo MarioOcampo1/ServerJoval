@@ -541,6 +541,8 @@ router.post('/Finanzas/NuevoCliente/guardarCliente', (req, res) => {
     var idCliente;
     var cuotasQuePaga = req.body.CuotasQuePaga;
     var NombreObra;
+    var ServicioDomiciliario= req.body.ImporteServicioDomiciliario;
+    var AnticipoFinanciero=req.body.ImporteAnticipoFinanciero;
     var promise1 = new Promise(function (resolve, reject) {
         connection.query(sql, Obra, (error, results) => {
             if (error) console.log(error);
@@ -574,7 +576,7 @@ router.post('/Finanzas/NuevoCliente/guardarCliente', (req, res) => {
                         if (error) console.log(error);
                         else {
                             setTimeout(() => {
-                                if (AnticipoFinanciero == '') {
+                                if (AnticipoFinanciero == '' || AnticipoFinanciero == undefined || AnticipoFinanciero == null ) {
                                     AnticipoFinanciero = 0;
                                 }
                                 sql = 'INSERT INTO finanzas_clientes_predeterminados set?;'
@@ -678,6 +680,11 @@ router.post('/Finanzas/NuevoCliente/guardarCliente', (req, res) => {
                                         break;
 
                                     default:
+                                        connection.query(sql,{
+                                            id_obra: id_Obra, id_cliente: idCliente, NombreCliente: Nombre, AnticipoFinanciero:AnticipoFinanciero,Cuota1: 0,
+                                        },(error,results)=>{
+
+                                        })
                                         resolve();
                                         break;
                                 }

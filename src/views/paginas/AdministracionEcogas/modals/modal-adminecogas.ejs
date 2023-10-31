@@ -152,6 +152,8 @@
             $('#SelectSubtarea').empty();
             $('#Selecttarea').empty();
             $('#Selecttarea').append("<option value='X' selected>Seleccione una opción</option>");
+            $('#Selecttarea').append("<option value='PropuestaDeTraza'>Propuesta de traza</option>");
+            $('#Selecttarea').append("<option value='DocumentacionContractual' >Documentación Contractual</option>");
           $('#Selecttarea').append("<option value='DocumentacionContractual' >Documentación Contractual</option>");
             $('#Selecttarea').append("<option value='DocumentacionDelTerreno' >Documentación del terreno</option>");
             $('#Selecttarea').append("<option value='DocumentacionSociedad' >Documentación Sociedad</option>");
@@ -209,6 +211,12 @@
     })
     $('#Selecttarea').change(function () {
         const valorSeleccionado= $(this).val();
+        if(valorSeleccionado==='DocumentacionContractual'){
+            $('#SelectSubtarea').empty();
+   $('#SelectSubtarea').append('<option value="AutorizacionPropuestaDeTraza">Autorización de propuesta</option>');
+   $('#SelectSubtarea').append('<option value="SolicitudDePedidoPropuestaDeTraza">Solicitud de pedido/actualización</option>');
+   $('#SelectSubtarea').append('<option value="KMLPropuestaDeTraza">KML</option>');
+        }
 if(valorSeleccionado==='DocumentacionContractual'){
     $('#SelectSubtarea').empty();
     $('#SelectSubtarea').append('<option selected>Seleccione alguna opción</option>');
