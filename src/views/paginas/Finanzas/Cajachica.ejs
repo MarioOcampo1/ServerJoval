@@ -58,7 +58,7 @@
                                 <td><%= moment(Ingreso.Fecha).locale('es').format("DD-MM-YYYY")%></td>
                                 <td><%= Ingreso.Descripcion%></td>
                                 <td><%= Ingreso.Monto%></td>
-                                <td><button  class="bi bi-pencil-square btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalEditarRegistro" onclick="abrirModalEditarRegistro('<%=Ingreso.id%>', 'Ingreso','<%=Ingreso.Fecha%>','<%=Ingreso.Descripcion%>','<%=Ingreso.Monto%>')"></button></td>
+                                <td><button  class="bi bi-pencil-square btn btn-outline-secondary" onclick="abrirModalEditarRegistro('<%=Ingreso.id%>','Ingreso','<%=Ingreso.Fecha%>','<%=Ingreso.Descripcion%>','<%=Ingreso.Monto%>')"></button></td>
                             </tr>
                                 <%}})%>
                     </tbody>
@@ -112,6 +112,7 @@ $('#IngresoEgreso').val(IngresoEgreso);
     $('#EdicionFecha').val(fecha);
 $('#EdicionDescripcion').val(descripcion);
 $('#EdicionMonto').val(monto);
+$('#modalEditarRegistro').modal('show')
     }
     $(function () {
         var fechaActual= new Date();
@@ -133,11 +134,11 @@ $('#EdicionMonto').val(monto);
                     TotalIngreso=TotalIngreso+element.Monto;
                     BalanceDeCaja=BalanceDeCaja+ element.Monto;
 
-                    $('#tbodyIngresos').append('<tr><td>'+moment(element.fecha).format('DD/MM/YYYY')+'</td><td>'+element.Descripcion+'</td><td>'+element.Monto+'</td>  <td><button  class="bi bi-pencil-square btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalEditarRegistro" onclick="abrirModalEditarRegistro('+element.id+', "Ingreso",'+element.Fecha+','+element.Descripcion+','+element.Monto+')"></button></td></tr>');
+                    $('#tbodyIngresos').append('<tr><td>'+moment(element.fecha).format('DD/MM/YYYY')+'</td><td>'+element.Descripcion+'</td><td>'+element.Monto+'</td>  <td><button  class="bi bi-pencil-square btn btn-outline-secondary" onclick="abrirModalEditarRegistro('+element.id+',\'Ingreso\','+element.Fecha+','+element.Descripcion+','+element.Monto+')"></button></td></tr>');
                 }else{ //Carga en egresos
                     TotalEgreso=TotalEgreso+element.Monto;
                     BalanceDeCaja= BalanceDeCaja-element.Monto;
-                    $('#tbodyEgresos').append('<tr><td>'+moment(element.fecha).format('DD/MM/YYYY')+'</td><td>'+element.Descripcion+'</td><td>'+element.Monto+'</td>  <td><button  class="bi bi-pencil-square btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalEditarRegistro" onclick="abrirModalEditarRegistro('+element.id+', "Egreso",'+element.Fecha+','+element.Descripcion+','+element.Monto+')"></button></td></tr>');
+                    $('#tbodyEgresos').append('<tr><td>'+moment(element.fecha).format('DD/MM/YYYY')+'</td><td>'+element.Descripcion+'</td><td>'+element.Monto+'</td>  <td><button  class="bi bi-pencil-square btn btn-outline-secondary"  onclick="abrirModalEditarRegistro('+element.id+',\'Egreso\','+element.Fecha+','+element.Descripcion+','+element.Monto+')"></button></td></tr>');
                 }
 
                 
@@ -168,11 +169,11 @@ $.ajax({
                     TotalIngreso=TotalIngreso+element.Monto;
                     BalanceDeCaja=BalanceDeCaja+ element.Monto;
 
-                    $('#tbodyIngresos').append('<tr><td>'+moment(element.fecha).format('DD/MM/YYYY')+'</td><td>'+element.Descripcion+'</td><td>'+element.Monto+'</td>  <td><button  class="bi bi-pencil-square btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalEditarRegistro" onclick="abrirModalEditarRegistro('+element.id+', "Ingreso",'+element.Fecha+','+element.Descripcion+','+element.Monto+')"></button></td></tr>');
+                    $('#tbodyIngresos').append('<tr><td>'+moment(element.fecha).format('DD/MM/YYYY')+'</td><td>'+element.Descripcion+'</td><td>'+element.Monto+'</td>  <td><button  class="bi bi-pencil-square btn btn-outline-secondary" onclick="abrirModalEditarRegistro('+element.id+',\'Ingreso\','+element.Fecha+','+element.Descripcion+','+element.Monto+')"></button></td></tr>');
                 }else{ //Carga en egresos
                     TotalEgreso=TotalEgreso+element.Monto;
                     BalanceDeCaja= BalanceDeCaja-element.Monto;
-                    $('#tbodyEgresos').append('<tr><td>'+moment(element.fecha).format('DD/MM/YYYY')+'</td><td>'+element.Descripcion+'</td><td>'+element.Monto+'</td>  <td><button  class="bi bi-pencil-square btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalEditarRegistro" onclick="abrirModalEditarRegistro('+element.id+', "Egreso",'+element.Fecha+','+element.Descripcion+','+element.Monto+')"></button></td></tr>');
+                    $('#tbodyEgresos').append('<tr><td>'+moment(element.fecha).format('DD/MM/YYYY')+'</td><td>'+element.Descripcion+'</td><td>'+element.Monto+'</td>  <td><button  class="bi bi-pencil-square btn btn-outline-secondary" onclick="abrirModalEditarRegistro('+element.id+', \'Egreso\','+element.Fecha+','+element.Descripcion+','+element.Monto+')"></button></td></tr>');
                 }
 
                 
