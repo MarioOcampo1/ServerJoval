@@ -23,21 +23,12 @@
         <div class="row mt-2 mb-2">
            
     <div class="col-4">
-            <input class="form-control" list="datalistOptions" id="DatalistMeses" placeholder="Búsqueda por mes específico">
-            <datalist id="datalistOptions">
-                <option value="Enero">
-                <option value="Febrero">
-                <option value="Marzo">
-                <option value="Abril">
-                <option value="Mayo">
-                <option value="Junio">
-                <option value="Julio">
-                <option value="Agosto">
-                <option value="Septiembre">
-                <option value="Octubre">
-                <option value="Noviembre">
-                <option value="Diciembre">
-            </datalist>
+         <div class="mb-3">
+           <label for="FiltrarPorMes" class="form-label">Filtrar por mes</label>
+           <input type="date"
+             class="form-control" name="Mes" id="FiltrarPorMes" aria-describedby="helpId" placeholder="">
+           <small id="helpId" class="form-text text-muted">Seleccione desde que día quiere comenzar a filtrar</small>
+         </div>
            
         </div>
         <div id="BalanceDeCaja" class="col-auto border bg-info">
@@ -126,36 +117,71 @@ $('#EdicionMonto').val(monto);
         var fechaActual= new Date();
     
     var fechaPrincipioMes = moment().year()+'/'+(moment().month()+1)+'/'+1;
+   
         $.ajax({
         type: "GET",
         url: "/Finanzas_CajaChica/data/"+fechaPrincipioMes,
                 dataType: "JSON",
         success: function (response) {
-            console.log(response);
+            $('#tbodyIngresos').empty();
+            $('#tbodyEgresos').empty();
             var BalanceDeCaja=0;
             var TotalIngreso=0;
             var TotalEgreso=0;
             response.forEach(element => {
                 if(element.Tipo=="Ingreso"){ //Carga el total de ingresos en balance de caja
                     TotalIngreso=TotalIngreso+element.Monto;
-                    console.log(TotalIngreso);
-                    console.log(element.Descripcion);
                     BalanceDeCaja=BalanceDeCaja+ element.Monto;
 
-                    $('#tbodyIngresos').append();
+                    $('#tbodyIngresos').append('<tr><td>'+moment(element.fecha).format('DD/MM/YYYY')+'</td><td>'+element.Descripcion+'</td><td>'+element.Monto+'</td>  <td><button  class="bi bi-pencil-square btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalEditarRegistro" onclick="abrirModalEditarRegistro('+element.id+', "Ingreso",'+element.Fecha+','+element.Descripcion+','+element.Monto+')"></button></td></tr>');
                 }else{ //Carga en egresos
                     TotalEgreso=TotalEgreso+element.Monto;
                     BalanceDeCaja= BalanceDeCaja-element.Monto;
-                    $('#tbodyEgresos').append();
+                    $('#tbodyEgresos').append('<tr><td>'+moment(element.fecha).format('DD/MM/YYYY')+'</td><td>'+element.Descripcion+'</td><td>'+element.Monto+'</td>  <td><button  class="bi bi-pencil-square btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalEditarRegistro" onclick="abrirModalEditarRegistro('+element.id+', "Egreso",'+element.Fecha+','+element.Descripcion+','+element.Monto+')"></button></td></tr>');
                 }
 
                 
             });
-            $('#BalanceDeCaja').append(BalanceDeCaja + ' Totales: Ingresos: '+TotalIngreso+'. Egresos: '+TotalEgreso+'.');  //Una vez termina el balance de caja, muestra el monto restante de la caja y el total de ingresos y egresos.
+            $('#BalanceDeCaja').empty();
+            $('#BalanceDeCaja').append('Balance de caja: '+BalanceDeCaja + '. Totales: Ingresos: '+TotalIngreso+'. Egresos: '+TotalEgreso+'.');  //Una vez termina el balance de caja, muestra el monto restante de la caja y el total de ingresos y egresos.
 
         }
     }); 
     });
-  
+  $('#FiltrarPorMes').change(function () {
+var fecha=$('#FiltrarPorMes').val();
+fecha= moment(fecha).format('YYYY/MM/DD');
+fecha
+
+$.ajax({
+        type: "GET",
+        url: "/Finanzas_CajaChica/data/"+fecha,
+                dataType: "JSON",
+        success: function (response) {
+            $('#tbodyIngresos').empty();
+            $('#tbodyEgresos').empty();
+            var BalanceDeCaja=0;
+            var TotalIngreso=0;
+            var TotalEgreso=0;
+            response.forEach(element => {
+                if(element.Tipo=="Ingreso"){ //Carga el total de ingresos en balance de caja
+                    TotalIngreso=TotalIngreso+element.Monto;
+                    BalanceDeCaja=BalanceDeCaja+ element.Monto;
+
+                    $('#tbodyIngresos').append('<tr><td>'+moment(element.fecha).format('DD/MM/YYYY')+'</td><td>'+element.Descripcion+'</td><td>'+element.Monto+'</td>  <td><button  class="bi bi-pencil-square btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalEditarRegistro" onclick="abrirModalEditarRegistro('+element.id+', "Ingreso",'+element.Fecha+','+element.Descripcion+','+element.Monto+')"></button></td></tr>');
+                }else{ //Carga en egresos
+                    TotalEgreso=TotalEgreso+element.Monto;
+                    BalanceDeCaja= BalanceDeCaja-element.Monto;
+                    $('#tbodyEgresos').append('<tr><td>'+moment(element.fecha).format('DD/MM/YYYY')+'</td><td>'+element.Descripcion+'</td><td>'+element.Monto+'</td>  <td><button  class="bi bi-pencil-square btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalEditarRegistro" onclick="abrirModalEditarRegistro('+element.id+', "Egreso",'+element.Fecha+','+element.Descripcion+','+element.Monto+')"></button></td></tr>');
+                }
+
+                
+            });
+            $('#BalanceDeCaja').empty();
+            $('#BalanceDeCaja').append('Balance de caja: '+BalanceDeCaja + '. Totales: Ingresos: '+TotalIngreso+'. Egresos: '+TotalEgreso+'.');  //Una vez termina el balance de caja, muestra el monto restante de la caja y el total de ingresos y egresos.
+
+        }
+    }); 
+    })
 </script>
 </html>

@@ -137,7 +137,8 @@ router.get('/Finanzas_CajaChica', (req, res) => {
     })
 })
 router.get('/Finanzas_CajaChica/data/:anio/:mes/:dia', (req, res) => {
-    var sql = 'SELECT * FROM finanzas_caja_chica WHERE Fecha>="'+req.params.anio+'/'+req.params.mes+''+req.params.dia+'" ORDER BY Fecha DESC;'
+    var sql = 'SELECT * FROM finanzas_caja_chica WHERE Fecha>="'+req.params.anio+'/'+req.params.mes+'/'+req.params.dia+'" ORDER BY Fecha DESC;'
+    console.log(sql);
     connection.query(sql, (error, results) => {
         if (error) console.log(error);
         else {
