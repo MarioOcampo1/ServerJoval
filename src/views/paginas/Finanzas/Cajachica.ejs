@@ -24,7 +24,7 @@
            
     <div class="col-4">
          <div class="mb-3">
-           <label for="FiltrarPorMes" class="form-label">Filtrar por mes</label>
+           <label for="FiltrarPorMes" class="form-label">Filtrar desde:</label>
            <input type="date"
              class="form-control" name="Mes" id="FiltrarPorMes" aria-describedby="helpId" placeholder="">
            <small id="helpId" class="form-text text-muted">Seleccione desde que día quiere comenzar a filtrar</small>
@@ -133,11 +133,11 @@ $('#modalEditarRegistro').modal('show')
                     TotalIngreso=TotalIngreso+element.Monto;
                     BalanceDeCaja=BalanceDeCaja+ element.Monto;
 
-                    $('#tbodyIngresos').append('<tr><td>'+moment(element.fecha).format('DD/MM/YYYY')+'</td><td>'+element.Descripcion+'</td><td>'+element.Monto+'</td>  <td><button  class="bi bi-pencil-square btn btn-outline-secondary" onclick="abrirModalEditarRegistro('+element.id+',\'Ingreso\','+element.Fecha+','+element.Descripcion+','+element.Monto+')"></button></td></tr>');
+                    $('#tbodyIngresos').append('<tr><td>'+moment(element.Fecha).format('DD/MM/YYYY')+'</td><td>'+element.Descripcion+'</td><td>'+element.Monto+'</td>  <td><button  class="bi bi-pencil-square btn btn-outline-secondary" onclick="abrirModalEditarRegistro('+element.id+',\'Ingreso\','+element.Fecha+','+element.Descripcion+','+element.Monto+')"></button></td></tr>');
                 }else{ //Carga en egresos
                     TotalEgreso=TotalEgreso+element.Monto;
                     BalanceDeCaja= BalanceDeCaja-element.Monto;
-                    $('#tbodyEgresos').append('<tr><td>'+moment(element.fecha).format('DD/MM/YYYY')+'</td><td>'+element.Descripcion+'</td><td>'+element.Monto+'</td>  <td><button  class="bi bi-pencil-square btn btn-outline-secondary"  onclick="abrirModalEditarRegistro('+element.id+',\'Egreso\','+element.Fecha+','+element.Descripcion+','+element.Monto+')"></button></td></tr>');
+                    $('#tbodyEgresos').append('<tr><td>'+moment(element.Fecha).format('DD/MM/YYYY')+'</td><td>'+element.Descripcion+'</td><td>'+element.Monto+'</td>  <td><button  class="bi bi-pencil-square btn btn-outline-secondary"  onclick="abrirModalEditarRegistro('+element.id+',\'Egreso\','+element.Fecha+','+element.Descripcion+','+element.Monto+')"></button></td></tr>');
                 }
 
                 
@@ -168,11 +168,11 @@ $.ajax({
                     TotalIngreso=TotalIngreso+element.Monto;
                     BalanceDeCaja=BalanceDeCaja+ element.Monto;
 
-                    $('#tbodyIngresos').append('<tr><td>'+moment(element.fecha).format('DD/MM/YYYY')+'</td><td>'+element.Descripcion+'</td><td>'+element.Monto+'</td>  <td><button  class="bi bi-pencil-square btn btn-outline-secondary" onclick="abrirModalEditarRegistro('+element.id+',\'Ingreso\','+element.Fecha+','+element.Descripcion+','+element.Monto+')"></button></td></tr>');
+                    $('#tbodyIngresos').append('<tr><td>'+moment(element.Fecha).format('DD/MM/YYYY')+'</td><td>'+element.Descripcion+'</td><td>'+element.Monto+'</td>  <td><button  class="bi bi-pencil-square btn btn-outline-secondary" onclick="abrirModalEditarRegistro('+element.id+',\'Ingreso\','+element.Fecha+','+element.Descripcion+','+element.Monto+')"></button></td></tr>');
                 }else{ //Carga en egresos
                     TotalEgreso=TotalEgreso+element.Monto;
                     BalanceDeCaja= BalanceDeCaja-element.Monto;
-                    $('#tbodyEgresos').append('<tr><td>'+moment(element.fecha).format('DD/MM/YYYY')+'</td><td>'+element.Descripcion+'</td><td>'+element.Monto+'</td>  <td><button  class="bi bi-pencil-square btn btn-outline-secondary" onclick="abrirModalEditarRegistro('+element.id+', \'Egreso\','+element.Fecha+','+element.Descripcion+','+element.Monto+')"></button></td></tr>');
+                    $('#tbodyEgresos').append('<tr><td>'+moment(element.Fecha).format('DD/MM/YYYY')+'</td><td>'+element.Descripcion+'</td><td>'+element.Monto+'</td>  <td><button  class="bi bi-pencil-square btn btn-outline-secondary" onclick="abrirModalEditarRegistro('+element.id+', \'Egreso\','+element.Fecha+','+element.Descripcion+','+element.Monto+')"></button></td></tr>');
                 }
 
                 
