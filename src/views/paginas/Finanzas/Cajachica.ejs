@@ -87,7 +87,7 @@
                                 <td><%= moment(Egreso.Fecha).locale('es').format("DD-MM-YYYY")%></td>
                                 <td><%= Egreso.Descripcion%></td>
                                 <td><%= Egreso.Monto%></td>
-                                <td><button value="<%=Egreso.id%>" class="bi bi-pencil-square btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalEditarRegistro" onclick="abrirModalEditarRegistro('<%=Egreso.id%>', 'Egreso','<%=Egreso.Fecha%>','<%=Egreso.Descripcion%>','<%=Egreso.Monto%>')"></button></td>
+                                <td><button value="<%=Egreso.id%>" class="bi bi-pencil-square btn btn-outline-secondary" onclick="abrirModalEditarRegistro('<%=Egreso.id%>','Egreso','<%=Egreso.Fecha%>','<%=Egreso.Descripcion%>','<%=Egreso.Monto%>')"></button></td>
                             </tr>
                                 <%}})%>
                       
@@ -108,7 +108,6 @@
     function abrirModalEditarRegistro(id,IngresoEgreso, fecha, descripcion, monto){
         $('#idEditarRegistro').val(id);
 $('#IngresoEgreso').val(IngresoEgreso);
-
     $('#EdicionFecha').val(fecha);
 $('#EdicionDescripcion').val(descripcion);
 $('#EdicionMonto').val(monto);

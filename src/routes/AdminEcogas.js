@@ -3007,21 +3007,32 @@ router.post("/actObrasCarpEcogas/:id", upload.none(), function (req, res) {
 
 
   if (FechaInicioTrabajos[1].length > 0) {
-    connection.query(
-      sql,
-      [
-        {
-          FechaInicioTrabajos: FechaInicioTrabajos[1],
-        },
-        Nombre,
-      ],
-      (error, results) => {
+
+    
+    var sql2 = 'SELECT FechaInicioTrabajos FROM adminecogas_tareas_por_carpeta WHERE id_obra='+idObra+';'
+    connection.query(sql2,(error,results)=>{
+      if(error)console.log(error);
+      else{
+        var fechaAVerificar =moment(results[0].FechaInicioTrabajos).format("YYYY-MM-DD");
+        if(fechaAVerificar==FechaInicioTrabajos[1]){
+          console.log("No es necesario guardar la fecha de inicio de trabajos en el historial.");
+        }else{
+          sql2= 'INSERT INTO historialdecambios set ? '
+    var consultarFecha=moment(FechaInicioTrabajos[1]).add(10,'days').format('YYYY-MM-DD');
+    connection.query(sql2,[{id_obra: idObra, Nombre_sub: Nombre, Tarea_Realizada_sub: 'Comienzan las tareas de obras', Proxima_Tarea_sub:'Seguimiento. Fin de obra/Actualización de estado. ', Fecha_Tarea_sub:FechaInicioTrabajos[1], Fecha_Proxima_Tarea_sub: consultarFecha, Tarea: "Comienzo de obras", EtapaTarea_sub:'Obras', ResponsableDeTarea:"Gustavo",Si_NO_TareaRealizada:"N"}],(error,results)=>{
+      if(error)console.log(error);
+    })
+   
+  }
+        }
+      })
+      connection.query(sql,[{FechaInicioTrabajos: FechaInicioTrabajos[1],},Nombre,],(error, results) => {
         if (error) {
           console.log(error);
         }
-      }
-    );
+      });
   }
+    
 
   if (FechaFinDeObra[1].length > 0) {
     connection.query(
