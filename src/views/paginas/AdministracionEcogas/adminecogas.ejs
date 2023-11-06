@@ -455,17 +455,18 @@ $('#btnNuevaTarea').click(function(){
         </script>
         <%}%>
 <script>
-  let prevScrollPos = window.pageYOffset;
+  let ScrollOriginal=window.pageYOffset;
+  let prevScrollPos = ScrollOriginal;
 
 window.onscroll = function() {
   let currentScrollPos = window.pageYOffset;
 
-  if (prevScrollPos < currentScrollPos) {
+  if (ScrollOriginal < currentScrollPos || ScrollOriginal > currentScrollPos) {
     // Desplazamiento hacia abajo, aplica el margen superior
     document.getElementById('btnNuevaTarea').style.marginTop = '54px';
     document.getElementById('btnNuevaTarea').style.position = 'fixed';
   } else {
-    // Desplazamiento hacia arriba, restablece el margen superior
+    // Desplazamiento hacia el principio, restablece el margen superior
     document.getElementById('btnNuevaTarea').style.marginTop = '0';
     document.getElementById('btnNuevaTarea').style.position = 'relative';
   }
