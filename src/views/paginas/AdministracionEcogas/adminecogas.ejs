@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<link rel="stylesheet" href="./css/adminecogas.css">
   <title class="text-center">Administración Ecogas</title>
 </head>
 
@@ -27,7 +27,7 @@
               <button class="btn btn-success hvr-grow mb-2">Nueva Obra</button>
             </a>
 
-            <button id="btnNuevaTarea" class="hvr-grow me-auto btn btn-info mb-2">Carga rápida</button>
+            <button id="btnNuevaTarea" class="hvr-grow me-auto btn btn-info mb-2 sticky-top">Carga rápida</button>
            <button class="hvr-grow btn btn-secondary mb-2 " id="btnVencimientoAdministracion" data-target="VencimientosCollapse" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="VencimientosCollapse">Vencimientos</button>
 </div>
               <div class="collapse border mb-2 ms-3" id="VencimientosCollapse">
@@ -454,7 +454,25 @@ $('#btnNuevaTarea').click(function(){
     });
         </script>
         <%}%>
+<script>
+  let prevScrollPos = window.pageYOffset;
 
+window.onscroll = function() {
+  let currentScrollPos = window.pageYOffset;
+
+  if (prevScrollPos < currentScrollPos) {
+    // Desplazamiento hacia abajo, aplica el margen superior
+    document.getElementById('btnNuevaTarea').style.marginTop = '54px';
+    document.getElementById('btnNuevaTarea').style.position = 'fixed';
+  } else {
+    // Desplazamiento hacia arriba, restablece el margen superior
+    document.getElementById('btnNuevaTarea').style.marginTop = '0';
+    document.getElementById('btnNuevaTarea').style.position = 'relative';
+  }
+
+  prevScrollPos = currentScrollPos;
+}
+</script>
 </body>
 
 </html>
