@@ -456,7 +456,6 @@ $('#btnNuevaTarea').click(function(){
         <%}%>
 <script>
   let ScrollOriginal=window.pageYOffset;
-  let prevScrollPos = ScrollOriginal;
 
 window.onscroll = function() {
   let currentScrollPos = window.pageYOffset;
@@ -471,7 +470,6 @@ window.onscroll = function() {
     document.getElementById('btnNuevaTarea').style.position = 'relative';
   }
 
-  prevScrollPos = currentScrollPos;
 }
 </script>
 </body>
