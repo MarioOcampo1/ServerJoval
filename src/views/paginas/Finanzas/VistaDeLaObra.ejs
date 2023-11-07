@@ -258,12 +258,12 @@ var ImporteOriginalAPagar=0;
     $('CotizacionUSD').val('0');
     $.ajax({
         type: "GET",
-        url: "https://www.dolarsi.com/api/api.php?type=dolar",
+        url: "https://dolarapi.com/v1/dolares/oficial",
         dataType: "json",
         success: function (response) {
           // console.log("Respuesta de api externa cotización dolar venta oficial, banco Nación"); 
           // console.log(response[4].casa);
-         cotizacionActualDolar= response[4].casa.venta;
+         cotizacionActualDolar= response.venta;
          $('#CotizacionUSD').val(cotizacionActualDolar); 
          $('#CotizacionUSDGenerarComprobante').val(cotizacionActualDolar);//Actualiza la cotización que va a llegar al backend, en Generar Comprobante.
         }
@@ -272,7 +272,6 @@ var ImporteOriginalAPagar=0;
     $.ajax({
       url: '/BuscarDatosClienteQuePaga/' + idcliente,
     }).done(function (respuestaServidor) {
-      console.log(respuestaServidor);
       var montoAPagarPredeterminado = respuestaServidor.montosCuota;
       $("#Concepto option:selected").each(function () {
         $('.calculoUSD').css('display','block'); //Este calculo en dolares, se encuentra dentro de la vista de pago del cliente.

@@ -790,7 +790,7 @@ router.post('/GenerarComprobante', (req, res, next) => {
                     }).then(function (id_Cobro) {
                         if (ObservacionesDelPago == null || ObservacionesDelPago == '') {
                             var fechapagoDate = new Date(fecha);
-                            sql = 'INSERT INTO finanzas_historial_comprobantes_emitidos SET?'
+                            sql = 'INSERT INTO finanzas_historial_comprobantes_emitidos SET ?'
                             connection.query(sql, {Nombre:Nombre,nroTransferencia:nroTransferencia, CotizacionDolar:CotizacionUSD,
                                 Descripcion: Concepto, id_cliente: ID, id_cobro: id_Cobro, id_obra: id_Obra, FechaPago: req.body.FechaPago,nroTransferencia:req.body.nroTransferencia, Monto: sumaDeTotalesPorConcepto, TipoPago: FormaDePago, Observacion: 'Sin observaciones'
                             }, (error, results) => {
