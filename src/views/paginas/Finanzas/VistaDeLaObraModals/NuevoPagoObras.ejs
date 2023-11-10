@@ -181,12 +181,14 @@
     }
     const form =$('#formGenerarComprobante');
     const formData=form.serialize();
+    var nombreArchivoComprobanteDePago='';
     $.ajax({
       type: "POST",
       url: "/GenerarComprobante",
       data: formData  ,
       success: function (data) {
-
+nombreArchivoComprobanteDePago=data;
+console.log(data);
         $('#MensajeServidorPago').html('<span class="text-success">El pago se ha efectuado con exito!</span>');
         setTimeout(() => {
           $('#ModalNuevoPagoObras2').modal('toggle');
@@ -216,7 +218,7 @@
     const a = document.createElement('a');
     document.body.appendChild(a);
     a.href = url;
-    a.download = 'recibo.xlsx';
+    a.download = nombreArchivoComprobanteDePago;
     a.click();
     
     // Liberar recursos

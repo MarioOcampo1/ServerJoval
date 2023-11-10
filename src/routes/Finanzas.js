@@ -1030,7 +1030,7 @@ router.post('/GenerarComprobante', (req, res, next) => {
             }
             var numeroEnLetras = NumeroALetras(ValorIngresado); //Se pasa el numero a LETRAS
             //Se comienza a modificar las celdas del Excel
-            workbook.sheet("Hoja1").cell("Q3").value(nDeComprobante);
+            workbook.sheet("Hoja1").cell("P3").value('N°:'+nDeComprobante);
             workbook.sheet("Hoja1").cell("L7").value(Nombre);
             workbook.sheet("Hoja1").cell("L9").value(Domicilio);
             workbook.sheet("Hoja1").cell("C8").value(Concepto);
@@ -1052,11 +1052,7 @@ router.post('/GenerarComprobante', (req, res, next) => {
             return workbook.outputAsync();
         }).then(data => {
             let nombreDelArchivo = nDeComprobante + '-' + Obra + '-' + Concepto + '-' + Nombre + '.xlsx';
-            res.attachment(nombreDelArchivo);
-            // Configurar las cabeceras de la respuesta para la descarga del archivo
-    res.setHeader('Content-Type', 'application/vnd.ms-excel');
-    // res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-    res.status(204).send(data);
+    res.send(nombreDelArchivo);
         })
             .catch(function () {
                 res.redirect('/Finanzas/cobrodeobras/VerObra/' + id_Obra);
