@@ -1038,7 +1038,7 @@ router.post('/GenerarComprobante', (req, res, next) => {
             workbook.sheet("Hoja1").cell("P15").value(ValorIngresado);
             workbook.sheet("Hoja1").cell("E8").value(ValorIngresado);
             if(FormaDePago=="Transferencia"){
-                workbook.sheet("Hoja1").cell("K18").value('Transf n°:'+nroTransferencia+ '|'+ ObservacionesDelPago);
+                workbook.sheet("Hoja1").cell("K18").value('Transf n°:'+nroTransferencia+ ' | '+ ObservacionesDelPago);
             }else{
                 workbook.sheet("Hoja1").cell("K18").value(ObservacionesDelPago);
             }
