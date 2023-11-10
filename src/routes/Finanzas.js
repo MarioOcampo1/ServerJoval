@@ -1054,8 +1054,14 @@ router.post('/GenerarComprobante', (req, res, next) => {
             if(FormaDePago=="Transferencia"){
                 workbook.sheet("Hoja1").cell("N15").value('Transferencia bancaria por:');
             }
-            workbook.toFileAsync('src/public/plantillas/ReciboDePago.xlsx');
-            return workbook.outputAsync();
+            
+                workbook.toFileAsync('src/public/plantillas/ReciboDePago.xlsx').then(()=>{
+                    return workbook.outputAsync();
+                });                
+            
+
+
+           
         }).then(data => {
             let nombreDelArchivo = nDeComprobante + '-' + Obra + '-' + Concepto + '-' + Nombre + '.xlsx';
     res.send(nombreDelArchivo);
