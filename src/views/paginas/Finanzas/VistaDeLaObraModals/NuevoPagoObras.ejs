@@ -29,7 +29,7 @@
                     <div class="d-inline  mb-2">
                       Obra: <%=NombreObra%>
                       <input class="" type="text" name="Obra" id="Obra" value="<%=NombreObra%>" hidden>
-    
+    <input type="text" name="DNICliente3" id="DNICliente3" hidden>
                     </div>
                     <div class="d-inline  ms-5 mb-2" id="textoNombreCliente2">
                     </div>
@@ -157,6 +157,7 @@
             $('#textoNombreCliente2').append('Nombre del cliente: ' + results[0].NombreCliente);
             $('#inputDomicilio2').val(results[0].Direccion);
             $('#IDCliente').val(idcliente);
+            $('#DNICliente3').val(results[0].DNICliente);
       
             var fecha = new Date(); //Fecha actual
             var mes = fecha.getMonth() + 1; //obteniendo mes

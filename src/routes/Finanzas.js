@@ -720,6 +720,7 @@ router.post('/GenerarComprobante', (req, res, next) => {
     let sql = '';
     var ID = req.body.IDCliente;
     var Nombre = req.body.NombreCompleto;
+    var DNICliente= req.body.DNICliente3;
     var Domicilio = req.body.Domicilio;
     var ValorIngresado = parseInt(req.body.ValorIngresado);
     var sumaDeTotalesPorConcepto;
@@ -1031,7 +1032,12 @@ router.post('/GenerarComprobante', (req, res, next) => {
             var numeroEnLetras = NumeroALetras(ValorIngresado); //Se pasa el numero a LETRAS
             //Se comienza a modificar las celdas del Excel
             workbook.sheet("Hoja1").cell("P3").value('N°:'+nDeComprobante);
-            workbook.sheet("Hoja1").cell("L7").value(Nombre);
+            if(DNICliente!=''|DNICliente!=null){
+                workbook.sheet("Hoja1").cell("L7").value(Nombre+' , DNI ' +DNICliente);
+            }else{
+                workbook.sheet("Hoja1").cell("L7").value(Nombre);
+
+            }
             workbook.sheet("Hoja1").cell("L9").value(Domicilio);
             workbook.sheet("Hoja1").cell("C8").value(Concepto);
             workbook.sheet("Hoja1").cell("I13").value("En concepto de pago en efectivo por " + Concepto);
