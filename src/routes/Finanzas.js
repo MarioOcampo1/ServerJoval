@@ -17,13 +17,8 @@ router.use(session({
 //Seteo server original
 const mysql = require('mysql');
 const { NULL } = require('mysql/lib/protocol/constants/types');
-const { routes, set, _router } = require('../app');
 const path = require('path');
-const { log, Console, error } = require('console');
-const { Dir } = require('fs');
-const { throws } = require('assert');
-//Variables
-var ReciboDePago;
+
 
 const connection = mysql.createConnection({
     host: '127.0.0.1',
@@ -1042,8 +1037,18 @@ router.post('/GenerarComprobante', (req, res, next) => {
             workbook.sheet("Hoja1").cell("I13").value("En concepto de pago en efectivo por " + Concepto);
             workbook.sheet("Hoja1").cell("P15").value(ValorIngresado);
             workbook.sheet("Hoja1").cell("E8").value(ValorIngresado);
-            workbook.sheet("Hoja1").cell("K18").value(ObservacionesDelPago);
+            if(FormaDePago=="Transferencia"){
+                workbook.sheet("Hoja1").cell("K18").value('Transf n°:'+nroTransferencia+ '|'+ ObservacionesDelPago);
+            }else{
+                workbook.sheet("Hoja1").cell("K18").value(ObservacionesDelPago);
+            }
+            
             workbook.sheet("Hoja1").cell("J11").value(numeroEnLetras);
+            workbook.sheet("Hoja1").cell("N15").value(FormaDePago+' por:');
+            if(FormaDePago=="Transferencia"){
+                workbook.sheet("Hoja1").cell("N15").value('Transferencia bancaria por:');
+            }
+            workbook.toFileAsync('src/public/plantillas/ReciboDePago.xlsx');
             return workbook.outputAsync();
         }).then(data => {
             let nombreDelArchivo = nDeComprobante + '-' + Obra + '-' + Concepto + '-' + Nombre + '.xlsx';
