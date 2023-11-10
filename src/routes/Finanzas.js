@@ -17,17 +17,21 @@ router.use(session({
 //Seteo server original
 const mysql = require('mysql');
 const { NULL } = require('mysql/lib/protocol/constants/types');
-const { routes, set } = require('../app');
+const { routes, set, _router } = require('../app');
 const path = require('path');
 const { log, Console, error } = require('console');
 const { Dir } = require('fs');
 const { throws } = require('assert');
+//Variables
+var ReciboDePago;
+
 const connection = mysql.createConnection({
     host: '127.0.0.1',
     user: 'root',
     password: 'Thinker95',
     database: 'joval'
 });
+
 //check de conexion a la base de datos
 connection.connect(error => {
     if (error) console.log(error);
@@ -1045,14 +1049,21 @@ router.post('/GenerarComprobante', (req, res, next) => {
             let nombreDelArchivo = nDeComprobante + '-' + Obra + '-' + Concepto + '-' + Nombre + '.xlsx';
             res.attachment(nombreDelArchivo);
             // Configurar las cabeceras de la respuesta para la descarga del archivo
-    res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-    res.setHeader('Content-Disposition', 'attachment; filename=' + nombreDelArchivo);
+    res.setHeader('Content-Type', 'application/vnd.ms-excel');
+    // res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
     res.status(204).send(data);
         })
             .catch(function () {
                 res.redirect('/Finanzas/cobrodeobras/VerObra/' + id_Obra);
             })
     });
+})
+
+router.get('/GenerarComprobante/Descargar', (req, res, next) => {
+    var archivo= 'C:/Users/Usuario/Documents/ServerJoval/src/public/plantillas/ReciboDePago.xlsx';
+    console.log(archivo);
+    res.sendFile(archivo);
+
 })
 router.get('/Finanzas/PagosPersonal', (req, res) => {
     res.render('./paginas/Finanzas/pagoPersonal.ejs');

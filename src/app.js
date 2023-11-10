@@ -18,7 +18,7 @@ const { log } = require('console');
 const router = Router();
 const cors= require('cors');
 const funciones = require('./funciones');
-module.exports = router;
+
 //Middlewares //Son funciones que se van ejecutando antes de que llegue a las rutas.
 app.use(morgan('dev'));
 app.use(express.urlencoded({extended: true }));

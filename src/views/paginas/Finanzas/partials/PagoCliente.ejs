@@ -35,54 +35,7 @@
    <%- include('../VistaDeLaObraModals/EdicionComprobanteEmitido.ejs') %>
    
     <script>
-           $('#btnGuardarCambiosPagos').click(function(){ 
-    // Funcion que trabaja con el modal que se encuentra ubicado en NuevoPagoObras.ejs, dentro de PagoClientes.ejs
-    //Primero comprobamos si el pago ingresado, es mayor al estipulado o no.
-    // la variable "ImporteOriginalAPagar" se encuentra dentro de "VistaDeLaObra.ejs".
-    if($('#ImporteIngresado').val()>ImporteOriginalAPagar){
-    console.log('Se ha detectado que el importe ingresado para pagar, es mayor al original estipulado');
-
-    }
-    const form =$('#formGenerarComprobante');
-    const formData=form.serialize();
-    $.ajax({
-      type: "POST",
-      url: "/GenerarComprobante",
-      data: formData  ,
-      dataType: "json",
-      success: function (data) {
-      // Crear un enlace de descarga para el Blob
-    const blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-    const url = window.URL.createObjectURL(blob);
-    
-    const a = document.createElement('a');
-    a.style.display = 'none';
-    document.body.appendChild(a);
-    a.href = url;
-    a.download = 'nombre_del_archivo.xlsx';
-    a.click();
-    
-    // Liberar recursos
-    window.URL.revokeObjectURL(url);
-    document.body.removeChild(a);
-
-        $('#MensajeServidorPago').html('<span class="text-success">El pago se ha efectuado con exito!</span>');
-        setTimeout(() => {
-          $('#ModalNuevoPagoObras2').modal('toggle');
-          $('#formGenerarComprobante')[0].reset();
-          location.reload();
-        }, 2000);
-      },
-      error:function(error){
-        console.log(error);
-        $('#MensajeServidorPago').html('<span class="text-danger">ERROR: No se ha podido efectuar el pago. Intente cargarlo nuevamente.</span>');
-        setTimeout(() => {
-          $('#formGenerarComprobante')[0].reset();
           
-        }, 2000);
-      }
-    });
-   }); 
    
  
   $('#CotizacionUSD').on('change',(()=>{
