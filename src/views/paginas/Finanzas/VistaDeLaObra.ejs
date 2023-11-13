@@ -421,7 +421,7 @@ $(document).ready(function(){
                '<div class="popup-content text-secondary">Monto pagado:$' + row.ServicioDomiciliario +'</div> </div>';
                 }
                 if(row.ServicioDomiciliario<row.PredeterminadoServicioDomiciliario){
-                return '<div class="tdServicioDomiciliario"><span class="popup-trigger bg-danger">$' + data + '</span>' + 
+                return '<div class="tdServicioDomiciliario"><span class="popup-trigger bg-danger">$' + data + '. Resta por pagar:$'+(row.PredeterminadoServicioDomiciliario-data)+'</span>' + 
                '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoServicioDomiciliario + ', resta por pagar:$'+(row.PredeterminadoServicioDomiciliario-data)+' </div> </div>';
               } if(row.ServicioDomiciliario>row.PredeterminadoServicioDomiciliario){
                 return '<div class="tdServicioDomiciliario"><span class="popup-trigger bg-warning">$' + data + '</span>' + 
@@ -442,7 +442,7 @@ $(document).ready(function(){
                '<div class="popup-content text-secondary">Monto pagado:$' + row.AnticipoFinanciero +'</div> </div>';
                 }
                 if(row.AnticipoFinanciero<row.PredeterminadoAnticipoFinanciero){
-                return '<div class="tdAnticipoFinanciero"><span class="popup-trigger bg-danger">$' + data + '</span>' + 
+                return '<div class="tdAnticipoFinanciero"><span class="popup-trigger bg-danger">$' + data + '. Resta por pagar:$'+(row.PredeterminadoAnticipoFinanciero-data)+'</span>' + 
                '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoAnticipoFinanciero + ', resta por pagar:$'+(row.PredeterminadoAnticipoFinanciero-data)+' </div> </div>';
               } if(row.AnticipoFinanciero>row.PredeterminadoAnticipoFinanciero){
                 return '<div class="tdAnticipoFinanciero"><span class="popup-trigger bg-warning">$' + data + '</span>' + 
@@ -464,7 +464,7 @@ $(document).ready(function(){
                '<div class="popup-content text-secondary">Valor a pagar:$' + row.Cuota1 +'</div> </div>';
                 }
                 if(row.Cuota1<row.PredeterminadoCuota1){
-                return '<div class="tdCuota1"><span class="popup-trigger bg-danger">$' + data + '</span>' + 
+                return '<div class="tdCuota1"><span class="popup-trigger bg-danger">$' + data + '. Resta por pagar:$'+(row.PredeterminadoCuota1-data)+'</span>' + 
                '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota1 + ', resta por pagar:$'+(row.PredeterminadoCuota1-data)+' </div> </div>';
               } if(row.Cuota1>row.PredeterminadoCuota1){
                 return '<div class="tdCuota1"><span class="popup-trigger bg-warning">$' + data + '</span>' + 
@@ -486,7 +486,7 @@ $(document).ready(function(){
                '<div class="popup-content text-secondary">Monto pagado:$' + row.Cuota2 +'</div> </div>';
                 }
                 if(row.Cuota2<row.PredeterminadoCuota2){
-                return '<div class="tdCuota2"><span class="popup-trigger bg-danger">$' + data + '</span>' + 
+                return '<div class="tdCuota2"><span class="popup-trigger bg-danger">$' + data + '. Resta por pagar:$'+(row.PredeterminadoCuota2-data)+'</span>' + 
                '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota2 + ', resta por pagar:$'+(row.PredeterminadoCuota2-data)+' </div> </div>';
               } if(row.Cuota2>row.PredeterminadoCuota2){
                 return '<div class="tdCuota2"><span class="popup-trigger bg-warning">$' + data + '</span>' + 
@@ -509,7 +509,7 @@ $(document).ready(function(){
                '<div class="popup-content text-secondary">Monto pagado:$' + row.Cuota3 +'</div> </div>';
                 }
                 if(row.Cuota3<row.PredeterminadoCuota3){
-                return '<div class="tdCuota3"><span class="popup-trigger bg-danger">$' + data + '</span>' + 
+                return '<div class="tdCuota3"><span class="popup-trigger bg-danger">$' + data + '. Resta por pagar:$'+(row.PredeterminadoCuota3-data)+'</span>' + 
                '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota3 + ', resta por pagar:$'+(row.PredeterminadoCuota3-data)+' </div> </div>';
               } if(row.Cuota3>row.PredeterminadoCuota3){
                 return '<div class="tdCuota3"><span class="popup-trigger bg-warning">$' + data + '</span>' + 
@@ -531,7 +531,7 @@ $(document).ready(function(){
                '<div class="popup-content text-secondary">Monto pagado:$' + row.Cuota4 +'</div> </div>';
                 }
                 if(row.Cuota4<row.PredeterminadoCuota4){
-                return '<div class="tdCuota4"><span class="popup-trigger bg-danger">$' + data + '</span>' + 
+                return '<div class="tdCuota4"><span class="popup-trigger bg-danger">$' + data + '. Resta por pagar:$'+(row.PredeterminadoCuota4-data)+'</span>' + 
                '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota4 + ', resta por pagar:$'+(row.PredeterminadoCuota4-data)+' </div> </div>';
               } if(row.Cuota4>row.PredeterminadoCuota4){
                 return '<div class="tdCuota4"><span class="popup-trigger bg-warning">$' + data + '</span>' + 
@@ -553,7 +553,7 @@ $(document).ready(function(){
                '<div class="popup-content text-secondary">Monto pagado:$' + row.Cuota5 +'</div> </div>';
                 }
                 if(row.Cuota5<row.PredeterminadoCuota5){
-                return '<div class="tdCuota5"><span class="popup-trigger bg-danger">$' + data + '</span>' + 
+                return '<div class="tdCuota5"><span class="popup-trigger bg-danger">$' + data + '. Resta por pagar:$'+(row.PredeterminadoCuota5-data)+'</span>' + 
                '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota5 + ', resta por pagar:$'+(row.PredeterminadoCuota5-data)+' </div> </div>';
               } if(row.Cuota5>row.PredeterminadoCuota5){
                 return '<div class="tdCuota5"><span class="popup-trigger bg-warning">$' + data + '</span>' + 
@@ -574,7 +574,7 @@ $(document).ready(function(){
                '<div class="popup-content text-secondary">Monto pagado:$' + row.Cuota6 +'</div> </div>';
                 }
                 if(row.Cuota6<row.PredeterminadoCuota6){
-                return '<div class="tdCuota6"><span class="popup-trigger bg-danger">$' + data + '</span>' + 
+                return '<div class="tdCuota6"><span class="popup-trigger bg-danger">$' + data + '. Resta por pagar:$'+(row.PredeterminadoCuota6-data)+'</span>' + 
                '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota6 + ', resta por pagar:$'+(row.PredeterminadoCuota6-data)+' </div> </div>';
               } if(row.Cuota6>row.PredeterminadoCuota6){
                 return '<div class="tdCuota6"><span class="popup-trigger bg-warning">$' + data + '</span>' + 
@@ -590,7 +590,7 @@ $(document).ready(function(){
                '<div class="popup-content text-secondary">Monto pagado:$' + row.Cuota7 +'</div> </div>';
                 }
                 if(row.Cuota7<row.PredeterminadoCuota7){
-                return '<div class="tdCuota7"><span class="popup-trigger bg-danger">$' + data + '</span>' + 
+                return '<div class="tdCuota7"><span class="popup-trigger bg-danger">$' + data + '. Resta por pagar:$'+(row.PredeterminadoCuota7-data)+'</span>' + 
                '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota7 + ', resta por pagar:$'+(row.PredeterminadoCuota7-data)+' </div> </div>';
               } if(row.Cuota7>row.PredeterminadoCuota7){
                 return '<div class="tdCuota7"><span class="popup-trigger bg-warning">$' + data + '</span>' + 
@@ -617,7 +617,7 @@ $(document).ready(function(){
                '<div class="popup-content text-secondary">Monto pagado:$' + row.Cuota8 +'</div> </div>';
                 }
                 if(row.Cuota8<row.PredeterminadoCuota8){
-                return '<div class="tdCuota8"><span class="popup-trigger bg-danger">$' + data + '</span>' + 
+                return '<div class="tdCuota8"><span class="popup-trigger bg-danger">$' + data + '. Resta por pagar:$'+(row.PredeterminadoCuota8-data)+'</span>' + 
                '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota8 + ', resta por pagar:$'+(row.PredeterminadoCuota8-data)+' </div> </div>';
               } if(row.Cuota8>row.PredeterminadoCuota8){
                 return '<div class="tdCuota8"><span class="popup-trigger bg-warning">$' + data + '</span>' + 
@@ -636,7 +636,7 @@ $(document).ready(function(){
                '<div class="popup-content text-secondary">Monto pagado:$' + row.Cuota9 +'</div> </div>';
                 }
                 if(row.Cuota9<row.PredeterminadoCuota9){
-                return '<div class="tdCuota9"><span class="popup-trigger bg-danger">$' + data + '</span>' + 
+                return '<div class="tdCuota9"><span class="popup-trigger bg-danger">$' + data + '. Resta por pagar:$'+(row.PredeterminadoCuota9-data)+'</span>' + 
                '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota9 + ', resta por pagar:$'+(row.PredeterminadoCuota9-data)+' </div> </div>';
               } if(row.Cuota9>row.PredeterminadoCuota9){
                 return '<div class="tdCuota9"><span class="popup-trigger bg-warning">$' + data + '</span>' + 
@@ -667,7 +667,7 @@ $(document).ready(function(){
                '<div class="popup-content text-secondary">Monto pagado:$' + row.Cuota10 +'</div> </div>';
                 }
                 if(row.Cuota10<row.PredeterminadoCuota10){
-                return '<div class="tdCuota10"><span class="popup-danger bg-danger">$' + data + '</span>' + 
+                return '<div class="tdCuota10"><span class="popup-danger bg-danger">$' + data + '. Resta por pagar:$'+(row.PredeterminadoCuota10-data)+'</span>' + 
                '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota10 + ', resta por pagar:$'+(row.PredeterminadoCuota10-data)+' </div> </div>';
               } if(row.Cuota10>row.PredeterminadoCuota10){
                 return '<div class="tdCuota10"><span class="popup-trigger bg-warning">$' + data + '</span>' + 
@@ -693,7 +693,7 @@ $(document).ready(function(){
                '<div class="popup-content text-secondary">Monto pagado:$' + row.Cuota11 +'</div> </div>';
                 }
                 if(row.Cuota11<row.PredeterminadoCuota11){
-                return '<div class="tdCuota11"><span class="popup-danger bg-danger">$' + data + '</span>' + 
+                return '<div class="tdCuota11"><span class="popup-danger bg-danger">$' + data + '. Resta por pagar:$'+(row.PredeterminadoCuota11-data)+'</span>' + 
                '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota11 + ', resta por pagar:$'+(row.PredeterminadoCuota11-data)+' </div> </div>';
               } if(row.Cuota11>row.PredeterminadoCuota11){
                 return '<div class="tdCuota11"><span class="popup-trigger bg-warning">$' + data + '</span>' + 
@@ -722,7 +722,7 @@ $(document).ready(function(){
                '<div class="popup-content text-secondary">Monto pagado:$' + row.Cuota12 +'</div> </div>';
                 }
                 if(row.Cuota12<row.PredeterminadoCuota12){
-                return '<div class="tdCuota12"><span class="popup-danger bg-danger">$' + data + '</span>' + 
+                return '<div class="tdCuota12"><span class="popup-danger bg-danger">$' + data + '. Resta por pagar:$'+(row.PredeterminadoCuota12-data)+'</span>' + 
                '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoCuota12 + ', resta por pagar:$'+(row.PredeterminadoCuota12-data)+' </div> </div>';
               } if(row.Cuota12>row.PredeterminadoCuota12){
                 return '<div class="tdCuota12"><span class="popup-trigger bg-warning">$' + data + '</span>' + 
@@ -752,7 +752,7 @@ $(document).ready(function(){
                '<div class="popup-content text-secondary">Monto pagado:$' + row.DNV +'</div> </div>';
                 }
                 if(row.DNV<row.PredeterminadoDNV){
-                return '<div class="tdDNV"><span class="popup-trigger bg-danger">$' + data + '</span>' + 
+                return '<div class="tdDNV"><span class="popup-trigger bg-danger">$' + data + '. Resta por pagar:$'+(row.PredeterminadoDNV-data)+'</span>' + 
                '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoDNV + ', resta por pagar:$'+(row.PredeterminadoDNV-data)+' </div> </div>';
               } if(row.DNV>row.PredeterminadoDNV){
                 return '<div class="tdDNV"><span class="popup-trigger bg-warning">$' + data + '</span>' + 
@@ -779,7 +779,7 @@ $(document).ready(function(){
                '<div class="popup-content text-secondary">Monto pagado:$' + row.DPV +'</div> </div>';
                 }
                 if(row.DPV<row.PredeterminadoDPV){
-                return '<div class="tdDPV"><span class="popup-trigger bg-danger">$' + data + '</span>' + 
+                return '<div class="tdDPV"><span class="popup-trigger bg-danger">$' + data + '. Resta por pagar:$'+(row.PredeterminadoDPV-data)+'</span>' + 
                '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoDPV + ', resta por pagar:$'+(row.PredeterminadoDPV-data)+' </div> </div>';
               } if(row.DPV>row.PredeterminadoDPV){
                 return '<div class="tdDPV"><span class="popup-trigger bg-warning">$' + data + '</span>' + 
@@ -836,7 +836,7 @@ $(document).ready(function(){
                '<div class="popup-content text-secondary">Monto pagado:$' + row.FFCC +'</div> </div>';
                 }
                 if(row.FFCC<row.PredeterminadoFFCC){
-                return '<div class="tdFFCC"><span class="popup-trigger bg-danger">$' + data + '</span>' + 
+                return '<div class="tdFFCC"><span class="popup-trigger bg-danger">$' + data + '. Resta por pagar:$'+(row.PredeterminadoFFCC-data)+'</span>' + 
                '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoFFCC + ', resta por pagar:$'+(row.PredeterminadoFFCC-data)+' </div> </div>';
               } if(row.FFCC>row.PredeterminadoFFCC){
                 return '<div class="tdFFCC"><span class="popup-trigger bg-warning">$' + data + '</span>' + 
@@ -904,7 +904,7 @@ $(document).ready(function(){
                '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoIngresoDocumentacion +'</div> </div>';
                 }
                 if(row.IngresoDocumentacion<row.PredeterminadoIngresoDocumentacion){
-                return '<div class="tdIngresoDocumentacion"><span class="popup-trigger bg-danger">$' + data + '</span>' + 
+                return '<div class="tdIngresoDocumentacion"><span class="popup-trigger bg-danger">$' + data + '. Resta por pagar:$'+(row.PredeterminadoIngresoDocumentacion-data)+'</span>' + 
                '<div class="popup-content text-secondary">Valor a pagar:$' + row.PredeterminadoIngresoDocumentacion + ', resta por pagar:$'+(row.PredeterminadoIngresoDocumentacion-data)+' </div> </div>';
               } if(row.IngresoDocumentacion>row.PredeterminadoIngresoDocumentacion){
                 return '<div class="tdIngresoDocumentacion"><span class="popup-trigger bg-warning">$' + data + '</span>' + 
