@@ -147,14 +147,29 @@ $('#btnVerComprobantesRegistrados').click(()=>{
         }
       }},
       { 'render': function(data,type,row,meta){
-        return'<button type="button" class="btn btn-sm btn-outline-primary" onclick="EditarComprobanteEmitido();";><i class="bi bi-pencil-square"></i></button><button type="button" class="btn btn-sm btn-outline-primary"><i class="bi bi-search"></i></button><button type="button" class="btn btn-sm btn-outline-primary"> <i class="bi bi-printer"></i></button>'
+        return'<button type="button" class="btn btn-sm btn-outline-primary" onclick="EditarComprobanteEmitido();";><i class="bi bi-pencil-square"></i></button><button type="button" class="btn btn-sm btn-outline-primary"><i class="bi bi-search"></i></button><button type="button" class="btn btn-sm btn-outline-primary" onclick="ReimprimirComprobante('+row.nComprobante+')" "> <i class="bi bi-printer"></i></button>'
       }
        },
-    ]
+    ],
+    
     })
+     
+    
  
   $('#modalComprobantesEfectuados').modal('show');
 })
+function ReimprimirComprobante(nroComprobante){
+
+  $.ajax({
+    type: "GET",
+    url: "/ReimprimirComprobante/"+nroComprobante,
+    dataType: "json",
+    success: function (response) {
+      
+    }
+  });
+  console.log('click');
+}
 $('#FormaDePago').on('change', function(){
   var opcionSeleccionada = $(this).val();
   if(opcionSeleccionada==="Transferencia"){
