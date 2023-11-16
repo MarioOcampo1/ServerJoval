@@ -761,12 +761,14 @@ router.post('/GenerarComprobante', (req, res, next) => {
                     var a;
                     JSON.parse((JSON.stringify(results)), function (k, v) {
                         if (k == Concepto) {
+                            if(v==undefined|| v==null){
+                                v=0;
+                            }
                             a = parseInt(v);
                         }
                     });
                     console.log("El cliente seleccionado tiene pagos existentes. Actualizando pagos.")
                     if (a == null || a == "") {
-                        sumaDeTotalesPorConcepto=0;
                         sumaDeTotalesPorConcepto = ValorIngresado;
                         console.log('Los conceptos sumados son:' +sumaDeTotalesPorConcepto);
                         console.log('El valor ingresado es:' +ValorIngresado);
