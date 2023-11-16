@@ -1318,6 +1318,7 @@ router.get('/GenerarComprobante/Descargar', (req, res, next) => {
     var indice=cadena.indexOf('routes');
     url= cadena.substring(0,indice);
 url= url+'public/plantillas/ReciboDePago.xlsx';
+console.log(url);
 res.sendFile(url);
 })
 router.get('/Finanzas/PagosPersonal', (req, res) => {
