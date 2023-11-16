@@ -7,7 +7,9 @@ const moment = require('moment');
 const multer = require('multer');
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
+const fs= require('fs');
 module.exports = router;
+
 router.use(session({
     secret: 'mi secreto',
     resave: true,
@@ -1280,7 +1282,8 @@ var numeroEnLetras;
             });                
     }).then(data => {
         let nombreDelArchivo = nDeComprobante + '-' + Obra + '-' + Concepto + '-' + Nombre + '.xlsx';
-        var archivo= 'C:/Users/Usuario/Documents/ServerJoval/src/public/plantillas/ReciboDePago.xlsx';
+        
+        var archivo= 'src/public/plantillas/ReciboDePago.xlsx';
 
 res.sendFile(archivo);
     })
@@ -1292,10 +1295,12 @@ res.sendFile(archivo);
 })
 
 router.get('/GenerarComprobante/Descargar', (req, res, next) => {
-    var archivo= 'src/public/plantillas/ReciboDePago.xlsx';
-    console.log(archivo);
-    res.sendFile(archivo);
-
+    let cadena=__dirname;
+    cadena= cadena.replace(/\\/g,"/");
+    var indice=cadena.indexOf('routes');
+    url= cadena.substring(0,indice);
+url= url+'public/plantillas/ReciboDePago.xlsx';
+res.sendFile(url);
 })
 router.get('/Finanzas/PagosPersonal', (req, res) => {
     res.render('./paginas/Finanzas/pagoPersonal.ejs');
