@@ -867,6 +867,11 @@ router.post('/GenerarComprobante', (req, res, next) => {
             }
         })
     }).then((resolve) => {
+        let cadena=__dirname;
+        cadena= cadena.replace(/\\/g,"/");
+        var indice=cadena.indexOf('routes');
+        url= cadena.substring(0,indice);
+        url= url+'src/public/plantillas/ReciboDePago.xlsx';
         //Generación del comprobante en archivo Excel
         //  Se utiliza como herramienta el xlsx-populate: https://www.npmjs.com/package/xlsx-populate#serving-from-express
         // La plantilla del comprobante es: src\public\plantillas\ReciboDePago.xlsx
@@ -882,7 +887,7 @@ router.post('/GenerarComprobante', (req, res, next) => {
                 })
             }
         })
-        XlsxPopulate.fromFileAsync("src/public/plantillas/ReciboDePago.xlsx").then(workbook => {
+        XlsxPopulate.fromFileAsync(url).then(workbook => {
             function Unidades(num) {
 
                 switch (num) {
@@ -1062,7 +1067,7 @@ router.post('/GenerarComprobante', (req, res, next) => {
                 workbook.sheet("Hoja1").cell("N15").value('Transferencia bancaria por:');
             }
             
-                workbook.toFileAsync('src/public/plantillas/ReciboDePago.xlsx').then(()=>{
+                workbook.toFileAsync(url).then(()=>{
                     return workbook.outputAsync();
                 });                
         }).then(data => {
