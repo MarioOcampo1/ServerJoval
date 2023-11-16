@@ -766,6 +766,7 @@ router.post('/GenerarComprobante', (req, res, next) => {
                     });
                     console.log("El cliente seleccionado tiene pagos existentes. Actualizando pagos.")
                     if (a == null || a == "") {
+                        sumaDeTotalesPorConcepto=0;
                         sumaDeTotalesPorConcepto = ValorIngresado;
                         sql = 'UPDATE finanzas_clientes_por_obra_cobros SET ' + Concepto + ' = ' + sumaDeTotalesPorConcepto + ', FechaPago' + Concepto + ' = "' + FechaPago + '" WHERE ID_cliente = ' + ID + ' ;';
                         connection.query(sql, (error, results) => {
