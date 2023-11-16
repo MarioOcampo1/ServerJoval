@@ -740,6 +740,7 @@ router.post('/GenerarComprobante', (req, res, next) => {
     var id_Obra;
     var FormaDePago = req.body.FormaDePago;
     var id_Cobro;
+    var nDeComprobante=0;
     sql = 'SELECT id FROM obras WHERE Nombre =?';
     connection.query(sql, [Obra], (error, results) => {
         if (error) console.log(error);
@@ -851,7 +852,19 @@ router.post('/GenerarComprobante', (req, res, next) => {
                                 Descripcion: Concepto, id_cliente: ID, id_cobro: id_Cobro, id_obra: id_Obra, FechaPago: req.body.FechaPago,nroTransferencia:req.body.nroTransferencia, Monto: sumaDeTotalesPorConcepto, TipoPago: FormaDePago, Observacion: ObservacionesDelPago
                             }, (error, results) => {
                                 if (error) console.log(error);
+                                sql = 'INSERT INTO finanzas_recibos_de_pago_obras set?';
+                                
+                                connection.query(sql, {idObra: id_Obra, idCliente: ID, Concepto: Concepto, ValorIngresado: ValorIngresado, ObservacionesDelPago, ObservacionesDelPago }, (error, results) => {
+                                    if (error) console.log(error);
+                                    else {
+                                        sql = 'SELECT MAX(nComprobante) as Nrecibo FROM finanzas_historial_comprobantes_emitidos';
+                                        connection.query(sql, (error, results) => {
+                                            nDeComprobante = results[0].Nrecibo;
                                 resolve();
+
+                                        })
+                                    }
+                                })
                             })
                         }
                     })
@@ -865,18 +878,7 @@ router.post('/GenerarComprobante', (req, res, next) => {
         //  Se utiliza como herramienta el xlsx-populate: https://www.npmjs.com/package/xlsx-populate#serving-from-express
         // La plantilla del comprobante es: src\public\plantillas\ReciboDePago.xlsx
         // Datos que se cargan en la misma: Nombre, Domicilio, ValorIngresado, Concepto, FechaPago, ObservacionesDelPago, Obra.
-        sql = 'INSERT INTO finanzas_recibos_de_pago_obras set?';
-        var nDeComprobante;
-        connection.query(sql, {idObra: id_Obra, idCliente: ID, Concepto: Concepto, ValorIngresado: ValorIngresado, ObservacionesDelPago, ObservacionesDelPago }, (error, results) => {
-            if (error) console.log(error);
-            else {
-                sql = 'SELECT MAX(nComprobante) as Nrecibo FROM finanzas_historial_comprobantes_emitidos';
-                connection.query(sql, (error, results) => {
-                    nDeComprobante = results[0].Nrecibo;
-                })
-            }
-        })
-
+     
         XlsxPopulate.fromFileAsync("src/public/plantillas/ReciboDePago.xlsx").then(workbook => {
             function Unidades(num) {
 
@@ -1276,14 +1278,22 @@ var numeroEnLetras;
         if(FormaDePago=="Transferencia"){
             workbook.sheet("Hoja1").cell("N15").value('Transferencia bancaria por:');
         }
-        
-            workbook.toFileAsync('src/public/plantillas/ReciboDePago.xlsx').then(()=>{
+        let cadena=__dirname;
+        cadena= cadena.replace(/\\/g,"/");
+        var indice=cadena.indexOf('routes');
+        url= cadena.substring(0,indice);
+            workbook.toFileAsync(url+'/public/plantillas/ReciboDePago.xlsx').then(()=>{
+                console.log('Buscando archivo');
                 return workbook.outputAsync();
             });                
     }).then(data => {
         let nombreDelArchivo = nDeComprobante + '-' + Obra + '-' + Concepto + '-' + Nombre + '.xlsx';
-        
-        var archivo= 'src/public/plantillas/ReciboDePago.xlsx';
+        let cadena=__dirname;
+    cadena= cadena.replace(/\\/g,"/");
+    var indice=cadena.indexOf('routes');
+    url= cadena.substring(0,indice);
+    
+        var archivo= url+'/public/plantillas/ReciboDePago.xlsx';
 
 res.sendFile(archivo);
     })
