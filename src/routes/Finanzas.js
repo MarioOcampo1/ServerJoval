@@ -768,6 +768,8 @@ router.post('/GenerarComprobante', (req, res, next) => {
                     if (a == null || a == "") {
                         sumaDeTotalesPorConcepto=0;
                         sumaDeTotalesPorConcepto = ValorIngresado;
+                        console.log('Los conceptos sumados son:' +sumaDeTotalesPorConcepto);
+                        console.log('El valor ingresado es:' +ValorIngresado);
                         sql = 'UPDATE finanzas_clientes_por_obra_cobros SET ' + Concepto + ' = ' + sumaDeTotalesPorConcepto + ', FechaPago' + Concepto + ' = "' + FechaPago + '" WHERE ID_cliente = ' + ID + ' ;';
                         connection.query(sql, (error, results) => {
                             if (error) console.log(error);
