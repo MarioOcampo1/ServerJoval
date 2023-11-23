@@ -296,8 +296,8 @@ router.post('/guardarNuevoCliente', (req, res) => {
                 }, (error, results) => {
                     if (error) console.log(error);
                 })
-                function cargarenFinanzas(){
-                    return new Promise((resolve, reject) => {
+   function cargarenFinanzas(){
+ return new Promise ((resolve, reject) => {
                         const cantidadVecinos = req.body.cantidadVecinos;
                         const MontoContrato = req.body.MontoContrato;
                         const PrecioDeCuota = req.body.PrecioDeCuota;
@@ -306,8 +306,17 @@ router.post('/guardarNuevoCliente', (req, res) => {
                         var ArregloVecinos = [];
                         var NombreVecino = req.body.NombreVecino;
                         var DniVecino = req.body.DniVecino;
+                        if(DniVecino==undefined||DniVecino==null){
+                            DniVecino=0;
+                        }
                         var TelefonoVecino = req.body.TelefonoVecino;
+                        if(TelefonoVecino==undefined||TelefonoVecino==null){
+                            TelefonoVecino=0;
+                        }
                         var CorreoVecino = req.body.CorreoVecino;
+                        if(CorreoVecino==undefined||CorreoVecino==null){
+                            CorreoVecino='';
+                        }
                         var LoteVecino = req.body.LoteVecino;
                         if (cantidadVecinos > 1 || cantidadVecinos != null || cantidadVecinos != undefined) {
                             for (let index = 0; index < cantidadVecinos; index++) {
@@ -350,15 +359,47 @@ router.post('/guardarNuevoCliente', (req, res) => {
                             resolve();
                         }
                         else {
+new Promise((resolve, reject) => {
                             sql = 'Insert into finanzas_clientes_por_obra set?';
                             var NombreVecino = req.body.NombreVecino;
                             connection.query(sql, {
                                 id_Obra: idObra, NombreObra: Nombre, NombreCliente: NombreVecino, DniCliente: DniVecino, LocacionObra: Departamento, Telefono: TelefonoVecino, Correo: CorreoVecino, Direccion: LoteVecino,
                             }, (error, results) => {
                                 if (error) console.log(error);
-                                resolve();
+                            else{
+                                resolve()
+                            }   
                             }
                             )
+                        }).then(()=>{
+                            sql = 'Select id_cliente from finanzas_clientes_por_obra where NombreCliente =? and id_Obra =?';
+                                        connection.query(sql, [NombreVecino[index], idObra], (error, results) => {
+                                            if (error) console.log(error);
+                                            else {
+                                                var id_cliente = results[0].id_cliente;
+                                                sql = 'Insert into finanzas_clientes_predeterminados set?';
+                                                connection.query(sql, {
+                                                    id_obra: idObra, id_cliente: id_cliente,CantidadCuotas:CantidadCuotas, NombreCliente: NombreVecino[index], AnticipoFinanciero: AnticipoFinanciero
+                                                }, (error, results) => {
+                                                    if (error) console.log(error);
+                                                    for (let j = 1; j < CantidadCuotas; j++) {
+                                                        var cuota = "Cuota" + j;
+                                                        sql = 'UPDATE finanzas_clientes_predeterminados SET ' + cuota + ' = ' + PrecioDeCuota + ' WHERE id_cliente=?';
+                                                        connection.query(sql, id_cliente, (error, results) => {
+                                                            if (error) console.log(error.sqlMessage);
+                                                        })
+                                                    }
+                                                })
+                                                sql = 'INSERT into finanzas_clientes_por_obra_cobros set?';
+                                                connection.query(sql, {
+                                                    id_obra: idObra, ID_cliente: id_cliente, NombreCliente: NombreVecino[index], ServicioIncluidoCuotas: ServicioIncluido[index],
+                                                }, (error, results) => {
+                                                    if (error) console.log(error);
+                                                })
+                                                resolve();
+                                            }
+                                        })
+                        })
                         }
                     })
                 }

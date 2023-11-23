@@ -21,6 +21,7 @@ const mysql = require('mysql');
 const { NULL } = require('mysql/lib/protocol/constants/types');
 const path = require('path');
 const { setTimeout } = require('timers/promises');
+const { url } = require('inspector');
 
 
 const connection = mysql.createConnection({
@@ -768,10 +769,8 @@ router.post('/GenerarComprobante', (req, res, next) => {
                         }
                     });
                     console.log("El cliente seleccionado tiene pagos existentes. Actualizando pagos.")
-                    if (a == null || a == "") {
+                    if (a == null || a == "" || a== undefined) {
                         sumaDeTotalesPorConcepto = ValorIngresado;
-                        console.log('Los conceptos sumados son:' +sumaDeTotalesPorConcepto);
-                        console.log('El valor ingresado es:' +ValorIngresado);
                         sql = 'UPDATE finanzas_clientes_por_obra_cobros SET ' + Concepto + ' = ' + sumaDeTotalesPorConcepto + ', FechaPago' + Concepto + ' = "' + FechaPago + '" WHERE ID_cliente = ' + ID + ' ;';
                         connection.query(sql, (error, results) => {
                             if (error) console.log(error);
@@ -870,213 +869,219 @@ router.post('/GenerarComprobante', (req, res, next) => {
         let cadena=__dirname;
         cadena= cadena.replace(/\\/g,"/");
         var indice=cadena.indexOf('routes');
-        url= cadena.substring(0,indice);
-        url= url+'src/public/plantillas/ReciboDePago.xlsx';
+       var url= cadena.substring(0,indice);
+        url= url+'/public/plantillas/ReciboDePago.xlsx';
+        console.log('url: '+url);
         //Generación del comprobante en archivo Excel
         //  Se utiliza como herramienta el xlsx-populate: https://www.npmjs.com/package/xlsx-populate#serving-from-express
         // La plantilla del comprobante es: src\public\plantillas\ReciboDePago.xlsx
         // Datos que se cargan en la misma: Nombre, Domicilio, ValorIngresado, Concepto, FechaPago, ObservacionesDelPago, Obra.
         sql = 'INSERT INTO finanzas_recibos_de_pago_obras set?';
         var nDeComprobante=0;
-        connection.query(sql, {idObra: id_Obra, idCliente: ID, Concepto: Concepto, ValorIngresado: ValorIngresado, ObservacionesDelPago, ObservacionesDelPago }, (error, results) => {
-            if (error) console.log(error);
-            else {
-                sql = 'SELECT MAX(nComprobante) as Nrecibo FROM finanzas_historial_comprobantes_emitidos';
-                connection.query(sql, (error, results) => {
-                    nDeComprobante = results[0].Nrecibo;
-                })
-            }
-        })
-        XlsxPopulate.fromFileAsync(url).then(workbook => {
-            function Unidades(num) {
-
-                switch (num) {
-                    case 1: return 'UN';
-                    case 2: return 'DOS';
-                    case 3: return 'TRES';
-                    case 4: return 'CUATRO';
-                    case 5: return 'CINCO';
-                    case 6: return 'SEIS';
-                    case 7: return 'SIETE';
-                    case 8: return 'OCHO';
-                    case 9: return 'NUEVE';
-                }
-
-                return '';
-            }//Unidades()
-
-            function Decenas(num) {
-
-                decena = Math.floor(num / 10);
-                unidad = num - (decena * 10);
-
-                switch (decena) {
-                    case 1:
-                        switch (unidad) {
-                            case 0: return 'DIEZ';
-                            case 1: return 'ONCE';
-                            case 2: return 'DOCE';
-                            case 3: return 'TRECE';
-                            case 4: return 'CATORCE';
-                            case 5: return 'QUINCE';
-                            default: return 'DIECI' + Unidades(unidad);
-                        }
-                    case 2:
-                        switch (unidad) {
-                            case 0: return 'VEINTE';
-                            default: return 'VEINTI' + Unidades(unidad);
-                        }
-                    case 3: return DecenasY('TREINTA', unidad);
-                    case 4: return DecenasY('CUARENTA', unidad);
-                    case 5: return DecenasY('CINCUENTA', unidad);
-                    case 6: return DecenasY('SESENTA', unidad);
-                    case 7: return DecenasY('SETENTA', unidad);
-                    case 8: return DecenasY('OCHENTA', unidad);
-                    case 9: return DecenasY('NOVENTA', unidad);
-                    case 0: return Unidades(unidad);
-                }
-            }//Unidades()
-
-            function DecenasY(strSin, numUnidades) {
-                if (numUnidades > 0)
-                    return strSin + ' Y ' + Unidades(numUnidades)
-
-                return strSin;
-            }//DecenasY()
-
-            function Centenas(num) {
-                centenas = Math.floor(num / 100);
-                decenas = num - (centenas * 100);
-
-                switch (centenas) {
-                    case 1:
-                        if (decenas > 0)
-                            return 'CIENTO ' + Decenas(decenas);
-                        return 'CIEN';
-                    case 2: return 'DOSCIENTOS ' + Decenas(decenas);
-                    case 3: return 'TRESCIENTOS ' + Decenas(decenas);
-                    case 4: return 'CUATROCIENTOS ' + Decenas(decenas);
-                    case 5: return 'QUINIENTOS ' + Decenas(decenas);
-                    case 6: return 'SEISCIENTOS ' + Decenas(decenas);
-                    case 7: return 'SETECIENTOS ' + Decenas(decenas);
-                    case 8: return 'OCHOCIENTOS ' + Decenas(decenas);
-                    case 9: return 'NOVECIENTOS ' + Decenas(decenas);
-                }
-
-                return Decenas(decenas);
-            }//Centenas()
-
-            function Seccion(num, divisor, strSingular, strPlural) {
-                cientos = Math.floor(num / divisor)
-                resto = num - (cientos * divisor)
-
-                letras = '';
-
-                if (cientos > 0)
-                    if (cientos > 1)
-                        letras = Centenas(cientos) + ' ' + strPlural;
-                    else
-                        letras = strSingular;
-
-                if (resto > 0)
-                    letras += '';
-
-                return letras;
-            }//Seccion()
-
-            function Miles(num) {
-                divisor = 1000;
-                cientos = Math.floor(num / divisor)
-                resto = num - (cientos * divisor)
-
-                strMiles = Seccion(num, divisor, 'UN MIL', 'MIL');
-                strCentenas = Centenas(resto);
-
-                if (strMiles == '')
-                    return strCentenas;
-
-                return strMiles + ' ' + strCentenas;
-            }//Miles()
-
-            function Millones(num) {
-                divisor = 1000000;
-                cientos = Math.floor(num / divisor)
-                resto = num - (cientos * divisor)
-
-                strMillones = Seccion(num, divisor, 'UN MILLON ', 'MILLONES ');
-                strMiles = Miles(resto);
-
-                if (strMillones == '')
-                    return strMiles;
-
-                return strMillones + ' ' + strMiles;
-            }//Millones()
-
-            function NumeroALetras(num) {
-                var data = {
-                    numero: num,
-                    enteros: Math.floor(num),
-                    centavos: (((Math.round(num * 100)) - (Math.floor(num) * 100))),
-                    letrasCentavos: '',
-                    letrasMonedaPlural: 'PESOS',//'PESOS', 'Dólares', 'Bolívares', 'etcs'
-                    letrasMonedaSingular: 'PESO', //'PESO', 'Dólar', 'Bolivar', 'etc'
-
-                    letrasMonedaCentavoPlural: 'CENTAVOS',
-                    letrasMonedaCentavoSingular: 'CENTAVO'
-                };
-
-                if (data.centavos > 0) {
-                    data.letrasCentavos = 'CON ' + (function () {
-                        if (data.centavos == 1)
-                            return Millones(data.centavos) + ' ' + data.letrasMonedaCentavoSingular;
-                        else
-                            return Millones(data.centavos) + ' ' + data.letrasMonedaCentavoPlural;
-                    })();
-                };
-
-                if (data.enteros == 0)
-                    return 'CERO ' + data.letrasMonedaPlural + ' ' + data.letrasCentavos;
-                if (data.enteros == 1)
-                    return Millones(data.enteros) + ' ' + data.letrasMonedaSingular + ' ' + data.letrasCentavos;
-                else
-                    return Millones(data.enteros) + ' ' + data.letrasMonedaPlural + ' ' + data.letrasCentavos;
-            }
-            var numeroEnLetras = NumeroALetras(ValorIngresado); //Se pasa el numero a LETRAS
-            //Se comienza a modificar las celdas del Excel
-            workbook.sheet("Hoja1").cell("P3").value('N°:'+nDeComprobante);
-            if(DNICliente!=''|DNICliente!=null){
-                workbook.sheet("Hoja1").cell("L7").value(Nombre+' , DNI ' +DNICliente);
-            }else{
-                workbook.sheet("Hoja1").cell("L7").value(Nombre);
-
-            }
-            workbook.sheet("Hoja1").cell("L9").value(Domicilio);
-            workbook.sheet("Hoja1").cell("C8").value(Concepto);
-            workbook.sheet("Hoja1").cell("I13").value("En concepto de pago en efectivo por " + Concepto);
-            workbook.sheet("Hoja1").cell("P15").value(ValorIngresado);
-            workbook.sheet("Hoja1").cell("E8").value(ValorIngresado);
-            if(FormaDePago=="Transferencia"){
-                workbook.sheet("Hoja1").cell("K18").value('Transf n°:'+nroTransferencia+ ' | '+ ObservacionesDelPago);
-            }else{
-                workbook.sheet("Hoja1").cell("K18").value(ObservacionesDelPago);
-            }
-            
-            workbook.sheet("Hoja1").cell("J11").value(numeroEnLetras);
-            workbook.sheet("Hoja1").cell("N15").value(FormaDePago+' por:');
-            if(FormaDePago=="Transferencia"){
-                workbook.sheet("Hoja1").cell("N15").value('Transferencia bancaria por:');
-            }
-            
-                workbook.toFileAsync(url).then(()=>{
-                    return workbook.outputAsync();
-                });                
-        }).then(data => {
-            let nombreDelArchivo = nDeComprobante + '-' + Obra + '-' + Concepto + '-' + Nombre + '.xlsx';
-    res.send(nombreDelArchivo);
-        })
-            .catch(function () {
-                res.redirect('/Finanzas/cobrodeobras/VerObra/' + id_Obra);
+new Promise((resolve, reject) => {
+    connection.query(sql, {idObra: id_Obra, idCliente: ID, Concepto: Concepto, ValorIngresado: ValorIngresado, ObservacionesDelPago, ObservacionesDelPago }, (error, results) => {
+        if (error) console.log(error);
+        else {
+            sql = 'SELECT MAX(nComprobante) as Nrecibo FROM finanzas_historial_comprobantes_emitidos';
+            connection.query(sql, (error, results) => {
+                nDeComprobante = results[0].Nrecibo;
+                resolve();
             })
+        }
+    })
+}).then(()=>{
+    console.log(url);
+    XlsxPopulate.fromFileAsync(url).then(workbook => {
+        function Unidades(num) {
+
+            switch (num) {
+                case 1: return 'UN';
+                case 2: return 'DOS';
+                case 3: return 'TRES';
+                case 4: return 'CUATRO';
+                case 5: return 'CINCO';
+                case 6: return 'SEIS';
+                case 7: return 'SIETE';
+                case 8: return 'OCHO';
+                case 9: return 'NUEVE';
+            }
+
+            return '';
+        }//Unidades()
+
+        function Decenas(num) {
+
+            decena = Math.floor(num / 10);
+            unidad = num - (decena * 10);
+
+            switch (decena) {
+                case 1:
+                    switch (unidad) {
+                        case 0: return 'DIEZ';
+                        case 1: return 'ONCE';
+                        case 2: return 'DOCE';
+                        case 3: return 'TRECE';
+                        case 4: return 'CATORCE';
+                        case 5: return 'QUINCE';
+                        default: return 'DIECI' + Unidades(unidad);
+                    }
+                case 2:
+                    switch (unidad) {
+                        case 0: return 'VEINTE';
+                        default: return 'VEINTI' + Unidades(unidad);
+                    }
+                case 3: return DecenasY('TREINTA', unidad);
+                case 4: return DecenasY('CUARENTA', unidad);
+                case 5: return DecenasY('CINCUENTA', unidad);
+                case 6: return DecenasY('SESENTA', unidad);
+                case 7: return DecenasY('SETENTA', unidad);
+                case 8: return DecenasY('OCHENTA', unidad);
+                case 9: return DecenasY('NOVENTA', unidad);
+                case 0: return Unidades(unidad);
+            }
+        }//Unidades()
+
+        function DecenasY(strSin, numUnidades) {
+            if (numUnidades > 0)
+                return strSin + ' Y ' + Unidades(numUnidades)
+
+            return strSin;
+        }//DecenasY()
+
+        function Centenas(num) {
+            centenas = Math.floor(num / 100);
+            decenas = num - (centenas * 100);
+
+            switch (centenas) {
+                case 1:
+                    if (decenas > 0)
+                        return 'CIENTO ' + Decenas(decenas);
+                    return 'CIEN';
+                case 2: return 'DOSCIENTOS ' + Decenas(decenas);
+                case 3: return 'TRESCIENTOS ' + Decenas(decenas);
+                case 4: return 'CUATROCIENTOS ' + Decenas(decenas);
+                case 5: return 'QUINIENTOS ' + Decenas(decenas);
+                case 6: return 'SEISCIENTOS ' + Decenas(decenas);
+                case 7: return 'SETECIENTOS ' + Decenas(decenas);
+                case 8: return 'OCHOCIENTOS ' + Decenas(decenas);
+                case 9: return 'NOVECIENTOS ' + Decenas(decenas);
+            }
+
+            return Decenas(decenas);
+        }//Centenas()
+
+        function Seccion(num, divisor, strSingular, strPlural) {
+            cientos = Math.floor(num / divisor)
+            resto = num - (cientos * divisor)
+
+            letras = '';
+
+            if (cientos > 0)
+                if (cientos > 1)
+                    letras = Centenas(cientos) + ' ' + strPlural;
+                else
+                    letras = strSingular;
+
+            if (resto > 0)
+                letras += '';
+
+            return letras;
+        }//Seccion()
+
+        function Miles(num) {
+            divisor = 1000;
+            cientos = Math.floor(num / divisor)
+            resto = num - (cientos * divisor)
+
+            strMiles = Seccion(num, divisor, 'UN MIL', 'MIL');
+            strCentenas = Centenas(resto);
+
+            if (strMiles == '')
+                return strCentenas;
+
+            return strMiles + ' ' + strCentenas;
+        }//Miles()
+
+        function Millones(num) {
+            divisor = 1000000;
+            cientos = Math.floor(num / divisor)
+            resto = num - (cientos * divisor)
+
+            strMillones = Seccion(num, divisor, 'UN MILLON ', 'MILLONES ');
+            strMiles = Miles(resto);
+
+            if (strMillones == '')
+                return strMiles;
+
+            return strMillones + ' ' + strMiles;
+        }//Millones()
+
+        function NumeroALetras(num) {
+            var data = {
+                numero: num,
+                enteros: Math.floor(num),
+                centavos: (((Math.round(num * 100)) - (Math.floor(num) * 100))),
+                letrasCentavos: '',
+                letrasMonedaPlural: 'PESOS',//'PESOS', 'Dólares', 'Bolívares', 'etcs'
+                letrasMonedaSingular: 'PESO', //'PESO', 'Dólar', 'Bolivar', 'etc'
+
+                letrasMonedaCentavoPlural: 'CENTAVOS',
+                letrasMonedaCentavoSingular: 'CENTAVO'
+            };
+
+            if (data.centavos > 0) {
+                data.letrasCentavos = 'CON ' + (function () {
+                    if (data.centavos == 1)
+                        return Millones(data.centavos) + ' ' + data.letrasMonedaCentavoSingular;
+                    else
+                        return Millones(data.centavos) + ' ' + data.letrasMonedaCentavoPlural;
+                })();
+            };
+
+            if (data.enteros == 0)
+                return 'CERO ' + data.letrasMonedaPlural + ' ' + data.letrasCentavos;
+            if (data.enteros == 1)
+                return Millones(data.enteros) + ' ' + data.letrasMonedaSingular + ' ' + data.letrasCentavos;
+            else
+                return Millones(data.enteros) + ' ' + data.letrasMonedaPlural + ' ' + data.letrasCentavos;
+        }
+        var numeroEnLetras = NumeroALetras(ValorIngresado); //Se pasa el numero a LETRAS
+        //Se comienza a modificar las celdas del Excel
+        workbook.sheet("Hoja1").cell("P3").value('N°:'+nDeComprobante);
+        if(DNICliente!=''|DNICliente!=null){
+            workbook.sheet("Hoja1").cell("L7").value(Nombre+' , DNI ' +DNICliente);
+        }else{
+            workbook.sheet("Hoja1").cell("L7").value(Nombre);
+
+        }
+        workbook.sheet("Hoja1").cell("L9").value(Domicilio);
+        workbook.sheet("Hoja1").cell("C8").value(Concepto);
+        workbook.sheet("Hoja1").cell("I13").value("En concepto de pago en efectivo por " + Concepto);
+        workbook.sheet("Hoja1").cell("P15").value(ValorIngresado);
+        workbook.sheet("Hoja1").cell("E8").value(ValorIngresado);
+        if(FormaDePago=="Transferencia"){
+            workbook.sheet("Hoja1").cell("K18").value('Transf n°:'+nroTransferencia+ ' | '+ ObservacionesDelPago);
+        }else{
+            workbook.sheet("Hoja1").cell("K18").value(ObservacionesDelPago);
+        }
+        
+        workbook.sheet("Hoja1").cell("J11").value(numeroEnLetras);
+        workbook.sheet("Hoja1").cell("N15").value(FormaDePago+' por:');
+        if(FormaDePago=="Transferencia"){
+            workbook.sheet("Hoja1").cell("N15").value('Transferencia bancaria por:');
+        }
+        
+            workbook.toFileAsync(url).then(()=>{
+                return workbook.outputAsync();
+            });                
+    }).then(data => {
+        let nombreDelArchivo = nDeComprobante + '-' + Obra + '-' + Concepto + '-' + Nombre + '.xlsx';
+res.send(nombreDelArchivo);
+    })
+        .catch(function () {
+            res.send('ERROR: NO SE GENERO EL COMPROBANTE');
+        })
+});
     });
 })
 router.get('/ReimprimirComprobante/:nroComprobante',(req,res)=>{
@@ -1316,7 +1321,7 @@ router.get('/GenerarComprobante/Descargar', (req, res, next) => {
     let cadena=__dirname;
     cadena= cadena.replace(/\\/g,"/");
     var indice=cadena.indexOf('routes');
-    url= cadena.substring(0,indice);
+    var url= cadena.substring(0,indice);
 url= url+'public/plantillas/ReciboDePago.xlsx';
 console.log(url);
 res.sendFile(url);
