@@ -32,5 +32,3 @@
 *.msp
 *.txz
 src/public/plantillas/ReciboDePago.xlsx
-# Carpetas del sistema
-ServerJoval/src/public/plantillas/
