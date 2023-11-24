@@ -32,3 +32,4 @@
 *.msp
 *.txz
 src/public/plantillas/ReciboDePago.xlsx
+src/public/plantillas/
