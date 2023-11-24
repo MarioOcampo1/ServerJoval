@@ -189,8 +189,6 @@
       data: formData  ,
       success: function (data) {
 nombreArchivoComprobanteDePago=data;
-console.log('Imprimiendo comprobante de pago');
-console.log(nombreArchivoComprobanteDePago);
         $('#MensajeServidorPago').html('<span class="text-success">El pago se ha efectuado con exito!</span>');
         setTimeout(() => {
           $('#ModalNuevoPagoObras2').modal('toggle');

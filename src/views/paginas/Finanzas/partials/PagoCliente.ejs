@@ -163,12 +163,22 @@ function ReimprimirComprobante(nroComprobante){
   $.ajax({
     type: "GET",
     url: "/ReimprimirComprobante/"+nroComprobante,
-    dataType: "json",
+    xhrFields:{responseType:'blob'},
     success: function (response) {
-      
+      console.log(response);
+      const blob=response;
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    document.body.appendChild(a);
+    a.href = url;
+    a.download = 'Comprobante n°: '+nroComprobante;
+    a.click();
+    
+    // Liberar recursos
+    window.URL.revokeObjectURL(url);
+    document.body.removeChild(a);
     }
   });
-  console.log('click');
 }
 $('#FormaDePago').on('change', function(){
   var opcionSeleccionada = $(this).val();
