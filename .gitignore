@@ -31,4 +31,5 @@
 *.msm
 *.msp
 *.txz
+# Carpetas del sistema
 ServerJoval/src/public/plantillas/
