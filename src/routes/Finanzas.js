@@ -737,6 +737,7 @@ router.post('/GenerarComprobante', (req, res, next) => {
     dia = fecha.getDate();
     dia = dia + 1;
     let FechaPago = (dia + '/' + mes + '/' + anio);
+    
     var ObservacionesDelPago = req.body.ObservacionesDelPago;
     var Obra = req.body.Obra;
     var id_Obra;
@@ -1062,7 +1063,9 @@ new Promise((resolve, reject) => {
         }else{
             workbook.sheet("Hoja1").cell("K18").value(ObservacionesDelPago);
         }
+        FechaPago= moment(FechaPago).locale("es").format("LL");
         
+        workbook.sheet("Hoja1").cell("N5").value(FechaPago);
         workbook.sheet("Hoja1").cell("J11").value(numeroEnLetras);
         workbook.sheet("Hoja1").cell("N15").value(FormaDePago+' por:');
         if(FormaDePago=="Transferencia"){
@@ -1092,6 +1095,7 @@ var Concepto;
 var ValorIngresado;
 var ObservacionesDelPago;
 var TipoPago;
+var FechaPago;
 var numeroEnLetras;
 let cadena=__dirname;
 cadena= cadena.replace(/\\/g,"/");
@@ -1108,6 +1112,8 @@ new Promise((resolve, reject) => {
     ValorIngresado=results[0].Monto;
     ObservacionesDelPago=results[0].Observacion;
     TipoPago=results[0].TipoPago;
+    FechaPago=results[0].FechaPago;
+   FechaPago= moment(FechaPago).locale("es").format("LL");
     if(TipoPago=='Transferencia'){
         nroTransferencia=results[0].nroTransferencia;
     }  
@@ -1297,6 +1303,7 @@ new Promise((resolve, reject) => {
             }else{
                 workbook.sheet("Hoja1").cell("K18").value(ObservacionesDelPago);
             }
+            workbook.sheet("Hoja1").cell("N5").value(FechaPago);
             
             workbook.sheet("Hoja1").cell("J11").value(numeroEnLetras);
             workbook.sheet("Hoja1").cell("N15").value(TipoPago+' por:');
