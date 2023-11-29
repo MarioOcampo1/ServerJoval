@@ -4,7 +4,7 @@
           <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="TituloModal">Nuevo pago</h5>
+                <h5 class="modal-title" id="TituloModal">NUEVO PAGO </h5>
                 <div class="btn-group">
                   <button class="btn btn-outline-secondary" type="button" id="btnClientesPorLote" onclick="cargarClientesPorLote('<%=NombreObra%>')">Cargar
                     clientes por lotes</button>
@@ -25,6 +25,7 @@
     <input type="number" name="CotizacionUSD" id="CotizacionUSDGenerarComprobante" hidden> 
 
                   <input type="number" name="IDCliente" id="IDCliente" hidden>
+                  <button type="button" id="btnPagoMultiple" class="btn btn-outline-primary">Pago múltiple</button>
                   <div class="container">
                     <div class="d-inline  mb-2">
                       Obra: <%=NombreObra%>

@@ -297,15 +297,16 @@ router.post('/guardarNuevoCliente', (req, res) => {
                     if (error) console.log(error);
                 })
    function cargarenFinanzas(){
+    const cantidadVecinos = req.body.cantidadVecinos;
+    const MontoContrato = req.body.MontoContrato;
+    const PrecioDeCuota = req.body.PrecioDeCuota;
+    const AnticipoFinanciero = req.body.AnticipoFinanciero;
+    const CantidadCuotas = req.body.CantidadCuotas;
+    var ArregloVecinos = [];
+    var NombreVecino = req.body.NombreVecino;
+    var DniVecino = req.body.DniVecino;
  return new Promise ((resolve, reject) => {
-                        const cantidadVecinos = req.body.cantidadVecinos;
-                        const MontoContrato = req.body.MontoContrato;
-                        const PrecioDeCuota = req.body.PrecioDeCuota;
-                        const AnticipoFinanciero = req.body.AnticipoFinanciero;
-                        const CantidadCuotas = req.body.CantidadCuotas;
-                        var ArregloVecinos = [];
-                        var NombreVecino = req.body.NombreVecino;
-                        var DniVecino = req.body.DniVecino;
+                      
                         if(DniVecino==undefined||DniVecino==null){
                             DniVecino=0;
                         }
@@ -319,6 +320,9 @@ router.post('/guardarNuevoCliente', (req, res) => {
                         }
                         var LoteVecino = req.body.LoteVecino;
                         if (cantidadVecinos > 1 || cantidadVecinos != null || cantidadVecinos != undefined) {
+                            var promise1 = new Promise((resolve, reject) => {
+                                
+                            
                             for (let index = 0; index < cantidadVecinos; index++) {
                                 sql = 'Insert into finanzas_clientes_por_obra set?';
                                 var NombreVecino = req.body.NombreVecino;
@@ -357,9 +361,10 @@ router.post('/guardarNuevoCliente', (req, res) => {
                                 })
                             }
                             resolve();
+                        });
                         }
                         else {
-new Promise((resolve, reject) => {
+                            var promise1=new Promise((resolve, reject) => {
                             sql = 'Insert into finanzas_clientes_por_obra set?';
                             var NombreVecino = req.body.NombreVecino;
                             connection.query(sql, {
@@ -367,11 +372,10 @@ new Promise((resolve, reject) => {
                             }, (error, results) => {
                                 if (error) console.log(error);
                             else{
-                                resolve()
-                            }   
-                            }
-                            )
-                        }).then(()=>{
+                                resolve();
+                            }}                            )
+                        })
+                        promise1.then(()=>{
                             sql = 'Select id_cliente from finanzas_clientes_por_obra where NombreCliente =? and id_Obra =?';
                                         connection.query(sql, [NombreVecino[index], idObra], (error, results) => {
                                             if (error) console.log(error);
@@ -408,11 +412,6 @@ new Promise((resolve, reject) => {
                     res.redirect('/editarTareas/' + idObra);
 
                 })
-
-
-            
-        
-
     })
 
 
