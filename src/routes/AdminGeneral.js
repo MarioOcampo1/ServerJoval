@@ -21,6 +21,7 @@ router.use(passport.session());
 const mysql = require('mysql');
 const { NULL, DATE } = require('mysql/lib/protocol/constants/types');
 const { now } = require('moment');
+const { log } = require('console');
 const connection = mysql.createConnection({
     host: '127.0.0.1',
     user: 'root',
@@ -36,23 +37,107 @@ connection.connect(error => {
 router.get('/admingral', (req, res) => {
     res.render('paginas/AdministracionGeneral/admingral.ejs');
 })
+//Vencimientos
 router.get('/vencimientosDocGral', (req, res) => {
 
-    let sql = 'SELECT * FROM vencimientos;'
+    let sql = 'SELECT * FROM vencimientos LEFT JOIN vencimientos_historial ON vencimientos.id=vencimientos_historial.fkid';
     connection.query(sql, (error, results) => {
         if (error) console.log(error);
         else {
+            new Promise((resolve, reject) => {
+                sql='SELECT * FROM vencimientos_historial;';
+                connection.query(sql,(error,results2)=>{
+                    if (error) console.log(error);
+                    else{
+                        resolve();
+                    }
+                })  
+            });
             res.render('./paginas/AdministracionGeneral/vencimientos.ejs', { vencimientos: results, moment })
         }
     })
 })
 router.get('/vencimientosDocGral/obtenerinfo', (req, res) => {
-
-    let sql = 'SELECT * FROM vencimientos;'
+//Esta llamada, trabaja con adminecogas, es la encargada de mostrar los vencimientos en el area.
+    let sql = 'SELECT * FROM vencimientos'
     connection.query(sql, (error, results) => {
         if (error) console.log(error);
         else {
+          
             res.send(results);
+        }
+    })
+})
+router.post('/ActualizarVencimiento', (req, res) => {
+    let sql = 'UPDATE vencimientos set? WHERE id=?';
+    var id = req.body.VencimientoID;
+    var fechaActual = new Date();
+    var descripcion= req.body.Descripcion;
+    connection.query(sql, [{
+        Item: req.body.Item, FechaActualizacion: fechaActual, FechaVencimiento: req.body.FechaVencimiento, DiasPreviosAviso: req.body.AvisoSistema
+    }, id], (error, results) => {
+        if (error) console.log(error);
+        else {
+            try {
+                sql='UPDATE vencimientos_historial set? WHERE fkid=?';
+                connection.query(sql,[{Descripcion:descripcion,Fecha:fechaActual}],id,(error,results)=>{
+                    if (error) console.log(error);
+                    else{
+                        res.redirect('/vencimientosDocGral');
+                    }
+            })    
+            } catch (error) {
+                sql='Insert into vencimientos_historial set?';
+                connection.query(sql,[{fkid:id,Fecha:fechaActual,Descripcion:descripcion}],(error,results)=>{
+                    if (error) console.log(error);
+                    else{
+                        res.redirect('/vencimientosDocGral');
+                    }
+                });
+            }
+           
+    }
+    })
+})
+router.post('/NuevoItemVencimiento', (req, res) => {
+    let sql = 'INSERT INTO vencimientos set?';
+    var fechaActual = new Date();
+    var descripcion= req.body.Descripcion;
+    new Promise((resolve, reject) => {
+        connection.query(sql, [{
+            Item: req.body.Item, FechaActualizacion: fechaActual, FechaVencimiento: req.body.FechaVencimiento, DiasPreviosAviso: req.body.AvisoSistema
+        }], (error, results) => {
+            if (error) console.log(error);
+            else {
+             resolve() ;
+            }
+        })    
+    }).then(()=>{
+        sql='SELECT MAX(id) from vencimientos';
+        connection.query(sql,(error,results)=>{
+            if (error) console.log(error);
+else{
+    sql='Insert into vencimientos_historial set?';
+    connection.query(sql,{fkid:results[0],Descripcion:descripcion,Fecha:fechaActual},(error,results)=>{
+        if (error) console.log(error);
+        else{
+            res.redirect('/vencimientosDocGral');
+
+        }
+    });
+
+}
+        })
+    });
+    
+
+})
+router.post('/DeleteItemVencimiento', (req, res) => {
+    let sql = 'DELETE FROM vencimientos WHERE id =? ';
+    connection.query(sql, req.body.IdItemABorrar, (error, results) => {
+        if (error) console.log(error);
+        else {
+            res.redirect('/vencimientosDocGral');
         }
     })
 })
@@ -167,31 +252,8 @@ router.get('/admingral/informacionlegal',(req,res)=>{
     var sql= 'SELECT * FROM informacionlegal;'
     res.render('./paginas/AdministracionGeneral/informacionlegal.ejs',{archivos})
 })
-router.post('/NuevoItemVencimiento', (req, res) => {
-    let sql = 'INSERT INTO vencimientos set?';
-    var fechaActual = new Date();
-    connection.query(sql, {
-        Item: req.body.Item, FechaActualizacion: fechaActual, FechaVencimiento: req.body.FechaVencimiento, DiasPreviosAviso: req.body.AvisoSistema
-    }, (error, results) => {
-        if (error) console.log(error);
-        else {
-            res.redirect('/vencimientosDocGral');
-        }
-    })
-})
-router.post('/ActualizarVencimiento', (req, res) => {
-    let sql = 'UPDATE vencimientos set? WHERE id=?';
-    var id = req.body.VencimientoID;
-    var fechaActual = new Date();
-    connection.query(sql, [{
-        Item: req.body.Item, FechaActualizacion: fechaActual, FechaVencimiento: req.body.FechaVencimiento, DiasPreviosAviso: req.body.AvisoSistema
-    }, id], (error, results) => {
-        if (error) console.log(error);
-        else {
-            res.redirect('/vencimientosDocGral');
-        }
-    })
-})
+
+
 router.post('/GuardarPolizaAlbacaucion', (req, res) => {
     let Aseguradora = req.body.Aseguradora;
     let NombreObra = req.body.NombreObra;
@@ -324,15 +386,7 @@ router.post('/GuardarPolizaAlbacaucion', (req, res) => {
 
 
 })
-router.post('/DeleteItemVencimiento', (req, res) => {
-    let sql = 'DELETE FROM vencimientos WHERE id =? ';
-    connection.query(sql, req.body.IdItemABorrar, (error, results) => {
-        if (error) console.log(error);
-        else {
-            res.redirect('/vencimientosDocGral');
-        }
-    })
-})
+
 router.get('/seguros/ActualizarPolizaAlbacaucion/:id', (req, res) => {
     if (req.isAuthenticated()) {
         var id = req.params.id;

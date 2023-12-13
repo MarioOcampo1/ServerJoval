@@ -25,7 +25,7 @@
     <input type="number" name="CotizacionUSD" id="CotizacionUSDGenerarComprobante" hidden> 
 
                   <input type="number" name="IDCliente" id="IDCliente" hidden>
-                  <button type="button" id="btnPagoMultiple" class="btn btn-outline-primary">Pago múltiple</button>
+                  <button type="button" id="btnShuffleTipoPago" class="btn btn-outline-primary"><i class="bi bi-shuffle"></i></button>
                   <div class="container">
                     <div class="d-inline  mb-2">
                       Obra: <%=NombreObra%>
@@ -37,15 +37,18 @@
                     
                     <input class="" id="inputNombreCliente2" type="hidden" name="NombreCompleto" value="">
     
-                    <div class="input-group mb-3">
+                    <div class="input-group mb-3 ">
                       <label id="labelDomicilio" class="input-group-text" for="InputDomicilio2">Domicilio</label>
                       <input class="form-control" type="text" id="inputDomicilio2" name="Domicilio">
                     </div>
+                    <div class="input-group mb-3 pagomodificado" style="display: none;" >
+                      <label id="labelDomicilio" class="input-group-text border-success " for="DineroQueTraeCliente">Dinero que trae el cliente</label>
+                      <input class="form-control border-success" type="number" id="DineroQueTraeCliente" >
+                    </div>
+                    <div class="conceptoPago1 col-6">
                     <div class="input-group mb-3 ">
                           <label class="input-group-text" for="Concepto">Concepto </label>
-                          <select class="form-select" name="Concepto" id="Concepto" aria-label="Seleccione el pago">
-                            <!-- <input required list="ConceptosDePago" defaultValue=""  class="form-control" type="text" name="Concepto" id="Concepto"> -->
-                            <!-- <datalist id="ConceptosDePago"> -->
+                          <select class="form-select Concepto" name="Concepto" id="Concepto1" aria-label="Seleccione el pago">
                             <option value="" selected> </option>
                             <option value="AnticipoFinanciero">Anticipo Financiero</option>
                             <option value="Cuota1">Cuota 1</option>
@@ -70,13 +73,16 @@
                             <option value="IngresoDocumentacion">Ingreso de documentacion comienzo tramite
                             </option>
                             <option value="Irrigacion">Permiso Irrigacion</option>
-                            <!-- </datalist> -->
                           </select>
-                       
-                        
-                 
+<button class="btn btn-primary" type="button" onclick="agregarNuevoConcepto();">Agregar nuevo concepto de pago</button>
+<p class="" id="InformacionSaldoVecino"></p>
                     </div>
-                    <div class=" calculoUSD" style="display: none;" >
+                    <div class="input-group-text mb-3 col-3" id="divImporte1" style="display: block;">
+                      <label class="input-group-text" for="ImporteIngresado">Importe</label>
+                      <input required class="form-control" value="0" type="number" name="ValorIngresado" id="Importe1">
+                    </div>
+                  </div>
+                    <div class="calculoUSD  mb-3" style="display: none;" >
                       <input type="hidden" id="cotizacionBaseDolar">
                       <div class="row mb-5">
                       <div class="col-2">
@@ -88,6 +94,7 @@
                           
                         </select>
                       </div>
+                   
 <div class="col-2">
   <label for="" class="form-label">Dólar venta oficial BNA:</label>
   <input type="number"
@@ -100,11 +107,10 @@
 <span style="display: none;" class="descripcionUSD">El sistema reajusta automáticamente el monto a pagar, en base al valor predefinido al momento de contratar la obra.</span>
 <span id="cotizacionInicial" class="text-primary" val=""></span>
 </div>
+
  </div>
-                    <div class="input-group-text mb-3 col-3" id="divImporte2" style="display: none;">
-                      <label class="input-group-text" for="ImporteIngresado">Importe</label>
-                      <input required class="form-control" value="0" type="number" name="ValorIngresado" id="ImporteIngresado">
-                    </div>
+ 
+                    
                
                     <div class="mb-3">
                       <label class="input-group-text" for="FechaPago2"> Fecha de pago</label>
@@ -143,7 +149,139 @@
       </div>
     </form>
     <script>
-        function CargarPago(idcliente) {
+      //variables globales de la pagina
+       var MontosaPagar=[];
+var ImporteOriginalAPagarConcepto=0;
+var idcliente = $('#IDCliente').val();
+cantidadConceptosGenerados=1;
+function BuscarCotizacionDolar(){
+  $('CotizacionUSD').val('0');
+  $.ajax({
+        type: "GET",
+        url: "https://dolarapi.com/v1/dolares/oficial",
+        dataType: "json",
+        success: function (response) {
+          // console.log("Respuesta de api externa cotización dolar venta oficial, banco Nación"); 
+          // console.log(response[4].casa);
+         cotizacionActualDolar= response.venta;
+         $('#CotizacionUSD').val(cotizacionActualDolar); 
+         $('#CotizacionUSDGenerarComprobante').val(cotizacionActualDolar);//Actualiza la cotización que va a llegar al backend, en Generar Comprobante.
+         $('.calculoUSD').css('display','block'); //Este calculo en dolares, se encuentra dentro de la vista de pago del cliente.
+        }
+        })
+
+        }
+function BuscarValoresConceptoPago(idConcepto, nroImporte) {
+let nombreConcepto = '#'+idConcepto;
+let Importe='#Importe'+nroImporte;
+var ConceptoDePagoHTML=$(nombreConcepto);
+          $.ajax({
+      url: '/BuscarDatosClienteQuePaga/' + idcliente,
+    }).done(function (respuestaServidor) {
+        $('#cotizacionInicial').empty();
+        $('#cotizacionInicial').append('Cotización al momento de contratación: 1USD = $'+respuestaServidor.montosCuota[0].CotizacionUSD);
+        $('#cotizacionInicial').val(respuestaServidor.montosCuota[0].CotizacionUSD);
+      var montoAPagarPredeterminado = respuestaServidor.montosCuota;
+      MontosaPagar=respuestaServidor.montosCuota;
+      $(nombreConcepto+" option:selected").each(function () {
+        var ConceptoSeleccionado = $(this).attr('value');
+        montoAPagarPredeterminado.forEach(element => {
+          JSON.parse(JSON.stringify(element), (key, value) => {
+            if (ConceptoSeleccionado == key) {
+              $(Importe).val(value);
+              ImporteOriginalAPagarConcepto=value;
+            };
+          });
+        })
+      
+      })
+    })
+        }
+       
+      function calcularSaldoDisponible(){
+        dineroCliente = $('#DineroQueTraeCliente').val();
+        var contador= 1;
+        while (contador<calcularSaldoDisponible) {
+          
+        }
+       if($('#DineroQueTraeCliente').val()>$('#Importe1').val()){
+            var montoRestante= $('#DineroQueTraeCliente').val();
+            montoRestante= $('#DineroQueTraeCliente').val()-$('#Importe1').val();
+            $('#InformacionSaldoVecino').html('Al cliente le sobra $'+montoRestante+'. Puede pagar otro concepto más.')
+          }
+          if($('#DineroQueTraeCliente').val()<$('#Importe1').val()){
+            var montoRestante= $('#DineroQueTraeCliente').val();
+            montoRestante= $('#DineroQueTraeCliente').val()-$('#Importe1').val();
+            $('#InformacionSaldoVecino').html('El monto restante es $'+montoRestante+'. Falta dinero para completar el pago del concepto.')
+          }  
+          if($('#DineroQueTraeCliente').val()==$('#Importe1').val()){
+            var montoRestante= $('#DineroQueTraeCliente').val();
+            montoRestante= $('#DineroQueTraeCliente').val()-$('#Importe1').val();
+            $('#InformacionSaldoVecino').html('El monto restante es $'+montoRestante+'.')
+          }  
+        }
+        if(cantidadConceptosGenerados==1){
+          if(ElClienteTraeDinero){ 
+          if($('#DineroQueTraeCliente').val()>$('#Importe1').val()){
+            var montoRestante= $('#DineroQueTraeCliente').val()
+            montoRestante= $('#DineroQueTraeCliente').val()-$('#Importe1').val();
+            $('#InformacionSaldoVecino').html('Al cliente le sobra $'+montoRestante+'. Puede pagar otro concepto más.')
+          }
+        }
+        }
+
+      }
+      function agregarNuevoConcepto(){
+        cantidadConceptosGenerados=cantidadConceptosGenerados+1; //Se aumenta en 1 el contador de conceptos generados
+        $('.conceptoPago1').append(
+'<div class="conceptoPago'+cantidadConceptosGenerados+' col-6 border border-success">'+
+'<div class="input-group mb-3 ">'+
+'<label class="input-group-text">Concepto '+cantidadConceptosGenerados+' </label>'+
+'<select class="form-select Concepto" name="Concepto" id="Concepto'+cantidadConceptosGenerados+'" aria-label="Seleccione el pago">'+
+'<option value="" selected> </option>'+
+'<option value="AnticipoFinanciero">Anticipo Financiero</option>'+
+'<option value="Cuota1">Cuota 1</option>'+
+'<option value="Cuota2">Cuota 2</option>'+
+'<option value="Cuota3">Cuota 3</option>'+
+'<option value="Cuota4">Cuota 4</option>'+
+'<option value="Cuota5">Cuota 5</option>'+
+'<option value="Cuota6">Cuota 6</option>'+
+'<option value="Cuota7">Cuota 7</option>'+
+'<option value="Cuota8">Cuota 8</option>'+
+'<option value="Cuota9">Cuota 9</option>'+
+'<option value="Cuota10">Cuota 10</option>'+
+'<option value="Cuota11">Cuota 11</option>'+
+'<option value="Cuota12">Cuota 12</option>'+
+'<option value="DNV">Permiso DNV</option>'+
+'<option value="DPV">Permiso DPV</option>'+
+'<option value="Hidraulica">Permiso Hidraulica</option>'+
+'<option value="FFCC">Permiso FFCC</option>'+
+'<option value="Privado">Permiso Privado</option>'+
+'<option value="Municipal">Permiso Municipal</option>'+
+'<option value="ServicioDomiciliario">Servicio Domiciliario</option>'+
+'<option value="IngresoDocumentacion">Ingreso de documentacion comienzo tramite'+
+'</option>'+
+'<option value="Irrigacion">Permiso Irrigacion</option>'+
+'</select>'+
+'</div>'+
+'<div class="input-group-text mb-3 ImporteDelConcepto" id="" style="display: block;">'+
+'<label class="input-group-text " for="ImporteIngresado">Importe '+cantidadConceptosGenerados+'</label>'+
+'<input required class="form-control " value="0" type="number" name="ValorIngresado" id="Importe'+cantidadConceptosGenerados+'">'+
+'</div>'+
+'</div>');
+    BuscarValoresConceptoPago('Concepto'+cantidadConceptosGenerados+', Importe '+cantidadConceptosGenerados+'');
+    calcularSaldoDisponible();
+      }
+      $(document).on('change','.Concepto',function(){
+idConcepto=$(this).attr('id');
+//BUSCAR EL NRO DE CONCEPTO
+var posicionPalabraClave=idConcepto.indexOf('Concepto');
+var nroConcepto= idConcepto.substring(posicionPalabraClave + 'Concepto'.length);
+BuscarCotizacionDolar();
+    BuscarValoresConceptoPago(idConcepto,nroConcepto);
+    calcularSaldoDisponible();
+      })
+  function CargarPago(idcliente) {
           $('#formGenerarComprobante')[0].reset();
           $.ajax({
             url: '/BuscarDatosClienteQuePaga/' + idcliente,
@@ -159,7 +297,6 @@
             $('#inputDomicilio2').val(results[0].Direccion);
             $('#IDCliente').val(idcliente);
             $('#DNICliente3').val(results[0].DNICliente);
-      
             var fecha = new Date(); //Fecha actual
             var mes = fecha.getMonth() + 1; //obteniendo mes
             var dia = fecha.getDate(); //obteniendo dia
@@ -173,63 +310,121 @@
           });
           $('#editarDatosCliente').html('<a class="btn btn-info" href="/Finanzas/CobroDeObras/EditarCliente/'+ idcliente+'">Editar cliente</a>');
         }
+        $('#ImporteIngresado,#DineroQueTraeCliente, #ValorIngresado2').change(function(){
+          calcularSaldoDisponible();
+    $('#Concepto1').change(function(){
+      $("#Concepto1 option:selected").each(function () {
+      var ConceptoSeleccionado = $(this).attr('value');
+      MontosaPagar.forEach(element => {
+          JSON.parse(JSON.stringify(element), (key, value) => {
+            if (ConceptoSeleccionado == key) {
+              $('#Importe1').val(value);
+            };
+          });
+        })
+    })
+    var MontoRestante= $('#DineroQueTraeCliente').val()-$('#ImporteIngresado').val()-$('#ValorIngresado2').val();
+    if(MontoRestante<0){
+      
+      var diferenciaAPagar=$('#ValorIngresado2').val()-MontoRestante;
+      $('#MontoRestanteDeDinero').html('Lo que resta de dinero, no puede pagar el importe por completo, el cliente solo puede pagar: $'+diferenciaAPagar+'. Por favor, modifique el importe a pagar.');
+    }else{
+      $('#MontoRestanteDeDinero').html('Actualmente queda un saldo de: $'+MontoRestante+' para ser usado en otro pago.');
+
+    }
+    })
+        })
         $('#btnGuardarCambiosPagos').click(function(){ 
     // Funcion que trabaja con el modal que se encuentra ubicado en NuevoPagoObras.ejs, dentro de PagoClientes.ejs
     //Primero comprobamos si el pago ingresado, es mayor al estipulado o no.
     // la variable "ImporteOriginalAPagar" se encuentra dentro de "VistaDeLaObra.ejs".
+    
     if($('#ImporteIngresado').val()>ImporteOriginalAPagar){
-    console.log('Se ha detectado que el importe ingresado para pagar, es mayor al original estipulado');
+    
 
     }
-    const form =$('#formGenerarComprobante');
-    const formData=form.serialize();
-    var nombreArchivoComprobanteDePago='';
-    $.ajax({
-      type: "POST",
-      url: "/GenerarComprobante",
-      data: formData  ,
-      success: function (data) {
-nombreArchivoComprobanteDePago=data;
-        $('#MensajeServidorPago').html('<span class="text-success">El pago se ha efectuado con exito!</span>');
-        setTimeout(() => {
-          $('#ModalNuevoPagoObras2').modal('toggle');
-          $('#formGenerarComprobante')[0].reset();
-          location.reload();
-        }, 4000);
-      },
-      error:function(error){
-        console.log(error);
-        $('#MensajeServidorPago').html('<span class="text-danger">ERROR: No se ha podido efectuar el pago. Intente cargarlo nuevamente.</span>');
-        setTimeout(() => {
-          $('#formGenerarComprobante')[0].reset();
-          
-        }, 4000);
-      }
-    });
-    setTimeout(() => {
-      $.ajax({
-      type: "GET",
-      url: "/GenerarComprobante/Descargar",
-      xhrFields:{responseType:'blob'},
-      success: function (response) {   
-    // const blob = new Blob([response], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;' });
-    const blob=response;
-    const url = URL.createObjectURL(blob);
+//     if($('#ImporteIngresado').val()==ImporteOriginalAPagar){
+//       const form =$('#formGenerarComprobante');
+//     const formData=form.serialize();
+//     var nombreArchivoComprobanteDePago='';
+//     $.ajax({
+//       type: "POST",
+//       url: "/GenerarComprobante",
+//       data: formData  ,
+//       success: function (data) {
+// nombreArchivoComprobanteDePago=data;
+//         $('#MensajeServidorPago').html('<span class="text-success">El pago se ha efectuado con exito!</span>');
+//         $.ajax({
+//       type: "GET",
+//       url: "/GenerarComprobante/Descargar",
+//       xhrFields:{responseType:'blob'},
+//       success: function (response) {   
+//     // const blob = new Blob([response], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;' });
+//     const blob=response;
+//     const url = URL.createObjectURL(blob);
     
-    const a = document.createElement('a');
-    document.body.appendChild(a);
-    a.href = url;
-    a.download = nombreArchivoComprobanteDePago;
-    a.click();
+//     const a = document.createElement('a');
+//     document.body.appendChild(a);
+//     a.href = url;
+//     a.download = nombreArchivoComprobanteDePago;
+//     a.click();
     
-    // Liberar recursos
-    window.URL.revokeObjectURL(url);
-    document.body.removeChild(a);
+//     // Liberar recursos
+//     window.URL.revokeObjectURL(url);
+//     document.body.removeChild(a);
   
-      }
-    });
-    }, 2000);
+//       }
+//     });
+//         setTimeout(() => {
+//           $('#ModalNuevoPagoObras2').modal('toggle');
+//           $('#formGenerarComprobante')[0].reset();
+//           location.reload();
+//         }, 4000);
+//       },
+//       error:function(error){
+//         console.log(error);
+//         $('#MensajeServidorPago').html('<span class="text-danger">ERROR: No se ha podido efectuar el pago. Intente cargarlo nuevamente.</span>');
+//         setTimeout(() => {
+//           $('#formGenerarComprobante')[0].reset();
+          
+//         }, 4000);
+//       }
+//     });
+//     setTimeout(() => {
+//       $.ajax({
+//       type: "GET",
+//       url: "/GenerarComprobante/Descargar",
+//       xhrFields:{responseType:'blob'},
+//       success: function (response) {   
+//     // const blob = new Blob([response], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;' });
+//     const blob=response;
+//     const url = URL.createObjectURL(blob);
+    
+//     const a = document.createElement('a');
+//     document.body.appendChild(a);
+//     a.href = url;
+//     a.download = nombreArchivoComprobanteDePago;
+//     a.click();
+    
+//     // Liberar recursos
+//     window.URL.revokeObjectURL(url);
+//     document.body.removeChild(a);
+  
+//       }
+//     });
+//     }, 6000);
+//     }
+    
     
     
    }); 
+   var ElClienteTraeDinero=false;
+$('#btnShuffleTipoPago').click(function () {
+  $('.pagomodificado').toggle('slow');
+  if(ElClienteTraeDinero==false){
+    ElClienteTraeDinero=true
+  }else{
+    ElClienteTraeDinero=false;
+  }
+})
           </script>

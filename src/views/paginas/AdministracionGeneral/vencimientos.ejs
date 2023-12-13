@@ -20,6 +20,7 @@
         <thead>
             <tr class="sticky-top">
                 <th scope="col ">Item</th>
+                <th scope="col ">Observación</th>
                 <th scope="col ">Fecha último cambio</th>
                 <th scope="col ">Fecha de vencimiento</th>
                 <th scope="col ">Fecha para notificación</th>
@@ -30,11 +31,18 @@
 <%vencimientos.forEach((vencimiento)=>{ %>
             <tr class="">
                 <td scope="row"><%=vencimiento.Item%></td>
+                <%if(vencimiento.Descripcion){%>
+                    <td><button>Observacion</button></td>
+                    <%}else{%>
+                        <td></td>
+                        <%}%>
+                
                 <td><%=moment(vencimiento.FechaActualizacion).format('DD/MM/YYYY')%></td>
                 <td id="Vencimiento"><%=moment(vencimiento.FechaVencimiento).format('DD/MM/YYYY')%></td>
                 <td class="avisoVencimientoitem" name="<%=vencimiento.Item%>"  id="<%=vencimiento.DiasPreviosAviso%>"><%=moment(vencimiento.DiasPreviosAviso).format('DD/MM/YYYY')%></td>
-                <td><button class="btn btn-lg btn-success btnConfigVencimiento" id="" onclick="configVencimiento('<%=vencimiento.id%>','<%=vencimiento.Item%>','<%=moment(vencimiento.FechaActualizacion).format('DD/MM/YYYY')%>','<%=moment(vencimiento.FechaVencimiento).format('DD/MM/YYYY')%>' )"><i class="bi bi-gear-fill"></i></button>
-                    <button id="BtnDelete" class="btn btn-lg btn-danger" onclick="BorrarItem('<%=vencimiento.id%>')"><i class="bi bi-trash"></i></button>
+                <td>
+                    <abbr title="Configurar vencimientos"><button class="btn btn-sm btn-success btnConfigVencimiento" id="" onclick="configVencimiento('<%=vencimiento.id%>','<%=vencimiento.Item%>','<%=moment(vencimiento.FechaActualizacion).format('DD/MM/YYYY')%>','<%=moment(vencimiento.FechaVencimiento).format('DD/MM/YYYY')%>,' )"><i class="bi bi-pencil-square"></i></button></abbr>
+                    <abbr title="Eliminar ítem"><button id="BtnDelete" class="btn btn-sm btn-danger" onclick="BorrarItem('<%=vencimiento.id%>')"><i class="bi bi-trash"></i></button></abbr>
                 </td>
             </tr>
            <%})%>
@@ -57,7 +65,10 @@
                         <input type="text" class="form-control" id="update1" name="Item" placeholder="Ingrese el nombre del item">
                         <label id="label1" for="float1">Item</label>
                       </div>
-                      
+                      <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="update1" name="Descripcion" placeholder="Observación">
+                        <label id="label1" for="float1">Observación</label>
+                      </div>
                       <div class="form-floating">
                         <input type="date" class="form-control" id="update2" name="FechaVencimiento" placeholder="Fecha de vencimiento">
                         <label id="label3" for="float3">Fecha de vencimiento</label>
@@ -90,6 +101,10 @@
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" id="float1" name="Item" placeholder="Ingrese el nombre del item">
                         <label id="label1" for="float1">Nombre del item</label>
+                      </div>
+                      <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="float1" name="Descripcion" placeholder="Ingrese alguna observación o descripción">
+                        <label id="label2" for="float1">Observación</label>
                       </div>
                       <div class="form-floating mb-3">
                             <select class="form-select form-select-sm" name="sector" id="">

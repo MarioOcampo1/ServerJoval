@@ -253,47 +253,7 @@ $('.popup-trigger').hover(function() {
       name: "file.xlsx"
     });
   }
-  var MontosaPagar;
-var ImporteOriginalAPagar=0;
-  $('#Concepto').change(function () {
-    $('CotizacionUSD').val('0');
-    $.ajax({
-        type: "GET",
-        url: "https://dolarapi.com/v1/dolares/oficial",
-        dataType: "json",
-        success: function (response) {
-          // console.log("Respuesta de api externa cotización dolar venta oficial, banco Nación"); 
-          // console.log(response[4].casa);
-         cotizacionActualDolar= response.venta;
-         $('#CotizacionUSD').val(cotizacionActualDolar); 
-         $('#CotizacionUSDGenerarComprobante').val(cotizacionActualDolar);//Actualiza la cotización que va a llegar al backend, en Generar Comprobante.
-        }
-      });
-    var idcliente = $('#IDCliente').val();
-    $.ajax({
-      url: '/BuscarDatosClienteQuePaga/' + idcliente,
-    }).done(function (respuestaServidor) {
-      var montoAPagarPredeterminado = respuestaServidor.montosCuota;
-      $("#Concepto option:selected").each(function () {
-        $('.calculoUSD').css('display','block'); //Este calculo en dolares, se encuentra dentro de la vista de pago del cliente.
-        $('#cotizacionInicial').empty();
-        $('#cotizacionInicial').append('Cotización al momento de contratación: 1USD = $'+respuestaServidor.montosCuota[0].CotizacionUSD);
-        $('#cotizacionInicial').val(respuestaServidor.montosCuota[0].CotizacionUSD);
-        
-        var ConceptoSeleccionado = $(this).attr('value');
-        montoAPagarPredeterminado.forEach(element => {
-          JSON.parse(JSON.stringify(element), (key, value) => {
-            if (ConceptoSeleccionado == key) {
-              $('#ImporteIngresado').val(value);
-              ImporteOriginalAPagar=value;
-            };
-          });
-        })
-        $('#divImporte2').css('display', 'block');
-      })
-    })
-  })
-
+ 
   function editarVecino() {
     var idCliente = $('#IDCliente').val();
     $('#IDCliente2').val(idCliente); //Este IDCliente2 se encuentra dentro del formulario que es enviado junto con los valores a editar. 

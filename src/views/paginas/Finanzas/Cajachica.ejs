@@ -58,7 +58,7 @@
                                 <td><%= moment(Ingreso.Fecha).locale('es').format("DD-MM-YYYY")%></td>
                                 <td><%= Ingreso.Descripcion%></td>
                                 <td><%= Ingreso.Monto%></td>
-                                <td><button  class="bi bi-pencil-square btn btn-outline-secondary" onclick="abrirModalEditarRegistro('<%=Ingreso.id%>','Ingreso','<%=Ingreso.Fecha%>','<%=Ingreso.Descripcion%>','<%=Ingreso.Monto%>')"></button></td>
+                                <td><button  class="bi bi-pencil-square btn btn-outline-secondary" onclick="abrirModalEditarRegistro('<%=Ingreso.id%>','Ingreso','<%=Ingreso.Fecha%>','<%=Ingreso.Descripcion%>','<%=Ingreso.Monto%>');"></button></td>
                             </tr>
                                 <%}})%>
                     </tbody>
@@ -87,7 +87,7 @@
                                 <td><%= moment(Egreso.Fecha).locale('es').format("DD-MM-YYYY")%></td>
                                 <td><%= Egreso.Descripcion%></td>
                                 <td><%= Egreso.Monto%></td>
-                                <td><button value="<%=Egreso.id%>" class="bi bi-pencil-square btn btn-outline-secondary" onclick="abrirModalEditarRegistro('<%=Egreso.id%>','Egreso','<%=Egreso.Fecha%>','<%=Egreso.Descripcion%>','<%=Egreso.Monto%>')"></button></td>
+                                <td><button class="bi bi-pencil-square btn btn-outline-secondary" onclick="abrirModalEditarRegistro('<%=Egreso.id%>','Egreso','<%=Egreso.Fecha%>','<%=Egreso.Descripcion%>','<%=Egreso.Monto%>');"></button></td>
                             </tr>
                                 <%}})%>
                       
@@ -105,14 +105,7 @@
 
 </body>
 <script>
-    function abrirModalEditarRegistro(id,IngresoEgreso, fecha, descripcion, monto){
-        $('#idEditarRegistro').val(id);
-$('#IngresoEgreso').val(IngresoEgreso);
-    $('#EdicionFecha').val(fecha);
-$('#EdicionDescripcion').val(descripcion);
-$('#EdicionMonto').val(monto);
-$('#modalEditarRegistro').modal('show')
-    }
+    
     $(function () {
         var fechaActual= new Date();
     
@@ -183,5 +176,13 @@ $.ajax({
         }
     }); 
     })
+    function abrirModalEditarRegistro(id,IngresoEgreso, fecha, descripcion, monto){
+        $('#idEditarRegistro').val(id);
+$('#IngresoEgreso').val(IngresoEgreso);
+    $('#EdicionFecha').val(fecha);
+$('#EdicionDescripcion').val(descripcion);
+$('#EdicionMonto').val(monto);
+$('#modalEditarRegistro').modal('show')
+    }
 </script>
 </html>

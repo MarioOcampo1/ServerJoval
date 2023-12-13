@@ -9,6 +9,9 @@
   <script src=".\bootstrap\dist\js/bootstrap.bundle.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous">
   </script>
+  <link rel="stylesheet" href="./css/Principal.css">
+    
+  
   <title>Nuevo Cliente</title>
 </head>
 
@@ -388,7 +391,7 @@ if(( $('#cantidadVecinos').val())>1){
           '<div class="col-3"><label class="fw-bold" for="ApellidoVecino">Apellido</label> ' +
           ' <input type="text" class="form-control" id="ApellidoVecino" name="ApellidoVecino" placeholder="Apellido."> </div>' +
           '<div class="col-3"><label class="fw-bold" for="DniVecino">Dni</label> ' +
-          '<input type="number" minlength="8" maxlength="9" class="form-control" id="DniVecino" name="DniVecino" placeholder="Dni."> </div>' +
+          '<input type="number" minlength="8" maxlength="9" class="form-control" id="DniVecino" name="DniVecino" placeholder="Dni." required> </div>' +
           '<div class="col-3"><label class="fw-bold" for="TeléfonoVecino">Teléfono</label>' +
           '   <input type="text" class="form-control" id="TelefonoVecino" name="TelefonoVecino" placeholder="Teléfono."> </div>' +
           '<div class="row"> <div class="col-3"><label class="fw-bold" for="CorreoVecino">Correo</label>' +
@@ -462,17 +465,19 @@ if(( $('#cantidadVecinos').val())>1){
     //   }
     // })
     $('#btnSubmit').click(function(){
-//       if($('#CarpetaProvisoria').val()=='S'){
-//  $('.SeleccionCodigoCarpeta').empty();
-//         $('.Permisos').empty();
-//         $('.Finanzas').empty();
-//         $('#formGuardarCliente').submit();
-//       }
-//       else{
-//   $('#formGuardarCliente').submit();
+if($('#MontoContrato').val()==""){
+  $('#MontoContrato').addClass('bg-warning border-dark text-light parpadearEnRojo ');
+}
+if($('#PrecioDeCuota').val()==""){
+  $('#PrecioDeCuota').addClass('bg-warning border-dark text-light parpadearEnRojo');
+}
+if($('#AnticipoFinanciero').val()==""){
+  $('#AnticipoFinanciero').addClass('bg-warning border-dark text-light parpadearEnRojo');
+}
+if ($('#MontoContrato').val()!="" && $('#PrecioDeCuota').val()!="" && $('#AnticipoFinanciero').val()!="") {
+  $('#formGuardarCliente').submit();  
+}
 
-//       }
-  $('#formGuardarCliente').submit();
 
     })
   </script>
