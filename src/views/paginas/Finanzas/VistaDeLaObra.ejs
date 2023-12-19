@@ -913,46 +913,7 @@ $(document).ready(function(){
     $('.OcultoCuotas').toggle();
       
    })
-   $('#btnVerTransferenciasObra').click(()=>{
-    if($.fn.DataTable.isDataTable('#tablaTransferenciasRecibidas')){
-      $('#tablaTransferenciasRecibidas').DataTable().destroy();
-    }
-    
-        $('#tablaTransferenciasRecibidas').DataTable({
-          "paging": false,
-        "info": false,
-        "searching": false,
-        
-        "ajax": {
-          type: "GET",
-      url: "/Finanzas/VerComprobantesRegistrados/obra/<%=id_Obra%>",
-      dataType: "json",
-            "dataSrc": function (data) {
-              console.log(data);
-              // console.log(data.PredeterminadosyCobros);
-              return data
-              
-            }
-        },
-    
-        "columns": [
-
-            { "data": "Nombre"
-            },  
-            {"data":"FechaPago","render":function(data,type,row,meta){
-              var fecha = moment(row.FechaPago).locale("es").format("DD-MM-YYYY");
-              return fecha;
-            }},
-            {"data":"Descripcion"},
-            {"data":"Monto"},
-            {"data":"Observacion"},
-            {"data":"TipoPago"},
-            {"data":"nroTransferencia"},
-          ],
-        
-    });
-    $('#modalVerTransferencias').modal('show');
-   })
+  
 </script>
 </html>
 <style>

@@ -22,7 +22,20 @@
                     <label for="" class="input-group-text">Cotización USD.</label>
                     <input type="number"class="form-control form-control-sm" name="" id="ConfigCotizacionUSD" aria-describedby="helpId" placeholder="" value="365.50">
                                         <button class="btn btn-outline-success " onclick="editarPago('ConfigCotizacionUSD')"><span><i class="bi bi-check"></i></span></button>
+                                       
+                                     
       </div>
+                </div>
+                <div class="mb-2 col-3">
+                  <label for="" class="input-group-text">Actualización a dólar actual.</label>
+                  <select
+                    class="form-select form-select-sm"
+                    name="ActualizarValorObra"
+                    id="ActualizarValorObra">
+                    <option value="N"selected>No</option>
+                    <option value="S">Si</option>
+                  </select>
+                  <button class="btn btn-outline-success " onclick="editarPago('ActualizarValorObra')"><span><i class="bi bi-check"></i></span></button>
                 </div>
                 <span class="mb-2">Pagos principales</span>
                 <div class="mb-3 col-3"> 

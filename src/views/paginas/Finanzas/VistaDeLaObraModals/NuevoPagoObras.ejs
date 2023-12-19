@@ -25,7 +25,6 @@
     <input type="number" name="CotizacionUSD" id="CotizacionUSDGenerarComprobante" hidden> 
 
                   <input type="number" name="IDCliente" id="IDCliente" hidden>
-                  <button type="button" id="btnShuffleTipoPago" class="btn btn-outline-primary"><i class="bi bi-shuffle"></i></button>
                   <div class="container">
                     <div class="d-inline  mb-2">
                       Obra: <%=NombreObra%>
@@ -41,13 +40,25 @@
                       <label id="labelDomicilio" class="input-group-text" for="InputDomicilio2">Domicilio</label>
                       <input class="form-control" type="text" id="inputDomicilio2" name="Domicilio">
                     </div>
-                    <div class="input-group mb-3 pagomodificado" style="display: none;" >
-                      <label id="labelDomicilio" class="input-group-text border-success " for="DineroQueTraeCliente">Dinero que trae el cliente</label>
-                      <input class="form-control border-success" type="number" id="DineroQueTraeCliente" >
+                    <div class="input-group mb-3 pagomodificado" >
+                      
+                      <label id="labelDomicilio" class="input-group-text border-success" for="DineroQueTraeCliente">Dinero que trae el cliente. <span class="text-muted">(Opcional)</span></label>
+                      <input class="form-control border-success" type="number" id="DineroQueTraeCliente" value="0" >
+                    
+                   
                     </div>
-                    <div class="conceptoPago1 col-6">
+                    <div class="row mb-2">
+<div class="col-2">
+  <button class="btn btn-primary btn-sm" type="button" onclick="agregarNuevoConcepto();">Agregar nuevo concepto de pago</button>
+</div>
+<div class="col-10">
+  <p class="border border-primary p-2" id="InformacionSaldoVecino"></p>
+</div>
+                    </div>
+<div class="row mb-2">
+                    <div class="conceptoPago1 col-7">
                     <div class="input-group mb-3 ">
-                          <label class="input-group-text" for="Concepto">Concepto </label>
+                          <label class="input-group-text" for="Concepto">Concepto 1</label>
                           <select class="form-select Concepto" name="Concepto" id="Concepto1" aria-label="Seleccione el pago">
                             <option value="" selected> </option>
                             <option value="AnticipoFinanciero">Anticipo Financiero</option>
@@ -74,14 +85,16 @@
                             </option>
                             <option value="Irrigacion">Permiso Irrigacion</option>
                           </select>
-<button class="btn btn-primary" type="button" onclick="agregarNuevoConcepto();">Agregar nuevo concepto de pago</button>
-<p class="" id="InformacionSaldoVecino"></p>
+
                     </div>
-                    <div class="input-group-text mb-3 col-3" id="divImporte1" style="display: block;">
-                      <label class="input-group-text" for="ImporteIngresado">Importe</label>
-                      <input required class="form-control" value="0" type="number" name="ValorIngresado" id="Importe1">
+                  </div><div class="col-4">
+                    <div class="input-group mb-3" id="divImporte1" >
+                      <label class="input-group-text" for="Importe1">Importe 1</label>
+                      <input required class="form-control Importe" value="0" type="number" name="ValorIngresado" id="Importe1">
                     </div>
                   </div>
+                </div>
+                 
                     <div class="calculoUSD  mb-3" style="display: none;" >
                       <input type="hidden" id="cotizacionBaseDolar">
                       <div class="row mb-5">
@@ -169,7 +182,6 @@ function BuscarCotizacionDolar(){
          $('.calculoUSD').css('display','block'); //Este calculo en dolares, se encuentra dentro de la vista de pago del cliente.
         }
         })
-
         }
 function BuscarValoresConceptoPago(idConcepto, nroImporte) {
 let nombreConcepto = '#'+idConcepto;
@@ -197,44 +209,45 @@ var ConceptoDePagoHTML=$(nombreConcepto);
       })
     })
         }
-       
+        function EliminarConcepto(nroConcepto) {
+        console.log('Elminar Concepto');
+        $('#Concepto'+nroConcepto).empty();
+        $('#Importe'+nroConcepto).empty();
+      }
       function calcularSaldoDisponible(){
+        $('#InformacionSaldoVecino').removeClass('border border-primary');
         dineroCliente = $('#DineroQueTraeCliente').val();
-        var contador= 1;
-        while (contador<calcularSaldoDisponible) {
-          
+        var contador= 0;
+        var MontoImportesACalcular=0;
+        while (contador<cantidadConceptosGenerados) {
+          contador=contador+1;
+          MontoImportesACalcular=parseInt(MontoImportesACalcular+parseInt($('#Importe'+contador).val()));
+          console.log('Monto de los importes calculados:'+MontoImportesACalcular);
         }
-       if($('#DineroQueTraeCliente').val()>$('#Importe1').val()){
-            var montoRestante= $('#DineroQueTraeCliente').val();
-            montoRestante= $('#DineroQueTraeCliente').val()-$('#Importe1').val();
-            $('#InformacionSaldoVecino').html('Al cliente le sobra $'+montoRestante+'. Puede pagar otro concepto más.')
+        $('#InformacionSaldoVecino').addClass('border border-primary');
+       if(dineroCliente>MontoImportesACalcular){
+            var montoRestante= dineroCliente;
+            montoRestante= dineroCliente-MontoImportesACalcular;
+            $('#InformacionSaldoVecino').html('<p class="text-primary">Al cliente le sobra $'+montoRestante+'. Puede pagar otro concepto más.</p>')
           }
-          if($('#DineroQueTraeCliente').val()<$('#Importe1').val()){
-            var montoRestante= $('#DineroQueTraeCliente').val();
-            montoRestante= $('#DineroQueTraeCliente').val()-$('#Importe1').val();
-            $('#InformacionSaldoVecino').html('El monto restante es $'+montoRestante+'. Falta dinero para completar el pago del concepto.')
+          if(dineroCliente<MontoImportesACalcular){
+            var montoRestante= dineroCliente;
+            montoRestante= dineroCliente-MontoImportesACalcular;
+            $('#InformacionSaldoVecino').html('<p class="text-primary">El monto restante es $'+montoRestante+'. Falta dinero para completar el pago del concepto.</p>')
           }  
-          if($('#DineroQueTraeCliente').val()==$('#Importe1').val()){
-            var montoRestante= $('#DineroQueTraeCliente').val();
-            montoRestante= $('#DineroQueTraeCliente').val()-$('#Importe1').val();
-            $('#InformacionSaldoVecino').html('El monto restante es $'+montoRestante+'.')
+          if(dineroCliente==MontoImportesACalcular){
+            var montoRestante= dineroCliente;
+            montoRestante= dineroCliente-MontoImportesACalcular;
+            $('#InformacionSaldoVecino').html('<p class="text-primary">$:'+montoRestante+'. Total del dinero utilizado.</p>')
           }  
-        }
-        if(cantidadConceptosGenerados==1){
-          if(ElClienteTraeDinero){ 
-          if($('#DineroQueTraeCliente').val()>$('#Importe1').val()){
-            var montoRestante= $('#DineroQueTraeCliente').val()
-            montoRestante= $('#DineroQueTraeCliente').val()-$('#Importe1').val();
-            $('#InformacionSaldoVecino').html('Al cliente le sobra $'+montoRestante+'. Puede pagar otro concepto más.')
-          }
-        }
-        }
 
       }
       function agregarNuevoConcepto(){
         cantidadConceptosGenerados=cantidadConceptosGenerados+1; //Se aumenta en 1 el contador de conceptos generados
         $('.conceptoPago1').append(
-'<div class="conceptoPago'+cantidadConceptosGenerados+' col-6 border border-success">'+
+
+'<div class="conceptoPago'+cantidadConceptosGenerados+' row p-2">'+
+  '<div class="col-6">'+
 '<div class="input-group mb-3 ">'+
 '<label class="input-group-text">Concepto '+cantidadConceptosGenerados+' </label>'+
 '<select class="form-select Concepto" name="Concepto" id="Concepto'+cantidadConceptosGenerados+'" aria-label="Seleccione el pago">'+
@@ -264,14 +277,22 @@ var ConceptoDePagoHTML=$(nombreConcepto);
 '<option value="Irrigacion">Permiso Irrigacion</option>'+
 '</select>'+
 '</div>'+
-'<div class="input-group-text mb-3 ImporteDelConcepto" id="" style="display: block;">'+
-'<label class="input-group-text " for="ImporteIngresado">Importe '+cantidadConceptosGenerados+'</label>'+
-'<input required class="form-control " value="0" type="number" name="ValorIngresado" id="Importe'+cantidadConceptosGenerados+'">'+
 '</div>'+
+'<div class="col-5">'+
+'<div class="ImporteDelConcepto" id="">'+
+'<label class="input-group-text " for="ImporteIngresado">Importe '+cantidadConceptosGenerados+'</label>'+
+'<input required class="form-control Importe" value="0" type="number" name="ValorIngresado" id="Importe'+cantidadConceptosGenerados+'">'+
+'</div>'+
+'</div>'+
+'<div class="col-1"><button class="btn btn-danger" type="button" onclick="EliminarConcepto('+cantidadConceptosGenerados+')">Eliminar concepto</button></div>'+
 '</div>');
     BuscarValoresConceptoPago('Concepto'+cantidadConceptosGenerados+', Importe '+cantidadConceptosGenerados+'');
     calcularSaldoDisponible();
       }
+      $(document).on('change','.Importe',function(){ //Cuando el importe de algun concepto es modificado, recalcula el saldo disponible.
+        calcularSaldoDisponible();
+        console.log('Saldo recalculado');
+      })
       $(document).on('change','.Concepto',function(){
 idConcepto=$(this).attr('id');
 //BUSCAR EL NRO DE CONCEPTO
@@ -279,8 +300,15 @@ var posicionPalabraClave=idConcepto.indexOf('Concepto');
 var nroConcepto= idConcepto.substring(posicionPalabraClave + 'Concepto'.length);
 BuscarCotizacionDolar();
     BuscarValoresConceptoPago(idConcepto,nroConcepto);
-    calcularSaldoDisponible();
+    setTimeout(() => {
+      calcularSaldoDisponible(); 
+    }, 1000);
+   
       })
+      function EliminarConcepto(idConcepto,idImporte){
+$('#'+idConcepto).empty();
+$('#'+idImporte).empty();
+      }
   function CargarPago(idcliente) {
           $('#formGenerarComprobante')[0].reset();
           $.ajax({
@@ -418,13 +446,4 @@ BuscarCotizacionDolar();
     
     
    }); 
-   var ElClienteTraeDinero=false;
-$('#btnShuffleTipoPago').click(function () {
-  $('.pagomodificado').toggle('slow');
-  if(ElClienteTraeDinero==false){
-    ElClienteTraeDinero=true
-  }else{
-    ElClienteTraeDinero=false;
-  }
-})
           </script>
