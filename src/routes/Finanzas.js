@@ -719,9 +719,18 @@ router.post('/Finanzas/NuevoCliente/guardarCliente', (req, res) => {
 })
 //PAGOS
 router.post('/GenerarComprobante', (req, res, next) => {
+    var id_Obra;
+   let sql = 'SELECT id FROM obras WHERE Nombre =?';
+   var Obra = req.body.Obra;
+    connection.query(sql, [Obra], (error, results) => {
+        if (error) console.log(error);
+
+        else {
+            id_Obra = results[0].id;
+        }
+    })
     var CotizacionUSD= req.body.CotizacionUSD;
     var nroTransferencia= req.body.nroTransferencia;
-    let sql = '';
     var ID = req.body.IDCliente;
     var Nombre = req.body.NombreCompleto;
     var DNICliente= req.body.DNICliente3;
@@ -737,353 +746,352 @@ router.post('/GenerarComprobante', (req, res, next) => {
     dia = fecha.getDate();
     dia = dia + 1;
     let FechaPago = (dia + '/' + mes + '/' + anio);
-    
     var ObservacionesDelPago = req.body.ObservacionesDelPago;
-    var Obra = req.body.Obra;
-    var id_Obra;
     var FormaDePago = req.body.FormaDePago;
     var id_Cobro;
-    sql = 'SELECT id FROM obras WHERE Nombre =?';
-    connection.query(sql, [Obra], (error, results) => {
-        if (error) console.log(error);
-
-        else {
-            id_Obra = results[0].id;
-        }
-    })
-    sql = 'SELECT ' + Concepto + ' FROM finanzas_clientes_por_obra_cobros WHERE ID_cliente =?'
-    var promise1 = new Promise(function (resolve, reject) {
-        connection.query(sql, [ID], (error, results) => {
-            if (error) {
-                console.log(error);
-                reject();
-            }
-            if (results.length > 0) {
-                new Promise((resolve, reject) => {
-                    var a;
-                    JSON.parse((JSON.stringify(results)), function (k, v) {
-                        if (k == Concepto) {
-                            if(v==undefined|| v==null){
-                                v=0;
-                            }
-                            a = parseInt(v);
-                        }
-                    });
-                    console.log("El cliente seleccionado tiene pagos existentes. Actualizando pagos.")
-                    if (a == null || a == "" || a== undefined) {
-                        sumaDeTotalesPorConcepto = ValorIngresado;
-                        sql = 'UPDATE finanzas_clientes_por_obra_cobros SET ' + Concepto + ' = ' + sumaDeTotalesPorConcepto + ', FechaPago' + Concepto + ' = "' + FechaPago + '" WHERE ID_cliente = ' + ID + ' ;';
-                        connection.query(sql, (error, results) => {
-                            if (error) console.log(error);
-                            resolve();
-                        })
-                    }
-                    else {
-                        sumaDeTotalesPorConcepto = (ValorIngresado + a);
-                        sql = 'UPDATE finanzas_clientes_por_obra_cobros SET ' + Concepto + ' = ' + sumaDeTotalesPorConcepto + ', FechaPago' + Concepto + ' = "' + FechaPago + '" WHERE ID_cliente = ' + ID + ' ;';
-                        connection.query(sql, (error, results) => {
-                            if (error) console.log(error);
-                            resolve();
-                        })
-                    }
-                   
-                }).then(() => {
+    //En caso de que exista más de un comprobante a pagar, el código tomara este rumbo.
+    if(Concepto.length>1){
+        Concepto.forEach(concepto => {
+            sql = 'SELECT ' + concepto + ' FROM finanzas_clientes_por_obra_cobros WHERE ID_cliente =?'; 
+            var promise1 = new Promise(function (resolve, reject) {
+                
+            })
+        });
+    }else{
+        sql = 'SELECT ' + Concepto + ' FROM finanzas_clientes_por_obra_cobros WHERE ID_cliente =?';
+        var promise1 = new Promise(function (resolve, reject) {
+            connection.query(sql, [ID], (error, results) => {
+                if (error) {
+                    console.log(error);
+                    reject();
+                }
+                if (results.length > 0) {
                     new Promise((resolve, reject) => {
-                        sql = 'SELECT id_Cobro AS id_Cobro FROM finanzas_clientes_por_obra_cobros WHERE ID_cliente=' + ID + ' ;';
+                        var a;
+                        JSON.parse((JSON.stringify(results)), function (k, v) {
+                            if (k == Concepto) {
+                                if(v==undefined|| v==null){
+                                    v=0;
+                                }
+                                a = parseInt(v);
+                            }
+                        });
+                        console.log("El cliente seleccionado tiene pagos existentes. Actualizando pagos.")
+                        if (a == null || a == "" || a== undefined) {
+                            sumaDeTotalesPorConcepto = ValorIngresado;
+                            sql = 'UPDATE finanzas_clientes_por_obra_cobros SET ' + Concepto + ' = ' + sumaDeTotalesPorConcepto + ', FechaPago' + Concepto + ' = "' + FechaPago + '" WHERE ID_cliente = ' + ID + ' ;';
+                            connection.query(sql, (error, results) => {
+                                if (error) console.log(error);
+                                resolve();
+                            })
+                        }
+                        else {
+                            sumaDeTotalesPorConcepto = (ValorIngresado + a);
+                            sql = 'UPDATE finanzas_clientes_por_obra_cobros SET ' + Concepto + ' = ' + sumaDeTotalesPorConcepto + ', FechaPago' + Concepto + ' = "' + FechaPago + '" WHERE ID_cliente = ' + ID + ' ;';
+                            connection.query(sql, (error, results) => {
+                                if (error) console.log(error);
+                                resolve();
+                            })
+                        }
+                       
+                    }).then(() => {
+                        new Promise((resolve, reject) => {
+                            sql = 'SELECT id_Cobro AS id_Cobro FROM finanzas_clientes_por_obra_cobros WHERE ID_cliente=' + ID + ' ;';
+                            connection.query(sql, (error, results) => {
+                                if (error) console.log(error);
+                                id_Cobro = results[0].id_Cobro
+                                resolve(id_Cobro);
+                            })
+                        }).then(function (id_Cobro) {
+                            if (ObservacionesDelPago == null || ObservacionesDelPago == '') {
+                                var fechapagoDate = new Date(fecha);
+                                sql = 'INSERT INTO finanzas_historial_comprobantes_emitidos SET ?'
+                                connection.query(sql, {Nombre:Nombre,nroTransferencia:nroTransferencia, CotizacionDolar:CotizacionUSD,
+                                    Descripcion: Concepto, id_cliente: ID, id_cobro: id_Cobro, id_obra: id_Obra, FechaPago: req.body.FechaPago,nroTransferencia:req.body.nroTransferencia, Monto: sumaDeTotalesPorConcepto, TipoPago: FormaDePago, Observacion: 'Sin observaciones'
+                                }, (error, results) => {
+                                    if (error) console.log(error);
+                                })
+                            }
+                            else {
+                                var fechapagoDate = new Date(fecha);
+                                sql = 'INSERT INTO finanzas_historial_comprobantes_emitidos SET?'
+                                connection.query(sql, {Nombre:Nombre,nroTransferencia:nroTransferencia, CotizacionDolar:CotizacionUSD,
+                                    Descripcion: Concepto, id_cliente: ID, id_cobro: id_Cobro, id_obra: id_Obra, FechaPago: req.body.FechaPago,nroTransferencia:req.body.nroTransferencia, Monto: sumaDeTotalesPorConcepto, TipoPago: FormaDePago, Observacion: ObservacionesDelPago
+                                }, (error, results) => {
+                                    if (error) console.log(error);
+                                })
+                            }
+                        });
+                    });
+                    resolve();
+                }
+    
+                if (results.length == null || results.length == 0) {
+    
+                    console.log("No existen pagos ingresados de el cliente seleccionado")
+                    console.log("Intentando cargar nuevo pago");
+                    new Promise((resolve, reject) => {
+                        sql = 'INSERT INTO finanzas_clientes_por_obra_cobros SET?'
+                        connection.query(sql, {
+                            ID_cliente: ID, id_Obra: id_Obra,
+                        }, (error, results) => {
+                            if (error) console.log(error);
+                            resolve();
+                        })
+                    }).then(() => {
+                        console.log("El cliente se ha cargado en el sistema, cargando el concepto de pago junto con su valor....");
+                        sql = 'Update finanzas_clientes_por_obra_cobros set ' + Concepto + '= ' + sumaDeTotalesPorConcepto + ' WHERE ID_cliente =' + ID + ' and id_Obra=' + id_Obra + '';
+                        connection.query(sql, (error, results) => {
+                            if (error) console.log(error);
+                        })
+                        sql = 'SELECT MAX(id_Cobro) FROM finanzas_clientes_por_obra_cobros WHERE id_Obra=' + id_Obra + '';
+                        var id_Cobro;
                         connection.query(sql, (error, results) => {
                             if (error) console.log(error);
                             id_Cobro = results[0].id_Cobro
-                            resolve(id_Cobro);
+                            if (ObservacionesDelPago == null) {
+                                var fechapagoDate = new Date(fecha);
+                                sql = 'Insert into finanzas_clientes_por_obra_cobros_observaciones set?'
+                                connection.query(sql, { id_cliente: ID, id_cobro: id_Cobro, Observacion: "Sin observaciones" }, (error, results) => {
+                                    if (error) console.log(error);
+                                    resolve();
+                                })
+                            }
+                            else {
+                                var fechapagoDate = new Date(fecha);
+                                sql = 'INSERT INTO finanzas_historial_comprobantes_emitidos SET?'
+                                connection.query(sql, {Nombre:Nombre,nroTransferencia:nroTransferencia, CotizacionDolar:CotizacionUSD,
+                                    Descripcion: Concepto, id_cliente: ID, id_cobro: id_Cobro, id_obra: id_Obra, FechaPago: req.body.FechaPago,nroTransferencia:req.body.nroTransferencia, Monto: sumaDeTotalesPorConcepto, TipoPago: FormaDePago, Observacion: ObservacionesDelPago
+                                }, (error, results) => {
+                                    if (error) console.log(error);
+                                    resolve();
+                                })
+                            }
                         })
-                    }).then(function (id_Cobro) {
-                        if (ObservacionesDelPago == null || ObservacionesDelPago == '') {
-                            var fechapagoDate = new Date(fecha);
-                            sql = 'INSERT INTO finanzas_historial_comprobantes_emitidos SET ?'
-                            connection.query(sql, {Nombre:Nombre,nroTransferencia:nroTransferencia, CotizacionDolar:CotizacionUSD,
-                                Descripcion: Concepto, id_cliente: ID, id_cobro: id_Cobro, id_obra: id_Obra, FechaPago: req.body.FechaPago,nroTransferencia:req.body.nroTransferencia, Monto: sumaDeTotalesPorConcepto, TipoPago: FormaDePago, Observacion: 'Sin observaciones'
-                            }, (error, results) => {
-                                if (error) console.log(error);
-                            })
-                        }
-                        else {
-                            var fechapagoDate = new Date(fecha);
-                            sql = 'INSERT INTO finanzas_historial_comprobantes_emitidos SET?'
-                            connection.query(sql, {Nombre:Nombre,nroTransferencia:nroTransferencia, CotizacionDolar:CotizacionUSD,
-                                Descripcion: Concepto, id_cliente: ID, id_cobro: id_Cobro, id_obra: id_Obra, FechaPago: req.body.FechaPago,nroTransferencia:req.body.nroTransferencia, Monto: sumaDeTotalesPorConcepto, TipoPago: FormaDePago, Observacion: ObservacionesDelPago
-                            }, (error, results) => {
-                                if (error) console.log(error);
-                            })
-                        }
+    
+    
                     });
-                });
-                resolve();
-            }
-
-            if (results.length == null || results.length == 0) {
-
-                console.log("No existen pagos ingresados de el cliente seleccionado")
-                console.log("Intentando cargar nuevo pago");
-                new Promise((resolve, reject) => {
-                    sql = 'INSERT INTO finanzas_clientes_por_obra_cobros SET?'
-                    connection.query(sql, {
-                        ID_cliente: ID, id_Obra: id_Obra,
-                    }, (error, results) => {
-                        if (error) console.log(error);
-                        resolve();
-                    })
-                }).then(() => {
-                    console.log("El cliente se ha cargado en el sistema, cargando el concepto de pago junto con su valor....");
-                    sql = 'Update finanzas_clientes_por_obra_cobros set ' + Concepto + '= ' + sumaDeTotalesPorConcepto + ' WHERE ID_cliente =' + ID + ' and id_Obra=' + id_Obra + '';
-                    connection.query(sql, (error, results) => {
-                        if (error) console.log(error);
-                    })
-                    sql = 'SELECT MAX(id_Cobro) FROM finanzas_clientes_por_obra_cobros WHERE id_Obra=' + id_Obra + '';
-                    var id_Cobro;
-                    connection.query(sql, (error, results) => {
-                        if (error) console.log(error);
-                        id_Cobro = results[0].id_Cobro
-                        if (ObservacionesDelPago == null) {
-                            var fechapagoDate = new Date(fecha);
-                            sql = 'Insert into finanzas_clientes_por_obra_cobros_observaciones set?'
-                            connection.query(sql, { id_cliente: ID, id_cobro: id_Cobro, Observacion: "Sin observaciones" }, (error, results) => {
-                                if (error) console.log(error);
-                                resolve();
-                            })
-                        }
-                        else {
-                            var fechapagoDate = new Date(fecha);
-                            sql = 'INSERT INTO finanzas_historial_comprobantes_emitidos SET?'
-                            connection.query(sql, {Nombre:Nombre,nroTransferencia:nroTransferencia, CotizacionDolar:CotizacionUSD,
-                                Descripcion: Concepto, id_cliente: ID, id_cobro: id_Cobro, id_obra: id_Obra, FechaPago: req.body.FechaPago,nroTransferencia:req.body.nroTransferencia, Monto: sumaDeTotalesPorConcepto, TipoPago: FormaDePago, Observacion: ObservacionesDelPago
-                            }, (error, results) => {
-                                if (error) console.log(error);
-                                resolve();
-                            })
-                        }
-                    })
-
-
-                });
-            }
-        })
-    }).then((resolve) => {
-        let cadena=__dirname;
-        cadena= cadena.replace(/\\/g,"/");
-        var indice=cadena.indexOf('routes');
-       var url= cadena.substring(0,indice);
-        url= url+'/public/plantillas/ReciboDePago.xlsx';
-        //Generación del comprobante en archivo Excel
-        //  Se utiliza como herramienta el xlsx-populate: https://www.npmjs.com/package/xlsx-populate#serving-from-express
-        // La plantilla del comprobante es: src\public\plantillas\ReciboDePago.xlsx
-        // Datos que se cargan en la misma: Nombre, Domicilio, ValorIngresado, Concepto, FechaPago, ObservacionesDelPago, Obra.
-        sql = 'INSERT INTO finanzas_recibos_de_pago_obras set?';
-        var nDeComprobante=0;
-new Promise((resolve, reject) => {
-    connection.query(sql, {idObra: id_Obra, idCliente: ID, Concepto: Concepto, ValorIngresado: ValorIngresado, ObservacionesDelPago, ObservacionesDelPago }, (error, results) => {
-        if (error) console.log(error);
-        else {
-            sql = 'SELECT MAX(nComprobante) as Nrecibo FROM finanzas_historial_comprobantes_emitidos';
-            connection.query(sql, (error, results) => {
-                nDeComprobante = results[0].Nrecibo;
-                resolve();
+                }
             })
-        }
-    })
-}).then(()=>{
-    XlsxPopulate.fromFileAsync(url).then(workbook => {
-        function Unidades(num) {
-
-            switch (num) {
-                case 1: return 'UN';
-                case 2: return 'DOS';
-                case 3: return 'TRES';
-                case 4: return 'CUATRO';
-                case 5: return 'CINCO';
-                case 6: return 'SEIS';
-                case 7: return 'SIETE';
-                case 8: return 'OCHO';
-                case 9: return 'NUEVE';
+        }).then((resolve) => {
+            let cadena=__dirname;
+            cadena= cadena.replace(/\\/g,"/");
+            var indice=cadena.indexOf('routes');
+           var url= cadena.substring(0,indice);
+            url= url+'/public/plantillas/ReciboDePago.xlsx';
+            //Generación del comprobante en archivo Excel
+            //  Se utiliza como herramienta el xlsx-populate: https://www.npmjs.com/package/xlsx-populate#serving-from-express
+            // La plantilla del comprobante es: src\public\plantillas\ReciboDePago.xlsx
+            // Datos que se cargan en la misma: Nombre, Domicilio, ValorIngresado, Concepto, FechaPago, ObservacionesDelPago, Obra.
+            sql = 'INSERT INTO finanzas_recibos_de_pago_obras set?';
+            var nDeComprobante=0;
+    new Promise((resolve, reject) => {
+        connection.query(sql, {idObra: id_Obra, idCliente: ID, Concepto: Concepto, ValorIngresado: ValorIngresado, ObservacionesDelPago, ObservacionesDelPago }, (error, results) => {
+            if (error) console.log(error);
+            else {
+                sql = 'SELECT MAX(nComprobante) as Nrecibo FROM finanzas_historial_comprobantes_emitidos';
+                connection.query(sql, (error, results) => {
+                    nDeComprobante = results[0].Nrecibo;
+                    resolve();
+                })
             }
-
-            return '';
-        }//Unidades()
-
-        function Decenas(num) {
-
-            decena = Math.floor(num / 10);
-            unidad = num - (decena * 10);
-
-            switch (decena) {
-                case 1:
-                    switch (unidad) {
-                        case 0: return 'DIEZ';
-                        case 1: return 'ONCE';
-                        case 2: return 'DOCE';
-                        case 3: return 'TRECE';
-                        case 4: return 'CATORCE';
-                        case 5: return 'QUINCE';
-                        default: return 'DIECI' + Unidades(unidad);
-                    }
-                case 2:
-                    switch (unidad) {
-                        case 0: return 'VEINTE';
-                        default: return 'VEINTI' + Unidades(unidad);
-                    }
-                case 3: return DecenasY('TREINTA', unidad);
-                case 4: return DecenasY('CUARENTA', unidad);
-                case 5: return DecenasY('CINCUENTA', unidad);
-                case 6: return DecenasY('SESENTA', unidad);
-                case 7: return DecenasY('SETENTA', unidad);
-                case 8: return DecenasY('OCHENTA', unidad);
-                case 9: return DecenasY('NOVENTA', unidad);
-                case 0: return Unidades(unidad);
-            }
-        }//Unidades()
-
-        function DecenasY(strSin, numUnidades) {
-            if (numUnidades > 0)
-                return strSin + ' Y ' + Unidades(numUnidades)
-
-            return strSin;
-        }//DecenasY()
-
-        function Centenas(num) {
-            centenas = Math.floor(num / 100);
-            decenas = num - (centenas * 100);
-
-            switch (centenas) {
-                case 1:
-                    if (decenas > 0)
-                        return 'CIENTO ' + Decenas(decenas);
-                    return 'CIEN';
-                case 2: return 'DOSCIENTOS ' + Decenas(decenas);
-                case 3: return 'TRESCIENTOS ' + Decenas(decenas);
-                case 4: return 'CUATROCIENTOS ' + Decenas(decenas);
-                case 5: return 'QUINIENTOS ' + Decenas(decenas);
-                case 6: return 'SEISCIENTOS ' + Decenas(decenas);
-                case 7: return 'SETECIENTOS ' + Decenas(decenas);
-                case 8: return 'OCHOCIENTOS ' + Decenas(decenas);
-                case 9: return 'NOVECIENTOS ' + Decenas(decenas);
-            }
-
-            return Decenas(decenas);
-        }//Centenas()
-
-        function Seccion(num, divisor, strSingular, strPlural) {
-            cientos = Math.floor(num / divisor)
-            resto = num - (cientos * divisor)
-
-            letras = '';
-
-            if (cientos > 0)
-                if (cientos > 1)
-                    letras = Centenas(cientos) + ' ' + strPlural;
-                else
-                    letras = strSingular;
-
-            if (resto > 0)
-                letras += '';
-
-            return letras;
-        }//Seccion()
-
-        function Miles(num) {
-            divisor = 1000;
-            cientos = Math.floor(num / divisor)
-            resto = num - (cientos * divisor)
-
-            strMiles = Seccion(num, divisor, 'UN MIL', 'MIL');
-            strCentenas = Centenas(resto);
-
-            if (strMiles == '')
-                return strCentenas;
-
-            return strMiles + ' ' + strCentenas;
-        }//Miles()
-
-        function Millones(num) {
-            divisor = 1000000;
-            cientos = Math.floor(num / divisor)
-            resto = num - (cientos * divisor)
-
-            strMillones = Seccion(num, divisor, 'UN MILLON ', 'MILLONES ');
-            strMiles = Miles(resto);
-
-            if (strMillones == '')
-                return strMiles;
-
-            return strMillones + ' ' + strMiles;
-        }//Millones()
-
-        function NumeroALetras(num) {
-            var data = {
-                numero: num,
-                enteros: Math.floor(num),
-                centavos: (((Math.round(num * 100)) - (Math.floor(num) * 100))),
-                letrasCentavos: '',
-                letrasMonedaPlural: 'PESOS',//'PESOS', 'Dólares', 'Bolívares', 'etcs'
-                letrasMonedaSingular: 'PESO', //'PESO', 'Dólar', 'Bolivar', 'etc'
-
-                letrasMonedaCentavoPlural: 'CENTAVOS',
-                letrasMonedaCentavoSingular: 'CENTAVO'
-            };
-
-            if (data.centavos > 0) {
-                data.letrasCentavos = 'CON ' + (function () {
-                    if (data.centavos == 1)
-                        return Millones(data.centavos) + ' ' + data.letrasMonedaCentavoSingular;
-                    else
-                        return Millones(data.centavos) + ' ' + data.letrasMonedaCentavoPlural;
-                })();
-            };
-
-            if (data.enteros == 0)
-                return 'CERO ' + data.letrasMonedaPlural + ' ' + data.letrasCentavos;
-            if (data.enteros == 1)
-                return Millones(data.enteros) + ' ' + data.letrasMonedaSingular + ' ' + data.letrasCentavos;
-            else
-                return Millones(data.enteros) + ' ' + data.letrasMonedaPlural + ' ' + data.letrasCentavos;
-        }
-        var numeroEnLetras = NumeroALetras(ValorIngresado); //Se pasa el numero a LETRAS
-        //Se comienza a modificar las celdas del Excel
-        workbook.sheet("Hoja1").cell("P3").value('N°:'+nDeComprobante);
-        if(DNICliente!=''|DNICliente!=null){
-            workbook.sheet("Hoja1").cell("L7").value(Nombre+' , DNI ' +DNICliente);
-        }else{
-            workbook.sheet("Hoja1").cell("L7").value(Nombre);
-
-        }
-        workbook.sheet("Hoja1").cell("L9").value(Domicilio);
-        workbook.sheet("Hoja1").cell("C8").value(Concepto);
-        workbook.sheet("Hoja1").cell("I13").value("En concepto de pago en efectivo por " + Concepto);
-        workbook.sheet("Hoja1").cell("P15").value(ValorIngresado);
-        workbook.sheet("Hoja1").cell("E8").value(ValorIngresado);
-        if(FormaDePago=="Transferencia"){
-            workbook.sheet("Hoja1").cell("K18").value('Transf n°:'+nroTransferencia+ ' | '+ ObservacionesDelPago);
-        }else{
-            workbook.sheet("Hoja1").cell("K18").value(ObservacionesDelPago);
-        }
-        FechaPago= moment(FechaPago).locale("es").format("LL");
-        
-        workbook.sheet("Hoja1").cell("N5").value(FechaPago);
-        workbook.sheet("Hoja1").cell("J11").value(numeroEnLetras);
-        workbook.sheet("Hoja1").cell("N15").value(FormaDePago+' por:');
-        if(FormaDePago=="Transferencia"){
-            workbook.sheet("Hoja1").cell("N15").value('Transferencia bancaria por:');
-        }
-        
-            workbook.toFileAsync(url).then(()=>{
-                return workbook.outputAsync();
-            });                
-    }).then(data => {
-        let nombreDelArchivo = nDeComprobante + '-' + Obra + '-' + Concepto + '-' + Nombre + '.xlsx';
-res.send(nombreDelArchivo);
-    })
-        .catch(function () {
-            res.send('ERROR: NO SE GENERO EL COMPROBANTE');
         })
-});
+    }).then(()=>{
+        XlsxPopulate.fromFileAsync(url).then(workbook => {
+            function Unidades(num) {
+    
+                switch (num) {
+                    case 1: return 'UN';
+                    case 2: return 'DOS';
+                    case 3: return 'TRES';
+                    case 4: return 'CUATRO';
+                    case 5: return 'CINCO';
+                    case 6: return 'SEIS';
+                    case 7: return 'SIETE';
+                    case 8: return 'OCHO';
+                    case 9: return 'NUEVE';
+                }
+    
+                return '';
+            }//Unidades()
+    
+            function Decenas(num) {
+    
+                decena = Math.floor(num / 10);
+                unidad = num - (decena * 10);
+    
+                switch (decena) {
+                    case 1:
+                        switch (unidad) {
+                            case 0: return 'DIEZ';
+                            case 1: return 'ONCE';
+                            case 2: return 'DOCE';
+                            case 3: return 'TRECE';
+                            case 4: return 'CATORCE';
+                            case 5: return 'QUINCE';
+                            default: return 'DIECI' + Unidades(unidad);
+                        }
+                    case 2:
+                        switch (unidad) {
+                            case 0: return 'VEINTE';
+                            default: return 'VEINTI' + Unidades(unidad);
+                        }
+                    case 3: return DecenasY('TREINTA', unidad);
+                    case 4: return DecenasY('CUARENTA', unidad);
+                    case 5: return DecenasY('CINCUENTA', unidad);
+                    case 6: return DecenasY('SESENTA', unidad);
+                    case 7: return DecenasY('SETENTA', unidad);
+                    case 8: return DecenasY('OCHENTA', unidad);
+                    case 9: return DecenasY('NOVENTA', unidad);
+                    case 0: return Unidades(unidad);
+                }
+            }//Unidades()
+    
+            function DecenasY(strSin, numUnidades) {
+                if (numUnidades > 0)
+                    return strSin + ' Y ' + Unidades(numUnidades)
+    
+                return strSin;
+            }//DecenasY()
+    
+            function Centenas(num) {
+                centenas = Math.floor(num / 100);
+                decenas = num - (centenas * 100);
+    
+                switch (centenas) {
+                    case 1:
+                        if (decenas > 0)
+                            return 'CIENTO ' + Decenas(decenas);
+                        return 'CIEN';
+                    case 2: return 'DOSCIENTOS ' + Decenas(decenas);
+                    case 3: return 'TRESCIENTOS ' + Decenas(decenas);
+                    case 4: return 'CUATROCIENTOS ' + Decenas(decenas);
+                    case 5: return 'QUINIENTOS ' + Decenas(decenas);
+                    case 6: return 'SEISCIENTOS ' + Decenas(decenas);
+                    case 7: return 'SETECIENTOS ' + Decenas(decenas);
+                    case 8: return 'OCHOCIENTOS ' + Decenas(decenas);
+                    case 9: return 'NOVECIENTOS ' + Decenas(decenas);
+                }
+    
+                return Decenas(decenas);
+            }//Centenas()
+    
+            function Seccion(num, divisor, strSingular, strPlural) {
+                cientos = Math.floor(num / divisor)
+                resto = num - (cientos * divisor)
+    
+                letras = '';
+    
+                if (cientos > 0)
+                    if (cientos > 1)
+                        letras = Centenas(cientos) + ' ' + strPlural;
+                    else
+                        letras = strSingular;
+    
+                if (resto > 0)
+                    letras += '';
+    
+                return letras;
+            }//Seccion()
+    
+            function Miles(num) {
+                divisor = 1000;
+                cientos = Math.floor(num / divisor)
+                resto = num - (cientos * divisor)
+    
+                strMiles = Seccion(num, divisor, 'UN MIL', 'MIL');
+                strCentenas = Centenas(resto);
+    
+                if (strMiles == '')
+                    return strCentenas;
+    
+                return strMiles + ' ' + strCentenas;
+            }//Miles()
+    
+            function Millones(num) {
+                divisor = 1000000;
+                cientos = Math.floor(num / divisor)
+                resto = num - (cientos * divisor)
+    
+                strMillones = Seccion(num, divisor, 'UN MILLON ', 'MILLONES ');
+                strMiles = Miles(resto);
+    
+                if (strMillones == '')
+                    return strMiles;
+    
+                return strMillones + ' ' + strMiles;
+            }//Millones()
+    
+            function NumeroALetras(num) {
+                var data = {
+                    numero: num,
+                    enteros: Math.floor(num),
+                    centavos: (((Math.round(num * 100)) - (Math.floor(num) * 100))),
+                    letrasCentavos: '',
+                    letrasMonedaPlural: 'PESOS',//'PESOS', 'Dólares', 'Bolívares', 'etcs'
+                    letrasMonedaSingular: 'PESO', //'PESO', 'Dólar', 'Bolivar', 'etc'
+    
+                    letrasMonedaCentavoPlural: 'CENTAVOS',
+                    letrasMonedaCentavoSingular: 'CENTAVO'
+                };
+    
+                if (data.centavos > 0) {
+                    data.letrasCentavos = 'CON ' + (function () {
+                        if (data.centavos == 1)
+                            return Millones(data.centavos) + ' ' + data.letrasMonedaCentavoSingular;
+                        else
+                            return Millones(data.centavos) + ' ' + data.letrasMonedaCentavoPlural;
+                    })();
+                };
+    
+                if (data.enteros == 0)
+                    return 'CERO ' + data.letrasMonedaPlural + ' ' + data.letrasCentavos;
+                if (data.enteros == 1)
+                    return Millones(data.enteros) + ' ' + data.letrasMonedaSingular + ' ' + data.letrasCentavos;
+                else
+                    return Millones(data.enteros) + ' ' + data.letrasMonedaPlural + ' ' + data.letrasCentavos;
+            }
+            var numeroEnLetras = NumeroALetras(ValorIngresado); //Se pasa el numero a LETRAS
+            //Se comienza a modificar las celdas del Excel
+            workbook.sheet("Hoja1").cell("P3").value('N°:'+nDeComprobante);
+            if(DNICliente!=''|DNICliente!=null){
+                workbook.sheet("Hoja1").cell("L7").value(Nombre+' , DNI ' +DNICliente);
+            }else{
+                workbook.sheet("Hoja1").cell("L7").value(Nombre);
+    
+            }
+            workbook.sheet("Hoja1").cell("L9").value(Domicilio);
+            workbook.sheet("Hoja1").cell("C8").value(Concepto);
+            workbook.sheet("Hoja1").cell("I13").value("En concepto de pago en efectivo por " + Concepto);
+            workbook.sheet("Hoja1").cell("P15").value(ValorIngresado);
+            workbook.sheet("Hoja1").cell("E8").value(ValorIngresado);
+            if(FormaDePago=="Transferencia"){
+                workbook.sheet("Hoja1").cell("K18").value('Transf n°:'+nroTransferencia+ ' | '+ ObservacionesDelPago);
+            }else{
+                workbook.sheet("Hoja1").cell("K18").value(ObservacionesDelPago);
+            }
+            FechaPago= moment(FechaPago).locale("es").format("LL");
+            
+            workbook.sheet("Hoja1").cell("N5").value(FechaPago);
+            workbook.sheet("Hoja1").cell("J11").value(numeroEnLetras);
+            workbook.sheet("Hoja1").cell("N15").value(FormaDePago+' por:');
+            if(FormaDePago=="Transferencia"){
+                workbook.sheet("Hoja1").cell("N15").value('Transferencia bancaria por:');
+            }
+            
+                workbook.toFileAsync(url).then(()=>{
+                    return workbook.outputAsync();
+                });                
+        }).then(data => {
+            let nombreDelArchivo = nDeComprobante + '-' + Obra + '-' + Concepto + '-' + Nombre + '.xlsx';
+    res.send(nombreDelArchivo);
+        })
+            .catch(function () {
+                res.send('ERROR: NO SE GENERO EL COMPROBANTE');
+            })
     });
+        });
+    }
 })
 router.get('/ReimprimirComprobante/:nroComprobante',(req,res)=>{
 var nDeComprobante= req.params.nroComprobante;
